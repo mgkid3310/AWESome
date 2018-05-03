@@ -24,6 +24,7 @@ private _altASLOld = getPosASL _vehicle select 2;
 private _altRadarOld = (getPos _vehicle select 2) min (getPosASL _vehicle select 2);
 private _ctrWarnOld = [];
 // private _targetOld = objNull;
+private _speedStall = getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "stallSpeed");
 DEV_CHAT("orbis_gpws: f16GPWS variables init done");
 
 // add eventhandlers & store ID
@@ -54,7 +55,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_altRadarOld = _altRadar;
 
 	// flight phase check
-	switch (_flightphase) do { 
+	switch (_flightphase) do {
 		case ("taxing"): {
 			if (speed _vehicle > 80) then {
 				_flightphase = "takeOff";
@@ -263,7 +264,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			}; */
 
 			// f16_lowSpeed
-			case ((speed _vehicle < orbis_gpws_lowSpeed) && !(isTouchingGround _vehicle)): {
+			case ((speed _vehicle < _speedStall) && !(isTouchingGround _vehicle)): {
 				DEV_CHAT("orbis_gpws: f16_lowSpeed");
 				_vehicle setVariable ["orbisGPWSreadyBeep", false];
 				[_vehicle, "f16_lowSpeed", 1.50, "orbisGPWSreadyBeep"] spawn orbis_gpws_fnc_speakGPWS;

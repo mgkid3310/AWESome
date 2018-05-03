@@ -3,7 +3,6 @@ orbis_gpws_ChaffFlareList = ["js_w_fa18_CMFlareLauncher", "FIR_CMLauncher"];
 orbis_gpws_takeoffAlt = 60;
 orbis_gpws_airportRange = 6000;
 orbis_gpws_pullupTime = 4;
-orbis_gpws_lowSpeed = 180;
 orbis_gpws_maxAOA = 15;
 orbis_gpws_lowAltitude = 50;
 orbis_gpws_bingoFuel = 0.2;

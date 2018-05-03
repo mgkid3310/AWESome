@@ -1,0 +1,31 @@
+C++
+    filter call_regexp_common C++
+    filter remove_inline //.*$
+    extension C
+    extension c++
+    extension cc
+    extension cpp
+    extension cxx
+    extension pcc
+    3rd_gen_scale 1.51
+    end_of_line_continuation \\$
+C/C++ Header
+    filter call_regexp_common C++
+    filter remove_inline //.*$
+    extension H
+    extension h
+    extension hh
+    extension hpp
+    extension hxx
+    3rd_gen_scale 1.00
+    end_of_line_continuation \\$
+Markdown
+    filter remove_between_regex \[(comment|\/\/)?\]\s*:?\s*(<\s*>|#)?\s*\(.*? .*?\)
+    extension md
+    3rd_gen_scale 1.00
+SQF
+    filter call_regexp_common C
+    filter remove_inline //.*$
+    extension SQF
+    extension sqf
+    3rd_gen_scale 1.00

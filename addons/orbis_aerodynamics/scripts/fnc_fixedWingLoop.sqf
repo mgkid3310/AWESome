@@ -52,8 +52,8 @@ if (isTouchingGround _vehicle) then {
 };
 
 // get DeltaV needed on world cooridate system and apply it
-private _worldImpulse = _vehicle vectorModeltoWorld (_forceApply vectorMultiply _timeStep);
-_vehicle setVelocity (velocity _vehicle vectorAdd (_worldImpulse / _mass));
+private _worldDeltaV = _vehicle vectorModeltoWorld (_forceApply vectorMultiply (_timeStep / _mass));
+_vehicle setVelocity (velocity _vehicle vectorAdd _worldDeltaV);
 
 // wait a frame then spawn next loop
 private _frameNo = diag_frameNo;

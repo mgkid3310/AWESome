@@ -1,4 +1,5 @@
 private _monitor = _this select 0;
+private _controller = param [1, player];
 
 player setVariable ["isUsingRadarScreen", true, true];
 
@@ -11,8 +12,8 @@ private _heliMarkers = [];
 while {((player distance _monitor) < 10) && (player getVariable ["isUsingRadarScreen", true])} do {
     // update planes info
     if (time > _timeNext) then {
-        _planes = (entities "Plane") select {(side driver _x isEqualTo side player) && (alive _x)};
-        _helies = (entities "Helicopter") select {(side driver _x isEqualTo side player) && (alive _x)};
+        _planes = (entities "Plane") select {(side driver _x in [side _controller, civilian]) && (alive _x)};
+        _helies = (entities "Helicopter") select {(side driver _x in [side _controller, civilian]) && (alive _x)};
 
         {
             _x params ["_marker1", "_marker2", "_marker3"];

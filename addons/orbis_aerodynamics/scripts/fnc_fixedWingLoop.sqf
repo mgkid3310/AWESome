@@ -1,13 +1,19 @@
 private _vehicle = _this select 0;
-private _timeOld = _this select 1;
-private _aeroConfigs = _this select 2;
+private _player = _this select 1;
+private _timeOld = _this select 2;
+private _aeroConfigs = _this select 3;
 
 // terminate when player isn't in vehicle
-if !(player in _vehicle) exitWith {};
+if !(_player in _vehicle) exitWith {};
 
 private _mass = getMass _vehicle;
 private _timeStep = time - _timeOld;
 private _dragArray = _aeroConfigs select 0;
+private _liftArray = _aeroConfigs select 1;
+
+private _performanceArray = _aeroConfigs select 2;
+private _speedMax = _performanceArray select 0;
+private _speedStall = _performanceArray select 1;
 
 // update timeOld
 _timeOld = time;
@@ -27,19 +33,30 @@ private _modelvelocity = velocityModelSpace _vehicle;
 private _modelWind = _vehicle vectorWorldToModel wind;
 private _trueAirVelocity = _modelvelocity vectorDiff _modelWind;
 
-// get ground-speed based drag
-private _dragGround = [_dragArray, _modelvelocity] call orbis_aerodynamics_fnc_getDrag;
+// get drag correction
+private _dragGround = [_modelvelocity, _dragArray] call orbis_aerodynamics_fnc_getDrag;
+private _dragTAS = [_trueAirVelocity, _dragArray] call orbis_aerodynamics_fnc_getDrag;
+private _forceDragCorrection = _dragTAS vectorDiff _dragGround;
 
-// get TAS based drag
-private _dragTAS = [_dragArray, _trueAirVelocity] call orbis_aerodynamics_fnc_getDrag;
+// get lift correction
+private _liftGround = [_modelvelocity, _liftArray, _speedMax] call orbis_aerodynamics_fnc_getlift;
+private _liftTAS = [_trueAirVelocity, _liftArray, _speedMax] call orbis_aerodynamics_fnc_getlift;
+private _forceLiftCorrection = _liftTAS vectorDiff _liftGround;
 
-// get and apply correction
-private _forceCorrection = _dragTAS vectorDiff _dragGround;
-private _worldDeltaV = _vehicle vectorModeltoWorld (_forceCorrection vectorMultiply (_timeStep / _mass));
-_vehicle setVelocity (velocity _vehicle vectorAdd _worldDeltaV);
+// sum up corrections and bring wheel friction into calculation if needed (todo)
+private _forceApply = _forceDragCorrection vectorAdd _forceLiftCorrection;
+/* if (isTouchingGround _vehicle) then {
+    for "_i" from 0 to 2 do {
+        _forceApply set [_i, 0 max ()];
+    };
+}; */
+
+// get DeltaV needed and apply it
+private _worldImpulse = _vehicle vectorModeltoWorld (_forceApply vectorMultiply _timeStep / _mass);
+_vehicle addForce [_worldImpulse, [0, 0, 0]];
 
 // wait a frame then spawn next loop
 private _frameNo = diag_frameNo;
 waitUntil {diag_frameNo > _frameNo};
 
-[_vehicle, time, _aeroConfigs] spawn orbis_aerodynamics_fnc_fixedWingLoop;
+[_vehicle, _player, time, _aeroConfigs] spawn orbis_aerodynamics_fnc_fixedWingLoop;

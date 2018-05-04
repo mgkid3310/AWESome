@@ -3,7 +3,7 @@ private _dragArray = _this select 1;
 
 private _dragForce = [0, 0, 0];
 
-for "_index" from 0 to 2 do {
+for "_i" from 0 to 2 do {
     private _velAxis = _velocity select _i;
     private _force = (_dragArray select 0 select _i) * _velAxis * sqrt (_velocity vectorDotProduct _velocity);
     _force = _force + (_dragArray select 1 select _i) * _velAxis;

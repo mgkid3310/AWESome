@@ -7,7 +7,7 @@ for "_i" from 0 to 2 do {
     private _velAxis = _velocity select _i;
     private _force = (_dragArray select 0 select _i) * _velAxis * sqrt (_velocity vectorDotProduct _velocity);
     _force = _force + (_dragArray select 1 select _i) * _velAxis;
-    _force = _force + (_dragArray select 2 select _i) * ([1, -1] select {_velAxis < 0});
+    _force = _force + (_dragArray select 2 select _i) * ([1, -1] select (_velAxis < 0));
     _dragForce set [_i, _force];
 };
 

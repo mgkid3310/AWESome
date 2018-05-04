@@ -45,11 +45,11 @@ private _forceLiftCorrection = _liftTAS vectorDiff _liftGround;
 
 // sum up corrections and bring wheel friction into calculation if needed (todo)
 private _forceApply = _forceDragCorrection vectorAdd _forceLiftCorrection;
-/* if (isTouchingGround _vehicle) then {
-    for "_i" from 0 to 2 do {
-        _forceApply set [_i, 0 max ()];
-    };
-}; */
+if (isTouchingGround _vehicle) then {
+    _forceApply set [0, 0];
+    _forceApply set [1, 0];
+    _forceApply set [2, (_forceApply select 2) max 0];
+};
 
 // get DeltaV needed and apply it
 private _worldImpulse = _vehicle vectorModeltoWorld (_forceApply vectorMultiply _timeStep / _mass);

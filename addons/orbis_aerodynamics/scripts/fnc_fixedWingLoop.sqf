@@ -4,7 +4,7 @@ private _timeOld = _this select 2;
 private _aeroConfigs = _this select 3;
 
 // terminate when player isn't in vehicle
-if !(_player in _vehicle) exitWith {};
+if (!(_player in _vehicle) || !(alive _vehicle)) exitWith {};
 
 private _mass = getMass _vehicle;
 private _timeStep = time - _timeOld;
@@ -28,7 +28,7 @@ if !(_timeStep > 0) exitWith {
     [_vehicle, _timeOld, _aeroConfigs] spawn orbis_aerodynamics_fnc_fixedWingLoop;
 };
 
-// get TAS and etc.
+// get TAS and etc. (use model coordiate system until further notice)
 private _modelvelocity = velocityModelSpace _vehicle;
 private _modelWind = _vehicle vectorWorldToModel wind;
 private _trueAirVelocity = _modelvelocity vectorDiff _modelWind;
@@ -51,9 +51,9 @@ if (isTouchingGround _vehicle) then {
     _forceApply set [2, (_forceApply select 2) max 0];
 };
 
-// get DeltaV needed and apply it
-private _worldImpulse = _vehicle vectorModeltoWorld (_forceApply vectorMultiply _timeStep / _mass);
-_vehicle addForce [_worldImpulse, [0, 0, 0]];
+// get DeltaV needed on world cooridate system and apply it
+private _worldImpulse = _vehicle vectorModeltoWorld (_forceApply vectorMultiply _timeStep);
+_vehicle setVelocity (velocity _vehicle vectorAdd (_worldImpulse / _mass));
 
 // wait a frame then spawn next loop
 private _frameNo = diag_frameNo;

@@ -16,7 +16,7 @@ private _speedStall = _performanceArray select 1;
 
 sleep _interval;
 
-while {time > (_timeInit + _time)} do {
+while {time < (_timeInit + _time)} do {
     private _timeStep = time - _timeOld;
 
     private _modelvelocity = velocityModelSpace _vehicle;

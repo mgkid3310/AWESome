@@ -23,7 +23,7 @@ while {time < (_timeInit + _time)} do {
     private _modelWind = _vehicle vectorWorldToModel wind;
     private _trueAirVelocity = _modelvelocity vectorDiff _modelWind;
 
-    private _accel = (velocity _vehicle - _velOld) / _timeStep;
+    private _accel = (velocity _vehicle - _velOld) apply {_x / _timeStep};
     private _dragGround = [_modelvelocity, _dragArray] call orbis_aerodynamics_fnc_getDrag;
     private _dragTAS = [_trueAirVelocity, _dragArray] call orbis_aerodynamics_fnc_getDrag;
     private _liftGround = [_modelvelocity, _liftArray, _speedMax] call orbis_aerodynamics_fnc_getlift;

@@ -4,10 +4,10 @@ if (hasInterface) then {
 
 	[
 		"orbis_edition_aerodynamics_enabled",
-		"CHECKBOX",
+		"LIST",
 		["Orbis Aerodynamics Toggle", "Can enable or disable Orbis Aerodynamics"],
 		"Orbis Edition",
-		[[true, false], ["Enabled, Disabled"], 1],
+		[[true, false], ["Enabled", "Disabled"], 1],
 		nil,
 		{
 			missionNamespace setVariable ["orbis_edition_aerodynamics_enabled", _this];

@@ -16,9 +16,6 @@ private _performanceArray = _aeroConfigs select 2;
 private _speedMax = _performanceArray select 0;
 private _speedStall = _performanceArray select 1;
 
-// update timeOld
-_timeOld = time;
-
 // if time step is 0, skip current step
 if !(_timeStep > 0) exitWith {
     _timeOld = time;
@@ -26,7 +23,7 @@ if !(_timeStep > 0) exitWith {
     private _frameNo = diag_frameNo;
     waitUntil {diag_frameNo > _frameNo};
 
-    [_vehicle, _timeOld, _aeroConfigs] spawn orbis_aerodynamics_fnc_fixedWingLoop;
+    [_vehicle, _player, _timeOld, _aeroConfigs] spawn orbis_aerodynamics_fnc_fixedWingLoop;
 };
 
 // get TAS and etc. (use model coordiate system until further notice)

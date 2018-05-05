@@ -8,10 +8,11 @@ if (!(_player in _vehicle) || !(alive _vehicle)) exitWith {};
 
 private _mass = getMass _vehicle;
 private _timeStep = time - _timeOld;
+
 private _dragArray = _aeroConfigs select 0;
 private _liftArray = _aeroConfigs select 1;
-
 private _performanceArray = _aeroConfigs select 2;
+
 private _speedMax = _performanceArray select 0;
 private _speedStall = _performanceArray select 1;
 

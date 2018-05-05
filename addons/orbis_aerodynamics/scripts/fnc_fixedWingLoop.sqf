@@ -53,8 +53,11 @@ if (isTouchingGround _vehicle) then {
 private _worldDeltaV = _vehicle vectorModeltoWorld (_forceApply vectorMultiply (_timeStep / _mass));
 _vehicle setVelocity (velocity _vehicle vectorAdd _worldDeltaV);
 
+// update _timeOld
+_timeOld = time;
+
 // wait a frame then spawn next loop
 private _frameNo = diag_frameNo;
 waitUntil {diag_frameNo > _frameNo};
 
-[_vehicle, _player, time, _aeroConfigs] spawn orbis_aerodynamics_fnc_fixedWingLoop;
+[_vehicle, _player, _timeOld, _aeroConfigs] spawn orbis_aerodynamics_fnc_fixedWingLoop;

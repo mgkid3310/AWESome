@@ -29,7 +29,7 @@ while {time > (_timeInit + _time)} do {
     private _liftGround = [_modelvelocity, _liftArray, _speedMax] call orbis_aerodynamics_fnc_getlift;
     private _liftTAS = [_trueAirVelocity, _liftArray, _speedMax] call orbis_aerodynamics_fnc_getlift;
 
-    diag_log format ["orbis_aerodynamics _accel: %1, _dragGround: %2, _dragTAS: %3, _liftGround: %4, _liftTAS: %5", _accel, _dragGround, _dragTAS. _liftGround, _liftTAS];
+    diag_log format ["orbis_aerodynamics _accel: %1, _dragGround: %2, _dragTAS: %3, _liftGround: %4, _liftTAS: %5", _accel, _dragGround, _dragTAS, _liftGround, _liftTAS];
 
     _timeOld = time;
     _velOld = velocity _vehicle;

@@ -12,8 +12,21 @@ if (hasInterface) then {
 		{
 			missionNamespace setVariable ["orbis_edition_aerodynamics_enabled", _this];
 			profileNamespace setVariable ["orbis_edition_aerodynamics_enabled", _this];
+
+			private _hasEvent = missionNamespace getVariable ["orbis_edition_aerodynamics_hasEvent", false];
+			if !(_hasEvent) then {
+				player addEventHandler ["GetInMan", {_this spawn orbis_aerodynamics_fnc_eventGetInMan}];
+				missionNamespace setVariable ["orbis_edition_aerodynamics_hasEvent", true];
+
+				if (vehicle player in entities "Plane") then {
+					[_vehicle, _unit] spawn orbis_aerodynamics_fnc_fixedWingInit;
+				};
+			};
 		}
 	] call CBA_Settings_fnc_init;
 
-    player addEventHandler ["GetInMan", {_this spawn orbis_aerodynamics_fnc_eventGetInMan}];
+	if (_enabled) then {
+    	player addEventHandler ["GetInMan", {_this spawn orbis_aerodynamics_fnc_eventGetInMan}];
+		missionNamespace setVariable ["orbis_edition_aerodynamics_hasEvent", true];
+	};
 };

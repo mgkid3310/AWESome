@@ -4,7 +4,7 @@ private _timeOld = _this select 2;
 private _aeroConfigs = _this select 3;
 
 // terminate when player isn't in vehicle
-if (!(_player in _vehicle) || !(alive _vehicle)) exitWith {};
+if (!(vehicle _player isEqualTo _vehicle) || !(alive _vehicle)) exitWith {};
 
 private _mass = getMass _vehicle;
 private _timeStep = time - _timeOld;

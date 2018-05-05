@@ -1,3 +1,5 @@
+// [_this, 10, 0.1] spawn orbis_aerodynamics_fnc_devReportAerodynamics;
+
 orbis_aerodynamics_fnc_devReportAerodynamics = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_devReportAerodynamics.sqf";
 orbis_aerodynamics_fnc_eventGetInMan = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_eventGetInMan.sqf";
 orbis_aerodynamics_fnc_fixedWingInit = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_fixedWingInit.sqf";

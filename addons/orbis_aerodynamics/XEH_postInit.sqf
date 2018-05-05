@@ -14,7 +14,7 @@ if (hasInterface) then {
 			profileNamespace setVariable ["orbis_edition_aerodynamics_enabled", _this];
 
 			private _hasEvent = missionNamespace getVariable ["orbis_edition_aerodynamics_hasEvent", false];
-			if !(_hasEvent) then {
+			if (_this && !(_hasEvent)) then {
 				player addEventHandler ["GetInMan", {_this spawn orbis_aerodynamics_fnc_eventGetInMan}];
 				missionNamespace setVariable ["orbis_edition_aerodynamics_hasEvent", true];
 

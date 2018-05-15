@@ -2,6 +2,7 @@ private _vehicle = _this select 0;
 private _time = _this select 1;
 private _interval = _this select 2;
 
+private _mass = getMass _vehicle;
 private _timeInit = time;
 private _timeOld = time;
 private _modelvelocityOld = velocityModelSpace _vehicle;
@@ -26,8 +27,8 @@ while {time < (_timeInit + _time)} do {
     private _accel = (_modelvelocity vectorDiff _modelvelocityOld) apply {_x / _timeStep};
     private _dragGround = [_modelvelocity, _dragArray] call orbis_aerodynamics_fnc_getDrag;
     private _dragTAS = [_trueAirVelocity, _dragArray] call orbis_aerodynamics_fnc_getDrag;
-    private _liftGround = [_modelvelocity, _liftArray, _speedMax] call orbis_aerodynamics_fnc_getlift;
-    private _liftTAS = [_trueAirVelocity, _liftArray, _speedMax] call orbis_aerodynamics_fnc_getlift;
+    private _liftGround = [_modelvelocity, _liftArray, _speedMax, _mass] call orbis_aerodynamics_fnc_getlift;
+    private _liftTAS = [_trueAirVelocity, _liftArray, _speedMax, _mass] call orbis_aerodynamics_fnc_getlift;
 
     diag_log format ["orbis_aerodynamics _accel: %1, _dragGround: %2, _dragTAS: %3, _liftGround: %4, _liftTAS: %5", _accel, _dragGround, _dragTAS, _liftGround, _liftTAS];
 

@@ -22,6 +22,14 @@ and heading.
 
 ----
 
+**Issue Tracking**  
+
+To report issues, please use Github's issue tracker  
+
+https://github.com/mgkid3310/AWESome/issues  
+
+----
+
 **Authors (Contributors)**  
 
 Orbis2358 (mgkid3310@naver.com) : Project Manager & Programmer  

@@ -3,8 +3,9 @@ private _player = _this select 1;
 private _timeOld = _this select 2;
 private _aeroConfigs = _this select 3;
 
-// terminate when player isn't in vehicle
-if (!(vehicle _player isEqualTo _vehicle) || !(alive _vehicle)) exitWith {};
+// terminate when player isn't in vehicle or aerodynamics is disabled
+private _aerodynamicsEnabled = missionNamespace getVariable ["orbis_edition_aerodynamics_enabled", false];
+if (!(vehicle _player isEqualTo _vehicle) || !(alive _vehicle) || !_aerodynamicsEnabled) exitWith {};
 
 private _mass = getMass _vehicle;
 private _timeStep = time - _timeOld;

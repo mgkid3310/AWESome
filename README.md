@@ -1,6 +1,6 @@
 # AWESome  
 Aerial Warfare Enhanced Somehow  
-makes ARMA 3's flight ENVIRONMENTS more realistic (GWPS, wind effect,  
+makes ARMA 3's flight environments more realistic (GWPS, wind effect,  
 etc.)  
 
 Although this addon is licensed under CC BY-NC-ND 4.0, feel free to  

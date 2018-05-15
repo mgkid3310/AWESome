@@ -1,11 +1,12 @@
 private _vehicle = _this select 0;
 private _player = _this select 1;
 private _timeOld = _this select 2;
-private _aeroConfigs = _this select 3;
 
-// terminate when player isn't in vehicle or aerodynamics is disabled
-private _aerodynamicsEnabled = missionNamespace getVariable ["orbis_edition_aerodynamics_enabled", false];
-if (!(vehicle _player isEqualTo _vehicle) || !(alive _vehicle) || !_aerodynamicsEnabled) exitWith {};
+private _aeroConfigs = _vehicle getVariable ["orbis_aerodynamics_aeroConfig", false];
+if !(_aeroConfigs isEqualType []) then {
+    _aeroConfigs = [_vehicle] call orbis_aerodynamics_fnc_getAeroConfig;
+    _vehicle setVariable ["orbis_aerodynamics_aeroConfig", _aeroConfigs];
+};
 
 private _mass = getMass _vehicle;
 private _timeStep = time - _timeOld;
@@ -53,12 +54,3 @@ if (isTouchingGround _vehicle) then {
 // get DeltaV needed on world cooridate system and apply it
 private _worldDeltaV = _vehicle vectorModeltoWorld (_forceApply vectorMultiply (_timeStep / _mass));
 _vehicle setVelocity (velocity _vehicle vectorAdd _worldDeltaV);
-
-// update _timeOld
-_timeOld = time;
-
-// wait a frame then spawn next loop
-private _frameNo = diag_frameNo;
-waitUntil {diag_frameNo > _frameNo};
-
-[_vehicle, _player, _timeOld, _aeroConfigs] spawn orbis_aerodynamics_fnc_fixedWingLoop;

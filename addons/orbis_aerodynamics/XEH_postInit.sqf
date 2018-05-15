@@ -19,10 +19,6 @@ if (hasInterface) then {
 		{
 			missionNamespace setVariable ["orbis_aerodynamics_enabled", _this];
 			profileNamespace setVariable ["orbis_aerodynamics_enabled", _this];
-
-			if (_this && (vehicle player in entities "Plane")) then {
-				[vehicle player, player] spawn orbis_aerodynamics_fnc_fixedWingInit;
-			};
 		}
 	] call CBA_Settings_fnc_init;
 };

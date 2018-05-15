@@ -1,5 +1,5 @@
 # AWESome
-Aerial Warfare Enhanced Somehow
+Aerial Warfare Enhanced Somehow  
 makes ARMA 3's flights more realistic (GWPS, wind effect, etc.)  
 
 Although this addon is licensed under CC BY-NC-ND 4.0, feel free  

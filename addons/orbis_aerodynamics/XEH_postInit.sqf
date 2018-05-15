@@ -1,5 +1,5 @@
 // init global variable
-orbis_aerodynamics_loopFrameInterval = 5;
+orbis_aerodynamics_loopFrameInterval = 1;
 
 // add EventHandlers
 addMissionEventHandler ["EachFrame", {[] call orbis_aerodynamics_fnc_eachFrameHandler}];

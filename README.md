@@ -7,6 +7,21 @@ to contact me if you need any code from this addon for applications.
 
 ----
 
+Functions (Effect on game)  
+
+1. GPWS(Ground Proximity Warning)
+Includes missile warning and other sound-warnings from Bitching
+Betty from F-16
+
+2. Realistic Aerodynamics (drag, lift, etc.)
+Brings wind into calculation
+
+3. ATC(Air Traffic Controller) radar screen
+Shows friendly & civilian planes on map with name, speed, altitude,
+and heading.
+
+----
+
 Authors (Contributors)  
 
 Orbis2358 (mgkid3310@naver.com) : Project Manager & Programmer  

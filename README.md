@@ -1,17 +1,18 @@
 # AWESome  
 Aerial Warfare Enhanced Somehow  
-makes ARMA 3's flights more realistic (GWPS, wind effect, etc.)  
+makes ARMA 3's flight ENVIRONMENTS more realistic (GWPS, wind effect,  
+etc.)  
 
-Although this addon is licensed under CC BY-NC-ND 4.0, feel free  
-to contact me if you need any code from this addon for applications.  
+Although this addon is licensed under CC BY-NC-ND 4.0, feel free to  
+contact me if you need any code from this addon for applications.  
 
 ----
 
 **Functions (Effect on game)**  
 
 1. GPWS (Ground Proximity Warning)  
-Includes missile warning and other sound-warnings from Bitching  
-Betty from F-16  
+Includes missile warning and other sound-warnings from Bitching Betty  
+from F-16  
 
 2. Realistic Aerodynamics (drag, lift, etc.)  
 Brings wind into calculation  

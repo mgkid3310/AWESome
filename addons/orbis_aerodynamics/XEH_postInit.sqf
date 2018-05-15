@@ -6,7 +6,7 @@ addMissionEventHandler ["EachFrame", {[] call orbis_aerodynamics_fnc_eachFrameHa
 
 // CBA based addon setting init
 if (hasInterface) then {
-	private _enabled = profileNamespace getVariable ["orbis_aerodynamics_enabled", false];
+	private _enabled = profileNamespace getVariable ["orbis_aerodynamics_enabled", true];
 	missionNamespace setVariable ["orbis_aerodynamics_enabled", _enabled];
 
 	[

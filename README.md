@@ -7,7 +7,7 @@ to contact me if you need any code from this addon for applications.
 
 ----
 
-Functions (Effect on game)  
+## Functions (Effect on game)  
 
 1. GPWS (Ground Proximity Warning)  
 Includes missile warning and other sound-warnings from Bitching  
@@ -22,6 +22,6 @@ and heading.
 
 ----
 
-Authors (Contributors)  
+## Authors (Contributors)  
 
 Orbis2358 (mgkid3310@naver.com) : Project Manager & Programmer  

@@ -1,4 +1,4 @@
-#define VOL_GENERAL 10
+#define VOL_GENERAL 50
 
 class CfgSounds {
 	// common words

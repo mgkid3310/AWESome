@@ -11,8 +11,6 @@ class CfgVehicles {
 		orbisGPWS_enabled = 0;
 		orbisGPWS_default = GPWS_NONE;
 		orbisGPWS_lowCMcount = LOW_CM_OFF;
-
-		#include "ACE_SelfActions.hpp"
 	};
 	class Plane_CAS_01_base_F: Plane_Base_F {};
 	class Plane_Fighter_03_base_F: Plane_Base_F {};

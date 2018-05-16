@@ -15,6 +15,8 @@ _remarksArray params ["_rain", "_lightnings"];
 ["orbis_phonetic_z"] call orbis_atc_fnc_playAndSleep;
 ["orbis_common_observation"] call orbis_atc_fnc_playAndSleep;
 
+sleep 0.5;
+
 // wind direction
 ["orbis_common_wind"] call orbis_atc_fnc_playAndSleep;
 [format ["orbis_phonetic_%1", floor (_windDir / 100)]] call orbis_atc_fnc_playAndSleep;
@@ -28,6 +30,8 @@ _remarksArray params ["_rain", "_lightnings"];
 // gust
 ["orbis_common_gusting"] call orbis_atc_fnc_playAndSleep;
 [_gusts] call orbis_atc_fnc_speakNumber;
+
+sleep 0.5;
 
 // visibility
 ["orbis_common_visibility"] call orbis_atc_fnc_playAndSleep;
@@ -46,6 +50,8 @@ if (_visibility >= 10) then {
 ["orbis_phonetic_1"] call orbis_atc_fnc_playAndSleep;
 ["orbis_common_thousand"] call orbis_atc_fnc_playAndSleep;
 
+sleep 0.5;
+
 // temperature
 ["orbis_common_temperature"] call orbis_atc_fnc_playAndSleep;
 [_temperature] call orbis_atc_fnc_speakNumber;
@@ -57,6 +63,8 @@ if (_visibility >= 10) then {
 // altimeter
 ["orbis_common_altimeter"] call orbis_atc_fnc_playAndSleep;
 [_QNH] call orbis_atc_fnc_speakNumber;
+
+sleep 0.5;
 
 // remarks
 if ((_fogApply isEqualTo 0) && (_rain isEqualTo 0) && (_lightnings isEqualTo 0)) exitWith {};

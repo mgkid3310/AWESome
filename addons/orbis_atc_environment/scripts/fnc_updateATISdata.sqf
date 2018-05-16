@@ -8,10 +8,10 @@ if (isArray (configFile >> "CfgWorlds" >> worldName >> "ilsPosition")) then {
 if !(_console isEqualType 0) then {
     _pos = getPos _console;
 };
-_pos set [2, getTerrainHeightASL _pos];
+_pos set [2, (getTerrainHeightASL _pos) max 0];
 
 fogParams params ["_fogValue", "_fogDecay", "_fogBase"];
-private _fogAltDiff = 0 max ((_pos select 2) - _fogBase);
+private _fogAltDiff = ((_pos select 2) - _fogBase) max 0;
 private _fogApply = _fogValue * (0.5 ^ (_fogAltDiff * _fogDecay / (ln 0.5)));
 private _visibility = 10 * exp (-6 * _fogApply);
 

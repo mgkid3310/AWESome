@@ -25,6 +25,46 @@ if (hasInterface) then {
 	] call CBA_Settings_fnc_init;
 };
 
+// add ATIS actions
+private _actionATISmain = [
+	"actionATIS",
+	"ATIS",
+	"",
+	{},
+	{_player isEqualTo driver _target},
+	{},
+	[],
+	[0, 0, 0],
+	10
+] call ace_interact_menu_fnc_createAction;
+private _actionATISlisten = [
+	"removeFlag",
+	"Listen to ATIS",
+	"",
+	{[] call orbis_atc_fnc_listenATISbroadcast},
+	{(_target getVariable ['orbisATISready', true]) && (_player isEqualTo driver _target)},
+	{},
+	[],
+	[0, 0, 0],
+	10
+] call ace_interact_menu_fnc_createAction;
+
+[
+	"Plane_Base_F",
+	1,
+	["ACE_SelfActions"],
+	_actionATISmain,
+    true
+] call ace_interact_menu_fnc_addActionToClass;
+[
+	"Plane_Base_F",
+	1,
+	["ACE_SelfActions", "actionATIS"],
+	_actionATISlisten,
+    true
+] call ace_interact_menu_fnc_addActionToClass;
+
+// run initial ATIS data update
 [] spawn {
     sleep 10;
     [] call orbis_atc_fnc_updateATISdata;

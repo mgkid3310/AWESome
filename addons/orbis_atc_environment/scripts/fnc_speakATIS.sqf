@@ -2,7 +2,7 @@ params ["_baseArray", "_windArray", "_visibilityArray", "_cloudArray", "_atmosph
 
 _baseArray params ["_pos", "_date"];
 _windArray params ["_windDir", "_windStr", "_gusts"];
-_visibilityArray params ["_visibility"];
+_visibilityArray params ["_visibility", "_fogApply"];
 _cloudArray params ["_overcast", "_cloudBaseKm", "_cloudHeightKm"];
 _atmosphereArray params ["_temperature", "_dewPoint", "_QNH"];
 _remarksArray params ["_rain", "_lightnings"];
@@ -59,8 +59,23 @@ if (_visibility >= 10) then {
 [_QNH] call orbis_atc_fnc_speakNumber;
 
 // remarks
-if ((_rain isEqualTo 0) && (_lightnings isEqualTo 0)) exitWith {};
+if ((_fogApply isEqualTo 0) && (_rain isEqualTo 0) && (_lightnings isEqualTo 0)) exitWith {};
 ["orbis_common_remarks"] call orbis_atc_fnc_playAndSleep;
+
+// fog
+switch (true) do {
+    case (_fogApply > 0.7): {
+        ["orbis_common_heavy"] call orbis_atc_fnc_playAndSleep;
+        ["orbis_common_fog"] call orbis_atc_fnc_playAndSleep;
+    };
+    case (_fogApply > 0.3): {
+        ["orbis_common_fog"] call orbis_atc_fnc_playAndSleep;
+    };
+    case (_fogApply > 0): {
+        ["orbis_common_light"] call orbis_atc_fnc_playAndSleep;
+        ["orbis_common_fog"] call orbis_atc_fnc_playAndSleep;
+    };
+};
 
 // rain
 switch (true) do {

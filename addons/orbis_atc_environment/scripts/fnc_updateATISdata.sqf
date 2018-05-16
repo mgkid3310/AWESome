@@ -19,11 +19,11 @@ private _QNH = (_pos select 2) call ace_weather_fnc_calculateBarometricPressure;
 
 private _baseArray = [_pos, date];
 private _windArray = [windDir, windStr, gusts];
-private _visibilityArray = [_visibility];
+private _visibilityArray = [_visibility, _fogApply];
 private _cloudArray = [overcast, _cloudBaseKm, _cloudHeightKm];
 private _atmosphereArray = [_temperature, _dewPoint, _QNH];
 private _remarksArray = [rain, lightnings];
 
-// [[_pos, _date], [_windDir, _windStr, _gusts], [_visibility], [_overcast, _cloudBaseKm, _cloudHeightKm], [_temperature, _dewPoint, _QNH], [_rain, _lightnings]]
+// [[_pos, _date], [_windDir, _windStr, _gusts], [_visibility, _fogApply], [_overcast, _cloudBaseKm, _cloudHeightKm], [_temperature, _dewPoint, _QNH], [_rain, _lightnings]]
 private _ATISdata = [_baseArray, _windArray, _visibilityArray, _cloudArray, _atmosphereArray, _remarksArray];
 missionNAmespace setVariable ["orbis_atc_ATIS", _ATISdata, true];

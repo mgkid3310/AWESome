@@ -7,6 +7,8 @@ _cloudArray params ["_overcast", "_cloudBaseKm", "_cloudHeightKm"];
 _atmosphereArray params ["_temperature", "_dewPoint", "_QNH"];
 _remarksArray params ["_rain", "_lightnings"];
 
+_target setVariable ['orbisATISready', false];
+
 // time
 [format ["orbis_phonetic_%1", floor ((_date select 3) / 10)]] call orbis_atc_fnc_playAndSleep;
 [format ["orbis_phonetic_%1", floor ((_date select 3) % 10)]] call orbis_atc_fnc_playAndSleep;
@@ -114,3 +116,5 @@ switch (true) do {
         ["orbis_common_lightning"] call orbis_atc_fnc_playAndSleep;
     };
 };
+
+_target setVariable ['orbisATISready', true];

@@ -85,7 +85,7 @@ class CfgSounds {
 	};
 
 	// Large planes GPWS (C130 & larger)
-	class b747_10 {
+	/* class b747_10 {
 		name = "Large 10";
 		sound[] = {"orbis_gpws\sounds\b747\10.ogg", B747_VOL, 1};
 		titles[] = {};
@@ -234,5 +234,5 @@ class CfgSounds {
 		name = "Large WINDSHR";
 		sound[] = {"orbis_gpws\sounds\b747\WINDSHR.ogg", B747_VOL, 1};
 		titles[] = {};
-	};
+	}; */
 };

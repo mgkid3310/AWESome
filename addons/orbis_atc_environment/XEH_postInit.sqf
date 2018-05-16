@@ -5,3 +5,8 @@ if (isNumber (configFile >> "CfgWorlds" >> worldName >> "mapSize")) then {
 orbis_atc_fontMin = 0.05;
 orbis_atc_fontMax = 0.1;
 orbis_atc_lineSpacing = 0.9;
+
+[] spawn {
+    sleep 10;
+    [player] call orbis_atc_fnc_updateATISdata;
+};

@@ -1,9 +1,10 @@
-private _console = param [0, 0];
+private _global = param [0, true];
+private _console = param [1, 0];
 private _pos = getArray (configFile >> "CfgWorlds" >> worldName >> "ilsPosition");
-_pos set [2, getTerrainHeightASL _pos];
 if !(_console isEqualType 0) then {
-    _pos = getPosASL _console;
+    _pos = getPos _console;
 };
+_pos set [2, getTerrainHeightASL _pos];
 
 fogParams params ["_fogValue", "_fogDecay", "_fogBase"];
 private _fogAltDiff = 0 max ((_pos select 2) - _fogBase);
@@ -26,4 +27,6 @@ private _remarksArray = [rain, lightnings];
 
 // [[_pos, _date], [_windDir, _windStr, _gusts], [_visibility, _fogApply], [_overcast, _cloudBaseKm, _cloudHeightKm], [_temperature, _dewPoint, _QNH], [_rain, _lightnings]]
 private _ATISdata = [_baseArray, _windArray, _visibilityArray, _cloudArray, _atmosphereArray, _remarksArray];
-missionNAmespace setVariable ["orbis_atc_ATIS", _ATISdata, true];
+missionNAmespace setVariable ["orbis_atc_ATIS", _ATISdata, _global];
+
+_ATISdata

@@ -17,7 +17,7 @@ if (hasInterface) then {
 		["Real-time ATIS data update", "Update ATIS data everytime when ATIS is played"],
 		"AWESome",
 		_enabled,
-		nil
+		nil,
 		{
 			missionNamespace setVariable ["orbis_atc_updateATISself", _this];
 			profileNamespace setVariable ["orbis_atc_updateATISself", _this];

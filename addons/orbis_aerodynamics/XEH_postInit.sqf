@@ -15,7 +15,7 @@ if (hasInterface) then {
 		["Advanced Aerodynamics", "Can enable or disable Advanced Aerodynamics"],
 		"AWESome",
 		[[true, false], ["Enabled", "Disabled"], [1, 0] select _enabled],
-		nil
+		nil,
 		{
 			missionNamespace setVariable ["orbis_aerodynamics_enabled", _this];
 			profileNamespace setVariable ["orbis_aerodynamics_enabled", _this];

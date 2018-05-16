@@ -6,11 +6,6 @@ orbis_atc_fontMin = 0.05;
 orbis_atc_fontMax = 0.1;
 orbis_atc_lineSpacing = 0.9;
 
-[] spawn {
-    sleep 10;
-    [] call orbis_atc_fnc_updateATISdata;
-};
-
 // CBA based addon setting init
 if (hasInterface) then {
 	private _enabled = profileNamespace getVariable ["orbis_atc_updateATISself", true];
@@ -28,4 +23,9 @@ if (hasInterface) then {
 			profileNamespace setVariable ["orbis_atc_updateATISself", _this];
 		}
 	] call CBA_Settings_fnc_init;
+};
+
+[] spawn {
+    sleep 10;
+    [] call orbis_atc_fnc_updateATISdata;
 };

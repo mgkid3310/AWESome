@@ -69,7 +69,9 @@ sleep 0.5;
 sleep 0.5;
 
 // remarks
-if ((_fogApply isEqualTo 0) && (_rain isEqualTo 0) && (_lightnings isEqualTo 0)) exitWith {};
+if ((_fogApply isEqualTo 0) && (_rain isEqualTo 0) && (_lightnings isEqualTo 0)) exitWith {
+    vehicle player setVariable ['orbisATISready', true];
+};
 ["orbis_common_remarks"] call orbis_atc_fnc_playAndSleep;
 
 // fog

@@ -1,5 +1,5 @@
 // init global variable
-orbis_aerodynamics_loopFrameInterval = 1;
+orbis_aerodynamics_loopFrameInterval = 4;
 
 // add EventHandlers
 addMissionEventHandler ["EachFrame", {[] call orbis_aerodynamics_fnc_eachFrameHandler}];
@@ -14,7 +14,7 @@ if (hasInterface) then {
 		"LIST",
 		["Advanced Aerodynamics", "Can enable or disable Advanced Aerodynamics"],
 		"AWESome",
-		[[true, false], ["Enabled", "Disabled"], 1],
+		[[false, true], ["Disabled", "Enabled"], [0, 1] select _enabled],
 		nil,
 		{
 			missionNamespace setVariable ["orbis_aerodynamics_enabled", _this];

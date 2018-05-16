@@ -8,5 +8,5 @@ orbis_atc_lineSpacing = 0.9;
 
 [] spawn {
     sleep 10;
-    [player] call orbis_atc_fnc_updateATISdata;
+    [] call orbis_atc_fnc_updateATISdata;
 };

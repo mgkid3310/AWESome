@@ -1,7 +1,7 @@
 private _ATISdata = missionNAmespace getVariable ["orbis_atc_ATIS", false];
-private _groundRequired = missionNamespace getVariable ["orbis_atc_gorundATISupdateRequired", false];
+private _enabled = missionNamespace getVariable ["orbis_atc_updateATISself", false];
 
-if (_groundRequired) then {
+if (_enabled) then {
     _ATISdata = [false] call orbis_atc_fnc_updateATISdata;
 };
 

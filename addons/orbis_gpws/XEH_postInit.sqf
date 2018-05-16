@@ -69,6 +69,17 @@ private _actionF16 = [
 	[0, 0, 0],
 	10
 ] call ace_interact_menu_fnc_createAction;
+private _testF16 = [
+	"f16",
+	"Test GPWS",
+	"",
+	{[_this select 0] spawn orbis_gpws_fnc_f16GPWStest},
+	{(_target getVariable ['orbisGPWSenabled', false]) && (_player isEqualTo driver _target) && (_target getVariable ['orbisGPWSmode', ''] == 'f16')},
+	{},
+	[],
+	[0, 0, 0],
+	10
+] call ace_interact_menu_fnc_createAction;
 private _actionB747 = [
 	"b747",
 	"Set to B747 GPWS",
@@ -100,6 +111,13 @@ private _actionB747 = [
 	1,
 	["ACE_SelfActions", "orbisGPWSmodes"],
 	_actionF16,
+    true
+] call ace_interact_menu_fnc_addActionToClass;
+[
+	"Plane_Base_F",
+	1,
+	["ACE_SelfActions", "orbisGPWSmodes"],
+	_testF16,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [

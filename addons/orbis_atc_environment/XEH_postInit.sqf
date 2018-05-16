@@ -13,19 +13,19 @@ orbis_atc_lineSpacing = 0.9;
 
 // CBA based addon setting init
 if (hasInterface) then {
-	private _required = profileNamespace getVariable ["orbis_atc_gorundATISupdateRequired", true];
-	missionNamespace setVariable ["orbis_atc_gorundATISupdateRequired", _required];
+	private _enabled = profileNamespace getVariable ["orbis_atc_updateATISself", true];
+	missionNamespace setVariable ["orbis_atc_updateATISself", _required];
 
 	[
-		"orbis_atc_gorundATISupdateRequired",
+		"orbis_atc_updateATISself",
 		"CHECKBOX",
-		["Require ATIS update", "Required ATIS data update from ground"],
+		["Real-time ATIS data update", "Update ATIS data everytime when ATIS is played"],
 		"AWESome",
-		_required,
+		_enabled,
 		nil
 		{
-			missionNamespace setVariable ["orbis_atc_gorundATISupdateRequired", _this];
-			profileNamespace setVariable ["orbis_atc_gorundATISupdateRequired", _this];
+			missionNamespace setVariable ["orbis_atc_updateATISself", _this];
+			profileNamespace setVariable ["orbis_atc_updateATISself", _this];
 		}
 	] call CBA_Settings_fnc_init;
 };

@@ -21,6 +21,9 @@ Brings wind into calculation
 Shows friendly & civilian planes on map with name, speed, altitude,  
 and heading  
 
+4. ATIS (Automatic Terminal Information Service)  
+Plays ATIS radio using real in-game atmospheric data  
+
 ----
 
 **Issue Tracking**  

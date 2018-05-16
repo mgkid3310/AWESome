@@ -3,7 +3,7 @@ private _console = param [1, 0];
 
 private _pos = [0, 0, 0];
 if (isArray (configFile >> "CfgWorlds" >> worldName >> "ilsPosition")) then {
-    _pos = isArray (configFile >> "CfgWorlds" >> worldName >> "ilsPosition");
+    _pos = getArray (configFile >> "CfgWorlds" >> worldName >> "ilsPosition");
 };
 if !(_console isEqualType 0) then {
     _pos = getPos _console;

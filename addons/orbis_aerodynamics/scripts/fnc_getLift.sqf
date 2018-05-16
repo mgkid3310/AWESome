@@ -6,7 +6,7 @@ private _mass = _this select 4;
 
 private _liftCoef = 0;
 private _liftForce = [0, 0, 0];
-private _speedKPH = _velocity vectorDotProduct [0, cos deg _angleOfIndicence, sin deg _angleOfIndicence] * 3.6;
+private _speedKPH = (_velocity vectorDotProduct [0, cos deg _angleOfIndicence, sin deg _angleOfIndicence]) * 3.6;
 
 if (_speedKPH >= (_speedMax * (count _liftArray - 1) / 10)) then {
     _liftCoef = _liftArray select (count _liftArray - 1);

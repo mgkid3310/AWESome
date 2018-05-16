@@ -15,5 +15,6 @@ private _liftArray = getArray (_class >> "envelope");
 private _speedMax = getNumber (_class >> "maxSpeed");
 private _speedStall = getNumber (_class >> "stallSpeed");
 private _angleOfIndicence = getNumber (_class >> "angleOfIndicence");
+private _massStandard = getMass _vehicle;
 
-[_dragArray, _liftArray, [_speedMax, _speedStall, _angleOfIndicence]];
+[_dragArray, _liftArray, [_speedMax, _speedStall, _angleOfIndicence, _massStandard]];

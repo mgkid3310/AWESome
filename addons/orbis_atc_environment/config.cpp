@@ -16,10 +16,10 @@ class CfgVehicles {
 	class Plane;
 	class Plane_Base_F: Plane {
 		class ACE_SelfActions {
-			class orbisATISrequest {
+			class orbisListenATIS {
 				displayName = "Listen to ATIS";
-				condition = "(_target getVariable ['orbisATISready', false]) && (_player isEqualTo driver _target)";
-				statement = "";
+				condition = "(_target getVariable ['orbisATISready', true]) && (_player isEqualTo driver _target)";
+				statement = "[] call orbis_atc_fnc_listenATISbroadcast";
 				showDisabled = 0;
 				priority = 0.6;
 				icon = "";

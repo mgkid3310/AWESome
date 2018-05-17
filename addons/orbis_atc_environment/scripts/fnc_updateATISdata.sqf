@@ -10,7 +10,7 @@ if !(_console isEqualType 0) then {
 };
 _pos set [2, (getTerrainHeightASL _pos) max 0];
 
-private _windStr = vectorMagnitude wind;
+private _windStr = (vectorMagnitude wind) * (900 / 463);
 
 fogParams params ["_fogValue", "_fogDecay", "_fogBase"];
 private _fogAltDiff = ((_pos select 2) - _fogBase) max 0;

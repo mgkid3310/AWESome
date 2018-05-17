@@ -85,6 +85,7 @@ switch (true) do {
         ["orbis_common_fog"] call orbis_atc_fnc_playAndSleep;
     };
     case (_fogApply > 0.3): {
+        sleep 0.1;
         ["orbis_common_fog"] call orbis_atc_fnc_playAndSleep;
     };
     case (_fogApply > 0): {
@@ -100,6 +101,7 @@ switch (true) do {
         ["orbis_common_rain"] call orbis_atc_fnc_playAndSleep;
     };
     case (_rain > 0.3): {
+        sleep 0.1;
         ["orbis_common_rain"] call orbis_atc_fnc_playAndSleep;
     };
     case (_rain > 0): {
@@ -115,6 +117,7 @@ switch (true) do {
         ["orbis_common_lightning"] call orbis_atc_fnc_playAndSleep;
     };
     case (_lightnings > 0.3): {
+        sleep 0.1;
         ["orbis_common_lightning"] call orbis_atc_fnc_playAndSleep;
     };
     case (_lightnings > 0): {

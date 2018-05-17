@@ -17,7 +17,7 @@ vehicle player setVariable ['orbisATISready', false];
 ["orbis_phonetic_z"] call orbis_atc_fnc_playAndSleep;
 ["orbis_common_observation"] call orbis_atc_fnc_playAndSleep;
 
-sleep 0.5;
+sleep 0.3;
 
 // wind direction
 ["orbis_common_wind"] call orbis_atc_fnc_playAndSleep;
@@ -33,7 +33,7 @@ sleep 0.5;
 ["orbis_common_gusting"] call orbis_atc_fnc_playAndSleep;
 [_gusts] call orbis_atc_fnc_speakNumber;
 
-sleep 0.5;
+sleep 0.3;
 
 // visibility
 ["orbis_common_visibility"] call orbis_atc_fnc_playAndSleep;
@@ -44,6 +44,8 @@ if (_visibility >= 10) then {
     [_visibility, -1] call orbis_atc_fnc_speakNumber;
 };
 
+sleep 0.3;
+
 // cloud
 ["orbis_common_scattered"] call orbis_atc_fnc_playAndSleep;
 ["orbis_phonetic_1"] call orbis_atc_fnc_playAndSleep;
@@ -52,7 +54,7 @@ if (_visibility >= 10) then {
 ["orbis_phonetic_1"] call orbis_atc_fnc_playAndSleep;
 ["orbis_common_thousand"] call orbis_atc_fnc_playAndSleep;
 
-sleep 0.5;
+sleep 0.3;
 
 // temperature
 ["orbis_common_temperature"] call orbis_atc_fnc_playAndSleep;
@@ -62,11 +64,13 @@ sleep 0.5;
 ["orbis_common_dewpoint"] call orbis_atc_fnc_playAndSleep;
 [_dewPoint] call orbis_atc_fnc_speakNumber;
 
+sleep 0.3;
+
 // altimeter
 ["orbis_common_altimeter"] call orbis_atc_fnc_playAndSleep;
 [_QNH] call orbis_atc_fnc_speakNumber;
 
-sleep 0.5;
+sleep 0.3;
 
 // remarks
 if ((_fogApply isEqualTo 0) && (_rain isEqualTo 0) && (_lightnings isEqualTo 0)) exitWith {

@@ -47,14 +47,14 @@ if (_visibility >= 10) then {
 sleep 0.3;
 
 // cloud
-["orbis_common_scattered"] call orbis_atc_fnc_playAndSleep;
+/* ["orbis_common_scattered"] call orbis_atc_fnc_playAndSleep;
 ["orbis_phonetic_1"] call orbis_atc_fnc_playAndSleep;
 ["orbis_common_hundred"] call orbis_atc_fnc_playAndSleep;
 ["orbis_common_broken"] call orbis_atc_fnc_playAndSleep;
 ["orbis_phonetic_1"] call orbis_atc_fnc_playAndSleep;
 ["orbis_common_thousand"] call orbis_atc_fnc_playAndSleep;
 
-sleep 0.3;
+sleep 0.3; */
 
 // temperature
 ["orbis_common_temperature"] call orbis_atc_fnc_playAndSleep;

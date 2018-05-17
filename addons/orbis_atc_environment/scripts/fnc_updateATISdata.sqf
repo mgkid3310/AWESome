@@ -10,6 +10,7 @@ if !(_console isEqualType 0) then {
 };
 _pos set [2, (getTerrainHeightASL _pos) max 0];
 
+private _windDir = (windDir + 180) % 360;
 private _windStr = (vectorMagnitude wind) * (900 / 463);
 
 fogParams params ["_fogValue", "_fogDecay", "_fogBase"];
@@ -25,7 +26,7 @@ private _dewPoint = [_temperature, _humidity] call ace_weather_fnc_calculateDewP
 private _QNH = (_pos select 2) call ace_weather_fnc_calculateBarometricPressure;
 
 private _baseArray = [_pos, date];
-private _windArray = [windDir, _windStr, gusts];
+private _windArray = [_windDir, _windStr, gusts];
 private _visibilityArray = [_visibility, _fogApply];
 private _cloudArray = [overcast, _cloudBaseKm, _cloudHeightKm];
 private _atmosphereArray = [_temperature, _dewPoint, _QNH];

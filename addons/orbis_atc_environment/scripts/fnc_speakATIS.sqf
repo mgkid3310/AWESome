@@ -30,10 +30,10 @@ sleep 0.3;
 [_windStr] call orbis_atc_fnc_speakNumber;
 
 // gust
-["orbis_common_gusting"] call orbis_atc_fnc_playAndSleep;
+/* ["orbis_common_gusting"] call orbis_atc_fnc_playAndSleep;
 [_gusts] call orbis_atc_fnc_speakNumber;
 
-sleep 0.3;
+sleep 0.3; */
 
 // visibility
 ["orbis_common_visibility"] call orbis_atc_fnc_playAndSleep;

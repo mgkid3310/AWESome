@@ -5,8 +5,8 @@ params ["_unit", "_position", "_vehicle", "_turret"];
 DEV_CHAT("orbis_gpws: getIn run");
 
 // check if has GPWS enabled
-private _GPWSenabled = _vehicle getVariable ["orbisGPWSenabled", nil];
-if !(isNil _GPWSenabled) then {
+private _GPWSenabled = _vehicle getVariable ["orbisGPWSenabled", 0];
+if (_GPWSenabled isEqualType true) then {
 	if !(_GPWSenabled) exitWith {};
 } else {
 	if !(getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbisGPWS_enabled") > 0) exitWith {};

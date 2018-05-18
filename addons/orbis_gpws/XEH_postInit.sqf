@@ -1,5 +1,5 @@
 // global variables init
-orbis_gpws_ChaffFlareList = ["js_w_fa18_CMFlareLauncher", "FIR_CMLauncher"];
+orbis_gpws_ChaffFlareList = ["CMFlareLauncher", "FIR_CMLauncher", "js_w_fa18_CMFlareLauncher"];
 orbis_gpws_takeoffAlt = 60;
 orbis_gpws_airportRange = 6000;
 orbis_gpws_pullupTime = 4;
@@ -31,9 +31,6 @@ for "_i" from 0 to (count (configFile >> "CfgWorlds" >> worldName >> "SecondaryA
 		orbis_gpws_runwayList pushBack [getPosASL _x, asin abs (getArray (configFile >> "CfgVehicles" >> (typeOf _x) >> "ilsDirection") select 0) call orbis_gpws_fnc_getOppositeHeading];
 	};
 } forEach (allAirports select 1);
-
-// add eventhandler
-player addEventHandler ["GetInMan", {_this spawn orbis_gpws_fnc_getIn}];
 
 // add GPWS actions
 private _actionGPWSmodes = [
@@ -80,7 +77,7 @@ private _testF16 = [
 	[0, 0, 0],
 	10
 ] call ace_interact_menu_fnc_createAction;
-private _actionB747 = [
+/* private _actionB747 = [
 	"b747",
 	"Set to B747 GPWS",
 	"",
@@ -90,7 +87,7 @@ private _actionB747 = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+] call ace_interact_menu_fnc_createAction; */
 
 [
 	"Plane_Base_F",
@@ -120,10 +117,16 @@ private _actionB747 = [
 	_testF16,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
-[
+/* [
 	"Plane_Base_F",
 	1,
 	["ACE_SelfActions", "orbisGPWSmodes"],
 	_actionB747,
     true
-] call ace_interact_menu_fnc_addActionToClass;
+] call ace_interact_menu_fnc_addActionToClass; */
+
+// add eventhandler
+player addEventHandler ["GetInMan", {_this spawn orbis_gpws_fnc_getIn}];
+if (vehicle player != player) then {
+	[player, getPos player, vehicle player, nil] spawn orbis_gpws_fnc_getIn;
+};

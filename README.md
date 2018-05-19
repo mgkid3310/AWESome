@@ -26,7 +26,7 @@ and heading. Useful when commanding multiple planes.
 
 4. ATIS (Automatic Terminal Information Service)  
 Plays ATIS radio boradcast using real in-game atmospheric data. Provides  
-wind, visibility, temperature, dewpoint, QNH, etc.  
+wind, visibility, temperature, dewpoint, QFE, etc.  
 
 ----
 

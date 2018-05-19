@@ -37,6 +37,14 @@ https://github.com/mgkid3310/AWESome/issues
 
 ----
 
+**Steam Workshop**  
+
+You can subscribe this addon on Steam Workshop  
+
+https://steamcommunity.com/sharedfiles/filedetails/?id=1301399507
+
+----
+
 **Authors (Contributors)**  
 
 Orbis2358 (mgkid3310@naver.com) : Project Manager & Programmer  

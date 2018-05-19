@@ -4,7 +4,7 @@ _baseArray params ["_pos", "_date"];
 _windArray params ["_windDir", "_windStr", "_gusts"];
 _visibilityArray params ["_visibility", "_fogApply"];
 _cloudArray params ["_overcast", "_cloudBaseKm", "_cloudHeightKm"];
-_atmosphereArray params ["_temperature", "_dewPoint", "_QNH"];
+_atmosphereArray params ["_temperature", "_dewPoint", "_QFE"];
 _remarksArray params ["_rain", "_lightnings"];
 
 vehicle player setVariable ['orbisATISready', false];
@@ -68,7 +68,7 @@ sleep 0.3;
 
 // altimeter
 ["orbis_common_altimeter"] call orbis_atc_fnc_playAndSleep;
-[_QNH] call orbis_atc_fnc_speakNumber;
+[_QFE] call orbis_atc_fnc_speakNumber;
 
 sleep 0.3;
 

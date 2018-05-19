@@ -18,6 +18,7 @@ Betty. Gives basic warnings such as: Pull Up, Altitude, Counter, etc.
 Brings wind into calculation. Landing speed should be calculated with  
 TAS (True Air Speed), not ground speed. In case of crosswinds, de-crab  
 or sideslip landings will be required.  
+Can enable/disable on addon settings (enabled as default).  
 
 3. ATC (Air Traffic Controller) radar screen  
 Shows friendly & civilian planes on map with name, speed, altitude,  

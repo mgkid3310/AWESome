@@ -2,7 +2,7 @@ private _velocity = _this select 0;
 private _dragArray = _this select 1;
 private _mass = _this select 2;
 
-private _airVel = _velocity apply {-1 * _x};
+private _airVel = _velocity vectorMultiply -1;
 private _airSpeed = sqrt (_airVel vectorDotProduct _airVel);
 private _dragForce = [0, 0, 0];
 

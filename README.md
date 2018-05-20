@@ -1,5 +1,5 @@
-# AWESome  
-Aerial Warfare Enhanced Somehow  
+# AWESome : Aerial Warfare Enhanced Somehow   
+
 makes ARMA 3's flight environments more realistic (GWPS, wind effect,  
 etc.)  
 

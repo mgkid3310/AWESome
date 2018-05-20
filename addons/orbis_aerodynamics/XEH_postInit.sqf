@@ -28,7 +28,7 @@ if (hasInterface) then {
 		"orbis_aerodynamics_windMultiplier",
 		"SLIDER",
 		["Wind Multiplier", "Sets shadow view distance"],
-		"Orbis View Distance",
+		"AWESome",
 		[0, 1, _windMultiplier, 2],
 		nil,
 		{

@@ -8,7 +8,7 @@ contact me if you need any code from this addon for applications
 
 ----
 
-**Features**  
+  **Features**  
 
 1. GPWS (Ground Proximity Warning)  
 
@@ -48,7 +48,7 @@ changed, ATIS data should be updated on ground.
 
 ----
 
-**Issue Tracking**  
+  **Issue Tracking**  
 
 To report issues, please use Github's issue tracker  
 
@@ -56,7 +56,7 @@ https://github.com/mgkid3310/AWESome/issues
 
 ----
 
-**Steam Workshop**  
+  **Steam Workshop**  
 
 You can subscribe this addon on Steam Workshop  
 
@@ -64,6 +64,6 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=1301399507
 
 ----
 
-**Authors (Contributors)**  
+  **Authors (Contributors)**  
 
 Orbis2358 (mgkid3310@naver.com) : Project Manager & Programmer  

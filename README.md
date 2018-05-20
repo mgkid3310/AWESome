@@ -8,12 +8,13 @@ contact me if you need any code from this addon for applications
 
 ----
 
-  **Features**  
+**Features**  
 
 1. GPWS (Ground Proximity Warning)  
 
 Includes missile warning and other sound-warnings from F16's Bit**ing  
 Betty. Gives basic warnings such as: Pull Up, Altitude, Counter, etc.  
+
 &nbsp;
 
 2. Realistic Aerodynamics (drag, lift, etc.)  
@@ -26,6 +27,7 @@ of wind can be adjusted with "Wind Multiplier" setting.
 NOTICE : in low-FPS and high-speed situation, this feature MAY cause  
 some sutters. if it does so, please temporarily disable this feature in  
 addon settings.  
+
 &nbsp;
 
 3. ATC (Air Traffic Controller) radar screen  
@@ -36,6 +38,7 @@ are consisted of the following three lines :
 Pilot's Name  
 Speed(km/h) Altitude(m)  
 Heading(deg)  
+
 &nbsp;
 
 4. ATIS (Automatic Terminal Information Service)  
@@ -44,11 +47,12 @@ Plays ATIS radio boradcast using real in-game atmospheric data. Provides
 wind, visibility, temperature, dewpoint, QFE, etc.  
 With basic settings, ATIS provides real-time data, but with addon setting  
 changed, ATIS data should be updated on ground.  
+
 &nbsp;
 
 ----
 
-  **Issue Tracking**  
+**Issue Tracking**  
 
 To report issues, please use Github's issue tracker  
 
@@ -56,7 +60,7 @@ https://github.com/mgkid3310/AWESome/issues
 
 ----
 
-  **Steam Workshop**  
+**Steam Workshop**  
 
 You can subscribe this addon on Steam Workshop  
 
@@ -64,6 +68,6 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=1301399507
 
 ----
 
-  **Authors (Contributors)**  
+**Authors (Contributors)**  
 
 Orbis2358 (mgkid3310@naver.com) : Project Manager & Programmer  

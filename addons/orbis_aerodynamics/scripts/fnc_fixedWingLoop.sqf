@@ -25,7 +25,9 @@ private _massCurrent = getMass _vehicle;
 // get TAS and etc. (use model coordiate system until further notice)
 private _modelvelocity = velocityModelSpace _vehicle;
 private _modelWind = _vehicle vectorWorldToModel wind;
-private _trueAirVelocity = _modelvelocity vectorDiff _modelWind;
+private _windMultiplier = missionNamespace getVariable ["orbis_aerodynamics_windMultiplier", 1];
+private _windApply = _modelWind vectorMultiply _windMultiplier;
+private _trueAirVelocity = _modelvelocity vectorDiff _windApply;
 
 // get drag correction
 private _dragGround = [_modelvelocity, _dragArray, _massStandard] call orbis_aerodynamics_fnc_getDrag;

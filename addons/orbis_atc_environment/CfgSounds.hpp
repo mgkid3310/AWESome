@@ -130,7 +130,7 @@ class CfgSounds {
 	};
 	class orbis_common_wind {
 		name = "Common Wind";
-		length = 0.3;
+		length = 0.35;
 		sound[] = {"orbis_atc_environment\sounds\common\wind.ogg", VOL_GENERAL, 1};
 		titles[] = {};
 	};

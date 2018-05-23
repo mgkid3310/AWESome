@@ -1,3 +1,4 @@
+orbis_gpws_fnc_addACEInteractMenu = compile preprocessFileLineNumbers 'orbis_gpws\scripts\fnc_addACEInteractMenu.sqf';
 orbis_gpws_fnc_f16ChaffFlare = compile preprocessFileLineNumbers 'orbis_gpws\scripts\fnc_f16ChaffFlare.sqf';
 orbis_gpws_fnc_f16GPWS = compile preprocessFileLineNumbers 'orbis_gpws\scripts\fnc_f16GPWS.sqf';
 orbis_gpws_fnc_f16GPWStest = compile preprocessFileLineNumbers 'orbis_gpws\scripts\fnc_f16GPWStest.sqf';

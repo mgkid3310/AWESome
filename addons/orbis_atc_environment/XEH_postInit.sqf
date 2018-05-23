@@ -25,10 +25,10 @@ if (hasInterface) then {
 	] call CBA_Settings_fnc_init;
 };
 
-if (orbis_hasACEInteractMenu) then {
+if (orbis_awesome_hasACEInteractMenu) then {
     [] call orbis_atc_fnc_addACEInteractMenu;
 } else {
-    adsf
+    player addEventHandler ["GetInMan", {_this call orbis_gpws_fnc_getInAddAction}];
 };
 
 // run initial ATIS data update

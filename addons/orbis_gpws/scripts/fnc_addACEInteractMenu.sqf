@@ -1,6 +1,6 @@
 private _actionGPWSmodes = [
 	"orbisGPWSmodes",
-	"GPWS Modes",
+	"GPWS",
 	"",
 	{},
 	{(_player isEqualTo driver _target) && (_target getVariable ['orbisGPWSenabled', false])},
@@ -24,7 +24,7 @@ private _actionF16 = [
 	"f16",
 	"Set to Betty (F-16)",
 	"",
-	{[_this select 0] spawn orbis_gpws_fnc_f16GPWS},
+	{[_target] spawn orbis_gpws_fnc_f16GPWS},
 	{(_player isEqualTo driver _target) && (_target getVariable ['orbisGPWSenabled', false]) && (_target getVariable ['orbisGPWSmode', ''] != 'f16')},
 	{},
 	[],
@@ -32,10 +32,10 @@ private _actionF16 = [
 	10
 ] call ace_interact_menu_fnc_createAction;
 private _testF16 = [
-	"f16",
-	"Test GPWS",
+	"f16Test",
+	"Test GPWS (Betty)",
 	"",
-	{[_this select 0] spawn orbis_gpws_fnc_f16GPWStest},
+	{[_target] spawn orbis_gpws_fnc_f16GPWStest},
 	{(_player isEqualTo driver _target) && (_target getVariable ['orbisGPWSenabled', false]) && (_target getVariable ['orbisGPWSmode', ''] == 'f16')},
 	{},
 	[],
@@ -46,7 +46,7 @@ private _testF16 = [
 	"b747",
 	"Set to B747 GPWS",
 	"",
-	{[_this select 0] spawn orbis_gpws_fnc_b747GPWS},
+	{[_target] spawn orbis_gpws_fnc_b747GPWS},
 	{(_player isEqualTo driver _target) && (_target getVariable ['orbisGPWSenabled', false]) && (_target getVariable ['orbisGPWSmode', ''] != 'b747')},
 	{},
 	[],

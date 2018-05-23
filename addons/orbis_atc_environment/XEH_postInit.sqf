@@ -49,15 +49,32 @@ private _actionATISlisten = [
 	10
 ] call ace_interact_menu_fnc_createAction;
 
+// planes
 [
-	"Plane_Base_F",
+	"Plane",
 	1,
 	["ACE_SelfActions"],
 	_actionATISmain,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
-	"Plane_Base_F",
+	"Plane",
+	1,
+	["ACE_SelfActions", "actionATIS"],
+	_actionATISlisten,
+    true
+] call ace_interact_menu_fnc_addActionToClass;
+
+// helicopters
+[
+	"Helicopter",
+	1,
+	["ACE_SelfActions"],
+	_actionATISmain,
+    true
+] call ace_interact_menu_fnc_addActionToClass;
+[
+	"Helicopter",
 	1,
 	["ACE_SelfActions", "actionATIS"],
 	_actionATISlisten,

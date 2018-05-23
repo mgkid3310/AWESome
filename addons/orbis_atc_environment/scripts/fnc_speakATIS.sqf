@@ -4,7 +4,7 @@ _baseArray params ["_pos", "_date"];
 _windArray params ["_windDir", "_windStr", "_gusts"];
 _visibilityArray params ["_visibility", "_fogApply"];
 _cloudArray params ["_overcast", "_cloudBaseKm", "_cloudHeightKm"];
-_atmosphereArray params ["_temperature", "_dewPoint", "_QFE"];
+_atmosphereArray params ["_hasACEWeather", "_temperature", "_dewPoint", "_QFE"];
 _remarksArray params ["_rain", "_lightnings"];
 
 vehicle player setVariable ['orbisATISready', false];
@@ -56,21 +56,23 @@ sleep 0.3;
 
 sleep 0.3; */
 
-// temperature
-["orbis_common_temperature"] call orbis_atc_fnc_playAndSleep;
-[_temperature] call orbis_atc_fnc_speakNumber;
+if (_hasACEWeather) then {
+    // temperature
+    ["orbis_common_temperature"] call orbis_atc_fnc_playAndSleep;
+    [_temperature] call orbis_atc_fnc_speakNumber;
 
-// dewpoint
-["orbis_common_dewpoint"] call orbis_atc_fnc_playAndSleep;
-[_dewPoint] call orbis_atc_fnc_speakNumber;
+    // dewpoint
+    ["orbis_common_dewpoint"] call orbis_atc_fnc_playAndSleep;
+    [_dewPoint] call orbis_atc_fnc_speakNumber;
 
-sleep 0.3;
+    sleep 0.3;
 
-// altimeter
-["orbis_common_altimeter"] call orbis_atc_fnc_playAndSleep;
-[_QFE] call orbis_atc_fnc_speakNumber;
+    // altimeter
+    ["orbis_common_altimeter"] call orbis_atc_fnc_playAndSleep;
+    [_QFE] call orbis_atc_fnc_speakNumber;
 
-sleep 0.3;
+    sleep 0.3;
+};
 
 // remarks
 if ((_fogApply isEqualTo 0) && (_rain isEqualTo 0) && (_lightnings isEqualTo 0)) exitWith {

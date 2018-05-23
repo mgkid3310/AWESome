@@ -3,7 +3,7 @@ class CfgPatches {
 		name = "Orbis Paradrop";
 		author = "Orbis2358";
 		requiredVersion = 0.1;
-		requiredAddons[] = {};
+		requiredAddons[] = {"orbis_awesome_main"};
 		units[] = {};
 		weapons[] = {};
 	};

@@ -1,6 +1,7 @@
 // [_this] call orbis_atc_fnc_addATCConsole;
 // [_this] call orbis_atc_fnc_addRadarScreen;
 
+orbis_atc_fnc_addACEInteractMenu = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_addACEInteractMenu.sqf";
 orbis_atc_fnc_addATCConsole = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_addATCConsole.sqf";
 orbis_atc_fnc_addRadarScreen = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_addRadarScreen.sqf";
 orbis_atc_fnc_atcRadarLoop = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_atcRadarLoop.sqf";

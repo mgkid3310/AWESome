@@ -1,7 +1,8 @@
 # AWESome : Aerial Warfare Enhanced Somehow   
 
 Makes ARMA 3's flight environments more realistic (GWPS, wind effect,  
-etc.)  
+etc.). Recommended to use with ACE since it will enable ACE Interaction  
+instead of vanilla actions and give more specific weather data on ATIS.  
 
 Although this addon is licensed under CC BY-NC-ND 4.0, feel free to  
 contact me if you need any code from this addon for applications  
@@ -41,7 +42,8 @@ Heading(deg)
 4. ATIS (Automatic Terminal Information Service)  
 
 Plays ATIS radio boradcast using real in-game atmospheric data. Provides  
-wind, visibility, temperature, dewpoint, QFE, etc.  
+wind, visibility, etc. Temperature, dew point, QFE will ve provided when  
+ACE Weather is enabled.  
 With basic settings, ATIS provides real-time data, but with addon setting  
 changed, ATIS data should be updated on ground.  
 &nbsp;

@@ -1,6 +1,10 @@
+orbis_ground_fnc_addACEInteractMenu = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_addACEInteractMenu.sqf";
 orbis_ground_fnc_attachTowingVehicle = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_attachTowingVehicle.sqf";
 orbis_ground_fnc_canAttachTowingVehicle = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_canAttachTowingVehicle.sqf";
+orbis_ground_fnc_canDetachTowingVehicle = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_canDetachTowingVehicle.sqf";
 orbis_ground_fnc_deployTowBar = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_deployTowBar.sqf";
+orbis_ground_fnc_detachTowingVehicle = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_detachTowingVehicle.sqf";
+orbis_ground_fnc_getInAddAction = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_getInAddAction.sqf";
 orbis_ground_fnc_parkingBrakeRelease = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_parkingBrakeRelease.sqf";
 orbis_ground_fnc_parkingBrakeSet = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_parkingBrakeSet.sqf";
 orbis_ground_fnc_removeTowBar = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_removeTowBar.sqf";

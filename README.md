@@ -4,6 +4,9 @@ Makes ARMA 3's flight environments more realistic (GWPS, wind effect,
 etc.). Recommended to use with ACE since it will enable ACE Interaction  
 instead of vanilla actions and give more specific weather data on ATIS.  
 
+This addon is SP/MP capable and basically works as a client-side mod,  
+and gives some additional features when used on both client/server.  
+
 Although this addon is licensed under CC BY-NC-ND 4.0, feel free to  
 contact me if you need any code from this addon for applications  
 

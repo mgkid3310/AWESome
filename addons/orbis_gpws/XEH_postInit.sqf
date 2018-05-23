@@ -90,35 +90,35 @@ private _testF16 = [
 ] call ace_interact_menu_fnc_createAction; */
 
 [
-	"Plane_Base_F",
+	"Plane",
 	1,
 	["ACE_SelfActions"],
 	_actionGPWSmodes,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
-	"Plane_Base_F",
+	"Plane",
 	1,
 	["ACE_SelfActions", "orbisGPWSmodes"],
 	_actionTurnOff,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
-	"Plane_Base_F",
+	"Plane",
 	1,
 	["ACE_SelfActions", "orbisGPWSmodes"],
 	_actionF16,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
-	"Plane_Base_F",
+	"Plane",
 	1,
 	["ACE_SelfActions", "orbisGPWSmodes"],
 	_testF16,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 /* [
-	"Plane_Base_F",
+	"Plane",
 	1,
 	["ACE_SelfActions", "orbisGPWSmodes"],
 	_actionB747,

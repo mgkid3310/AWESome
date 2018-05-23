@@ -42,7 +42,7 @@ private _actionATISlisten = [
 	"Listen to ATIS",
 	"",
 	{[] call orbis_atc_fnc_listenATISbroadcast},
-	{(_target getVariable ['orbisATISready', true]) && (_player isEqualTo driver _target)},
+	{(_player isEqualTo driver _target) && (_target getVariable ['orbisATISready', true])},
 	{},
 	[],
 	[0, 0, 0],

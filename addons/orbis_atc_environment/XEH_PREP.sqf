@@ -6,6 +6,7 @@ orbis_atc_fnc_addATCConsole = compile preProcessFileLineNumbers "orbis_atc_envir
 orbis_atc_fnc_addRadarScreen = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_addRadarScreen.sqf";
 orbis_atc_fnc_atcRadarLoop = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_atcRadarLoop.sqf";
 orbis_atc_fnc_createMarkers = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_createMarkers.sqf";
+orbis_atc_fnc_getInAddAction = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_getInAddAction.sqf";
 orbis_atc_fnc_listenATISbroadcast = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_listenATISbroadcast.sqf";
 orbis_atc_fnc_playAndSleep = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_playAndSleep.sqf";
 orbis_atc_fnc_radarScreenOn = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_radarScreenOn.sqf";

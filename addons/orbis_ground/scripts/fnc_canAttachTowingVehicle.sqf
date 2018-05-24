@@ -4,8 +4,8 @@ if (!(_car getVariable ["orbis_hasTowBarDeployed", false]) || (_car getVariable 
 
 private _towBar = _car getVariable ["orbis_towBarObject", objNull];
 private _objects = lineIntersectsSurfaces [
-    getPosASL _car vectorAdd [0.22, 7.63, -1.31],
-    getPosASL _car vectorAdd [-0.3, 7.63, -1.31],
+    AGLToASL (_car modelToWorld [0.22, 7.63, -1.31]),
+    AGLToASL (_car modelToWorld [-0.3, 7.63, -1.31]),
     _car,
     _towBar,
     true,

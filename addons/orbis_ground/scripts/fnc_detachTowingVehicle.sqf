@@ -1,7 +1,7 @@
 private _car = _this select 0;
 
-private _eventID = getVariable ["orbis_towingEvent", 0];
-private _plane = getVariable ["orbis_towingTarget", objNull];
+private _eventID = _car getVariable ["orbis_towingEvent", 0];
+private _plane = _car getVariable ["orbis_towingTarget", objNull];
 removeMissionEventHandler ["EachFrame", _eventID];
 detach _plane;
 

@@ -62,14 +62,14 @@ private _parkingBrakeRelease = [
 ] call ace_interact_menu_fnc_createAction;
 
 [
-	"Plane_Base_F",
+	"Plane",
 	1.1,
 	["ACE_SelfActions"],
 	_parkingBrakeSet,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
-	"Plane_Base_F",
+	"Plane",
 	1.1,
 	["ACE_SelfActions"],
 	_parkingBrakeRelease,

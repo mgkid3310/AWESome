@@ -20,5 +20,10 @@ private _plane = objNull;
 } forEach _objects;
 
 if (isNull _plane) exitWith {};
+
+missionNamespace setVariable ["orbis_towVehicle", _car];
 _car setVariable ["orbis_isTowingPlane", true];
 _car setVariable ["orbis_towingTarget", _plane];
+
+private _eventID = addMissionEventHandler ["EachFrame", {[] call orbis_ground_fnc_eachFrameHandlerTow}];
+_car setVariable ["orbis_towingEvent", _eventID];

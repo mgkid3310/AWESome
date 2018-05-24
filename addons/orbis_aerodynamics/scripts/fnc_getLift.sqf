@@ -7,14 +7,15 @@ private _mass = _this select 4;
 private _liftCoef = 0;
 private _liftForce = [0, 0, 0];
 private _speedKPH = (_velocity vectorDotProduct [0, cos deg _angleOfIndicence, sin deg _angleOfIndicence]) * 3.6;
+private _speedStep = _speedMax / 10;
 
-if (_speedKPH < (_speedMax * (count _liftArray - 1) / 10)) then {
-    private _speedIndex = (floor (_speedKPH * 10 / _speedMax)) min (count _liftArray - 1);
-    private _speedMin = _speedMax * _speedIndex / 10;
-    private _speedMax = _speedMax * (_speedIndex + 1) / 10;
+if (_speedKPH < (_speedStep * (count _liftArray - 1))) then {
+    private _speedIndex = (1 + floor (_speedKPH / _speedStep)) min (count _liftArray - 2);
+    private _speedLower = _speedStep * _speedIndex;
+    private _speedUpper = _speedStep * (_speedIndex + 1);
     private _coefMin = _liftArray select _speedIndex;
     private _coefMax = _liftArray select (_speedIndex + 1);
-    _liftCoef = linearConversion [_speedMin, _speedMax, _speedKPH, _coefMin, _coefMax];
+    _liftCoef = linearConversion [_speedLower, _speedUpper, _speedKPH, _coefMin, _coefMax];
 } else {
     _liftCoef = _liftArray select (count _liftArray - 1);
 };

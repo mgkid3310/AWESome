@@ -21,6 +21,9 @@ private _angleOfIndicence = _performanceArray select 2;
 private _massStandard = _performanceArray select 3;
 
 private _massCurrent = getMass _vehicle;
+if !(_massCurrent > 0) then {
+    _massCurrent = _massStandard;
+};
 
 // get TAS and etc. (use model coordiate system until further notice)
 private _modelvelocity = velocityModelSpace _vehicle;
@@ -35,8 +38,8 @@ private _dragTAS = [_trueAirVelocity, _dragArray, _massStandard] call orbis_aero
 private _forceDragCorrection = _dragTAS vectorDiff _dragGround;
 
 // get lift correction
-private _liftGround = [_modelvelocity, _liftArray, _speedMax, _angleOfIndicence, _massCurrent] call orbis_aerodynamics_fnc_getlift;
-private _liftTAS = [_trueAirVelocity, _liftArray, _speedMax, _angleOfIndicence, _massCurrent] call orbis_aerodynamics_fnc_getlift;
+private _liftGround = [_modelvelocity, _liftArray, _speedMax, _angleOfIndicence, _massStandard] call orbis_aerodynamics_fnc_getlift;
+private _liftTAS = [_trueAirVelocity, _liftArray, _speedMax, _angleOfIndicence, _massStandard] call orbis_aerodynamics_fnc_getlift;
 private _forceLiftCorrection = _liftTAS vectorDiff _liftGround;
 
 // sum up corrections and bring wheel friction into calculation if needed (todo)

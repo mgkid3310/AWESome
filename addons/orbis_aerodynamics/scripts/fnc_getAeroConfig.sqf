@@ -16,5 +16,8 @@ private _speedMax = getNumber (_class >> "maxSpeed");
 private _speedStall = getNumber (_class >> "stallSpeed");
 private _angleOfIndicence = getNumber (_class >> "angleOfIndicence");
 private _massStandard = getMass _vehicle;
+if !(_massStandard > 0) then {
+    _massStandard = 1000;
+};
 
 [_dragArray, _liftArray, [_speedMax, _speedStall, _angleOfIndicence, _massStandard]];

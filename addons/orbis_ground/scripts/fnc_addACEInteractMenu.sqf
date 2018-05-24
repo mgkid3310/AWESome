@@ -24,14 +24,14 @@ private _removeTowBar = [
 
 [
 	"Offroad_01_repair_base_F",
-	1.1,
+	1,
 	["ACE_SelfActions"],
 	_deployTowBar,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
 	"Offroad_01_repair_base_F",
-	1.1,
+	1,
 	["ACE_SelfActions"],
 	_removeTowBar,
     true

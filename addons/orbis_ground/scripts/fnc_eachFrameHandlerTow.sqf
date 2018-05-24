@@ -1,4 +1,4 @@
-private _car = missionNamespace ["orbis_towVehicle", objNull];
+private _car = missionNamespace getVariable ["orbis_towVehicle", objNull];
 if (isNull _car) exitWith {};
 if !(_car getVariable ["orbis_isTowingPlane", false]) exitWith {};
 

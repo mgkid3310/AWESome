@@ -9,7 +9,7 @@ private _surfaces = lineIntersectsSurfaces [
     _car,
     _towBar,
     true,
-    -1,
+    -1
 ];
 private _objects = _surfaces apply {_x select 3};
 

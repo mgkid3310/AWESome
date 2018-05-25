@@ -1,8 +1,7 @@
 class CfgVehicles {
     class EventHandlers;
-    class Offroad_01_base_F;
-
-    class Offroad_01_repair_base_F: Offroad_01_base_F {
+    class Car_F;
+    class Offroad_01_base_F: Car_F {
         class UserActions {
             class attachTowBar {
 				displayName = "Attach Towbar to Plane";

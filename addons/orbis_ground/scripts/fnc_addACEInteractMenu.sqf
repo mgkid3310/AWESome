@@ -15,7 +15,7 @@ private _removeTowBar = [
 	"Remove Towbar",
 	"",
 	{[_target] call orbis_ground_fnc_removeTowBar},
-	{(_target getVariable ['orbis_hasTowBarDeployed', true]) && (speed _target < 1)},
+	{(_target getVariable ['orbis_hasTowBarDeployed', false]) && (speed _target < 1)},
 	{},
 	[],
 	[0, 0, 0],
@@ -23,14 +23,14 @@ private _removeTowBar = [
 ] call ace_interact_menu_fnc_createAction;
 
 [
-	"Offroad_01_repair_base_F",
+	"Offroad_01_base_F",
 	0,
 	["ACE_MainActions"],
 	_deployTowBar,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
-	"Offroad_01_repair_base_F",
+	"Offroad_01_base_F",
 	0,
 	["ACE_MainActions"],
 	_removeTowBar,

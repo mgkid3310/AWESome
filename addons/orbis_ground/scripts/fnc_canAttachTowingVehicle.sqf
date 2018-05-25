@@ -2,10 +2,12 @@ private _car = _this select 0;
 
 if (!(_car getVariable ["orbis_hasTowBarDeployed", false]) || (_car getVariable ["orbis_isTowingPlane", false])) exitWith {false};
 
+private _checkStart = getArray [configFile >> "CfgVehicles" >> (typeOf _car) >> "orbis_towBarCheckStart"];
+private _checkEnd = getArray [configFile >> "CfgVehicles" >> (typeOf _car) >> "orbis_towBarCheckEnd"];
 private _towBar = _car getVariable ["orbis_towBarObject", objNull];
 private _surfaces = lineIntersectsSurfaces [
-    AGLToASL (_car modelToWorld [0.22, 7.63, -1.31]),
-    AGLToASL (_car modelToWorld [-0.3, 7.63, -1.31]),
+    AGLToASL (_car modelToWorld _checkStart),
+    AGLToASL (_car modelToWorld _checkEnd),
     _car,
     _towBar,
     true,

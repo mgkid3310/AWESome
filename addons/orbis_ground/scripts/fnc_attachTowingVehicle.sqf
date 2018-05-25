@@ -22,9 +22,14 @@ private _plane = objNull;
 
 if (isNull _plane) exitWith {};
 
+_plane attachTo [_car];
+
 missionNamespace setVariable ["orbis_towVehicle", _car];
 _car setVariable ["orbis_isTowingPlane", true];
 _car setVariable ["orbis_towingTarget", _plane];
+_car setVariable ["orbis_towingPosCarLast", getPosASL _car];
+_car setVariable ["orbis_towingPosPlaneLast", getPosASL _plane];
+_car setVariable ["orbis_towingDistance", vectorMagnitude (_car worldToModel ASLToAGL getPosASL _plane)];
 
 private _eventID = addMissionEventHandler ["EachFrame", {[] call orbis_ground_fnc_eachFrameHandlerTow}];
 _car setVariable ["orbis_towingEvent", _eventID];

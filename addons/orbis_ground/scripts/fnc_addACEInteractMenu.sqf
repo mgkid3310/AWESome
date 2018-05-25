@@ -3,9 +3,9 @@ private _deployTowBar = [
 	"deployTowBar",
 	"Deploy Towbar",
 	"",
-	{},
 	{[_target] call orbis_ground_fnc_deployTowBar},
 	{(_player isEqualTo driver _target) && !(_target getVariable ['orbis_hasTowBarDeployed', false]) && (speed _target < 1)},
+	{},
 	[],
 	[0, 0, 0],
 	10
@@ -24,15 +24,15 @@ private _removeTowBar = [
 
 [
 	"Offroad_01_repair_base_F",
-	1,
-	["ACE_SelfActions"],
+	0,
+	["ACE_MainActions"],
 	_deployTowBar,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
 	"Offroad_01_repair_base_F",
-	1,
-	["ACE_SelfActions"],
+	0,
+	["ACE_MainActions"],
 	_removeTowBar,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
@@ -42,9 +42,9 @@ private _parkingBrakeSet = [
 	"parkingBrakeSet",
 	"Set Parking Brake",
 	"",
-	{},
 	{[_target] call orbis_ground_fnc_parkingBrakeSet},
 	{(_player isEqualTo driver _target) && !(_target getVariable ['orbis_parkingBrakeSet', false]) && (speed _target < 1)},
+	{},
 	[],
 	[0, 0, 0],
 	10

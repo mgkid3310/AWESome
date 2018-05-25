@@ -1,7 +1,10 @@
 class CfgVehicles {
     class EventHandlers;
     class Car_F;
+
     class Offroad_01_base_F: Car_F {
+        orbis_towBarAngle = -1;
+        orbis_towBarPosRel[] = {-0.042, 5.10, -0.95};
         class UserActions {
             class attachTowBar {
 				displayName = "Attach Towbar to Plane";
@@ -28,5 +31,9 @@ class CfgVehicles {
 				statement = "this animateSource ['Beacons',0];";
 			}; */
 		};
+    };
+    class Offroad_01_repair_base_F: Offroad_01_base_F {
+        orbis_towBarAngle = -1;
+        orbis_towBarPosRel[] = {-0.042, 4.98, -0.88};
     };
 };

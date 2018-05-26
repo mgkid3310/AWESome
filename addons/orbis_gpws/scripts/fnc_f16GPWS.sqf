@@ -14,7 +14,7 @@ _vehicle setVariable ["lowCMcount", getNumber (configFile >> "CfgVehicles" >> (t
 private ["_altAGLS", "_altASL", "_altRadar",
 	"_posExpect", "_cosAOA", "_flapStatus", "_gearStatus", "_acceleration", "_climeASL", "_climeRadar",
 	"_altDiff", "_distance", "_headingDiff", "_approachAngle", "_ILSarray", "_currentILSindex",
-	"_incomingMSLlist", "_incomingMSLs", "_ctrWarnMSLs", "_targetMSLs", "_counterGo"/* ,
+	"_incomingMSLlist", "_incomingMSLs", "_ctrWarnMSLs", "_targetMSLs", "_counterGo", "_damageNow", "_damageWarnLevel"/* ,
 	"_samGo", _jammerGo", "_target", "_IFFgo" */
 ];
 private _flightphase = "taxing";
@@ -187,6 +187,28 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 		};
 	} forEach _incomingMSLlist; */
 
+	_damageNow = damage _vehicle;
+	_damageWarnLevel = _vehicle getVariable ["damageWarnLevel", 0];
+	switch (_damageWarnLevel) do {
+	    case (2): {
+	        if (_damageNow < 0.6) then {
+				_damageWarnLevel = 1;
+				_vehicle setVariable ["damageWarnLevel", 1];
+			};
+	        if (_damageNow < 0.3) then {
+				_damageWarnLevel = 0;
+				_vehicle setVariable ["damageWarnLevel", 0];
+			};
+	    };
+		case (1): {
+	        if (_damageNow < 0.3) then {
+				_damageWarnLevel = 0;
+				_vehicle setVariable ["damageWarnLevel", 0];
+			};
+	    };
+		default {};
+	};
+
 	// hostile radar lock check
 	/* private _allRadars = (_vehicle nearObjects orbis_gpsw_rwrDetectRange) select {isClass (configFile >> "CfgVehicles" >> (typeOf _x) >> "Components" >> "SensorsManagerComponent" >> "Components" >> "ActiveRadarSensorComponent")};
 	private _targeting = _allRadars select {(assignedTarget _x isEqualTo _vehicle) && !(side player isEqualTo side _x)};
@@ -240,6 +262,22 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 				[_vehicle, "f16_altitude", 2.14] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
+			// f16_warning
+			case ((_damageNow > 0.6) && (_damageWarnLevel < 2)): {
+				DEV_CHAT("orbis_gpws: f16_warning");
+				_vehicle setVariable ["orbisGPWSready", false];
+				[_vehicle, "f16_warning", 2.20] spawn orbis_gpws_fnc_speakGPWS;
+				_vehicle setVariable ["damageWarnLevel", 2];
+			};
+
+			// f16_caution
+			case ((_damageNow > 0.3) && (_damageWarnLevel < 1)): {
+				DEV_CHAT("orbis_gpws: f16_caution");
+				_vehicle setVariable ["orbisGPWSready", false];
+				[_vehicle, "f16_caution", 1.90] spawn orbis_gpws_fnc_speakGPWS;
+				_vehicle setVariable ["damageWarnLevel", 1];
+			};
+
 			// f16_bingo
 			case ((fuel _vehicle < orbis_gpws_bingoFuel) && !(_vehicle getVariable ["bingoAlerted", false])): {
 				DEV_CHAT("orbis_gpws: f16_bingo");
@@ -291,7 +329,5 @@ _vehicle removeEventHandler ["IncomingMissile", _incomingMSL];
 _vehicle setVariable ["orbisGPWSmode", ""];
 DEV_CHAT("orbis_gpws: f16GPWS ended");
 
-// f16_caution 1.90
 // f16_data 0.42
 // f16_lock 0.61
-// f16_warning 2.20

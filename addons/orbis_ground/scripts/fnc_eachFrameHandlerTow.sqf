@@ -12,8 +12,8 @@ private _posPlaneOld = _car getVariable ["orbis_towingPosPlaneLast", getPosASL _
 private _distance = _car getVariable ["orbis_towingDistance", vectorMagnitude (_car worldToModel ASLToAGL getPosASL _plane)];
 if (_posCar isEqualTo _posCarOld) exitWith {};
 
-_plane attachTo [_car, vectorNormalized (_posPlaneOld vectorDiff _posCar) vectorMultiply _distance];
-_plane setVectorDir ((getPosASL _plane) vectorFromTo (getPosASL _car));
+_plane attachTo [_car,_car worldToModel (getPos _car vectorAdd ((_posPlaneOld vectorFromTo _posCar) vectorMultiply _distance))];
+_plane setVectorDirAndUp [((getPosASL _plane) vectorFromTo (getPosASL _car)), vectorUp _car];
 
 _car setVariable ["orbis_towingPosCarLast", getPosASL _car];
 _car setVariable ["orbis_towingPosPlaneLast", getPosASL _plane];

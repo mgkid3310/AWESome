@@ -24,7 +24,8 @@ private _plane = objNull;
 
 if (isNull _plane) exitWith {};
 
-_plane attachTo [_car];
+_plane attachTo [_car, _car worldToModel (getPos _car vectorAdd ((_posPlaneOld vectorFromTo _posCar) vectorMultiply _distance))];
+_plane setVectorDirAndUp [((getPosASL _plane) vectorFromTo (getPosASL _car)), vectorUp _car];
 
 missionNamespace setVariable ["orbis_towVehicle", _car];
 _car setVariable ["orbis_isTowingPlane", true];

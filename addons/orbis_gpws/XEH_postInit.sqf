@@ -9,6 +9,8 @@ orbis_gpws_bingoFuel = 0.2;
 orbis_gpsw_mslDetectRange = 5000;
 orbis_gpsw_mslApproachTime = 3;
 orbis_gpsw_rwrDetectRange = 25000;
+orbis_gpsw_warningDamageLevel = 0.6;
+orbis_gpsw_cautionDamageLevel = 0.1;
 
 // get runways list
 orbis_gpws_runwayList = [[[0, 0, 0], 0]]; // [[position(ASL), heading], ...]

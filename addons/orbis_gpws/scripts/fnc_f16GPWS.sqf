@@ -191,17 +191,17 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_damageWarnLevel = _vehicle getVariable ["damageWarnLevel", 0];
 	switch (_damageWarnLevel) do {
 	    case (2): {
-	        if (_damageNow < 0.6) then {
+	        if (_damageNow < orbis_gpsw_warningDamageLevel) then {
 				_damageWarnLevel = 1;
 				_vehicle setVariable ["damageWarnLevel", 1];
 			};
-	        if (_damageNow < 0.3) then {
+	        if (_damageNow < orbis_gpsw_cautionDamageLevel) then {
 				_damageWarnLevel = 0;
 				_vehicle setVariable ["damageWarnLevel", 0];
 			};
 	    };
 		case (1): {
-	        if (_damageNow < 0.3) then {
+	        if (_damageNow < orbis_gpsw_cautionDamageLevel) then {
 				_damageWarnLevel = 0;
 				_vehicle setVariable ["damageWarnLevel", 0];
 			};
@@ -263,7 +263,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			};
 
 			// f16_warning
-			case ((_damageNow > 0.6) && (_damageWarnLevel < 2)): {
+			case ((_damageNow > orbis_gpsw_warningDamageLevel) && (_damageWarnLevel < 2)): {
 				DEV_CHAT("orbis_gpws: f16_warning");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "f16_warning", 2.20] spawn orbis_gpws_fnc_speakGPWS;
@@ -271,7 +271,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			};
 
 			// f16_caution
-			case ((_damageNow > 0.3) && (_damageWarnLevel < 1)): {
+			case ((_damageNow > orbis_gpsw_cautionDamageLevel) && (_damageWarnLevel < 1)): {
 				DEV_CHAT("orbis_gpws: f16_caution");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "f16_caution", 1.90] spawn orbis_gpws_fnc_speakGPWS;

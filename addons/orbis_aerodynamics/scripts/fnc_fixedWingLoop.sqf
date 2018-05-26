@@ -47,7 +47,7 @@ private _forceApply = _forceDragCorrection vectorAdd _forceLiftCorrection;
 if (isTouchingGround _vehicle) then {
     _forceApply set [0, 0];
     _forceApply set [1, 0];
-    _forceApply set [2, ((_forceApply select 2) - (9.81 * _massCurrent)) max 0];
+    _forceApply set [2, 0];
 };
 
 // get DeltaV needed on world cooridate system and apply it

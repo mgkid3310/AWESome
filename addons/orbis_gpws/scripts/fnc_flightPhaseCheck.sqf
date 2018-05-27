@@ -26,14 +26,14 @@ switch (_flightphase) do {
             _distance = (_x select 0) distance2D (getPos _vehicle);
             _headingDiff = abs ((getDir _vehicle) - (_x select 1));
             _approachAngle = abs (((getPos _vehicle) getDir (_x select 0)) - (_x select 1));
-            if ((_altDiff < 200) && (_distance < 3000) && (_headingDiff < 30) && (_approachAngle < 30)) exitWith {
+            if ((_altDiff < 400) && (_distance < 3000) && (_headingDiff < 30) && (_approachAngle < 30)) exitWith {
                 _flightphase = "landing";
                 _currentILSindex = _forEachIndex;
                 DEV_CHAT("orbis_gpws: b747GPWS inFlight -> landing (ILS)");
             };
         } forEach orbis_gpws_runwayList;
 
-        if ((_flapStatus > 0.1) && (_gearStatus < 0.9) && (_altRadar < 200) && (_climeASL < 0)) then {
+        if ((_flapStatus > 0.1) && (_gearStatus < 0.9) && (_altRadar < 400) && (_climeASL < 0)) then {
             _flightphase = "landing";
             _currentILSindex = -1;
             DEV_CHAT("orbis_gpws: b747GPWS inFlight -> landing");
@@ -48,7 +48,7 @@ switch (_flightphase) do {
             _headingDiff = abs ((getDir _vehicle) - (_ILSarray select 1));
             _approachAngle = abs (((getPos _vehicle) getDir (_ILSarray select 0)) - (_ILSarray select 1));
             switch (true) do {
-                case ((_altDiff > 200) || (_distance > 3000) || (_headingDiff > 30) || (_approachAngle > 30)): {
+                case ((_altDiff > 400) || (_distance > 3000) || (_headingDiff > 30) || (_approachAngle > 30)): {
                     _flightphase = "inFlight";
                     _currentILSindex = -1;
                     DEV_CHAT("orbis_gpws: b747GPWS landing -> inFlight (ILS)");

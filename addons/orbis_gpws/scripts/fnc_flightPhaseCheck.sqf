@@ -1,4 +1,4 @@
-params ["_vehicle", "_flightphase", "_altRadar", "_climeASL"];
+params ["_vehicle", "_flightphase", "_altRadar", "_climeASL", "_flapStatus", "_gearStatus"];
 private ["_altDiff", "_altDiffDesired", "_distance", "_headingDiff", "_approachAngle", "_ILSarray", "_currentILSindex"];
 
 switch (_flightphase) do {

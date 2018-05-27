@@ -1,16 +1,25 @@
 // global variables init
-orbis_gpws_ChaffFlareList = ["CMFlareLauncher", "FIR_CMLauncher", "js_w_fa18_CMFlareLauncher"];
 orbis_gpws_takeoffAlt = 60;
 orbis_gpws_airportRange = 6000;
 orbis_gpws_pullupTime = 4;
+
+// f16
+orbis_gpws_ChaffFlareList = ["CMFlareLauncher", "FIR_CMLauncher", "js_w_fa18_CMFlareLauncher"];
 orbis_gpws_maxAOA = 15;
 orbis_gpws_lowAltitude = 50;
 orbis_gpws_bingoFuel = 0.2;
-orbis_gpsw_mslDetectRange = 5000;
-orbis_gpsw_mslApproachTime = 3;
-orbis_gpsw_rwrDetectRange = 25000;
-orbis_gpsw_warningDamageLevel = 0.6;
-orbis_gpsw_cautionDamageLevel = 0.1;
+orbis_gpws_mslDetectRange = 5000;
+orbis_gpws_mslApproachTime = 3;
+orbis_gpws_rwrDetectRange = 25000;
+orbis_gpws_warningDamageLevel = 0.6;
+orbis_gpws_cautionDamageLevel = 0.1;
+
+// b747
+orbis_gpws_ftToM = 0.3048;
+orbis_gpws_appMinAlt = 91.44; // 300ft
+orbis_gpws_minAlt = 60.96; // 200ft
+orbis_gpws_maxSinkeRate = -5;
+orbis_gpws_maxBankAngle = 30;
 
 // get runways list
 orbis_gpws_runwayList = [[[0, 0, 0], 0]]; // [[position(ASL), heading], ...]

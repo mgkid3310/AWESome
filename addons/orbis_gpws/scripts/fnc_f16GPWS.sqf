@@ -12,7 +12,7 @@ _vehicle setVariable ["orbisGPWSready", true];
 _vehicle setVariable ["orbisGPWSreadyBeep", true];
 _vehicle setVariable ["lowCMcount", getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbisGPWS_lowCMcount")];
 private ["_altAGLS", "_altASL", "_altRadar",
-	"_posExpect", "_cosAOA", "_flapStatus", "_gearStatus", "_acceleration", "_climeASL", "_climeRadar", "_flightphaseOutput",
+	"_posExpect", "_expectTerrainAlt", "_cosAOA", "_flapStatus", "_gearStatus", "_acceleration", "_climeASL", "_climeRadar", "_flightphaseOutput",
 	"_incomingMSLlist", "_incomingMSLs", "_ctrWarnMSLs", "_targetMSLs", "_counterGo", "_damageNow", "_damageWarnLevel"/* ,
 	"_samGo", _jammerGo", "_target", "_IFFgo" */
 ];
@@ -40,6 +40,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_altASL = getPosASL _vehicle select 2;
 	_altRadar = _altAGLS min _altASL;
 	_posExpect = (getPosASL _vehicle) vectorAdd (velocity _vehicle vectorMultiply orbis_gpws_pullupTime);
+    _expectTerrainAlt = 0 max getTerrainHeightASL _posExpect;
 	_cosAOA = (vectorDir _vehicle) vectorCos (velocity _vehicle);
 	_flapStatus = _vehicle animationSourcePhase "flap";
 	_gearStatus = _vehicle animationSourcePhase "gear";
@@ -54,13 +55,13 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_altRadarOld = _altRadar;
 
 	// flight phase check
-	_flightphaseOutput = [_vehicle, _flightphase, _altRadar, _climeASL] call orbis_gpws_fnc_flightPhaseCheck;
+	_flightphaseOutput = [_vehicle, _flightphase, _altRadar, _climeASL, _flapStatus, _gearStatus] call orbis_gpws_fnc_flightPhaseCheck;
 	_flightphase = _flightphaseOutput select 0;
 
 	// incoming mssile check (RWR)
 	_incomingMSLlist = _vehicle getVariable ["incomingMSLlist", []];
 	_incomingMSLs = _incomingMSLlist apply {_x select 0};
-	_ctrWarnMSLs =_incomingMSLs select {(_vehicle distance _x) < (orbis_gpsw_mslApproachTime * vectorMagnitude (velocity _vehicle vectorDiff velocity _x))};
+	_ctrWarnMSLs =_incomingMSLs select {(_vehicle distance _x) < (orbis_gpws_mslApproachTime * vectorMagnitude (velocity _vehicle vectorDiff velocity _x))};
 	_targetMSLs = _ctrWarnMSLs - _ctrWarnOld;
 	_counterGo = {alive _x} count _targetMSLs > 0;
 	/* {
@@ -73,17 +74,17 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_damageWarnLevel = _vehicle getVariable ["damageWarnLevel", 0];
 	switch (_damageWarnLevel) do {
 	    case (2): {
-	        if (_damageNow < orbis_gpsw_warningDamageLevel) then {
+	        if (_damageNow < orbis_gpws_warningDamageLevel) then {
 				_damageWarnLevel = 1;
 				_vehicle setVariable ["damageWarnLevel", 1];
 			};
-	        if (_damageNow < orbis_gpsw_cautionDamageLevel) then {
+	        if (_damageNow < orbis_gpws_cautionDamageLevel) then {
 				_damageWarnLevel = 0;
 				_vehicle setVariable ["damageWarnLevel", 0];
 			};
 	    };
 		case (1): {
-	        if (_damageNow < orbis_gpsw_cautionDamageLevel) then {
+	        if (_damageNow < orbis_gpws_cautionDamageLevel) then {
 				_damageWarnLevel = 0;
 				_vehicle setVariable ["damageWarnLevel", 0];
 			};
@@ -92,7 +93,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	};
 
 	// hostile radar lock check
-	/* private _allRadars = (_vehicle nearObjects orbis_gpsw_rwrDetectRange) select {isClass (configFile >> "CfgVehicles" >> (typeOf _x) >> "Components" >> "SensorsManagerComponent" >> "Components" >> "ActiveRadarSensorComponent")};
+	/* private _allRadars = (_vehicle nearObjects orbis_gpws_rwrDetectRange) select {isClass (configFile >> "CfgVehicles" >> (typeOf _x) >> "Components" >> "SensorsManagerComponent" >> "Components" >> "ActiveRadarSensorComponent")};
 	private _targeting = _allRadars select {(assignedTarget _x isEqualTo _vehicle) && !(side player isEqualTo side _x)};
 	private _radarOld = _vehicle getVariable ["radarLocks", []];
 	_jammerGo = count (_targeting - _radarOld) > 0; */
@@ -130,14 +131,14 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 				_IFFgo = false;
 			}; */
 
-			// f16_pullUp (in-flight)
-			case (((0 max getTerrainHeightASL _posExpect) > (_posExpect select 2)) && (_flightphase isEqualTo "inFlight")): {
+			// f16_pullUp (inFlight)
+			case ((_expectTerrainAlt > (_posExpect select 2)) && (_flightphase isEqualTo "inFlight")): {
 				DEV_CHAT("orbis_gpws: f16_pullUp");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "f16_pullUp"] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
-			// f16_altitude (in-flight)
+			// f16_altitude (inFlight)
 			case ((_altRadar < orbis_gpws_lowAltitude) && (_flightphase isEqualTo "inFlight")): {
 				DEV_CHAT("orbis_gpws: f16_altitude");
 				_vehicle setVariable ["orbisGPWSready", false];
@@ -145,7 +146,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			};
 
 			// f16_warning
-			case ((_damageNow > orbis_gpsw_warningDamageLevel) && (_damageWarnLevel < 2)): {
+			case ((_damageNow > orbis_gpws_warningDamageLevel) && (_damageWarnLevel < 2)): {
 				DEV_CHAT("orbis_gpws: f16_warning");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "f16_warning"] spawn orbis_gpws_fnc_speakGPWS;
@@ -153,7 +154,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			};
 
 			// f16_caution
-			case ((_damageNow > orbis_gpsw_cautionDamageLevel) && (_damageWarnLevel < 1)): {
+			case ((_damageNow > orbis_gpws_cautionDamageLevel) && (_damageWarnLevel < 1)): {
 				DEV_CHAT("orbis_gpws: f16_caution");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "f16_caution"] spawn orbis_gpws_fnc_speakGPWS;

@@ -139,14 +139,14 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			};
 
 			// b747_TOOLOWT
-			case (!(_flightphase in ["taxing", "final", "touchDown"]) && _tooLow && (_expectTerrainAlt > _altASL)): {
+			case (!(_flightphase in ["taxing", "final", "touchDown"]) && (_altRadar > 5) && _tooLow && (_expectTerrainAlt > _altASL)): {
 				DEV_CHAT("orbis_gpws: b747_TOOLOWT");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_TOOLOWT", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
 			// b747_TERRAIN
-			case (!(_flightphase in ["taxing", "final", "touchDown"]) && (_expectTerrainAlt > _altASL)): {
+			case (!(_flightphase in ["taxing", "final", "touchDown"]) && (_altRadar > 5) && (_expectTerrainAlt > _altASL)): {
 				DEV_CHAT("orbis_gpws: b747_TERRAIN");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_TERRAIN", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;

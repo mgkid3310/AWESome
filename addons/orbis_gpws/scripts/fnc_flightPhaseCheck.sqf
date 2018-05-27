@@ -1,3 +1,5 @@
+#include "header_macros.hpp"
+
 params ["_vehicle", "_flightphase", "_altRadar", "_climeASL", "_flapStatus", "_gearStatus"];
 private ["_altDiff", "_altDiffDesired", "_distance", "_headingDiff", "_approachAngle", "_ILSarray", "_currentILSindex"];
 

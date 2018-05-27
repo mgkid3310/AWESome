@@ -16,8 +16,12 @@ contact me if you need any code from this addon for applications
 
 1. GPWS (Ground Proximity Warning)  
 
-Includes missile warning and other sound-warnings from F16's Bit**ing  
-Betty. Gives basic warnings such as: Pull Up, Altitude, Counter, etc.  
+GPWS has two modes: F-16 and B747. F-16's Bit**ing Betty GPWS includes  
+missile warning and other sound-warnings (voice informers). Gives basic  
+warnings such as: Counter; Warning; Caution; etc., and is suitable for  
+fighter planes. B747's GPWS has more familiar sounds from commercial  
+airliners including altitude informers during landing. Suitable for  
+large transport or support planes.  
 &nbsp;
 
 2. Realistic Aerodynamics (drag, lift, etc.)  

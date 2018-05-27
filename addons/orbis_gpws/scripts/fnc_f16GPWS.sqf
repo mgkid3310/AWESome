@@ -213,6 +213,3 @@ if (_vehicle getVariable ["orbisGPWSmode", ""] isEqualTo "f16") then {
 	_vehicle setVariable ["orbisGPWSmode", ""];
 };
 DEV_CHAT("orbis_gpws: f16GPWS ended");
-
-// f16_data 0.42
-// f16_lock 0.61

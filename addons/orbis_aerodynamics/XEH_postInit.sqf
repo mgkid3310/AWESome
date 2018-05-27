@@ -6,7 +6,7 @@ player addEventHandler ["GetInMan", {_this call orbis_aerodynamics_fnc_eventGetI
 addMissionEventHandler ["EachFrame", {[] call orbis_aerodynamics_fnc_eachFrameHandler}];
 
 if !(vehicle player isEqualTo player) then {
-	[vehicle player] call orbis_aerodynamics_fnc_eventGetInMan;
+	[nil, nil, vehicle player] call orbis_aerodynamics_fnc_eventGetInMan;
 };
 
 // CBA based addon setting init

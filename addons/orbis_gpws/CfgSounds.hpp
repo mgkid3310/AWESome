@@ -1,5 +1,5 @@
 #define F16_VOL 20
-#define B747_VOL 20
+#define B747_VOL 15
 
 class CfgSounds {
 	// F16 GPWS

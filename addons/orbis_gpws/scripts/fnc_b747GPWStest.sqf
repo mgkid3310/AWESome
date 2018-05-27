@@ -20,7 +20,7 @@
 ["b747_DONTSNK", 0.5] call orbis_gpws_fnc_playAndSleep; // done
 ["b747_FLAPS", 0.5] call orbis_gpws_fnc_playAndSleep; // done
 ["b747_GEAR", 0.5] call orbis_gpws_fnc_playAndSleep; // done
-["b747_GLIDESLOPE", 0.5] call orbis_gpws_fnc_playAndSleep;
+["b747_GLIDESLOPE", 0.5] call orbis_gpws_fnc_playAndSleep; // done
 ["b747_MIN", 0.5] call orbis_gpws_fnc_playAndSleep; // done
 ["b747_PULLUP", 0.5] call orbis_gpws_fnc_playAndSleep; // done
 ["b747_SNKRATE", 0.5] call orbis_gpws_fnc_playAndSleep; // done

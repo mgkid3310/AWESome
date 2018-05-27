@@ -12,8 +12,8 @@ _vehicle setVariable ["orbisGPWSready", true];
 _vehicle setVariable ["orbisGPWSreadyBeep", true];
 private ["_altAGLS", "_altASL", "_altRadar",
 	"_posExpect", "_expectTerrainAlt", "_cosAOA", "_flapStatus", "_gearStatus", "_acceleration", "_climeASL", "_climeRadar",
-    "_tooLow", "_pitchAndBank", "_pitchAngle", "_bankAngle",
-    "_flightphaseOutput", "_distance", "_altDiff", "_altDiffDesired"
+	"_pitchAndBank", "_pitchAngle", "_bankAngle",
+    "_flightphaseOutput", "_distance", "_altDiff", "_altDiffDesired", "_tooLow"
 ];
 private _flightphase = "taxing";
 private _timeOld = time;
@@ -42,8 +42,6 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_climeASL = (_altASL - _altASLOld) / (time - _timeOld); // m/s
 	_climeRadar = (_altRadar - _altRadarOld) / (time - _timeOld); // m/s
 
-    _tooLow = _altRadar < 100;
-
     _pitchAndBank = _vehicle call BIS_fnc_getPitchBank;
     _pitchAngle = _pitchAndBank select 0;
     _bankAngle = _pitchAndBank select 1;
@@ -60,6 +58,8 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_distance = _flightphaseOutput select 1;
 	_altDiff = _flightphaseOutput select 2;
 	_altDiffDesired = _flightphaseOutput select 3;
+
+    _tooLow = !(_flightphase in ["taxing", "touchDown"]) && (_altRadar < 100);
 
 	_minWarnLevel = _vehicle getVariable ["minWarnLevel", 0];
 	switch (_minWarnLevel) do {

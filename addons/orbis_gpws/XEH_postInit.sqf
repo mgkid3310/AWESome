@@ -16,10 +16,12 @@ orbis_gpws_cautionDamageLevel = 0.1;
 
 // b747
 orbis_gpws_ftToM = 0.3048;
+orbis_gpws_tooLowAlt = 50;
 orbis_gpws_appMinAlt = 91.44; // 300ft
 orbis_gpws_minAlt = 60.96; // 200ft
-orbis_gpws_maxSinkeRate = -30;
+orbis_gpws_maxSinkeRate = -40;
 orbis_gpws_maxBankAngle = 60;
+orbis_gpws_delay = 1.0;
 
 // get runways list
 orbis_gpws_runwayList = [[[0, 0, 0], 0]]; // [[position(ASL), heading], ...]

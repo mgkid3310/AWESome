@@ -59,22 +59,22 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_altDiff = _flightphaseOutput select 2;
 	_altDiffDesired = _flightphaseOutput select 3;
 
-    _tooLow = !(_flightphase in ["taxing", "touchDown"]) && (_altRadar < 100);
+    _tooLow = !(_flightphase in ["taxing", "touchDown"]) && (_altRadar < orbis_gpws_tooLowAlt);
 
 	_minWarnLevel = _vehicle getVariable ["minWarnLevel", 0];
 	switch (_minWarnLevel) do {
 	    case (2): {
-	        if (_altDiff < orbis_gpws_appMinAlt) then {
+	        if (_altDiff > orbis_gpws_minAlt) then {
 				_minWarnLevel = 1;
 				_vehicle setVariable ["minWarnLevel", 1];
 			};
-	        if (_altDiff < orbis_gpws_minAlt) then {
+	        if (_altDiff > orbis_gpws_appMinAlt) then {
 				_minWarnLevel = 0;
 				_vehicle setVariable ["minWarnLevel", 0];
 			};
 	    };
 		case (1): {
-	        if (_altDiff < orbis_gpws_minAlt) then {
+	        if (_altDiff > orbis_gpws_appMinAlt) then {
 				_minWarnLevel = 0;
 				_vehicle setVariable ["minWarnLevel", 0];
 			};
@@ -82,8 +82,8 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 		default {};
 	};
 
-	_altInformLevel = _vehicle getVariable ["altInformLevel", 0];
-	if (_altDiff > (10 * orbis_gpws_ftToM)) then {
+	_altInformLevel = _vehicle getVariable ["altInformLevel", 2000];
+	if ((_altInformLevel < 10) && (_altDiff > (10 * orbis_gpws_ftToM))) then {
 		_altInformLevel = 10;
 		_vehicle setVariable ["altInformLevel", 10];
 	};
@@ -135,35 +135,35 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			case ((_flightphase isEqualTo "inFlight") && (_expectTerrainAlt > (_posExpect select 2))): {
 				DEV_CHAT("orbis_gpws: b747_PULLUP");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_PULLUP"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_PULLUP", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
 			// b747_TOOLOWT
-			case (_tooLow && (_expectTerrainAlt > _altASL)): {
+			case (!(_flightphase in ["taxing", "final", "touchDown"]) && _tooLow && (_expectTerrainAlt > _altASL)): {
 				DEV_CHAT("orbis_gpws: b747_TOOLOWT");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_TOOLOWT"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_TOOLOWT", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
 			// b747_TERRAIN
-			case (_expectTerrainAlt > _altASL): {
+			case (!(_flightphase in ["taxing", "final", "touchDown"]) && (_expectTerrainAlt > _altASL)): {
 				DEV_CHAT("orbis_gpws: b747_TERRAIN");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_TERRAIN"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_TERRAIN", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
 			// b747_DONTSNK
 			case ((_flightphase isEqualTo "takeOff") && (_altRadar > 5) && (_climeASL < 0)): {
 				DEV_CHAT("orbis_gpws: b747_DONTSNK");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_DONTSNK"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_DONTSNK", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
 			// b747_SNKRATE (takeOff)
 			case (_climeASL < orbis_gpws_maxSinkeRate): {
 				DEV_CHAT("orbis_gpws: b747_SNKRATE");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_SNKRATE"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_SNKRATE", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["minWarnLevel", 1];
 			};
 
@@ -171,7 +171,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			case ((abs _bankAngle) > orbis_gpws_maxBankAngle): {
 				DEV_CHAT("orbis_gpws: b747_BNKANGL");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_BNKANGL"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_BNKANGL", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["minWarnLevel", 1];
 			};
 
@@ -179,21 +179,21 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			case (_tooLow && !(_flightphase isEqualTo "takeOff") && (_flapStatus < 0.1)): {
 				DEV_CHAT("orbis_gpws: b747_FLAPS");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_FLAPS"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_FLAPS", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
             // b747_GEAR
             case (_tooLow && !(_flightphase isEqualTo "takeOff") && (_gearStatus > 0.9)): {
                 DEV_CHAT("orbis_gpws: b747_GEAR");
                 _vehicle setVariable ["orbisGPWSready", false];
-                [_vehicle, "b747_GEAR"] spawn orbis_gpws_fnc_speakGPWS;
+                [_vehicle, "b747_GEAR", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
             };
 
 			// b747_MIN (landing / final)
 			case ((_flightphase in ["landing", "final"]) && (_altDiff < orbis_gpws_minAlt) && (_minWarnLevel < 2)): {
 				DEV_CHAT("orbis_gpws: b747_MIN");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_MIN"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_MIN", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["minWarnLevel", 2];
 			};
 
@@ -201,95 +201,95 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			case ((_flightphase in ["landing", "final"]) && (_altDiff < orbis_gpws_appMinAlt) && (_minWarnLevel < 1)): {
 				DEV_CHAT("orbis_gpws: b747_APPRMIN");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_APPRMIN"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_APPRMIN", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["minWarnLevel", 1];
 			};
 
 			// b747_10 (landing / final)
-			case ((_flightphase in ["landing", "final"]) && (_altDiff < (10 * orbis_gpws_ftToM)) && (_minWarnLevel > 10)): {
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (10 * orbis_gpws_ftToM)) && (_altInformLevel > 10)): {
 				DEV_CHAT("orbis_gpws: b747_10");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_10"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_10", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["altInformLevel", 10];
 			};
 
 			// b747_20 (landing / final)
-			case ((_flightphase in ["landing", "final"]) && (_altDiff < (20 * orbis_gpws_ftToM)) && (_minWarnLevel > 20)): {
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (20 * orbis_gpws_ftToM)) && (_altInformLevel > 20)): {
 				DEV_CHAT("orbis_gpws: b747_20");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_20"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_20", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["altInformLevel", 20];
 			};
 
 			// b747_30 (landing / final)
-			case ((_flightphase in ["landing", "final"]) && (_altDiff < (30 * orbis_gpws_ftToM)) && (_minWarnLevel > 30)): {
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (30 * orbis_gpws_ftToM)) && (_altInformLevel > 30)): {
 				DEV_CHAT("orbis_gpws: b747_30");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_30"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_30", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["altInformLevel", 30];
 			};
 
 			// b747_40 (landing / final)
-			case ((_flightphase in ["landing", "final"]) && (_altDiff < (40 * orbis_gpws_ftToM)) && (_minWarnLevel > 40)): {
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (40 * orbis_gpws_ftToM)) && (_altInformLevel > 40)): {
 				DEV_CHAT("orbis_gpws: b747_40");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_40"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_40", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["altInformLevel", 40];
 			};
 
 			// b747_50 (landing / final)
-			case ((_flightphase in ["landing", "final"]) && (_altDiff < (50 * orbis_gpws_ftToM)) && (_minWarnLevel > 50)): {
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (50 * orbis_gpws_ftToM)) && (_altInformLevel > 50)): {
 				DEV_CHAT("orbis_gpws: b747_50");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_50"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_50", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["altInformLevel", 50];
 			};
 
 			// b747_100 (landing / final)
-			case ((_flightphase in ["landing", "final"]) && (_altDiff < (100 * orbis_gpws_ftToM)) && (_minWarnLevel > 100)): {
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (100 * orbis_gpws_ftToM)) && (_altInformLevel > 100)): {
 				DEV_CHAT("orbis_gpws: b747_100");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_100"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_100", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["altInformLevel", 100];
 			};
 
 			// b747_200 (landing / final)
-			case ((_flightphase in ["landing", "final"]) && (_altDiff < (200 * orbis_gpws_ftToM)) && (_minWarnLevel > 200)): {
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (200 * orbis_gpws_ftToM)) && (_altInformLevel > 200)): {
 				DEV_CHAT("orbis_gpws: b747_200");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_200"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_200", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["altInformLevel", 200];
 			};
 
 			// b747_300 (landing / final)
-			case ((_flightphase in ["landing", "final"]) && (_altDiff < (300 * orbis_gpws_ftToM)) && (_minWarnLevel > 300)): {
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (300 * orbis_gpws_ftToM)) && (_altInformLevel > 300)): {
 				DEV_CHAT("orbis_gpws: b747_300");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_300"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_300", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["altInformLevel", 300];
 			};
 
 			// b747_400 (landing / final)
-			case ((_flightphase in ["landing", "final"]) && (_altDiff < (400 * orbis_gpws_ftToM)) && (_minWarnLevel > 400)): {
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (400 * orbis_gpws_ftToM)) && (_altInformLevel > 400)): {
 				DEV_CHAT("orbis_gpws: b747_400");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_400"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_400", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["altInformLevel", 400];
 			};
 
 			// b747_500 (landing / final)
-			case ((_flightphase in ["landing", "final"]) && (_altDiff < (500 * orbis_gpws_ftToM)) && (_minWarnLevel > 500)): {
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (500 * orbis_gpws_ftToM)) && (_altInformLevel > 500)): {
 				DEV_CHAT("orbis_gpws: b747_500");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_500"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_500", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["altInformLevel", 500];
 			};
 
 			// b747_1000 (landing / final)
-			case ((_flightphase in ["landing", "final"]) && (_altDiff < (1000 * orbis_gpws_ftToM)) && (_minWarnLevel > 1000)): {
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (1000 * orbis_gpws_ftToM)) && (_altInformLevel > 1000)): {
 				DEV_CHAT("orbis_gpws: b747_1000");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_1000"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_1000", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["altInformLevel", 1000];
 			};
 
@@ -302,5 +302,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 };
 DEV_CHAT("orbis_gpws: b747GPWS loop terminated");
 
-_vehicle setVariable ["orbisGPWSmode", ""];
+if (_vehicle getVariable ["orbisGPWSmode", ""] isEqualTo "b747") then {
+	_vehicle setVariable ["orbisGPWSmode", ""];
+};
 DEV_CHAT("orbis_gpws: b747GPWS ended");

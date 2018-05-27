@@ -2,9 +2,10 @@
 
 params ["_vehicle", "_flightphase", "_altRadar", "_climeASL", "_flapStatus", "_gearStatus"];
 private ["_headingDiff", "_approachAngle", "_ILSarray", "_currentILSindex"];
+private _currentILSindex = -1;
 private _distance = 10000;
-private _altDiff = 2000;
-private _altDiffDesired = 2000;
+private _altDiff = _altRadar;
+private _altDiffDesired = _altRadar;
 
 switch (_flightphase) do {
     case ("taxing"): {

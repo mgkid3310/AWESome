@@ -20,7 +20,7 @@ orbis_gpws_tooLowAlt = 50;
 orbis_gpws_appMinAlt = 350 * orbis_gpws_ftToM;
 orbis_gpws_minAlt = 250 * orbis_gpws_ftToM;
 orbis_gpws_maxSinkeRate = -40;
-orbis_gpws_maxBankAngle = 60;
+orbis_gpws_maxBankAngle = 45;
 orbis_gpws_delay = 2.0;
 
 // get runways list

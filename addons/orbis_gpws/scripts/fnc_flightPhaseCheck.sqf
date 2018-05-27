@@ -1,7 +1,10 @@
 #include "header_macros.hpp"
 
 params ["_vehicle", "_flightphase", "_altRadar", "_climeASL", "_flapStatus", "_gearStatus"];
-private ["_altDiff", "_altDiffDesired", "_distance", "_headingDiff", "_approachAngle", "_ILSarray", "_currentILSindex"];
+private ["_headingDiff", "_approachAngle", "_ILSarray", "_currentILSindex"];
+private _distance = 10000;
+private _altDiff = 2000;
+private _altDiffDesired = 2000;
 
 switch (_flightphase) do {
     case ("taxing"): {

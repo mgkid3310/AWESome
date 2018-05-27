@@ -25,7 +25,7 @@ if !(_massCurrent > 0) then {
     _massCurrent = _massStandard;
 };
 
-// get TAS and etc. (use model coordiate system until further notice)
+// get TAS and etc.
 private _modelvelocity = velocityModelSpace _vehicle;
 private _modelWind = _vehicle vectorWorldToModel wind;
 private _windMultiplier = missionNamespace getVariable ["orbis_aerodynamics_windMultiplier", 1];
@@ -50,9 +50,9 @@ if (isTouchingGround _vehicle) then {
     _forceApply set [2, 0];
 };
 
-// get DeltaV needed on world cooridate system and apply it
-private _worldDeltaV = _vehicle vectorModeltoWorld (_forceApply vectorMultiply (_timeStep / _massCurrent));
-_vehicle setVelocity (velocity _vehicle vectorAdd _worldDeltaV);
+// get DeltaV needed and apply it
+private _modelDeltaV = _forceApply vectorMultiply (_timeStep / _massCurrent);
+_vehicle setVelocityModelSpace (_modelvelocity vectorAdd _modelDeltaV);
 
 // report if needed (dev script)
 // diag_log format ["orbis_aerodynamics _forceApply: %1, _dragGround: %2, _dragTAS: %3, _liftGround: %4, _liftTAS: %5", _forceApply, _dragGround, _dragTAS, _liftGround, _liftTAS];

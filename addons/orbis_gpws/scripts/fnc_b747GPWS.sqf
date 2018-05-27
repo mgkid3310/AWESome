@@ -153,7 +153,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			};
 
 			// b747_DONTSNK (takeOff)
-			case ((_flightphase isEqualTo "takeOff") && (_altRadar > 5) && (_climeASL < 0)): {
+			case ((_flightphase isEqualTo "takeOff") && (_altRadar > 5) && (_altRadar < 100) && (_climeASL < 0)): {
 				DEV_CHAT("orbis_gpws: b747_DONTSNK");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_DONTSNK", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;

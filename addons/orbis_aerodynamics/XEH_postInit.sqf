@@ -2,7 +2,12 @@
 orbis_aerodynamics_loopFrameInterval = 4;
 
 // add EventHandlers
+player addEventHandler ["GetInMan", {_this call orbis_aerodynamics_fnc_eventGetInMan}];
 addMissionEventHandler ["EachFrame", {[] call orbis_aerodynamics_fnc_eachFrameHandler}];
+
+if !(vehicle player isEqualTo player) then {
+	[vehicle player] call orbis_aerodynamics_fnc_eventGetInMan;
+};
 
 // CBA based addon setting init
 if (hasInterface) then {

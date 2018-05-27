@@ -11,9 +11,9 @@ _vehicle setVariable ["orbisGPWSmode", "b747"];
 _vehicle setVariable ["orbisGPWSready", true];
 _vehicle setVariable ["orbisGPWSreadyBeep", true];
 private ["_altAGLS", "_altASL", "_altRadar",
-	"_posExpect", "_cosAOA", "_flapStatus", "_gearStatus", "_acceleration", "_climeASL", "_climeRadar",
-    "_flightphaseOutput", "_distance", "_altDiff", "_altDiffDesired",
-	"_damageNow", "_damageWarnLevel"
+	"_posExpect", "_expectTerrainAlt", "_cosAOA", "_flapStatus", "_gearStatus", "_acceleration", "_climeASL", "_climeRadar",
+    "_tooLow", "_pitchAndBank", "_pitchAngle", "_bankAngle",
+    "_flightphaseOutput", "_distance", "_altDiff", "_altDiffDesired"
 ];
 private _flightphase = "taxing";
 private _timeOld = time;
@@ -34,12 +34,19 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_altASL = getPosASL _vehicle select 2;
 	_altRadar = _altAGLS min _altASL;
 	_posExpect = (getPosASL _vehicle) vectorAdd (velocity _vehicle vectorMultiply orbis_gpws_pullupTime);
+    _expectTerrainAlt = 0 max getTerrainHeightASL _posExpect;
 	_cosAOA = (vectorDir _vehicle) vectorCos (velocity _vehicle);
 	_flapStatus = _vehicle animationSourcePhase "flap";
 	_gearStatus = _vehicle animationSourcePhase "gear";
 	_acceleration = (speed _vehicle - _speedOld) / (time - _timeOld); // km/h/s
 	_climeASL = (_altASL - _altASLOld) / (time - _timeOld); // m/s
 	_climeRadar = (_altRadar - _altRadarOld) / (time - _timeOld); // m/s
+
+    _tooLow = _altRadar < 100;
+
+    _pitchAndBank = _vehicle call BIS_fnc_getPitchBank;
+    _pitchAngle = _pitchAndBank select 0;
+    _bankAngle = _pitchAndBank select 1;
 
 	// save data for next loop
 	_timeOld = time;
@@ -48,125 +55,242 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_altRadarOld = _altRadar;
 
     // flight phase check
-    _flightphaseOutput = [_vehicle, _flightphase, _altRadar, _climeASL] call orbis_gpws_fnc_flightPhaseCheck;
+    _flightphaseOutput = [_vehicle, _flightphase, _altRadar, _climeASL, _flapStatus, _gearStatus] call orbis_gpws_fnc_flightPhaseCheck;
 	_flightphase = _flightphaseOutput select 0;
 	_distance = _flightphaseOutput select 1;
 	_altDiff = _flightphaseOutput select 2;
 	_altDiffDesired = _flightphaseOutput select 3;
 
-	_damageNow = damage _vehicle;
-	_damageWarnLevel = _vehicle getVariable ["damageWarnLevel", 0];
-	switch (_damageWarnLevel) do {
+	_minWarnLevel = _vehicle getVariable ["minWarnLevel", 0];
+	switch (_minWarnLevel) do {
 	    case (2): {
-	        if (_damageNow < orbis_gpsw_warningDamageLevel) then {
-				_damageWarnLevel = 1;
-				_vehicle setVariable ["damageWarnLevel", 1];
+	        if (_altDiff < orbis_gpws_appMinAlt) then {
+				_minWarnLevel = 1;
+				_vehicle setVariable ["minWarnLevel", 1];
 			};
-	        if (_damageNow < orbis_gpsw_cautionDamageLevel) then {
-				_damageWarnLevel = 0;
-				_vehicle setVariable ["damageWarnLevel", 0];
+	        if (_altDiff < orbis_gpws_minAlt) then {
+				_minWarnLevel = 0;
+				_vehicle setVariable ["minWarnLevel", 0];
 			};
 	    };
 		case (1): {
-	        if (_damageNow < orbis_gpsw_cautionDamageLevel) then {
-				_damageWarnLevel = 0;
-				_vehicle setVariable ["damageWarnLevel", 0];
+	        if (_altDiff < orbis_gpws_minAlt) then {
+				_minWarnLevel = 0;
+				_vehicle setVariable ["minWarnLevel", 0];
 			};
 	    };
 		default {};
 	};
 
+	_altInformLevel = _vehicle getVariable ["altInformLevel", 0];
+	if (_altDiff > (10 * orbis_gpws_ftToM)) then {
+		_altInformLevel = 10;
+		_vehicle setVariable ["altInformLevel", 10];
+	};
+	if ((_altInformLevel < 20) && (_altDiff > (20 * orbis_gpws_ftToM))) then {
+		_altInformLevel = 20;
+		_vehicle setVariable ["altInformLevel", 20];
+	};
+	if ((_altInformLevel < 30) && (_altDiff > (30 * orbis_gpws_ftToM))) then {
+		_altInformLevel = 30;
+		_vehicle setVariable ["altInformLevel", 30];
+	};
+	if ((_altInformLevel < 40) && (_altDiff > (40 * orbis_gpws_ftToM))) then {
+		_altInformLevel = 40;
+		_vehicle setVariable ["altInformLevel", 40];
+	};
+	if ((_altInformLevel < 50) && (_altDiff > (50 * orbis_gpws_ftToM))) then {
+		_altInformLevel = 50;
+		_vehicle setVariable ["altInformLevel", 50];
+	};
+	if ((_altInformLevel < 100) && (_altDiff > (100 * orbis_gpws_ftToM))) then {
+		_altInformLevel = 100;
+		_vehicle setVariable ["altInformLevel", 100];
+	};
+	if ((_altInformLevel < 200) && (_altDiff > (200 * orbis_gpws_ftToM))) then {
+		_altInformLevel = 200;
+		_vehicle setVariable ["altInformLevel", 200];
+	};
+	if ((_altInformLevel < 300) && (_altDiff > (300 * orbis_gpws_ftToM))) then {
+		_altInformLevel = 300;
+		_vehicle setVariable ["altInformLevel", 300];
+	};
+	if ((_altInformLevel < 400) && (_altDiff > (400 * orbis_gpws_ftToM))) then {
+		_altInformLevel = 400;
+		_vehicle setVariable ["altInformLevel", 400];
+	};
+	if ((_altInformLevel < 500) && (_altDiff > (500 * orbis_gpws_ftToM))) then {
+		_altInformLevel = 500;
+		_vehicle setVariable ["altInformLevel", 500];
+	};
+	if ((_altInformLevel < 1000) && (_altDiff > (1000 * orbis_gpws_ftToM))) then {
+		_altInformLevel = 1000;
+		_vehicle setVariable ["altInformLevel", 1000];
+	};
+
 	// GPWS general speach
 	if (_vehicle getVariable ["orbisGPWSready", true]) then {
 		switch (true) do {
-			// b747_counter
-			case (_counterGo): {
-				DEV_CHAT("orbis_gpws: b747_counter");
+			// b747_PULLUP (inFlight)
+			case ((_flightphase isEqualTo "inFlight") && (_expectTerrainAlt > (_posExpect select 2))): {
+				DEV_CHAT("orbis_gpws: b747_PULLUP");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_counter"] spawn orbis_gpws_fnc_speakGPWS;
-				_ctrWarnOld = _ctrWarnMSLs;
+				[_vehicle, "b747_PULLUP"] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
-			// b747_jammer
-			/* case (_jammerGo): {
-				DEV_CHAT("orbis_gpws: b747_jammer");
+			// b747_TOOLOWT
+			case (_tooLow && (_expectTerrainAlt > _altASL)): {
+				DEV_CHAT("orbis_gpws: b747_TOOLOWT");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_jammer"] spawn orbis_gpws_fnc_speakGPWS;
-				_vehicle setVariable ["radarLocks", _targeting];
-			}; */
-
-			// b747_IFF
-			/* case (_IFFgo): {
-				DEV_CHAT("orbis_gpws: b747_IFF");
-				[_vehicle, "b747_IFF"] spawn orbis_gpws_fnc_speakGPWS;
-				_IFFgo = false;
-			}; */
-
-			// b747_pullUp (in-flight)
-			case (((0 max getTerrainHeightASL _posExpect) > (_posExpect select 2)) && (_flightphase isEqualTo "inFlight")): {
-				DEV_CHAT("orbis_gpws: b747_pullUp");
-				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_pullUp"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_TOOLOWT"] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
-			// b747_altitude (in-flight)
-			case ((_altRadar < orbis_gpws_lowAltitude) && (_flightphase isEqualTo "inFlight")): {
-				DEV_CHAT("orbis_gpws: b747_altitude");
+			// b747_TERRAIN
+			case (_expectTerrainAlt > _altASL): {
+				DEV_CHAT("orbis_gpws: b747_TERRAIN");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_altitude"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "b747_TERRAIN"] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
-			// b747_warning
-			case ((_damageNow > orbis_gpsw_warningDamageLevel) && (_damageWarnLevel < 2)): {
-				DEV_CHAT("orbis_gpws: b747_warning");
+			// b747_DONTSNK
+			case ((_flightphase isEqualTo "takeOff") && (_climeASL < 0)): {
+				DEV_CHAT("orbis_gpws: b747_DONTSNK");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_warning"] spawn orbis_gpws_fnc_speakGPWS;
-				_vehicle setVariable ["damageWarnLevel", 2];
+				[_vehicle, "b747_DONTSNK"] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
-			// b747_caution
-			case ((_damageNow > orbis_gpsw_cautionDamageLevel) && (_damageWarnLevel < 1)): {
-				DEV_CHAT("orbis_gpws: b747_caution");
+			// b747_SNKRATE (takeOff)
+			case (_climeASL < orbis_gpws_maxSinkeRate): {
+				DEV_CHAT("orbis_gpws: b747_SNKRATE");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_caution"] spawn orbis_gpws_fnc_speakGPWS;
-				_vehicle setVariable ["damageWarnLevel", 1];
+				[_vehicle, "b747_SNKRATE"] spawn orbis_gpws_fnc_speakGPWS;
+				_vehicle setVariable ["minWarnLevel", 1];
 			};
 
-			// b747_bingo
-			case ((fuel _vehicle < orbis_gpws_bingoFuel) && !(_vehicle getVariable ["bingoAlerted", false])): {
-				DEV_CHAT("orbis_gpws: b747_bingo");
+			// b747_BNKANGL
+			case ((abs _bankAngle) > orbis_gpws_maxBankAngle): {
+				DEV_CHAT("orbis_gpws: b747_BNKANGL");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_bingo"] spawn orbis_gpws_fnc_speakGPWS;
-				_vehicle setVariable ["bingoAlerted", true];
+				[_vehicle, "b747_BNKANGL"] spawn orbis_gpws_fnc_speakGPWS;
+				_vehicle setVariable ["minWarnLevel", 1];
 			};
 
-			default {};
-		};
-	};
-
-	// GPWS beep
-	if (_vehicle getVariable ["orbisGPWSreadyBeep", true]) then {
-		switch (true) do {
-			// b747_SAM
-			/* case (_samGo): {
-				DEV_CHAT("orbis_gpws: b747_SAM");
-				_vehicle setVariable ["orbisGPWSreadyBeep", false];
-				[_vehicle, "b747_SAM", nil, "orbisGPWSreadyBeep"] spawn orbis_gpws_fnc_speakGPWS;
-				_samGo = false;
-			}; */
-
-			// b747_lowSpeed
-			case ((speed _vehicle < _speedStall) && !(isTouchingGround _vehicle)): {
-				DEV_CHAT("orbis_gpws: b747_lowSpeed");
-				_vehicle setVariable ["orbisGPWSreadyBeep", false];
-				[_vehicle, "b747_lowSpeed", nil, "orbisGPWSreadyBeep"] spawn orbis_gpws_fnc_speakGPWS;
+			// b747_FLAPS
+			case (_tooLow && (_flapStatus < 0.1)): {
+				DEV_CHAT("orbis_gpws: b747_FLAPS");
+				_vehicle setVariable ["orbisGPWSready", false];
+				[_vehicle, "b747_FLAPS"] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
-			// b747_highAOA
-			case ((_cosAOA < cos orbis_gpws_maxAOA) && (speed _vehicle > 50)): {
-				DEV_CHAT("orbis_gpws: b747_highAOA");
-				_vehicle setVariable ["orbisGPWSreadyBeep", false];
-				[_vehicle, "b747_highAOA", nil, "orbisGPWSreadyBeep"] spawn orbis_gpws_fnc_speakGPWS;
+            // b747_GEAR
+            case (_tooLow && (_gearStatus > 0.9)): {
+                DEV_CHAT("orbis_gpws: b747_GEAR");
+                _vehicle setVariable ["orbisGPWSready", false];
+                [_vehicle, "b747_GEAR"] spawn orbis_gpws_fnc_speakGPWS;
+            };
+
+			// b747_MIN (landing / final)
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < orbis_gpws_minAlt) && (_minWarnLevel < 2)): {
+				DEV_CHAT("orbis_gpws: b747_MIN");
+				_vehicle setVariable ["orbisGPWSready", false];
+				[_vehicle, "b747_MIN"] spawn orbis_gpws_fnc_speakGPWS;
+				_vehicle setVariable ["minWarnLevel", 2];
+			};
+
+			// b747_APPRMIN (landing / final)
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < orbis_gpws_appMinAlt) && (_minWarnLevel < 1)): {
+				DEV_CHAT("orbis_gpws: b747_APPRMIN");
+				_vehicle setVariable ["orbisGPWSready", false];
+				[_vehicle, "b747_APPRMIN"] spawn orbis_gpws_fnc_speakGPWS;
+				_vehicle setVariable ["minWarnLevel", 1];
+			};
+
+			// b747_10 (landing / final)
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (10 * orbis_gpws_ftToM)) && (_minWarnLevel > 10)): {
+				DEV_CHAT("orbis_gpws: b747_10");
+				_vehicle setVariable ["orbisGPWSready", false];
+				[_vehicle, "b747_10"] spawn orbis_gpws_fnc_speakGPWS;
+				_vehicle setVariable ["altInformLevel", 10];
+			};
+
+			// b747_20 (landing / final)
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (20 * orbis_gpws_ftToM)) && (_minWarnLevel > 20)): {
+				DEV_CHAT("orbis_gpws: b747_20");
+				_vehicle setVariable ["orbisGPWSready", false];
+				[_vehicle, "b747_20"] spawn orbis_gpws_fnc_speakGPWS;
+				_vehicle setVariable ["altInformLevel", 20];
+			};
+
+			// b747_30 (landing / final)
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (30 * orbis_gpws_ftToM)) && (_minWarnLevel > 30)): {
+				DEV_CHAT("orbis_gpws: b747_30");
+				_vehicle setVariable ["orbisGPWSready", false];
+				[_vehicle, "b747_30"] spawn orbis_gpws_fnc_speakGPWS;
+				_vehicle setVariable ["altInformLevel", 30];
+			};
+
+			// b747_40 (landing / final)
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (40 * orbis_gpws_ftToM)) && (_minWarnLevel > 40)): {
+				DEV_CHAT("orbis_gpws: b747_40");
+				_vehicle setVariable ["orbisGPWSready", false];
+				[_vehicle, "b747_40"] spawn orbis_gpws_fnc_speakGPWS;
+				_vehicle setVariable ["altInformLevel", 40];
+			};
+
+			// b747_50 (landing / final)
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (50 * orbis_gpws_ftToM)) && (_minWarnLevel > 50)): {
+				DEV_CHAT("orbis_gpws: b747_50");
+				_vehicle setVariable ["orbisGPWSready", false];
+				[_vehicle, "b747_50"] spawn orbis_gpws_fnc_speakGPWS;
+				_vehicle setVariable ["altInformLevel", 50];
+			};
+
+			// b747_100 (landing / final)
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (100 * orbis_gpws_ftToM)) && (_minWarnLevel > 100)): {
+				DEV_CHAT("orbis_gpws: b747_100");
+				_vehicle setVariable ["orbisGPWSready", false];
+				[_vehicle, "b747_100"] spawn orbis_gpws_fnc_speakGPWS;
+				_vehicle setVariable ["altInformLevel", 100];
+			};
+
+			// b747_200 (landing / final)
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (200 * orbis_gpws_ftToM)) && (_minWarnLevel > 200)): {
+				DEV_CHAT("orbis_gpws: b747_200");
+				_vehicle setVariable ["orbisGPWSready", false];
+				[_vehicle, "b747_200"] spawn orbis_gpws_fnc_speakGPWS;
+				_vehicle setVariable ["altInformLevel", 200];
+			};
+
+			// b747_300 (landing / final)
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (300 * orbis_gpws_ftToM)) && (_minWarnLevel > 300)): {
+				DEV_CHAT("orbis_gpws: b747_300");
+				_vehicle setVariable ["orbisGPWSready", false];
+				[_vehicle, "b747_300"] spawn orbis_gpws_fnc_speakGPWS;
+				_vehicle setVariable ["altInformLevel", 300];
+			};
+
+			// b747_400 (landing / final)
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (400 * orbis_gpws_ftToM)) && (_minWarnLevel > 400)): {
+				DEV_CHAT("orbis_gpws: b747_400");
+				_vehicle setVariable ["orbisGPWSready", false];
+				[_vehicle, "b747_400"] spawn orbis_gpws_fnc_speakGPWS;
+				_vehicle setVariable ["altInformLevel", 400];
+			};
+
+			// b747_500 (landing / final)
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (500 * orbis_gpws_ftToM)) && (_minWarnLevel > 500)): {
+				DEV_CHAT("orbis_gpws: b747_500");
+				_vehicle setVariable ["orbisGPWSready", false];
+				[_vehicle, "b747_500"] spawn orbis_gpws_fnc_speakGPWS;
+				_vehicle setVariable ["altInformLevel", 500];
+			};
+
+			// b747_1000 (landing / final)
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (1000 * orbis_gpws_ftToM)) && (_minWarnLevel > 1000)): {
+				DEV_CHAT("orbis_gpws: b747_1000");
+				_vehicle setVariable ["orbisGPWSready", false];
+				[_vehicle, "b747_1000"] spawn orbis_gpws_fnc_speakGPWS;
+				_vehicle setVariable ["altInformLevel", 1000];
 			};
 
 			default {};

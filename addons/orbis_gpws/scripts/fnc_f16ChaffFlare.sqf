@@ -25,14 +25,14 @@ if ((_weapon in orbis_gpws_ChaffFlareList) && !(_vehicle getVariable ["CMrunnig"
 			case (_resultingAmmo <= 0): {
 				DEV_CHAT("orbis_gpws: f16_chaffFlareOut");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "f16_chaffFlareOut", 1.26] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "f16_chaffFlareOut"] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
 			// f16_chaffFlareLow
 			case ((_resultingAmmo <= (_vehicle getVariable ["lowCMcount", _resultingAmmo - 1])) && !(_vehicle getVariable ["CMlowAlerted", false])): {
 				DEV_CHAT("orbis_gpws: f16_chaffFlareLow");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "f16_chaffFlareLow", 1.34] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "f16_chaffFlareLow"] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["CMlowAlerted", true];
 			};
 
@@ -40,7 +40,7 @@ if ((_weapon in orbis_gpws_ChaffFlareList) && !(_vehicle getVariable ["CMrunnig"
 			default {
 				DEV_CHAT("orbis_gpws: f16_chaffFlare");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "f16_chaffFlare", 0.86] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "f16_chaffFlare"] spawn orbis_gpws_fnc_speakGPWS;
 			};
 		};
 	};

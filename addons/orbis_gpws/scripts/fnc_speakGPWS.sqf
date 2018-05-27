@@ -2,7 +2,7 @@
 
 private _vehicle = _this select 0;
 private _sound = _this select 1;
-private _duration = _this select 2;
+private _duration = param [2, getNumber (configFile >> "CfgSounds" >> _sound >> "length")];
 private _mode = param [3, "orbisGPWSready"];
 
 if !((alive _vehicle) && (player in _vehicle)) exitWith {};

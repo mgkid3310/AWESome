@@ -229,7 +229,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			case (_counterGo): {
 				DEV_CHAT("orbis_gpws: f16_counter");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "f16_counter", 0.67] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "f16_counter"] spawn orbis_gpws_fnc_speakGPWS;
 				_ctrWarnOld = _ctrWarnMSLs;
 			};
 
@@ -237,14 +237,14 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			/* case (_jammerGo): {
 				DEV_CHAT("orbis_gpws: f16_jammer");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "f16_jammer", 0.54] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "f16_jammer"] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["radarLocks", _targeting];
 			}; */
 
 			// f16_IFF
 			/* case (_IFFgo): {
 				DEV_CHAT("orbis_gpws: f16_IFF");
-				[_vehicle, "f16_IFF", 0.97] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "f16_IFF"] spawn orbis_gpws_fnc_speakGPWS;
 				_IFFgo = false;
 			}; */
 
@@ -252,21 +252,21 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			case (((0 max getTerrainHeightASL _posExpect) > (_posExpect select 2)) && (_flightphase isEqualTo "inFlight")): {
 				DEV_CHAT("orbis_gpws: f16_pullUp");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "f16_pullUp", 1.58] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "f16_pullUp"] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
 			// f16_altitude (in-flight)
 			case ((_altRadar < orbis_gpws_lowAltitude) && (_flightphase isEqualTo "inFlight")): {
 				DEV_CHAT("orbis_gpws: f16_altitude");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "f16_altitude", 2.14] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "f16_altitude"] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
 			// f16_warning
 			case ((_damageNow > orbis_gpsw_warningDamageLevel) && (_damageWarnLevel < 2)): {
 				DEV_CHAT("orbis_gpws: f16_warning");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "f16_warning", 2.20] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "f16_warning"] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["damageWarnLevel", 2];
 			};
 
@@ -274,7 +274,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			case ((_damageNow > orbis_gpsw_cautionDamageLevel) && (_damageWarnLevel < 1)): {
 				DEV_CHAT("orbis_gpws: f16_caution");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "f16_caution", 1.90] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "f16_caution"] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["damageWarnLevel", 1];
 			};
 
@@ -282,7 +282,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			case ((fuel _vehicle < orbis_gpws_bingoFuel) && !(_vehicle getVariable ["bingoAlerted", false])): {
 				DEV_CHAT("orbis_gpws: f16_bingo");
 				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "f16_bingo", 1.73] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "f16_bingo"] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["bingoAlerted", true];
 			};
 
@@ -297,7 +297,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			/* case (_samGo): {
 				DEV_CHAT("orbis_gpws: f16_SAM");
 				_vehicle setVariable ["orbisGPWSreadyBeep", false];
-				[_vehicle, "f16_SAM", 0.80, "orbisGPWSreadyBeep"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "f16_SAM", nil, "orbisGPWSreadyBeep"] spawn orbis_gpws_fnc_speakGPWS;
 				_samGo = false;
 			}; */
 
@@ -305,14 +305,14 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			case ((speed _vehicle < _speedStall) && !(isTouchingGround _vehicle)): {
 				DEV_CHAT("orbis_gpws: f16_lowSpeed");
 				_vehicle setVariable ["orbisGPWSreadyBeep", false];
-				[_vehicle, "f16_lowSpeed", 1.50, "orbisGPWSreadyBeep"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "f16_lowSpeed", nil, "orbisGPWSreadyBeep"] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
 			// f16_highAOA
 			case ((_cosAOA < cos orbis_gpws_maxAOA) && (speed _vehicle > 50)): {
 				DEV_CHAT("orbis_gpws: f16_highAOA");
 				_vehicle setVariable ["orbisGPWSreadyBeep", false];
-				[_vehicle, "f16_highAOA", 0.999, "orbisGPWSreadyBeep"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "f16_highAOA", nil, "orbisGPWSreadyBeep"] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
 			default {};

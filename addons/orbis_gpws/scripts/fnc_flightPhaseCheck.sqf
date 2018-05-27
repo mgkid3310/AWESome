@@ -81,11 +81,11 @@ switch (_flightphase) do {
                     {
                         _altDiff = _altASL - (_x select 0 select 2);
                         _distance = (_x select 0) distance2D (getPos _vehicle);
-                        _altDiffDesired = _distance * tan (_ILSarray select 2);
                         _headingDiff = abs ((getDir _vehicle) - (_x select 1));
                         _approachAngle = abs (((getPos _vehicle) getDir (_x select 0)) - (_x select 1));
                         if ((_altDiff < 200) && (_distance < 3000) && (_headingDiff < 30) && (_approachAngle < 30)) exitWith {
                             _currentILSindex = _forEachIndex;
+                            _altDiffDesired = _distance * tan (_x select 2);
                             DEV_CHAT("orbis_gpws: b747GPWS ILS capture");
                         };
                     } forEach orbis_gpws_runwayList;
@@ -113,11 +113,11 @@ switch (_flightphase) do {
                     {
                         _altDiff = _altASL - (_x select 0 select 2);
                         _distance = (_x select 0) distance2D (getPos _vehicle);
-                        _altDiffDesired = _distance * tan (_ILSarray select 2);
                         _headingDiff = abs ((getDir _vehicle) - (_x select 1));
                         _approachAngle = abs (((getPos _vehicle) getDir (_x select 0)) - (_x select 1));
                         if ((_altDiff < 100) && (_distance < 1000) && (_headingDiff < 30) && (_approachAngle < 30)) exitWith {
                             _currentILSindex = _forEachIndex;
+                            _altDiffDesired = _distance * tan (_x select 2);
                             DEV_CHAT("orbis_gpws: b747GPWS ILS capture");
                         };
                     } forEach orbis_gpws_runwayList;

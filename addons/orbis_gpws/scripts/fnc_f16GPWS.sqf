@@ -180,7 +180,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			/* case (_samGo): {
 				DEV_CHAT("orbis_gpws: f16_SAM");
 				_vehicle setVariable ["orbisGPWSreadyBeep", false];
-				[_vehicle, "f16_SAM", nil, "orbisGPWSreadyBeep"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "f16_SAM", nil, nil, "orbisGPWSreadyBeep"] spawn orbis_gpws_fnc_speakGPWS;
 				_samGo = false;
 			}; */
 
@@ -188,14 +188,14 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			case ((speed _vehicle < _speedStall) && !(isTouchingGround _vehicle)): {
 				DEV_CHAT("orbis_gpws: f16_lowSpeed");
 				_vehicle setVariable ["orbisGPWSreadyBeep", false];
-				[_vehicle, "f16_lowSpeed", nil, "orbisGPWSreadyBeep"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "f16_lowSpeed", nil, nil, "orbisGPWSreadyBeep"] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
 			// f16_highAOA
 			case ((_cosAOA < cos orbis_gpws_maxAOA) && (speed _vehicle > 50)): {
 				DEV_CHAT("orbis_gpws: f16_highAOA");
 				_vehicle setVariable ["orbisGPWSreadyBeep", false];
-				[_vehicle, "f16_highAOA", nil, "orbisGPWSreadyBeep"] spawn orbis_gpws_fnc_speakGPWS;
+				[_vehicle, "f16_highAOA", nil, nil, "orbisGPWSreadyBeep"] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
 			default {};
@@ -209,7 +209,9 @@ DEV_CHAT("orbis_gpws: f16GPWS loop terminated");
 
 _vehicle removeEventHandler ["Fired", _chaffFlare];
 _vehicle removeEventHandler ["IncomingMissile", _incomingMSL];
-_vehicle setVariable ["orbisGPWSmode", ""];
+if (_vehicle getVariable ["orbisGPWSmode", ""] isEqualTo "f16") then {
+	_vehicle setVariable ["orbisGPWSmode", ""];
+};
 DEV_CHAT("orbis_gpws: f16GPWS ended");
 
 // f16_data 0.42

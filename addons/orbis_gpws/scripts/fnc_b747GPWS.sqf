@@ -153,7 +153,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			};
 
 			// b747_DONTSNK
-			case ((_flightphase isEqualTo "takeOff") && (_climeASL < 0)): {
+			case ((_flightphase isEqualTo "takeOff") && (_altRadar > 5) && (_climeASL < 0)): {
 				DEV_CHAT("orbis_gpws: b747_DONTSNK");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_DONTSNK"] spawn orbis_gpws_fnc_speakGPWS;
@@ -176,14 +176,14 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			};
 
 			// b747_FLAPS
-			case (_tooLow && (_flapStatus < 0.1)): {
+			case (_tooLow && !(_flightphase isEqualTo "takeOff") && (_flapStatus < 0.1)): {
 				DEV_CHAT("orbis_gpws: b747_FLAPS");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_FLAPS"] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
             // b747_GEAR
-            case (_tooLow && (_gearStatus > 0.9)): {
+            case (_tooLow && !(_flightphase isEqualTo "takeOff") && (_gearStatus > 0.9)): {
                 DEV_CHAT("orbis_gpws: b747_GEAR");
                 _vehicle setVariable ["orbisGPWSready", false];
                 [_vehicle, "b747_GEAR"] spawn orbis_gpws_fnc_speakGPWS;

@@ -77,7 +77,18 @@ switch (_flightphase) do {
                     _flightphase = "touchDown";
                     DEV_CHAT("orbis_gpws: b747GPWS landing -> touchDown");
                 };
-                default {};
+                default {
+                    {
+                        _altDiff = _altASL - (_x select 0 select 2);
+                        _distance = (_x select 0) distance2D (getPos _vehicle);
+                        _headingDiff = abs ((getDir _vehicle) - (_x select 1));
+                        _approachAngle = abs (((getPos _vehicle) getDir (_x select 0)) - (_x select 1));
+                        if ((_altDiff < 200) && (_distance < 3000) && (_headingDiff < 30) && (_approachAngle < 30)) exitWith {
+                            _currentILSindex = _forEachIndex;
+                            DEV_CHAT("orbis_gpws: b747GPWS inFlight -> landing (ILS)");
+                        };
+                    } forEach orbis_gpws_runwayList;
+                };
             };
         };
     };
@@ -97,7 +108,18 @@ switch (_flightphase) do {
                     _flightphase = "touchDown";
                     DEV_CHAT("orbis_gpws: b747GPWS final -> touchDown (ILS)");
                 };
-                default {};
+                default {
+                    {
+                        _altDiff = _altASL - (_x select 0 select 2);
+                        _distance = (_x select 0) distance2D (getPos _vehicle);
+                        _headingDiff = abs ((getDir _vehicle) - (_x select 1));
+                        _approachAngle = abs (((getPos _vehicle) getDir (_x select 0)) - (_x select 1));
+                        if ((_altDiff < 100) && (_distance < 1000) && (_headingDiff < 30) && (_approachAngle < 30)) exitWith {
+                            _currentILSindex = _forEachIndex;
+                            DEV_CHAT("orbis_gpws: b747GPWS inFlight -> landing (ILS)");
+                        };
+                    } forEach orbis_gpws_runwayList;
+                };
             };
         } else {
             switch (true) do {

@@ -16,21 +16,24 @@ orbis_gpsw_cautionDamageLevel = 0.1;
 orbis_gpws_runwayList = [[[0, 0, 0], 0]]; // [[position(ASL), heading], ...]
 private _runwayPos = getArray (configFile >> "CfgWorlds" >> worldName >> "ilsPosition");
 _runwayPos set [2, getTerrainHeightASL _runwayPos];
-orbis_gpws_runwayList pushBack [_runwayPos, asin abs (getArray (configFile >> "CfgWorlds" >> worldName >> "ilsDirection") select 0)];
-orbis_gpws_runwayList pushBack [_runwayPos, asin abs (getArray (configFile >> "CfgWorlds" >> worldName >> "ilsDirection") select 0) call orbis_gpws_fnc_getOppositeHeading];
+private _ilsDirection = getArray (configFile >> "CfgWorlds" >> worldName >> "ilsDirection");
+orbis_gpws_runwayList pushBack [_runwayPos, asin abs (_ilsDirection select 0), asin (_ilsDirection select 1)];
+orbis_gpws_runwayList pushBack [_runwayPos, asin abs (_ilsDirection select 0) call orbis_gpws_fnc_getOppositeHeading, asin (_ilsDirection select 1)];
 for "_i" from 0 to (count (configFile >> "CfgWorlds" >> worldName >> "SecondaryAirports") - 1) do {
 	private _config = (configFile >> "CfgWorlds" >> worldName >> "SecondaryAirports") select _i;
 	_runwayPos = getArray (_config >> "ilsPosition");
 	_runwayPos set [2, getTerrainHeightASL _runwayPos];
 	if (isClass _config) then {
-		orbis_gpws_runwayList pushBack [_runwayPos, asin abs (getArray (_config >> "ilsDirection") select 0)];
-		orbis_gpws_runwayList pushBack [_runwayPos, asin abs (getArray (_config >> "ilsDirection") select 0) call orbis_gpws_fnc_getOppositeHeading];
+		_ilsDirection = getArray (_config >> "ilsDirection");
+		orbis_gpws_runwayList pushBack [_runwayPos, asin abs (_ilsDirection select 0), asin (_ilsDirection select 1)];
+		orbis_gpws_runwayList pushBack [_runwayPos, asin abs (_ilsDirection select 0) call orbis_gpws_fnc_getOppositeHeading, asin (_ilsDirection select 1)];
 	};
 };
 {
-	orbis_gpws_runwayList pushBack [getPosASL _x, asin abs (getArray (configFile >> "CfgVehicles" >> (typeOf _x) >> "ilsDirection") select 0)];
+	_ilsDirection = getArray (configFile >> "CfgVehicles" >> (typeOf _x) >> "ilsDirection");
+	orbis_gpws_runwayList pushBack [getPosASL _x, asin abs (_ilsDirection select 0), asin (_ilsDirection select 1)];
 	if (getNumber (configFile >> "CfgVehicles" >> (typeOf _x) >> isCarrier) isEqualTo 0) then {
-		orbis_gpws_runwayList pushBack [getPosASL _x, asin abs (getArray (configFile >> "CfgVehicles" >> (typeOf _x) >> "ilsDirection") select 0) call orbis_gpws_fnc_getOppositeHeading];
+		orbis_gpws_runwayList pushBack [getPosASL _x, asin abs (_ilsDirection select 0) call orbis_gpws_fnc_getOppositeHeading, asin (_ilsDirection select 1)];
 	};
 } forEach (allAirports select 1);
 

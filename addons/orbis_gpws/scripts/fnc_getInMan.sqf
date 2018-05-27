@@ -2,7 +2,7 @@
 
 params ["_unit", "_position", "_vehicle", "_turret"];
 
-DEV_CHAT("orbis_gpws: getIn run");
+DEV_CHAT("orbis_gpws: getInMan run");
 
 // check if has GPWS enabled
 private _GPWSenabled = _vehicle getVariable ["orbisGPWSenabled", 0];

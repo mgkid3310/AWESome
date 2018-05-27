@@ -65,7 +65,7 @@ switch (_flightphase) do {
             };
         } else {
             switch (true) do {
-                case ((_flapStatus < 0.1) || (_gearStatus > 0.9) || (_altRadar > 200) || (_climeASL > 3)): {
+                case ((_flapStatus < 0.1) || (_gearStatus > 0.9) || (_altRadar > 400) || (_climeASL > 5)): {
                     _flightphase = "inFlight";
                     DEV_CHAT("orbis_gpws: b747GPWS landing -> inFlight");
                 };

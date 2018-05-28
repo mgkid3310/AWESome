@@ -30,12 +30,12 @@ for large transport or support planes.
 
 2. Realistic Aerodynamics (drag, lift, etc.)  
 
-Brings wind into calculation. Landing speed should be  
-calculated with TAS (True Air Speed), not ground speed. In  
-case of crosswinds, de-crab or sideslip landings will be  
-required. Can enable/disable at addon settings (enabled as  
-default), and effects of wind can be adjusted with "Wind  
-Multiplier" setting.  
+Brings wind into calculation. Landing speed should be set  
+with TAS (True Air Speed), not ground speed. In case of  
+crosswinds, de-crab or sideslip landings will be required.  
+Can enable/disable at addon settings (enabled as default),  
+and effects of wind can be adjusted with "Wind Multiplier"  
+setting.  
 NOTICE : in low-FPS and high-speed situation, this feature  
 MAY cause some sutters. if it does so, please temporarily  
 disable this feature in addon settings.  

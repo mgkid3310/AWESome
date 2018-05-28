@@ -1,17 +1,17 @@
 # AWESome : Aerial Warfare Enhanced Somehow  
 
 Makes ARMA 3's flight environments more realistic (GWPS,  
-wind effect, etc.). Recommended to use with ACE since it will  
-enable ACE Interaction instead of vanilla actions and give  
-more specific weather data on ATIS.  
+wind effect, etc.). Recommended to use with ACE since it  
+will enable ACE Interaction instead of vanilla actions  
+and give more specific weather data on ATIS.  
 
-This addon is SP/MP capable and basically works as a client-  
-side mod, and gives some additional features when used on  
-both client/server.  
+This addon is SP/MP capable and basically works as a  
+client-side mod, and gives some additional features when  
+used on both client/server.  
 
 Although this addon is licensed under CC BY-NC-ND 4.0,  
-feel free to contact me if you need any code from this addon  
-for applications.  
+feel free to contact me if you need any code from this  
+addon for applications.  
 
 ----------------
 
@@ -24,8 +24,8 @@ GPWS includes missile warning and other sound-warnings
 (voice informers). Gives basic warnings such as: Counter;  
 Warning; Caution; etc., and is suitable for fighter planes.  
 B747's GPWS has more familiar sounds from commercial  
-airliners including altitude informers during landing. Suitable  
-for large transport or support planes.  
+airliners including altitude informers during landing.  
+Suitable for large transport or support planes.  
 &nbsp;
 
 2. Realistic Aerodynamics (drag, lift, etc.)  

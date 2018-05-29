@@ -7,7 +7,7 @@ _cloudArray params ["_overcast", "_cloudBaseKm", "_cloudHeightKm"];
 _atmosphereArray params ["_hasACEWeather", "_temperature", "_dewPoint", "_QFE"];
 _remarksArray params ["_rain", "_lightnings"];
 
-vehicle player setVariable ['orbisATISready', false];
+vehicle player setVariable ['orbisATISready', false, true];
 
 // time
 [format ["orbis_phonetic_%1", floor ((_date select 3) / 10)]] call orbis_atc_fnc_playAndSleep;
@@ -128,4 +128,4 @@ switch (true) do {
     };
 };
 
-vehicle player setVariable ['orbisATISready', true];
+vehicle player setVariable ['orbisATISready', true, true];

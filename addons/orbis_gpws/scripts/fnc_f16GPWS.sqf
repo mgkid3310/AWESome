@@ -7,7 +7,6 @@ if !((alive _vehicle) && (player in _vehicle)) exitWith {};
 DEV_CHAT("orbis_gpws: f16GPWS active");
 
 // initialize variables
-_vehicle setVariable ["orbisGPWSmode", "f16", true];
 _vehicle setVariable ["orbisGPWSready", true];
 _vehicle setVariable ["orbisGPWSreadyBeep", true];
 _vehicle setVariable ["lowCMcount", getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbisGPWS_lowCMcount")];

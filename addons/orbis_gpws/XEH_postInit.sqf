@@ -65,3 +65,5 @@ if !(vehicle player isEqualTo player) then {
 	[player, getPos player, vehicle player, nil] spawn orbis_gpws_fnc_getInMan;
 };
 player addEventHandler ["GetInMan", {_this spawn orbis_gpws_fnc_getInMan}];
+
+[] spawn orbis_gpws_fnc_periodicCheck;

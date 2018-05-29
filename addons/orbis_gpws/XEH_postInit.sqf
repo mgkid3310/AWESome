@@ -58,6 +58,16 @@ if (orbis_awesome_hasACEInteractMenu) then {
     };
 };
 
+// add global event
+["orbisPlaySoundGPWS", {
+	private _vehicle = _this select 0;
+	private _sound = _this select 1;
+
+	if (player in [driver _vehicle, gunner _vehicle, commander _vehicle]) then {
+		playSound _sound;
+	};
+}] call CBA_fnc_addEventHandler;
+
 // add eventhandler
 if (vehicle player != player) then {
 	[player, getPos player, vehicle player, nil] spawn orbis_gpws_fnc_getInMan;

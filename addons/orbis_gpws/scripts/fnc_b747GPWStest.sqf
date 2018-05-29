@@ -14,25 +14,25 @@ _vehicle setVariable ["orbisGPWSreadyBeep", false, true];
 ["b747_20", 0.5] call orbis_gpws_fnc_playAndSleep; // done
 ["b747_10", 0.5] call orbis_gpws_fnc_playAndSleep; // done
 
+["b747_APPRMIN", 0.5] call orbis_gpws_fnc_playAndSleep; // done
+["b747_MIN", 0.5] call orbis_gpws_fnc_playAndSleep; // done
+["b747_GLIDESLOPE", 0.5] call orbis_gpws_fnc_playAndSleep; // done
+["b747_WINDSHR", 0.5] call orbis_gpws_fnc_playAndSleep;
+["b747_BNKANGL", 0.5] call orbis_gpws_fnc_playAndSleep; // done
+["b747_DONTSNK", 0.5] call orbis_gpws_fnc_playAndSleep; // done
+["b747_SNKRATE", 0.5] call orbis_gpws_fnc_playAndSleep; // done
+["b747_FLAPS", 0.5] call orbis_gpws_fnc_playAndSleep; // done
+["b747_GEAR", 0.5] call orbis_gpws_fnc_playAndSleep; // done
+["b747_TERRAIN", 0.5] call orbis_gpws_fnc_playAndSleep; // done
+["b747_TOOLOWT", 0.5] call orbis_gpws_fnc_playAndSleep; // done
+["b747_PULLUP", 0.5] call orbis_gpws_fnc_playAndSleep; // done
+["b747_CHIME", 0.5] call orbis_gpws_fnc_playAndSleep;
+["b747_ATTEND", 0.5] call orbis_gpws_fnc_playAndSleep;
 ["b747_ALTALRT", 0.5] call orbis_gpws_fnc_playAndSleep;
 ["b747_ALTENTR", 0.5] call orbis_gpws_fnc_playAndSleep;
 ["b747_APDISCO", 0.5] call orbis_gpws_fnc_playAndSleep;
-["b747_APPRMIN", 0.5] call orbis_gpws_fnc_playAndSleep; // done
-["b747_ATTEND", 0.5] call orbis_gpws_fnc_playAndSleep;
-["b747_BNKANGL", 0.5] call orbis_gpws_fnc_playAndSleep; // done
-["b747_CHIME", 0.5] call orbis_gpws_fnc_playAndSleep;
-["b747_DONTSNK", 0.5] call orbis_gpws_fnc_playAndSleep; // done
-["b747_FLAPS", 0.5] call orbis_gpws_fnc_playAndSleep; // done
-["b747_GEAR", 0.5] call orbis_gpws_fnc_playAndSleep; // done
-["b747_GLIDESLOPE", 0.5] call orbis_gpws_fnc_playAndSleep; // done
-["b747_MIN", 0.5] call orbis_gpws_fnc_playAndSleep; // done
-["b747_PULLUP", 0.5] call orbis_gpws_fnc_playAndSleep; // done
-["b747_SNKRATE", 0.5] call orbis_gpws_fnc_playAndSleep; // done
-["b747_TERRAIN", 0.5] call orbis_gpws_fnc_playAndSleep; // done
-["b747_TOOLOWT", 0.5] call orbis_gpws_fnc_playAndSleep; // done
 ["b747_TOWARN", 0.5] call orbis_gpws_fnc_playAndSleep;
-["b747_TRIM", 0.5] call orbis_gpws_fnc_playAndSleep;
-["b747_WINDSHR", 0.5] call orbis_gpws_fnc_playAndSleep;
+// ["b747_TRIM", 0.5] call orbis_gpws_fnc_playAndSleep;
 
 _vehicle setVariable ["orbisGPWSready", true, true];
 _vehicle setVariable ["orbisGPWSreadyBeep", true, true];

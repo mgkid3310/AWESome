@@ -14,7 +14,7 @@ private _actionATISlisten = [
 	"Listen to ATIS",
 	"",
 	{[] call orbis_atc_fnc_listenATISbroadcast},
-	{(_player in [driver _target, gunner _target, commander _target]) && (_target getVariable ['orbisATISready', true])},
+	{(_player in [driver _target, gunner _target, commander _target]) && (_target getVariable ["orbisATISready", true])},
 	{},
 	[],
 	[0, 0, 0],

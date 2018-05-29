@@ -1,3 +1,5 @@
+player setVariable ["hasOrbisGPWS", true, true];
+
 // global variables init
 orbis_gpws_takeoffAlt = 60;
 orbis_gpws_airportRange = 6000;
@@ -57,33 +59,6 @@ if (orbis_awesome_hasACEInteractMenu) then {
     	[player, "", vehicle player, []] call orbis_gpws_fnc_getInAddAction;
     };
 };
-
-// add global event
-["orbisStartGPWS", {
-	private _vehicle = _this select 0;
-	private _mode = _this select 1;
-
-	if (player in [driver _target, gunner _target, commander _target]) then {
-		switch (_mode) do {
-		    case ("f16"): {
-		        [_target] spawn orbis_gpws_fnc_f16GPWS;
-		    };
-		    case ("b747"): {{
-		        [_target] spawn orbis_gpws_fnc_b747GPWS;
-		    };
-			default {};
-		};
-	};
-}] spawn CBA_fnc_addEventHandler;
-
-["orbisPlaySoundGPWS", {
-	private _vehicle = _this select 0;
-	private _sound = _this select 1;
-
-	if (player in [driver _vehicle, gunner _vehicle, commander _vehicle]) then {
-		playSound _sound;
-	};
-}] spawn CBA_fnc_addEventHandler;
 
 // add eventhandler
 if !(vehicle player isEqualTo player) then {

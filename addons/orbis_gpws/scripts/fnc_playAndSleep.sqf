@@ -2,5 +2,5 @@ private _sound = _this select 0;
 private _term = param [1, 0];
 private _length = getNumber (configFile >> "CfgSounds" >> _sound >> "length");
 
-["orbisPlaySoundGPWS", [vehicle player, _sound]] call CBA_fnc_globalEvent;
+[_sound] remoteExec ["playSound", allPlayers in [driver vehicle player, gunner vehicle player, commander vehicle player] select {_x getVariable ["hasOrbisGPWS", false]}];
 sleep (_length + _term);

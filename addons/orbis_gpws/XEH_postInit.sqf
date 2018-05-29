@@ -74,7 +74,7 @@ if (orbis_awesome_hasACEInteractMenu) then {
 			default {};
 		};
 	};
-}] call CBA_fnc_addEventHandler;
+}] spawn CBA_fnc_addEventHandler;
 
 ["orbisPlaySoundGPWS", {
 	private _vehicle = _this select 0;
@@ -83,7 +83,7 @@ if (orbis_awesome_hasACEInteractMenu) then {
 	if (player in [driver _vehicle, gunner _vehicle, commander _vehicle]) then {
 		playSound _sound;
 	};
-}] call CBA_fnc_addEventHandler;
+}] spawn CBA_fnc_addEventHandler;
 
 // add eventhandler
 if (vehicle player != player) then {

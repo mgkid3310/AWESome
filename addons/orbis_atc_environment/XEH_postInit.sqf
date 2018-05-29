@@ -42,7 +42,7 @@ if (orbis_awesome_hasACEInteractMenu) then {
 	if (player in [driver _vehicle, gunner _vehicle, commander _vehicle]) then {
 		playSound _sound;
 	};
-}] call CBA_fnc_addEventHandler;
+}] spawn CBA_fnc_addEventHandler;
 
 // run initial ATIS data update
 [] spawn {

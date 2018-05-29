@@ -1,3 +1,5 @@
+player setVariable ["hasOrbisATC", true, true];
+
 orbis_atc_scaleStd = 0.0015;
 if (isNumber (configFile >> "CfgWorlds" >> worldName >> "mapSize")) then {
     orbis_atc_scaleStd = (orbis_atc_scaleStd * 30720) / getNumber (configFile >> "CfgWorlds" >> worldName >> "mapSize");
@@ -46,7 +48,7 @@ if (orbis_awesome_hasACEInteractMenu) then {
     while {true} do {
         _lastTime = (vehicle player) getVariable ["orbisATISlastTime", CBA_missionTime];
         if (_lastTime > (CBA_missionTime + 60)) then {
-            vehicle player setVariable ["orbisATISready", true, true];
+            (vehicle player) setVariable ["orbisATISready", true, true];
         };
 
         sleep 10;

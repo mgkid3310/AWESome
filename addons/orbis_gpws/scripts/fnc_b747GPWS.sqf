@@ -7,7 +7,6 @@ if !((alive _vehicle) && (player in _vehicle)) exitWith {};
 DEV_CHAT("orbis_gpws: b747GPWS active");
 
 // initialize variables
-_vehicle setVariable ["orbisGPWSmode", "b747", true];
 _vehicle setVariable ["orbisGPWSready", true];
 _vehicle setVariable ["orbisGPWSreadyBeep", true];
 private ["_altAGLS", "_altASL", "_altRadar",

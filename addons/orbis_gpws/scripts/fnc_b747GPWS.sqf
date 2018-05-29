@@ -311,7 +311,4 @@ DEV_CHAT("orbis_gpws: b747GPWS loop terminated");
 
 _vehicle setVariable ["minWarnLevel", 0];
 _vehicle setVariable ["altInformLevel", 2000];
-if (_vehicle getVariable ["orbisGPWSmode", ""] isEqualTo "b747") then {
-	_vehicle setVariable ["orbisGPWSmode", "", true];
-};
 DEV_CHAT("orbis_gpws: b747GPWS ended");

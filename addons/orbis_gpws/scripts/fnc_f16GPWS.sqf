@@ -209,7 +209,4 @@ DEV_CHAT("orbis_gpws: f16GPWS loop terminated");
 
 _vehicle removeEventHandler ["Fired", _chaffFlare];
 _vehicle removeEventHandler ["IncomingMissile", _incomingMSL];
-if (_vehicle getVariable ["orbisGPWSmode", ""] isEqualTo "f16") then {
-	_vehicle setVariable ["orbisGPWSmode", "", true];
-};
 DEV_CHAT("orbis_gpws: f16GPWS ended");

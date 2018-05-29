@@ -7,9 +7,9 @@ if !((alive _vehicle) && (player in _vehicle)) exitWith {};
 DEV_CHAT("orbis_gpws: f16GPWS active");
 
 // initialize variables
-_vehicle setVariable ["orbisGPWSmode", "f16"];
-_vehicle setVariable ["orbisGPWSready", true];
-_vehicle setVariable ["orbisGPWSreadyBeep", true];
+_vehicle setVariable ["orbisGPWSmode", "f16", true];
+_vehicle setVariable ["orbisGPWSready", true, true];
+_vehicle setVariable ["orbisGPWSreadyBeep", true, true];
 _vehicle setVariable ["lowCMcount", getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbisGPWS_lowCMcount")];
 private ["_altAGLS", "_altASL", "_altRadar",
 	"_posExpect", "_expectTerrainAlt", "_cosAOA", "_flapStatus", "_gearStatus", "_acceleration", "_climeASL", "_climeRadar", "_flightphaseOutput",
@@ -210,6 +210,6 @@ DEV_CHAT("orbis_gpws: f16GPWS loop terminated");
 _vehicle removeEventHandler ["Fired", _chaffFlare];
 _vehicle removeEventHandler ["IncomingMissile", _incomingMSL];
 if (_vehicle getVariable ["orbisGPWSmode", ""] isEqualTo "f16") then {
-	_vehicle setVariable ["orbisGPWSmode", ""];
+	_vehicle setVariable ["orbisGPWSmode", "", true];
 };
 DEV_CHAT("orbis_gpws: f16GPWS ended");

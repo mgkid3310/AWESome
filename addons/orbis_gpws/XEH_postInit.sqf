@@ -59,6 +59,23 @@ if (orbis_awesome_hasACEInteractMenu) then {
 };
 
 // add global event
+["orbisStartGPWS", {
+	private _vehicle = _this select 0;
+	private _mode = _this select 1;
+
+	if (local _vehicle) then {
+		switch (_mode) do {
+		    case ("f16"): {
+		        //code
+		    };
+		    case ("b747"): {
+		        //code
+		    };
+			default {};
+		};
+	};
+}] call CBA_fnc_addEventHandler;
+
 ["orbisPlaySoundGPWS", {
 	private _vehicle = _this select 0;
 	private _sound = _this select 1;

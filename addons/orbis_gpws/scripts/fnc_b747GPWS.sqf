@@ -7,9 +7,9 @@ if !((alive _vehicle) && (player in _vehicle)) exitWith {};
 DEV_CHAT("orbis_gpws: b747GPWS active");
 
 // initialize variables
-_vehicle setVariable ["orbisGPWSmode", "b747"];
-_vehicle setVariable ["orbisGPWSready", true];
-_vehicle setVariable ["orbisGPWSreadyBeep", true];
+_vehicle setVariable ["orbisGPWSmode", "b747", true];
+_vehicle setVariable ["orbisGPWSready", true, true];
+_vehicle setVariable ["orbisGPWSreadyBeep", true, true];
 private ["_altAGLS", "_altASL", "_altRadar",
 	"_posExpect", "_expectTerrainAlt", "_cosAOA", "_flapStatus", "_gearStatus", "_acceleration", "_climeASL", "_climeRadar",
 	"_pitchAndBank", "_pitchAngle", "_bankAngle",
@@ -308,8 +308,10 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	waitUntil {(diag_frameNo > _frameNo) && (time > _timeOld)};
 };
 DEV_CHAT("orbis_gpws: b747GPWS loop terminated");
+_vehicle setVariable ["minWarnLevel", 0];
+_vehicle setVariable ["altInformLevel", 2000];
 
 if (_vehicle getVariable ["orbisGPWSmode", ""] isEqualTo "b747") then {
-	_vehicle setVariable ["orbisGPWSmode", ""];
+	_vehicle setVariable ["orbisGPWSmode", "", true];
 };
 DEV_CHAT("orbis_gpws: b747GPWS ended");

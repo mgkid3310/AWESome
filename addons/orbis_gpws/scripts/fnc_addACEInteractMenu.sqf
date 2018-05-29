@@ -13,7 +13,7 @@ private _actionTurnOff = [
 	"turnOff",
 	"Turn off GPWS",
 	"",
-	{_target setVariable ['orbisGPWSmode', '']},
+	{_target setVariable ['orbisGPWSmode', '', true]},
 	{(_player in [driver _target, gunner _target, commander _target]) && (_target getVariable ['orbisGPWSenabled', false]) && (_target getVariable ['orbisGPWSmode', ''] != '')},
 	{},
 	[],

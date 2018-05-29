@@ -19,7 +19,7 @@ switch (_modeCurrent) do {
 	case ("f16"): {
 		[_vehicle] spawn orbis_gpws_fnc_f16GPWS;
 	};
-	case ("b747"): {{
+	case ("b747"): {
 		[_vehicle] spawn orbis_gpws_fnc_b747GPWS;
 	};
 	default {};

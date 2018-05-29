@@ -63,13 +63,13 @@ if (orbis_awesome_hasACEInteractMenu) then {
 	private _vehicle = _this select 0;
 	private _mode = _this select 1;
 
-	if (local _vehicle) then {
+	if (player in [driver _target, gunner _target, commander _target]) then {
 		switch (_mode) do {
 		    case ("f16"): {
-		        //code
+		        [_target] spawn orbis_gpws_fnc_f16GPWS;
 		    };
-		    case ("b747"): {
-		        //code
+		    case ("b747"): {{
+		        [_target] spawn orbis_gpws_fnc_b747GPWS;
 		    };
 			default {};
 		};

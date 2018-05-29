@@ -14,7 +14,7 @@ if (_GPWSenabled isEqualType true) then {
 _vehicle setVariable ["orbisGPWSenabled", true];
 
 // check if GPWS is already running
-private _modeCurrent = getVariable ["orbisGPWSmode", ""];
+private _modeCurrent = _vehicle getVariable ["orbisGPWSmode", ""];
 switch (_modeCurrent) do {
 	case ("f16"): {
 		[_vehicle] spawn orbis_gpws_fnc_f16GPWS;

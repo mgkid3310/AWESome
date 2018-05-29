@@ -13,6 +13,18 @@ if (_GPWSenabled isEqualType true) then {
 };
 _vehicle setVariable ["orbisGPWSenabled", true];
 
+// check if GPWS is already running
+private _modeCurrent = getVariable ["orbisGPWSmode", ""];
+switch (_modeCurrent) do {
+	case ("f16"): {
+		[_vehicle] spawn orbis_gpws_fnc_f16GPWS;
+	};
+	case ("b747"): {{
+		[_vehicle] spawn orbis_gpws_fnc_b747GPWS;
+	};
+	default {};
+};
+
 // set default GPWS
 if (getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbisGPWS_default") isEqualTo "f16") then {
 	[_vehicle] spawn orbis_gpws_fnc_f16GPWS;

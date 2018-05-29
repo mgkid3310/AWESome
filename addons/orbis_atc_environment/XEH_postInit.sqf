@@ -34,16 +34,6 @@ if (orbis_awesome_hasACEInteractMenu) then {
     player addEventHandler ["GetInMan", {_this call orbis_atc_fnc_getInAddAction}];
 };
 
-// add global event
-["orbisPlaySoundATIS", {
-	private _vehicle = _this select 0;
-	private _sound = _this select 1;
-
-	if (player in [driver _vehicle, gunner _vehicle, commander _vehicle]) then {
-		playSound _sound;
-	};
-}] spawn CBA_fnc_addEventHandler;
-
 // run initial ATIS data update
 [] spawn {
     sleep 10;
@@ -54,7 +44,7 @@ if (orbis_awesome_hasACEInteractMenu) then {
 [] spawn {
     private _lastTime = 0;
     while {true} do {
-        _lastTime = vehicle player getVariable ["orbisATISlastTime", CBA_missionTime];
+        _lastTime = (vehicle player) getVariable ["orbisATISlastTime", CBA_missionTime];
         if (_lastTime > (CBA_missionTime + 60)) then {
             vehicle player setVariable ["orbisATISready", true, true];
         };

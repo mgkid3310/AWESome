@@ -86,7 +86,7 @@ if (orbis_awesome_hasACEInteractMenu) then {
 }] spawn CBA_fnc_addEventHandler;
 
 // add eventhandler
-if (vehicle player != player) then {
+if !(vehicle player isEqualTo player) then {
 	[player, getPos player, vehicle player, nil] spawn orbis_gpws_fnc_getInMan;
 };
 player addEventHandler ["GetInMan", {_this spawn orbis_gpws_fnc_getInMan}];

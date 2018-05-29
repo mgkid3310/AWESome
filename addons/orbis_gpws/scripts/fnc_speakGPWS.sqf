@@ -7,7 +7,7 @@ private _delay = param [3, 0];
 private _mode = param [4, "orbisGPWSready"];
 
 if !((alive _vehicle) && (player in _vehicle)) exitWith {};
-[_sound] remoteExec ["playSound", allPlayers in [driver vehicle player, gunner vehicle player, commander vehicle player] select {_x getVariable ["hasOrbisGPWS", false]}];
+playSound _sound;
 
 if (isNil {_duration}) exitWith {};
 _vehicle setVariable [_mode, false, true];

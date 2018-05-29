@@ -46,7 +46,7 @@ private _actionB747 = [
 	"b747",
 	"Set to B747 GPWS",
 	"",
-	{["orbisStartGPWS", [_target, "f16"]] call CBA_fnc_globalEvent},
+	{["orbisStartGPWS", [_target, "b747"]] call CBA_fnc_globalEvent},
 	{(_player in [driver _target, gunner _target, commander _target]) && (_target getVariable ["orbisGPWSenabled", false]) && (_target getVariable ["orbisGPWSmode", ""] != "b747")},
 	{},
 	[],

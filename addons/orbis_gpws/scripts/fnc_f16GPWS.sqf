@@ -3,7 +3,7 @@
 DEV_CHAT("orbis_gpws: f16GPWS run");
 private _vehicle = _this select 0;
 
-if !((alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbisGPWSmode", ""] isEqualTo "f16")) exitWith {};
+if !((alive _vehicle) && (player in _vehicle)) exitWith {};
 DEV_CHAT("orbis_gpws: f16GPWS active");
 
 // initialize variables

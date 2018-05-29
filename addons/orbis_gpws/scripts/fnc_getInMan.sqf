@@ -10,7 +10,7 @@ if (_GPWSenabled isEqualType true) then {
 	if !(_GPWSenabled) exitWith {};
 } else {
 	if !(getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbisGPWS_enabled") > 0) exitWith {
-	_vehicle setVariable ["orbisGPWSenabled", false];
+		_vehicle setVariable ["orbisGPWSenabled", false];
 	};
 };
 _vehicle setVariable ["orbisGPWSenabled", true];

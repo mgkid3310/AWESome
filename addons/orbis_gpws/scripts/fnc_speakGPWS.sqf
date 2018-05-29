@@ -7,7 +7,7 @@ private _delay = param [3, 0];
 private _mode = param [4, "orbisGPWSready"];
 
 if !((alive _vehicle) && (player in _vehicle)) exitWith {};
-["orbisPlaySoundGPWS", [_vehicle, _sound]] call CBA_fnc_globalEvent;
+playSound _sound;
 
 if (isNil {_duration}) exitWith {};
 _vehicle setVariable [_mode, false, true];

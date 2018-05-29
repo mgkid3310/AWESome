@@ -1,6 +1,5 @@
 private _vehicle = _this select 0;
-_vehicle setVariable ["orbisGPWSready", false, true];
-_vehicle setVariable ["orbisGPWSreadyBeep", false, true];
+_vehicle setVariable ["orbisGPWStestReady", false, true];
 
 // general
 ["f16_altitude", 0.5] call orbis_gpws_fnc_playAndSleep; // done
@@ -22,5 +21,4 @@ _vehicle setVariable ["orbisGPWSreadyBeep", false, true];
 ["f16_lowSpeed", 0.5] call orbis_gpws_fnc_playAndSleep; // done
 ["f16_SAM", 0.5] call orbis_gpws_fnc_playAndSleep; // done
 
-_vehicle setVariable ["orbisGPWSready", true, true];
-_vehicle setVariable ["orbisGPWSreadyBeep", true, true];
+_vehicle setVariable ["orbisGPWStestReady", false, true];

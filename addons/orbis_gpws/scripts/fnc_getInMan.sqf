@@ -19,15 +19,17 @@ _vehicle setVariable ["orbisGPWSenabled", true];
 private _modeCurrent = _vehicle getVariable ["orbisGPWSmode", ""];
 switch (_modeCurrent) do {
 	case ("f16"): {
-		[_vehicle] spawn orbis_gpws_fnc_f16GPWS;
+		[_vehicle, _modeCurrent] call orbis_gpws_fnc_startGPWS;
 	};
 	case ("b747"): {
-		[_vehicle] spawn orbis_gpws_fnc_b747GPWS;
+		[_vehicle, _modeCurrent] call orbis_gpws_fnc_startGPWS;
 	};
 	default {};
 };
 
 // set default GPWS
-if (getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbisGPWS_default") isEqualTo "f16") then {
-	[_vehicle] spawn orbis_gpws_fnc_f16GPWS;
+if (_GPWSenabled isEqualType 0) then {
+	if (getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbisGPWS_default") isEqualTo "f16") then {
+		[_vehicle, "f16", true] call orbis_gpws_fnc_startGPWS;
+	};
 };

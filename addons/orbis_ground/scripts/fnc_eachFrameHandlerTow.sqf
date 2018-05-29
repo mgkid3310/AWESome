@@ -7,13 +7,24 @@ if (isNull _plane) exitWith {};
 
 private _posCar = getPosASL _car;
 private _posPlane = getPosASL _plane;
-private _posCarOld = _car getVariable ["orbis_towingPosCarLast", getPosASL _car];
-private _posPlaneOld = _car getVariable ["orbis_towingPosPlaneLast", getPosASL _plane];
-private _distance = _car getVariable ["orbis_towingDistance", vectorMagnitude (_car worldToModel ASLToAGL getPosASL _plane)];
-if (_posCar isEqualTo _posCarOld) exitWith {};
+private _posRelCar = _car getVariable ["orbis_towingPosRelCar", []];
+private _posRelPlane = _car getVariable ["orbis_towingPosRelPlane", []];
+private _posCarOld = _car getVariable ["orbis_towingPosCarLast", []];
+private _posPlaneOld = _car getVariable ["orbis_towingPosPlaneLast", []];
 
-_plane attachTo [_car,_car worldToModel (getPos _car vectorAdd ((_posPlaneOld vectorFromTo _posCar) vectorMultiply _distance))];
-_plane setVectorDirAndUp [((getPosASL _plane) vectorFromTo (getPosASL _car)), vectorUp _car];
+if (((count _posRelCar) != 3) || ((count _posRelPlane) != 3) || ((count _posCarOld) != 3) || ((count _posPlaneOld) != 3)) exitWith {};
+
+private _targetVel = [];
+private _targetHeading = ;
+private _targetVelFwd = [0, vectorMagnitude _targetVel, 0];
+
+if (local _plane) then {
+    _plane setDir _targetHeading;
+    _plane setVelocity _targetVelFwd;
+} else {
+    [_plane, _targetHeading] remoteExec ["setDir", _plane];
+    [_plane, _targetVel] remoteExec ["setVelocity", _plane];
+};
 
 _car setVariable ["orbis_towingPosCarLast", getPosASL _car];
 _car setVariable ["orbis_towingPosPlaneLast", getPosASL _plane];

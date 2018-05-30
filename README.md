@@ -32,12 +32,12 @@ Suitable for large transport or support planes.
 
 Brings air density and wind into consideration. Air density  
 is calulated based on altitude, temperature and humidity.  
-Landing speed should be set with TAS (True Air Speed), not  
-ground speed. In case of crosswinds, de-crab or sideslip  
-landings will be required.  
-Can enable/disable at addon settings (enabled as default),  
-and effects of wind can be adjusted with "Wind Multiplier"  
-setting.  
+This requires landing speed to be set based on TAS (True  
+Air Speed), and have air density (altimeter) considered.  
+In case of crosswinds, de-crab or sideslip landings will be  
+needed. Can enable/disable at addon settings (enabled as  
+default), and effects of wind can be adjusted with "Wind  
+Multiplier" setting.  
 NOTICE : in low-FPS and high-speed situation, this feature  
 MAY cause some sutters. if it does so, please temporarily  
 disable this feature in addon settings.  

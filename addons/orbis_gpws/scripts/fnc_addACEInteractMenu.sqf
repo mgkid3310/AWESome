@@ -64,6 +64,28 @@ private _testB747 = [
 	[0, 0, 0],
 	10
 ] call ace_interact_menu_fnc_createAction;
+private _actionVolumeLow = [
+	"volumeLow",
+	"Lower Volume",
+	"",
+	{_target setVariable ["orbisGPWSvolumeLow", true, true]},
+	{(_player in [driver _target, gunner _target, commander _target]) && (_target getVariable ["orbisGPWSenabled", false]) && !(_target getVariable ["orbisGPWSvolumeLow", false])},
+	{},
+	[],
+	[0, 0, 0],
+	10
+] call ace_interact_menu_fnc_createAction;
+private _actionVolumeHigh = [
+	"volumeHigh",
+	"Increase Volume",
+	"",
+	{_target setVariable ["orbisGPWSvolumeLow", false, true]},
+	{(_player in [driver _target, gunner _target, commander _target]) && (_target getVariable ["orbisGPWSenabled", false]) && (_target getVariable ["orbisGPWSvolumeLow", false])},
+	{},
+	[],
+	[0, 0, 0],
+	10
+] call ace_interact_menu_fnc_createAction;
 
 [
 	"Plane",
@@ -105,5 +127,19 @@ private _testB747 = [
 	1,
 	["ACE_SelfActions", "orbisGPWSmodes"],
 	_testB747,
+    true
+] call ace_interact_menu_fnc_addActionToClass;
+[
+	"Plane",
+	1,
+	["ACE_SelfActions", "orbisGPWSmodes"],
+	_actionVolumeLow,
+    true
+] call ace_interact_menu_fnc_addActionToClass;
+[
+	"Plane",
+	1,
+	["ACE_SelfActions", "orbisGPWSmodes"],
+	_actionVolumeHigh,
     true
 ] call ace_interact_menu_fnc_addActionToClass;

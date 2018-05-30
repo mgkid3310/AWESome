@@ -6,6 +6,11 @@ private _duration = param [2, getNumber (configFile >> "CfgSounds" >> _sound >> 
 private _delay = param [3, 0];
 private _mode = param [4, "orbisGPWSready"];
 
+private _volumeLow = _vehicle getVariable ["orbisGPWSvolumeLow", false];
+if (_volumeLow) then {
+    _sound = format ["%1_low", _sound];
+};
+
 if !((alive _vehicle) && (player in _vehicle)) exitWith {};
 playSound _sound;
 

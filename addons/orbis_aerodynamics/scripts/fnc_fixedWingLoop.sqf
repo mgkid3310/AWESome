@@ -25,6 +25,21 @@ if !(_massCurrent > 0) then {
     _massCurrent = _massStandard;
 };
 
+// atmosphere data setup
+private _altitude = (getPosASL _vehicle) select 2;
+private ["_temperature", "_pressure", "_humidity"];
+if (orbis_awesome_hasACEWeather) then {
+    _temperature = _altitude call ace_weather_fnc_calculateTemperatureAtHeight; // Celsius
+    _pressure = _altitude call ace_weather_fnc_calculateBarometricPressure; // hPa
+    _humidity = ace_weather_currentHumidity; // relative
+} else {
+    _temperature = 25 - (0.0065 * _altitude); // Celsius
+    _pressure = 1013.25 * ((298.15 / (273.15 + _temperature)) ^ -5.2557812); // hPa
+    _humidity = linearConversion [0, 0.5, overcast, 0, 1, true]; // relative
+};
+private _density = [_temperature, _pressure, _humidity] call orbis_aerodynamics_fnc_getAirDensity; // kg/m^3
+private _densityRatio = _density / 1.2754;
+
 // get TAS and etc.
 private _modelvelocity = velocityModelSpace _vehicle;
 private _modelWind = _vehicle vectorWorldToModel wind;
@@ -33,13 +48,13 @@ private _windApply = _modelWind vectorMultiply _windMultiplier;
 private _trueAirVelocity = _modelvelocity vectorDiff _windApply;
 
 // get drag correction
-private _dragGround = [_modelvelocity, _dragArray, _massStandard] call orbis_aerodynamics_fnc_getDrag;
-private _dragTAS = [_trueAirVelocity, _dragArray, _massStandard] call orbis_aerodynamics_fnc_getDrag;
+private _dragGround = [_modelvelocity, _dragArray, _densityRatio, _massStandard] call orbis_aerodynamics_fnc_getDrag;
+private _dragTAS = [_trueAirVelocity, _dragArray, _densityRatio, _massStandard] call orbis_aerodynamics_fnc_getDrag;
 private _forceDragCorrection = _dragTAS vectorDiff _dragGround;
 
 // get lift correction
-private _liftGround = [_modelvelocity, _liftArray, _speedMax, _angleOfIndicence, _massStandard] call orbis_aerodynamics_fnc_getlift;
-private _liftTAS = [_trueAirVelocity, _liftArray, _speedMax, _angleOfIndicence, _massStandard] call orbis_aerodynamics_fnc_getlift;
+private _liftGround = [_modelvelocity, _liftArray, _speedMax, _angleOfIndicence, _densityRatio, _massStandard] call orbis_aerodynamics_fnc_getlift;
+private _liftTAS = [_trueAirVelocity, _liftArray, _speedMax, _angleOfIndicence, _densityRatio, _massStandard] call orbis_aerodynamics_fnc_getlift;
 private _forceLiftCorrection = _liftTAS vectorDiff _liftGround;
 
 // sum up corrections and bring wheel friction into calculation if needed (todo)

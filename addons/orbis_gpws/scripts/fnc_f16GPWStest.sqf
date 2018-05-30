@@ -21,4 +21,4 @@ _vehicle setVariable ["orbisGPWStestReady", false, true];
 ["f16_lowSpeed", 0.5] call orbis_gpws_fnc_playAndSleep; // done
 ["f16_SAM", 0.5] call orbis_gpws_fnc_playAndSleep; // done
 
-_vehicle setVariable ["orbisGPWStestReady", false, true];
+_vehicle setVariable ["orbisGPWStestReady", true, true];

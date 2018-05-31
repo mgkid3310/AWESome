@@ -28,7 +28,7 @@ switch (_flightphase) do {
             _distance = (_x select 0) distance2D (getPos _vehicle);
             _headingDiff = abs ((getDir _vehicle) - (_x select 1));
             _approachAngle = abs (((getPos _vehicle) getDir (_x select 0)) - (_x select 1));
-            if ((speed _vehicle < 600) && (_altDiff < 400) && (_distance < 6000) && (_headingDiff < 30) && (_approachAngle < 30)) exitWith {
+            if ((speed _vehicle < 600) && (_altDiff < 400) && (_distance < 6000) && (_headingDiff < 30) && (_approachAngle < 30) && (_climeASL < 0)) exitWith {
                 _flightphase = "landing";
                 _currentILSindex = _forEachIndex;
                 DEV_CHAT("orbis_gpws: b747GPWS inFlight -> landing (ILS app.)");
@@ -52,12 +52,12 @@ switch (_flightphase) do {
             _headingDiff = abs ((getDir _vehicle) - (_ILSarray select 1));
             _approachAngle = abs (((getPos _vehicle) getDir (_ILSarray select 0)) - (_ILSarray select 1));
             switch (true) do {
-                case ((speed _vehicle > 600) || (_altDiff > 400) || (_distance > 3000) || (_headingDiff > 30) || (_approachAngle > 30)): {
+                case ((speed _vehicle > 600) || (_altDiff > 400) || (_distance > 6000) || (_headingDiff > 30) || (_approachAngle > 30) || (_climeASL > 5)): {
                     _flightphase = "inFlight";
                     _currentILSindex = -1;
                     DEV_CHAT("orbis_gpws: b747GPWS landing -> inFlight");
                 };
-                case ((speed _vehicle > 600) || (_altDiff < 100) && (_distance < 1000) && (_headingDiff < 30) && (_approachAngle < 30)): {
+                case ((speed _vehicle < 400) && (_altDiff < 100) && (_distance < 1000) && (_headingDiff < 30) && (_approachAngle < 30) && (_climeASL < 0)): {
                     _flightphase = "final";
                     DEV_CHAT("orbis_gpws: b747GPWS landing -> final (ILS app.)");
                 };
@@ -69,11 +69,11 @@ switch (_flightphase) do {
             };
         } else {
             switch (true) do {
-                case ((_flapStatus < 0.1) || (_gearStatus > 0.9) || (_altRadar > 400) || (_climeASL > 5)): {
+                case ((speed _vehicle > 600) || (_flapStatus < 0.1) || (_gearStatus > 0.9) || (_altRadar > 400) || (_climeASL > 5)): {
                     _flightphase = "inFlight";
                     DEV_CHAT("orbis_gpws: b747GPWS landing -> inFlight");
                 };
-                case ((_flapStatus > 0.6) && (_gearStatus < 0.9) && (_altRadar < 100) && (_climeASL < 0)): {
+                case ((speed _vehicle < 400) && (_flapStatus > 0.6) && (_gearStatus < 0.9) && (_altRadar < 100) && (_climeASL < 0)): {
                     _flightphase = "final";
                     DEV_CHAT("orbis_gpws: b747GPWS landing -> final (visual app.)");
                 };
@@ -109,7 +109,7 @@ switch (_flightphase) do {
             _altDiffDesired = _distance * tan (_ILSarray select 2);
             _headingDiff = abs ((getDir _vehicle) - (_ILSarray select 1));
             switch (true) do {
-                case ((_altDiff > 100) || (_distance > 1000) || (_headingDiff > 30)): {
+                case ((_altDiff > 100) || (_distance > 1000) || (_headingDiff > 30) || (_climeASL > 5)): {
                     _flightphase = "inFlight";
                     DEV_CHAT("orbis_gpws: b747GPWS final -> inFLight");
                 };
@@ -121,7 +121,7 @@ switch (_flightphase) do {
             };
         } else {
             switch (true) do {
-                case ((_flapStatus < 0.1) || (_gearStatus > 0.9) || (_altRadar > 200) || (_climeASL > 3)): {
+                case ((_flapStatus < 0.1) || (_gearStatus > 0.9) || (_altRadar > 200) || (_climeASL > 5)): {
                     _flightphase = "inFlight";
                     DEV_CHAT("orbis_gpws: b747GPWS landing -> inFlight");
                 };

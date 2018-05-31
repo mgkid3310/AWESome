@@ -11,12 +11,12 @@ private _speedKPH = (_velocity vectorDotProduct [0, cos deg _angleOfIndicence, s
 private _speedStep = _speedMax / 10;
 
 if (_speedKPH < (_speedStep * (count _liftArray - 1))) then {
-    private _speedIndex = (1 + floor (_speedKPH / _speedStep)) min (count _liftArray - 2);
+    private _speedIndex = (0 max floor (_speedKPH / _speedStep)) min (count _liftArray - 2);
     private _speedLower = _speedStep * _speedIndex;
     private _speedUpper = _speedStep * (_speedIndex + 1);
     private _coefMin = _liftArray select _speedIndex;
     private _coefMax = _liftArray select (_speedIndex + 1);
-    _liftCoef = linearConversion [_speedLower, _speedUpper, _speedKPH, _coefMin, _coefMax];
+    _liftCoef = linearConversion [_speedLower, _speedUpper, _speedKPH, _coefMin, _coefMax, true];
 } else {
     _liftCoef = _liftArray select (count _liftArray - 1);
 };

@@ -5,26 +5,55 @@ if !(_car getVariable ["orbis_isTowingPlane", false]) exitWith {};
 private _plane = _car getVariable ["orbis_towingTarget", objNull];
 if (isNull _plane) exitWith {};
 
-private _posCar = getPosASL _car;
-private _posPlane = getPosASL _plane;
+private _posCarNow = getPosASL _car;
+private _posPlaneNow = getPosASL _plane;
+
+private _posCarOld = _car getVariable ["orbis_towingPosCarOld", []];
+private _posPlaneOld = _car getVariable ["orbis_towingPosPlaneOld", []];
+private _posBarOld = _car getVariable ["orbis_towingPosBarOld", []];
+private _planeDirOld = _car getVariable ["orbis_towingDirPlaneOld", []];
+
+private _distance = _car getVariable ["orbis_towingDistance", 0];
 private _posRelCar = _car getVariable ["orbis_towingPosRelCar", []];
-private _posRelPlane = _car getVariable ["orbis_towingPosRelPlane", []];
-private _posCarOld = _car getVariable ["orbis_towingPosCarLast", []];
-private _posPlaneOld = _car getVariable ["orbis_towingPosPlaneLast", []];
+private _timeOld = _car getVariable ["orbis_towingTimeOld", time];
+private _frameeOld = _car getVariable ["orbis_towingFrameOld", diag_frameNo];
 
-if (((count _posRelCar) != 3) || ((count _posRelPlane) != 3) || ((count _posCarOld) != 3) || ((count _posPlaneOld) != 3)) exitWith {};
+if (!(_timeOld < time) || ((_frameeOld + 2) < diag_frameNo)) exitWith {};
 
-private _targetVel = [];
-private _targetHeading = ;
-private _targetVelFwd = [0, vectorMagnitude _targetVel, 0];
+private _posBarNow = AGLToASL (_car modelToWorld _posRelCar);
+private _timeStep = time - _timeOld;
 
-if (local _plane) then {
-    _plane setDir _targetHeading;
-    _plane setVelocity _targetVelFwd;
-} else {
-    [_plane, _targetHeading] remoteExec ["setDir", _plane];
-    [_plane, _targetVel] remoteExec ["setVelocity", _plane];
+private _vectorTemp = (_posBarNow vectorDiff _posBarOld) vectorAdd (_planeDirOld vectorMultiply _distance);
+private _velBase = _vectorTemp vectorMultiply (((vectorMagnitude _vectorTemp) - _distance) / (_timeStep * vectorMagnitude _vectorTemp));
+
+private _error = (_posBarOld vectorDiff _posPlaneOld) vectorDiff (_planeDirOld vectorMultiply _distance);
+private _velProportional = _error vectorMultiply -1;
+
+private _velTotal = _velBase vectorAdd _velProportional;
+private _targetDir = vectorNormalized _velTotal;
+private _targetVelFwd = [0, vectorMagnitude _velTotal, 0];
+
+private _isBackward = acos (_velTotal vectorCos _vectorTemp) > 90;
+if (_isBackward) then {
+    _targetDir = _targetDir vectorMultiply -1;
+    _targetVelFwd = _targetVelFwd vectorMultiply -1;
 };
 
-_car setVariable ["orbis_towingPosCarLast", getPosASL _car];
-_car setVariable ["orbis_towingPosPlaneLast", getPosASL _plane];
+if (local _plane) then {
+    _plane setVelocityModelSpace _targetVelFwd;
+    _plane setVectorDir _targetDir;
+    _plane setVelocityModelSpace _targetVelFwd;
+    // _plane setPos getPos _plane;
+} else {
+    [_plane, _targetVelFwd] remoteExec ["setVelocityModelSpace", _plane];
+    [_plane, _targetDir] remoteExec ["setVectorDir", _plane];
+    [_plane, _targetVelFwd] remoteExec ["setVelocityModelSpace", _plane];
+    // [_plane, getPos _plane] remoteExec ["setPos", _plane];
+};
+
+_car setVariable ["orbis_towingPosCarOld", getPosASL _car];
+_car setVariable ["orbis_towingPosPlaneOld", getPosASL _plane];
+_car setVariable ["orbis_towingPosBarOld", _posBarNow];
+_car setVariable ["orbis_towingDirPlaneOld", _targetDir];
+_car setVariable ["orbis_towingTimeOld", time];
+_car setVariable ["orbis_towingFrameOld", diag_frameNo];

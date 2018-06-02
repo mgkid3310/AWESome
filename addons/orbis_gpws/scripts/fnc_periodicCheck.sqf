@@ -19,6 +19,6 @@ while {true} do {
         };
     };
 
-    private _frameNo = diag_frameNo;
+    private _frameNo = diag_frameNo + 3;
     waitUntil {diag_frameNo > _frameNo};
 };

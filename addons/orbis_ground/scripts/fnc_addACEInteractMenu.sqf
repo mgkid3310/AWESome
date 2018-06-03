@@ -38,7 +38,7 @@ private _removeTowBar = [
 ] call ace_interact_menu_fnc_addActionToClass;
 
 // parking brake interactions
-private _parkingBrakeSet = [
+/* private _parkingBrakeSet = [
 	"parkingBrakeSet",
 	"Set Parking Brake",
 	"",
@@ -74,4 +74,4 @@ private _parkingBrakeRelease = [
 	["ACE_SelfActions"],
 	_parkingBrakeRelease,
     true
-] call ace_interact_menu_fnc_addActionToClass;
+] call ace_interact_menu_fnc_addActionToClass; */

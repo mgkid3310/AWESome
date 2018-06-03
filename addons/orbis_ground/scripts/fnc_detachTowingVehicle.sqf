@@ -16,5 +16,6 @@ _car setVariable ["orbis_towingDirPlaneOld", nil];
 _car setVariable ["orbis_towingDistance", nil];
 _car setVariable ["orbis_towingPosRelCar", nil];
 _car setVariable ["orbis_towingTimeOld", nil];
+_car setVariable ["orbis_towingFrameOld", nil];
 
 missionNamespace setVariable ["orbis_towVehicle", objNull];

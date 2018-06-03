@@ -9,6 +9,6 @@ orbis_gpws_fnc_flightPhaseCheck = compile preprocessFileLineNumbers 'orbis_gpws\
 orbis_gpws_fnc_getInAddAction = compile preprocessFileLineNumbers 'orbis_gpws\scripts\fnc_getInAddAction.sqf';
 orbis_gpws_fnc_getInMan = compile preprocessFileLineNumbers 'orbis_gpws\scripts\fnc_getInMan.sqf';
 orbis_gpws_fnc_periodicCheck = compile preprocessFileLineNumbers 'orbis_gpws\scripts\fnc_periodicCheck.sqf';
-orbis_gpws_fnc_playAndSleep = compile preprocessFileLineNumbers 'orbis_gpws\scripts\fnc_playAndSleep.sqf';
+orbis_gpws_fnc_playTestSound = compile preprocessFileLineNumbers 'orbis_gpws\scripts\fnc_playTestSound.sqf';
 orbis_gpws_fnc_speakGPWS = compile preprocessFileLineNumbers 'orbis_gpws\scripts\fnc_speakGPWS.sqf';
 orbis_gpws_fnc_startGPWS = compile preprocessFileLineNumbers 'orbis_gpws\scripts\fnc_startGPWS.sqf';

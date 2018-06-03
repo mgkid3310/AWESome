@@ -5,7 +5,6 @@ while {true} do {
     if (_vehicle isKindOf "Plane") then {
         _modePublic = _vehicle getVariable ["orbisGPWSmode", ""];
         _modeLocal = _vehicle getVariable ["orbisGPWSmodeLocal", ""];
-        _caller = _vehicle getVariable ["orbisGPWScaller", player];
 
         if (_modePublic != _modeLocal) then {
             _vehicle setVariable ["orbisGPWSmodeLocal", _modePublic];
@@ -13,6 +12,6 @@ while {true} do {
         };
     };
 
-    private _frameNo = diag_frameNo + 3;
+    private _frameNo = diag_frameNo;
     waitUntil {diag_frameNo > _frameNo};
 };

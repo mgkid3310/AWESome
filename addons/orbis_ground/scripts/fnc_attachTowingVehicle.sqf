@@ -37,6 +37,7 @@ _car setVariable ["orbis_towingDirPlaneOld", vectorDir _plane];
 _car setVariable ["orbis_towingDistance", (getPosATL _plane) distance (ASLToATL _posIntersect)];
 _car setVariable ["orbis_towingPosRelCar", _car worldToModel ASLToAGL _posIntersect];
 _car setVariable ["orbis_towingTimeOld", time];
+_car setVariable ["orbis_towingFrameOld", diag_frameNo];
 
 private _eventID = addMissionEventHandler ["EachFrame", {[] call orbis_ground_fnc_eachFrameHandlerTow}];
 _car setVariable ["orbis_towingEvent", _eventID];

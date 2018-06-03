@@ -16,25 +16,29 @@ private _planeDirOld = _car getVariable ["orbis_towingDirPlaneOld", []];
 private _distance = _car getVariable ["orbis_towingDistance", 0];
 private _posRelCar = _car getVariable ["orbis_towingPosRelCar", []];
 private _timeOld = _car getVariable ["orbis_towingTimeOld", time];
-private _frameeOld = _car getVariable ["orbis_towingFrameOld", diag_frameNo];
+private _frameOld = _car getVariable ["orbis_towingFrameOld", diag_frameNo];
 
-if (!(_timeOld < time) || ((_frameeOld + 2) < diag_frameNo)) exitWith {};
+if (!(time > _timeOld) || (diag_frameNo < (_frameOld + 4))) exitWith {};
 
 private _posBarNow = AGLToASL (_car modelToWorld _posRelCar);
 private _timeStep = time - _timeOld;
 
 private _vectorTemp = (_posBarNow vectorDiff _posBarOld) vectorAdd (_planeDirOld vectorMultiply _distance);
-private _velBase = _vectorTemp vectorMultiply (((vectorMagnitude _vectorTemp) - _distance) / (_timeStep * vectorMagnitude _vectorTemp));
+private _vectorTBase = _vectorTemp vectorMultiply (((vectorMagnitude _vectorTemp) - _distance) / (vectorMagnitude _vectorTemp));
+
+if (vectorMagnitude _vectorTBase < 0.05) exitWith {};
+
+private _velBase = _vectorTBase vectorMultiply (1 / _timeStep);
 
 private _error = (_posBarOld vectorDiff _posPlaneOld) vectorDiff (_planeDirOld vectorMultiply _distance);
 private _velProportional = _error vectorMultiply -1;
 
 private _velTotal = _velBase vectorAdd _velProportional;
-private _targetDir = vectorNormalized _velTotal;
+private _targetDir = vectorNormalized _vectorTemp;
 private _targetVelFwd = [0, vectorMagnitude _velTotal, 0];
 
 private _isBackward = acos (_velTotal vectorCos _vectorTemp) > 90;
-if (_isBackward) then {
+if !(_isBackward) then {
     _targetDir = _targetDir vectorMultiply -1;
     _targetVelFwd = _targetVelFwd vectorMultiply -1;
 };
@@ -55,5 +59,6 @@ _car setVariable ["orbis_towingPosCarOld", getPosASL _car];
 _car setVariable ["orbis_towingPosPlaneOld", getPosASL _plane];
 _car setVariable ["orbis_towingPosBarOld", _posBarNow];
 _car setVariable ["orbis_towingDirPlaneOld", _targetDir];
+
 _car setVariable ["orbis_towingTimeOld", time];
 _car setVariable ["orbis_towingFrameOld", diag_frameNo];

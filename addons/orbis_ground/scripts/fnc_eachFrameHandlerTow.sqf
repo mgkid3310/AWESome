@@ -24,11 +24,11 @@ private _posBarNow = AGLToASL (_car modelToWorld _posRelCar);
 private _timeStep = time - _timeOld;
 
 private _vectorDir = (_posBarNow vectorDiff _posBarOld) vectorAdd (_planeDirOld vectorMultiply _distance);
-private _vectorTBase = _vectorDir vectorMultiply (((vectorMagnitude _vectorDir) - _distance) / (vectorMagnitude _vectorDir));
+private _vectorOffest = _vectorDir vectorMultiply (((vectorMagnitude _vectorDir) - _distance) / (vectorMagnitude _vectorDir));
 
-if (vectorMagnitude _vectorTBase < 0.01) exitWith {};
+if (vectorMagnitude _vectorOffest < 0.01) exitWith {};
 
-private _velBase = _vectorTBase vectorMultiply (1 / _timeStep);
+private _velBase = _vectorOffest vectorMultiply (1 / _timeStep);
 
 private _error = (_posBarOld vectorDiff _posPlaneOld) vectorDiff (_planeDirOld vectorMultiply _distance);
 private _velProportional = _error vectorMultiply -1;

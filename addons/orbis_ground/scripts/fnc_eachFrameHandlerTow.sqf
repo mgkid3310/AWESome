@@ -23,10 +23,10 @@ if (!(time > _timeOld) || (diag_frameNo < (_frameOld + 4))) exitWith {};
 private _posBarNow = AGLToASL (_car modelToWorld _posRelCar);
 private _timeStep = time - _timeOld;
 
-private _vectorTemp = (_posBarNow vectorDiff _posBarOld) vectorAdd (_planeDirOld vectorMultiply _distance);
-private _vectorTBase = _vectorTemp vectorMultiply (((vectorMagnitude _vectorTemp) - _distance) / (vectorMagnitude _vectorTemp));
+private _vectorDir = (_posBarNow vectorDiff _posBarOld) vectorAdd (_planeDirOld vectorMultiply _distance);
+private _vectorTBase = _vectorDir vectorMultiply (((vectorMagnitude _vectorDir) - _distance) / (vectorMagnitude _vectorDir));
 
-if (vectorMagnitude _vectorTBase < 0.05) exitWith {};
+if (vectorMagnitude _vectorTBase < 0.01) exitWith {};
 
 private _velBase = _vectorTBase vectorMultiply (1 / _timeStep);
 
@@ -34,7 +34,7 @@ private _error = (_posBarOld vectorDiff _posPlaneOld) vectorDiff (_planeDirOld v
 private _velProportional = _error vectorMultiply -1;
 
 private _velTotal = _velBase vectorAdd _velProportional;
-private _targetDir = vectorNormalized _vectorTemp;
+private _targetDir = vectorNormalized (_vectorDir + _velProportional);
 private _targetVelFwd = [0, vectorMagnitude _velTotal, 0];
 
 private _isBackward = acos (_velTotal vectorCos _vectorTemp) > 90;

@@ -37,7 +37,7 @@ private _velTotal = _velBase vectorAdd _velProportional;
 private _targetDir = vectorNormalized (_vectorDir + _velProportional);
 private _targetVelFwd = [0, vectorMagnitude _velTotal, 0];
 
-private _isBackward = acos (_velTotal vectorCos _vectorTemp) > 90;
+private _isBackward = acos (_velTotal vectorCos _vectorDir) > 90;
 if !(_isBackward) then {
     _targetDir = _targetDir vectorMultiply -1;
     _targetVelFwd = _targetVelFwd vectorMultiply -1;

@@ -29,7 +29,7 @@ missionNamespace setVariable ["orbis_towVehicle", _car];
 _car setVariable ["orbis_isTowingPlane", true];
 _car setVariable ["orbis_towingTarget", _plane];
 
-_car setVariable ["orbis_offsetOldArray", [[0, 0, 0]]];
+_car setVariable ["orbis_offsetOldArray", []];
 _car setVariable ["orbis_towingPosRelPlane", _plane worldToModel ASLToAGL _posIntersect];
 _car setVariable ["orbis_towingPosRelCar", _car worldToModel ASLToAGL _posIntersect];
 _car setVariable ["orbis_towingTimeOld", time];

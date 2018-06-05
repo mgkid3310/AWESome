@@ -8,7 +8,7 @@ if (isNull _plane) exitWith {};
 private _posCarNow = getPosASL _car;
 private _posPlaneNow = getPosASL _plane;
 
-private _offsetOldArray = _car getVariable ["orbis_offsetOldArray", [[0, 0, 0]]];
+private _offsetOldArray = _car getVariable ["orbis_offsetOldArray", []];
 private _posRelCar = _car getVariable ["orbis_towingPosRelCar", []];
 private _posRelPlane = _car getVariable ["orbis_towingPosRelPlane", []];
 private _timeOld = _car getVariable ["orbis_towingTimeOld", time];
@@ -23,7 +23,7 @@ private _offestIntegral = [0, 0, 0];
 {
     _offestIntegral = _offestIntegral vectorAdd _x;
 } forEach _offsetOldArray;
-_offestIntegral = _offestIntegral vectorMultiply (1 / (count _offsetOldArray));
+_offestIntegral = _offestIntegral vectorMultiply (1 / (1 max count _offsetOldArray));
 private _offsetDerivative = (_offsetVector vectorDiff (_offsetOldArray select (count _offsetOldArray - 1))) vectorMultiply (1 / _timeStep);
 private _velTotal = (orbis_ground_Pconst * _offsetVector) + (orbis_ground_Iconst * _offestIntegral) + (orbis_ground_Dconst * _offsetDerivative);
 

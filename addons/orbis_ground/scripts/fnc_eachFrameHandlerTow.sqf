@@ -14,23 +14,23 @@ private _posRelPlane = _car getVariable ["orbis_towingPosRelPlane", []];
 private _timeOld = _car getVariable ["orbis_towingTimeOld", time];
 private _frameOld = _car getVariable ["orbis_towingFrameOld", diag_frameNo];
 
-if (!(time > _timeOld) || (diag_frameNo < (_frameOld + 2))) exitWith {};
+if (!(time > _timeOld) || (diag_frameNo < (_frameOld + 4))) exitWith {};
 
 private _timeStep = time - _timeOld;
 
-private _offsetVector = AGLtoASL (_plane modelToWorld _posRelPlane) vectorDiff AGLtoASL (_car modelToWorld _posRelCar);
-private _offestIntegral = [0, 0, 0];
+private _offsetVector = (AGLtoASL (_car modelToWorld _posRelCar)) vectorDiff (AGLtoASL (_plane modelToWorld _posRelPlane));
+private _offsetIntegral = [0, 0, 0];
 private _isInit = false;
 if !(count _offsetOldArray > 0) then {
     _offsetOldArray = [[0, 0, 0]];
     _isInit = true;
 };
 {
-    _offestIntegral = _offestIntegral vectorAdd _x;
+    _offsetIntegral = _offsetIntegral vectorAdd _x;
 } forEach _offsetOldArray;
-_offestIntegral = _offestIntegral vectorMultiply (1 / (count _offsetOldArray));
+_offsetIntegral = _offsetIntegral vectorMultiply (1 / (count _offsetOldArray));
 private _offsetDerivative = (_offsetVector vectorDiff (_offsetOldArray select (count _offsetOldArray - 1))) vectorMultiply (1 / _timeStep);
-private _velTotal = (_offsetVector vectorMultiply orbis_ground_Pconst) vectorAdd (_offestIntegral vectorMultiply orbis_ground_Iconst) vectorAdd (_offsetDerivative vectorMultiply orbis_ground_Dconst);
+private _velTotal = (_offsetVector vectorMultiply orbis_ground_Pconst) vectorAdd (_offsetIntegral vectorMultiply orbis_ground_Iconst) vectorAdd (_offsetDerivative vectorMultiply orbis_ground_Dconst);
 
 private _vectorDir = AGLtoASL (_car modelToWorld _posRelCar) vectorDiff getPosASL _plane;
 private _dirTotal = _vectorDir vectorAdd (_velTotal vectorMultiply _timeStep);
@@ -38,7 +38,7 @@ private _dirTotal = _vectorDir vectorAdd (_velTotal vectorMultiply _timeStep);
 private _targetVelFwd = [0, vectorMagnitude _velTotal, 0];
 private _targetDir = vectorNormalized _dirTotal;
 
-private _isBackward = acos (_offsetVector vectorCos _targetDir) > 90;
+private _isBackward = acos (_velTotal vectorCos _targetDir) > 90;
 if (_isBackward) then {
     _targetVelFwd = _targetVelFwd vectorMultiply -1;
 };

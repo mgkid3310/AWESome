@@ -25,7 +25,7 @@ private _offestIntegral = [0, 0, 0];
 } forEach _offsetOldArray;
 _offestIntegral = _offestIntegral vectorMultiply (1 / (1 max count _offsetOldArray));
 private _offsetDerivative = (_offsetVector vectorDiff (_offsetOldArray select (count _offsetOldArray - 1))) vectorMultiply (1 / _timeStep);
-private _velTotal = (orbis_ground_Pconst * _offsetVector) + (orbis_ground_Iconst * _offestIntegral) + (orbis_ground_Dconst * _offsetDerivative);
+private _velTotal = (_offsetVector vectorMultiply orbis_ground_Pconst) vectorAdd (_offestIntegral vectorMultiply orbis_ground_Iconst) vectorAdd (_offsetDerivative vectorMultiply orbis_ground_Dconst);
 
 private _vectorDir = AGLtoASL (_car modelToWorld _posRelCar) vectorDiff getPosASL _plane;
 private _dirTotal = _vectorDir vectorAdd (_velTotal vectorMultiply _timeStep);

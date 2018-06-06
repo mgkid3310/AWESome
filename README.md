@@ -64,6 +64,19 @@ addon setting changed, ATIS data should be updated on
 ground  
 &nbsp;
 
+5. Ground System  
+
+Provides towing vehicle & system for all planes. Works in MP  
+and does not require other players to use this addon for  
+towing their planes.  
+Offroad vehicles are used as towing cars, and tow planes by  
+deploying tow bat via Interaction / Action outside the  
+vehicle. Once the tow bar is deployed, place target plane's  
+front gear at the end of the tow bar then use Action to  
+connect plane to the towbar. After towing around, stop the  
+vehicle and disconnect plane using Action.  
+&nbsp;
+
 ----------------
 
 **Issue Tracking**  

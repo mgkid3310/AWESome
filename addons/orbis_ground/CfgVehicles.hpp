@@ -9,7 +9,7 @@ class CfgVehicles {
         orbis_towBarCheckEnd[] = {0.22, 7.46, -0.87};
         class UserActions {
             class attachTowBar {
-				displayName = "Attach Plane to Towbar";
+				displayName = "Connect Plane to Towbar";
 				priority = 1.5;
 				radius = 2;
 				position = "temp";
@@ -20,7 +20,7 @@ class CfgVehicles {
 				statement = "[this] call orbis_ground_fnc_attachTowingVehicle";
             };
             class detachTowBar: attachTowBar {
-				displayName = "Detach Plane";
+				displayName = "Disconnect Plane from Towbar";
 				condition = "[this] call orbis_ground_fnc_canDetachTowingVehicle";
 				statement = "[this] call orbis_ground_fnc_detachTowingVehicle";
             };

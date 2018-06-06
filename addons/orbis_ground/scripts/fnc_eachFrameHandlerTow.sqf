@@ -9,28 +9,32 @@ private _posCarNow = getPosASL _car;
 private _posPlaneNow = getPosASL _plane;
 
 private _offsetOldArray = _car getVariable ["orbis_offsetOldArray", []];
+private _posBarOld = _car getVariable ["orbis_posBarOld", []];
 private _posRelCar = _car getVariable ["orbis_towingPosRelCar", []];
 private _posRelPlane = _car getVariable ["orbis_towingPosRelPlane", []];
 private _timeOld = _car getVariable ["orbis_towingTimeOld", time];
 private _frameOld = _car getVariable ["orbis_towingFrameOld", diag_frameNo];
 
-if (!(time > _timeOld) || (diag_frameNo < (_frameOld + 4))) exitWith {};
+if (!(time > _timeOld) || (diag_frameNo < (_frameOld + orbis_ground_perFrame))) exitWith {};
 
 private _timeStep = time - _timeOld;
 
+private _velVector = [0, 0, 0];
+if (count _posBarOld > 0) then {
+    _velVector = (AGLtoASL (_car modelToWorld _posRelCar)) vectorDiff _posBarOld;
+};
+private _velBase = _velVector vectorMultiply (1 / _timeStep);
+
 private _offsetVector = (AGLtoASL (_car modelToWorld _posRelCar)) vectorDiff (AGLtoASL (_plane modelToWorld _posRelPlane));
 private _offsetIntegral = [0, 0, 0];
-private _isInit = false;
-if !(count _offsetOldArray > 0) then {
-    _offsetOldArray = [[0, 0, 0]];
-    _isInit = true;
+if (count _offsetOldArray > 10) then {
+    {
+        _offsetIntegral = _offsetIntegral vectorAdd _x;
+    } forEach _offsetOldArray;
 };
-{
-    _offsetIntegral = _offsetIntegral vectorAdd _x;
-} forEach _offsetOldArray;
 _offsetIntegral = _offsetIntegral vectorMultiply (1 / (count _offsetOldArray));
 private _offsetDerivative = (_offsetVector vectorDiff (_offsetOldArray select (count _offsetOldArray - 1))) vectorMultiply (1 / _timeStep);
-private _velTotal = (_offsetVector vectorMultiply orbis_ground_Pconst) vectorAdd (_offsetIntegral vectorMultiply orbis_ground_Iconst) vectorAdd (_offsetDerivative vectorMultiply orbis_ground_Dconst);
+private _velTotal = (_velBase vectorMultiply orbis_ground_velBase) vectorAdd (_offsetVector vectorMultiply orbis_ground_Pconst) vectorAdd (_offsetIntegral vectorMultiply orbis_ground_Iconst) vectorAdd (_offsetDerivative vectorMultiply orbis_ground_Dconst);
 
 private _vectorDir = AGLtoASL (_car modelToWorld _posRelCar) vectorDiff getPosASL _plane;
 private _dirTotal = _vectorDir vectorAdd (_velTotal vectorMultiply _timeStep);
@@ -64,5 +68,6 @@ if (_isInit || (count _offsetOldArray >= 20)) then {
 };
 _offsetOldArray pushBack _offsetVector;
 _car setVariable ["orbis_offsetOldArray", _offsetOldArray];
+_car setVariable ["orbis_posBarOld", AGLtoASL (_car modelToWorld _posRelCar)];
 _car setVariable ["orbis_towingTimeOld", time];
 _car setVariable ["orbis_towingFrameOld", diag_frameNo];

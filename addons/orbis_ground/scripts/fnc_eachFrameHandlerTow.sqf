@@ -27,7 +27,7 @@ private _velBase = _velVector vectorMultiply (1 / _timeStep);
 
 private _offsetVector = (AGLtoASL (_car modelToWorld _posRelCar)) vectorDiff (AGLtoASL (_plane modelToWorld _posRelPlane));
 private _offsetIntegral = [0, 0, 0];
-if (count _offsetOldArray > 10) then {
+if (count _offsetOldArray > 15) then {
     {
         _offsetIntegral = _offsetIntegral vectorAdd _x;
     } forEach _offsetOldArray;

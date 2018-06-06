@@ -37,6 +37,10 @@ _car setVariable ["orbis_towingFrameOld", diag_frameNo];
 
 _car disableCollisionWith _plane;
 _towBar disableCollisionWith _plane;
+if !(local _plane) then {
+    [_car, _plane] remoteExec ["disableCollisionWith", _plane];
+    [_towBar, _plane] remoteExec ["disableCollisionWith", _plane];
+};
 
 private _eventID = addMissionEventHandler ["EachFrame", {[] call orbis_ground_fnc_eachFrameHandlerTow}];
 _car setVariable ["orbis_towingEvent", _eventID];

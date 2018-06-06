@@ -66,17 +66,17 @@ ground
 
 5. Ground System  
 
-Provides towing vehicle & system for all planes. Works in MP  
-and does not require other players to use this addon for  
+Provides towing vehicle & system for all planes. Works in  
+MP and does not require other players to use this addon for  
 towing their planes.  
-Offroad vehicles are used as towing cars, and can tow planes  
-by deploying towbar via Interaction / Action outside the  
-vehicle. Once the towbar is deployed, place target plane's  
-front gear at the end of the towbar, then use Action to  
-connect target plane to the towbar. After towing around, stop  
-the vehicle and disconnect target plane using Action.  
-NOTICE : moving too fast may occur collisions, so drive with  
-caution when towing.  
+Offroad vehicles are used as towing cars, and can tow  
+planes by deploying towbar via Interaction / Action outside  
+the vehicle. Once the towbar is deployed, place target  
+plane's front gear at the end of the towbar, then use Action  
+to connect target plane to the towbar. After towing around,  
+stop the vehicle and disconnect target plane using Action.  
+NOTICE : moving too fast may occur collisions, so drive  
+with caution when towing.  
 &nbsp;
 
 ----------------

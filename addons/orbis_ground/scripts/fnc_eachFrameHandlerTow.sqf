@@ -33,7 +33,10 @@ if (count _offsetOldArray >= orbis_ground_minIntegralItem) then {
     } forEach _offsetOldArray;
     _offsetIntegral = _offsetIntegral vectorMultiply (1 / (count _offsetOldArray));
 };
-private _offsetDerivative = (_offsetVector vectorDiff (_offsetOldArray select (count _offsetOldArray - 1))) vectorMultiply (1 / _timeStep);
+private _offsetDerivative = [0, 0, 0];
+if (count _offsetOldArray > 0) then {
+    _offsetDerivative = (_offsetVector vectorDiff (_offsetOldArray select (count _offsetOldArray - 1))) vectorMultiply (1 / _timeStep);
+};
 private _velTotal = (_velBase vectorMultiply orbis_ground_velBase) vectorAdd (_offsetVector vectorMultiply orbis_ground_Pconst) vectorAdd (_offsetIntegral vectorMultiply orbis_ground_Iconst) vectorAdd (_offsetDerivative vectorMultiply orbis_ground_Dconst);
 
 private _vectorDir = AGLtoASL (_car modelToWorld _posRelCar) vectorDiff getPosASL _plane;

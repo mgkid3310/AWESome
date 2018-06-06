@@ -35,5 +35,8 @@ _car setVariable ["orbis_towingPosRelCar", _car worldToModel ASLToAGL _posInters
 _car setVariable ["orbis_towingTimeOld", time];
 _car setVariable ["orbis_towingFrameOld", diag_frameNo];
 
+_car disableCollisionWith _plane;
+_towBar disableCollisionWith _plane;
+
 private _eventID = addMissionEventHandler ["EachFrame", {[] call orbis_ground_fnc_eachFrameHandlerTow}];
 _car setVariable ["orbis_towingEvent", _eventID];

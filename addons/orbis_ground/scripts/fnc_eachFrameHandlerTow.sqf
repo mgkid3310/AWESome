@@ -27,7 +27,7 @@ private _velBase = _velVector vectorMultiply (1 / _timeStep);
 
 private _offsetVector = (AGLtoASL (_car modelToWorld _posRelCar)) vectorDiff (AGLtoASL (_plane modelToWorld _posRelPlane));
 private _offsetIntegral = [0, 0, 0];
-if (count _offsetOldArray > 15) then {
+if (count _offsetOldArray >= orbis_ground_minIntegralItem) then {
     {
         _offsetIntegral = _offsetIntegral vectorAdd _x;
     } forEach _offsetOldArray;
@@ -63,7 +63,7 @@ if (local _plane) then {
     // [_plane, getPos _plane] remoteExec ["setPos", _plane];
 };
 
-if (_isInit || (count _offsetOldArray >= 20)) then {
+if (_isInit || (count _offsetOldArray >= orbis_ground_maxIntegralItem)) then {
     _offsetOldArray deleteAt 0;
 };
 _offsetOldArray pushBack _offsetVector;

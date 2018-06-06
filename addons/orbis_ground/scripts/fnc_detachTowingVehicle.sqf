@@ -4,6 +4,10 @@ private _eventID = _car getVariable ["orbis_towingEvent", 0];
 private _plane = _car getVariable ["orbis_towingTarget", objNull];
 removeMissionEventHandler ["EachFrame", _eventID];
 
+private _towBar = _car getVariable ["orbis_towBarObject", objNull];
+_car enableCollisionWith _plane;
+_towBar enableCollisionWith _plane;
+
 _car setVariable ["orbis_towingEvent", nil];
 _car setVariable ["orbis_isTowingPlane", false];
 _car setVariable ["orbis_towingTarget", nil];

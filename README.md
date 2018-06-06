@@ -75,6 +75,8 @@ vehicle. Once the tow bar is deployed, place target plane's
 front gear at the end of the tow bar then use Action to  
 connect plane to the towbar. After towing around, stop the  
 vehicle and disconnect plane using Action.  
+NOTICE : moving too fast may occur collisions, so drive with  
+caution when towing.  
 &nbsp;
 
 ----------------

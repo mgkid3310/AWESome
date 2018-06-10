@@ -1,5 +1,5 @@
 // init global variable
-orbis_aerodynamics_loopFrameInterval = 4;
+orbis_aerodynamics_loopFrameInterval = 6;
 
 // add EventHandlers
 player addEventHandler ["GetInMan", {_this call orbis_aerodynamics_fnc_eventGetInMan}];
@@ -39,6 +39,18 @@ if (hasInterface) then {
 		{
 			missionNamespace setVariable ["orbis_aerodynamics_windMultiplier", _this];
 			profileNamespace setVariable ["orbis_aerodynamics_windMultiplier", _this];
+		}
+	] call CBA_Settings_fnc_init;
+
+	[
+		"orbis_aerodynamics_loopFrameInterval",
+		"SLIDER",
+		["Loop Interval (Dev feature)", "Higher values have lower accuracy & low FPS drop"],
+		"AWESome",
+		[3, 8, orbis_aerodynamics_loopFrameInterval, 0],
+		nil,
+		{
+			orbis_aerodynamics_loopFrameInterval = _this;
 		}
 	] call CBA_Settings_fnc_init;
 };

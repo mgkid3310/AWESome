@@ -16,7 +16,8 @@ if (_GPWSenabled isEqualType true) then {
 _vehicle setVariable ["orbisGPWSenabled", true, true];
 
 // GPWS initialization
-if (_GPWSenabled isEqualType 0) then {
+private _modeCurrent = _vehicle getVariable ["orbisGPWSmode", ""];
+if !(_modeCurrent in ["off", "f16", "b747"]) then {
 	if (getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbisGPWS_default") isEqualTo "f16") exitWith {
 		_vehicle setVariable ["orbisGPWSmode", "f16", true];
 	};

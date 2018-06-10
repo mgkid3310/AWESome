@@ -3,10 +3,10 @@ player setVariable ["hasOrbisGPWS", true, true];
 // global variables init
 orbis_gpws_takeoffAlt = 60;
 orbis_gpws_airportRange = 6000;
-orbis_gpws_pullupTime = 4;
 
 // f16
 orbis_gpws_ChaffFlareList = ["CMFlareLauncher", "FIR_CMLauncher", "js_w_fa18_CMFlareLauncher"];
+orbis_gpws_pullupTime = 6;
 orbis_gpws_maxAOA = 15;
 orbis_gpws_lowAltitude = 50;
 orbis_gpws_bingoFuel = 0.2;
@@ -32,7 +32,7 @@ _runwayPos set [2, getTerrainHeightASL _runwayPos];
 private _ilsDirection = getArray (configFile >> "CfgWorlds" >> worldName >> "ilsDirection");
 private _dirOpposite = ((asin abs (_ilsDirection select 0)) + 180) % 360;
 orbis_gpws_runwayList pushBack [_runwayPos, asin abs (_ilsDirection select 0), asin (_ilsDirection select 1)];
-orbis_gpws_runwayList pushBack [_runwayPos getPos [-1000, _dirOpposite], _dirOpposite, asin (_ilsDirection select 1)];
+orbis_gpws_runwayList pushBack [_runwayPos getPos [-1000, _dirOpposite], _dirOpposite, 0];
 
 for "_i" from 0 to (count (configFile >> "CfgWorlds" >> worldName >> "SecondaryAirports") - 1) do {
 	private _config = (configFile >> "CfgWorlds" >> worldName >> "SecondaryAirports") select _i;
@@ -42,7 +42,7 @@ for "_i" from 0 to (count (configFile >> "CfgWorlds" >> worldName >> "SecondaryA
 		_ilsDirection = getArray (_config >> "ilsDirection");
 		_dirOpposite = ((asin abs (_ilsDirection select 0)) + 180) % 360;
 		orbis_gpws_runwayList pushBack [_runwayPos, asin abs (_ilsDirection select 0), asin (_ilsDirection select 1)];
-		orbis_gpws_runwayList pushBack [_runwayPos getPos [-1000, _dirOpposite], _dirOpposite, asin (_ilsDirection select 1)];
+		orbis_gpws_runwayList pushBack [_runwayPos getPos [-1000, _dirOpposite], _dirOpposite, 0];
 	};
 };
 {
@@ -50,7 +50,7 @@ for "_i" from 0 to (count (configFile >> "CfgWorlds" >> worldName >> "SecondaryA
 	orbis_gpws_runwayList pushBack [getPosASL _x, asin abs (_ilsDirection select 0), asin (_ilsDirection select 1)];
 	if !(getNumber (configFile >> "CfgVehicles" >> (typeOf _x) >> "isCarrier") > 0) then {
 		_dirOpposite = ((asin abs (_ilsDirection select 0)) + 180) % 360;
-		orbis_gpws_runwayList pushBack [(getPosASL _x) getPos [-1000, _dirOpposite], _dirOpposite, asin (_ilsDirection select 1)];
+		orbis_gpws_runwayList pushBack [(getPosASL _x) getPos [-1000, _dirOpposite], _dirOpposite, 0];
 	};
 } forEach (allAirports select 1);
 

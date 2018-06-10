@@ -15,7 +15,7 @@ if !((alive _vehicle) && (player in _vehicle)) exitWith {};
 playSound _sound;
 
 if (isNil {_duration}) exitWith {};
-_vehicle setVariable [_mode, false, true];
+_vehicle setVariable [_mode, false];
 sleep (_duration + _delay);
-_vehicle setVariable [_mode, true, true];
+_vehicle setVariable [_mode, true];
 DEV_CHAT("orbis_gpws: GPWS sleep done");

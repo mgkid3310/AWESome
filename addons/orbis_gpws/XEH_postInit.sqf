@@ -6,7 +6,7 @@ orbis_gpws_airportRange = 6000;
 
 // f16
 orbis_gpws_ChaffFlareList = ["CMFlareLauncher", "FIR_CMLauncher", "js_w_fa18_CMFlareLauncher"];
-orbis_gpws_pullupTime = 6;
+orbis_gpws_pullupTime = 4;
 orbis_gpws_maxAOA = 15;
 orbis_gpws_lowAltitude = 50;
 orbis_gpws_bingoFuel = 0.2;
@@ -18,11 +18,13 @@ orbis_gpws_cautionDamageLevel = 0.1;
 
 // b747
 orbis_gpws_ftToM = 0.3048;
+orbis_gpws_posExpectTime = 6;
 orbis_gpws_tooLowAlt = 50;
 orbis_gpws_appMinAlt = 350 * orbis_gpws_ftToM;
 orbis_gpws_minAlt = 250 * orbis_gpws_ftToM;
 orbis_gpws_maxSinkRate = -40;
 orbis_gpws_maxBankAngle = 45;
+orbis_gpws_terrainWarningHeight = 100;
 orbis_gpws_delay = 2.0;
 
 // get runways list

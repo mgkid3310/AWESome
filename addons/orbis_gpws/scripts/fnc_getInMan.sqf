@@ -15,9 +15,11 @@ if (_GPWSenabled isEqualType true) then {
 };
 _vehicle setVariable ["orbisGPWSenabled", true];
 
-// set default GPWS
+// GPWS initialization
 if (_GPWSenabled isEqualType 0) then {
-	if (getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbisGPWS_default") isEqualTo "f16") then {
+	if (getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbisGPWS_default") isEqualTo "f16") exitWith {
 		_vehicle setVariable ["orbisGPWSmode", "f16", true];
 	};
+
+	_vehicle setVariable ["orbisGPWSmode", "", true];
 };

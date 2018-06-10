@@ -1,18 +1,24 @@
-private _sound = _this select 0;
-private _term = param [1, 0];
+private _modeGiven = _this select 0;
+private _sound = _this select 1;
+private _term = param [2, 0];
+
+private _soundName = "";
 private _length = getNumber (configFile >> "CfgSounds" >> _sound >> "length");
 
 private _isStop = (vehicle player) getVariable ["orbisGPWStestStop", false];
-if !(_isStop) then {
+private _modeLocal = _vehicle getVariable ["orbisGPWSmodeLocal", ""];
+if (!_isStop || !(_modeGiven isEqualTo _modeLocal)) then {
     private _crew = allPlayers select {_x in [driver vehicle player, gunner vehicle player, commander vehicle player]};
     private _targets = _crew select {_x getVariable ["hasOrbisATC", false]};
 
     private _volumeLow = (vehicle player) getVariable ["orbisGPWSvolumeLow", false];
     if (_volumeLow) then {
-        _sound = format ["%1_low", _sound];
+        _soundName = format ["%1_%2_low", _modeGiven, _sound];
+    } else {
+        _soundName = format ["%1_%2", _modeGiven, _sound];
     };
 
-    [_sound] remoteExec ["playSound", _targets];
+    [_soundName] remoteExec ["playSound", _targets];
 
     sleep (_length + _term);
 };

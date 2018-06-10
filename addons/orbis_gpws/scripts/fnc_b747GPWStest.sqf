@@ -2,37 +2,37 @@ private _vehicle = _this select 0;
 _vehicle setVariable ["orbisGPWStestReady", false, true];
 _vehicle setVariable ["orbisGPWStestStop", false, true];
 
-["b747_1000", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_500", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_400", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_300", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_200", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_100", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_50", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_40", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_30", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_20", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_10", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "1000", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "500", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "400", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "300", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "200", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "100", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "50", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "40", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "30", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "20", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "10", 0.5] call orbis_gpws_fnc_playTestSound; // done
 
-["b747_APPRMIN", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_MIN", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_GLIDESLOPE", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_WINDSHR", 0.5] call orbis_gpws_fnc_playTestSound;
-["b747_BNKANGL", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_DONTSNK", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_SNKRATE", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_FLAPS", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_GEAR", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_TERRAIN", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_TOOLOWT", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_PULLUP", 0.5] call orbis_gpws_fnc_playTestSound; // done
-["b747_CHIME", 0.5] call orbis_gpws_fnc_playTestSound;
-["b747_ATTEND", 0.5] call orbis_gpws_fnc_playTestSound;
-["b747_ALTALRT", 0.5] call orbis_gpws_fnc_playTestSound;
-["b747_ALTENTR", 0.5] call orbis_gpws_fnc_playTestSound;
-["b747_APDISCO", 0.5] call orbis_gpws_fnc_playTestSound;
-["b747_TOWARN", 0.5] call orbis_gpws_fnc_playTestSound;
-// ["b747_TRIM", 0.5] call orbis_gpws_fnc_playTestSound;
+["b747", "APPRMIN", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "MIN", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "GLIDESLOPE", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "WINDSHR", 0.5] call orbis_gpws_fnc_playTestSound;
+["b747", "BNKANGL", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "DONTSNK", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "SNKRATE", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "FLAPS", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "GEAR", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "TERRAIN", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "TOOLOWT", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "PULLUP", 0.5] call orbis_gpws_fnc_playTestSound; // done
+["b747", "CHIME", 0.5] call orbis_gpws_fnc_playTestSound;
+["b747", "ATTEND", 0.5] call orbis_gpws_fnc_playTestSound;
+["b747", "ALTALRT", 0.5] call orbis_gpws_fnc_playTestSound;
+["b747", "ALTENTR", 0.5] call orbis_gpws_fnc_playTestSound;
+["b747", "APDISCO", 0.5] call orbis_gpws_fnc_playTestSound;
+["b747", "TOWARN", 0.5] call orbis_gpws_fnc_playTestSound;
+// ["b747", "TRIM", 0.5] call orbis_gpws_fnc_playTestSound;
 
 _vehicle setVariable ["orbisGPWStestReady", true, true];
 _vehicle setVariable ["orbisGPWStestStop", false, true];

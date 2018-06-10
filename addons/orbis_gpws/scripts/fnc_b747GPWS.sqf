@@ -32,7 +32,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_altAGLS = getPos _vehicle select 2;
 	_altASL = getPosASL _vehicle select 2;
 	_altRadar = _altAGLS min _altASL;
-	_posExpect = (getPosASL _vehicle) vectorAdd (velocity _vehicle vectorMultiply orbis_gpws_pullupTime);
+	_posExpect = (getPosASL _vehicle) vectorAdd (velocity _vehicle vectorMultiply orbis_gpws_posExpectTime);
     _expectTerrainAlt = 0 max getTerrainHeightASL _posExpect;
 	_cosAOA = (vectorDir _vehicle) vectorCos (velocity _vehicle);
 	_flapStatus = _vehicle animationSourcePhase "flap";
@@ -59,7 +59,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_altDiffDesired = _flightphaseOutput select 3;
 
     _tooLow = !(_flightphase in ["taxing", "touchDown"]) && (_altRadar < orbis_gpws_tooLowAlt);
-	_terrainWarn = (_altRadar > 5) && (_flightphase in ["takeOff", "inFlight", "landing"]) && ((_expectTerrainAlt + 100) > _altASL);
+	_terrainWarn = (_altRadar > 5) && (_flightphase in ["takeOff", "inFlight", "landing"]) && ((_expectTerrainAlt + orbis_gpws_terrainWarningHeight) > _altASL);
 	_dontSink = (_flightphase isEqualTo "takeOff") && (_altRadar > 5) && (_altRadar < 100) && (_climeASL < 0);
 	_sinkRate = _climeASL < orbis_gpws_maxSinkRate;
 

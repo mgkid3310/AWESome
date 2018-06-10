@@ -33,7 +33,7 @@ DEV_CHAT("orbis_gpws: f16GPWS eventHandler added");
 private _frameNo = diag_frameNo;
 waitUntil {(diag_frameNo > _frameNo) && (time > _timeOld)};
 
-while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbisGPWSmode", ""] isEqualTo "f16")} do {
+while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbisGPWSmodeLocal", "off"] isEqualTo "f16")} do {
 	// flight status check
 	_altAGLS = getPos _vehicle select 2;
 	_altASL = getPosASL _vehicle select 2;

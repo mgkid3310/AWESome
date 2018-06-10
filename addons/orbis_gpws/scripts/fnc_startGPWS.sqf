@@ -1,5 +1,5 @@
 private _vehicle = param [0, vehicle player];
-private _mode = param [1, ""];
+private _mode = param [1, "off"];
 
 if (player in [driver _vehicle, gunner _vehicle, commander _vehicle]) then {
     switch (_mode) do {
@@ -12,7 +12,7 @@ if (player in [driver _vehicle, gunner _vehicle, commander _vehicle]) then {
             [_vehicle] spawn orbis_gpws_fnc_b747GPWS;
         };
         default {
-            _vehicle setVariable ["orbisGPWSmodeLocal", ""];
+            _vehicle setVariable ["orbisGPWSmodeLocal", "off"];
         };
     };
 };

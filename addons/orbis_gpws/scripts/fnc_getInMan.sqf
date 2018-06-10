@@ -21,5 +21,5 @@ if (_GPWSenabled isEqualType 0) then {
 		_vehicle setVariable ["orbisGPWSmode", "f16", true];
 	};
 
-	_vehicle setVariable ["orbisGPWSmode", "", true];
+	_vehicle setVariable ["orbisGPWSmode", "off", true];
 };

@@ -27,7 +27,7 @@ DEV_CHAT("orbis_gpws: b747GPWS variables init done");
 private _frameNo = diag_frameNo;
 waitUntil {(diag_frameNo > _frameNo) && (time > _timeOld)};
 
-while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbisGPWSmode", ""] isEqualTo "b747")} do {
+while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbisGPWSmodeLocal", "off"] isEqualTo "b747")} do {
 	// flight status check
 	_altAGLS = getPos _vehicle select 2;
 	_altASL = getPosASL _vehicle select 2;

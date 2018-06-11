@@ -8,7 +8,7 @@ private _length = getNumber (configFile >> "CfgSounds" >> _soundName >> "length"
 private _isStop = (vehicle player) getVariable ["orbisGPWStestStop", false];
 private _modeLocal = (vehicle player) getVariable ["orbisGPWSmodeLocal", "off"];
 if (!_isStop && (_modeGiven isEqualTo _modeLocal)) then {
-    private _crew = allPlayers select {[_x] call orbis_gpws_fnc_isCrew]};
+    private _crew = allPlayers select {[_x] call orbis_gpws_fnc_isCrew};
     private _targets = _crew select {_x getVariable ["hasOrbisGPWS", false]};
 
     private _volumeLow = (vehicle player) getVariable ["orbisGPWSvolumeLow", false];

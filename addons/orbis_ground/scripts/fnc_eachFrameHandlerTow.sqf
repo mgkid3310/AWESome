@@ -44,6 +44,7 @@ private _dirTotal = _vectorDir vectorAdd (_velTotal vectorMultiply _timeStep);
 
 private _targetVelFwd = [0, vectorMagnitude _velTotal, 0];
 private _targetDir = vectorNormalized _dirTotal;
+private _targetHeading = [0, 0, 0] getDir _targetDir;
 
 private _isBackward = acos (_velTotal vectorCos _targetDir) > 90;
 if (_isBackward) then {
@@ -56,12 +57,12 @@ if (vectorMagnitude _offsetVector < 0.01) then {
 
 if (local _plane) then {
     _plane setVelocityModelSpace _targetVelFwd;
-    _plane setVectorDir _targetDir;
+    _plane setDir _targetHeading;
     _plane setVelocityModelSpace _targetVelFwd;
     // _plane setPos getPos _plane;
 } else {
     [_plane, _targetVelFwd] remoteExec ["setVelocityModelSpace", _plane];
-    [_plane, _targetDir] remoteExec ["setVectorDir", _plane];
+    [_plane, _targetHeading] remoteExec ["setDir", _plane];
     [_plane, _targetVelFwd] remoteExec ["setVelocityModelSpace", _plane];
     // [_plane, getPos _plane] remoteExec ["setPos", _plane];
 };

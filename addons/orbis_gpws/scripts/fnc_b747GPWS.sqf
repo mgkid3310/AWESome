@@ -65,8 +65,6 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 
 	if !(_terrainWarn || _dontSink || _sinkRate) then {
 		_criticalWarningCount = 0;
-	} else {
-		_criticalWarningCount = _criticalWarningCount + 1;
 	};
 
 	_minWarnLevel = _vehicle getVariable ["minWarnLevel", 0];
@@ -151,6 +149,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 				DEV_CHAT("orbis_gpws: b747_TOOLOWT");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_TOOLOWT", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
+				_criticalWarningCount = _criticalWarningCount + 1;
 			};
 
 			// b747_TERRAIN (takeOff / inFlight / landing)
@@ -158,6 +157,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 				DEV_CHAT("orbis_gpws: b747_TERRAIN");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_TERRAIN", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
+				_criticalWarningCount = _criticalWarningCount + 1;
 			};
 
 			// b747_DONTSNK (takeOff)
@@ -165,6 +165,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 				DEV_CHAT("orbis_gpws: b747_DONTSNK");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_DONTSNK", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
+				_criticalWarningCount = _criticalWarningCount + 1;
 			};
 
 			// b747_SNKRATE
@@ -172,6 +173,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 				DEV_CHAT("orbis_gpws: b747_SNKRATE");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_SNKRATE", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
+				_criticalWarningCount = _criticalWarningCount + 1;
 				_vehicle setVariable ["minWarnLevel", 1];
 			};
 

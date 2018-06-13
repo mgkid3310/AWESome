@@ -1,7 +1,8 @@
 private _player = param [0, player];
 private _vehicle = param [1, vehicle player];
 
-if (_player isEqualTo _vehicle) exitWith {};
+if (_player isEqualTo _vehicle) exitWith {false};
+if !(_player in _vehicle) exitWith {false};
 
 private _role = assignedVehicleRole _player;
 private _return = false;

@@ -1,4 +1,4 @@
-private _car = missionNamespace getVariable ["orbis_towVehicle", objNull];
+private _car = player getVariable ["orbis_towVehicle", objNull];
 if (isNull _car) exitWith {};
 if !(_car getVariable ["orbis_isTowingPlane", false]) exitWith {};
 
@@ -12,6 +12,7 @@ private _offsetOldArray = _car getVariable ["orbis_offsetOldArray", []];
 private _posBarOld = _car getVariable ["orbis_posBarOld", []];
 private _posRelCar = _car getVariable ["orbis_towingPosRelCar", []];
 private _posRelPlane = _car getVariable ["orbis_towingPosRelPlane", []];
+private _rotateCenter = _car getVariable ["orbis_towingRotateCenter", []];
 private _timeOld = _car getVariable ["orbis_towingTimeOld", time];
 private _frameOld = _car getVariable ["orbis_towingFrameOld", diag_frameNo];
 
@@ -19,12 +20,14 @@ if (!(time > _timeOld) || (diag_frameNo < (_frameOld + orbis_ground_perFrame))) 
 
 private _timeStep = time - _timeOld;
 
+// base velocity
 private _velVector = [0, 0, 0];
 if (count _posBarOld > 0) then {
     _velVector = (AGLtoASL (_car modelToWorld _posRelCar)) vectorDiff _posBarOld;
 };
 private _velBase = _velVector vectorMultiply (1 / _timeStep);
 
+// PID control
 private _offsetVector = (AGLtoASL (_car modelToWorld _posRelCar)) vectorDiff (AGLtoASL (_plane modelToWorld _posRelPlane));
 private _offsetIntegral = [0, 0, 0];
 if (count _offsetOldArray >= orbis_ground_minIntegralItem) then {
@@ -39,7 +42,8 @@ if (count _offsetOldArray > 0) then {
 };
 private _velTotal = (_velBase vectorMultiply orbis_ground_velBase) vectorAdd (_offsetVector vectorMultiply orbis_ground_Pconst) vectorAdd (_offsetIntegral vectorMultiply orbis_ground_Iconst) vectorAdd (_offsetDerivative vectorMultiply orbis_ground_Dconst);
 
-private _vectorDir = AGLtoASL (_car modelToWorld _posRelCar) vectorDiff getPosASL _plane;
+// process to foward speed & heading
+private _vectorDir = AGLtoASL (_car modelToWorld _posRelCar) vectorDiff AGLtoASL (_plane modelToWorld _rotateCenter);
 private _dirTotal = _vectorDir vectorAdd (_velTotal vectorMultiply _timeStep);
 
 private _targetVelFwd = [0, vectorMagnitude _velTotal, 0];
@@ -55,6 +59,7 @@ if (vectorMagnitude _offsetVector < 0.01) then {
     _targetVelFwd = [0, 0, 0];
 };
 
+// apply changes
 if (local _plane) then {
     _plane setVelocityModelSpace _targetVelFwd;
     _plane setDir _targetHeading;
@@ -67,6 +72,7 @@ if (local _plane) then {
     // [_plane, getPos _plane] remoteExec ["setPos", _plane];
 };
 
+// save data for next run
 if (_isInit || (count _offsetOldArray >= orbis_ground_maxIntegralItem)) then {
     _offsetOldArray deleteAt 0;
 };

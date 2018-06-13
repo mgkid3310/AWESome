@@ -2,36 +2,33 @@ private _car = _this select 0;
 
 if !(_car getVariable ["orbis_hasTowBarDeployed", false]) exitWith {};
 
-private _checkStart = getArray (configFile >> "CfgVehicles" >> (typeOf _car) >> "orbis_towBarCheckStart");
-private _checkEnd = getArray (configFile >> "CfgVehicles" >> (typeOf _car) >> "orbis_towBarCheckEnd");
-private _towBar = _car getVariable ["orbis_towBarObject", objNull];
-private _surfaces = lineIntersectsSurfaces [
-    AGLToASL (_car modelToWorld _checkStart),
-    AGLToASL (_car modelToWorld _checkEnd),
-    _car,
-    _towBar,
-    true,
-    -1
-];
-private _objects = _surfaces apply {_x select 3};
-
-private ["_plane", "_posIntersect"];
-{
-    if (_x isKindOf "Plane") exitWith {
-        _plane = _x;
-        _posIntersect = _surfaces select _forEachIndex select 0;
-    };
-} forEach _objects;
+private _towArray = [_car] call orbis_ground_fnc_getTowTarget;
+private _plane = _towArray select 0;
+private _towBarCenterPos = _towArray select 1;
+private _attachPos = _towArray select 2;
 
 if (isNull _plane) exitWith {};
 
-missionNamespace setVariable ["orbis_towVehicle", _car];
+private _wheelPos = (getArray (configFile >> "CfgVehicles" >> (typeOf _plane) >> "driveOnComponent")) apply {_plane selectionPosition _x};
+private _wheelPosSorted = [_wheelPos, [], {_x select 1}, "DESCEND"] call BIS_fnc_sortBy;
+private _frontWheelPos = _wheelPosSorted select 0;
+
+private _rearWheels = _wheelPosSorted select {(_x distance _frontWheelPos) > 0.3};
+private _rotateCenter = [0, 0, 0];
+{
+    _rotateCenter = _rotateCenter vectorAdd _x;
+} forEach _rearWheels;
+_rotateCenter = _rotateCenter vectorMultiply (1 / (1 max (count _rearWheels)));
+
+player setVariable ["orbis_towVehicle", _car];
 _car setVariable ["orbis_isTowingPlane", true];
 _car setVariable ["orbis_towingTarget", _plane];
 
 _car setVariable ["orbis_offsetOldArray", []];
-_car setVariable ["orbis_towingPosRelPlane", _plane worldToModel ASLToAGL _posIntersect];
-_car setVariable ["orbis_towingPosRelCar", _car worldToModel ASLToAGL _posIntersect];
+_car setVariable ["orbis_posBarOld", AGLtoASL (_car modelToWorld _towBarCenterPos)];
+_car setVariable ["orbis_towingPosRelCar", _towBarCenterPos];
+_car setVariable ["orbis_towingPosRelPlane", _attachPos];
+_car setVariable ["orbis_towingRotateCenter", _rotateCenter];
 _car setVariable ["orbis_towingTimeOld", time];
 _car setVariable ["orbis_towingFrameOld", diag_frameNo];
 

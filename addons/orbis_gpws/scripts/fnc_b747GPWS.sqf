@@ -12,14 +12,14 @@ _vehicle setVariable ["orbisGPWSreadyBeep", true];
 private ["_altAGLS", "_altASL", "_altRadar",
 	"_posExpect", "_expectTerrainAlt", "_cosAOA", "_flapStatus", "_gearStatus", "_acceleration", "_climeASL", "_climeRadar",
 	"_pitchAndBank", "_pitchAngle", "_bankAngle",
-    "_flightphaseOutput", "_distance", "_altDiff", "_altDiffDesired", "_tooLow", "_terrainWarn", "_dontSink", "_sinkRate"
+    "_flightphaseOutput", "_distance", "_altDiff", "_altDiffDesired", "_tooLow", "_terrainWarn", "_dontSink", "_sinkRate", "_isCritical"
 ];
 private _flightphase = "taxing";
 private _timeOld = time;
 private _speedOld = speed _vehicle;
 private _altASLOld = getPosASL _vehicle select 2;
 private _altRadarOld = (getPos _vehicle select 2) min (getPosASL _vehicle select 2);
-private _criticalWarningCount = 0;
+private _criticalWarningLog = [];
 // private _targetOld = objNull;
 private _speedStall = getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "stallSpeed");
 DEV_CHAT("orbis_gpws: b747GPWS variables init done");
@@ -62,12 +62,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_terrainWarn = (_altRadar > 5) && (_flightphase in ["takeOff", "inFlight", "landing"]) && ((_expectTerrainAlt + orbis_gpws_terrainWarningHeight) > _altASL);
 	_dontSink = (_flightphase isEqualTo "takeOff") && (_altRadar > 5) && (_altRadar < 100) && (_climeASL < 0);
 	_sinkRate = _climeASL < orbis_gpws_maxSinkRate;
-
-	if !(_terrainWarn || _dontSink || _sinkRate) then {
-		_criticalWarningCount = 0;
-	} else {
-		_criticalWarningCount = _criticalWarningCount + 1;
-	};
+	_isCritical = _terrainWarn || _dontSink || _sinkRate;
 
 	_minWarnLevel = _vehicle getVariable ["minWarnLevel", 0];
 	switch (_minWarnLevel) do {
@@ -136,11 +131,19 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 		_vehicle setVariable ["altInformLevel", 1000];
 	};
 
-	// GPWS general speach
+	// GPWS general speech work
 	if (_vehicle getVariable ["orbisGPWSready", true]) then {
+
+		// log & update critical warnings
+		if (_terrainWarn || _dontSink || _sinkRate) then {
+			_criticalWarningLog pushBack time;
+		};
+		_criticalWarningLog = _criticalWarningLog select {(_x + orbis_gpws_pullupLogTime) > time};
+
+		// run speech
 		switch (true) do {
 			// b747_PULLUP (inFlight)
-			case (_criticalWarningCount > 2): {
+			case (_isCritical && (count _criticalWarningLog > 2)): {
 				DEV_CHAT("orbis_gpws: b747_PULLUP");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_PULLUP", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;

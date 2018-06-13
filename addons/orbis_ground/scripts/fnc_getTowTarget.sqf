@@ -35,7 +35,7 @@ if (isNull _target) then {
         if (count _wheelPosSorted > 0) then {
             private _frontWheelPos = _wheelPosSorted select 0;
             private _distance = _frontWheelPos distance2D _checkCenter;
-            if (_distance < 0.3) exitWith {
+            if (_distance < 0.5) exitWith {
                 _target = _vehicle;
                 _attachPos = _frontWheelPos;
             };

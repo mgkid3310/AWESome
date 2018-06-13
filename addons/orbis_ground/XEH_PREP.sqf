@@ -6,6 +6,7 @@ orbis_ground_fnc_deployTowBar = compile preProcessFileLineNumbers "orbis_ground\
 orbis_ground_fnc_detachTowingVehicle = compile preProcessFileLineNumbers "orbis_ground\scripts\fnc_detachTowingVehicle.sqf";
 orbis_ground_fnc_eachFrameHandlerTow = compile preProcessFileLineNumbers "orbis_ground\scripts\fnc_eachFrameHandlerTow.sqf";
 orbis_ground_fnc_getInAddAction = compile preProcessFileLineNumbers "orbis_ground\scripts\fnc_getInAddAction.sqf";
+orbis_ground_fnc_getTowTarget = compile preProcessFileLineNumbers "orbis_ground\scripts\fnc_getTowTarget.sqf";
 orbis_ground_fnc_parkingBrakeRelease = compile preProcessFileLineNumbers "orbis_ground\scripts\fnc_parkingBrakeRelease.sqf";
 orbis_ground_fnc_parkingBrakeSet = compile preProcessFileLineNumbers "orbis_ground\scripts\fnc_parkingBrakeSet.sqf";
 orbis_ground_fnc_removeTowBar = compile preProcessFileLineNumbers "orbis_ground\scripts\fnc_removeTowBar.sqf";

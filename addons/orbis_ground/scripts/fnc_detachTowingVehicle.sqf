@@ -17,9 +17,11 @@ _car setVariable ["orbis_isTowingPlane", false];
 _car setVariable ["orbis_towingTarget", nil];
 
 _car setVariable ["orbis_offsetOldArray", nil];
-_car setVariable ["orbis_towingPosRelPlane", nil];
+_car setVariable ["orbis_posBarOld", nil];
 _car setVariable ["orbis_towingPosRelCar", nil];
+_car setVariable ["orbis_towingPosRelPlane", nil];
+_car setVariable ["orbis_towingRotateCenter", nil];
 _car setVariable ["orbis_towingTimeOld", nil];
 _car setVariable ["orbis_towingFrameOld", nil];
 
-missionNamespace setVariable ["orbis_towVehicle", nil];
+player setVariable ["orbis_towVehicle", nil];

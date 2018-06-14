@@ -6,19 +6,9 @@ private _towArray = [_car] call orbis_ground_fnc_getTowTarget;
 private _plane = _towArray select 0;
 private _towBarCenterPos = _towArray select 1;
 private _attachPos = _towArray select 2;
+private _rotateCenter = _towArray select 3;
 
 if (isNull _plane) exitWith {};
-
-private _wheelPos = (getArray (configFile >> "CfgVehicles" >> (typeOf _plane) >> "driveOnComponent")) apply {_plane selectionPosition _x};
-private _wheelPosSorted = [_wheelPos, [], {_x select 1}, "DESCEND"] call BIS_fnc_sortBy;
-private _frontWheelPos = _wheelPosSorted select 0;
-
-private _rearWheels = _wheelPosSorted select {(_x distance _frontWheelPos) > 0.3};
-private _rotateCenter = [0, 0, 0];
-{
-    _rotateCenter = _rotateCenter vectorAdd _x;
-} forEach _rearWheels;
-_rotateCenter = _rotateCenter vectorMultiply (1 / (1 max (count _rearWheels)));
 
 player setVariable ["orbis_towVehicle", _car];
 _car setVariable ["orbis_isTowingPlane", true];

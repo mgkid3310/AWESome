@@ -57,6 +57,7 @@ if (_isBackward) then {
 
 private _isTowingRear = ((_posRelPlane vectorDiff _rotateCenter) select 1) < 0;
 if (_isTowingRear) then {
+    _targetVelFwd = _targetVelFwd vectorMultiply -1;
     _targetHeading = (_targetHeading + 180) % 360;
 };
 

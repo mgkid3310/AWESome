@@ -1,4 +1,4 @@
-orbis_ground_perFrame = 3;
+orbis_ground_perFrame = 1;
 orbis_ground_minIntegralItem = 25;
 orbis_ground_maxIntegralItem = 30;
 

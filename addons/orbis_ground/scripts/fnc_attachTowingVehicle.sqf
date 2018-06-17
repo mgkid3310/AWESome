@@ -10,6 +10,8 @@ private _rotateCenter = _towArray select 3;
 
 if (isNull _plane) exitWith {};
 
+private _towBar = _car getVariable ["orbis_towBarObject", objNull];
+
 player setVariable ["orbis_towVehicle", _car];
 _car setVariable ["orbis_isTowingPlane", true];
 _car setVariable ["orbis_towingTarget", _plane];

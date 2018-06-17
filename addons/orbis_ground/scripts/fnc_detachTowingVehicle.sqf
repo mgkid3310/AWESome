@@ -5,9 +5,11 @@ private _plane = _car getVariable ["orbis_towingTarget", objNull];
 removeMissionEventHandler ["EachFrame", _eventID];
 
 private _towBar = _car getVariable ["orbis_towBarObject", objNull];
+_plane allowDamage true;
 _car enableCollisionWith _plane;
 _towBar enableCollisionWith _plane;
 if !(local _plane) then {
+    [_plane, true] remoteExec ["allowDamage", _plane];
     [_car, _plane] remoteExec ["enableCollisionWith", _plane];
     [_towBar, _plane] remoteExec ["enableCollisionWith", _plane];
 };

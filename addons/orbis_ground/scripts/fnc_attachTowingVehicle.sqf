@@ -13,6 +13,7 @@ if (isNull _plane) exitWith {};
 player setVariable ["orbis_towVehicle", _car];
 _car setVariable ["orbis_isTowingPlane", true];
 _car setVariable ["orbis_towingTarget", _plane];
+_car setVariable ["orbis_towingOwner", owner _plane];
 
 _car setVariable ["orbis_offsetOldArray", []];
 _car setVariable ["orbis_posBarOld", AGLtoASL (_car modelToWorld _towBarCenterPos)];

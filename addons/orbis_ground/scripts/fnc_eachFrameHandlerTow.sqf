@@ -42,6 +42,9 @@ private _frameOld = _car getVariable ["orbis_towingFrameOld", diag_frameNo];
 if (!(time > _timeOld) || (diag_frameNo < (_frameOld + orbis_ground_perFrame))) exitWith {};
 
 private _timeStep = time - _timeOld;
+private _offsetVector = (AGLtoASL (_car modelToWorld _posRelCar)) vectorDiff (AGLtoASL (_plane modelToWorld _posRelPlane));
+
+if (vectorMagnitude _offsetVector > 3) exitWith {[_car] call orbis_ground_fnc_detachTowingVehicle};
 
 // base velocity
 private _velVector = [0, 0, 0];
@@ -51,7 +54,6 @@ if (count _posBarOld > 0) then {
 private _velBase = _velVector vectorMultiply (1 / _timeStep);
 
 // PID control
-private _offsetVector = (AGLtoASL (_car modelToWorld _posRelCar)) vectorDiff (AGLtoASL (_plane modelToWorld _posRelPlane));
 private _offsetIntegral = [0, 0, 0];
 if (count _offsetOldArray >= orbis_ground_minIntegralItem) then {
     {

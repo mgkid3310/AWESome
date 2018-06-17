@@ -25,9 +25,11 @@ _car setVariable ["orbis_towingRotateCenter", _rotateCenter];
 _car setVariable ["orbis_towingTimeOld", time];
 _car setVariable ["orbis_towingFrameOld", diag_frameNo];
 
+_plane allowDamage false;
 _car disableCollisionWith _plane;
 _towBar disableCollisionWith _plane;
 if !(local _plane) then {
+    [_plane, false] remoteExec ["allowDamage", _plane];
     [_car, _plane] remoteExec ["disableCollisionWith", _plane];
     [_towBar, _plane] remoteExec ["disableCollisionWith", _plane];
 };

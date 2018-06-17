@@ -5,6 +5,15 @@ if !(_car getVariable ["orbis_isTowingPlane", false]) exitWith {};
 private _plane = _car getVariable ["orbis_towingTarget", objNull];
 if (isNull _plane) exitWith {};
 
+if !((alive _car) && (alive _plane)) exitWith {[_car] call orbis_ground_fnc_detachTowingVehicle};
+
+if (speed _car > orbis_ground_maxSpeedFoward) then {
+    _car setVelocity (velocity _car vectorMultiply (orbis_ground_maxSpeedFoward / (abs speed _car)));
+};
+if (speed _car < (-1 * orbis_ground_maxSpeedReverse)) then {
+    _car setVelocity (velocity _car vectorMultiply (orbis_ground_maxSpeedReverse / (abs speed _car)));
+};
+
 private _posCarNow = getPosASL _car;
 private _posPlaneNow = getPosASL _plane;
 

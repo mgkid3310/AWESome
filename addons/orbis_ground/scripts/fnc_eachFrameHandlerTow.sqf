@@ -19,7 +19,7 @@ private _posPlaneNow = getPosASL _plane;
 
 private _towBar = _car getVariable ["orbis_towBarObject", objNull];
 private _ownerOld = _car getVariable ["orbis_towingOwner", owner _plane];
-if (_ownerOld isEqualTo owner _plane) then {
+if !(_ownerOld isEqualTo owner _plane) then {
     _plane allowDamage false;
     _car disableCollisionWith _plane;
     _towBar disableCollisionWith _plane;

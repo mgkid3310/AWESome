@@ -17,6 +17,20 @@ if (speed _car < (-1 * orbis_ground_maxSpeedReverse)) then {
 private _posCarNow = getPosASL _car;
 private _posPlaneNow = getPosASL _plane;
 
+private _towBar = _car getVariable ["orbis_towBarObject", objNull];
+private _ownerOld = _car getVariable ["orbis_towingOwner", owner _plane];
+if (_ownerOld isEqualTo owner _plane) then {
+    _plane allowDamage false;
+    _car disableCollisionWith _plane;
+    _towBar disableCollisionWith _plane;
+    if !(local _plane) then {
+        [_plane, false] remoteExec ["allowDamage", _plane];
+        [_car, _plane] remoteExec ["disableCollisionWith", _plane];
+        [_towBar, _plane] remoteExec ["disableCollisionWith", _plane];
+    };
+    _car setVariable ["orbis_towingOwner", owner _plane];
+};
+
 private _offsetOldArray = _car getVariable ["orbis_offsetOldArray", []];
 private _posBarOld = _car getVariable ["orbis_posBarOld", []];
 private _posRelCar = _car getVariable ["orbis_towingPosRelCar", []];

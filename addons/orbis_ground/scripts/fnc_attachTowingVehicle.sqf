@@ -10,9 +10,12 @@ private _rotateCenter = _towArray select 3;
 
 if (isNull _plane) exitWith {};
 
+private _towBar = _car getVariable ["orbis_towBarObject", objNull];
+
 player setVariable ["orbis_towVehicle", _car];
 _car setVariable ["orbis_isTowingPlane", true];
 _car setVariable ["orbis_towingTarget", _plane];
+_car setVariable ["orbis_towingOwner", owner _plane];
 
 _car setVariable ["orbis_offsetOldArray", []];
 _car setVariable ["orbis_posBarOld", AGLtoASL (_car modelToWorld _towBarCenterPos)];
@@ -22,9 +25,11 @@ _car setVariable ["orbis_towingRotateCenter", _rotateCenter];
 _car setVariable ["orbis_towingTimeOld", time];
 _car setVariable ["orbis_towingFrameOld", diag_frameNo];
 
+_plane allowDamage false;
 _car disableCollisionWith _plane;
 _towBar disableCollisionWith _plane;
 if !(local _plane) then {
+    [_plane, false] remoteExec ["allowDamage", _plane];
     [_car, _plane] remoteExec ["disableCollisionWith", _plane];
     [_towBar, _plane] remoteExec ["disableCollisionWith", _plane];
 };

@@ -5,8 +5,31 @@ if !(_car getVariable ["orbis_isTowingPlane", false]) exitWith {};
 private _plane = _car getVariable ["orbis_towingTarget", objNull];
 if (isNull _plane) exitWith {};
 
+if !((alive _car) && (alive _plane)) exitWith {[_car] call orbis_ground_fnc_detachTowingVehicle};
+
+if (speed _car > orbis_ground_maxSpeedFoward) then {
+    _car setVelocity (velocity _car vectorMultiply (orbis_ground_maxSpeedFoward / (abs speed _car)));
+};
+if (speed _car < (-1 * orbis_ground_maxSpeedReverse)) then {
+    _car setVelocity (velocity _car vectorMultiply (orbis_ground_maxSpeedReverse / (abs speed _car)));
+};
+
 private _posCarNow = getPosASL _car;
 private _posPlaneNow = getPosASL _plane;
+
+private _towBar = _car getVariable ["orbis_towBarObject", objNull];
+private _ownerOld = _car getVariable ["orbis_towingOwner", owner _plane];
+if !(_ownerOld isEqualTo owner _plane) then {
+    _plane allowDamage false;
+    _car disableCollisionWith _plane;
+    _towBar disableCollisionWith _plane;
+    if !(local _plane) then {
+        [_plane, false] remoteExec ["allowDamage", _plane];
+        [_car, _plane] remoteExec ["disableCollisionWith", _plane];
+        [_towBar, _plane] remoteExec ["disableCollisionWith", _plane];
+    };
+    _car setVariable ["orbis_towingOwner", owner _plane];
+};
 
 private _offsetOldArray = _car getVariable ["orbis_offsetOldArray", []];
 private _posBarOld = _car getVariable ["orbis_posBarOld", []];
@@ -57,6 +80,7 @@ if (_isBackward) then {
 
 private _isTowingRear = ((_posRelPlane vectorDiff _rotateCenter) select 1) < 0;
 if (_isTowingRear) then {
+    _targetVelFwd = _targetVelFwd vectorMultiply -1;
     _targetHeading = (_targetHeading + 180) % 360;
 };
 

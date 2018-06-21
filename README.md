@@ -82,9 +82,9 @@ with caution when towing.
 6. Cockpit Utility  
 
 Provides checklists for fixed-wing pilots, with decision  
-speed, rotate speed, etc. automatically filled in. This  
-helps pilots to check if they have anything missing and  
-gives reference speeds for takeoff and landing.  
+speed, rotate speed, etc. automatically filled in. This helps  
+pilots to check if they have anything missing and gives  
+reference speeds for takeoff and landing.  
 &nbsp;
 
 ----------------

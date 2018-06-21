@@ -1,7 +1,7 @@
 private _vehicle = param [0, vehicle player];
 private _mode = param [1, "off"];
 
-if ([] call orbis_gpws_fnc_isCrew) then {
+if ([nil, nil, 1] call orbis_awesome_main_fnc_isCrew) then {
     switch (_mode) do {
         case ("f16"): {
             _vehicle setVariable ["orbisGPWSmodeLocal", "f16"];

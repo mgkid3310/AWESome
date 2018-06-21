@@ -79,6 +79,14 @@ NOTICE : moving too fast may occur collisions, so drive
 with caution when towing.  
 &nbsp;
 
+6. Cockpit Utility  
+
+Provides checklists for fixed-wing pilots, with decision  
+speed, rotate speed, etc. automatically filled in. This  
+helps pilots to check if they have anything missing and  
+gives reference speeds for takeoff and landing.  
+&nbsp;
+
 ----------------
 
 **Issue Tracking**  

@@ -4,4 +4,5 @@ private _hasAction = _vehicle getVariable ["orbis_atc_hasAction", false];
 if (_hasAction || (!(_vehicle isKindOf "Plane") && !(_vehicle isKindOf "Helicopter"))) exitWith {};
 
 _vehicle addAction ["Listen to ATIS", "[] call orbis_atc_fnc_listenATISbroadcast", nil, 1, false, true, "", "(isClass (configFile >> 'CfgPatches' >> 'orbis_atc_environment')) && ([] call orbis_awesome_main_fnc_isCrew) && (_target getVariable ['orbisATISready', true])", 10];
+_vehicle addAction ["Listen to ATIS", "(_this select 0) setVariable ['orbisATISstop', true, true]", nil, 1, false, true, "", "(isClass (configFile >> 'CfgPatches' >> 'orbis_atc_environment')) && ([] call orbis_awesome_main_fnc_isCrew) && !(_target getVariable ['orbisATISstop', false])", 10];
 _vehicle setVariable ["orbis_atc_hasAction", true, true];

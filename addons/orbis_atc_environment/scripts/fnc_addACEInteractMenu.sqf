@@ -10,7 +10,7 @@ private _actionATISmain = [
 	10
 ] call ace_interact_menu_fnc_createAction;
 private _actionATISlisten = [
-	"removeFlag",
+	"startATIS",
 	"Listen to ATIS",
 	"",
 	{[] call orbis_atc_fnc_listenATISbroadcast},

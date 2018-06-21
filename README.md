@@ -85,6 +85,11 @@ Provides checklists for fixed-wing pilots, with decision
 speed, rotate speed, etc. automatically filled in. This helps  
 pilots to check if they have anything missing and gives  
 reference speeds for takeoff and landing.  
+NOTICE : opening a checklist will put the plane to autopilot  
+mode. In this mode, the plane will level itself but may crash  
+when happened during takeoff or landing. Because of this,  
+opening a checklist while engine on is recommended to be  
+conducted by the co-pilot (or gunner).  
 &nbsp;
 
 ----------------

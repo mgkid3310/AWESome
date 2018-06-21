@@ -8,6 +8,7 @@ _atmosphereArray params ["_hasACEWeather", "_temperature", "_dewPoint", "_QFE"];
 _remarksArray params ["_rain", "_lightnings"];
 
 vehicle player setVariable ["orbisATISready", false, true];
+vehicle player setVariable ["orbisATISstop", false, true];
 vehicle player setVariable ["orbisATISlastTime", CBA_missionTime, true];
 
 // time
@@ -130,3 +131,4 @@ switch (true) do {
 };
 
 vehicle player setVariable ["orbisATISready", true, true];
+vehicle player setVariable ["orbisATISstop", true, true];

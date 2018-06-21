@@ -25,14 +25,14 @@ private _actionATISlisten = [
 [
 	"Plane",
 	1,
-	["ACE_SelfActions"],
+	["ACE_SelfActions", "AWESome"],
 	_actionATISmain,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
 	"Plane",
 	1,
-	["ACE_SelfActions", "actionATIS"],
+	["ACE_SelfActions", "AWESome", "actionATIS"],
 	_actionATISlisten,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
@@ -41,14 +41,14 @@ private _actionATISlisten = [
 [
 	"Helicopter",
 	1,
-	["ACE_SelfActions"],
+	["ACE_SelfActions", "AWESome"],
 	_actionATISmain,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
 	"Helicopter",
 	1,
-	["ACE_SelfActions", "actionATIS"],
+	["ACE_SelfActions", "AWESome", "actionATIS"],
 	_actionATISlisten,
     true
 ] call ace_interact_menu_fnc_addActionToClass;

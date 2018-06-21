@@ -101,63 +101,63 @@ private _actionVolumeHigh = [
 [
 	"Plane",
 	1,
-	["ACE_SelfActions"],
+	["ACE_SelfActions", "AWESome"],
 	_actionGPWSmodes,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
 	"Plane",
 	1,
-	["ACE_SelfActions", "orbisGPWSmodes"],
+	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_actionTurnOff,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
 	"Plane",
 	1,
-	["ACE_SelfActions", "orbisGPWSmodes"],
+	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_actionF16,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
 	"Plane",
 	1,
-	["ACE_SelfActions", "orbisGPWSmodes"],
+	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_actionB747,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
 	"Plane",
 	1,
-	["ACE_SelfActions", "orbisGPWSmodes"],
+	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_testF16,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
 	"Plane",
 	1,
-	["ACE_SelfActions", "orbisGPWSmodes"],
+	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_testB747,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
 	"Plane",
 	1,
-	["ACE_SelfActions", "orbisGPWSmodes"],
+	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_testStop,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
 	"Plane",
 	1,
-	["ACE_SelfActions", "orbisGPWSmodes"],
+	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_actionVolumeLow,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
 	"Plane",
 	1,
-	["ACE_SelfActions", "orbisGPWSmodes"],
+	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_actionVolumeHigh,
     true
 ] call ace_interact_menu_fnc_addActionToClass;

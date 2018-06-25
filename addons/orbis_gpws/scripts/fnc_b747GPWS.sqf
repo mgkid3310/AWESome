@@ -10,15 +10,13 @@ DEV_CHAT("orbis_gpws: b747GPWS active");
 _vehicle setVariable ["orbisGPWSready", true];
 _vehicle setVariable ["orbisGPWSreadyBeep", true];
 private ["_altAGLS", "_altASL", "_altRadar",
-	"_posExpect", "_expectTerrainAlt", "_cosAOA", "_flapStatus", "_gearStatus", "_acceleration", "_climeASL", "_climeRadar",
+	"_posExpect", "_expectTerrainAlt", "_cosAOA", "_flapStatus", "_gearStatus", "_climeASL",
 	"_pitchAndBank", "_pitchAngle", "_bankAngle",
     "_flightphaseOutput", "_distance", "_altDiff", "_altDiffDesired", "_tooLow", "_terrainWarn", "_dontSink", "_sinkRate", "_isCritical"
 ];
 private _flightphase = "taxing";
 private _timeOld = time;
-private _speedOld = speed _vehicle;
 private _altASLOld = getPosASL _vehicle select 2;
-private _altRadarOld = (getPos _vehicle select 2) min (getPosASL _vehicle select 2);
 private _criticalWarningLog = [];
 private _speedStall = getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "stallSpeed");
 DEV_CHAT("orbis_gpws: b747GPWS variables init done");
@@ -36,9 +34,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_cosAOA = (vectorDir _vehicle) vectorCos (velocity _vehicle);
 	_flapStatus = _vehicle animationSourcePhase "flap";
 	_gearStatus = _vehicle animationSourcePhase "gear";
-	_acceleration = (speed _vehicle - _speedOld) / (time - _timeOld); // km/h/s
 	_climeASL = (_altASL - _altASLOld) / (time - _timeOld); // m/s
-	_climeRadar = (_altRadar - _altRadarOld) / (time - _timeOld); // m/s
 
     _pitchAndBank = _vehicle call BIS_fnc_getPitchBank;
     _pitchAngle = _pitchAndBank select 0;
@@ -46,9 +42,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 
 	// save data for next loop
 	_timeOld = time;
-	_speedOld = speed _vehicle;
 	_altASLOld = _altASL;
-	_altRadarOld = _altRadar;
 
     // flight phase check
     _flightphaseOutput = [_vehicle, _flightphase, _altRadar, _climeASL, _flapStatus, _gearStatus] call orbis_gpws_fnc_flightPhaseCheck;

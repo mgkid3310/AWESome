@@ -20,17 +20,6 @@ private _actionTurnOff = [
 	[0, 0, 0],
 	10
 ] call ace_interact_menu_fnc_createAction;
-private _actionF16 = [
-	"f16",
-	"Set to Betty (F-16)",
-	"",
-	{_target setVariable ["orbisGPWSmode", "f16", true]},
-	{([nil, nil, 1] call orbis_awesome_main_fnc_isCrew) && (_target getVariable ["orbisGPWSenabled", false]) && (_target getVariable ["orbisGPWSmodeLocal", "off"] != "f16")},
-	{},
-	[],
-	[0, 0, 0],
-	10
-] call ace_interact_menu_fnc_createAction;
 private _actionB747 = [
 	"b747",
 	"Set to B747 GPWS",
@@ -42,12 +31,12 @@ private _actionB747 = [
 	[0, 0, 0],
 	10
 ] call ace_interact_menu_fnc_createAction;
-private _testF16 = [
-	"f16Test",
-	"Test GPWS (Betty)",
+private _actionF16 = [
+	"f16",
+	"Set to Betty (F-16)",
 	"",
-	{[_target] spawn orbis_gpws_fnc_f16GPWStest},
-	{([nil, nil, 1] call orbis_awesome_main_fnc_isCrew) && (_target getVariable ["orbisGPWSenabled", false]) && (_target getVariable ["orbisGPWSmodeLocal", "off"] == "f16") && (_target getVariable ["orbisGPWStestReady", true])},
+	{_target setVariable ["orbisGPWSmode", "f16", true]},
+	{([nil, nil, 1] call orbis_awesome_main_fnc_isCrew) && (_target getVariable ["orbisGPWSenabled", false]) && (_target getVariable ["orbisGPWSmodeLocal", "off"] != "f16")},
 	{},
 	[],
 	[0, 0, 0],
@@ -59,6 +48,17 @@ private _testB747 = [
 	"",
 	{[_target] spawn orbis_gpws_fnc_b747GPWStest},
 	{([nil, nil, 1] call orbis_awesome_main_fnc_isCrew) && (_target getVariable ["orbisGPWSenabled", false]) && (_target getVariable ["orbisGPWSmodeLocal", "off"] == "b747") && (_target getVariable ["orbisGPWStestReady", true])},
+	{},
+	[],
+	[0, 0, 0],
+	10
+] call ace_interact_menu_fnc_createAction;
+private _testF16 = [
+	"f16Test",
+	"Test GPWS (Betty)",
+	"",
+	{[_target] spawn orbis_gpws_fnc_f16GPWStest},
+	{([nil, nil, 1] call orbis_awesome_main_fnc_isCrew) && (_target getVariable ["orbisGPWSenabled", false]) && (_target getVariable ["orbisGPWSmodeLocal", "off"] == "f16") && (_target getVariable ["orbisGPWStestReady", true])},
 	{},
 	[],
 	[0, 0, 0],
@@ -116,13 +116,6 @@ private _actionVolumeHigh = [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
-	_actionF16,
-    true
-] call ace_interact_menu_fnc_addActionToClass;
-[
-	"Plane",
-	1,
-	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_actionB747,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
@@ -130,7 +123,7 @@ private _actionVolumeHigh = [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
-	_testF16,
+	_actionF16,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
@@ -138,6 +131,13 @@ private _actionVolumeHigh = [
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_testB747,
+    true
+] call ace_interact_menu_fnc_addActionToClass;
+[
+	"Plane",
+	1,
+	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
+	_testF16,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [

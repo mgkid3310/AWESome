@@ -31,23 +31,23 @@ private _actionB747 = [
 	[0, 0, 0],
 	10
 ] call ace_interact_menu_fnc_createAction;
-private _actionF16 = [
-	"f16",
-	"Set to Betty (F-16)",
-	"",
-	{_target setVariable ["orbisGPWSmode", "f16", true]},
-	{([nil, nil, 1] call orbis_awesome_main_fnc_isCrew) && (_target getVariable ["orbisGPWSenabled", false]) && (_target getVariable ["orbisGPWSmodeLocal", "off"] != "f16")},
-	{},
-	[],
-	[0, 0, 0],
-	10
-] call ace_interact_menu_fnc_createAction;
 private _testB747 = [
 	"f16Test",
 	"Test GPWS (B747)",
 	"",
 	{[_target] spawn orbis_gpws_fnc_b747GPWStest},
 	{([nil, nil, 1] call orbis_awesome_main_fnc_isCrew) && (_target getVariable ["orbisGPWSenabled", false]) && (_target getVariable ["orbisGPWSmodeLocal", "off"] == "b747") && (_target getVariable ["orbisGPWStestReady", true])},
+	{},
+	[],
+	[0, 0, 0],
+	10
+] call ace_interact_menu_fnc_createAction;
+private _actionF16 = [
+	"f16",
+	"Set to Betty (F-16)",
+	"",
+	{_target setVariable ["orbisGPWSmode", "f16", true]},
+	{([nil, nil, 1] call orbis_awesome_main_fnc_isCrew) && (_target getVariable ["orbisGPWSenabled", false]) && (_target getVariable ["orbisGPWSmodeLocal", "off"] != "f16")},
 	{},
 	[],
 	[0, 0, 0],

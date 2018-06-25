@@ -184,7 +184,6 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 				DEV_CHAT("orbis_gpws: b747_SNKRATE");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_SNKRATE", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
-				_vehicle setVariable ["minWarnLevel", 1];
 			};
 
 			// b747_BNKANGL
@@ -192,7 +191,6 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 				DEV_CHAT("orbis_gpws: b747_BNKANGL");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_BNKANGL", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
-				_vehicle setVariable ["minWarnLevel", 1];
 			};
 
 			// b747_GLIDESLOPE (landing, final)

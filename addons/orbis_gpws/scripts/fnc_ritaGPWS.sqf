@@ -126,6 +126,4 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 };
 DEV_CHAT("orbis_gpws: ritaGPWS loop terminated");
 
-_vehicle removeEventHandler ["Fired", _chaffFlare];
-_vehicle removeEventHandler ["IncomingMissile", _incomingMSL];
 DEV_CHAT("orbis_gpws: ritaGPWS ended");

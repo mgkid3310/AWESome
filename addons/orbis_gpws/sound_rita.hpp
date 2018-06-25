@@ -25,7 +25,7 @@
 	class rita_ControlsF_low: rita_ControlsF {
 		sound[] = {"orbis_gpws\sounds\rita\ControlsF.ogg", RITA_VOL_LOW, 1};
 	};
-	class rita_ejectpilot { // ???
+	class rita_ejectpilot { // ??? maybe too much damage
 		name = "Rita Ejectpilot";
 		length = 1.784;
 		sound[] = {"orbis_gpws\sounds\rita\ejectpilot.ogg", RITA_VOL, 1};
@@ -142,7 +142,7 @@
 	class rita_spodam_low: rita_spodam {
 		sound[] = {"orbis_gpws\sounds\rita\spodam.ogg", RITA_VOL_LOW, 1};
 	};
-	class rita_SysF { // instrument damage
+	class rita_SysF { // avionics system damage
 		name = "Rita SysF";
 		length = 1.724;
 		sound[] = {"orbis_gpws\sounds\rita\SysF.ogg", RITA_VOL, 1};

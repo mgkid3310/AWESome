@@ -49,7 +49,7 @@ switch (_flightphase) do {
 
         if !(_currentILSindex < 0) exitWith {};
 
-        if ((speed _vehicle < 600) && (_flapStatus > 0.1) && (_gearStatus < 0.9) && (_altRadar < 400) && (_climeASL < 0)) exitWith {
+        if ((speed _vehicle < 600) && ((_flapStatus > 0.1) || (_gearStatus < 0.9)) && (_altRadar < 400) && (_climeASL < 0)) exitWith {
             _flightphase = "landing";
             _currentILSindex = -1;
             DEV_CHAT("orbis_gpws: b747GPWS inFlight -> landing (visual app.)");
@@ -83,11 +83,11 @@ switch (_flightphase) do {
             };
         } else {
             switch (true) do {
-                case ((speed _vehicle > 600) || (_flapStatus < 0.1) || (_gearStatus > 0.9) || (_altRadar > 400) || (_climeASL > 5)): {
+                case ((speed _vehicle > 600) || ((_flapStatus < 0.1) && (_gearStatus > 0.9)) || (_altRadar > 400) || (_climeASL > 5)): {
                     _flightphase = "inFlight";
                     DEV_CHAT("orbis_gpws: b747GPWS landing -> inFlight");
                 };
-                case ((speed _vehicle < 400) && (_flapStatus > 0.6) && (_gearStatus < 0.9) && (_altRadar < 100) && (_climeASL < 0)): {
+                case ((speed _vehicle < 400) && ((_flapStatus > 0.6) || (_gearStatus < 0.9)) && (_altRadar < 100) && (_climeASL < 0)): {
                     _flightphase = "final";
                     DEV_CHAT("orbis_gpws: b747GPWS landing -> final (visual app.)");
                 };
@@ -135,7 +135,7 @@ switch (_flightphase) do {
             };
         } else {
             switch (true) do {
-                case ((_flapStatus < 0.1) || (_gearStatus > 0.9) || (_altRadar > 200) || (_climeASL > 5)): {
+                case (((_flapStatus < 0.1) && (_gearStatus > 0.9)) || (_altRadar > 200) || (_climeASL > 5)): {
                     _flightphase = "inFlight";
                     DEV_CHAT("orbis_gpws: b747GPWS landing -> inFlight");
                 };

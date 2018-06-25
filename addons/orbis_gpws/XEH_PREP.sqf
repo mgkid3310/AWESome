@@ -10,5 +10,7 @@ orbis_gpws_fnc_getInAddAction = compile preprocessFileLineNumbers "orbis_gpws\sc
 orbis_gpws_fnc_getInMan = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_getInMan.sqf";
 orbis_gpws_fnc_periodicCheck = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_periodicCheck.sqf";
 orbis_gpws_fnc_playTestSound = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_playTestSound.sqf";
+orbis_gpws_fnc_ritaGPWS = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_ritaGPWS.sqf";
+orbis_gpws_fnc_ritaGPWStest = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_ritaGPWStest.sqf";
 orbis_gpws_fnc_speakGPWS = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_speakGPWS.sqf";
 orbis_gpws_fnc_startGPWS = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_startGPWS.sqf";

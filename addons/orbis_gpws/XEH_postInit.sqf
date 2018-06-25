@@ -28,6 +28,12 @@ orbis_gpws_rwrDetectRange = 25000;
 orbis_gpws_warningDamageLevel = 0.6;
 orbis_gpws_cautionDamageLevel = 0.1;
 
+// rita
+orbis_gpws_ritaPullupTime = 4;
+orbis_gpws_ritaLowAltitude = 50;
+orbis_gpws_ritaMaxAOA = 20;
+orbis_gpws_ritaMaxDive = -60;
+
 // get runways list
 orbis_gpws_runwayList = [[[0, 0, 0], 0, 8]]; // [[position(ASL), heading, approachAngle], ...]
 private _runwayPos = getArray (configFile >> "CfgWorlds" >> worldName >> "ilsPosition");

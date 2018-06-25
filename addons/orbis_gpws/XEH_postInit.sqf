@@ -31,8 +31,8 @@ orbis_gpws_cautionDamageLevel = 0.1;
 // rita
 orbis_gpws_ritaPullupTime = 4;
 orbis_gpws_ritaLowAltitude = 50;
-orbis_gpws_ritaMaxAOA = 20;
-orbis_gpws_ritaMaxDive = -60;
+orbis_gpws_ritaMaxAOA = 15;
+orbis_gpws_ritaMaxDive = -45;
 
 // get runways list
 orbis_gpws_runwayList = [[[0, 0, 0], 0, 8]]; // [[position(ASL), heading, approachAngle], ...]

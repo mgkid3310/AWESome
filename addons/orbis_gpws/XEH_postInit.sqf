@@ -4,29 +4,35 @@ player setVariable ["hasOrbisGPWS", true, true];
 orbis_gpws_takeoffAlt = 60;
 orbis_gpws_airportRange = 6000;
 
+// b747
+orbis_gpws_ftToM = 0.3048;
+orbis_gpws_pullupLogTime = 8;
+orbis_gpws_posExpectTime = 10;
+orbis_gpws_terrainWarningHeight = 10;
+orbis_gpws_tooLowAlt = 50;
+orbis_gpws_maxSinkRate = -40;
+orbis_gpws_maxBankAngle = 45;
+orbis_gpws_appMinAlt = 350 * orbis_gpws_ftToM;
+orbis_gpws_minAlt = 250 * orbis_gpws_ftToM;
+orbis_gpws_delay = 2.0;
+
 // f16
 orbis_gpws_ChaffFlareList = ["CMFlareLauncher", "FIR_CMLauncher", "js_w_fa18_CMFlareLauncher"];
-orbis_gpws_pullupTime = 4;
-orbis_gpws_maxAOA = 15;
-orbis_gpws_lowAltitude = 50;
-orbis_gpws_bingoFuel = 0.2;
+orbis_gpws_f16PullupTime = 4;
+orbis_gpws_f16LowAltitude = 50;
+orbis_gpws_f16MaxAOA = 20; // deg
+orbis_gpws_f16BingoFuel = 0.2;
 orbis_gpws_mslDetectRange = 5000;
 orbis_gpws_mslApproachTime = 3;
 orbis_gpws_rwrDetectRange = 25000;
 orbis_gpws_warningDamageLevel = 0.6;
 orbis_gpws_cautionDamageLevel = 0.1;
 
-// b747
-orbis_gpws_ftToM = 0.3048;
-orbis_gpws_pullupLogTime = 8;
-orbis_gpws_posExpectTime = 10;
-orbis_gpws_tooLowAlt = 50;
-orbis_gpws_maxSinkRate = -40;
-orbis_gpws_terrainWarningHeight = 10;
-orbis_gpws_maxBankAngle = 45;
-orbis_gpws_appMinAlt = 350 * orbis_gpws_ftToM;
-orbis_gpws_minAlt = 250 * orbis_gpws_ftToM;
-orbis_gpws_delay = 2.0;
+// rita
+orbis_gpws_ritaPullupTime = 4;
+orbis_gpws_ritaLowAltitude = 50;
+orbis_gpws_ritaMaxAOA = 15;
+orbis_gpws_ritaMaxDive = -45;
 
 // get runways list
 orbis_gpws_runwayList = [[[0, 0, 0], 0, 8]]; // [[position(ASL), heading, approachAngle], ...]
@@ -58,13 +64,13 @@ for "_i" from 0 to (count (configFile >> "CfgWorlds" >> worldName >> "SecondaryA
 } forEach (allAirports select 1);
 
 if (orbis_awesome_hasACEInteractMenu) then {
-    [] call orbis_gpws_fnc_addACEInteractMenu;
+	[] call orbis_gpws_fnc_addACEInteractMenu;
 } else {
-    player addEventHandler ["GetInMan", {_this call orbis_gpws_fnc_getInAddAction}];
+	player addEventHandler ["GetInMan", {_this call orbis_gpws_fnc_getInAddAction}];
 
-    if !(vehicle player isEqualTo player) then {
-    	[player, "", vehicle player, []] call orbis_gpws_fnc_getInAddAction;
-    };
+	if !(vehicle player isEqualTo player) then {
+		[player, "", vehicle player, []] call orbis_gpws_fnc_getInAddAction;
+	};
 };
 
 // add eventhandler

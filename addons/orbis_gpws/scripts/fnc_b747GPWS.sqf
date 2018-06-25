@@ -10,17 +10,14 @@ DEV_CHAT("orbis_gpws: b747GPWS active");
 _vehicle setVariable ["orbisGPWSready", true];
 _vehicle setVariable ["orbisGPWSreadyBeep", true];
 private ["_altAGLS", "_altASL", "_altRadar",
-	"_posExpect", "_expectTerrainAlt", "_cosAOA", "_flapStatus", "_gearStatus", "_acceleration", "_climeASL", "_climeRadar",
+	"_posExpect", "_expectTerrainAlt", "_cosAOA", "_flapStatus", "_gearStatus", "_climeASL",
 	"_pitchAndBank", "_pitchAngle", "_bankAngle",
-    "_flightphaseOutput", "_distance", "_altDiff", "_altDiffDesired", "_tooLow", "_terrainWarn", "_dontSink", "_sinkRate", "_isCritical"
+	"_flightphaseOutput", "_distance", "_altDiff", "_altDiffDesired", "_tooLow", "_terrainWarn", "_dontSink", "_sinkRate", "_isCritical"
 ];
 private _flightphase = "taxing";
 private _timeOld = time;
-private _speedOld = speed _vehicle;
 private _altASLOld = getPosASL _vehicle select 2;
-private _altRadarOld = (getPos _vehicle select 2) min (getPosASL _vehicle select 2);
 private _criticalWarningLog = [];
-// private _targetOld = objNull;
 private _speedStall = getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "stallSpeed");
 DEV_CHAT("orbis_gpws: b747GPWS variables init done");
 
@@ -33,32 +30,28 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_altASL = getPosASL _vehicle select 2;
 	_altRadar = _altAGLS min _altASL;
 	_posExpect = (getPosASL _vehicle) vectorAdd (velocity _vehicle vectorMultiply orbis_gpws_posExpectTime);
-    _expectTerrainAlt = 0 max getTerrainHeightASL _posExpect;
+	_expectTerrainAlt = 0 max getTerrainHeightASL _posExpect;
 	_cosAOA = (vectorDir _vehicle) vectorCos (velocity _vehicle);
 	_flapStatus = _vehicle animationSourcePhase "flap";
 	_gearStatus = _vehicle animationSourcePhase "gear";
-	_acceleration = (speed _vehicle - _speedOld) / (time - _timeOld); // km/h/s
 	_climeASL = (_altASL - _altASLOld) / (time - _timeOld); // m/s
-	_climeRadar = (_altRadar - _altRadarOld) / (time - _timeOld); // m/s
 
-    _pitchAndBank = _vehicle call BIS_fnc_getPitchBank;
-    _pitchAngle = _pitchAndBank select 0;
-    _bankAngle = _pitchAndBank select 1;
+	_pitchAndBank = _vehicle call BIS_fnc_getPitchBank;
+	_pitchAngle = _pitchAndBank select 0;
+	_bankAngle = _pitchAndBank select 1;
 
 	// save data for next loop
 	_timeOld = time;
-	_speedOld = speed _vehicle;
 	_altASLOld = _altASL;
-	_altRadarOld = _altRadar;
 
-    // flight phase check
-    _flightphaseOutput = [_vehicle, _flightphase, _altRadar, _climeASL, _flapStatus, _gearStatus] call orbis_gpws_fnc_flightPhaseCheck;
+	// flight phase check
+	_flightphaseOutput = [_vehicle, _flightphase, _altRadar, _climeASL, _flapStatus, _gearStatus] call orbis_gpws_fnc_flightPhaseCheck;
 	_flightphase = _flightphaseOutput select 0;
 	_distance = _flightphaseOutput select 1;
 	_altDiff = _flightphaseOutput select 2;
 	_altDiffDesired = _flightphaseOutput select 3;
 
-    _tooLow = !(_flightphase in ["taxing", "touchDown"]) && (_altRadar < orbis_gpws_tooLowAlt);
+	_tooLow = !(_flightphase in ["taxing", "touchDown"]) && (_altRadar < orbis_gpws_tooLowAlt);
 	_terrainWarn = (_altRadar > 5) && (_flightphase in ["takeOff", "inFlight", "landing"]) && ((_expectTerrainAlt + orbis_gpws_terrainWarningHeight) > _altASL);
 	_dontSink = (_flightphase isEqualTo "takeOff") && (_altRadar > 5) && (_altRadar < 100) && (_climeASL < 0);
 	_sinkRate = _climeASL < orbis_gpws_maxSinkRate;
@@ -66,23 +59,32 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 
 	_minWarnLevel = _vehicle getVariable ["minWarnLevel", 0];
 	switch (_minWarnLevel) do {
-	    case (2): {
-	        if (_altDiff > orbis_gpws_minAlt) then {
+		case (2): {
+			if (_altDiff > orbis_gpws_minAlt) then {
 				_minWarnLevel = 1;
 				_vehicle setVariable ["minWarnLevel", 1];
 			};
-	        if (_altDiff > orbis_gpws_appMinAlt) then {
+			if (_altDiff > orbis_gpws_appMinAlt) then {
 				_minWarnLevel = 0;
 				_vehicle setVariable ["minWarnLevel", 0];
 			};
-	    };
+		};
 		case (1): {
-	        if (_altDiff > orbis_gpws_appMinAlt) then {
+			if (_altDiff > orbis_gpws_appMinAlt) then {
 				_minWarnLevel = 0;
 				_vehicle setVariable ["minWarnLevel", 0];
 			};
-	    };
+		};
 		default {};
+	};
+
+	if !(_tooLow) then {
+		if (_flapsWarned) then {
+			_flapsWarned = false;
+		};
+		if (_gearWarned) then {
+			_gearWarned = false;
+		};
 	};
 
 	_altInformLevel = _vehicle getVariable ["altInformLevel", 2000];
@@ -175,15 +177,14 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 				DEV_CHAT("orbis_gpws: b747_SNKRATE");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_SNKRATE", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
-				_vehicle setVariable ["minWarnLevel", 1];
 			};
 
 			// b747_BNKANGL
-			case ((abs _bankAngle) > orbis_gpws_maxBankAngle): {
+			case (time + 5 > _bankWarnedTime) && (abs _bankAngle > orbis_gpws_maxBankAngle): {
 				DEV_CHAT("orbis_gpws: b747_BNKANGL");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_BNKANGL", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
-				_vehicle setVariable ["minWarnLevel", 1];
+				_bankWarnedTime = time;
 			};
 
 			// b747_GLIDESLOPE (landing, final)
@@ -194,18 +195,20 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			};
 
 			// b747_FLAPS (inFlight, landing, final)
-			case (_tooLow && (_flightphase in ["inFlight", "landing", "final"]) && (_flapStatus < 0.1)): {
+			case (_tooLow && !_flapsWarned && (_flightphase in ["inFlight", "landing", "final"]) && (_flapStatus < 0.1)): {
 				DEV_CHAT("orbis_gpws: b747_FLAPS");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_FLAPS", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
+				_flapsWarned = true;
 			};
 
-            // b747_GEAR (inFlight, landing, final)
-            case (_tooLow && (_flightphase in ["inFlight", "landing", "final"]) && (_gearStatus > 0.9)): {
-                DEV_CHAT("orbis_gpws: b747_GEAR");
-                _vehicle setVariable ["orbisGPWSready", false];
-                [_vehicle, "b747_GEAR", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
-            };
+			// b747_GEAR (inFlight, landing, final)
+			case (_tooLow && !_gearWarned && (_flightphase in ["inFlight", "landing", "final"]) && (_gearStatus > 0.9)): {
+				DEV_CHAT("orbis_gpws: b747_GEAR");
+				_vehicle setVariable ["orbisGPWSready", false];
+				[_vehicle, "b747_GEAR", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
+				_gearWarned = true;
+			};
 
 			// b747_MIN (landing / final)
 			case ((_flightphase in ["landing", "final"]) && (_altDiff < orbis_gpws_minAlt) && (_minWarnLevel < 2) && (_climeASL < 0)): {

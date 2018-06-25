@@ -17,15 +17,21 @@ addon for applications.
 
 **Features**  
 
-1. GPWS (Ground Proximity Warning)  
+1. Voice Informer, GPWS(Ground Proximity Warning)  
 
-GPWS has two modes: F-16 and B747. F-16's Bit**ing Betty  
-GPWS includes missile warning and other sound-warnings  
-(voice informers). Gives basic warnings such as: Counter;  
-Warning; Caution; etc., and is suitable for fighter planes.  
-B747's GPWS has more familiar sounds from commercial  
-airliners including altitude informers during landing.  
-Suitable for large transport or support planes.  
+GPWS(incl. Voice Informer) has three modes: B747, F-16  
+and Rita. B747's GPWS has more familiar sounds from  
+commercial airliners including altitude informers during  
+landing. Suitable for large transport or support planes.  
+F-16's Bit**ing Betty GPWS includes missile warning and  
+other sound-warnings (voice informers). Gives basic  
+warnings such as: Counter; Warning; Caution; etc., and is  
+suitable for fighter planes.  
+Rita is a Russian voice informer, and works similar to  
+Bit**ing Betty, but speaks Russian and has fewer  
+features(it's because that I don't speak Russian, so  
+I can't find enough sound files).  
+
 &nbsp;
 
 2. Realistic Aerodynamics (drag, lift, etc.)  
@@ -82,9 +88,14 @@ with caution when towing.
 6. Cockpit Utility  
 
 Provides checklists for fixed-wing pilots, with decision  
-speed, rotate speed, etc. automatically filled in. This  
-helps pilots to check if they have anything missing and  
-gives reference speeds for takeoff and landing.  
+speed, rotate speed, etc. automatically filled in. This helps  
+pilots to check if they have anything missing and gives  
+reference speeds for takeoff and landing.  
+NOTICE : opening a checklist will put the plane to autopilot  
+mode. In this mode, the plane will level itself but may crash  
+when happened during takeoff or landing. Because of this,  
+opening a checklist while engine on is recommended to be  
+conducted by the co-pilot (or gunner).  
 &nbsp;
 
 ----------------

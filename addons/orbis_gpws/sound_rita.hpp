@@ -1,6 +1,6 @@
 	class rita_altitude {
 		name = "Rita Aaltitude";
-		length = 2.14;
+		length = 2.413;
 		sound[] = {"orbis_gpws\sounds\rita\altitude.ogg", RITA_VOL, 1};
 		titles[] = {};
 	};
@@ -9,7 +9,7 @@
 	};
 	class rita_angle {
 		name = "Rita Angle";
-		length = 2.14;
+		length = 5.092;
 		sound[] = {"orbis_gpws\sounds\rita\angle.ogg", RITA_VOL, 1};
 		titles[] = {};
 	};
@@ -18,7 +18,7 @@
 	};
 	class rita_ControlsF {
 		name = "Rita ControlsF";
-		length = 2.14;
+		length = 2.141;
 		sound[] = {"orbis_gpws\sounds\rita\ControlsF.ogg", RITA_VOL, 1};
 		titles[] = {};
 	};
@@ -27,7 +27,7 @@
 	};
 	class rita_ejectpilot {
 		name = "Rita Ejectpilot";
-		length = 2.14;
+		length = 1.784;
 		sound[] = {"orbis_gpws\sounds\rita\ejectpilot.ogg", RITA_VOL, 1};
 		titles[] = {};
 	};
@@ -36,7 +36,7 @@
 	};
 	class rita_fuel500 {
 		name = "Rita Fuel500";
-		length = 2.14;
+		length = 2.899;
 		sound[] = {"orbis_gpws\sounds\rita\fuel500.ogg", RITA_VOL, 1};
 		titles[] = {};
 	};
@@ -45,7 +45,7 @@
 	};
 	class rita_fuel800 {
 		name = "Rita Fuel800";
-		length = 2.14;
+		length = 3.012;
 		sound[] = {"orbis_gpws\sounds\rita\fuel800.ogg", RITA_VOL, 1};
 		titles[] = {};
 	};
@@ -54,7 +54,7 @@
 	};
 	class rita_fuel1500 {
 		name = "Rita Fuel1500";
-		length = 2.14;
+		length = 3.261;
 		sound[] = {"orbis_gpws\sounds\rita\fuel1500.ogg", RITA_VOL, 1};
 		titles[] = {};
 	};
@@ -63,7 +63,7 @@
 	};
 	class rita_FuelF {
 		name = "Rita FuelF";
-		length = 2.14;
+		length = 2.255;
 		sound[] = {"orbis_gpws\sounds\rita\FuelF.ogg", RITA_VOL, 1};
 		titles[] = {};
 	};
@@ -72,7 +72,7 @@
 	};
 	class rita_fuellow {
 		name = "Rita Fuellow";
-		length = 2.14;
+		length = 2.123;
 		sound[] = {"orbis_gpws\sounds\rita\fuellow.ogg", RITA_VOL, 1};
 		titles[] = {};
 	};
@@ -81,7 +81,7 @@
 	};
 	class rita_LEF {
 		name = "Rita LEF";
-		length = 2.14;
+		length = 2.569;
 		sound[] = {"orbis_gpws\sounds\rita\LEF.ogg", RITA_VOL, 1};
 		titles[] = {};
 	};
@@ -90,7 +90,7 @@
 	};
 	class rita_online {
 		name = "Rita Online";
-		length = 2.14;
+		length = 1.069;
 		sound[] = {"orbis_gpws\sounds\rita\online.ogg", RITA_VOL, 1};
 		titles[] = {};
 	};
@@ -99,7 +99,7 @@
 	};
 	class rita_overload {
 		name = "Rita Overload";
-		length = 2.14;
+		length = 2.849;
 		sound[] = {"orbis_gpws\sounds\rita\overload.ogg", RITA_VOL, 1};
 		titles[] = {};
 	};
@@ -108,7 +108,7 @@
 	};
 	class rita_pullUp {
 		name = "Rita Pullup";
-		length = 2.14;
+		length = 1.750;
 		sound[] = {"orbis_gpws\sounds\rita\pullup.ogg", RITA_VOL, 1};
 		titles[] = {};
 	};
@@ -117,7 +117,7 @@
 	};
 	class rita_REF {
 		name = "Rita REF";
-		length = 2.14;
+		length = 2.609;
 		sound[] = {"orbis_gpws\sounds\rita\REF.ogg", RITA_VOL, 1};
 		titles[] = {};
 	};
@@ -126,7 +126,7 @@
 	};
 	class rita_speed {
 		name = "Rita Speed";
-		length = 2.14;
+		length = 1.901;
 		sound[] = {"orbis_gpws\sounds\rita\speed.ogg", RITA_VOL, 1};
 		titles[] = {};
 	};
@@ -135,7 +135,7 @@
 	};
 	class rita_spodam {
 		name = "Rita Spodam";
-		length = 2.14;
+		length = 1.915;
 		sound[] = {"orbis_gpws\sounds\rita\spodam.ogg", RITA_VOL, 1};
 		titles[] = {};
 	};
@@ -144,7 +144,7 @@
 	};
 	class rita_SysF {
 		name = "Rita SysF";
-		length = 2.14;
+		length = 1.724;
 		sound[] = {"orbis_gpws\sounds\rita\SysF.ogg", RITA_VOL, 1};
 		titles[] = {};
 	};

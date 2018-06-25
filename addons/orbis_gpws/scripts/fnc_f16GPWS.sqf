@@ -38,7 +38,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_altAGLS = getPos _vehicle select 2;
 	_altASL = getPosASL _vehicle select 2;
 	_altRadar = _altAGLS min _altASL;
-	_posExpect = (getPosASL _vehicle) vectorAdd (velocity _vehicle vectorMultiply orbis_gpws_pullupTime);
+	_posExpect = (getPosASL _vehicle) vectorAdd (velocity _vehicle vectorMultiply orbis_gpws_f16PullupTime);
     _expectTerrainAlt = 0 max getTerrainHeightASL _posExpect;
 	_cosAOA = (vectorDir _vehicle) vectorCos (velocity _vehicle);
 	_flapStatus = _vehicle animationSourcePhase "flap";
@@ -138,7 +138,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			};
 
 			// f16_altitude (inFlight)
-			case ((_altRadar < orbis_gpws_lowAltitude) && (_flightphase isEqualTo "inFlight")): {
+			case ((_altRadar < orbis_gpws_f16LowAltitude) && (_flightphase isEqualTo "inFlight")): {
 				DEV_CHAT("orbis_gpws: f16_altitude");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "f16_altitude"] spawn orbis_gpws_fnc_speakGPWS;
@@ -161,7 +161,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			};
 
 			// f16_bingo
-			case ((fuel _vehicle < orbis_gpws_bingoFuel) && !(_vehicle getVariable ["bingoAlerted", false])): {
+			case ((fuel _vehicle < orbis_gpws_f16BingoFuel) && !(_vehicle getVariable ["bingoAlerted", false])): {
 				DEV_CHAT("orbis_gpws: f16_bingo");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "f16_bingo"] spawn orbis_gpws_fnc_speakGPWS;
@@ -191,7 +191,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			};
 
 			// f16_highAOA
-			case ((_cosAOA < cos orbis_gpws_maxAOA) && (speed _vehicle > 50)): {
+			case ((_cosAOA < cos orbis_gpws_f16MaxAOA) && (speed _vehicle > 50)): {
 				DEV_CHAT("orbis_gpws: f16_highAOA");
 				_vehicle setVariable ["orbisGPWSreadyBeep", false];
 				[_vehicle, "f16_highAOA", nil, nil, "orbisGPWSreadyBeep"] spawn orbis_gpws_fnc_speakGPWS;

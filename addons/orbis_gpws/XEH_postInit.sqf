@@ -19,7 +19,7 @@ orbis_gpws_delay = 2.0;
 // f16
 orbis_gpws_ChaffFlareList = ["CMFlareLauncher", "FIR_CMLauncher", "js_w_fa18_CMFlareLauncher"];
 orbis_gpws_pullupTime = 4;
-orbis_gpws_maxAOA = 15;
+orbis_gpws_maxAOA = 20;
 orbis_gpws_lowAltitude = 50;
 orbis_gpws_bingoFuel = 0.2;
 orbis_gpws_mslDetectRange = 5000;

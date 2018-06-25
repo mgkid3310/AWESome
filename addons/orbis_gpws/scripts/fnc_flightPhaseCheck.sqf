@@ -42,14 +42,16 @@ switch (_flightphase) do {
             };
         } forEach orbis_gpws_runwayList;
 
-        if ((_currentILSindex < 0) && (speed _vehicle < 600) && (_flapStatus > 0.1) && (_gearStatus < 0.9) && (_altRadar < 400) && (_climeASL < 0)) then {
+        if !(_currentILSindex < 0) exitWith {};
+
+        if ((speed _vehicle < 600) && (_flapStatus > 0.1) && (_gearStatus < 0.9) && (_altRadar < 400) && (_climeASL < 0)) exitWith {
             _flightphase = "landing";
             _currentILSindex = -1;
             DEV_CHAT("orbis_gpws: b747GPWS inFlight -> landing (visual app.)");
         };
     };
     case ("landing"): {
-        if (_currentILSindex > -1) then {
+        if !(_currentILSindex < 0) then {
             _ILSarray = orbis_gpws_runwayList select _currentILSindex;
             _altDiff = _altASL - (_ILSarray select 0 select 2);
             _distance = (_ILSarray select 0) distance2D (getPos _vehicle);
@@ -107,7 +109,7 @@ switch (_flightphase) do {
         };
     };
     case ("final"): {
-        if (_currentILSindex > -1) then {
+        if !(_currentILSindex < 0) then {
             _ILSarray = orbis_gpws_runwayList select _currentILSindex;
             _altDiff = _altASL - (_ILSarray select 0 select 2);
             _distance = (_ILSarray select 0) distance2D (getPos _vehicle);

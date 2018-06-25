@@ -1,3 +1,4 @@
+// parent action
 private _actionGPWSmodes = [
 	"orbisGPWSmodes",
 	"GPWS",
@@ -9,6 +10,8 @@ private _actionGPWSmodes = [
 	[0, 0, 0],
 	10
 ] call ace_interact_menu_fnc_createAction;
+
+// turn GPWS off
 private _actionTurnOff = [
 	"turnOff",
 	"Turn off GPWS",
@@ -20,6 +23,8 @@ private _actionTurnOff = [
 	[0, 0, 0],
 	10
 ] call ace_interact_menu_fnc_createAction;
+
+// b747
 private _actionB747 = [
 	"b747",
 	"Set to B747 GPWS",
@@ -42,6 +47,8 @@ private _testB747 = [
 	[0, 0, 0],
 	10
 ] call ace_interact_menu_fnc_createAction;
+
+// f16
 private _actionF16 = [
 	"f16",
 	"Set to Betty (F-16)",
@@ -75,6 +82,8 @@ private _testStop = [
 	[0, 0, 0],
 	10
 ] call ace_interact_menu_fnc_createAction;
+
+// volume change
 private _actionVolumeLow = [
 	"volumeLow",
 	"Lower Volume",

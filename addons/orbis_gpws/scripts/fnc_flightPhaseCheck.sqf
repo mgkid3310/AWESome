@@ -1,7 +1,7 @@
 #include "header_macros.hpp"
 
 params ["_vehicle", "_flightphase", "_altRadar", "_climeASL", "_flapStatus", "_gearStatus"];
-private ["_headingDiff", "_approachAngle", "_ILSarray", "_currentILSindex"];
+private ["_headingDiff", "_approachAngle", "_ILSarray"];
 private _currentILSindex = -1;
 private _distance = 10000;
 private _distanceReturn = 10000;
@@ -23,6 +23,13 @@ switch (_flightphase) do {
         };
     };
     case ("inFlight"): {
+	    _currentILSindex = -1;
+
+	    if (isTouchingGround _vehicle) exitWith {
+            _flightphase = "touchDown";
+            DEV_CHAT("orbis_gpws: b747GPWS inFlight -> touchDown");
+        };
+
         {
             _altDiff = _altASL - (_x select 0 select 2);
             _distance = (_x select 0) distance2D (getPos _vehicle);
@@ -35,7 +42,7 @@ switch (_flightphase) do {
             };
         } forEach orbis_gpws_runwayList;
 
-        if ((speed _vehicle < 600) && (_flapStatus > 0.1) && (_gearStatus < 0.9) && (_altRadar < 400) && (_climeASL < 0)) then {
+        if ((_currentILSindex < 0) && (speed _vehicle < 600) && (_flapStatus > 0.1) && (_gearStatus < 0.9) && (_altRadar < 400) && (_climeASL < 0)) then {
             _flightphase = "landing";
             _currentILSindex = -1;
             DEV_CHAT("orbis_gpws: b747GPWS inFlight -> landing (visual app.)");

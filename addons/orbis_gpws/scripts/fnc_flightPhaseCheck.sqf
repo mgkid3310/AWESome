@@ -21,6 +21,11 @@ switch (_flightphase) do {
             _flightphase = "inFlight";
             DEV_CHAT("orbis_gpws: b747GPWS takeOff -> inFlight");
         };
+
+	    if (isTouchingGround _vehicle) exitWith {
+            _flightphase = "touchDown";
+            DEV_CHAT("orbis_gpws: b747GPWS takeOff -> touchDown");
+        };
     };
     case ("inFlight"): {
 	    _currentILSindex = -1;

@@ -37,7 +37,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_altASL = getPosASL _vehicle select 2;
 	_altRadar = _altAGLS min _altASL;
 	_posExpect = (getPosASL _vehicle) vectorAdd (velocity _vehicle vectorMultiply orbis_gpws_f16PullupTime);
-    _expectTerrainAlt = 0 max getTerrainHeightASL _posExpect;
+	_expectTerrainAlt = 0 max getTerrainHeightASL _posExpect;
 	_cosAOA = (vectorDir _vehicle) vectorCos (velocity _vehicle);
 	_flapStatus = _vehicle animationSourcePhase "flap";
 	_gearStatus = _vehicle animationSourcePhase "gear";
@@ -66,22 +66,22 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_damageNow = damage _vehicle;
 	_damageWarnLevel = _vehicle getVariable ["damageWarnLevel", 0];
 	switch (_damageWarnLevel) do {
-	    case (2): {
-	        if (_damageNow < orbis_gpws_warningDamageLevel) then {
+		case (2): {
+			if (_damageNow < orbis_gpws_warningDamageLevel) then {
 				_damageWarnLevel = 1;
 				_vehicle setVariable ["damageWarnLevel", 1];
 			};
-	        if (_damageNow < orbis_gpws_cautionDamageLevel) then {
+			if (_damageNow < orbis_gpws_cautionDamageLevel) then {
 				_damageWarnLevel = 0;
 				_vehicle setVariable ["damageWarnLevel", 0];
 			};
-	    };
+		};
 		case (1): {
-	        if (_damageNow < orbis_gpws_cautionDamageLevel) then {
+			if (_damageNow < orbis_gpws_cautionDamageLevel) then {
 				_damageWarnLevel = 0;
 				_vehicle setVariable ["damageWarnLevel", 0];
 			};
-	    };
+		};
 		default {};
 	};
 

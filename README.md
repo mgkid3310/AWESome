@@ -27,10 +27,10 @@ F-16's Bitching Betty GPWS includes missile warning and
 other sound-warnings (voice informers). Gives basic  
 warnings such as: Counter; Warning; Caution; etc., and is  
 suitable for fighter planes.  
-Rita is a Russian voice informer, and works similar to  
+Rita is a Russian voice informer which works similar to  
 Bitching Betty, but speaks Russian and has fewer  
-features(it's because that I don't speak Russian, so  
-I can't find enough sound files).  
+features(it's mainly because I don't speak Russian, and  
+therefore I can't find enough sound files).  
 
 &nbsp;
 

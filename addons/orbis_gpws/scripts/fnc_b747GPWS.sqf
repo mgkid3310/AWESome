@@ -20,7 +20,6 @@ private _speedOld = speed _vehicle;
 private _altASLOld = getPosASL _vehicle select 2;
 private _altRadarOld = (getPos _vehicle select 2) min (getPosASL _vehicle select 2);
 private _criticalWarningLog = [];
-// private _targetOld = objNull;
 private _speedStall = getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "stallSpeed");
 DEV_CHAT("orbis_gpws: b747GPWS variables init done");
 

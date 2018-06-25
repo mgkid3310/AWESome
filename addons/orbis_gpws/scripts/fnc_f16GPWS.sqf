@@ -27,7 +27,7 @@ DEV_CHAT("orbis_gpws: f16GPWS variables init done");
 
 // add eventhandlers & store ID
 private _chaffFlare = _vehicle addEventHandler ["Fired", {_this spawn orbis_gpws_fnc_f16ChaffFlare}]; // f16_chaffFlare, f16_chaffFlareLow, f16_chaffFlareOut
-private _incomingMSL = _vehicle addEventHandler ["IncomingMissile", {_this spawn orbis_gpws_fnc_f16incomingMSL}]; // stack list of incoming MSLs
+private _incomingMSL = _vehicle addEventHandler ["IncomingMissile", {_this spawn orbis_gpws_fnc_incomingMSL}]; // stack list of incoming MSLs
 DEV_CHAT("orbis_gpws: f16GPWS eventHandler added");
 
 private _frameNo = diag_frameNo;

@@ -123,14 +123,14 @@ private _actionVolumeHigh = [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
-	_actionF16,
+	_testB747,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
-	_testB747,
+	_actionF16,
     true
 ] call ace_interact_menu_fnc_addActionToClass;
 [

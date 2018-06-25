@@ -85,6 +85,15 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 		default {};
 	};
 
+	if !(_tooLow) then {
+		if (_flapsWarned) then {
+			_flapsWarned = false;
+		};
+		if (_gearWarned) then {
+			_gearWarned = false;
+		};
+	};
+
 	_altInformLevel = _vehicle getVariable ["altInformLevel", 2000];
 	if ((_altInformLevel < 10) && (_altDiff > (10 * orbis_gpws_ftToM))) then {
 		_altInformLevel = 10;
@@ -194,17 +203,19 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			};
 
 			// b747_FLAPS (inFlight, landing, final)
-			case (_tooLow && (_flightphase in ["inFlight", "landing", "final"]) && (_flapStatus < 0.1)): {
+			case (_tooLow && !_flapsWarned && (_flightphase in ["inFlight", "landing", "final"]) && (_flapStatus < 0.1)): {
 				DEV_CHAT("orbis_gpws: b747_FLAPS");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_FLAPS", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
+				_flapsWarned = true;
 			};
 
             // b747_GEAR (inFlight, landing, final)
-            case (_tooLow && (_flightphase in ["inFlight", "landing", "final"]) && (_gearStatus > 0.9)): {
+            case (_tooLow && !_gearWarned && (_flightphase in ["inFlight", "landing", "final"]) && (_gearStatus > 0.9)): {
                 DEV_CHAT("orbis_gpws: b747_GEAR");
                 _vehicle setVariable ["orbisGPWSready", false];
                 [_vehicle, "b747_GEAR", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
+                _gearWarned = true;
             };
 
 			// b747_MIN (landing / final)

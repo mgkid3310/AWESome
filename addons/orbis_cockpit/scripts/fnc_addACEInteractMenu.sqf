@@ -75,6 +75,17 @@ private _openChecklist06 = [
 	[0, 0, 0],
 	10
 ] call ace_interact_menu_fnc_createAction;
+private _closeChecklist = [
+	"closeChecklist",
+	"Close Checklist",
+	"",
+	{["none"] call orbis_cockpit_fnc_openChecklist},
+	{([nil, nil, 1] call orbis_awesome_main_fnc_isCrew) && !(orbis_cockpit_currentChecklist isEqualTo "none")},
+	{},
+	[],
+	[0, 0, 0],
+	10
+] call ace_interact_menu_fnc_createAction;
 
 [
 	"Plane",
@@ -123,5 +134,12 @@ private _openChecklist06 = [
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_openChecklist06,
+    true
+] call ace_interact_menu_fnc_addActionToClass;
+[
+	"Plane",
+	1,
+	["ACE_SelfActions", "AWESome", "checklistMain"],
+	_closeChecklist,
     true
 ] call ace_interact_menu_fnc_addActionToClass;

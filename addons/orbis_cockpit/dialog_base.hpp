@@ -67,7 +67,7 @@ class buttonPrevious_base: control_base {
 	offsetY = 0;
 	offsetPressedX = 0;
 	offsetPressedY = 0;
-	onMouseButtonClick = "[false] call orbis_cockpit_fnc_nextChecklist";
+	onButtonClick = "[false] call orbis_cockpit_fnc_nextChecklist";
 };
 class buttonNext_base: buttonPrevious_base {
 	idc = 1802;
@@ -75,7 +75,7 @@ class buttonNext_base: buttonPrevious_base {
 	y = "0.0004 * 1100 * safezoneW + 0.2 * safezoneH + safezoneY";
 	w = "0.0004 * 119 * safezoneW";
 	h = "0.0004 * 53 * safezoneW";
-	onMouseButtonClick = "[true] call orbis_cockpit_fnc_nextChecklist";
+	onButtonClick = "[true] call orbis_cockpit_fnc_nextChecklist";
 };
 class text_static_base: control_base {
 	colorText[] = {0.3359375, 0.33984375, 0.35546875, 0.65};

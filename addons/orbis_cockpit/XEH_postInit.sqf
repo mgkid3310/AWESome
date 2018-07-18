@@ -7,6 +7,7 @@ orbis_cockpit_checklistArray = ["pre_start_checklist",
     "landing_taxi_to_ramp_checklist"
 ];
 
+// add actions (ACE / vanilla)
 if (orbis_awesome_hasACEInteractMenu) then {
     [] call orbis_cockpit_fnc_addACEInteractMenu;
 } else {

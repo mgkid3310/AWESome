@@ -63,6 +63,7 @@ for "_i" from 0 to (count (configFile >> "CfgWorlds" >> worldName >> "SecondaryA
 	};
 } forEach (allAirports select 1);
 
+// add actions (ACE / vanilla)
 if (orbis_awesome_hasACEInteractMenu) then {
 	[] call orbis_gpws_fnc_addACEInteractMenu;
 } else {

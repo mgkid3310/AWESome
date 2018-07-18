@@ -16,7 +16,8 @@ while {((player distance _monitor) < 10) && (player getVariable ["isUsingRadarSc
         _helies = (entities "Helicopter") select {(side driver _x in [side _controller, civilian]) && (alive _x)};
 
         {
-            _x params ["_marker1", "_marker2", "_marker3"];
+            _x params ["_marker0", "_marker1", "_marker2", "_marker3"];
+            deleteMarkerLocal _marker0;
             deleteMarkerLocal _marker1;
             deleteMarkerLocal _marker2;
             deleteMarkerLocal _marker3;

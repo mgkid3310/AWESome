@@ -28,6 +28,7 @@ if (hasInterface) then {
 	] call CBA_Settings_fnc_init;
 };
 
+// add actions (ACE / vanilla)
 if (orbis_awesome_hasACEInteractMenu) then {
     [] call orbis_atc_fnc_addACEInteractMenu;
 } else {

@@ -10,6 +10,7 @@ orbis_ground_Dconst = 0.2;
 orbis_ground_minIntegralItem = 25;
 orbis_ground_maxIntegralItem = 30;
 
+// add actions (ACE / vanilla)
 if (orbis_awesome_hasACEInteractMenu) then {
     [] call orbis_ground_fnc_addACEInteractMenu;
 } else {

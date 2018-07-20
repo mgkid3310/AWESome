@@ -10,23 +10,21 @@ orbis_atc_spaceMax = 1.5;
 orbis_atc_spaceMin = 0.75;
 
 // CBA based addon setting init
-if (hasInterface) then {
-	private _enabled = profileNamespace getVariable ["orbis_atc_updateATISself", true];
-	missionNamespace setVariable ["orbis_atc_updateATISself", _required];
+private _enabled = profileNamespace getVariable ["orbis_atc_updateATISself", true];
+missionNamespace setVariable ["orbis_atc_updateATISself", _required];
 
-	[
-		"orbis_atc_updateATISself",
-		"CHECKBOX",
-		["Real-time ATIS data update", "Update ATIS data everytime when ATIS is played"],
-		"AWESome",
-		_enabled,
-		nil,
-		{
-			missionNamespace setVariable ["orbis_atc_updateATISself", _this];
-			profileNamespace setVariable ["orbis_atc_updateATISself", _this];
-		}
-	] call CBA_Settings_fnc_init;
-};
+[
+	"orbis_atc_updateATISself",
+	"CHECKBOX",
+	["Real-time ATIS data update", "Update ATIS data everytime when ATIS is played"],
+	"AWESome",
+	_enabled,
+	nil,
+	{
+		missionNamespace setVariable ["orbis_atc_updateATISself", _this];
+		profileNamespace setVariable ["orbis_atc_updateATISself", _this];
+	}
+] call CBA_Settings_fnc_init;
 
 // add actions (ACE / vanilla)
 if (orbis_awesome_hasACEInteractMenu) then {

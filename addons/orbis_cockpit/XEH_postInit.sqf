@@ -1,3 +1,4 @@
+orbis_cockpit_lastChecklist = "pre_start_checklist";
 orbis_cockpit_currentChecklist = "none";
 orbis_cockpit_checklistArray = ["pre_start_checklist",
     "startup_before_taxi_checklist",

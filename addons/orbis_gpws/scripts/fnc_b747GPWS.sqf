@@ -13,12 +13,15 @@ private ["_altAGLS", "_altASL", "_altRadar",
 	"_posExpect", "_expectTerrainAlt", "_cosAOA", "_flapStatus", "_gearStatus", "_climeASL",
 	"_pitchAndBank", "_pitchAngle", "_bankAngle",
 	"_flightphaseOutput", "_distance", "_altDiff", "_altDiffDesired",
-	"_flapswarned", "_bankwarnedtime", "_tooLow", "_terrainWarn", "_dontSink", "_sinkRate", "_isCritical"
+	"_tooLow", "_terrainWarn", "_dontSink", "_sinkRate", "_isCritical"
 ];
 private _flightphase = "taxing";
 private _timeOld = time;
 private _altASLOld = getPosASL _vehicle select 2;
 private _criticalWarningLog = [];
+private _gearwarned = false;
+private _flapsWarned = false;
+private _bankWarnedTime = 0;
 private _speedStall = getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "stallSpeed");
 DEV_CHAT("orbis_gpws: b747GPWS variables init done");
 
@@ -181,7 +184,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			};
 
 			// b747_BNKANGL
-			case (time + 5 > _bankWarnedTime) && (abs _bankAngle > orbis_gpws_maxBankAngle): {
+			case ((time + 5 > _bankWarnedTime) && (abs _bankAngle > orbis_gpws_maxBankAngle)): {
 				DEV_CHAT("orbis_gpws: b747_BNKANGL");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_BNKANGL", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;

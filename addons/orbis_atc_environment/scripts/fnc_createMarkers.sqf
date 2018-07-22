@@ -17,21 +17,21 @@ private _return = [];
         case 2: {_line3 = "0" + _line3;};
     };
 
-    private _marker0 = createMarkerLocal [format ["orbis_atc_%1_%2_0", _type, count _return], getPos _x];
+    private _marker0 = createMarkerLocal [format ["orbis_atc_%1_%2_0", _type, _forEachIndex], getPos _x];
     _marker0 setMarkerTypeLocal _type;
     _marker0 setMarkerTextLocal "";
 
-    private _marker1 = createMarkerLocal [format ["orbis_atc_%1_%2_1", _type, count _return], getPos _x];
+    private _marker1 = createMarkerLocal [format ["orbis_atc_%1_%2_1", _type, _forEachIndex], getPos _x];
     _marker1 setMarkerTypeLocal _type;
     _marker1 setMarkerSizeLocal [0, 0];
     _marker1 setMarkerTextLocal _line1;
 
-    private _marker2 = createMarkerLocal [format ["orbis_atc_%1_%2_2", _type, count _return], getPos _x];
+    private _marker2 = createMarkerLocal [format ["orbis_atc_%1_%2_2", _type, _forEachIndex], getPos _x];
     _marker2 setMarkerTypeLocal _type;
     _marker2 setMarkerSizeLocal [0, 0];
     _marker2 setMarkerTextLocal _line2;
 
-    private _marker3 = createMarkerLocal [format ["orbis_atc_%1_%2_3", _type, count _return], getPos _x];
+    private _marker3 = createMarkerLocal [format ["orbis_atc_%1_%2_3", _type, _forEachIndex], getPos _x];
     _marker3 setMarkerTypeLocal _type;
     _marker3 setMarkerSizeLocal [0, 0];
     _marker3 setMarkerTextLocal _line3;

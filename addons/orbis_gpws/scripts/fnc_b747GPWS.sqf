@@ -13,12 +13,14 @@ private ["_altAGLS", "_altASL", "_altRadar",
 	"_posExpect", "_expectTerrainAlt", "_cosAOA", "_flapStatus", "_gearStatus", "_climeASL",
 	"_pitchAndBank", "_pitchAngle", "_bankAngle",
 	"_flightphaseOutput", "_distance", "_altDiff", "_altDiffDesired",
-	"_flapsWarned", "_bankWarnedTime", "_tooLow", "_terrainWarn", "_dontSink", "_sinkRate", "_isCritical"
+	"_tooLow", "_terrainWarn", "_dontSink", "_sinkRate", "_isCritical"
 ];
 private _flightphase = "taxing";
 private _timeOld = time;
 private _altASLOld = getPosASL _vehicle select 2;
 private _criticalWarningLog = [];
+private _flapsWarned = false;
+private _bankWarnedTime = 0;
 private _speedStall = getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "stallSpeed");
 DEV_CHAT("orbis_gpws: b747GPWS variables init done");
 

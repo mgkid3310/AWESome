@@ -51,6 +51,7 @@ In case of crosswinds, de-crab or sideslip landings will be
 needed. Can enable/disable at addon settings (enabled as  
 default), and effects of wind can be adjusted with "Wind  
 Multiplier" setting.  
+
 NOTICE : in low-FPS and high-speed situation, this feature  
 MAY cause some sutters. if it does so, please temporarily  
 disable this feature in addon settings.  
@@ -97,6 +98,7 @@ the vehicle. Once the towbar is deployed, place target
 plane's front gear at the end of the towbar, then use Action  
 to connect target plane to the towbar. After towing around,  
 stop the vehicle and disconnect target plane using Action.  
+
 NOTICE : moving too fast may occur collisions, so drive  
 with caution when towing.  
 &nbsp;

@@ -4,6 +4,8 @@ params ["_unit", "_position", "_vehicle", "_turret"];
 
 DEV_CHAT("orbis_gpws: getInMan run");
 
+if !([_unit, _vehicle, 1] call orbis_awesome_main_fnc_isCrew) exitWith {);
+
 // check if has GPWS enabled
 private _GPWSenabled = _vehicle getVariable ["orbisGPWSenabled", 0];
 if (_GPWSenabled isEqualType true) then {

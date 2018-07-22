@@ -1,6 +1,6 @@
 #include "header_macros.hpp"
 
-params ["_unit", "_position", "_vehicle", "_turret"];
+params ["_unit", "_role", "_vehicle", "_turret"];
 
 DEV_CHAT("orbis_gpws: getInMan run");
 

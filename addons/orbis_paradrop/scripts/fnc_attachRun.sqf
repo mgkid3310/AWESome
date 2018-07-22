@@ -12,14 +12,12 @@ private _relOld = _oldArray select 3;
 private _velNow = velocity _carrier;
 private _posNow = getPosASL _carrier;
 
-_carrier vectorModelToWorld _relOld;
-
-private _posRel = [_carrier, _player] call orbis_paradrop_fnc_getPosRel;
+private _posRel = _carrier worldToModel getPos player;
 private _doAttach = (abs (_posRel select 0) < 2.5) && (_posRel select 1 < 16) && (_posRel select 1 > -14.5) && (_posRel select 2 < 1) && (_posRel select 2 > -1.3);
 
 if (!_arrayNil && _doAttach) then {
-	// _player setVelocity (velocity _player vectorAdd _velNow vectorDiff _velOld);
+	_player setVelocity (velocity _player vectorAdd _velNow vectorDiff _velOld);
 	private _newPos = getPosASL _player vectorAdd _posNow vectorDiff _posOld;
-	_newPos = _newPos vectorAdd (_carrier vectorModelToWorld _posRel) vectorDiff (_carrier vectorModelToWorld _relOld);
+	_newPos = _newPos vectorAdd ASLtoAGL (_carrier modelToWorld _posRel) vectorDiff ASLtoAGL (_carrier modelToWorld _relOld);
 	_player setPosASL _newPos;
 };

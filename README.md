@@ -27,10 +27,10 @@ F-16's Bitching Betty GPWS includes missile warning and
 other sound-warnings (voice informers). Gives basic  
 warnings such as: Counter; Warning; Caution; etc., and is  
 suitable for fighter planes.  
-Rita is a Russian voice informer, and works similar to  
+Rita is a Russian voice informer which works similar to  
 Bitching Betty, but speaks Russian and has fewer  
-features(it's because that I don't speak Russian, so  
-I can't find enough sound files).  
+features(it's mainly because I don't speak Russian, and  
+therefore I can't find enough sound files).  
 
 &nbsp;
 
@@ -58,6 +58,10 @@ three lines :
 Pilot's Name  
 Speed(km/h) Altitude(m)  
 Heading(deg)  
+
+To enable this feature, you need to add the following code  
+to the target object's init field:  
+[this] call orbis_atc_fnc_addRadarScreen;  
 &nbsp;
 
 4. ATIS (Automatic Terminal Information Service)  
@@ -68,6 +72,11 @@ QFE will ve provided when ACE Weather is enabled.
 With basic settings, ATIS provides real-time data, but with  
 addon setting changed, ATIS data should be updated on  
 ground  
+
+To let the controller manually update the data, disable  
+'Real-time ATIS data update' option in addon setting, and  
+add the following code to the target object's init field:  
+[this] call orbis_atc_fnc_addATCConsole;  
 &nbsp;
 
 5. Ground System  

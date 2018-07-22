@@ -13,7 +13,7 @@ private ["_altAGLS", "_altASL", "_altRadar",
 	"_posExpect", "_expectTerrainAlt", "_cosAOA", "_flapStatus", "_gearStatus", "_climeASL",
 	"_pitchAndBank", "_pitchAngle", "_bankAngle",
 	"_flightphaseOutput", "_distance", "_altDiff", "_altDiffDesired",
-	"_flapswarned", "_bankwarnedtime", "_tooLow", "_terrainWarn", "_dontSink", "_sinkRate", "_isCritical"
+	"_flapsWarned", "_bankWarnedTime", "_tooLow", "_terrainWarn", "_dontSink", "_sinkRate", "_isCritical"
 ];
 private _flightphase = "taxing";
 private _timeOld = time;

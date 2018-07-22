@@ -35,8 +35,9 @@ therefore I can't find enough sound files).
 You can set default setting for GPWS in addon settings  
 which will override plane's default GPWS mode setting  
 and set GPWS mode to what you want when getting in a  
-plane. However, if someone with this addon is in or the  
-plane, the GPWS mode will not change.  
+plane. However, if someone with this addon is in or has  
+been in the plane, the GPWS mode will not change and  
+stay as it was.  
 
 &nbsp;
 

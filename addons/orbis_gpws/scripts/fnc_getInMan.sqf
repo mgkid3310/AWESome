@@ -16,10 +16,10 @@ if (_GPWSenabled isEqualType true) then {
 _vehicle setVariable ["orbisGPWSenabled", true, true];
 
 // GPWS initialization
-private _modeCurrent = _vehicle getVariable ["orbisGPWSmode", ""];
-if !(_modeCurrent in ["f16", "b747", "rita"]) then {
-	private _defaultMode = missionNamespace getVariable ["orbis_gpws_personallDefault", ""];
-	if !(_defaultMode isEqualTo "") exitWith {
+private _modeCurrent = _vehicle getVariable ["orbisGPWSmode", "init"];
+if (_modeCurrent isEqualTo "init") then {
+	private _defaultMode = missionNamespace getVariable ["orbis_gpws_personallDefault", "none"];
+	if !(_defaultMode isEqualTo "none") exitWith {
 		_vehicle setVariable ["orbisGPWSmode", _defaultMode, true];
 	};
 

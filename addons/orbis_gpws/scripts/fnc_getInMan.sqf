@@ -5,9 +5,9 @@ params ["_unit", "_position", "_vehicle", "_turret"];
 DEV_CHAT("orbis_gpws: getInMan run");
 
 private _timeOld = time;
-waitUntil {(_unit in _vehicle) || (_timeOld + 10 > time)};
+waitUntil {(_unit in _vehicle) || (_timeOld + 10 < time)};
 
-if (_timeOld + 10 > time) exitWith {};
+if (_timeOld + 10 < time) exitWith {};
 if !([_unit, _vehicle, 1] call orbis_awesome_main_fnc_isCrew) exitWith {);
 
 // check if has GPWS enabled

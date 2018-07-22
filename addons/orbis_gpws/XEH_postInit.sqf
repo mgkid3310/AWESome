@@ -64,7 +64,7 @@ for "_i" from 0 to (count (configFile >> "CfgWorlds" >> worldName >> "SecondaryA
 } forEach (allAirports select 1);
 
 // add addon settings
-private _defaultMode = profileNamespace getVariable ["orbis_gpws_personallDefault", ""];
+private _defaultMode = profileNamespace getVariable ["orbis_gpws_personallDefault", "none"];
 missionNamespace setVariable ["orbis_gpws_personallDefault", _defaultMode];
 
 [
@@ -72,7 +72,7 @@ missionNamespace setVariable ["orbis_gpws_personallDefault", _defaultMode];
 	"LIST",
 	["Default GPWS Mode", "Activates default GPWS when boarding planes with GPWS turned off"],
 	"AWESome",
-	[["", "b747", "f16", "rita"], ["No default setting", "B747", "Betty (F-16)", "Rita"], ["", "b747", "f16", "rita"] find _defaultMode],
+	[["none", "b747", "f16", "rita"], ["No default setting", "B747", "Betty (F-16)", "Rita"], ["none", "b747", "f16", "rita"] find _defaultMode],
 	nil,
 	{
 		missionNamespace setVariable ["orbis_gpws_personallDefault", _this];

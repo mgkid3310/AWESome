@@ -2,7 +2,7 @@ params ["_array", "_type"];
 
 private _return = [];
 {
-    private _callsign = name (driver _x);
+    private _callsign = name driver _x;
     private _speed = round speed _x;
     private _altitude = round (getPosASL _x select 2);
     private _heading = round direction _x;

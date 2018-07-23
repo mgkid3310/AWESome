@@ -10,15 +10,15 @@ orbis_atc_spaceMax = 1.5;
 orbis_atc_spaceMin = 0.75;
 
 // CBA based addon setting init
-private _enabled = profileNamespace getVariable ["orbis_atc_updateATISself", true];
-missionNamespace setVariable ["orbis_atc_updateATISself", _required];
+private _realtime = profileNamespace getVariable ["orbis_atc_updateATISself", true];
+missionNamespace setVariable ["orbis_atc_updateATISself", _realtime];
 
 [
 	"orbis_atc_updateATISself",
 	"CHECKBOX",
 	["Real-time ATIS data update", "Update ATIS data everytime when ATIS is played"],
-	_enabled,
 	"AWESome ATC",
+	_realtime,
 	nil,
 	{
 		missionNamespace setVariable ["orbis_atc_updateATISself", _this];

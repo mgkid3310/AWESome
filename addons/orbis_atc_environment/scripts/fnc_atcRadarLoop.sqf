@@ -3,9 +3,8 @@ private _controller = param [1, player];
 
 player setVariable ["isUsingRadarScreen", true, true];
 
+private ["_planes", "_helies", "_crewList"];
 private _timeNext = 0;
-private _planes = [];
-private _helies = [];
 private _planeMarkers = [];
 private _heliMarkers = [];
 
@@ -35,6 +34,19 @@ while {((player distance _monitor) < 10) && (player getVariable ["isUsingRadarSc
     // update marker line spacing
     [_planeMarkers + _heliMarkers] call orbis_atc_fnc_updateMarkerSpacing;
 
+    // ACE_map capability
+    if (orbis_awesome_hasACEMap) then {
+        _crewList = [];
+        {
+            {
+                _crewList pushBackUnique _x;
+            } forEach crew _x;
+        } forEach (_planes + _helies);
+        {
+            _x setVariable ["ace_map_hideBlueForceMarker", _x in _crewList];
+        } forEach allPlayers;
+    };
+
     private _frameNo = diag_frameNo;
 	waitUntil {diag_frameNo > _frameNo};
 };
@@ -47,6 +59,10 @@ while {((player distance _monitor) < 10) && (player getVariable ["isUsingRadarSc
     deleteMarkerLocal _marker2;
     deleteMarkerLocal _marker3;
 } forEach (_planeMarkers + _heliMarkers);
+
+{
+    _x setVariable ["ace_map_hideBlueForceMarker", false];
+} forEach allPlayers;
 
 if !((player distance _monitor) < 10) then {
     [parseText format["<t align='center'>Became too far from the Radar Screen</t>"], [0.25, 1, 0.5, 0.05], [1, 1], 2] spawn BIS_fnc_textTiles;

@@ -17,8 +17,8 @@ missionNamespace setVariable ["orbis_atc_updateATISself", _required];
 	"orbis_atc_updateATISself",
 	"CHECKBOX",
 	["Real-time ATIS data update", "Update ATIS data everytime when ATIS is played"],
-	"AWESome",
 	_enabled,
+	"AWESome ATC",
 	nil,
 	{
 		missionNamespace setVariable ["orbis_atc_updateATISself", _this];

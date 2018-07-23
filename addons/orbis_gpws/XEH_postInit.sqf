@@ -65,7 +65,9 @@ for "_i" from 0 to (count (configFile >> "CfgWorlds" >> worldName >> "SecondaryA
 
 // add addon settings
 private _defaultMode = profileNamespace getVariable ["orbis_gpws_personallDefault", "none"];
+private _defaultVolumeLow = profileNamespace getVariable ["orbis_gpws_defaultVolumeLow", false];
 missionNamespace setVariable ["orbis_gpws_personallDefault", _defaultMode];
+missionNamespace setVariable ["orbis_gpws_defaultVolumeLow", _defaultVolumeLow];
 
 [
 	"orbis_gpws_personallDefault",
@@ -77,6 +79,19 @@ missionNamespace setVariable ["orbis_gpws_personallDefault", _defaultMode];
 	{
 		missionNamespace setVariable ["orbis_gpws_personallDefault", _this];
 		profileNamespace setVariable ["orbis_gpws_personallDefault", _this];
+	}
+] call CBA_Settings_fnc_init;
+
+[
+	"orbis_gpws_defaultVolumeLow",
+	"LIST",
+	["Default GPWS Mode", "Activates default GPWS when boarding planes with GPWS turned off"],
+	"AWESome GPWS",
+	[[false, true], ["High", "Low"], [0, 1] select _defaultVolumeLow],
+	nil,
+	{
+		missionNamespace setVariable ["orbis_gpws_defaultVolumeLow", _this];
+		profileNamespace setVariable ["orbis_gpws_defaultVolumeLow", _this];
 	}
 ] call CBA_Settings_fnc_init;
 

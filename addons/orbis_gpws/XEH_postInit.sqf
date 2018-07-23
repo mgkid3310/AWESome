@@ -71,7 +71,7 @@ missionNamespace setVariable ["orbis_gpws_personallDefault", _defaultMode];
 	"orbis_gpws_personallDefault",
 	"LIST",
 	["Default GPWS Mode", "Activates default GPWS when boarding planes with GPWS turned off"],
-	"AWESome",
+	"AWESome GPWS",
 	[["none", "b747", "f16", "rita"], ["No default setting", "B747", "Betty (F-16)", "Rita"], ["none", "b747", "f16", "rita"] find _defaultMode],
 	nil,
 	{

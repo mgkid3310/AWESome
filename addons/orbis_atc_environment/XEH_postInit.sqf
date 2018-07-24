@@ -10,8 +10,23 @@ orbis_atc_spaceMax = 1.5;
 orbis_atc_spaceMin = 0.75;
 
 // CBA based addon setting init
+private _callsign = profileNamespace getVariable ["orbis_atc_displayCallsign", true];
 private _realtime = profileNamespace getVariable ["orbis_atc_updateATISself", true];
+missionNamespace setVariable ["orbis_atc_displayCallsign", _callsign];
 missionNamespace setVariable ["orbis_atc_updateATISself", _realtime];
+
+[
+	"orbis_atc_transponderName",
+	"LIST",
+	["Toggle ATC Radar display name", "Toggles between the pilot's name and callsign displayed ATC Radar screen"],
+	"AWESome ATC",
+	[[false, true], ["Name", "Callsign"], [0, 1] select _callsign],
+	nil,
+	{
+		missionNamespace setVariable ["orbis_atc_displayCallsign", _this];
+		profileNamespace setVariable ["orbis_atc_displayCallsign", _this];
+	}
+] call CBA_Settings_fnc_init;
 
 [
 	"orbis_atc_updateATISself",

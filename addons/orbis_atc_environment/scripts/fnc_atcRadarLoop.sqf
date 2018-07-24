@@ -60,9 +60,11 @@ while {((player distance _monitor) < 10) && (player getVariable ["isUsingRadarSc
     deleteMarkerLocal _marker3;
 } forEach (_planeMarkers + _heliMarkers);
 
-{
-    _x setVariable ["ace_map_hideBlueForceMarker", false];
-} forEach allPlayers;
+if (orbis_awesome_hasACEMap) then {
+    {
+        _x setVariable ["ace_map_hideBlueForceMarker", false];
+    } forEach allPlayers;
+};
 
 if !((player distance _monitor) < 10) then {
     [parseText format["<t align='center'>Became too far from the Radar Screen</t>"], [0.25, 1, 0.5, 0.05], [1, 1], 2] spawn BIS_fnc_textTiles;

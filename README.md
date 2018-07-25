@@ -64,8 +64,11 @@ altitude, and heading. Useful when commanding multiple
 planes. Information lines are consisted of the following  
 three lines :  
 Pilot's Name  
-Speed(km/h) Altitude(m)  
+Speed Altitude  
 Heading(deg)  
+
+The units for speed & altitude can be changed at addon  
+settings tab. Supports kph/knot and meter/feet.  
 
 To enable this feature, you need to add the following code  
 to the target object's init field:  

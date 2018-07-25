@@ -63,12 +63,15 @@ Shows friendly & civilian planes on map with name, speed,
 altitude, and heading. Useful when commanding multiple  
 planes. Information lines are consisted of the following  
 three lines :  
-Pilot's Name  
+Pilot's Name or Callsign  
 Speed Altitude  
 Heading(deg)  
 
-The units for speed & altitude can be changed at addon  
-settings tab. Supports kph/knot and meter/feet.  
+Pilot name/callsign setting and units for speed & altitude  
+can be changed at addon settings tab. Supports kph/knot  
+for speed and meter/feet for altitude. Note that unit  
+callsign uses the unit's group ID and therefore cannot  
+distinguish between planes in a same group.  
 
 To enable this feature, you need to add the following code  
 to the target object's init field:  

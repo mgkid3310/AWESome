@@ -48,14 +48,14 @@ private _windApply = _modelWind vectorMultiply _windMultiplier;
 private _trueAirVelocity = _modelvelocity vectorDiff _windApply;
 
 // get drag correction
-private _dragGround = [_modelvelocity, _dragArray, _densityRatio, _massStandard] call orbis_aerodynamics_fnc_getDrag;
-private _dragTAS = [_trueAirVelocity, _dragArray, _densityRatio, _massStandard] call orbis_aerodynamics_fnc_getDrag;
-private _forceDragCorrection = _dragTAS vectorDiff _dragGround;
+private _dragDefault = [_modelvelocity, _dragArray, 1, _massStandard] call orbis_aerodynamics_fnc_getDrag;
+private _dragEnhanced = [_trueAirVelocity, _dragArray, _densityRatio, _massStandard] call orbis_aerodynamics_fnc_getDrag;
+private _forceDragCorrection = _dragEnhanced vectorDiff _dragDefault;
 
 // get lift correction
-private _liftGround = [_modelvelocity, _liftArray, _speedMax, _angleOfIndicence, _densityRatio, _massStandard] call orbis_aerodynamics_fnc_getlift;
-private _liftTAS = [_trueAirVelocity, _liftArray, _speedMax, _angleOfIndicence, _densityRatio, _massStandard] call orbis_aerodynamics_fnc_getlift;
-private _forceLiftCorrection = _liftTAS vectorDiff _liftGround;
+private _liftDefault = [_modelvelocity, _liftArray, _speedMax, _angleOfIndicence, 1, _massStandard] call orbis_aerodynamics_fnc_getlift;
+private _liftEnhanced = [_trueAirVelocity, _liftArray, _speedMax, _angleOfIndicence, _densityRatio, _massStandard] call orbis_aerodynamics_fnc_getlift;
+private _forceLiftCorrection = _liftEnhanced vectorDiff _liftDefault;
 
 // sum up corrections and bring wheel friction into calculation if needed (todo)
 private _forceApply = _forceDragCorrection vectorAdd _forceLiftCorrection;
@@ -70,4 +70,4 @@ private _modelDeltaV = _forceApply vectorMultiply (_timeStep / _massCurrent);
 _vehicle setVelocityModelSpace (_modelvelocity vectorAdd _modelDeltaV);
 
 // report if needed (dev script)
-// diag_log format ["orbis_aerodynamics _forceApply: %1, _dragGround: %2, _dragTAS: %3, _liftGround: %4, _liftTAS: %5", _forceApply, _dragGround, _dragTAS, _liftGround, _liftTAS];
+// diag_log format ["orbis_aerodynamics _forceApply: %1, _dragDefault: %2, _dragEnhanced: %3, _liftDefault: %4, _liftEnhanced: %5", _forceApply, _dragDefault, _dragEnhanced, _liftDefault, _liftEnhanced];

@@ -2,11 +2,32 @@ params ["_array", "_type"];
 
 private ["_callsign", "_speed", "_altitude", "_heading", "_line1", "_line2", "_line3", "_marker0", "_marker1", "_marker2", "_marker3"];
 private _useCallsign = missionNamespace getVariable ["orbis_atc_displayCallsign", false];
+private _unitSetting = missionNamespace getVariable ["orbis_atc_unitSetting", 0];
 private _return = [];
 {
     _callsign = [name driver _x, groupId group driver _x] select _useCallsign;
-    _speed = round speed _x;
-    _altitude = round (getPosASL _x select 2);
+    switch (_unitSetting) do {
+        case (0): { // meter / kph
+            _speed = round speed _x;
+            _altitude = round (getPosASL _x select 2);
+        };
+        case (1): { // meter / knot
+            _speed = round (orbis_awesome_kphToKnot * speed _x);
+            _altitude = round (getPosASL _x select 2);
+        };
+        case (2): { // feet / kph
+            _speed = round speed _x;
+            _altitude = round (orbis_awesome_mToFt * (getPosASL _x select 2));
+        };
+        case (3): { // feet / knot
+            _speed = round (orbis_awesome_kphToKnot * speed _x);
+            _altitude = round (orbis_awesome_mToFt * (getPosASL _x select 2));
+        };
+        default { // meter / kph as default
+            _speed = round speed _x;
+            _altitude = round (getPosASL _x select 2);
+        };
+    };
     _heading = round direction _x;
 
     _line1 = format ["%1", _callsign];

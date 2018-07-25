@@ -11,8 +11,10 @@ orbis_atc_spaceMin = 0.75;
 
 // CBA based addon setting init
 private _callsign = profileNamespace getVariable ["orbis_atc_displayCallsign", false];
+private _unitSetting = profileNamespace getVariable ["orbis_atc_unitSetting", 0];
 private _realtime = profileNamespace getVariable ["orbis_atc_updateATISself", true];
 missionNamespace setVariable ["orbis_atc_displayCallsign", _callsign];
+missionNamespace setVariable ["orbis_atc_unitSetting", _unitSetting];
 missionNamespace setVariable ["orbis_atc_updateATISself", _realtime];
 
 [
@@ -21,6 +23,19 @@ missionNamespace setVariable ["orbis_atc_updateATISself", _realtime];
 	["Toggle ATC Radar display name", "Toggles between the pilot's name and callsign displayed ATC Radar screen"],
 	"AWESome ATC",
 	[[false, true], ["Name", "Callsign"], [0, 1] select _callsign],
+	nil,
+	{
+		missionNamespace setVariable ["orbis_atc_displayCallsign", _this];
+		profileNamespace setVariable ["orbis_atc_displayCallsign", _this];
+	}
+] call CBA_Settings_fnc_init;
+
+[
+	"orbis_atc_unitSetting",
+	"LIST",
+	["ATC display unit", "Set display units for altitude and speed"],
+	"AWESome ATC",
+	[[0, 1, 2, 3], ["meter / kph", "meter / knot", "feet / kph", "feet / knot"], _unitSetting],
 	nil,
 	{
 		missionNamespace setVariable ["orbis_atc_displayCallsign", _this];

@@ -35,8 +35,8 @@ missionNamespace setVariable ["orbis_atc_unitSetting", _unitSetting];
 	[[0, 1, 2, 3], ["meter / kph", "meter / knot", "feet / kph", "feet / knot"], _unitSetting],
 	nil,
 	{
-		missionNamespace setVariable ["orbis_atc_displayCallsign", _this];
-		profileNamespace setVariable ["orbis_atc_displayCallsign", _this];
+		missionNamespace setVariable ["orbis_atc_unitSetting", _this];
+		profileNamespace setVariable ["orbis_atc_unitSetting", _this];
 	}
 ] call CBA_Settings_fnc_init;
 

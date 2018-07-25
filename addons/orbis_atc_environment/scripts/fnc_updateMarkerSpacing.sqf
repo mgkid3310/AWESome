@@ -4,8 +4,8 @@ private _scaleNow = ctrlMapScale ((findDisplay 12) displayCtrl 51);
 {
     _x params ["_marker0", "_marker1", "_marker2", "_marker3", "_pos"];
 
-    private _xOffset = 0 * (_scaleNow / orbis_atc_scaleStd);
-    private _yOffset = 0 * (_scaleNow / orbis_atc_scaleStd);
+    private _xOffset = orbis_atc_xOffset * (_scaleNow / orbis_atc_scaleStd);
+    private _yOffset = orbis_atc_yOffset * (_scaleNow / orbis_atc_scaleStd);
 
     private _size = getMarkerSize _marker1;
     private _xSpace = (_size select 0) * (_scaleNow / orbis_atc_scaleStd);

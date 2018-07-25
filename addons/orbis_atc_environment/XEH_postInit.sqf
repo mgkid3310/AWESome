@@ -1,5 +1,8 @@
 player setVariable ["hasOrbisATC", true, true];
 
+orbis_atc_xOffset = 0.8;
+orbis_atc_yOffset = -0.3;
+
 orbis_atc_scaleStd = 0.0015;
 if (isNumber (configFile >> "CfgWorlds" >> worldName >> "mapSize")) then {
     orbis_atc_scaleStd = (orbis_atc_scaleStd * 30720) / getNumber (configFile >> "CfgWorlds" >> worldName >> "mapSize");

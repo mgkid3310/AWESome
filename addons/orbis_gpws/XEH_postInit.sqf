@@ -64,10 +64,7 @@ for "_i" from 0 to (count (configFile >> "CfgWorlds" >> worldName >> "SecondaryA
 
 // add addon settings
 private _defaultMode = profileNamespace getVariable ["orbis_gpws_personallDefault", "none"];
-private _defaultVolumeLow = profileNamespace getVariable ["orbis_gpws_defaultVolumeLow", false];
 missionNamespace setVariable ["orbis_gpws_personallDefault", _defaultMode];
-missionNamespace setVariable ["orbis_gpws_defaultVolumeLow", _defaultVolumeLow];
-
 [
 	"orbis_gpws_personallDefault",
 	"LIST",
@@ -81,6 +78,8 @@ missionNamespace setVariable ["orbis_gpws_defaultVolumeLow", _defaultVolumeLow];
 	}
 ] call CBA_Settings_fnc_init;
 
+private _defaultVolumeLow = profileNamespace getVariable ["orbis_gpws_defaultVolumeLow", false];
+missionNamespace setVariable ["orbis_gpws_defaultVolumeLow", _defaultVolumeLow];
 [
 	"orbis_gpws_defaultVolumeLow",
 	"LIST",

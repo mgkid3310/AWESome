@@ -11,12 +11,7 @@ orbis_atc_spaceMin = 0.75;
 
 // CBA based addon setting init
 private _callsign = profileNamespace getVariable ["orbis_atc_displayCallsign", false];
-private _unitSetting = profileNamespace getVariable ["orbis_atc_unitSetting", 0];
-private _realtime = profileNamespace getVariable ["orbis_atc_updateATISself", true];
 missionNamespace setVariable ["orbis_atc_displayCallsign", _callsign];
-missionNamespace setVariable ["orbis_atc_unitSetting", _unitSetting];
-missionNamespace setVariable ["orbis_atc_updateATISself", _realtime];
-
 [
 	"orbis_atc_transponderName",
 	"LIST",
@@ -30,6 +25,8 @@ missionNamespace setVariable ["orbis_atc_updateATISself", _realtime];
 	}
 ] call CBA_Settings_fnc_init;
 
+private _unitSetting = profileNamespace getVariable ["orbis_atc_unitSetting", 0];
+missionNamespace setVariable ["orbis_atc_unitSetting", _unitSetting];
 [
 	"orbis_atc_unitSetting",
 	"LIST",
@@ -43,6 +40,8 @@ missionNamespace setVariable ["orbis_atc_updateATISself", _realtime];
 	}
 ] call CBA_Settings_fnc_init;
 
+private _realtime = profileNamespace getVariable ["orbis_atc_updateATISself", true];
+missionNamespace setVariable ["orbis_atc_updateATISself", _realtime];
 [
 	"orbis_atc_updateATISself",
 	"CHECKBOX",

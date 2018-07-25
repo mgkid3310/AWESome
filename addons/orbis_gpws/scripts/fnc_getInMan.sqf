@@ -4,7 +4,7 @@ params ["_unit", "_role", "_vehicle", "_turret"];
 
 DEV_CHAT("orbis_gpws: getInMan run");
 
-if !([_unit, _vehicle, 1] call orbis_awesome_main_fnc_isCrew) exitWith {};
+if !([_unit, _vehicle, 1] call orbis_awesome_fnc_isCrew) exitWith {};
 
 // check if has GPWS enabled
 private _GPWSenabled = _vehicle getVariable ["orbisGPWSenabled", 0];
@@ -20,6 +20,9 @@ _vehicle setVariable ["orbisGPWSenabled", true, true];
 // GPWS initialization
 private _modeCurrent = _vehicle getVariable ["orbisGPWSmode", "init"];
 if (_modeCurrent isEqualTo "init") then {
+	private _defaultVolumeLow = missionNamespace getVariable ["orbis_gpws_defaultVolumeLow", false];
+	_vehicle setVariable ["orbisGPWSvolumeLow", _defaultVolumeLow, true];
+
 	private _defaultMode = missionNamespace getVariable ["orbis_gpws_personallDefault", "none"];
 	if !(_defaultMode isEqualTo "none") exitWith {
 		_vehicle setVariable ["orbisGPWSmode", _defaultMode, true];

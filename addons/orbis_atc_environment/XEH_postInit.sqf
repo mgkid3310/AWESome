@@ -1,5 +1,8 @@
 player setVariable ["hasOrbisATC", true, true];
 
+orbis_atc_xOffset = 0.8;
+orbis_atc_yOffset = -0.3;
+
 orbis_atc_scaleStd = 0.0015;
 if (isNumber (configFile >> "CfgWorlds" >> worldName >> "mapSize")) then {
     orbis_atc_scaleStd = (orbis_atc_scaleStd * 30720) / getNumber (configFile >> "CfgWorlds" >> worldName >> "mapSize");
@@ -10,15 +13,44 @@ orbis_atc_spaceMax = 1.5;
 orbis_atc_spaceMin = 0.75;
 
 // CBA based addon setting init
-private _enabled = profileNamespace getVariable ["orbis_atc_updateATISself", true];
-missionNamespace setVariable ["orbis_atc_updateATISself", _required];
+private _callsign = profileNamespace getVariable ["orbis_atc_displayCallsign", false];
+missionNamespace setVariable ["orbis_atc_displayCallsign", _callsign];
+[
+	"orbis_atc_transponderName",
+	"LIST",
+	["Toggle ATC Radar display name", "Toggles between the pilot's name and callsign displayed ATC Radar screen"],
+	"AWESome ATC",
+	[[false, true], ["Name", "Callsign"], [0, 1] select _callsign],
+	nil,
+	{
+		missionNamespace setVariable ["orbis_atc_displayCallsign", _this];
+		profileNamespace setVariable ["orbis_atc_displayCallsign", _this];
+	}
+] call CBA_Settings_fnc_init;
 
+private _unitSetting = profileNamespace getVariable ["orbis_atc_unitSetting", 0];
+missionNamespace setVariable ["orbis_atc_unitSetting", _unitSetting];
+[
+	"orbis_atc_unitSetting",
+	"LIST",
+	["ATC display unit", "Set display units for altitude and speed"],
+	"AWESome ATC",
+	[[0, 1, 2, 3], ["meter / kph", "meter / knot", "feet / kph", "feet / knot"], _unitSetting],
+	nil,
+	{
+		missionNamespace setVariable ["orbis_atc_unitSetting", _this];
+		profileNamespace setVariable ["orbis_atc_unitSetting", _this];
+	}
+] call CBA_Settings_fnc_init;
+
+private _realtime = profileNamespace getVariable ["orbis_atc_updateATISself", true];
+missionNamespace setVariable ["orbis_atc_updateATISself", _realtime];
 [
 	"orbis_atc_updateATISself",
 	"CHECKBOX",
 	["Real-time ATIS data update", "Update ATIS data everytime when ATIS is played"],
-	"AWESome",
-	_enabled,
+	"AWESome ATC",
+	_realtime,
 	nil,
 	{
 		missionNamespace setVariable ["orbis_atc_updateATISself", _this];

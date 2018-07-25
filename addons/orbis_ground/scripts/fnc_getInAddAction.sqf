@@ -8,7 +8,7 @@ if (_vehicle isKindOf "Offroad_01_base_F") then {
     _vehicle addAction ["Remove Towbar", "[_this select 0] call orbis_ground_fnc_removeTowBar", nil, 1, false, true, "", "(isClass (configFile >> 'CfgPatches' >> 'orbis_ground')) && (_this isEqualTo driver _target) && (_target getVariable ['orbis_hasTowBarDeployed', true]) && (speed _target < 1)", 10];
 };
 /* if (_vehicle isKindOf "Plane") then {
-    _vehicle addAction ["Set Parking Brake", "[_this select 0] call orbis_ground_fnc_parkingBrakeSet", nil, 1, false, true, "", "(isClass (configFile >> 'CfgPatches' >> 'orbis_ground')) && ([nil, nil, 1] call orbis_awesome_main_fnc_isCrew) && !(_target getVariable ['orbis_parkingBrakeSet', false]) && (speed _target < 1)", 10];
-    _vehicle addAction ["Release Parking Brake", "[_this select 0] call orbis_ground_fnc_parkingBrakeRelease", nil, 1, false, true, "", "(isClass (configFile >> 'CfgPatches' >> 'orbis_ground')) && ([nil, nil, 1] call orbis_awesome_main_fnc_isCrew) && (_target getVariable ['orbis_parkingBrakeSet', true])", 10];
+    _vehicle addAction ["Set Parking Brake", "[_this select 0] call orbis_ground_fnc_parkingBrakeSet", nil, 1, false, true, "", "(isClass (configFile >> 'CfgPatches' >> 'orbis_ground')) && ([nil, nil, 1] call orbis_awesome_fnc_isCrew) && !(_target getVariable ['orbis_parkingBrakeSet', false]) && (speed _target < 1)", 10];
+    _vehicle addAction ["Release Parking Brake", "[_this select 0] call orbis_ground_fnc_parkingBrakeRelease", nil, 1, false, true, "", "(isClass (configFile >> 'CfgPatches' >> 'orbis_ground')) && ([nil, nil, 1] call orbis_awesome_fnc_isCrew) && (_target getVariable ['orbis_parkingBrakeSet', true])", 10];
 }; */
 _vehicle setVariable ["orbis_ground_hasAction", true, true];

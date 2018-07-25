@@ -10,7 +10,7 @@ orbis_atc_spaceMax = 1.5;
 orbis_atc_spaceMin = 0.75;
 
 // CBA based addon setting init
-private _callsign = profileNamespace getVariable ["orbis_atc_displayCallsign", true];
+private _callsign = profileNamespace getVariable ["orbis_atc_displayCallsign", false];
 private _realtime = profileNamespace getVariable ["orbis_atc_updateATISself", true];
 missionNamespace setVariable ["orbis_atc_displayCallsign", _callsign];
 missionNamespace setVariable ["orbis_atc_updateATISself", _realtime];

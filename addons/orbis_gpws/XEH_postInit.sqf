@@ -85,7 +85,7 @@ missionNamespace setVariable ["orbis_gpws_defaultVolumeLow", _defaultVolumeLow];
 [
 	"orbis_gpws_defaultVolumeLow",
 	"LIST",
-	["Default GPWS Mode", "Activates default GPWS when boarding planes with GPWS turned off"],
+	["Default GPWS Volume", "Sets default GPWS volume (high/low)"],
 	"AWESome GPWS",
 	[[false, true], ["High", "Low"], [0, 1] select _defaultVolumeLow],
 	nil,

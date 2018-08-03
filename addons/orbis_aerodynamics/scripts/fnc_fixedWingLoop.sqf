@@ -1,10 +1,9 @@
-private _vehicle = _this select 0;
-private _player = _this select 1;
-private _timeOld = _this select 2;
+params ["_vehicle", "_player", "_timeOld"];
 
 private _timeStep = time - _timeOld;
 if !(_timeStep > 0) exitWith {};
 
+// load aerodynamic & etc. data
 private _aeroConfigs = _vehicle getVariable ["orbis_aerodynamics_aeroConfig", false];
 if !(_aeroConfigs isEqualType []) then {
     _aeroConfigs = [_vehicle] call orbis_aerodynamics_fnc_getAeroConfig;
@@ -47,25 +46,28 @@ private _windMultiplier = missionNamespace getVariable ["orbis_aerodynamics_wind
 private _windApply = _modelWind vectorMultiply _windMultiplier;
 private _trueAirVelocity = _modelvelocity vectorDiff _windApply;
 
-// get drag correction
-private _dragDefault = [_modelvelocity, _dragArray, 1, _massStandard] call orbis_aerodynamics_fnc_getDrag;
-private _dragEnhanced = [_trueAirVelocity, _dragArray, _densityRatio, _massStandard] call orbis_aerodynamics_fnc_getDrag;
-private _forceDragCorrection = _dragEnhanced vectorDiff _dragDefault;
+// build parameter array
+private _paramDefault = [_modelvelocity, _massStandard, 1];
+private _paramEnhanced = [_trueAirVelocity, _massStandard, _densityRatio];
 
-// get lift correction
-private _liftDefault = [_modelvelocity, _liftArray, _speedMax, _angleOfIndicence, 1, _massStandard] call orbis_aerodynamics_fnc_getlift;
-private _liftEnhanced = [_trueAirVelocity, _liftArray, _speedMax, _angleOfIndicence, _densityRatio, _massStandard] call orbis_aerodynamics_fnc_getlift;
-private _forceLiftCorrection = _liftEnhanced vectorDiff _liftDefault;
+// get drag force correction
+private _dragDefault = [_paramDefault, _dragArray] call orbis_aerodynamics_fnc_getDrag;
+private _dragEnhanced = [_paramEnhanced, _dragArray] call orbis_aerodynamics_fnc_getDrag;
+private _dragCorrection = _dragEnhanced vectorDiff _dragDefault;
 
-// sum up corrections and bring wheel friction into calculation if needed (todo)
-private _forceApply = _forceDragCorrection vectorAdd _forceLiftCorrection;
+// get lift force correction
+private _liftDefault = [_paramDefault, _liftArray, _speedMax, _angleOfIndicence] call orbis_aerodynamics_fnc_getlift;
+private _liftEnhanced = [_paramEnhanced, _liftArray, _speedMax, _angleOfIndicence] call orbis_aerodynamics_fnc_getlift;
+private _liftCorrection = _liftEnhanced vectorDiff _liftDefault;
+// sum up force corrections and bring wheel friction into calculation if needed (todo)
+private _forceApply = _dragCorrection vectorAdd _liftCorrection;
 if (isTouchingGround _vehicle) then {
     _forceApply set [0, 0];
     _forceApply set [1, 0];
     _forceApply set [2, 0];
 };
 
-// get DeltaV needed and apply it
+// calculate and apply required DeltaV
 private _modelDeltaV = _forceApply vectorMultiply (_timeStep / _massCurrent);
 _vehicle setVelocityModelSpace (_modelvelocity vectorAdd _modelDeltaV);
 

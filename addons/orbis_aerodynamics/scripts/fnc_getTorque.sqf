@@ -1,7 +1,7 @@
-params ["_paramArray", "_dragArray"];
+params ["_paramArray", "_torqueArray"];
 _paramArray params ["_velocity", "_mass", "_densityRatio"];
 
-private _airVel = _velocity vectorMultiply -1;
+/* private _airVel = _velocity vectorMultiply -1;
 private _airSpeed = sqrt (_airVel vectorDotProduct _airVel);
 private _dragForce = [0, 0, 0];
 
@@ -13,4 +13,4 @@ for "_i" from 0 to 2 do {
     _dragForce set [_i, _force * _mass * _densityRatio];
 };
 
-_dragForce
+_dragForce */

@@ -1,9 +1,5 @@
-private _velocity = _this select 0;
-private _liftArray = _this select 1;
-private _speedMax = _this select 2;
-private _angleOfIndicence = _this select 3;
-private _densityRatio = _this select 4;
-private _mass = _this select 5;
+params ["_paramArray", "_liftArray", "_speedMax", "_angleOfIndicence"];
+_paramArray params ["_velocity", "_mass", "_densityRatio"];
 
 private _liftCoef = 0;
 private _liftForce = [0, 0, 0];
@@ -21,6 +17,6 @@ if (_speedKPH < (_speedStep * (count _liftArray - 1))) then {
     _liftCoef = _liftArray select (count _liftArray - 1);
 };
 
-_liftForce set [2, _liftCoef * 9.81 * _densityRatio * _mass];
+_liftForce set [2, _liftCoef * 9.81 * _mass * _densityRatio];
 
 _liftForce

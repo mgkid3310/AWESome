@@ -59,6 +59,12 @@ private _dragCorrection = _dragEnhanced vectorDiff _dragDefault;
 private _liftDefault = [_paramDefault, _liftArray, _speedMax, _angleOfIndicence] call orbis_aerodynamics_fnc_getlift;
 private _liftEnhanced = [_paramEnhanced, _liftArray, _speedMax, _angleOfIndicence] call orbis_aerodynamics_fnc_getlift;
 private _liftCorrection = _liftEnhanced vectorDiff _liftDefault;
+
+// get torque correction
+// private _torqueDefault = [_paramDefault, _torqueArray] call orbis_aerodynamics_fnc_getTorque;
+// private _torqueEnhanced = [_paramEnhanced, _torqueArray] call orbis_aerodynamics_fnc_getTorque;
+// private _torqueCorrection = _torqueEnhanced vectorDiff _torqueDefault;
+
 // sum up force corrections and bring wheel friction into calculation if needed (todo)
 private _forceApply = _dragCorrection vectorAdd _liftCorrection;
 if (isTouchingGround _vehicle) then {
@@ -71,5 +77,9 @@ if (isTouchingGround _vehicle) then {
 private _modelDeltaV = _forceApply vectorMultiply (_timeStep / _massCurrent);
 _vehicle setVelocityModelSpace (_modelvelocity vectorAdd _modelDeltaV);
 
+// calculate and apply required force for target torque
+// private _modelDeltaV = _forceApply vectorMultiply (_timeStep / _massCurrent);
+// _vehicle setVelocityModelSpace (_modelvelocity vectorAdd _modelDeltaV);
+
 // report if needed (dev script)
-// diag_log format ["orbis_aerodynamics _forceApply: %1, _dragDefault: %2, _dragEnhanced: %3, _liftDefault: %4, _liftEnhanced: %5", _forceApply, _dragDefault, _dragEnhanced, _liftDefault, _liftEnhanced];
+diag_log format ["orbis_aerodynamics _density: %1, _forceApply: %2, _dragDefault: %3, _dragEnhanced: %4, _liftDefault: %5, _liftEnhanced: %6", _density, _forceApply, _dragDefault, _dragEnhanced, _liftDefault, _liftEnhanced];

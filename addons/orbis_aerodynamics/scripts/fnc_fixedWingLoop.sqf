@@ -47,7 +47,7 @@ private _windApply = _modelWind vectorMultiply _windMultiplier;
 private _trueAirVelocity = _modelvelocity vectorDiff _windApply;
 
 // build parameter array
-private _paramDefault = [_modelvelocity, _massStandard, 1];
+private _paramDefault = [_modelvelocity, _massStandard, _densityRatio];
 private _paramEnhanced = [_trueAirVelocity, _massStandard, _densityRatio];
 
 // get drag force correction

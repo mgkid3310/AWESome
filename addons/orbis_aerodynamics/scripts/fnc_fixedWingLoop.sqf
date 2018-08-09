@@ -78,8 +78,7 @@ private _modelDeltaV = _forceApply vectorMultiply (_timeStep / _massCurrent);
 _vehicle setVelocityModelSpace (_modelvelocity vectorAdd _modelDeltaV);
 
 // calculate and apply required force for target torque
-// private _modelDeltaV = _forceApply vectorMultiply (_timeStep / _massCurrent);
-// _vehicle setVelocityModelSpace (_modelvelocity vectorAdd _modelDeltaV);
+// _vehicle addtorque [_torqueCorrection vectorMultiply _timeStep];
 
 // report if needed (dev script)
 // diag_log format ["orbis_aerodynamics _density: %1, _forceApply: %2, _dragDefault: %3, _dragEnhanced: %4, _liftDefault: %5, _liftEnhanced: %6", _density, _forceApply, _dragDefault, _dragEnhanced, _liftDefault, _liftEnhanced];

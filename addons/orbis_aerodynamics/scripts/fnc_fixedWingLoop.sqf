@@ -74,8 +74,7 @@ if (isTouchingGround _vehicle) then {
 };
 
 // calculate and apply required DeltaV
-private _modelDeltaV = _forceApply vectorMultiply (_timeStep / _massCurrent);
-_vehicle setVelocityModelSpace (_modelvelocity vectorAdd _modelDeltaV);
+_vehicle addForce [_vehicle vectorModelToWorld (_forceApply vectorMultiply _timeStep), getCenterOfMass _vehicle];
 
 // calculate and apply required force for target torque
 // _vehicle addtorque [_torqueCorrection vectorMultiply _timeStep];

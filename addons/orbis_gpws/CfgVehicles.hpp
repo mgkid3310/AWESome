@@ -6,7 +6,8 @@
 #define LOW_CM_DEFAULT 60
 
 class CfgVehicles {
-	class Plane {
+	class Air;
+	class Plane: Air {
 		orbisGPWS_enabled = 1;
 		orbisGPWS_default = GPWS_NONE;
 		orbisGPWS_lowCMcount = 20;

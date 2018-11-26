@@ -17,8 +17,7 @@ private _dragParasite = [0, 0, 0];
 } forEach [[0, 0], [1, 2], [2, 1]];
 
 // induced drag
-_liftVector params ["_liftX", "_liftY", "_liftZ"];
-private _dragInduced = [0, -_liftZ * tan deg _effectiveAngle, 0];
+private _dragInduced = [0, -(_liftVector select 2) * tan deg _effectiveAngle, 0];
 
 // sum up drags
 private _dragForce = _dragParasite vectorAdd _dragInduced;

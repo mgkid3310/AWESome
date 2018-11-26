@@ -10,9 +10,11 @@ if !(_aeroConfigs isEqualType []) then {
     _vehicle setVariable ["orbis_aerodynamics_aeroConfig", _aeroConfigs];
 };
 
-private _dragArray = _aeroConfigs select 0;
-private _liftArray = _aeroConfigs select 1;
-private _performanceArray = _aeroConfigs select 2;
+private _isAdvanced = _aeroConfigs select 0;
+private _dragArray = _aeroConfigs select 1;
+private _liftArray = _aeroConfigs select 2;
+private _torqueXCoef = _aeroConfigs select 3;
+private _performanceArray = _aeroConfigs select 4;
 
 private _speedMax = _performanceArray select 0;
 private _speedStall = _performanceArray select 1;
@@ -47,12 +49,12 @@ private _windApply = _modelWind vectorMultiply _windMultiplier;
 private _trueAirVelocity = _modelvelocity vectorDiff _windApply;
 
 // build parameter array
-private _paramDefault = [_modelvelocity, _massStandard, _densityRatio];
+private _paramDefault = [_modelvelocity, _massStandard, 1];
 private _paramEnhanced = [_trueAirVelocity, _massStandard, _densityRatio];
 
 // get drag force correction
-private _dragDefault = [_paramDefault, _dragArray] call orbis_aerodynamics_fnc_getDrag;
-private _dragEnhanced = [_paramEnhanced, _dragArray] call orbis_aerodynamics_fnc_getDrag;
+private _dragDefault = [_paramDefault, _dragArray, _isAdvanced] call orbis_aerodynamics_fnc_getDragDefault;
+private _dragEnhanced = [_paramEnhanced, _dragArray] call orbis_aerodynamics_fnc_getDragEnhanced;
 private _dragCorrection = _dragEnhanced vectorDiff _dragDefault;
 
 // get lift force correction
@@ -61,8 +63,8 @@ private _liftEnhanced = [_paramEnhanced, _liftArray, _speedMax, _angleOfIndicenc
 private _liftCorrection = _liftEnhanced vectorDiff _liftDefault;
 
 // get torque correction
-// private _torqueDefault = [_paramDefault, _torqueArray] call orbis_aerodynamics_fnc_getTorque;
-// private _torqueEnhanced = [_paramEnhanced, _torqueArray] call orbis_aerodynamics_fnc_getTorque;
+// private _torqueDefault = [_paramDefault, _torqueXCoef] call orbis_aerodynamics_fnc_getTorque;
+// private _torqueEnhanced = [_paramEnhanced, _torqueXCoef] call orbis_aerodynamics_fnc_getTorque;
 // private _torqueCorrection = _torqueEnhanced vectorDiff _torqueDefault;
 
 // sum up force corrections and bring wheel friction into calculation if needed (todo)
@@ -80,4 +82,4 @@ _vehicle addForce [_vehicle vectorModelToWorld (_forceApply vectorMultiply _time
 // _vehicle addtorque [_torqueCorrection vectorMultiply _timeStep];
 
 // report if needed (dev script)
-// diag_log format ["orbis_aerodynamics _density: %1, _forceApply: %2, _dragDefault: %3, _dragEnhanced: %4, _liftDefault: %5, _liftEnhanced: %6", _density, _forceApply, _dragDefault, _dragEnhanced, _liftDefault, _liftEnhanced];
+// diag_log format ["orbis_aerodynamics _density: %1, _modelvelocity: %2, _trueAirVelocity: %3, _dragDefault: %4, _dragEnhanced: %5, _forceApply: %6", _density, _modelvelocity, _trueAirVelocity, _dragDefault, _dragEnhanced, _forceApply];

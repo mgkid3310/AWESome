@@ -1,23 +1,34 @@
 private _vehicle = _this select 0;
 
+private ["_isAdvanced", "_dragArray", "_liftArray", "_torqueXCoef", "_speedMax", "_speedStall", "_angleOfIndicence", "_massStandard"];
 private _className = typeOf _vehicle;
 private _class = (configFile >> "CfgVehicles" >> _className);
 
-private _dragArray = [];
-private _isAdvanced = toLower getText (_class >> "simulation") isEqualTo "planex";
+// need to find out more
+_isAdvanced = toLower getText (_class >> "simulation") isEqualTo "planex";
 if (_isAdvanced) then {
     _dragArray = [getArray (_class >> "airFrictionCoefs2"), getArray (_class >> "airFrictionCoefs1"), getArray (_class >> "airFrictionCoefs0")];
 } else {
-    _dragArray = [[0.00100, 0.00050, 0.00006], [0.100, 0.050, 0.006], [0, 0, 0]];
+    _dragArray = [getArray (_class >> "airFrictionCoefs2"), getArray (_class >> "airFrictionCoefs1"), getArray (_class >> "airFrictionCoefs0")];
 };
 
-private _liftArray = getArray (_class >> "envelope");
-private _speedMax = getNumber (_class >> "maxSpeed");
-private _speedStall = getNumber (_class >> "stallSpeed");
-private _angleOfIndicence = getNumber (_class >> "angleOfIndicence");
-private _massStandard = getMass _vehicle;
+_liftArray = getArray (_class >> "envelope");
+if (isNumber (_class >> "draconicTorqueXCoef")) then {
+    _torqueXCoef = getNumber (_class >> "draconicTorqueXCoef");
+} else {
+    _torqueXCoef = getArray (_class >> "draconicTorqueXCoef");
+};
+_speedMax = getNumber (_class >> "maxSpeed");
+_speedStall = getNumber (_class >> "stallSpeed");
+_angleOfIndicence = getNumber (_class >> "angleOfIndicence");
+_massStandard = getMass _vehicle;
 if !(_massStandard > 0) then {
     _massStandard = 1000;
 };
 
-[_dragArray, _liftArray, [_speedMax, _speedStall, _angleOfIndicence, _massStandard]];
+private _return = [_isAdvanced, _dragArray, _liftArray, _torqueXCoef, [_speedMax, _speedStall, _angleOfIndicence, _massStandard]];
+
+// report if needed (dev script)
+// diag_log format ["orbis_aerodynamics aeroConfig: %1", _return];
+
+_return

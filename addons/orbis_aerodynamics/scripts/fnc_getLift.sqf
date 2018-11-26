@@ -19,4 +19,7 @@ if (_speedKPH < (_speedStep * (count _liftArray - 1))) then {
 
 _liftForce set [2, _liftCoef * 9.81 * _mass * _densityRatio];
 
+// report if needed (dev script)
+// diag_log format ["orbis_aerodynamics _liftForce: %1", _liftForce];
+
 _liftForce

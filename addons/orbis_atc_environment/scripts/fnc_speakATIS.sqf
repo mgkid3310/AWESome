@@ -85,6 +85,7 @@ if ((_fogApply isEqualTo 0) && (_rain isEqualTo 0) && (_lightnings isEqualTo 0))
 // fog
 switch (true) do {
     case (_fogApply > 0.7): {
+        sleep 0.1;
         ["orbis_common_heavy"] call orbis_atc_fnc_playAndSleep;
         ["orbis_common_fog"] call orbis_atc_fnc_playAndSleep;
     };
@@ -93,40 +94,49 @@ switch (true) do {
         ["orbis_common_fog"] call orbis_atc_fnc_playAndSleep;
     };
     case (_fogApply > 0): {
+        sleep 0.1;
         ["orbis_common_light"] call orbis_atc_fnc_playAndSleep;
         ["orbis_common_fog"] call orbis_atc_fnc_playAndSleep;
     };
 };
 
 // rain
-switch (true) do {
-    case (_rain > 0.7): {
-        ["orbis_common_heavy"] call orbis_atc_fnc_playAndSleep;
-        ["orbis_common_rain"] call orbis_atc_fnc_playAndSleep;
-    };
-    case (_rain > 0.3): {
-        sleep 0.1;
-        ["orbis_common_rain"] call orbis_atc_fnc_playAndSleep;
-    };
-    case (_rain > 0): {
-        ["orbis_common_light"] call orbis_atc_fnc_playAndSleep;
-        ["orbis_common_rain"] call orbis_atc_fnc_playAndSleep;
+if !(_overcast < 0.7) then {
+    switch (true) do {
+        case (_rain > 0.7): {
+            sleep 0.1;
+            ["orbis_common_heavy"] call orbis_atc_fnc_playAndSleep;
+            ["orbis_common_rain"] call orbis_atc_fnc_playAndSleep;
+        };
+        case (_rain > 0.3): {
+            sleep 0.1;
+            ["orbis_common_rain"] call orbis_atc_fnc_playAndSleep;
+        };
+        case (_rain > 0): {
+            sleep 0.1;
+            ["orbis_common_light"] call orbis_atc_fnc_playAndSleep;
+            ["orbis_common_rain"] call orbis_atc_fnc_playAndSleep;
+        };
     };
 };
 
 // lightning
-switch (true) do {
-    case (_lightnings > 0.7): {
-        ["orbis_common_heavy"] call orbis_atc_fnc_playAndSleep;
-        ["orbis_common_lightning"] call orbis_atc_fnc_playAndSleep;
-    };
-    case (_lightnings > 0.3): {
-        sleep 0.1;
-        ["orbis_common_lightning"] call orbis_atc_fnc_playAndSleep;
-    };
-    case (_lightnings > 0): {
-        ["orbis_common_light"] call orbis_atc_fnc_playAndSleep;
-        ["orbis_common_lightning"] call orbis_atc_fnc_playAndSleep;
+if !(_overcast < 0.4) then {
+    switch (true) do {
+        case (_lightnings > 0.7): {
+            sleep 0.1;
+            ["orbis_common_heavy"] call orbis_atc_fnc_playAndSleep;
+            ["orbis_common_lightning"] call orbis_atc_fnc_playAndSleep;
+        };
+        case (_lightnings > 0.3): {
+            sleep 0.1;
+            ["orbis_common_lightning"] call orbis_atc_fnc_playAndSleep;
+        };
+        case (_lightnings > 0.1): {
+            sleep 0.1;
+            ["orbis_common_light"] call orbis_atc_fnc_playAndSleep;
+            ["orbis_common_lightning"] call orbis_atc_fnc_playAndSleep;
+        };
     };
 };
 

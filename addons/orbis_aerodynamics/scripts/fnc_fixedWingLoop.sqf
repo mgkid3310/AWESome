@@ -11,7 +11,7 @@ if !(_aeroConfigs isEqualType []) then {
 };
 
 _aeroConfigs params ["_isAdvanced", "_dragArray", "_liftArray", "_torqueXCoef", "_performanceArray"];
-_performanceArray params ["_speedMax", "_speedStall", "_angleOfIndicence", "_effectiveAngle", "_massStandard"];
+_performanceArray params ["_speedMax", "_speedStall", "_angleOfIndicence", "_massStandard"];
 
 private _massCurrent = getMass _vehicle;
 if !(_massCurrent > 0) then {
@@ -41,17 +41,17 @@ private _windApply = _modelWind vectorMultiply _windMultiplier;
 private _trueAirVelocity = _modelvelocity vectorDiff _windApply;
 
 // build parameter array
-private _paramDefault = [_modelvelocity, _massStandard, 1];
+private _paramDefault = [_modelvelocity, _massStandard];
 private _paramEnhanced = [_trueAirVelocity, _massStandard, _densityRatio];
 
 // get lift force correction
-private _liftDefault = [_paramDefault, _liftArray, _speedMax, _angleOfIndicence] call orbis_aerodynamics_fnc_getlift;
-private _liftEnhanced = [_paramEnhanced, _liftArray, _speedMax, _angleOfIndicence] call orbis_aerodynamics_fnc_getlift;
+private _liftDefault = [_paramDefault, _liftArray, _speedMax, _angleOfIndicence] call orbis_aerodynamics_fnc_getLiftDefault;
+private _liftEnhanced = [_paramEnhanced, _liftArray, _speedMax, _angleOfIndicence] call orbis_aerodynamics_fnc_getLiftEnhanced;
 private _liftCorrection = _liftEnhanced vectorDiff _liftDefault;
 
 // get drag force correction
 private _dragDefault = [_paramDefault, _dragArray, _isAdvanced] call orbis_aerodynamics_fnc_getDragDefault;
-private _dragEnhanced = [_paramEnhanced, _dragArray, _liftEnhanced, _effectiveAngle] call orbis_aerodynamics_fnc_getDragEnhanced;
+private _dragEnhanced = [_paramEnhanced, _dragArray, _liftEnhanced, _speedStall] call orbis_aerodynamics_fnc_getDragEnhanced;
 private _dragCorrection = _dragEnhanced vectorDiff _dragDefault;
 
 // get torque correction

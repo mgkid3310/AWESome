@@ -42,8 +42,11 @@ stay as it was.
 
 2. Realistic Aerodynamics (drag, lift, etc.)  
 
-Basic drag model is replaced with enhanced model so that  
-it better reflects the drag in real life.  
+Basic drag model is replaced with an enhanced model so  
+that it better reflects the drag in real life. This will  
+generate drag that's much more complicated than a simple  
+polynomial function and create many effects such as the  
+so-called 'Sound barrier'.  
 This also brings air density and wind into consideration.  
 Air density is calulated based on altitude, temperature  
 and humidity which gets more accurate if ACE3 weather is  

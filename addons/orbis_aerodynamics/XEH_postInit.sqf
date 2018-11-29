@@ -1,7 +1,7 @@
 // init global variable
 orbis_aerodynamics_loopFrameInterval = 1;
 orbis_aerodynamics_dragMultiplier = [0.7, 0.1, 0.7];
-orbis_aerodynamics_waveCdArray = [0.7, 0.98, 1.0, 1.03, 1.4, 0.2, 0.1, -6.0];
+orbis_aerodynamics_waveCdArray = [0.7, 0.98, 1.0, 1.03, 1.4, 0.2, 0.1, -3.5];
 
 // add EventHandlers
 player addEventHandler ["GetInMan", {_this call orbis_aerodynamics_fnc_eventGetInMan}];

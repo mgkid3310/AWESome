@@ -22,28 +22,28 @@ private _inducedValue = ((vectorMagnitude _liftVector) / (_airSpeed max (_speedS
 private _dragInduced = (vectorNormalized _airVel) vectorMultiply (_inducedConst * _inducedValue * (orbis_aerodynamics_dragMultiplier select 1));
 
 // wave drag (zero lift drag)
-orbis_aerodynamics_waveCdArray params ["_machCritical", "_transMin", "_machMaxCd", "_transMax", "_multiplierMax", "_multiplierRound", "_machPower"];
+orbis_aerodynamics_waveCdArray params ["_machCritical", "_transStart", "_machMaxCd", "_transEnd", "_multiplierMax", "_roundFwd", "_roundAft", "_machPower"];
 private _machNumber = _airSpeed / sqrt (103497 / _densityRatio);
 private _waveCdMultiplier = 0;
 switch (true) do {
-    case (_machNumber < _transMin): {
-        _waveCdMultiplier = ((_multiplierMax - _multiplierRound) / ((_transMin - _machCritical) ^ 4)) * (((_machCritical max _machNumber min _transMin) - _machCritical) ^ 4);
+    case (_machNumber < _transStart): {
+        _waveCdMultiplier = ((_multiplierMax - _roundFwd) / ((_transStart - _machCritical) ^ 4)) * (((_machCritical max _machNumber min _transStart) - _machCritical) ^ 4);
     };
     case (_machNumber < _machMaxCd): {
-        private _slope = 4 * (_multiplierMax - _multiplierRound) / (_transMin - _machCritical);
-        private _power = _slope * (_machMaxCd - _transMin) / _multiplierRound;
-        _waveCdMultiplier = _multiplierMax - (_multiplierRound / ((_machMaxCd - _transMin) ^ _power)) * ((_machMaxCd - _machNumber) ^ _power);
+        private _slope = 4 * (_multiplierMax - _roundFwd) / (_transStart - _machCritical);
+        private _power = _slope * (_machMaxCd - _transStart) / _roundFwd;
+        _waveCdMultiplier = _multiplierMax - (_roundFwd / ((_machMaxCd - _transStart) ^ _power)) * ((_machMaxCd - _machNumber) ^ _power);
     };
     case (_machNumber == _machMaxCd): {
         _waveCdMultiplier = _multiplierMax;
     };
-    case (_machNumber < _transMax): {
-        private _slope = _machPower * (_multiplierMax - _multiplierRound) / _transMax;
-        private _power = -_slope * (_transMax - _machMaxCd) / _multiplierRound;
-        _waveCdMultiplier = _multiplierMax - (_multiplierRound / ((_transMax - _machMaxCd) ^ _power)) * ((_machNumber - _machMaxCd) ^ _power);
+    case (_machNumber < _transEnd): {
+        private _slope = _machPower * (_multiplierMax - _roundAft) / _transEnd;
+        private _power = -_slope * (_transEnd - _machMaxCd) / _roundAft;
+        _waveCdMultiplier = _multiplierMax - (_roundAft / ((_transEnd - _machMaxCd) ^ _power)) * ((_machNumber - _machMaxCd) ^ _power);
     };
     default {
-        _waveCdMultiplier = (_multiplierMax - _multiplierRound) * (_machNumber ^ _machPower) / (_transMax ^ _machPower);
+        _waveCdMultiplier = (_multiplierMax - _roundAft) * (_machNumber ^ _machPower) / (_transEnd ^ _machPower);
     };
 };
 private _waveCoef = _coef2 vectorMultiply _waveCdMultiplier;

@@ -16,19 +16,52 @@ private _dragParasite = [0, 0, 0];
     _dragParasite set [_velIndex, _force * _mass * _densityRatio * (orbis_aerodynamics_dragMultiplier select 0)];
 } forEach [[0, 0], [1, 2], [2, 1]];
 
-// induced drag (incl. lift-dependent parasite & wave drag)
+// induced drag (including lift-dependent parasite & wave drag)
 private _inducedConst = (2 * 1.2754) / (_densityRatio * pi * 0.5 * 400);
 private _inducedValue = ((vectorMagnitude _liftVector) / (_airSpeed max (_speedStall / 3.6))) ^ 2;
 private _dragInduced = (vectorNormalized _airVel) vectorMultiply (_inducedConst * _inducedValue * (orbis_aerodynamics_dragMultiplier select 1));
 
 // wave drag (zero lift drag)
+orbis_aerodynamics_waveCdArray params ["_machCritical", "_transMin", "_machMaxCd", "_transMax", "_multiplierMax", "_multiplierRound", "_machPower"];
+private _machNumber = _airSpeed / sqrt (103497 / _densityRatio);
+private _waveCdMultiplier = 0;
+switch (true) do {
+    case (_machNumber < _transMin): {
+        _waveCdMultiplier = ((_multiplierMax - _multiplierRound) / ((_transMin - _machCritical) ^ 4)) * (((_machCritical max _machNumber min _transMin) - _machCritical) ^ 4);
+    };
+    case (_machNumber < _machMaxCd): {
+        private _slope = 4 * (_multiplierMax - _multiplierRound) / (_transMin - _machCritical);
+        private _power = _slope * (_machMaxCd - _transMin) / _multiplierRound;
+        _waveCdMultiplier = _multiplierMax - (_multiplierRound / ((_machMaxCd - _transMin) ^ _power)) * ((_machMaxCd - _machNumber) ^ _power);
+    };
+    case (_machNumber == _machMaxCd): {
+        _waveCdMultiplier = _multiplierMax;
+    };
+    case (_machNumber < _transMax): {
+        private _slope = _machPower * (_multiplierMax - _multiplierRound) / _transMax;
+        private _power = -_slope * (_transMax - _machMaxCd) / _multiplierRound;
+        _waveCdMultiplier = _multiplierMax - (_multiplierRound / ((_transMax - _machMaxCd) ^ _power)) * ((_machNumber - _machMaxCd) ^ _power);
+    };
+    default {
+        _waveCdMultiplier = (_multiplierMax - _multiplierRound) * (_machNumber ^ _machPower) / (_transMax ^ _machPower);
+    };
+};
+private _waveCoef = _coef2 vectorMultiply _waveCdMultiplier;
 private _dragWave = [0, 0, 0];
+{
+    _x params ["_velIndex", "_coefIndex"];
+    private _velAxis = _airVel select _velIndex;
+    private _force = (_waveCoef select _coefIndex) * _velAxis * _airSpeed;
+    _dragWave set [_velIndex, _force * _mass * _densityRatio * (orbis_aerodynamics_dragMultiplier select 2)];
+} forEach [[0, 0], [1, 2], [2, 1]];
 
 // sum up drags
 private _dragForceEnhanced = _dragParasite vectorAdd _dragInduced vectorAdd _dragWave;
 
 // report if needed (dev script)
 // diag_log format ["orbis_aerodynamics _dragParasite: %1, _dragInduced: %2, _dragForceEnhanced: %3", _dragParasite, _dragInduced, _dragForceEnhanced];
-// diag_log format ["orbis_aerodynamics SPD: %1, Base: %2, Parasite: %3, Induced: %4, Total: %5", _airSpeed * 3.6, vectorMagnitude _dragParasite, vectorMagnitude _dragInduced, vectorMagnitude _dragForceEnhanced];
+if (AWESOME_DEVMODE_LOG) then {
+    diag_log format ["orbis_aerodynamics Mach: %1, Base: %2, Parasite: %3, Induced: %4, Wave: %5, Total: %6", _machNumber, vectorMagnitude _dragParasite / (orbis_aerodynamics_dragMultiplier select 0), vectorMagnitude _dragParasite, vectorMagnitude _dragInduced, vectorMagnitude _dragWave, vectorMagnitude _dragForceEnhanced];
+};
 
 _dragForceEnhanced

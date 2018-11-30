@@ -77,65 +77,64 @@ if (_hasACEWeather) then {
 };
 
 // remarks
-if ((_fogApply isEqualTo 0) && (_rain isEqualTo 0) && (_lightnings isEqualTo 0)) exitWith {
-    vehicle player setVariable ["orbisATISready", true];
-};
-["orbis_common_remarks"] call orbis_atc_fnc_playAndSleep;
+if ((_fogApply > 0) || (!(_overcast < 0.7) && (_rain > 0)) || (!(_overcast < 0.4) && (_lightnings > 0.1))) then {
+    ["orbis_common_remarks"] call orbis_atc_fnc_playAndSleep;
 
-// fog
-switch (true) do {
-    case (_fogApply > 0.7): {
-        sleep 0.1;
-        ["orbis_common_heavy"] call orbis_atc_fnc_playAndSleep;
-        ["orbis_common_fog"] call orbis_atc_fnc_playAndSleep;
-    };
-    case (_fogApply > 0.3): {
-        sleep 0.1;
-        ["orbis_common_fog"] call orbis_atc_fnc_playAndSleep;
-    };
-    case (_fogApply > 0): {
-        sleep 0.1;
-        ["orbis_common_light"] call orbis_atc_fnc_playAndSleep;
-        ["orbis_common_fog"] call orbis_atc_fnc_playAndSleep;
-    };
-};
-
-// rain
-if !(_overcast < 0.7) then {
+    // fog
     switch (true) do {
-        case (_rain > 0.7): {
+        case (_fogApply > 0.7): {
             sleep 0.1;
             ["orbis_common_heavy"] call orbis_atc_fnc_playAndSleep;
-            ["orbis_common_rain"] call orbis_atc_fnc_playAndSleep;
+            ["orbis_common_fog"] call orbis_atc_fnc_playAndSleep;
         };
-        case (_rain > 0.3): {
+        case (_fogApply > 0.3): {
             sleep 0.1;
-            ["orbis_common_rain"] call orbis_atc_fnc_playAndSleep;
+            ["orbis_common_fog"] call orbis_atc_fnc_playAndSleep;
         };
-        case (_rain > 0): {
+        case (_fogApply > 0): {
             sleep 0.1;
             ["orbis_common_light"] call orbis_atc_fnc_playAndSleep;
-            ["orbis_common_rain"] call orbis_atc_fnc_playAndSleep;
+            ["orbis_common_fog"] call orbis_atc_fnc_playAndSleep;
         };
     };
-};
 
-// lightning
-if !(_overcast < 0.4) then {
-    switch (true) do {
-        case (_lightnings > 0.7): {
-            sleep 0.1;
-            ["orbis_common_heavy"] call orbis_atc_fnc_playAndSleep;
-            ["orbis_common_lightning"] call orbis_atc_fnc_playAndSleep;
+    // rain
+    if !(_overcast < 0.7) then {
+        switch (true) do {
+            case (_rain > 0.7): {
+                sleep 0.1;
+                ["orbis_common_heavy"] call orbis_atc_fnc_playAndSleep;
+                ["orbis_common_rain"] call orbis_atc_fnc_playAndSleep;
+            };
+            case (_rain > 0.3): {
+                sleep 0.1;
+                ["orbis_common_rain"] call orbis_atc_fnc_playAndSleep;
+            };
+            case (_rain > 0): {
+                sleep 0.1;
+                ["orbis_common_light"] call orbis_atc_fnc_playAndSleep;
+                ["orbis_common_rain"] call orbis_atc_fnc_playAndSleep;
+            };
         };
-        case (_lightnings > 0.3): {
-            sleep 0.1;
-            ["orbis_common_lightning"] call orbis_atc_fnc_playAndSleep;
-        };
-        case (_lightnings > 0.1): {
-            sleep 0.1;
-            ["orbis_common_light"] call orbis_atc_fnc_playAndSleep;
-            ["orbis_common_lightning"] call orbis_atc_fnc_playAndSleep;
+    };
+
+    // lightning
+    if !(_overcast < 0.4) then {
+        switch (true) do {
+            case (_lightnings > 0.7): {
+                sleep 0.1;
+                ["orbis_common_heavy"] call orbis_atc_fnc_playAndSleep;
+                ["orbis_common_lightning"] call orbis_atc_fnc_playAndSleep;
+            };
+            case (_lightnings > 0.3): {
+                sleep 0.1;
+                ["orbis_common_lightning"] call orbis_atc_fnc_playAndSleep;
+            };
+            case (_lightnings > 0.1): {
+                sleep 0.1;
+                ["orbis_common_light"] call orbis_atc_fnc_playAndSleep;
+                ["orbis_common_lightning"] call orbis_atc_fnc_playAndSleep;
+            };
         };
     };
 };

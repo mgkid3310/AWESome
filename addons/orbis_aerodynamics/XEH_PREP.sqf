@@ -6,5 +6,6 @@ orbis_aerodynamics_fnc_getAeroConfig = compile preProcessFileLineNumbers "orbis_
 orbis_aerodynamics_fnc_getAirDensity = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_getAirDensity.sqf";
 orbis_aerodynamics_fnc_getDragDefault = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_getDragDefault.sqf";
 orbis_aerodynamics_fnc_getDragEnhanced = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_getDragEnhanced.sqf";
-orbis_aerodynamics_fnc_getLift = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_getLift.sqf";
+orbis_aerodynamics_fnc_getLiftDefault = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_getLiftDefault.sqf";
+orbis_aerodynamics_fnc_getLiftEnhanced = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_getLiftEnhanced.sqf";
 orbis_aerodynamics_fnc_getTorque = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_getTorque.sqf";

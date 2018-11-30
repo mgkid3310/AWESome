@@ -38,23 +38,23 @@ and set GPWS mode to what you want when getting in a
 plane. However, if someone with this addon is in or has  
 been in the plane, the GPWS mode will not change and  
 stay as it was.  
-
 &nbsp;
 
 2. Realistic Aerodynamics (drag, lift, etc.)  
 
-Brings air density and wind into consideration. Air density  
-is calulated based on altitude, temperature and humidity.  
-This requires landing speed to be set based on TAS (True  
-Air Speed), and have air density (altimeter) considered.  
-In case of crosswinds, de-crab or sideslip landings will be  
-needed. Can enable/disable at addon settings (enabled as  
-default), and effects of wind can be adjusted with "Wind  
-Multiplier" setting.  
+Basic drag model is replaced with an enhanced model so  
+that it better reflects the drag in real life. This will  
+generate drag that's much more complicated than a simple  
+polynomial function and create many effects such as the  
+so-called 'Sound barrier'.  
+This also brings air density and wind into consideration.  
+Air density is calulated based on altitude, temperature  
+and humidity which gets more accurate if ACE3 weather is  
+used together.  
 
-NOTICE : in low-FPS and high-speed situation, this feature  
-MAY cause some sutters. if it does so, please temporarily  
-disable this feature in addon settings.  
+Can enable/disable at addon settings (enabled as default),  
+and effects of wind can be adjusted with "Wind Multiplier"  
+setting.  
 &nbsp;
 
 3. ATC (Air Traffic Controller) radar screen  

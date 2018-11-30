@@ -19,7 +19,7 @@ if !(_massCurrent > 0) then {
 };
 
 // atmosphere data setup
-private _altitude = (getPosASL _vehicle) select 2;
+private _altitude = ((getPosASL _vehicle) select 2) * orbis_aerodynamics_altitudeMultiplier;
 private ["_temperature", "_pressure", "_humidity"];
 if (orbis_awesome_hasACEWeather) then {
     _temperature = _altitude call ace_weather_fnc_calculateTemperatureAtHeight; // Celsius

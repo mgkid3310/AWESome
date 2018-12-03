@@ -1,19 +1,19 @@
 General License
 
-All files in this folder and subfolders follow CC BY-NC-SA 4.0, which can be viewed
-from the link below. This license gives the right to authors mentioned in Readme.md
-file. This license has listed exceptions:
+All contents in this folder follow CC BY-NC-SA 4.0, which can be viewed from the
+link below, and contents of subfolders inherits the same license. This license
+gives the right to authors mentioned in Readme.md file.
 
 http://creativecommons.org/licenses/by-nc-sa/4.0/
 
-1. In case of any folder that contains a LICENSE file, all files in the folder
-and its subfolders follow the license written in the LICENSE file instead of
-what's inherited from its upper folder unless there's another LISENCE file in
-its subfolders.
+This license has exceptions as following:
+
+1. In case of a subfolder that contains a LICENSE file, all contents in the folder
+and its subfolders follow the license written in the LICENSE file instead of what's
+inherited from its upper folder.
 
 2. Some files may have seperate license or have original authors, and is listed
 in the 'Seperate Licenses' paragraph in this file.
-
 
 
 Seperate Licenses

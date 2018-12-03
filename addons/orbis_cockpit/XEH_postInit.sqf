@@ -1,3 +1,4 @@
+// init global variable
 orbis_cockpit_lastChecklist = "pre_start_checklist";
 orbis_cockpit_currentChecklist = "none";
 orbis_cockpit_checklistArray = ["pre_start_checklist",
@@ -12,6 +13,7 @@ orbis_cockpit_speedMultiplier = 0.0002;
 orbis_cockpit_groundMultiplier = 25;
 orbis_cockpit_touchdownMultiplier = 0.8;
 
+// add EventHandlers
 addMissionEventHandler ["EachFrame", {[] call orbis_cockpit_fnc_eachFrameHandler}];
 
 // add actions (ACE / vanilla)

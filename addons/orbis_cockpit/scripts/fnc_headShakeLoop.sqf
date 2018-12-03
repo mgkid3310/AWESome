@@ -12,7 +12,7 @@ private _intensity = 0;
 private _speedFactor = 0;
 private _velocity = velocityModelSpace _vehicle;
 private _speed = vectorMagnitude _velocity;
-_speedFactor = orbis_cockpit_speedMultiplier * _speed;
+_speedFactor = _speed * orbis_cockpit_speedMultiplier;
 
 private _onGround = isTouchingGround _vehicle;
 private _groundMultiplier = [1, orbis_cockpit_groundMultiplier] select _onGround;

@@ -61,7 +61,7 @@ private _dragCorrection = _dragEnhanced vectorDiff _dragDefault;
 // private _torqueEnhanced = [_paramEnhanced, _torqueXCoef, _massError] call orbis_aerodynamics_fnc_getTorque;
 // private _torqueCorrection = (_torqueEnhanced vectorMultiply (_massStandard / _massCurrent)) vectorDiff _torqueDefault;
 
-// sum up force corrections and bring wheel friction into calculation if needed (todo)
+// sum up corrections and bring wheel friction into calculation if needed (todo)
 private _forceApply = _liftCorrection vectorAdd _dragCorrection;
 if (isTouchingGround _vehicle) then {
     _forceApply set [0, 0];
@@ -72,10 +72,10 @@ if (isTouchingGround _vehicle) then {
     _torqueCorrection set [2, 0];
 };
 
-// calculate and apply required DeltaV
+// calculate and apply required impulse (force times timestep)
 _vehicle addForce [_vehicle vectorModelToWorld (_forceApply vectorMultiply _timeStep), getCenterOfMass _vehicle];
 
-// calculate and apply required force for target torque
+// calculate and apply required angular impulse (torque times timestep)
 // _vehicle addtorque [_vehicle vectorModelToWorld (_torqueCorrection vectorMultiply _timeStep)];
 
 // report if needed (dev script)

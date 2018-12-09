@@ -64,17 +64,17 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_minWarnLevel = _vehicle getVariable ["minWarnLevel", 0];
 	switch (_minWarnLevel) do {
 		case (2): {
-			if (_altDiff > orbis_gpws_minAlt) then {
+			if (_altDiff > ((orbis_gpws_minAlt + 50) * orbis_awesome_ftToM)) then {
 				_minWarnLevel = 1;
 				_vehicle setVariable ["minWarnLevel", 1];
 			};
-			if (_altDiff > orbis_gpws_appMinAlt) then {
+			if (_altDiff > ((orbis_gpws_appMinAlt + 50) * orbis_awesome_ftToM)) then {
 				_minWarnLevel = 0;
 				_vehicle setVariable ["minWarnLevel", 0];
 			};
 		};
 		case (1): {
-			if (_altDiff > orbis_gpws_appMinAlt) then {
+			if (_altDiff > ((orbis_gpws_appMinAlt + 50) * orbis_awesome_ftToM)) then {
 				_minWarnLevel = 0;
 				_vehicle setVariable ["minWarnLevel", 0];
 			};
@@ -215,7 +215,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			};
 
 			// b747_MIN (landing / final)
-			case ((_flightphase in ["landing", "final"]) && (_altDiff < orbis_gpws_minAlt) && (_minWarnLevel < 2) && (_climeASL < 0)): {
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (orbis_gpws_minAlt * orbis_awesome_ftToM)) && (_minWarnLevel < 2) && (_climeASL < 0)): {
 				DEV_CHAT("orbis_gpws: b747_MIN");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_MIN"] spawn orbis_gpws_fnc_speakGPWS;
@@ -223,7 +223,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			};
 
 			// b747_APPRMIN (landing / final)
-			case ((_flightphase in ["landing", "final"]) && (_altDiff < orbis_gpws_appMinAlt) && (_minWarnLevel < 1) && (_climeASL < 0)): {
+			case ((_flightphase in ["landing", "final"]) && (_altDiff < (orbis_gpws_appMinAlt * orbis_awesome_ftToM)) && (_minWarnLevel < 1) && (_climeASL < 0)): {
 				DEV_CHAT("orbis_gpws: b747_APPRMIN");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_APPRMIN"] spawn orbis_gpws_fnc_speakGPWS;

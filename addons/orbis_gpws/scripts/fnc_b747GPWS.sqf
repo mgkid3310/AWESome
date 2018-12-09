@@ -91,51 +91,42 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 		};
 	};
 
+	// altInfo saves minimum altitude informed
 	_altInfo = _vehicle getVariable ["altInformLevel", 2000];
-	if ((_altInfo < 10) && (_altDiff > (10 * orbis_awesome_ftToM))) then {
-		_altInfo = 10;
-		_vehicle setVariable ["altInformLevel", 10];
-	};
-	if ((_altInfo < 20) && (_altDiff > (20 * orbis_awesome_ftToM))) then {
+	if ((_altInfo == 10) && (_altDiff > (15 * orbis_awesome_ftToM))) then {
 		_altInfo = 20;
-		_vehicle setVariable ["altInformLevel", 20];
 	};
-	if ((_altInfo < 30) && (_altDiff > (30 * orbis_awesome_ftToM))) then {
+	if ((_altInfo == 20) && (_altDiff > (25 * orbis_awesome_ftToM))) then {
 		_altInfo = 30;
-		_vehicle setVariable ["altInformLevel", 30];
 	};
-	if ((_altInfo < 40) && (_altDiff > (40 * orbis_awesome_ftToM))) then {
+	if ((_altInfo == 30) && (_altDiff > (35 * orbis_awesome_ftToM))) then {
 		_altInfo = 40;
-		_vehicle setVariable ["altInformLevel", 40];
 	};
-	if ((_altInfo < 50) && (_altDiff > (50 * orbis_awesome_ftToM))) then {
+	if ((_altInfo == 40) && (_altDiff > (45 * orbis_awesome_ftToM))) then {
 		_altInfo = 50;
-		_vehicle setVariable ["altInformLevel", 50];
 	};
-	if ((_altInfo < 100) && (_altDiff > (100 * orbis_awesome_ftToM))) then {
+	if ((_altInfo == 50) && (_altDiff > (75 * orbis_awesome_ftToM))) then {
 		_altInfo = 100;
-		_vehicle setVariable ["altInformLevel", 100];
 	};
-	if ((_altInfo < 200) && (_altDiff > (200 * orbis_awesome_ftToM))) then {
+	if ((_altInfo == 100) && (_altDiff > (150 * orbis_awesome_ftToM))) then {
 		_altInfo = 200;
-		_vehicle setVariable ["altInformLevel", 200];
 	};
-	if ((_altInfo < 300) && (_altDiff > (300 * orbis_awesome_ftToM))) then {
+	if ((_altInfo == 200) && (_altDiff > (250 * orbis_awesome_ftToM))) then {
 		_altInfo = 300;
-		_vehicle setVariable ["altInformLevel", 300];
 	};
-	if ((_altInfo < 400) && (_altDiff > (400 * orbis_awesome_ftToM))) then {
+	if ((_altInfo == 300) && (_altDiff > (350 * orbis_awesome_ftToM))) then {
 		_altInfo = 400;
-		_vehicle setVariable ["altInformLevel", 400];
 	};
-	if ((_altInfo < 500) && (_altDiff > (500 * orbis_awesome_ftToM))) then {
+	if ((_altInfo == 400) && (_altDiff > (450 * orbis_awesome_ftToM))) then {
 		_altInfo = 500;
-		_vehicle setVariable ["altInformLevel", 500];
 	};
-	if ((_altInfo < 1000) && (_altDiff > (1000 * orbis_awesome_ftToM))) then {
+	if ((_altInfo == 500) && (_altDiff > (600 * orbis_awesome_ftToM))) then {
 		_altInfo = 1000;
-		_vehicle setVariable ["altInformLevel", 1000];
 	};
+	if ((_altInfo == 1000) && (_altDiff > (1200 * orbis_awesome_ftToM))) then {
+		_altInfo = 2000;
+	};
+	_vehicle setVariable ["altInformLevel", _altInfo];
 
 	// GPWS general speech work
 	if (_vehicle getVariable ["orbisGPWSready", true]) then {

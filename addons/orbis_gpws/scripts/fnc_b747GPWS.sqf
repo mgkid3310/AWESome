@@ -61,6 +61,15 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_sinkRate = _climeASL < orbis_gpws_maxSinkRate;
 	_isCritical = _terrainWarn || _dontSink || _sinkRate;
 
+	if !(_tooLow) then {
+		if (_flapsWarned) then {
+			_flapsWarned = false;
+		};
+		if (_gearWarned) then {
+			_gearWarned = false;
+		};
+	};
+
 	_minWarnLevel = _vehicle getVariable ["minWarnLevel", 0];
 	switch (_minWarnLevel) do {
 		case (2): {
@@ -80,15 +89,6 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 			};
 		};
 		default {};
-	};
-
-	if !(_tooLow) then {
-		if (_flapsWarned) then {
-			_flapsWarned = false;
-		};
-		if (_gearWarned) then {
-			_gearWarned = false;
-		};
 	};
 
 	// altInfo saves minimum altitude informed

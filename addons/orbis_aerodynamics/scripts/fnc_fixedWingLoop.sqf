@@ -67,13 +67,16 @@ if (isTouchingGround _vehicle) then {
     _forceApply set [0, 0];
     _forceApply set [1, 0];
     _forceApply set [2, 0];
+    _torqueCorrection set [0, 0];
+    _torqueCorrection set [1, 0];
+    _torqueCorrection set [2, 0];
 };
 
 // calculate and apply required DeltaV
 _vehicle addForce [_vehicle vectorModelToWorld (_forceApply vectorMultiply _timeStep), getCenterOfMass _vehicle];
 
 // calculate and apply required force for target torque
-// _vehicle addtorque [_torqueCorrection vectorMultiply _timeStep];
+// _vehicle addtorque [_vehicle vectorModelToWorld (_torqueCorrection vectorMultiply _timeStep)];
 
 // report if needed (dev script)
 // diag_log format ["orbis_aerodynamics _density: %1, _modelvelocity: %2, _trueAirVelocity: %3, _dragDefault: %4, _dragEnhanced: %5, _forceApply: %6", _density, _modelvelocity, _trueAirVelocity, _dragDefault, _dragEnhanced, _forceApply];

@@ -59,7 +59,7 @@ private _dragCorrection = _dragEnhanced vectorDiff _dragDefault;
 // get torque correction
 // private _torqueDefault = [_paramDefault, _torqueXCoef, _massError] call orbis_aerodynamics_fnc_getTorque;
 // private _torqueEnhanced = [_paramEnhanced, _torqueXCoef, _massError] call orbis_aerodynamics_fnc_getTorque;
-// private _torqueCorrection = _torqueEnhanced vectorDiff _torqueDefault;
+// private _torqueCorrection = (_torqueEnhanced vectorMultiply (_massStandard / _massCurrent)) vectorDiff _torqueDefault;
 
 // sum up force corrections and bring wheel friction into calculation if needed (todo)
 private _forceApply = _liftCorrection vectorAdd _dragCorrection;

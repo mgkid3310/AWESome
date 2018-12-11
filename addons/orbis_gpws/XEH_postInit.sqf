@@ -2,6 +2,7 @@ player setVariable ["hasOrbisGPWS", true, true];
 
 // global variables init
 orbis_gpws_takeoffAlt = 60;
+orbis_gpws_takeoffSpeed = 300;
 orbis_gpws_airportRange = 6000;
 
 // b747
@@ -11,8 +12,8 @@ orbis_gpws_terrainWarningHeight = 10;
 orbis_gpws_tooLowAlt = 50;
 orbis_gpws_maxSinkRate = -40;
 orbis_gpws_maxBankAngle = 45;
-orbis_gpws_appMinAlt = 350 * orbis_awesome_ftToM;
-orbis_gpws_minAlt = 250 * orbis_awesome_ftToM;
+orbis_gpws_appMinAlt = 350;
+orbis_gpws_minAlt = 250;
 orbis_gpws_delay = 2.0;
 
 // f16

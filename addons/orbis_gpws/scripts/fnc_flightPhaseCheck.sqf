@@ -1,6 +1,6 @@
 #include "header_macros.hpp"
 
-params ["_vehicle", "_flightphase", "_altRadar", "_climeASL", "_flapStatus", "_gearStatus"];
+params ["_vehicle", ["_flightphase", "taxing"], "_altRadar", "_climeASL", "_flapStatus", "_gearStatus"];
 private ["_headingDiff", "_approachAngle", "_ILSarray"];
 private _currentILSindex = -1;
 private _distance = 10000;
@@ -17,7 +17,7 @@ switch (_flightphase) do {
         };
     };
     case ("takeOff"): {
-        if (_altRadar > orbis_gpws_takeoffAlt) then {
+        if ((_altRadar > orbis_gpws_takeoffAlt) || (speed _vehicle > orbis_gpws_takeoffSpeed)) then {
             _flightphase = "inFlight";
             DEV_CHAT("orbis_gpws: b747GPWS takeOff -> inFlight");
         };

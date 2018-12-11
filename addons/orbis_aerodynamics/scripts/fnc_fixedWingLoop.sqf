@@ -10,8 +10,10 @@ if !(_aeroConfigs isEqualType []) then {
     _vehicle setVariable ["orbis_aerodynamics_aeroConfig", _aeroConfigs];
 };
 
-_aeroConfigs params ["_isAdvanced", "_dragArray", "_liftArray", "_torqueXCoef", "_performanceArray"];
-_performanceArray params ["_speedMax", "_speedStall", "_angleOfIndicence", "_massStandard"];
+_aeroConfigs params ["_isAdvanced", "_aerodynamicsArray", "_speedPerformance", "_physicalProperty"];
+_aerodynamicsArray params ["_dragArray", "_liftArray", "_angleOfIndicence", "_torqueXCoef"];
+_speedPerformance params ["_speedStall", "_speedMax"];
+_physicalProperty params ["_massStandard", "_massError"];
 
 private _massCurrent = getMass _vehicle;
 if !(_massCurrent > 0) then {
@@ -55,23 +57,26 @@ private _dragEnhanced = [_paramEnhanced, _dragArray, _liftEnhanced, _speedStall]
 private _dragCorrection = _dragEnhanced vectorDiff _dragDefault;
 
 // get torque correction
-// private _torqueDefault = [_paramDefault, _torqueXCoef] call orbis_aerodynamics_fnc_getTorque;
-// private _torqueEnhanced = [_paramEnhanced, _torqueXCoef] call orbis_aerodynamics_fnc_getTorque;
-// private _torqueCorrection = _torqueEnhanced vectorDiff _torqueDefault;
+// private _torqueDefault = [_paramDefault, _torqueXCoef, _massError] call orbis_aerodynamics_fnc_getTorque;
+// private _torqueEnhanced = [_paramEnhanced, _torqueXCoef, _massError] call orbis_aerodynamics_fnc_getTorque;
+// private _torqueCorrection = (_torqueEnhanced vectorMultiply (_massStandard / _massCurrent)) vectorDiff _torqueDefault;
 
-// sum up force corrections and bring wheel friction into calculation if needed (todo)
+// sum up corrections and bring wheel friction into calculation if needed (todo)
 private _forceApply = _liftCorrection vectorAdd _dragCorrection;
 if (isTouchingGround _vehicle) then {
     _forceApply set [0, 0];
     _forceApply set [1, 0];
     _forceApply set [2, 0];
+    _torqueCorrection set [0, 0];
+    _torqueCorrection set [1, 0];
+    _torqueCorrection set [2, 0];
 };
 
-// calculate and apply required DeltaV
+// calculate and apply required impulse (force times timestep)
 _vehicle addForce [_vehicle vectorModelToWorld (_forceApply vectorMultiply _timeStep), getCenterOfMass _vehicle];
 
-// calculate and apply required force for target torque
-// _vehicle addtorque [_torqueCorrection vectorMultiply _timeStep];
+// calculate and apply required angular impulse (torque times timestep)
+// _vehicle addtorque [_vehicle vectorModelToWorld (_torqueCorrection vectorMultiply _timeStep)];
 
 // report if needed (dev script)
 // diag_log format ["orbis_aerodynamics _density: %1, _modelvelocity: %2, _trueAirVelocity: %3, _dragDefault: %4, _dragEnhanced: %5, _forceApply: %6", _density, _modelvelocity, _trueAirVelocity, _dragDefault, _dragEnhanced, _forceApply];

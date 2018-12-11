@@ -11,7 +11,7 @@ orbis_cockpit_checklistArray = ["pre_start_checklist",
 
 orbis_cockpit_speedShakeMultiplier = 0.0001;
 orbis_cockpit_speedMaxShake = 600;
-orbis_cockpit_groundShakeMultiplier = 25;
+orbis_cockpit_groundShakeMultiplier = 20;
 orbis_cockpit_touchdownShakeMultiplier = 0.8;
 
 // add EventHandlers

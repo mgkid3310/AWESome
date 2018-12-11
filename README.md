@@ -57,7 +57,7 @@ and effects of wind can be adjusted with "Wind Multiplier"
 setting.  
 &nbsp;
 
-3. ATC (Air Traffic Controller) radar screen  
+3. ATC (Air Traffic Controller) Radar Screen  
 
 Shows friendly & civilian planes on map with name, speed,  
 altitude, and heading. Useful when commanding multiple  
@@ -111,10 +111,12 @@ with caution when towing.
 
 6. Cockpit Utility  
 
-Provides checklists for fixed-wing pilots, with decision  
-speed, rotate speed, etc. automatically filled in. This helps  
-pilots to check if they have anything missing and gives  
-reference speeds for takeoff and landing.  
+Adds camera shake feature reflecting the vehicle's speed and  
+status including the touchdown speed, and checklists feature  
+for fixed-wing pilots which provides decision speed, rotate  
+speed, landing speed and many more automatically filled in.  
+This helps pilots to check if they have anything forgotten  
+and gives reference speeds for takeoff and landing.  
 &nbsp;
 
 ----------------

@@ -55,7 +55,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	_altDiff = _flightphaseOutput select 2;
 	_altDiffDesired = _flightphaseOutput select 3;
 
-	_tooLow = !(_flightphase in ["taxing", "touchDown"]) && (_altRadar < orbis_gpws_tooLowAlt);
+	_tooLow = !(_flightphase in ["taxing", "takeOff", "touchDown"]) && (_altRadar < orbis_gpws_tooLowAlt);
 	_terrainWarn = (_altRadar > 5) && (_flightphase in ["takeOff", "inFlight", "landing"]) && ((_expectTerrainAlt + orbis_gpws_terrainWarningHeight) > _altASL);
 	_dontSink = (_flightphase isEqualTo "takeOff") && (_altRadar > 5) && (_altRadar < 100) && (_climeASL < 0);
 	_sinkRate = _climeASL < orbis_gpws_maxSinkRate;
@@ -182,13 +182,6 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 				_bankWarnedTime = time;
 			};
 
-			// b747_GLIDESLOPE (landing, final)
-			case ((_flightphase in ["landing", "final"]) && (((_altDiffDesired - 50) min (_altDiffDesired * 0.8)) > _altDiff)): {
-				DEV_CHAT("orbis_gpws: b747_GLIDESLOPE");
-				_vehicle setVariable ["orbisGPWSready", false];
-				[_vehicle, "b747_GLIDESLOPE", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
-			};
-
 			// b747_FLAPS (inFlight, landing, final)
 			case (_tooLow && !_flapsWarned && (_flightphase in ["inFlight", "landing", "final"]) && (_flapStatus < 0.1)): {
 				DEV_CHAT("orbis_gpws: b747_FLAPS");
@@ -203,6 +196,13 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "b747_GEAR", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 				_gearWarned = true;
+			};
+
+			// b747_GLIDESLOPE (landing, final)
+			case ((_flightphase in ["landing", "final"]) && (((_altDiffDesired - 50) min (_altDiffDesired * 0.8)) > _altDiff)): {
+				DEV_CHAT("orbis_gpws: b747_GLIDESLOPE");
+				_vehicle setVariable ["orbisGPWSready", false];
+				[_vehicle, "b747_GLIDESLOPE", orbis_gpws_delay] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
 			// b747_MIN (landing / final)

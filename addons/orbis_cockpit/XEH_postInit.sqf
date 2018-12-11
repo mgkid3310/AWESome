@@ -9,7 +9,8 @@ orbis_cockpit_checklistArray = ["pre_start_checklist",
     "landing_taxi_to_ramp_checklist"
 ];
 
-orbis_cockpit_speedMultiplier = 0.0002;
+orbis_cockpit_speedMultiplier = 0.0001;
+orbis_cockpit_speedMaxReference = 600;
 orbis_cockpit_groundMultiplier = 25;
 orbis_cockpit_touchdownMultiplier = 0.8;
 

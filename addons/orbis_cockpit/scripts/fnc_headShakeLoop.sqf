@@ -28,7 +28,7 @@ _intensity = _speedFactor + _touchdownFactor;
 
 enableCamShake true;
 setCamShakeParams [0.01, 0.4, 0.4, 0.4, true];
-addCamShake [_intensity, 3, 50];
+addCamShake [_intensity, 2, 50];
 
 _vehicle setVariable ["orbis_cockpit_velOld", _velocity];
 _vehicle setVariable ["orbis_cockpit_groundOld", _onGround];

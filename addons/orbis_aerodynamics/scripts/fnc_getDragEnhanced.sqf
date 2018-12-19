@@ -1,6 +1,8 @@
 params ["_paramArray", "_dragArray", "_liftVector", "_speedStall"];
-_paramArray params ["_trueAirVelocity", "_mass", "_densityRatio"];
+_paramArray params ["_trueAirVelocity", "_massStandard", "_massError", "_densityRatio"];
 _dragArray params ["_coef2", "_coef1", "_coef0"];
+
+// if (_massError) exitWith {[0, 0, 0]};
 
 private _airVel = _trueAirVelocity vectorMultiply -1;
 private _airSpeed = vectorMagnitude _airVel;
@@ -13,7 +15,7 @@ private _dragParasite = [0, 0, 0];
     private _force = (_coef2 select _coefIndex) * _velAxis * _airSpeed;
     _force = _force + (_coef1 select _coefIndex) * _velAxis;
     _force = _force + (_coef0 select _coefIndex) * ([1, -1] select (_velAxis < 0));
-    _dragParasite set [_velIndex, _force * _mass * _densityRatio * (orbis_aerodynamics_dragMultiplier select 0)];
+    _dragParasite set [_velIndex, _force * _massStandard * _densityRatio * (orbis_aerodynamics_dragMultiplier select 0)];
 } forEach [[0, 0], [1, 2], [2, 1]];
 
 // induced drag (including lift-dependent parasite & wave drag)
@@ -52,7 +54,7 @@ private _dragWave = [0, 0, 0];
     _x params ["_velIndex", "_coefIndex"];
     private _velAxis = _airVel select _velIndex;
     private _force = (_waveCoef select _coefIndex) * _velAxis * _airSpeed;
-    _dragWave set [_velIndex, _force * _mass * _densityRatio * (orbis_aerodynamics_dragMultiplier select 2)];
+    _dragWave set [_velIndex, _force * _massStandard * _densityRatio * (orbis_aerodynamics_dragMultiplier select 2)];
 } forEach [[0, 0], [1, 2], [2, 1]];
 
 // sum up drags

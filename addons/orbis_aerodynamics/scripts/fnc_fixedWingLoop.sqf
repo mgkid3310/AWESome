@@ -19,6 +19,7 @@ private _massCurrent = getMass _vehicle;
 if !(_massCurrent > 0) then {
     _massCurrent = _massStandard;
 };
+_vehicle setMAss _massCurrent;
 
 // atmosphere data setup
 private _altitude = ((getPosASL _vehicle) select 2) * orbis_aerodynamics_altitudeMultiplier;
@@ -43,8 +44,8 @@ private _windApply = _modelWind vectorMultiply _windMultiplier;
 private _trueAirVelocity = _modelvelocity vectorDiff _windApply;
 
 // build parameter array
-private _paramDefault = [_modelvelocity, _massStandard];
-private _paramEnhanced = [_trueAirVelocity, _massStandard, _densityRatio];
+private _paramDefault = [_modelvelocity, _massCurrent, _massError];
+private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityRatio];
 
 // get lift force correction
 private _liftDefault = [_paramDefault, _liftArray, _speedMax, _angleOfIndicence] call orbis_aerodynamics_fnc_getLiftDefault;

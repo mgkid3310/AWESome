@@ -19,7 +19,7 @@ private _massCurrent = getMass _vehicle;
 if !(_massCurrent > 0) then {
     _massCurrent = _massStandard;
 };
-_vehicle setMAss _massCurrent;
+_vehicle setMass _massCurrent;
 
 // atmosphere data setup
 private _altitude = ((getPosASL _vehicle) select 2) * orbis_aerodynamics_altitudeMultiplier;

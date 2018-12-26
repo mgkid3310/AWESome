@@ -15,13 +15,13 @@ private _dragParasite = [0, 0, 0];
     private _force = (_coef2 select _coefIndex) * _velAxis * _airSpeed;
     _force = _force + (_coef1 select _coefIndex) * _velAxis;
     _force = _force + (_coef0 select _coefIndex) * ([1, -1] select (_velAxis < 0));
-    _dragParasite set [_velIndex, _force * _massStandard * _densityRatio * (orbis_aerodynamics_dragMultiplier select 0)];
+    _dragParasite set [_velIndex, _force * _massStandard * _densityRatio * (orbis_aerodynamics_dragSourceMultiplier select 0)];
 } forEach [[0, 0], [1, 2], [2, 1]];
 
 // induced drag (including lift-dependent parasite & wave drag)
 private _inducedConst = (2 * 1.2754) / (_densityRatio * pi * 0.5 * 400);
 private _inducedValue = ((vectorMagnitude _liftVector) / (_airSpeed max (_speedStall / 3.6))) ^ 2;
-private _dragInduced = (vectorNormalized _airVel) vectorMultiply (_inducedConst * _inducedValue * (orbis_aerodynamics_dragMultiplier select 1));
+private _dragInduced = (vectorNormalized _airVel) vectorMultiply (_inducedConst * _inducedValue * (orbis_aerodynamics_dragSourceMultiplier select 1));
 
 // wave drag (zero lift drag)
 orbis_aerodynamics_waveCdArray params ["_machCritical", "_transStart", "_machMaxCd", "_transEnd", "_multiplierMax", "_roundFwd", "_roundAft", "_machPower"];
@@ -54,7 +54,7 @@ private _dragWave = [0, 0, 0];
     _x params ["_velIndex", "_coefIndex"];
     private _velAxis = _airVel select _velIndex;
     private _force = (_waveCoef select _coefIndex) * _velAxis * _airSpeed;
-    _dragWave set [_velIndex, _force * _massStandard * _densityRatio * (orbis_aerodynamics_dragMultiplier select 2)];
+    _dragWave set [_velIndex, _force * _massStandard * _densityRatio * (orbis_aerodynamics_dragSourceMultiplier select 2)];
 } forEach [[0, 0], [1, 2], [2, 1]];
 
 // sum up drags
@@ -64,6 +64,7 @@ private _dragForceEnhanced = _dragParasite vectorAdd _dragInduced vectorAdd _dra
 // diag_log format ["orbis_aerodynamics _dragParasite: %1, _dragInduced: %2, _dragForceEnhanced: %3", _dragParasite, _dragInduced, _dragForceEnhanced];
 if (AWESOME_DEVMODE_LOG) then {
     diag_log format ["orbis_aerodynamics Mach: %1, Base: %2, Parasite: %3, Induced: %4, Wave: %5, Total: %6", _machNumber, vectorMagnitude _dragParasite / (orbis_aerodynamics_dragMultiplier select 0), vectorMagnitude _dragParasite, vectorMagnitude _dragInduced, vectorMagnitude _dragWave, vectorMagnitude _dragForceEnhanced];
+    diag_log format ["orbis_aerodynamics Mach: %1, Base: %2, Parasite: %3, Induced: %4, Wave: %5, Total: %6", _machNumber, vectorMagnitude _dragParasite / (orbis_aerodynamics_dragSourceMultiplier select 0), vectorMagnitude _dragParasite, vectorMagnitude _dragInduced, vectorMagnitude _dragWave, vectorMagnitude _dragForceEnhanced];
 };
 
 _dragForceEnhanced

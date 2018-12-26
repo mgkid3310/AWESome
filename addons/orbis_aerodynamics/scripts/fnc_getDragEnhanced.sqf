@@ -1,4 +1,4 @@
-params ["_paramArray", "_dragArray", "_liftVector", "_speedStall"];
+params ["_paramArray", "_dragArray", "_liftVector", "_speedStall", "_dragMultiplier"];
 _paramArray params ["_trueAirVelocity", "_massStandard", "_massError", "_densityRatio"];
 _dragArray params ["_coef2", "_coef1", "_coef0"];
 
@@ -58,12 +58,11 @@ private _dragWave = [0, 0, 0];
 } forEach [[0, 0], [1, 2], [2, 1]];
 
 // sum up drags
-private _dragForceEnhanced = _dragParasite vectorAdd _dragInduced vectorAdd _dragWave;
+private _dragForceEnhanced = (_dragParasite vectorAdd _dragInduced vectorAdd _dragWave) vectorMultiply _dragMultiplier;
 
 // report if needed (dev script)
 // diag_log format ["orbis_aerodynamics _dragParasite: %1, _dragInduced: %2, _dragForceEnhanced: %3", _dragParasite, _dragInduced, _dragForceEnhanced];
 if (AWESOME_DEVMODE_LOG) then {
-    diag_log format ["orbis_aerodynamics Mach: %1, Base: %2, Parasite: %3, Induced: %4, Wave: %5, Total: %6", _machNumber, vectorMagnitude _dragParasite / (orbis_aerodynamics_dragMultiplier select 0), vectorMagnitude _dragParasite, vectorMagnitude _dragInduced, vectorMagnitude _dragWave, vectorMagnitude _dragForceEnhanced];
     diag_log format ["orbis_aerodynamics Mach: %1, Base: %2, Parasite: %3, Induced: %4, Wave: %5, Total: %6", _machNumber, vectorMagnitude _dragParasite / (orbis_aerodynamics_dragSourceMultiplier select 0), vectorMagnitude _dragParasite, vectorMagnitude _dragInduced, vectorMagnitude _dragWave, vectorMagnitude _dragForceEnhanced];
 };
 

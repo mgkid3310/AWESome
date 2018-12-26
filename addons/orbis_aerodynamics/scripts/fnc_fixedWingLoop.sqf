@@ -23,8 +23,8 @@ _vehicle setMass _massCurrent;
 private _dragMultiplier = 1;
 
 // F/A-18 canopy compatibility
-if (typeOf _vehicle in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
-    if (_vehicle animationPhase "rcanopy_hide" > 0) then {
+if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
+    if ((_vehicle animationPhase "rcanopy_hide") > 0) then {
         _dragMultiplier = 1.2;
     };
 };

@@ -19,6 +19,15 @@ private _massCurrent = getMass _vehicle;
 if !(_massCurrent > 0) then {
     _massCurrent = _massStandard;
 };
+_vehicle setMass _massCurrent;
+private _dragMultiplier = 1;
+
+// F/A-18 canopy compatibility
+if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
+    if ((_vehicle animationPhase "rcanopy_hide") > 0) then {
+        _dragMultiplier = 1.2;
+    };
+};
 
 // atmosphere data setup
 private _altitude = ((getPosASL _vehicle) select 2) * orbis_aerodynamics_altitudeMultiplier;
@@ -43,8 +52,8 @@ private _windApply = _modelWind vectorMultiply _windMultiplier;
 private _trueAirVelocity = _modelvelocity vectorDiff _windApply;
 
 // build parameter array
-private _paramDefault = [_modelvelocity, _massStandard];
-private _paramEnhanced = [_trueAirVelocity, _massStandard, _densityRatio];
+private _paramDefault = [_modelvelocity, _massCurrent, _massError];
+private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityRatio];
 
 // get lift force correction
 private _liftDefault = [_paramDefault, _liftArray, _speedMax, _angleOfIndicence] call orbis_aerodynamics_fnc_getLiftDefault;
@@ -53,7 +62,7 @@ private _liftCorrection = _liftEnhanced vectorDiff _liftDefault;
 
 // get drag force correction
 private _dragDefault = [_paramDefault, _dragArray, _isAdvanced] call orbis_aerodynamics_fnc_getDragDefault;
-private _dragEnhanced = [_paramEnhanced, _dragArray, _liftEnhanced, _speedStall] call orbis_aerodynamics_fnc_getDragEnhanced;
+private _dragEnhanced = [_paramEnhanced, _dragArray, _liftEnhanced, _speedStall, _dragMultiplier] call orbis_aerodynamics_fnc_getDragEnhanced;
 private _dragCorrection = _dragEnhanced vectorDiff _dragDefault;
 
 // get torque correction

@@ -20,6 +20,9 @@ if !(_massCurrent > 0) then {
     _massCurrent = _massStandard;
 };
 _vehicle setMass _massCurrent;
+
+// get effective drag config
+private _dragArrayEff = _dragArray;
 private _dragMultiplier = 1;
 
 // F/A-18 canopy compatibility
@@ -61,8 +64,8 @@ private _liftEnhanced = [_paramEnhanced, _liftArray, _speedMax, _angleOfIndicenc
 private _liftCorrection = _liftEnhanced vectorDiff _liftDefault;
 
 // get drag force correction
-private _dragDefault = [_paramDefault, _dragArray, _isAdvanced] call orbis_aerodynamics_fnc_getDragDefault;
-private _dragEnhanced = [_paramEnhanced, _dragArray, _liftEnhanced, _speedStall, _dragMultiplier] call orbis_aerodynamics_fnc_getDragEnhanced;
+private _dragDefault = [_paramDefault, _dragArrayEff, _isAdvanced] call orbis_aerodynamics_fnc_getDragDefault;
+private _dragEnhanced = [_paramEnhanced, _dragArrayEff, _liftEnhanced, _speedStall, _dragMultiplier] call orbis_aerodynamics_fnc_getDragEnhanced;
 private _dragCorrection = _dragEnhanced vectorDiff _dragDefault;
 
 // get torque correction

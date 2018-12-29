@@ -13,11 +13,27 @@ if !(_aeroConfigs isEqualType []) then {
 _aeroConfigs params ["_isAdvanced", "_aerodynamicsArray", "_speedPerformance", "_physicalProperty"];
 _aerodynamicsArray params ["_dragArray", "_liftArray", "_angleOfIndicence", "_torqueXCoef"];
 _speedPerformance params ["_speedStall", "_speedMax"];
-_physicalProperty params ["_massStandard", "_massError"];
+_physicalProperty params ["_massError", "_massStandard", "_fuelCapacity"];
 
-private _massCurrent = getMass _vehicle;
-if !(_massCurrent > 0) then {
-    _massCurrent = _massStandard;
+// get current vehicle mass and apply
+private ["_massCurrent", "_fuelMass", "_magazineMass", "_massFull", "_countFull"];
+if (_massError) then {
+    _massCurrent = 10000;
+} else {
+    _fuelMass = 0.8 * (fuel _vehicle) * _fuelCapacity;
+    if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
+        _fuelMass = _fuelMass + 0.8 * (_vehicle animationPhase "auxtank_switch") * _fuelCapacity;
+    };
+
+    _magazineMass = 0;
+    {
+        _massFull = getNumber (configFile >> "CfgMagazines" >> _x >> "mass");
+        _countNow = _vehicle ammoOnPylon (_forEachIndex + 1);
+        _countFull = 1 max getNumber (configFile >> "CfgMagazines" >> _x >> "count");
+        _magazineMass = _magazineMass + _massFull * _countNow / _countFull;
+    } forEach (getPylonMagazines _vehicle);
+
+    _massCurrent = (_massStandard * orbis_aerodynamics_massStandardRatio) + _fuelMass + _magazineMass;
 };
 _vehicle setMass _massCurrent;
 

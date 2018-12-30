@@ -1,5 +1,6 @@
 // init global variable
 orbis_aerodynamics_loopFrameInterval = 1;
+orbis_aerodynamics_pylonDragRatio = 0.001; // Cd 0.1 for FIR Mk84
 orbis_aerodynamics_massStandardRatio = 0.8;
 orbis_aerodynamics_altitudeMultiplier = 0.5;
 orbis_aerodynamics_dragSourceMultiplier = [1.0, 0.1, 1.0];

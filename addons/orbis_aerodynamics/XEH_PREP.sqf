@@ -10,3 +10,4 @@ orbis_aerodynamics_fnc_getDragEnhanced = compile preProcessFileLineNumbers "orbi
 orbis_aerodynamics_fnc_getLiftDefault = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_getLiftDefault.sqf";
 orbis_aerodynamics_fnc_getLiftEnhanced = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_getLiftEnhanced.sqf";
 orbis_aerodynamics_fnc_getTorque = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_getTorque.sqf";
+orbis_aerodynamics_fnc_vehicleInit = compile preProcessFileLineNumbers "orbis_aerodynamics\scripts\fnc_vehicleInit.sqf";

@@ -13,13 +13,47 @@ if !(_aeroConfigs isEqualType []) then {
 _aeroConfigs params ["_isAdvanced", "_aerodynamicsArray", "_speedPerformance", "_physicalProperty"];
 _aerodynamicsArray params ["_dragArray", "_liftArray", "_angleOfIndicence", "_torqueXCoef"];
 _speedPerformance params ["_speedStall", "_speedMax"];
-_physicalProperty params ["_massStandard", "_massError"];
+_physicalProperty params ["_massError", "_massStandard", "_fuelCapacity"];
 
-private _massCurrent = getMass _vehicle;
-if !(_massCurrent > 0) then {
-    _massCurrent = _massStandard;
+// check for ammo on pylons
+private ["_magazineClass", "_ammoClass", "_massFull", "_countFull", "_massMagazine", "_airFriction", "_sideAirFriction", "_pylonDragCoef2"];
+private _massPylon = 0;
+private _pylonDragCoef2 = [0, 0, 0];
+{
+    _magazineClass = (configFile >> "CfgMagazines" >> _x);
+    _ammoClass = (configFile >> "CfgAmmo" >> getText (_magazineClass >> "ammo"));
+
+    _massFull = getNumber (_magazineClass >> "mass");
+    _countNow = _vehicle ammoOnPylon (_forEachIndex + 1);
+    _countFull = 1 max getNumber (_magazineClass >> "count");
+    _massMagazine = _massFull * _countNow / _countFull;;
+    _massPylon = _massPylon + _massMagazine;
+
+    _airFriction = 0 max getNumber (_ammoClass >> "airFriction");
+    _sideAirFriction = 0 max getNumber (_ammoClass >> "sideAirFriction");
+    _coefMagazine = [_sideAirFriction, _sideAirFriction, _airFriction] vectorMultiply (_massMagazine * orbis_aerodynamics_pylonDragRatio);
+    _pylonDragCoef2 = _pylonDragCoef2 vectorAdd _coefMagazine;
+
+    // report if needed (dev script)
+    // diag_log format ["orbis_aerodynamics pylonNum: %1, magazine: %2, _massMagazine: %3, _coefMagazine: %4", _forEachIndex + 1, _x, _massMagazine, _coefMagazine];
+} forEach (getPylonMagazines _vehicle);
+private _pylonDragArray = [_pylonDragCoef2 vectorMultiply (1 / (1 max _massPylon)), [0, 0, 0], [0, 0, 0]];
+
+// get current vehicle mass and apply
+private ["_massCurrent", "_fuelMass"];
+if (_massError) then {
+    _massCurrent = 10000;
+} else {
+    _fuelMass = 0.8 * (fuel _vehicle) * _fuelCapacity;
+    if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
+        _fuelMass = _fuelMass + 0.8 * (_vehicle animationPhase "auxtank_switch") * _fuelCapacity;
+    };
+    _massCurrent = (_massStandard * orbis_aerodynamics_massStandardRatio) + _fuelMass + _massPylon;
 };
 _vehicle setMass _massCurrent;
+
+// get effective drag config
+private _dragArrayEff = _dragArray;
 private _dragMultiplier = 1;
 
 // F/A-18 canopy compatibility
@@ -54,6 +88,7 @@ private _trueAirVelocity = _modelvelocity vectorDiff _windApply;
 // build parameter array
 private _paramDefault = [_modelvelocity, _massCurrent, _massError];
 private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityRatio];
+private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio];
 
 // get lift force correction
 private _liftDefault = [_paramDefault, _liftArray, _speedMax, _angleOfIndicence] call orbis_aerodynamics_fnc_getLiftDefault;
@@ -61,9 +96,10 @@ private _liftEnhanced = [_paramEnhanced, _liftArray, _speedMax, _angleOfIndicenc
 private _liftCorrection = _liftEnhanced vectorDiff _liftDefault;
 
 // get drag force correction
-private _dragDefault = [_paramDefault, _dragArray, _isAdvanced] call orbis_aerodynamics_fnc_getDragDefault;
-private _dragEnhanced = [_paramEnhanced, _dragArray, _liftEnhanced, _speedStall, _dragMultiplier] call orbis_aerodynamics_fnc_getDragEnhanced;
-private _dragCorrection = _dragEnhanced vectorDiff _dragDefault;
+private _dragDefault = [_paramDefault, _dragArrayEff, _isAdvanced] call orbis_aerodynamics_fnc_getDragDefault;
+private _dragEnhanced = [_paramEnhanced, _dragArrayEff, _dragMultiplier, _liftEnhanced, _speedStall] call orbis_aerodynamics_fnc_getDragEnhanced;
+private _dragPylon = [_paramPylon, _pylonDragArray, _dragMultiplier] call orbis_aerodynamics_fnc_getDragEnhanced;
+private _dragCorrection = (_dragEnhanced vectorAdd _dragPylon) vectorDiff _dragDefault;
 
 // get torque correction
 // private _torqueDefault = [_paramDefault, _torqueXCoef, _massError] call orbis_aerodynamics_fnc_getTorque;
@@ -76,9 +112,9 @@ if (isTouchingGround _vehicle) then {
     _forceApply set [0, 0];
     _forceApply set [1, 0];
     _forceApply set [2, 0];
-    _torqueCorrection set [0, 0];
-    _torqueCorrection set [1, 0];
-    _torqueCorrection set [2, 0];
+    // _torqueCorrection set [0, 0];
+    // _torqueCorrection set [1, 0];
+    // _torqueCorrection set [2, 0];
 };
 
 // calculate and apply required impulse (force times timestep)
@@ -88,4 +124,4 @@ _vehicle addForce [_vehicle vectorModelToWorld (_forceApply vectorMultiply _time
 // _vehicle addtorque [_vehicle vectorModelToWorld (_torqueCorrection vectorMultiply _timeStep)];
 
 // report if needed (dev script)
-// diag_log format ["orbis_aerodynamics _density: %1, _modelvelocity: %2, _trueAirVelocity: %3, _dragDefault: %4, _dragEnhanced: %5, _forceApply: %6", _density, _modelvelocity, _trueAirVelocity, _dragDefault, _dragEnhanced, _forceApply];
+// diag_log format ["orbis_aerodynamics _massCurrent: %1, _dragArrayEff: %2, _pylonDragArray: %3, _dragDefault: %4, _dragEnhanced: %5, _dragPylon: %6", _massCurrent, _dragArrayEff, _pylonDragArray, _dragDefault, _dragEnhanced, _dragPylon];

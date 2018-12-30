@@ -1,6 +1,6 @@
 private _vehicle = _this select 0;
 
-_aeroConfigs = [_vehicle] call orbis_aerodynamics_fnc_getAeroConfig;
+private _aeroConfigs = [_vehicle] call orbis_aerodynamics_fnc_getAeroConfig;
 _vehicle setVariable ["orbis_aerodynamics_aeroConfig", _aeroConfigs];
 
 // report if needed (dev script)

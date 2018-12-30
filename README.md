@@ -47,8 +47,12 @@ that it better reflects the drag in real life. This will
 generate drag that's much more complicated than a simple  
 polynomial function and create many effects such as the  
 so-called 'Sound barrier'.  
+Vehicle's fuel status and weapon loadout will now affect  
+mass and aerodynamic characteristics of the vehicle,  
+resulting in high aerodynamic drag and lowered stability  
+when armed heavily.  
 This also brings air density and wind into consideration.  
-Air density is calulated based on altitude, temperature  
+Air density is calculated based on altitude, temperature  
 and humidity which gets more accurate if ACE3 weather is  
 used together.  
 
@@ -80,9 +84,9 @@ to the target object's init field:
 
 4. ATIS (Automatic Terminal Information Service)  
 
-Plays ATIS radio boradcast using real in-game atmospheric  
+Plays ATIS radio broadcast using real in-game atmospheric  
 data. Provides wind, visibility, etc. Temperature, dew point,  
-QFE will ve provided when ACE Weather is enabled.  
+QNH will be provided when ACE Weather is enabled.  
 With basic settings, ATIS provides real-time data, but with  
 addon setting changed, ATIS data should be updated on  
 ground  

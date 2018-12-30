@@ -1,4 +1,4 @@
-params ["_paramArray", "_dragArray", "_liftVector", "_speedStall", "_dragMultiplier"];
+params ["_paramArray", "_dragArray", "_dragMultiplier", ["_liftVector", false], ["_speedStall", 0]];
 _paramArray params ["_trueAirVelocity", "_massStandard", "_massError", "_densityRatio"];
 _dragArray params ["_coef2", "_coef1", "_coef0"];
 
@@ -19,9 +19,12 @@ private _dragParasite = [0, 0, 0];
 } forEach [[0, 0], [1, 2], [2, 1]];
 
 // induced drag (including lift-dependent parasite & wave drag)
-private _inducedConst = (2 * 1.2754) / (_densityRatio * pi * 0.5 * 400);
-private _inducedValue = ((vectorMagnitude _liftVector) / (_airSpeed max (_speedStall / 3.6))) ^ 2;
-private _dragInduced = (vectorNormalized _airVel) vectorMultiply (_inducedConst * _inducedValue * (orbis_aerodynamics_dragSourceMultiplier select 1));
+private _dragInduced = [0, 0, 0];
+if (_liftVector isEqualType []) then {
+    private _inducedConst = (2 * 1.2754) / (_densityRatio * pi * 0.5 * 400);
+    private _inducedValue = ((vectorMagnitude _liftVector) / (_airSpeed max (_speedStall / 3.6))) ^ 2;
+    _dragInduced = (vectorNormalized _airVel) vectorMultiply (_inducedConst * _inducedValue * (orbis_aerodynamics_dragSourceMultiplier select 1));
+};
 
 // wave drag (zero lift drag)
 orbis_aerodynamics_waveCdArray params ["_machCritical", "_transStart", "_machMaxCd", "_transEnd", "_multiplierMax", "_roundFwd", "_roundAft", "_machPower"];

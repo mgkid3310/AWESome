@@ -24,19 +24,19 @@ private _cloudHeightKm = getNumber (configFile >> "CfgWorlds" >> worldName >> "S
 private _temperature = 0;
 private _humidity = 0;
 private _dewPoint = 0;
-private _QFE = 0;
+private _QNH = 0;
 if (orbis_awesome_hasACEWeather) then {
     _temperature = (_pos select 2) call ace_weather_fnc_calculateTemperatureAtHeight;
     _humidity = ace_weather_currentHumidity;
     _dewPoint = [_temperature, _humidity] call ace_weather_fnc_calculateDewPoint;
-    _QFE = (_pos select 2) call ace_weather_fnc_calculateBarometricPressure;
+    _QNH = 0 call ace_weather_fnc_calculateBarometricPressure;
 };
 
 private _baseArray = [_pos, date];
 private _windArray = [_windDir, _windStr, gusts];
 private _visibilityArray = [_visibility, _fogApply];
 private _cloudArray = [overcast, _cloudBaseKm, _cloudHeightKm];
-private _atmosphereArray = [orbis_awesome_hasACEWeather, _temperature, _dewPoint, _QFE];
+private _atmosphereArray = [orbis_awesome_hasACEWeather, _temperature, _dewPoint, _QNH];
 private _remarksArray = [rain, lightnings];
 
 // [[_pos, _date], [_windDir, _windStr, _gusts], [_visibility, _fogApply], [_overcast, _cloudBaseKm, _cloudHeightKm], [_hasACEWeather, _temperature, _dewPoint, _QNH], [_rain, _lightnings]]

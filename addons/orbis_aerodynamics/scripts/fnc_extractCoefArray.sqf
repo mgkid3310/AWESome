@@ -1,7 +1,7 @@
-params ["_array", "_maxValue", "_stepMax", "_input"];
+params ["_array", "_maxValue", "_stepSizeRatio", "_input"];
 
 private _return = 0;
-private _stepSize = _maxValue / _stepMax;
+private _stepSize = _maxValue * _stepSizeRatio;
 if (_input < (_stepSize * (count _array - 1))) then {
     private _index = (0 max floor (_input / _stepSize)) min (count _array - 2);
     private _lowerStep = _stepSize * _index;

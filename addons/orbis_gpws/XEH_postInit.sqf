@@ -2,7 +2,7 @@ player setVariable ["hasOrbisGPWS", true, true];
 
 // global variables init
 orbis_gpws_takeoffAlt = 60;
-orbis_gpws_takeoffSpeed = 300;
+orbis_gpws_takeoffSpeed = 500;
 orbis_gpws_airportRange = 6000;
 
 // b747

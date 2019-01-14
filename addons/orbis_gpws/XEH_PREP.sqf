@@ -5,6 +5,7 @@ orbis_gpws_fnc_f16ChaffFlare = compile preprocessFileLineNumbers "orbis_gpws\scr
 orbis_gpws_fnc_f16GPWS = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_f16GPWS.sqf";
 orbis_gpws_fnc_f16GPWStest = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_f16GPWStest.sqf";
 orbis_gpws_fnc_incomingMSL = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_incomingMSL.sqf";
+orbis_gpws_fnc_isMSLCritical = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_isMSLCritical.sqf";
 orbis_gpws_fnc_flightPhaseCheck = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_flightPhaseCheck.sqf";
 orbis_gpws_fnc_getInAddAction = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_getInAddAction.sqf";
 orbis_gpws_fnc_getInMan = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_getInMan.sqf";

@@ -54,7 +54,7 @@ while {(alive _vehicle) && (player in _vehicle) && (_vehicle getVariable ["orbis
 	// incoming mssile check (RWR)
 	_incomingMSLlist = _vehicle getVariable ["incomingMSLlist", []];
 	_incomingMSLs = _incomingMSLlist apply {_x select 0};
-	_ctrWarnMSLs =_incomingMSLs select {(_vehicle distance _x) < (orbis_gpws_mslApproachTime * vectorMagnitude (velocity _vehicle vectorDiff velocity _x))};
+	_ctrWarnMSLs =_incomingMSLs select {[_vehicle, _x] call orbis_gpws_fnc_isMSLCritical};
 	_targetMSLs = _ctrWarnMSLs - _ctrWarnOld;
 	_counterGo = {alive _x} count _targetMSLs > 0;
 	/* {

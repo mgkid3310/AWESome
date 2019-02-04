@@ -1,5 +1,4 @@
 class CfgVehicles {
-    class EventHandlers;
     class Car_F;
 
     class Offroad_01_base_F: Car_F {

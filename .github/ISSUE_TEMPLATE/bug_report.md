@@ -21,9 +21,9 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Game Environment:**
- - Additional Addons: [e.g. ACE3, RHS, FIR series]
- - Date [e.g. 2018.06.14.]
- - Addon Version (If available) [e.g. v 0.8.8]
+ - Additional Addons: e.g. ACE3, RHS, FIR series
+ - Date: e.g. 2019.02.05.
+ - (If available) Addon Version: e.g. v1.1.3
 
 **Additional context**
 Add any other context about the problem here.

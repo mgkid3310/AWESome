@@ -48,12 +48,12 @@ class RscTitles {
 			class text_v1: text_static_base {
 				idc = 1811;
 				y = "0.0004 * (239 + 48) * safezoneW + 0.2 * safezoneH + safezoneY";
-				onLoad = "(_this select 0) ctrlSetText ((str round ((orbis_cockpit_landingSpeed - 10) min 120)) + 'KIAS')";
+				onLoad = "(_this select 0) ctrlSetText (((orbis_cockpit_landingSpeed - 10) min 120) call orbis_cockpit_fnc_processText)";
 			};
 			class text_vr: text_static_base {
 				idc = 1812;
 				y = "0.0004 * (239 + 48 * 2) * safezoneW + 0.2 * safezoneH + safezoneY";
-				onLoad = "(_this select 0) ctrlSetText ((str round orbis_cockpit_landingSpeed) + 'KIAS')";
+				onLoad = "(_this select 0) ctrlSetText (orbis_cockpit_landingSpeed call orbis_cockpit_fnc_processText)";
 			};
 			class text_pitch: text_static_base {
 				idc = 1813;
@@ -63,17 +63,17 @@ class RscTitles {
 			class text_v2: text_static_base {
 				idc = 1814;
 				y = "0.0004 * (239 + 48 * 4) * safezoneW + 0.2 * safezoneH + safezoneY";
-				onLoad = "(_this select 0) ctrlSetText ((str round (20 + orbis_cockpit_landingSpeed)) + 'KIAS')";
+				onLoad = "(_this select 0) ctrlSetText ((20 + orbis_cockpit_landingSpeed) call orbis_cockpit_fnc_processText)";
 			};
 			class text_flaps_1: text_static_base {
 				idc = 1815;
 				y = "0.0004 * (239 + 48 * 6) * safezoneW + 0.2 * safezoneH + safezoneY";
-				onLoad = "(_this select 0) ctrlSetText ((str round (60 + orbis_cockpit_landingSpeed)) + 'KIAS')";
+				onLoad = "(_this select 0) ctrlSetText ((60 + orbis_cockpit_landingSpeed) call orbis_cockpit_fnc_processText)";
 			};
 			class text_flaps_up: text_static_base {
 				idc = 1816;
 				y = "0.0004 * (239 + 48 * 7) * safezoneW + 0.2 * safezoneH + safezoneY";
-				onLoad = "(_this select 0) ctrlSetText ((str round (100 + orbis_cockpit_landingSpeed)) + 'KIAS')";
+				onLoad = "(_this select 0) ctrlSetText ((100 + orbis_cockpit_landingSpeed) call orbis_cockpit_fnc_processText)";
 			};
 		};
 	};
@@ -88,12 +88,12 @@ class RscTitles {
 			class text_descent_speed: text_static_base {
 				idc = 1811;
 				y = "0.0004 * (239 + 48 * 2) * safezoneW + 0.2 * safezoneH + safezoneY";
-				onLoad = "(_this select 0) ctrlSetText ((str round (60 + orbis_cockpit_landingSpeed)) + 'KIAS')";
+				onLoad = "(_this select 0) ctrlSetText ((60 + orbis_cockpit_landingSpeed) call orbis_cockpit_fnc_processText)";
 			};
 			class text_speed_establish: text_static_base {
 				idc = 1812;
 				y = "0.0004 * (758 + 48 * 3) * safezoneW + 0.2 * safezoneH + safezoneY";
-				onLoad = "(_this select 0) ctrlSetText ((str round (30 + orbis_cockpit_landingSpeed)) + 'KIAS')";
+				onLoad = "(_this select 0) ctrlSetText ((30 + orbis_cockpit_landingSpeed) call orbis_cockpit_fnc_processText)";
 			};
 		};
 	};
@@ -108,7 +108,7 @@ class RscTitles {
 			class text_landing_speed: text_static_base {
 				idc = 1811;
 				y = "0.0004 * (239 + 48 * 2) * safezoneW + 0.2 * safezoneH + safezoneY";
-				onLoad = "(_this select 0) ctrlSetText ((str round orbis_cockpit_landingSpeed) + 'KIAS')";
+				onLoad = "(_this select 0) ctrlSetText (orbis_cockpit_landingSpeed call orbis_cockpit_fnc_processText)";
 			};
 		};
 	};

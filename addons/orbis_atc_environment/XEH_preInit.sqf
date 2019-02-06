@@ -13,7 +13,7 @@ missionNamespace setVariable ["orbis_atc_displayCallsign", _callsign];
 	{
 		missionNamespace setVariable ["orbis_atc_displayCallsign", _this];
 		profileNamespace setVariable ["orbis_atc_displayCallsign", _this];
-        saveProfileNamespace;
+		saveProfileNamespace;
 	}
 ] call CBA_Settings_fnc_init;
 
@@ -29,7 +29,7 @@ missionNamespace setVariable ["orbis_atc_unitSetting", _unitSetting];
 	{
 		missionNamespace setVariable ["orbis_atc_unitSetting", _this];
 		profileNamespace setVariable ["orbis_atc_unitSetting", _this];
-        saveProfileNamespace;
+		saveProfileNamespace;
 	}
 ] call CBA_Settings_fnc_init;
 
@@ -45,6 +45,6 @@ missionNamespace setVariable ["orbis_atc_updateATISself", _realtime];
 	{
 		missionNamespace setVariable ["orbis_atc_updateATISself", _this];
 		profileNamespace setVariable ["orbis_atc_updateATISself", _this];
-        saveProfileNamespace;
+		saveProfileNamespace;
 	}
 ] call CBA_Settings_fnc_init;

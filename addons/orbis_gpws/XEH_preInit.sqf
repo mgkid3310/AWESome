@@ -13,7 +13,7 @@ missionNamespace setVariable ["orbis_gpws_personallDefault", _defaultMode];
 	{
 		missionNamespace setVariable ["orbis_gpws_personallDefault", _this];
 		profileNamespace setVariable ["orbis_gpws_personallDefault", _this];
-        saveProfileNamespace;
+		saveProfileNamespace;
 	}
 ] call CBA_Settings_fnc_init;
 
@@ -29,6 +29,6 @@ missionNamespace setVariable ["orbis_gpws_defaultVolumeLow", _defaultVolumeLow];
 	{
 		missionNamespace setVariable ["orbis_gpws_defaultVolumeLow", _this];
 		profileNamespace setVariable ["orbis_gpws_defaultVolumeLow", _this];
-        saveProfileNamespace;
+		saveProfileNamespace;
 	}
 ] call CBA_Settings_fnc_init;

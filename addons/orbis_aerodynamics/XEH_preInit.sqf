@@ -13,7 +13,7 @@ missionNamespace setVariable ["orbis_aerodynamics_enabled", _enabled];
 	{
 		missionNamespace setVariable ["orbis_aerodynamics_enabled", _this];
 		profileNamespace setVariable ["orbis_aerodynamics_enabled", _this];
-        saveProfileNamespace;
+		saveProfileNamespace;
 	}
 ] call CBA_Settings_fnc_init;
 
@@ -29,7 +29,7 @@ missionNamespace setVariable ["orbis_aerodynamics_windMultiplier", _windMultipli
 	{
 		missionNamespace setVariable ["orbis_aerodynamics_windMultiplier", _this];
 		profileNamespace setVariable ["orbis_aerodynamics_windMultiplier", _this];
-        saveProfileNamespace;
+		saveProfileNamespace;
 	}
 ] call CBA_Settings_fnc_init;
 

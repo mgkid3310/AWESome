@@ -149,6 +149,11 @@ https://forums.bohemia.net/forums/topic/217012-awesome-aerial-warfare-enhanced-s
 
 ----------------
 
-**Authors (Contributors)**  
+**Authors**  
 
 Orbis2358 (mgkid3310@naver.com) : Project Manager & Programmer  
+&nbsp;
+
+**Contributors**
+
+N/A

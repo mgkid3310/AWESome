@@ -5,7 +5,7 @@
 	"LIST",
 	["Default GPWS Mode", "Activates default GPWS when boarding planes with GPWS turned off"],
 	"AWESome GPWS",
-	[["none", "b747", "f16", "rita"], ["No default setting", "B747", "Betty (F-16)", "Rita"], 0],
+	[["none", "b747", "f16", "rita"], ["No default setting", "B747", "Betty (F-16)", "Rita"], 0]
 ] call CBA_Settings_fnc_init;
 
 [
@@ -13,5 +13,5 @@
 	"LIST",
 	["Default GPWS Volume", "Sets default GPWS volume (high/low)"],
 	"AWESome GPWS",
-	[[false, true], ["High", "Low"], 0],
+	[[false, true], ["High", "Low"], 0]
 ] call CBA_Settings_fnc_init;

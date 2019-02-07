@@ -5,8 +5,7 @@
 	"LIST",
 	["Advanced Aerodynamics", "Can enable or disable Advanced Aerodynamics"],
 	"AWESome Aerodynamics",
-	[[true, false], ["Enabled", "Disabled"], 1],
-	nil,
+	[[true, false], ["Enabled", "Disabled"], 1]
 ] call CBA_Settings_fnc_init;
 
 [
@@ -14,7 +13,7 @@
 	"SLIDER",
 	["Wind Multiplier", "Sets shadow view distance"],
 	"AWESome Aerodynamics",
-	[0, 1, _windMultiplier, 2],
+	[0, 1, _windMultiplier, 2]
 ] call CBA_Settings_fnc_init;
 
 [
@@ -22,5 +21,5 @@
 	"SLIDER",
 	["Loop Interval (Dev feature)", "Higher values have lower accuracy & low FPS drop"],
 	"AWESome Aerodynamics",
-	[1, 12, orbis_aerodynamics_loopFrameInterval, 1],
+	[1, 12, orbis_aerodynamics_loopFrameInterval, 1]
 ] call CBA_Settings_fnc_init;

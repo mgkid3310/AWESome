@@ -1,0 +1,11 @@
+#define MAINPREFIX z
+#define PREFIX awesome
+
+#define MAJOR 1
+#define MINOR 2
+#define PATCHLVL 0
+
+#define VERSION MAJOR.MINOR.PATCHLVL
+#define VERSION_AR MAJOR,MINOR,PATCHLVL
+
+#define REQUIRED_VERSION 1.84

@@ -1,0 +1,13 @@
+PREP(eachFrameHandler);
+PREP(eventGetInMan);
+PREP(eventTouchdown);
+PREP(extractCoefArray);
+PREP(fixedWingLoop);
+PREP(getAeroConfig);
+PREP(getAirDensity);
+PREP(getDragDefault);
+PREP(getDragEnhanced);
+PREP(getLiftDefault);
+PREP(getLiftEnhanced);
+PREP(getTorque);
+PREP(vehicleInit);

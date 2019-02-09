@@ -1,6 +1,6 @@
 player setVariable ["hasOrbisGPWS", true, true];
 
-// global variables init
+// init global variables
 orbis_gpws_takeoffAlt = 60;
 orbis_gpws_takeoffSpeed = 500;
 orbis_gpws_airportRange = 6000;

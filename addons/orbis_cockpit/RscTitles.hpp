@@ -1,4 +1,4 @@
-#include "dialog_base.hpp"
+#include "RscTitles_base.hpp"
 
 class RscTitles {
 	class none {

@@ -39,19 +39,31 @@ class mainTexture_base: control_base {
 	style = "48 + 2048";
 	x = "0.1 * safezoneW + safezoneX";
 	y = "0.2 * safezoneH + safezoneY";
-	w = "0.0004 * 950 * safezoneW";
-	h = "0.0004 * 1257 * safezoneW";
+	w = "0.0004 * 900 * safezoneW";
+	h = "0.0004 * 1200 * safezoneW";
 	text = "";
 };
-class buttonPrevious_base: control_base {
+class text_static_base: control_base {
+	colorText[] = {0.3359375, 0.33984375, 0.35546875, 0.65};
+	idc = 1810;
+	moving = 1;
+	type = 0;
+	style = 2;
+	x = "0.0004 * 409.8 * safezoneW + 0.1 * safezoneW + safezoneX";
+	y = "0.0004 * 229.1 * safezoneW + 0.2 * safezoneH + safezoneY";
+	w = "0.0004 * 221 * safezoneW";
+	h = "0.0004 * 44 * safezoneW";
+	onLoad = "";
+};
+/* class buttonPrevious_base: control_base {
 	idc = 1801;
 	moving = 1;
 	type = 1;
 	style = 0;
-	x = "0.0004 * 70 * safezoneW + 0.1 * safezoneW + safezoneX";
-	y = "0.0004 * 1101 * safezoneW + 0.2 * safezoneH + safezoneY";
-	w = "0.0004 * 151 * safezoneW";
-	h = "0.0004 * 53 * safezoneW";
+	x = "0.0004 * 66 * safezoneW + 0.1 * safezoneW + safezoneX";
+	y = "0.0004 * 1051 * safezoneW + 0.2 * safezoneH + safezoneY";
+	w = "0.0004 * 143 * safezoneW";
+	h = "0.0004 * 51 * safezoneW";
 	soundEnter[] = {"", 0.1, 1};
 	soundPush[] = {"", 0.1, 1};
 	soundClick[] = {"", 0.1, 1};
@@ -71,21 +83,9 @@ class buttonPrevious_base: control_base {
 };
 class buttonNext_base: buttonPrevious_base {
 	idc = 1802;
-	x = "0.0004 * 502 * safezoneW + 0.1 * safezoneW + safezoneX";
-	y = "0.0004 * 1100 * safezoneW + 0.2 * safezoneH + safezoneY";
-	w = "0.0004 * 119 * safezoneW";
-	h = "0.0004 * 53 * safezoneW";
+	x = "0.0004 * 476 * safezoneW + 0.1 * safezoneW + safezoneX";
+	y = "0.0004 * 1051 * safezoneW + 0.2 * safezoneH + safezoneY";
+	w = "0.0004 * 113 * safezoneW";
+	h = "0.0004 * 51 * safezoneW";
 	onButtonClick = "[true] call orbis_cockpit_fnc_nextChecklist";
-};
-class text_static_base: control_base {
-	colorText[] = {0.3359375, 0.33984375, 0.35546875, 0.65};
-	idc = 1810;
-	moving = 1;
-	type = 0;
-	style = 2;
-	x = "0.0004 * 432.6 * safezoneW + 0.1 * safezoneW + safezoneX";
-	y = "0.0004 * 240 * safezoneW + 0.2 * safezoneH + safezoneY";
-	w = "0.0004 * 233 * safezoneW";
-	h = "0.0004 * 46 * safezoneW";
-	onLoad = "";
-};
+}; */

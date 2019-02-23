@@ -1,11 +1,4 @@
-AWESOME_DEVMODE_LOG = false;
-
-// check if has ACE modules
-orbis_awesome_hasACEMap = isClass (configFile >> "CfgPatches" >> "ace_map");
-orbis_awesome_hasACEInteractMenu = isClass (configFile >> "CfgPatches" >> "ace_interact_menu");
-orbis_awesome_hasACEWeather = isClass (configFile >> "CfgPatches" >> "ace_weather");
-
-// global values
+// init global variables
 orbis_awesome_ftToM = 0.3048;
 orbis_awesome_mToFt = 1 / orbis_awesome_ftToM;
 orbis_awesome_knotToKph = 1.852;

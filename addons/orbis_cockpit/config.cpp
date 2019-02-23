@@ -10,4 +10,4 @@ class CfgPatches {
 };
 
 #include "CfgEventHandlers.hpp"
-#include "dialogs.hpp"
+#include "RscTitles.hpp"

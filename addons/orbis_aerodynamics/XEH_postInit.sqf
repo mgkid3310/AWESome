@@ -1,4 +1,4 @@
-// init global variable
+// init global variables
 orbis_aerodynamics_loopFrameInterval = 1;
 orbis_aerodynamics_pylonDragRatio = 0.001; // Cd 0.1 for FIR Mk84
 orbis_aerodynamics_massStandardRatio = 0.8;

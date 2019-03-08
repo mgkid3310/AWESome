@@ -1,5 +1,7 @@
 params ["_vehicle", "_player", "_timeOld"];
 
+if !(missionNamespace getVariable ["orbis_cockpit_shakeEnabled", true]) exitWith {};
+
 private _timeStep = time - _timeOld;
 if !(_timeStep > 0) exitWith {};
 
@@ -11,17 +13,18 @@ private _intensity = 0;
 
 private _speedFactor = 0;
 private _velocity = velocityModelSpace _vehicle;
-private _speed = 3.6 * vectorMagnitude _velocity;
-_speedFactor = (_speed min orbis_cockpit_speedMaxShake) * orbis_cockpit_speedShakeMultiplier;
-
+private _speed = (3.6 * vectorMagnitude _velocity) min orbis_cockpit_speedMaxShake;
 private _onGround = isTouchingGround _vehicle;
-private _groundMultiplier = [1, orbis_cockpit_groundShakeMultiplier] select _onGround;
-_speedFactor = _speedFactor * _groundMultiplier;
+
+if (_onGround) then {
+	_speedFactor = _speed * orbis_cockpit_groundShake * (missionNamespace getVariable ["orbis_cockpit_groundMultiplier", 1]);
+} else {
+	_speedFactor = _speed * orbis_cockpit_speedShake * (missionNamespace getVariable ["orbis_cockpit_speedMultiplier", 1]);
+};
 
 private _touchdownFactor = 0;
 if (!_groundOld && _onGround) then {
-    private _vertical = velocity _vehicle select 2;
-    _touchdownFactor = abs _vertical * orbis_cockpit_touchdownShakeMultiplier;
+    _touchdownFactor = abs (velocity _vehicle select 2) * orbis_cockpit_touchdownShake * (missionNamespace getVariable ["orbis_cockpit_groundMultiplier", 1]);
 };
 
 _intensity = _speedFactor + _touchdownFactor;

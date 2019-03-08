@@ -22,7 +22,7 @@ missionNamespace setVariable ["orbis_aerodynamics_windMultiplier", _windMultipli
 [
 	"orbis_aerodynamics_windMultiplier",
 	"SLIDER",
-	["Wind Multiplier", "Sets shadow view distance"],
+	["Wind Multiplier", "Set wind effect multiplier"],
 	"AWESome Aerodynamics",
 	[0, 1, _windMultiplier, 2],
 	nil,

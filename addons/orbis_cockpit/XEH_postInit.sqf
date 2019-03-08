@@ -9,10 +9,10 @@ orbis_cockpit_checklistArray = ["pre_start_checklist",
     "landing_taxi_to_ramp_checklist"
 ];
 
-orbis_cockpit_speedShakeMultiplier = 0.0001;
 orbis_cockpit_speedMaxShake = 600;
-orbis_cockpit_groundShakeMultiplier = 15;
-orbis_cockpit_touchdownShakeMultiplier = 0.8;
+orbis_cockpit_groundShake = 0.0015;
+orbis_cockpit_speedShake = 0.00005;
+orbis_cockpit_touchdownShake = 0.8;
 
 // add EventHandlers
 addMissionEventHandler ["EachFrame", {[] call orbis_cockpit_fnc_eachFrameHandler}];

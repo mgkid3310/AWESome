@@ -1,9 +1,8 @@
 private _vehicle = vehicle player;
-private _aerodynamicsEnabled = missionNamespace getVariable ["orbis_aerodynamics_enabled", false];
 private _timeOld = missionNamespace getVariable ["orbis_aerodynamics_timeOld", -1];
 private _frameOld = missionNamespace getVariable ["orbis_aerodynamics_frameOld", -1];
 
-if (!_aerodynamicsEnabled || (_vehicle isEqualTo player) || (_timeOld < 0) || (_frameOld < 0)) exitWith {
+if (!orbis_aerodynamics_enabled || (_vehicle isEqualTo player) || (_timeOld < 0) || (_frameOld < 0)) exitWith {
     missionNamespace setVariable ["orbis_aerodynamics_timeOld", time];
     missionNamespace setVariable ["orbis_aerodynamics_frameOld", diag_frameNo];
 

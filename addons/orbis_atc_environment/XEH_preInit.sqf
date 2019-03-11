@@ -8,7 +8,7 @@ missionNamespace setVariable ["orbis_atc_displayCallsign", _callsign];
 	"LIST",
 	["Toggle ATC Radar display name", "Toggles between the pilot's name and callsign displayed ATC Radar screen"],
 	"AWESome ATC",
-	[[false, true], ["Name", "Callsign"], [0, 1] select _callsign],
+	[[false, true], ["Name", "Callsign"], 0],
 	nil,
 	{
 		missionNamespace setVariable ["orbis_atc_displayCallsign", _this];
@@ -24,7 +24,7 @@ missionNamespace setVariable ["orbis_atc_unitSetting", _unitSetting];
 	"LIST",
 	["ATC display unit", "Set display units for altitude and speed"],
 	"AWESome ATC",
-	[[0, 1, 2, 3], ["meter / kph", "meter / knot", "feet / kph", "feet / knot"], _unitSetting],
+	[[0, 1, 2, 3], ["meter / kph", "meter / knot", "feet / kph", "feet / knot"], 0],
 	nil,
 	{
 		missionNamespace setVariable ["orbis_atc_unitSetting", _this];
@@ -40,7 +40,7 @@ missionNamespace setVariable ["orbis_atc_updateATISself", _realtime];
 	"CHECKBOX",
 	["Real-time ATIS data update", "Update ATIS data everytime when ATIS is played"],
 	"AWESome ATC",
-	_realtime,
+	true,
 	nil,
 	{
 		missionNamespace setVariable ["orbis_atc_updateATISself", _this];

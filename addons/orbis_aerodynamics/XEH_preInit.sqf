@@ -8,7 +8,7 @@ missionNamespace setVariable ["orbis_aerodynamics_enabled", _enabled];
 	"LIST",
 	["Advanced Aerodynamics", "Can enable or disable Advanced Aerodynamics"],
 	"AWESome Aerodynamics",
-	[[true, false], ["Enabled", "Disabled"], [1, 0] select _enabled],
+	[[true, false], ["Enabled", "Disabled"], 0],
 	nil,
 	{
 		missionNamespace setVariable ["orbis_aerodynamics_enabled", _this];
@@ -24,7 +24,7 @@ missionNamespace setVariable ["orbis_aerodynamics_windMultiplier", _windMultipli
 	"SLIDER",
 	["Wind Multiplier", "Set wind effect multiplier"],
 	"AWESome Aerodynamics",
-	[0, 1, _windMultiplier, 2],
+	[0, 1, 1, 2],
 	nil,
 	{
 		missionNamespace setVariable ["orbis_aerodynamics_windMultiplier", _this];

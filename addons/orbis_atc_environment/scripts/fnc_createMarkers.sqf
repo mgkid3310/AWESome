@@ -1,12 +1,10 @@
 params ["_array", "_type"];
 
 private ["_callsign", "_speed", "_altitude", "_heading", "_line1", "_line2", "_line3", "_marker0", "_marker1", "_marker2", "_marker3"];
-private _useCallsign = missionNamespace getVariable ["orbis_atc_displayCallsign", false];
-private _unitSetting = missionNamespace getVariable ["orbis_atc_unitSetting", 0];
 private _return = [];
 {
-    _callsign = [name driver _x, groupId group driver _x] select _useCallsign;
-    switch (_unitSetting) do {
+    _callsign = [name driver _x, groupId group driver _x] select orbis_atc_displayCallsign;
+    switch (orbis_atc_unitSetting) do {
         case (0): { // meter / kph
             _speed = round speed _x;
             _altitude = round (getPosASL _x select 2);

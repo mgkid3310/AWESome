@@ -20,12 +20,10 @@ _vehicle setVariable ["orbisGPWSenabled", true, true];
 // GPWS initialization
 private _modeCurrent = _vehicle getVariable ["orbisGPWSmode", "init"];
 if (_modeCurrent isEqualTo "init") then {
-	private _defaultVolumeLow = missionNamespace getVariable ["orbis_gpws_defaultVolumeLow", false];
-	_vehicle setVariable ["orbisGPWSvolumeLow", _defaultVolumeLow, true];
+	_vehicle setVariable ["orbisGPWSvolumeLow", orbis_gpws_defaultVolumeLow, true];
 
-	private _defaultMode = missionNamespace getVariable ["orbis_gpws_personallDefault", "none"];
-	if !(_defaultMode isEqualTo "none") exitWith {
-		_vehicle setVariable ["orbisGPWSmode", _defaultMode, true];
+	if !(orbis_gpws_personallDefault isEqualTo "none") exitWith {
+		_vehicle setVariable ["orbisGPWSmode", orbis_gpws_personallDefault, true];
 	};
 
 	if (getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbisGPWS_default") isEqualTo "f16") exitWith {

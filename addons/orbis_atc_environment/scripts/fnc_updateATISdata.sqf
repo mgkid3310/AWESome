@@ -41,6 +41,6 @@ private _remarksArray = [rain, lightnings];
 
 // [[_pos, _date], [_windDir, _windStr, _gusts], [_visibility, _fogApply], [_overcast, _cloudBaseKm, _cloudHeightKm], [_hasACEWeather, _temperature, _dewPoint, _QNH], [_rain, _lightnings]]
 private _ATISdata = [_baseArray, _windArray, _visibilityArray, _cloudArray, _atmosphereArray, _remarksArray];
-missionNAmespace setVariable ["orbis_atc_ATIS", _ATISdata, _global];
+missionNAmespace setVariable ["orbis_atc_ATISdata", _ATISdata, _global];
 
 _ATISdata

@@ -12,7 +12,7 @@ if !(_aeroConfigs isEqualType []) then {
 
 _aeroConfigs params ["_isAdvanced", "_aerodynamicsArray", "_speedPerformance", "_physicalProperty"];
 _aerodynamicsArray params ["_dragArray", "_liftArray", "_angleOfIndicence", "_torqueXCoef"];
-_speedPerformance params ["_speedStall", "_speedMax"];
+_speedPerformance params ["_thrustCoef", "_altFullForce", "_altNoForce", "_speedStall", "_speedMax"];
 _physicalProperty params ["_massError", "_massStandard", "_fuelCapacity"];
 
 // check for ammo on pylons
@@ -59,36 +59,53 @@ private _dragMultiplier = 1;
 // F/A-18 canopy compatibility
 if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
     if ((_vehicle animationPhase "rcanopy_hide") > 0) then {
-        _dragMultiplier = 1.2;
+        _dragMultiplier = _dragMultiplier * 1.2;
     };
 };
 
+// devmode
+_dragMultiplier = _dragMultiplier * orbis_aerodynamics_dragMultiplier;
+
 // atmosphere data setup
 private _altitude = ((getPosASL _vehicle) select 2) * orbis_aerodynamics_altitudeMultiplier;
-private ["_temperature", "_pressure", "_humidity"];
+private ["_temperatureSL", "_pressureSL", "_humidity"];
 if (orbis_awesome_hasACEWeather) then {
-    _temperature = _altitude call ace_weather_fnc_calculateTemperatureAtHeight; // Celsius
-    _pressure = _altitude call ace_weather_fnc_calculateBarometricPressure; // hPa
+	_temperatureSL = ace_weather_currentTemperature; // Celsius
+	_pressureSL = 0 call ace_weather_fnc_calculateBarometricPressure; // hPa
     _humidity = ace_weather_currentHumidity; // relative
 } else {
-    _temperature = 25 - (0.0065 * _altitude); // Celsius
-    _pressure = 1013.25 * ((298.15 / (273.15 + _temperature)) ^ -5.2557812); // hPa
+	_temperatureSL = 15; // Celsius
+	_pressureSL = 1013.25; // hPa
     _humidity = linearConversion [0, 0.5, overcast, 0, 1, true]; // relative
 };
+
+private _temperatureArray = [_altitude, _temperatureSL] call orbis_aerodynamics_fnc_getAirTemperature;
+private _temperature = _temperatureArray select 4; // Celsius
+private _pressure = [_altitude, _temperatureArray, _pressureSL] call orbis_aerodynamics_fnc_getAirPressure; // hPa
 private _density = [_temperature, _pressure, _humidity] call orbis_aerodynamics_fnc_getAirDensity; // kg/m^3
+
+private _temperatureRatio = (_temperature + 273.15) / (_temperatureSL + 273.15);
+private _pressureRatio = _pressure / _pressureSL;
 private _densityRatio = _density / 1.2754;
 
 // get TAS and etc.
 private _modelvelocity = velocityModelSpace _vehicle;
 private _modelWind = _vehicle vectorWorldToModel wind;
-private _windMultiplier = missionNamespace getVariable ["orbis_aerodynamics_windMultiplier", 1];
-private _windApply = _modelWind vectorMultiply _windMultiplier;
+private _windApply = _modelWind vectorMultiply orbis_aerodynamics_windMultiplier;
 private _trueAirVelocity = _modelvelocity vectorDiff _windApply;
 
 // build parameter array
 private _paramDefault = [_modelvelocity, _massCurrent, _massError];
 private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityRatio];
+private _paramThrust = [_thrustCoef, airplaneThrottle _vehicle];
+private _paramAltitude = [_altFullForce, _altNoForce, _altitude];
+private _paramAtmosphere = [_temperatureRatio, _pressureRatio];
 private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio];
+
+// thrust correction
+private _thrustDefault = [_paramDefault, _paramThrust, _speedMax, _paramAltitude] call orbis_aerodynamics_fnc_getThrustDefault;
+private _thrustEnhanced = [_paramEnhanced, _paramThrust, _speedMax, _paramAtmosphere] call orbis_aerodynamics_fnc_getThrustEnhanced;
+private _thrustCorrection = _thrustEnhanced vectorDiff _thrustDefault;
 
 // get lift force correction
 private _liftDefault = [_paramDefault, _liftArray, _speedMax, _angleOfIndicence] call orbis_aerodynamics_fnc_getLiftDefault;
@@ -96,7 +113,7 @@ private _liftEnhanced = [_paramEnhanced, _liftArray, _speedMax, _angleOfIndicenc
 private _liftCorrection = _liftEnhanced vectorDiff _liftDefault;
 
 // get drag force correction
-private _dragDefault = [_paramDefault, _dragArrayEff, _isAdvanced] call orbis_aerodynamics_fnc_getDragDefault;
+private _dragDefault = [_paramDefault, _dragArrayEff, _paramAltitude, _isAdvanced] call orbis_aerodynamics_fnc_getDragDefault;
 private _dragEnhanced = [_paramEnhanced, _dragArrayEff, _dragMultiplier, _liftEnhanced, _speedStall] call orbis_aerodynamics_fnc_getDragEnhanced;
 private _dragPylon = [_paramPylon, _pylonDragArray, _dragMultiplier] call orbis_aerodynamics_fnc_getDragEnhanced;
 private _dragCorrection = (_dragEnhanced vectorAdd _dragPylon) vectorDiff _dragDefault;
@@ -107,7 +124,7 @@ private _dragCorrection = (_dragEnhanced vectorAdd _dragPylon) vectorDiff _dragD
 // private _torqueCorrection = (_torqueEnhanced vectorMultiply (_massStandard / _massCurrent)) vectorDiff _torqueDefault;
 
 // sum up corrections and bring wheel friction into calculation if needed (todo)
-private _forceApply = _liftCorrection vectorAdd _dragCorrection;
+private _forceApply = _thrustCorrection vectorAdd _liftCorrection vectorAdd _dragCorrection;
 if (isTouchingGround _vehicle) then {
     _forceApply set [0, 0];
     _forceApply set [1, 0];

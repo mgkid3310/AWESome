@@ -22,6 +22,9 @@ if (isNumber (_class >> "draconicTorqueXCoef")) then {
 };
 
 // _speedPerformance
+_thrustCoef = getArray (_class >> "thrustCoef");
+_altFullForce = getNumber (_class >> "altFullForce");
+_altNoForce = getNumber (_class >> "altNoForce");
 _speedStall = getNumber (_class >> "stallSpeed");
 _speedMax = getNumber (_class >> "maxSpeed");
 
@@ -34,7 +37,10 @@ if !(_massStandard > 0) then {
 };
 _fuelCapacity = getNumber (_class >> "fuelCapacity");
 
-private _return = [_isAdvanced, [_dragArray, _liftArray, _angleOfIndicence, _torqueXCoef], [_speedStall, _speedMax], [_massError, _massStandard, _fuelCapacity]];
+private _aerodynamicsArray = [_dragArray, _liftArray, _angleOfIndicence, _torqueXCoef];
+private _speedPerformance = [_thrustCoef, _altFullForce, _altNoForce, _speedStall, _speedMax];
+private _physicalProperty = [_massError, _massStandard, _fuelCapacity];
+private _return = [_isAdvanced, _aerodynamicsArray, _speedPerformance, _physicalProperty];
 
 // report if needed (dev script)
 // diag_log format ["orbis_aerodynamics aeroConfig: %1", _return];

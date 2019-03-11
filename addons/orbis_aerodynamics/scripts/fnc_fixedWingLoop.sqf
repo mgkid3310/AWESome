@@ -82,7 +82,7 @@ if (orbis_awesome_hasACEWeather) then {
 private _temperatureArray = [_altitude, _temperatureSL] call orbis_aerodynamics_fnc_getAirTemperature;
 private _temperature = _temperatureArray select 4; // Celsius
 private _pressure = [_altitude, _temperatureArray, _pressureSL] call orbis_aerodynamics_fnc_getAirPressure; // hPa
-private _density = [_temperature, _pressure, _humidity] call orbis_aerodynamics_fnc_getAirDensity; // kg/m^3
+private _density = [_altitude, _temperature, _pressure, _humidity] call orbis_aerodynamics_fnc_getAirDensity; // kg/m^3
 
 private _temperatureRatio = (_temperature + 273.15) / (_temperatureSL + 273.15);
 private _pressureRatio = _pressure / _pressureSL;

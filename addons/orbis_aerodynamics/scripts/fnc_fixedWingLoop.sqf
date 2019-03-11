@@ -91,8 +91,7 @@ private _densityRatio = _density / 1.2754;
 // get TAS and etc.
 private _modelvelocity = velocityModelSpace _vehicle;
 private _modelWind = _vehicle vectorWorldToModel wind;
-private _windMultiplier = missionNamespace getVariable ["orbis_aerodynamics_windMultiplier", 1];
-private _windApply = _modelWind vectorMultiply _windMultiplier;
+private _windApply = _modelWind vectorMultiply orbis_aerodynamics_windMultiplier;
 private _trueAirVelocity = _modelvelocity vectorDiff _windApply;
 
 // build parameter array

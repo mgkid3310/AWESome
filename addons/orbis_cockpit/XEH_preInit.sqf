@@ -8,7 +8,7 @@ missionNamespace setVariable ["orbis_cockpit_shakeEnabled", _enabled];
 	"LIST",
 	["Camera Shake", "Can enable or disable camera shake feature"],
 	"AWESome Cockpit",
-	[[true, false], ["Enabled", "Disabled"], [1, 0] select _enabled],
+	[[true, false], ["Enabled", "Disabled"], 0],
 	nil,
 	{
 		missionNamespace setVariable ["orbis_cockpit_shakeEnabled", _this];
@@ -24,7 +24,7 @@ missionNamespace setVariable ["orbis_cockpit_groundMultiplier", _groundMultiplie
 	"SLIDER",
 	["Shake Multiplier (ground)", "Set multiplier for camera shake on ground"],
 	"AWESome Cockpit",
-	[0, 1, _groundMultiplier, 2],
+	[0, 1, 1, 2],
 	nil,
 	{
 		missionNamespace setVariable ["orbis_cockpit_groundMultiplier", _this];
@@ -40,7 +40,7 @@ missionNamespace setVariable ["orbis_cockpit_speedMultiplier", _speedMultiplier]
 	"SLIDER",
 	["Shake Multiplier (in-flight)", "Set multiplier for in-flight camera shake"],
 	"AWESome Cockpit",
-	[0, 1, _speedMultiplier, 2],
+	[0, 1, 1, 2],
 	nil,
 	{
 		missionNamespace setVariable ["orbis_cockpit_speedMultiplier", _this];

@@ -8,8 +8,8 @@
 #define TCAS_VOL_LOW 4
 
 class CfgSounds {
-	#include "sound_b747.hpp"
-	#include "sound_f16.hpp"
-	#include "sound_rita.hpp"
+	#include "sound_B747.hpp"
+	#include "sound_F16.hpp"
+	#include "sound_Rita.hpp"
 	#include "sound_TCAS.hpp"
 };

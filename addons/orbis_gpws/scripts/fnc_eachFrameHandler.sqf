@@ -10,6 +10,10 @@ if (!([nil, nil, 1] call orbis_awesome_fnc_isCrew) || !(alive _vehicle) || (_tim
 private _modePublic = _vehicle getVariable ["orbisGPWSmode", "off"];
 private _modeLocal = _vehicle getVariable ["orbisGPWSmodeLocal", "off"];
 
+if (_target getVariable ["orbisGPWSenabled", false]) then {
+	_modePublic = "off";
+};
+
 if (_modePublic != _modeLocal) then {
 	[_vehicle, _modeLocal] call orbis_gpws_fnc_terminateGPWS;
 	[_vehicle, _modePublic] call orbis_gpws_fnc_startGPWS;

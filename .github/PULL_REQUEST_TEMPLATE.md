@@ -1,9 +1,3 @@
----
-name: Pull request
-about: open a PR
-
----
-
 **What does this PR do?**
 All changes this PR will make should be written.
 

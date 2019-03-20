@@ -8,12 +8,19 @@ if !([_unit, _vehicle, 1] call orbis_awesome_fnc_isCrew) exitWith {};
 
 // check if has GPWS enabled
 private _GPWSenabled = _vehicle getVariable ["orbisGPWSenabled", 0];
+private _enable = true;
 if (_GPWSenabled isEqualType true) then {
-	if !(_GPWSenabled) exitWith {};
-} else {
-	if !(getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbisGPWS_enabled") > 0) exitWith {
-		_vehicle setVariable ["orbisGPWSenabled", false, true];
+	if !(_GPWSenabled) then {
+		_enable = false;
 	};
+} else {
+	if !(getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbisGPWS_enabled") > 0) then {
+		_enable = false;
+	};
+};
+
+if !(_enable) exitWith {
+	_vehicle setVariable ["orbisGPWSenabled", false, true];
 };
 _vehicle setVariable ["orbisGPWSenabled", true, true];
 

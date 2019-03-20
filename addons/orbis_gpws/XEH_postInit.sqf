@@ -63,7 +63,7 @@ for "_i" from 0 to (count (configFile >> "CfgWorlds" >> worldName >> "SecondaryA
 	};
 } forEach (allAirports select 1);
 
-// add actions (ACE / vanilla)
+// add actions (ACE / vanilla) & events
 if (orbis_awesome_hasACEInteractMenu) then {
 	[] call orbis_gpws_fnc_addACEInteractMenu;
 } else {
@@ -73,11 +73,10 @@ if (orbis_awesome_hasACEInteractMenu) then {
 		[player, "", vehicle player, []] call orbis_gpws_fnc_getInAddAction;
 	};
 };
+addMissionEventHandler ["EachFrame", {[] call orbis_gpws_fnc_eachFrameHandler}];
 
 // add eventhandler
 if !(vehicle player isEqualTo player) then {
 	[player, getPos player, vehicle player, nil] spawn orbis_gpws_fnc_getInMan;
 };
 player addEventHandler ["GetInMan", {_this spawn orbis_gpws_fnc_getInMan}];
-
-[] spawn orbis_gpws_fnc_periodicCheck;

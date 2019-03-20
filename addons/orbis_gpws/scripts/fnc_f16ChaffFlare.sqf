@@ -11,6 +11,7 @@ if ((_weapon in orbis_gpws_ChaffFlareList) && !(_vehicle getVariable ["CMrunnig"
 	} forEach ((magazinesAllTurrets _vehicle) select {_x select 0 in getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines")});
 	private _ammosFired = (getNumber (configFile >> "CfgWeapons" >> _weapon >> _mode >> "burst")) * (getNumber (configFile >> "CfgWeapons" >> _weapon >> _mode >> "multiplier"));
 	private _resultingAmmo = _CMammoCount - _ammosFired;
+	private _lowCMcount = getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbisGPWS_lowCMcount");
 
 	if (_vehicle getVariable ["nextCMcount", _CMammoCount] < _CMammoCount) exitWith {};
 	_vehicle setVariable ["nextCMcount", _resultingAmmo];
@@ -29,7 +30,7 @@ if ((_weapon in orbis_gpws_ChaffFlareList) && !(_vehicle getVariable ["CMrunnig"
 			};
 
 			// f16_chaffFlareLow
-			case ((_resultingAmmo <= (_vehicle getVariable ["lowCMcount", _resultingAmmo - 1])) && !(_vehicle getVariable ["CMlowAlerted", false])): {
+			case ((_resultingAmmo <= _lowCMcount) && !(_vehicle getVariable ["CMlowAlerted", false])): {
 				DEV_CHAT("orbis_gpws: f16_chaffFlareLow");
 				_vehicle setVariable ["orbisGPWSready", false];
 				[_vehicle, "f16_chaffFlareLow"] spawn orbis_gpws_fnc_speakGPWS;

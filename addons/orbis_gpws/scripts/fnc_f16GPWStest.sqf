@@ -1,4 +1,5 @@
 private _vehicle = _this select 0;
+
 _vehicle setVariable ["orbisGPWStestReady", false, true];
 _vehicle setVariable ["orbisGPWStestStop", false, true];
 

@@ -125,7 +125,7 @@ private _dragCorrection = (_dragEnhanced vectorAdd _dragPylon) vectorDiff _dragD
 
 // sum up corrections and bring wheel friction into calculation if needed (todo)
 private _forceApply = _thrustCorrection vectorAdd _liftCorrection vectorAdd _dragCorrection;
-if (isTouchingGround _vehicle) then {
+if ((isTouchingGround _vehicle) && orbis_aerodynamics_noForceoOnGround) then {
     _forceApply set [0, 0];
     _forceApply set [1, 0];
     _forceApply set [2, 0];
@@ -142,3 +142,4 @@ _vehicle addForce [_vehicle vectorModelToWorld (_forceApply vectorMultiply _time
 
 // report if needed (dev script)
 // diag_log format ["orbis_aerodynamics _massCurrent: %1, _dragArrayEff: %2, _pylonDragArray: %3, _dragDefault: %4, _dragEnhanced: %5, _dragPylon: %6", _massCurrent, _dragArrayEff, _pylonDragArray, _dragDefault, _dragEnhanced, _dragPylon];
+// diag_log format ["orbis_aerodynamics _massCurrent: %1, _forceApply: %2, _timeStep: %3", _massCurrent, _forceApply, _timeStep];

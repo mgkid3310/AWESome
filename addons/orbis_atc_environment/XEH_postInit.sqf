@@ -12,16 +12,6 @@ orbis_atc_fontMin = 0.05;
 orbis_atc_spaceMax = 1.5;
 orbis_atc_spaceMin = 0.75;
 
-// add actions (ACE / vanilla)
-if (orbis_awesome_hasACEInteractMenu) then {
-    [] call orbis_atc_fnc_addACEInteractMenu;
-} else {
-    if !(vehicle player isEqualTo player) then {
-    	[player, "", vehicle player, []] call orbis_atc_fnc_getInAddAction;
-    };
-    player addEventHandler ["GetInMan", {_this call orbis_atc_fnc_getInAddAction}];
-};
-
 // run initial ATIS data update
 [] spawn {
     sleep 10;

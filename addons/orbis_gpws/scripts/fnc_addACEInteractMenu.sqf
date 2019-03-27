@@ -9,7 +9,7 @@ private _actionGPWSmodes = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 
 // turn GPWS off
 private _actionTurnOff = [
@@ -22,7 +22,7 @@ private _actionTurnOff = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 
 // set mode action
 private _actionB747 = [
@@ -35,7 +35,7 @@ private _actionB747 = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 private _actionF16 = [
 	"f16",
 	"Set to Betty (F-16)",
@@ -46,7 +46,7 @@ private _actionF16 = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 private _actionRita = [
 	"rita",
 	"Set to Rita",
@@ -57,7 +57,7 @@ private _actionRita = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 
 // test action
 private _testB747 = [
@@ -70,7 +70,7 @@ private _testB747 = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 private _testF16 = [
 	"f16Test",
 	"Test GPWS (Betty)",
@@ -81,7 +81,7 @@ private _testF16 = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 private _testRita = [
 	"ritaTest",
 	"Test GPWS (Rita)",
@@ -92,7 +92,7 @@ private _testRita = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 
 // stop currently running GPWS test
 private _testStop = [
@@ -105,7 +105,7 @@ private _testStop = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 
 // volume change
 private _actionVolumeLow = [
@@ -118,7 +118,7 @@ private _actionVolumeLow = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 private _actionVolumeHigh = [
 	"volumeHigh",
 	"Increase Volume",
@@ -129,85 +129,85 @@ private _actionVolumeHigh = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 
-[
+orbis_awesome_ACEInteractions pushBack [2, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome"],
 	_actionGPWSmodes,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+orbis_awesome_ACEInteractions pushBack [2.1, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_actionTurnOff,
     true
-] call ace_interact_menu_fnc_addActionToClass;
+]];
 
-[
+orbis_awesome_ACEInteractions pushBack [2.21, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_actionB747,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+orbis_awesome_ACEInteractions pushBack [2.22, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_actionF16,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+orbis_awesome_ACEInteractions pushBack [2.23, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_actionRita,
     true
-] call ace_interact_menu_fnc_addActionToClass;
+]];
 
-[
+orbis_awesome_ACEInteractions pushBack [2.31, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_testB747,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+orbis_awesome_ACEInteractions pushBack [2.32, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_testF16,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+orbis_awesome_ACEInteractions pushBack [2.33, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_testRita,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-
-[
+]];
+orbis_awesome_ACEInteractions pushBack [2.34, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_testStop,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+
+orbis_awesome_ACEInteractions pushBack [2.41, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_actionVolumeLow,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+orbis_awesome_ACEInteractions pushBack [2.42, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_actionVolumeHigh,
     true
-] call ace_interact_menu_fnc_addActionToClass;
+]];

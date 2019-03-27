@@ -24,3 +24,14 @@
 	"AWESome Cockpit",
 	[0, 1, 1, 2]
 ] call CBA_Settings_fnc_init;
+
+// add actions (ACE / vanilla)
+if (orbis_awesome_hasACEInteractMenu) then {
+    [] call orbis_cockpit_fnc_addACEInteractMenu;
+} else {
+    player addEventHandler ["GetInMan", {_this call orbis_cockpit_fnc_getInAddAction}];
+
+    if !(vehicle player isEqualTo player) then {
+    	[player, "", vehicle player, []] call orbis_cockpit_fnc_getInAddAction;
+    };
+};

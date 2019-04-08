@@ -1,1 +1,3 @@
+orbis_awesome_fnc_addACEInteractMenu = compile preprocessFileLineNumbers 'orbis_awesome_main\scripts\fnc_addACEInteractMenu.sqf';
 orbis_awesome_fnc_isCrew = compile preprocessFileLineNumbers 'orbis_awesome_main\scripts\fnc_isCrew.sqf';
+orbis_awesome_fnc_setupACEInteractMenu = compile preprocessFileLineNumbers 'orbis_awesome_main\scripts\fnc_setupACEInteractMenu.sqf';

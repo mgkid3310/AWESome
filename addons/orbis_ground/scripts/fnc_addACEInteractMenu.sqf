@@ -9,7 +9,7 @@ private _deployTowBar = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 private _removeTowBar = [
 	"removeTowBar",
 	"Remove Towbar",
@@ -20,22 +20,22 @@ private _removeTowBar = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 
-[
+orbis_awesome_ACEInteractions pushBack [4.1, [
 	"Offroad_01_base_F",
 	0,
 	["ACE_MainActions"],
 	_deployTowBar,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+orbis_awesome_ACEInteractions pushBack [4.2, [
 	"Offroad_01_base_F",
 	0,
 	["ACE_MainActions"],
 	_removeTowBar,
     true
-] call ace_interact_menu_fnc_addActionToClass;
+]];
 
 // parking brake interactions
 /* private _parkingBrakeSet = [
@@ -48,7 +48,7 @@ private _removeTowBar = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 private _parkingBrakeRelease = [
 	"parkingBrakeRelease",
 	"Release Parking Brake",
@@ -59,19 +59,19 @@ private _parkingBrakeRelease = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 
-[
+orbis_awesome_ACEInteractions pushBack [4.3, [
 	"Plane",
 	1.1,
 	["ACE_SelfActions"],
 	_parkingBrakeSet,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+orbis_awesome_ACEInteractions pushBack [4.4, [
 	"Plane",
 	1.1,
 	["ACE_SelfActions"],
 	_parkingBrakeRelease,
     true
-] call ace_interact_menu_fnc_addActionToClass; */
+]]; */

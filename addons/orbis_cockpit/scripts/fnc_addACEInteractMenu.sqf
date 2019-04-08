@@ -8,7 +8,7 @@ private _checklistMain = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 private _openChecklist01 = [
 	"openChecklist01",
 	"Pre-Start",
@@ -19,7 +19,7 @@ private _openChecklist01 = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 private _openChecklist02 = [
 	"openChecklist02",
 	"Startup + Before Taxi",
@@ -30,7 +30,7 @@ private _openChecklist02 = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 private _openChecklist03 = [
 	"openChecklist03",
 	"Before Takeoff",
@@ -41,7 +41,7 @@ private _openChecklist03 = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 private _openChecklist04 = [
 	"openChecklist04",
 	"Takeoff",
@@ -52,7 +52,7 @@ private _openChecklist04 = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 private _openChecklist05 = [
 	"openChecklist05",
 	"Descent + Approach",
@@ -63,7 +63,7 @@ private _openChecklist05 = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 private _openChecklist06 = [
 	"openChecklist06",
 	"Landing + Taxi To Ramp",
@@ -74,7 +74,7 @@ private _openChecklist06 = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 private _closeChecklist = [
 	"closeChecklist",
 	"Close Checklist",
@@ -85,61 +85,61 @@ private _closeChecklist = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 
-[
+orbis_awesome_ACEInteractions pushBack [1, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome"],
 	_checklistMain,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+orbis_awesome_ACEInteractions pushBack [1.1, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_openChecklist01,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+orbis_awesome_ACEInteractions pushBack [1.2, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_openChecklist02,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+orbis_awesome_ACEInteractions pushBack [1.3, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_openChecklist03,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+orbis_awesome_ACEInteractions pushBack [1.4, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_openChecklist04,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+orbis_awesome_ACEInteractions pushBack [1.5, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_openChecklist05,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+orbis_awesome_ACEInteractions pushBack [1.6, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_openChecklist06,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+orbis_awesome_ACEInteractions pushBack [1.7, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_closeChecklist,
     true
-] call ace_interact_menu_fnc_addActionToClass;
+]];

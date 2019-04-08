@@ -8,7 +8,7 @@ private _actionATISmain = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 private _actionATISlisten = [
 	"startATIS",
 	"Listen to ATIS",
@@ -19,7 +19,7 @@ private _actionATISlisten = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 private _actionATISstop = [
 	"stopATIS",
 	"Stop Listening to ATIS",
@@ -30,50 +30,50 @@ private _actionATISstop = [
 	[],
 	[0, 0, 0],
 	10
-] call ace_interact_menu_fnc_createAction;
+];
 
 // planes
-[
+orbis_awesome_ACEInteractions pushBack [3, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome"],
 	_actionATISmain,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+orbis_awesome_ACEInteractions pushBack [3.1, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "actionATIS"],
 	_actionATISlisten,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+orbis_awesome_ACEInteractions pushBack [3.2, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "actionATIS"],
 	_actionATISstop,
     true
-] call ace_interact_menu_fnc_addActionToClass;
+]];
 
 // helicopters
-[
+orbis_awesome_ACEInteractions pushBack [3, [
 	"Helicopter",
 	1,
 	["ACE_SelfActions", "AWESome"],
 	_actionATISmain,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+orbis_awesome_ACEInteractions pushBack [3.1, [
 	"Helicopter",
 	1,
 	["ACE_SelfActions", "AWESome", "actionATIS"],
 	_actionATISlisten,
     true
-] call ace_interact_menu_fnc_addActionToClass;
-[
+]];
+orbis_awesome_ACEInteractions pushBack [3.2, [
 	"Helicopter",
 	1,
 	["ACE_SelfActions", "AWESome", "actionATIS"],
 	_actionATISstop,
     true
-] call ace_interact_menu_fnc_addActionToClass;
+]];

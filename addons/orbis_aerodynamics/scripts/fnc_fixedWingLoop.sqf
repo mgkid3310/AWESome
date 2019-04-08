@@ -93,11 +93,12 @@ private _modelvelocity = velocityModelSpace _vehicle;
 private _modelWind = _vehicle vectorWorldToModel wind;
 private _windApply = _modelWind vectorMultiply orbis_aerodynamics_windMultiplier;
 private _trueAirVelocity = _modelvelocity vectorDiff _windApply;
+private _thrustVector = _vehicle animationSourcePhase "thrustVector";
 
 // build parameter array
 private _paramDefault = [_modelvelocity, _massCurrent, _massError];
 private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityRatio];
-private _paramThrust = [_thrustCoef, airplaneThrottle _vehicle];
+private _paramThrust = [_thrustCoef, airplaneThrottle _vehicle, _thrustVector];
 private _paramAltitude = [_altFullForce, _altNoForce, _altitude];
 private _paramAtmosphere = [_temperatureRatio, _pressureRatio];
 private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio];
@@ -125,7 +126,7 @@ private _dragCorrection = (_dragEnhanced vectorAdd _dragPylon) vectorDiff _dragD
 
 // sum up corrections and bring wheel friction into calculation if needed (todo)
 private _forceApply = _thrustCorrection vectorAdd _liftCorrection vectorAdd _dragCorrection;
-if (isTouchingGround _vehicle) then {
+if ((isTouchingGround _vehicle) && orbis_aerodynamics_noForceoOnGround) then {
     _forceApply set [0, 0];
     _forceApply set [1, 0];
     _forceApply set [2, 0];
@@ -142,3 +143,4 @@ _vehicle addForce [_vehicle vectorModelToWorld (_forceApply vectorMultiply _time
 
 // report if needed (dev script)
 // diag_log format ["orbis_aerodynamics _massCurrent: %1, _dragArrayEff: %2, _pylonDragArray: %3, _dragDefault: %4, _dragEnhanced: %5, _dragPylon: %6", _massCurrent, _dragArrayEff, _pylonDragArray, _dragDefault, _dragEnhanced, _dragPylon];
+// diag_log format ["orbis_aerodynamics _massCurrent: %1, _forceApply: %2, _timeStep: %3", _massCurrent, _forceApply, _timeStep];

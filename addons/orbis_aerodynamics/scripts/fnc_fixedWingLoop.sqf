@@ -93,11 +93,12 @@ private _modelvelocity = velocityModelSpace _vehicle;
 private _modelWind = _vehicle vectorWorldToModel wind;
 private _windApply = _modelWind vectorMultiply orbis_aerodynamics_windMultiplier;
 private _trueAirVelocity = _modelvelocity vectorDiff _windApply;
+private _thrustVector = _vehicle animationSourcePhase "thrustVector";
 
 // build parameter array
 private _paramDefault = [_modelvelocity, _massCurrent, _massError];
 private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityRatio];
-private _paramThrust = [_thrustCoef, airplaneThrottle _vehicle];
+private _paramThrust = [_thrustCoef, airplaneThrottle _vehicle, _thrustVector];
 private _paramAltitude = [_altFullForce, _altNoForce, _altitude];
 private _paramAtmosphere = [_temperatureRatio, _pressureRatio];
 private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio];

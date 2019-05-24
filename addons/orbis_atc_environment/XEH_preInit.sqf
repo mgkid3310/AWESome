@@ -18,6 +18,22 @@
 ] call CBA_Settings_fnc_init;
 
 [
+	"orbis_atc_radarUpdateInterval",
+	"SLIDER",
+	["ATC display Update Interval", "Set display update interval"],
+	"AWESome ATC",
+	[0, 5, 1, 1]
+] call CBA_Settings_fnc_init;
+
+[
+	"orbis_atc_radarTrailLength",
+	"SLIDER",
+	["ATC display trail length", "Set display trail length"],
+	"AWESome ATC",
+	[0, 10, 3, 0]
+] call CBA_Settings_fnc_init;
+
+[
 	"orbis_atc_realtimeATIS",
 	"CHECKBOX",
 	["Real-time ATIS data update", "Update ATIS data everytime when ATIS is played"],

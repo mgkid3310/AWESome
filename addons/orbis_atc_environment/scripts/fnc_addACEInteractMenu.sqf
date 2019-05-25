@@ -22,7 +22,7 @@ private _actionATISlisten = [
 ];
 private _actionATISstop = [
 	"stopATIS",
-	"Stop Listening to ATIS",
+	"Stop Listening ATIS",
 	"",
 	{_target setVariable ["orbisATISstop", true, true]},
 	{([] call orbis_awesome_fnc_isCrew) && !(_target getVariable ["orbisATISstop", true])},

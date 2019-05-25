@@ -38,21 +38,21 @@ orbis_awesome_ACEInteractions pushBack [3, [
 	1,
 	["ACE_SelfActions", "AWESome"],
 	_actionATISmain,
-    true
+	true
 ]];
 orbis_awesome_ACEInteractions pushBack [3.1, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "actionATIS"],
 	_actionATISlisten,
-    true
+	true
 ]];
 orbis_awesome_ACEInteractions pushBack [3.2, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "actionATIS"],
 	_actionATISstop,
-    true
+	true
 ]];
 
 // helicopters
@@ -61,19 +61,19 @@ orbis_awesome_ACEInteractions pushBack [3, [
 	1,
 	["ACE_SelfActions", "AWESome"],
 	_actionATISmain,
-    true
+	true
 ]];
 orbis_awesome_ACEInteractions pushBack [3.1, [
 	"Helicopter",
 	1,
 	["ACE_SelfActions", "AWESome", "actionATIS"],
 	_actionATISlisten,
-    true
+	true
 ]];
 orbis_awesome_ACEInteractions pushBack [3.2, [
 	"Helicopter",
 	1,
 	["ACE_SelfActions", "AWESome", "actionATIS"],
 	_actionATISstop,
-    true
+	true
 ]];

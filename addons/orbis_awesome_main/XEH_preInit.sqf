@@ -13,5 +13,5 @@ orbis_awesome_ACEInteractions = [];
 
 // add ACE action
 if (orbis_awesome_hasACEInteractMenu) then {
-    [] call orbis_awesome_fnc_addACEInteractMenu;
+	[] call orbis_awesome_fnc_addACEInteractMenu;
 };

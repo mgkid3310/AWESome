@@ -15,12 +15,12 @@ orbis_awesome_ACEInteractions pushBack [0, [
 	1,
 	["ACE_SelfActions"],
 	_actionMain,
-    true
+	true
 ]];
 orbis_awesome_ACEInteractions pushBack [0, [
 	"Helicopter",
 	1,
 	["ACE_SelfActions"],
 	_actionMain,
-    true
+	true
 ]];

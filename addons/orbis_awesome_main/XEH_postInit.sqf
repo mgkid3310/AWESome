@@ -6,5 +6,5 @@ orbis_awesome_kphToKnot = 1 / orbis_awesome_knotToKph;
 
 // setup ACE Interactions
 if (orbis_awesome_hasACEInteractMenu) then {
-    [] call orbis_awesome_fnc_setupACEInteractMenu;
+	[] call orbis_awesome_fnc_setupACEInteractMenu;
 };

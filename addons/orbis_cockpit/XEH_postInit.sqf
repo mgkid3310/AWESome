@@ -2,11 +2,11 @@
 orbis_cockpit_lastChecklist = "pre_start_checklist";
 orbis_cockpit_currentChecklist = "none";
 orbis_cockpit_checklistArray = ["pre_start_checklist",
-    "startup_before_taxi_checklist",
-    "before_takeoff_checklist",
-    "takeoff_checklist",
-    "descent_approach_checklist",
-    "landing_taxi_to_ramp_checklist"
+	"startup_before_taxi_checklist",
+	"before_takeoff_checklist",
+	"takeoff_checklist",
+	"descent_approach_checklist",
+	"landing_taxi_to_ramp_checklist"
 ];
 
 orbis_cockpit_speedMaxShake = 600;

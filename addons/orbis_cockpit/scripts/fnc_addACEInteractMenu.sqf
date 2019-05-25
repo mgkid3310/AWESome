@@ -92,54 +92,54 @@ orbis_awesome_ACEInteractions pushBack [1, [
 	1,
 	["ACE_SelfActions", "AWESome"],
 	_checklistMain,
-    true
+	true
 ]];
 orbis_awesome_ACEInteractions pushBack [1.1, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_openChecklist01,
-    true
+	true
 ]];
 orbis_awesome_ACEInteractions pushBack [1.2, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_openChecklist02,
-    true
+	true
 ]];
 orbis_awesome_ACEInteractions pushBack [1.3, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_openChecklist03,
-    true
+	true
 ]];
 orbis_awesome_ACEInteractions pushBack [1.4, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_openChecklist04,
-    true
+	true
 ]];
 orbis_awesome_ACEInteractions pushBack [1.5, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_openChecklist05,
-    true
+	true
 ]];
 orbis_awesome_ACEInteractions pushBack [1.6, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_openChecklist06,
-    true
+	true
 ]];
 orbis_awesome_ACEInteractions pushBack [1.7, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_closeChecklist,
-    true
+	true
 ]];

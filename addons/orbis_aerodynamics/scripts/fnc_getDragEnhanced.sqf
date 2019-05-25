@@ -1,5 +1,5 @@
 params ["_paramArray", "_dragArray", "_dragMultiplier", ["_liftVector", false], ["_speedStall", 0]];
-_paramArray params ["_trueAirVelocity", "_massStandard", "_massError", "_densityRatio"];
+_paramArray params ["_trueAirVelocity", "_massStandard", "_massError", "_densityRatio", "_height"];
 _dragArray params ["_coef2", "_coef1", "_coef0"];
 
 // if (_massError) exitWith {[0, 0, 0]};
@@ -24,6 +24,9 @@ if (_liftVector isEqualType []) then {
 	private _inducedConst = (2 * 1.2754) / (_densityRatio * pi * 0.5 * 400);
 	private _inducedValue = ((vectorMagnitude _liftVector) / (_airSpeed max (_speedStall / 3.6))) ^ 2;
 	_dragInduced = (vectorNormalized _airVel) vectorMultiply (_inducedConst * _inducedValue * (orbis_aerodynamics_dragSourceMultiplier select 1));
+
+	private _groundEffectMultiplier = orbis_aerodynamics_geInducedDragMultiplier
+	_dragInduced = _dragInduced vectorMultiply _groundEffectMultiplier;
 };
 
 // wave drag (zero lift drag)

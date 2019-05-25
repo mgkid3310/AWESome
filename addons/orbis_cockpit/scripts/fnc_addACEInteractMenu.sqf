@@ -1,8 +1,8 @@
 private _checklistMain = [
 	"checklistMain",
-	"Open Checklist",
+	"Checklist",
 	"",
-	{},
+	{["none"] call orbis_cockpit_fnc_openChecklist},
 	{[nil, nil, 1] call orbis_awesome_fnc_isCrew},
 	{},
 	[],

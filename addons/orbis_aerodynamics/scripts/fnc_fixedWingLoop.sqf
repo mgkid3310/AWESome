@@ -7,7 +7,7 @@ if !(_timeStep > 0) exitWith {};
 private _aeroConfigs = _vehicle getVariable ["orbis_aerodynamics_aeroConfig", false];
 if !(_aeroConfigs isEqualType []) then {
 	_aeroConfigs = [_vehicle] call orbis_aerodynamics_fnc_getAeroConfig;
-	_vehicle setVariable ["orbis_aerodynamics_aeroConfig", _aeroConfigs, true];
+	_vehicle setVariable ["orbis_aerodynamics_aeroConfig", _aeroConfigs];
 };
 
 _aeroConfigs params ["_isAdvanced", "_aerodynamicsArray", "_speedPerformance", "_physicalProperty"];

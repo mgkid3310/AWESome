@@ -25,7 +25,7 @@ if (_liftVector isEqualType []) then {
 	private _inducedValue = ((vectorMagnitude _liftVector) / (_airSpeed max (_speedStall / 3.6))) ^ 2;
 	_dragInduced = (vectorNormalized _airVel) vectorMultiply (_inducedConst * _inducedValue * (orbis_aerodynamics_dragSourceMultiplier select 1));
 
-	private _groundEffectMultiplier = orbis_aerodynamics_geInducedDragMultiplier
+	private _groundEffectMultiplier = orbis_aerodynamics_geInducedDragMultiplier;
 	_dragInduced = _dragInduced vectorMultiply _groundEffectMultiplier;
 };
 

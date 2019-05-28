@@ -25,8 +25,9 @@ if (_liftVector isEqualType []) then {
 	private _inducedValue = ((vectorMagnitude _liftVector) / (_airSpeed max (_speedStall / 3.6))) ^ 2;
 	_dragInduced = (vectorNormalized _airVel) vectorMultiply (_inducedConst * _inducedValue * (orbis_aerodynamics_dragSourceMultiplier select 1));
 
-	private _groundEffectMultiplier = orbis_aerodynamics_geInducedDragMultiplier;
-	_dragInduced = _dragInduced vectorMultiply _groundEffectMultiplier;
+	private _hOverD = (((_height max 0) + orbis_aerodynamics_wingHeight) / orbis_aerodynamics_wingSpan);
+	private _geMultiplier = orbis_aerodynamics_geFactor / (_hOverD + orbis_aerodynamics_geFactor);
+	_dragInduced = _dragInduced vectorMultiply (1 - (_geMultiplier * orbis_aerodynamics_geInducedDragMultiplier));
 };
 
 // wave drag (zero lift drag)

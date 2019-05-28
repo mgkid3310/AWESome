@@ -14,7 +14,7 @@
 	"LIST",
 	["ATC display unit", "Set display units for altitude and speed"],
 	"AWESome ATC",
-	[[0, 1, 2, 3], ["meter / kph", "meter / knot", "feet / kph", "feet / knot"], 0]
+	[[0, 1, 2, 3], ["kph / meter", "knot / meter", "kph / feet", "knot / feet"], 0]
 ] call CBA_Settings_fnc_init;
 
 [
@@ -30,7 +30,7 @@
 	"SLIDER",
 	["ATC display trail length", "Set display trail length"],
 	"AWESome ATC",
-	[0, 10, 3, 0]
+	[0, 10, 5, 0]
 ] call CBA_Settings_fnc_init;
 
 [

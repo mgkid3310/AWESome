@@ -1,7 +1,8 @@
 private _monitor = _this select 0;
 private _controller = param [1, player];
 
-private ["_planes", "_helies", "_trails", "_crewList"];
+private _planes = [];
+private _helies = [];
 private _loadData = _monitor getVariable ["orbis_atc_radar_data", [0, [], [], [], []]];
 _loadData params ["_timeNext", "_trailsOld", "_planeMarkers", "_heliMarkers", "_trailMarkers"];
 
@@ -33,7 +34,7 @@ if (time > _timeNext) then {
 	missionNamespace setVariable ["oribs_atc_planeMarkers", _planeMarkers];
 	missionNamespace setVariable ["oribs_atc_heliMarkers", _heliMarkers];
 
-	_trails = [];
+	private _trails = [];
 	{
 		_trails pushBack (_x select {(alive (_x select 0)) && (isEngineOn (_x select 0))});
 	} forEach _trailsOld;
@@ -44,6 +45,7 @@ if (time > _timeNext) then {
 	};
 
 	_timeNext = time + orbis_atc_radarUpdateInterval;
+	_monitor setVariable ["orbis_atc_radar_data", [_timeNext, _trails, _planeMarkers, _heliMarkers, _trailMarkers]];
 };
 
 // ACE_map capability
@@ -55,5 +57,3 @@ if (orbis_awesome_hasACEMap) then {
 
 // update marker line spacing
 [_planeMarkers + _heliMarkers] call orbis_atc_fnc_updateMarkerSpacing;
-
-_monitor setVariable ["orbis_atc_radar_data", [_timeNext, _trails, _planeMarkers, _heliMarkers, _trailMarkers]];

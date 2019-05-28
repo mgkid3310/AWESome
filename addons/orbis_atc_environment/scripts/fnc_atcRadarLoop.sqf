@@ -48,14 +48,8 @@ if (time > _timeNext) then {
 
 // ACE_map capability
 if (orbis_awesome_hasACEMap) then {
-	_crewList = [];
 	{
-		{
-			_crewList pushBackUnique _x;
-		} forEach crew _x;
-	} forEach (_planes + _helies);
-	{
-		_x setVariable ["ace_map_hideBlueForceMarker", _x in _crewList];
+		_x setVariable ["ace_map_hideBlueForceMarker", (vehicle _x) in (_planes + _helies)];
 	} forEach allPlayers;
 };
 

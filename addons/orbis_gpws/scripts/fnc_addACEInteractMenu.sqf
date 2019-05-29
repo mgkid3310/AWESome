@@ -179,14 +179,14 @@ private _actionOff = [
 	10
 ];
 
-orbis_awesome_ACEInteractions pushBack [2, [
+orbis_awesome_ACEInteractions pushBack [1, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome"],
 	_actionGPWSmodes,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [2.1, [
+orbis_awesome_ACEInteractions pushBack [1.1, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
@@ -194,21 +194,21 @@ orbis_awesome_ACEInteractions pushBack [2.1, [
 	true
 ]];
 
-orbis_awesome_ACEInteractions pushBack [2.21, [
+orbis_awesome_ACEInteractions pushBack [1.21, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_actionB747,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [2.22, [
+orbis_awesome_ACEInteractions pushBack [1.22, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_actionF16,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [2.23, [
+orbis_awesome_ACEInteractions pushBack [1.23, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
@@ -216,28 +216,28 @@ orbis_awesome_ACEInteractions pushBack [2.23, [
 	true
 ]];
 
-orbis_awesome_ACEInteractions pushBack [2.31, [
+orbis_awesome_ACEInteractions pushBack [1.31, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_testB747,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [2.32, [
+orbis_awesome_ACEInteractions pushBack [1.32, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_testF16,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [2.33, [
+orbis_awesome_ACEInteractions pushBack [1.33, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_testRita,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [2.34, [
+orbis_awesome_ACEInteractions pushBack [1.34, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
@@ -245,14 +245,14 @@ orbis_awesome_ACEInteractions pushBack [2.34, [
 	true
 ]];
 
-orbis_awesome_ACEInteractions pushBack [2.41, [
+orbis_awesome_ACEInteractions pushBack [1.41, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_actionVolumeLow,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [2.42, [
+orbis_awesome_ACEInteractions pushBack [1.42, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
@@ -260,28 +260,28 @@ orbis_awesome_ACEInteractions pushBack [2.42, [
 	true
 ]];
 
-orbis_awesome_ACEInteractions pushBack [3, [
+orbis_awesome_ACEInteractions pushBack [2, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome"],
 	_actionTCASmodes,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [3.1, [
+orbis_awesome_ACEInteractions pushBack [2.1, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisTCASmodes"],
 	_actionModeC,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [3.2, [
+orbis_awesome_ACEInteractions pushBack [2.2, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisTCASmodes"],
 	_actionSTBY,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [3.3, [
+orbis_awesome_ACEInteractions pushBack [2.3, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "orbisTCASmodes"],

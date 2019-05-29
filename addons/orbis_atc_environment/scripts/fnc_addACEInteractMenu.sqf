@@ -22,7 +22,7 @@ private _actionATISlisten = [
 ];
 private _actionATISstop = [
 	"stopATIS",
-	"Stop Listening to ATIS",
+	"Stop Listening ATIS",
 	"",
 	{_target setVariable ["orbisATISstop", true, true]},
 	{([] call orbis_awesome_fnc_isCrew) && !(_target getVariable ["orbisATISstop", true])},
@@ -33,47 +33,47 @@ private _actionATISstop = [
 ];
 
 // planes
-orbis_awesome_ACEInteractions pushBack [3, [
+orbis_awesome_ACEInteractions pushBack [4, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome"],
 	_actionATISmain,
-    true
+	true
 ]];
-orbis_awesome_ACEInteractions pushBack [3.1, [
+orbis_awesome_ACEInteractions pushBack [4.1, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "actionATIS"],
 	_actionATISlisten,
-    true
+	true
 ]];
-orbis_awesome_ACEInteractions pushBack [3.2, [
+orbis_awesome_ACEInteractions pushBack [4.2, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "actionATIS"],
 	_actionATISstop,
-    true
+	true
 ]];
 
 // helicopters
-orbis_awesome_ACEInteractions pushBack [3, [
+orbis_awesome_ACEInteractions pushBack [4, [
 	"Helicopter",
 	1,
 	["ACE_SelfActions", "AWESome"],
 	_actionATISmain,
-    true
+	true
 ]];
-orbis_awesome_ACEInteractions pushBack [3.1, [
+orbis_awesome_ACEInteractions pushBack [4.1, [
 	"Helicopter",
 	1,
 	["ACE_SelfActions", "AWESome", "actionATIS"],
 	_actionATISlisten,
-    true
+	true
 ]];
-orbis_awesome_ACEInteractions pushBack [3.2, [
+orbis_awesome_ACEInteractions pushBack [4.2, [
 	"Helicopter",
 	1,
 	["ACE_SelfActions", "AWESome", "actionATIS"],
 	_actionATISstop,
-    true
+	true
 ]];

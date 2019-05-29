@@ -8,7 +8,7 @@ private _mode = param [4, "orbisGPWSready"];
 
 private _volumeLow = _vehicle getVariable ["orbisGPWSvolumeLow", false];
 if (_volumeLow) then {
-    _sound = format ["%1_low", _sound];
+	_sound = format ["%1_low", _sound];
 };
 
 if !((alive _vehicle) && (player in _vehicle)) exitWith {};

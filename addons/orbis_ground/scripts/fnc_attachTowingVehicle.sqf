@@ -29,9 +29,9 @@ _plane allowDamage false;
 _car disableCollisionWith _plane;
 _towBar disableCollisionWith _plane;
 if !(local _plane) then {
-    [_plane, false] remoteExec ["allowDamage", _plane];
-    [_car, _plane] remoteExec ["disableCollisionWith", _plane];
-    [_towBar, _plane] remoteExec ["disableCollisionWith", _plane];
+	[_plane, false] remoteExec ["allowDamage", _plane];
+	[_car, _plane] remoteExec ["disableCollisionWith", _plane];
+	[_towBar, _plane] remoteExec ["disableCollisionWith", _plane];
 };
 
 private _eventID = addMissionEventHandler ["EachFrame", {[] call orbis_ground_fnc_eachFrameHandlerTow}];

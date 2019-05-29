@@ -7,7 +7,7 @@ if !(_timeStep > 0) exitWith {};
 
 private _groundOld = _vehicle getVariable ["orbis_cockpit_groundOld", 0];
 if !(_groundOld isEqualType true) exitWith {
-    _vehicle setVariable ["orbis_cockpit_groundOld", isTouchingGround _vehicle];
+	_vehicle setVariable ["orbis_cockpit_groundOld", isTouchingGround _vehicle];
 };
 private _intensity = 0;
 
@@ -24,7 +24,7 @@ if (_onGround) then {
 
 private _touchdownFactor = 0;
 if (!_groundOld && _onGround) then {
-    _touchdownFactor = abs (velocity _vehicle select 2) * orbis_cockpit_touchdownShake * orbis_cockpit_groundMultiplier;
+	_touchdownFactor = abs (velocity _vehicle select 2) * orbis_cockpit_touchdownShake * orbis_cockpit_groundMultiplier;
 };
 
 _intensity = _speedFactor + _touchdownFactor;

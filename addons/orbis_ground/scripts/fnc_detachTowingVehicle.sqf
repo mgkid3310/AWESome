@@ -9,9 +9,9 @@ _plane allowDamage true;
 _car enableCollisionWith _plane;
 _towBar enableCollisionWith _plane;
 if !(local _plane) then {
-    [_plane, true] remoteExec ["allowDamage", _plane];
-    [_car, _plane] remoteExec ["enableCollisionWith", _plane];
-    [_towBar, _plane] remoteExec ["enableCollisionWith", _plane];
+	[_plane, true] remoteExec ["allowDamage", _plane];
+	[_car, _plane] remoteExec ["enableCollisionWith", _plane];
+	[_towBar, _plane] remoteExec ["enableCollisionWith", _plane];
 };
 
 _car setVariable ["orbis_towingEvent", nil];

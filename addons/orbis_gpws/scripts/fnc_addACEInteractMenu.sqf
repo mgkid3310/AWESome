@@ -1,4 +1,4 @@
-// parent action
+// GPWS parent action
 private _actionGPWSmodes = [
 	"orbisGPWSmodes",
 	"GPWS",
@@ -131,6 +131,54 @@ private _actionVolumeHigh = [
 	10
 ];
 
+// TCAS parent action
+private _actionTCASmodes = [
+	"orbisTCASmodes",
+	"TCAS",
+	"",
+	{},
+	{([nil, nil, 1] call orbis_awesome_fnc_isCrew) && !(_target getVariable ["orbisTCASmode", 0] < 0)},
+	{},
+	[],
+	[0, 0, 0],
+	10
+];
+
+// TCAS mode C STBY off
+private _actionModeC = [
+	"tcas_modeC",
+	"Mode C",
+	"",
+	{_target setVariable ["orbisTCASmode", 2, true]},
+	{(_target getVariable ["orbisTCASmode", 0] != 2)},
+	{},
+	[],
+	[0, 0, 0],
+	10
+];
+private _actionSTBY = [
+	"tcas_stby",
+	"Stand By",
+	"",
+	{_target setVariable ["orbisTCASmode", 1, true]},
+	{(_target getVariable ["orbisTCASmode", 0] != 1)},
+	{},
+	[],
+	[0, 0, 0],
+	10
+];
+private _actionOff = [
+	"tcas_off",
+	"Off",
+	"",
+	{_target setVariable ["orbisTCASmode", 0, true]},
+	{(_target getVariable ["orbisTCASmode", 0] != 0)},
+	{},
+	[],
+	[0, 0, 0],
+	10
+];
+
 orbis_awesome_ACEInteractions pushBack [2, [
 	"Plane",
 	1,
@@ -209,5 +257,34 @@ orbis_awesome_ACEInteractions pushBack [2.42, [
 	1,
 	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
 	_actionVolumeHigh,
+	true
+]];
+
+orbis_awesome_ACEInteractions pushBack [3, [
+	"Plane",
+	1,
+	["ACE_SelfActions", "AWESome"],
+	_actionTCASmodes,
+	true
+]];
+orbis_awesome_ACEInteractions pushBack [3.1, [
+	"Plane",
+	1,
+	["ACE_SelfActions", "AWESome", "orbisTCASmodes"],
+	_actionModeC,
+	true
+]];
+orbis_awesome_ACEInteractions pushBack [3.2, [
+	"Plane",
+	1,
+	["ACE_SelfActions", "AWESome", "orbisTCASmodes"],
+	_actionSTBY,
+	true
+]];
+orbis_awesome_ACEInteractions pushBack [3.3, [
+	"Plane",
+	1,
+	["ACE_SelfActions", "AWESome", "orbisTCASmodes"],
+	_actionOff,
 	true
 ]];

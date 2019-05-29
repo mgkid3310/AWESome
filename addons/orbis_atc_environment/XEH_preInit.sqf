@@ -14,7 +14,23 @@
 	"LIST",
 	["ATC display unit", "Set display units for altitude and speed"],
 	"AWESome ATC",
-	[[0, 1, 2, 3], ["meter / kph", "meter / knot", "feet / kph", "feet / knot"], 0]
+	[[0, 1, 2, 3], ["kph / meter", "knot / meter", "kph / feet", "knot / feet"], 0]
+] call CBA_Settings_fnc_init;
+
+[
+	"orbis_atc_radarUpdateInterval",
+	"SLIDER",
+	["ATC display Update Interval", "Set display update interval"],
+	"AWESome ATC",
+	[0, 5, 1, 1]
+] call CBA_Settings_fnc_init;
+
+[
+	"orbis_atc_radarTrailLength",
+	"SLIDER",
+	["ATC display trail length", "Set display trail length"],
+	"AWESome ATC",
+	[0, 10, 5, 0]
 ] call CBA_Settings_fnc_init;
 
 [
@@ -27,10 +43,11 @@
 
 // add actions (ACE / vanilla)
 if (orbis_awesome_hasACEInteractMenu) then {
-    [] call orbis_atc_fnc_addACEInteractMenu;
+	[] call orbis_atc_fnc_addACEInteractMenu;
 } else {
-    if !(vehicle player isEqualTo player) then {
-    	[player, "", vehicle player, []] call orbis_atc_fnc_getInAddAction;
-    };
-    player addEventHandler ["GetInMan", {_this call orbis_atc_fnc_getInAddAction}];
+	player addEventHandler ["GetInMan", {_this call orbis_atc_fnc_getInAddAction}];
+
+	if !(vehicle player isEqualTo player) then {
+		[player, "", vehicle player, []] call orbis_atc_fnc_getInAddAction;
+	};
 };

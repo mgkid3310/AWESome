@@ -9,6 +9,11 @@ orbis_aerodynamics_dragSourceMultiplier = [1.0, 0.1, 1.0];
 orbis_aerodynamics_thrustFactor = 7.2;
 orbis_aerodynamics_liftGFactor = 2.5;
 orbis_aerodynamics_waveCdArray = [0.7, 0.98, 1.0, 1.03, 2.4, 0.2, 0.1, -3.5];
+orbis_aerodynamics_wingHeight = 1;
+orbis_aerodynamics_wingSpan = 12;
+orbis_aerodynamics_geFactor = 0.1;
+orbis_aerodynamics_geLiftMultiplier = 0.6;
+orbis_aerodynamics_geInducedDragMultiplier = 0.6;
 orbis_aerodynamics_noForceoOnGround = false;
 
 // add EventHandlers

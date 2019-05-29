@@ -4,8 +4,11 @@
 orbis_atc_fnc_addACEInteractMenu = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_addACEInteractMenu.sqf";
 orbis_atc_fnc_addATCConsole = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_addATCConsole.sqf";
 orbis_atc_fnc_addRadarScreen = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_addRadarScreen.sqf";
+orbis_atc_fnc_atcRadarExit = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_atcRadarExit.sqf";
 orbis_atc_fnc_atcRadarLoop = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_atcRadarLoop.sqf";
 orbis_atc_fnc_createMarkers = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_createMarkers.sqf";
+orbis_atc_fnc_createTrails = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_createTrails.sqf";
+orbis_atc_fnc_eachFrameHandler = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_eachFrameHandler.sqf";
 orbis_atc_fnc_getInAddAction = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_getInAddAction.sqf";
 orbis_atc_fnc_listenATISbroadcast = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_listenATISbroadcast.sqf";
 orbis_atc_fnc_periodicCheck = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_periodicCheck.sqf";

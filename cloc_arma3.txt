@@ -1,17 +1,21 @@
 C++
+    filter rm_comments_in_strings " /* */
+    filter rm_comments_in_strings " //
     filter call_regexp_common C++
-    filter remove_inline //.*$
     extension C
+    extension CPP
     extension c++
     extension cc
     extension cpp
     extension cxx
+    extension inl
     extension pcc
     3rd_gen_scale 1.51
     end_of_line_continuation \\$
 C/C++ Header
+    filter rm_comments_in_strings " /* */
+    filter rm_comments_in_strings " //
     filter call_regexp_common C++
-    filter remove_inline //.*$
     extension H
     extension h
     extension hh
@@ -24,8 +28,9 @@ Markdown
     extension md
     3rd_gen_scale 1.00
 SQF
-    filter call_regexp_common C
-    filter remove_inline //.*$
+    filter rm_comments_in_strings " /* */
+    filter rm_comments_in_strings " //
+    filter call_regexp_common C++
     extension SQF
     extension sqf
     3rd_gen_scale 1.00

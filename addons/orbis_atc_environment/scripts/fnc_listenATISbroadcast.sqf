@@ -1,7 +1,7 @@
 private _ATISdata = missionNamespace getVariable ["orbis_atc_ATISdata", false];
 
 if (orbis_atc_realtimeATIS) then {
-    _ATISdata = [false] call orbis_atc_fnc_updateATISdata;
+	_ATISdata = [false] call orbis_atc_fnc_updateATISdata;
 };
 
 if !(_ATISdata isEqualType []) exitWith {};

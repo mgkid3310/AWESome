@@ -3,10 +3,10 @@ private _console = param [1, 0];
 
 private _pos = [0, 0, 0];
 if (isArray (configFile >> "CfgWorlds" >> worldName >> "ilsPosition")) then {
-    _pos = getArray (configFile >> "CfgWorlds" >> worldName >> "ilsPosition");
+	_pos = getArray (configFile >> "CfgWorlds" >> worldName >> "ilsPosition");
 };
 if !(_console isEqualType 0) then {
-    _pos = getPos _console;
+	_pos = getPos _console;
 };
 _pos set [2, (getTerrainHeightASL _pos) max 0];
 
@@ -26,10 +26,10 @@ private _humidity = 0;
 private _dewPoint = 0;
 private _QNH = 0;
 if (orbis_awesome_hasACEWeather) then {
-    _temperature = (_pos select 2) call ace_weather_fnc_calculateTemperatureAtHeight;
-    _humidity = ace_weather_currentHumidity;
-    _dewPoint = [_temperature, _humidity] call ace_weather_fnc_calculateDewPoint;
-    _QNH = 0 call ace_weather_fnc_calculateBarometricPressure;
+	_temperature = (_pos select 2) call ace_weather_fnc_calculateTemperatureAtHeight;
+	_humidity = ace_weather_currentHumidity;
+	_dewPoint = [_temperature, _humidity] call ace_weather_fnc_calculateDewPoint;
+	_QNH = 0 call ace_weather_fnc_calculateBarometricPressure;
 };
 
 private _baseArray = [_pos, date];

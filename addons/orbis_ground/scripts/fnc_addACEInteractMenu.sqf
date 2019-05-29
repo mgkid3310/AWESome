@@ -27,14 +27,14 @@ orbis_awesome_ACEInteractions pushBack [4.1, [
 	0,
 	["ACE_MainActions"],
 	_deployTowBar,
-    true
+	true
 ]];
 orbis_awesome_ACEInteractions pushBack [4.2, [
 	"Offroad_01_base_F",
 	0,
 	["ACE_MainActions"],
 	_removeTowBar,
-    true
+	true
 ]];
 
 // parking brake interactions
@@ -66,12 +66,12 @@ orbis_awesome_ACEInteractions pushBack [4.3, [
 	1.1,
 	["ACE_SelfActions"],
 	_parkingBrakeSet,
-    true
+	true
 ]];
 orbis_awesome_ACEInteractions pushBack [4.4, [
 	"Plane",
 	1.1,
 	["ACE_SelfActions"],
 	_parkingBrakeRelease,
-    true
+	true
 ]]; */

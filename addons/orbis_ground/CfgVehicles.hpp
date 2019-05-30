@@ -24,11 +24,11 @@ class CfgVehicles {
 				statement = "[this] call orbis_ground_fnc_detachTowingVehicle";
 			};
 			/* class beacons_start {
-				condition = "driver this == player AND {this animationPhase 'hidePolice' < 0.5 OR this animationPhase 'hideServices' < 0.5} AND {this animationSourcePhase 'Beacons' < 0.5}";
+				condition = "driver this isEqualTo player AND {this animationPhase 'hidePolice' < 0.5 OR this animationPhase 'hideServices' < 0.5} AND {this animationSourcePhase 'Beacons' < 0.5}";
 				statement = "this animateSource ['Beacons',1];";
 			};
 			class beacons_stop: beacons_start {
-				condition = "driver this == player AND {this animationPhase 'hidePolice' < 0.5 OR this animationPhase 'hideServices' < 0.5} AND {this animationSourcePhase 'Beacons' > 0.5}";
+				condition = "driver this isEqualTo player AND {this animationPhase 'hidePolice' < 0.5 OR this animationPhase 'hideServices' < 0.5} AND {this animationSourcePhase 'Beacons' > 0.5}";
 				statement = "this animateSource ['Beacons',0];";
 			}; */
 		};

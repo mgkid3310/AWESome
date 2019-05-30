@@ -1,36 +1,39 @@
 params ["_array", "_type"];
 
-private ["_callsign", "_speed", "_altitude", "_heading", "_line1", "_line2", "_line3", "_marker0", "_marker1", "_marker2", "_marker3"];
+private ["_speed", "_altitude", "_callsign", "_altitudeDisplay", "_verticalSpd", "_verticalTrend", "_speedDisplay", "_heading",
+	"_line1", "_line2", "_line3", "_marker0", "_marker1", "_marker2", "_marker3"
+];
 private _return = [];
 {
+	_speed = 3.6 * vectorMagnitude velocity _x;
+	_altitude = getPosASL _x select 2;
 	_callsign = [name driver _x, groupId group driver _x] select orbis_atc_displayCallsign;
-	switch (orbis_atc_unitSetting) do {
-		case (0): { // meter / kph
-			_speed = round speed _x;
-			_altitude = round (getPosASL _x select 2);
-		};
-		case (1): { // meter / knot
-			_speed = round (orbis_awesome_kphToKnot * speed _x);
-			_altitude = round (getPosASL _x select 2);
-		};
-		case (2): { // feet / kph
-			_speed = round speed _x;
-			_altitude = round (orbis_awesome_mToFt * (getPosASL _x select 2));
-		};
-		case (3): { // feet / knot
-			_speed = round (orbis_awesome_kphToKnot * speed _x);
-			_altitude = round (orbis_awesome_mToFt * (getPosASL _x select 2));
-		};
-		default { // meter / kph as default
-			_speed = round speed _x;
-			_altitude = round (getPosASL _x select 2);
-		};
+
+	if (orbis_atc_unitSettingAlt) then {
+		_altitudeDisplay = round (_altitude * orbis_awesome_mToFt / 100);
+	} else {
+		_altitudeDisplay = round (_altitude / 10);
 	};
+
+	_verticalSpd = velocity _x select 2;
+	_verticalTrend = "";
+	switch (true) do {
+		case (_verticalSpd > orbis_atc_minVerticalSpd): {_verticalTrend = toString [8593];};
+		case (_verticalSpd < -orbis_atc_minVerticalSpd): {_verticalTrend = toString [8595];};
+	};
+
+	_speedDisplay = round ([_speed, _speed * orbis_awesome_kphToKnot] select orbis_atc_unitSettingSpd);
 	_heading = round direction _x;
 
 	_line1 = format ["%1", _callsign];
-	_line2 = format ["%1 %2", _speed, _altitude];
+	_line2 = format ["%1%2     %3", _altitudeDisplay, _verticalTrend, _speedDisplay];
 	_line3 = format ["%1", _heading];
+
+	switch (count str _altitudeDisplay) do {
+		case 0: {_line2 = "000";};
+		case 1: {_line2 = "00" + _line2;};
+		case 2: {_line2 = "0" + _line2;};
+	};
 
 	switch (count _line3) do {
 		case 0: {_line3 = "000";};

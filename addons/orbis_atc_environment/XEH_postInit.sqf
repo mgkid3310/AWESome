@@ -17,7 +17,7 @@ orbis_atc_spaceMin = 0.9;
 // run initial ATIS data update
 [] spawn {
 	sleep 10;
-	[] call orbis_atc_fnc_updateATISdata;
+	[false] call orbis_atc_fnc_updateATISdata;
 };
 
 // run periodic check

@@ -19,7 +19,7 @@ if (_modePublic != _modeLocal) then {
 	[_vehicle, _modePublic] call orbis_gpws_fnc_startGPWS;
 };
 
-switch (_vehicle getVariable ["orbisGPWSmodeLocal", "off"]) do {
+switch (_vehicle getVariable ["orbis_gpws_GPWSmodeLocal", "off"]) do {
 	case ("b747"): {
 		[_vehicle] call orbis_gpws_fnc_b747GPWS;
 	};

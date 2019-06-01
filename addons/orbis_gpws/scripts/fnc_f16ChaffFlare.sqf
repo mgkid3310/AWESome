@@ -3,7 +3,7 @@
 DEV_CHAT("orbis_gpws: f16ChaffFlare run");
 params ["_vehicle", "_weapon", "_muzzle", "_mode"];
 
-if ((_weapon in orbis_gpws_ChaffFlareList) && !(_vehicle getVariable ["CMrunnig", false])) then {
+if ((_weapon in orbis_gpws_ChaffFlareList) && !(_vehicle getVariable ["orbis_gpws_CMrunning", false])) then {
 	DEV_CHAT("orbis_gpws: f16ChaffFlare active");
 	private _CMammoCount = 0;
 	{
@@ -11,28 +11,28 @@ if ((_weapon in orbis_gpws_ChaffFlareList) && !(_vehicle getVariable ["CMrunnig"
 	} forEach ((magazinesAllTurrets _vehicle) select {_x select 0 in getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines")});
 	private _ammosFired = (getNumber (configFile >> "CfgWeapons" >> _weapon >> _mode >> "burst")) * (getNumber (configFile >> "CfgWeapons" >> _weapon >> _mode >> "multiplier"));
 	private _resultingAmmo = _CMammoCount - _ammosFired;
-	private _lowCMcount = getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbisGPWS_lowCMcount");
+	private _lowCMcount = getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbis_gpws_GPWS_lowCMcount");
 
-	if (_vehicle getVariable ["nextCMcount", _CMammoCount] < _CMammoCount) exitWith {};
-	_vehicle setVariable ["nextCMcount", _resultingAmmo];
-	_vehicle setVariable ["CMrunnig", true];
+	if (_vehicle getVariable ["orbis_gpws_nextCMcount", _CMammoCount] < _CMammoCount) exitWith {};
+	_vehicle setVariable ["orbis_gpws_nextCMcount", _resultingAmmo];
+	_vehicle setVariable ["orbis_gpws_CMrunning", true];
 
 	DEV_CHAT("orbis_gpws: f16ChaffFlare waiting");
-	waitUntil {(_vehicle getVariable ["orbisGPWSready", true]) || !((alive _vehicle) && (player in _vehicle))};
+	waitUntil {(_vehicle getVariable ["orbis_gpws_GPWSready", true]) || !((alive _vehicle) && (player in _vehicle))};
 
 	if ((alive _vehicle) && (player in _vehicle)) then {
 		switch (true) do {
 			// f16_chaffFlareOut
 			case (_resultingAmmo <= 0): {
 				DEV_CHAT("orbis_gpws: f16_chaffFlareOut");
-				_vehicle setVariable ["orbisGPWSready", false];
+				_vehicle setVariable ["orbis_gpws_GPWSready", false];
 				[_vehicle, "f16_chaffFlareOut"] spawn orbis_gpws_fnc_speakGPWS;
 			};
 
 			// f16_chaffFlareLow
 			case ((_resultingAmmo <= _lowCMcount) && !(_vehicle getVariable ["CMlowAlerted", false])): {
 				DEV_CHAT("orbis_gpws: f16_chaffFlareLow");
-				_vehicle setVariable ["orbisGPWSready", false];
+				_vehicle setVariable ["orbis_gpws_GPWSready", false];
 				[_vehicle, "f16_chaffFlareLow"] spawn orbis_gpws_fnc_speakGPWS;
 				_vehicle setVariable ["CMlowAlerted", true];
 			};
@@ -40,11 +40,11 @@ if ((_weapon in orbis_gpws_ChaffFlareList) && !(_vehicle getVariable ["CMrunnig"
 			// f16_chaffFlare
 			default {
 				DEV_CHAT("orbis_gpws: f16_chaffFlare");
-				_vehicle setVariable ["orbisGPWSready", false];
+				_vehicle setVariable ["orbis_gpws_GPWSready", false];
 				[_vehicle, "f16_chaffFlare"] spawn orbis_gpws_fnc_speakGPWS;
 			};
 		};
 	};
 
-	_vehicle setVariable ["CMrunnig", false];
+	_vehicle setVariable ["orbis_gpws_CMrunning", false];
 };

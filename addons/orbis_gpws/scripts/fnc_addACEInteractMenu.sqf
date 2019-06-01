@@ -1,10 +1,10 @@
 // GPWS parent action
 private _actionGPWSmodes = [
-	"orbisGPWSmodes",
+	"orbis_gpws_GPWSmodes",
 	"GPWS",
 	"",
 	{},
-	{([nil, nil, 1] call orbis_awesome_fnc_isCrew) && (_target getVariable ["orbisGPWSenabled", false])},
+	{([nil, nil, 1] call orbis_awesome_fnc_isCrew) && (_target getVariable ["orbis_gpws_GPWSenabled", false])},
 	{},
 	[],
 	[0, 0, 0],
@@ -16,8 +16,8 @@ private _actionTurnOff = [
 	"turnOff",
 	"Turn off GPWS",
 	"",
-	{_target setVariable ["orbisGPWSmode", "off", true]},
-	{(_target getVariable ["orbisGPWSmodeLocal", "off"] != "off")},
+	{_target setVariable ["orbis_gpws_GPWSmode", "off", true]},
+	{(_target getVariable ["orbis_gpws_GPWSmodeLocal", "off"] != "off")},
 	{},
 	[],
 	[0, 0, 0],
@@ -29,8 +29,8 @@ private _actionB747 = [
 	"b747",
 	"Set to B747 GPWS",
 	"",
-	{_target setVariable ["orbisGPWSmode", "b747", true]},
-	{(_target getVariable ["orbisGPWSmodeLocal", "off"] != "b747")},
+	{_target setVariable ["orbis_gpws_GPWSmode", "b747", true]},
+	{(_target getVariable ["orbis_gpws_GPWSmodeLocal", "off"] != "b747")},
 	{},
 	[],
 	[0, 0, 0],
@@ -40,8 +40,8 @@ private _actionF16 = [
 	"f16",
 	"Set to Betty (F-16)",
 	"",
-	{_target setVariable ["orbisGPWSmode", "f16", true]},
-	{(_target getVariable ["orbisGPWSmodeLocal", "off"] != "f16")},
+	{_target setVariable ["orbis_gpws_GPWSmode", "f16", true]},
+	{(_target getVariable ["orbis_gpws_GPWSmodeLocal", "off"] != "f16")},
 	{},
 	[],
 	[0, 0, 0],
@@ -51,8 +51,8 @@ private _actionRita = [
 	"rita",
 	"Set to Rita",
 	"",
-	{_target setVariable ["orbisGPWSmode", "rita", true]},
-	{(_target getVariable ["orbisGPWSmodeLocal", "off"] != "rita")},
+	{_target setVariable ["orbis_gpws_GPWSmode", "rita", true]},
+	{(_target getVariable ["orbis_gpws_GPWSmodeLocal", "off"] != "rita")},
 	{},
 	[],
 	[0, 0, 0],
@@ -65,7 +65,7 @@ private _testB747 = [
 	"Test GPWS (B747)",
 	"",
 	{[_target] spawn orbis_gpws_fnc_b747GPWStest},
-	{(_target getVariable ["orbisGPWSmodeLocal", "off"] isEqualTo "b747") && (_target getVariable ["orbisGPWStestReady", true])},
+	{(_target getVariable ["orbis_gpws_GPWSmodeLocal", "off"] isEqualTo "b747") && (_target getVariable ["orbis_gpws_GPWStestReady", true])},
 	{},
 	[],
 	[0, 0, 0],
@@ -76,7 +76,7 @@ private _testF16 = [
 	"Test GPWS (Betty)",
 	"",
 	{[_target] spawn orbis_gpws_fnc_f16GPWStest},
-	{(_target getVariable ["orbisGPWSmodeLocal", "off"] isEqualTo "f16") && (_target getVariable ["orbisGPWStestReady", true])},
+	{(_target getVariable ["orbis_gpws_GPWSmodeLocal", "off"] isEqualTo "f16") && (_target getVariable ["orbis_gpws_GPWStestReady", true])},
 	{},
 	[],
 	[0, 0, 0],
@@ -87,7 +87,7 @@ private _testRita = [
 	"Test GPWS (Rita)",
 	"",
 	{[_target] spawn orbis_gpws_fnc_ritaGPWStest},
-	{(_target getVariable ["orbisGPWSmodeLocal", "off"] isEqualTo "rita") && (_target getVariable ["orbisGPWStestReady", true])},
+	{(_target getVariable ["orbis_gpws_GPWSmodeLocal", "off"] isEqualTo "rita") && (_target getVariable ["orbis_gpws_GPWStestReady", true])},
 	{},
 	[],
 	[0, 0, 0],
@@ -99,8 +99,8 @@ private _testStop = [
 	"testStop",
 	"Stop GPWS Test",
 	"",
-	{_target setVariable ["orbisGPWStestStop", true, true]},
-	{(_target getVariable ["orbisGPWSmodeLocal", "off"] != "off") && !(_target getVariable ["orbisGPWStestReady", true]) && !(_target getVariable ["orbisGPWStestStop", false])},
+	{_target setVariable ["orbis_gpws_GPWStestStop", true, true]},
+	{(_target getVariable ["orbis_gpws_GPWSmodeLocal", "off"] != "off") && !(_target getVariable ["orbis_gpws_GPWStestReady", true]) && !(_target getVariable ["orbis_gpws_GPWStestStop", false])},
 	{},
 	[],
 	[0, 0, 0],
@@ -112,8 +112,8 @@ private _actionVolumeLow = [
 	"volumeLow",
 	"Lower Volume",
 	"",
-	{_target setVariable ["orbisGPWSvolumeLow", true, true]},
-	{!(_target getVariable ["orbisGPWSvolumeLow", false])},
+	{_target setVariable ["orbis_gpws_GPWSvolumeLow", true, true]},
+	{!(_target getVariable ["orbis_gpws_GPWSvolumeLow", false])},
 	{},
 	[],
 	[0, 0, 0],
@@ -123,8 +123,8 @@ private _actionVolumeHigh = [
 	"volumeHigh",
 	"Increase Volume",
 	"",
-	{_target setVariable ["orbisGPWSvolumeLow", false, true]},
-	{(_target getVariable ["orbisGPWSvolumeLow", false])},
+	{_target setVariable ["orbis_gpws_GPWSvolumeLow", false, true]},
+	{(_target getVariable ["orbis_gpws_GPWSvolumeLow", false])},
 	{},
 	[],
 	[0, 0, 0],
@@ -189,7 +189,7 @@ orbis_awesome_ACEInteractions pushBack [1, [
 orbis_awesome_ACEInteractions pushBack [1.1, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
+	["ACE_SelfActions", "AWESome", "orbis_gpws_GPWSmodes"],
 	_actionTurnOff,
 	true
 ]];
@@ -197,21 +197,21 @@ orbis_awesome_ACEInteractions pushBack [1.1, [
 orbis_awesome_ACEInteractions pushBack [1.21, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
+	["ACE_SelfActions", "AWESome", "orbis_gpws_GPWSmodes"],
 	_actionB747,
 	true
 ]];
 orbis_awesome_ACEInteractions pushBack [1.22, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
+	["ACE_SelfActions", "AWESome", "orbis_gpws_GPWSmodes"],
 	_actionF16,
 	true
 ]];
 orbis_awesome_ACEInteractions pushBack [1.23, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
+	["ACE_SelfActions", "AWESome", "orbis_gpws_GPWSmodes"],
 	_actionRita,
 	true
 ]];
@@ -219,28 +219,28 @@ orbis_awesome_ACEInteractions pushBack [1.23, [
 orbis_awesome_ACEInteractions pushBack [1.31, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
+	["ACE_SelfActions", "AWESome", "orbis_gpws_GPWSmodes"],
 	_testB747,
 	true
 ]];
 orbis_awesome_ACEInteractions pushBack [1.32, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
+	["ACE_SelfActions", "AWESome", "orbis_gpws_GPWSmodes"],
 	_testF16,
 	true
 ]];
 orbis_awesome_ACEInteractions pushBack [1.33, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
+	["ACE_SelfActions", "AWESome", "orbis_gpws_GPWSmodes"],
 	_testRita,
 	true
 ]];
 orbis_awesome_ACEInteractions pushBack [1.34, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
+	["ACE_SelfActions", "AWESome", "orbis_gpws_GPWSmodes"],
 	_testStop,
 	true
 ]];
@@ -248,14 +248,14 @@ orbis_awesome_ACEInteractions pushBack [1.34, [
 orbis_awesome_ACEInteractions pushBack [1.41, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
+	["ACE_SelfActions", "AWESome", "orbis_gpws_GPWSmodes"],
 	_actionVolumeLow,
 	true
 ]];
 orbis_awesome_ACEInteractions pushBack [1.42, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", "orbisGPWSmodes"],
+	["ACE_SelfActions", "AWESome", "orbis_gpws_GPWSmodes"],
 	_actionVolumeHigh,
 	true
 ]];

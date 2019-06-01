@@ -1,4 +1,4 @@
-player setVariable ["hasOrbisGPWS", true, true];
+player setVariable ["orbis_gpws_hasGPWS", true, true];
 
 // init global variables
 orbis_gpws_takeoffAlt = 60;

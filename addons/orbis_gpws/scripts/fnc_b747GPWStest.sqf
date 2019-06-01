@@ -1,7 +1,7 @@
 private _vehicle = _this select 0;
 
-_vehicle setVariable ["orbisGPWStestReady", false, true];
-_vehicle setVariable ["orbisGPWStestStop", false, true];
+_vehicle setVariable ["orbis_gpws_GPWStestReady", false, true];
+_vehicle setVariable ["orbis_gpws_GPWStestStop", false, true];
 
 ["b747", "1000", 0.5] call orbis_gpws_fnc_playTestSound; // done
 ["b747", "500", 0.5] call orbis_gpws_fnc_playTestSound; // done
@@ -35,5 +35,5 @@ _vehicle setVariable ["orbisGPWStestStop", false, true];
 ["b747", "TOWARN", 0.5] call orbis_gpws_fnc_playTestSound;
 // ["b747", "TRIM", 0.5] call orbis_gpws_fnc_playTestSound;
 
-_vehicle setVariable ["orbisGPWStestReady", true, true];
-_vehicle setVariable ["orbisGPWStestStop", false, true];
+_vehicle setVariable ["orbis_gpws_GPWStestReady", true, true];
+_vehicle setVariable ["orbis_gpws_GPWStestStop", false, true];

@@ -182,7 +182,7 @@ private _actionTCASSTBY = [
 // Transponder parent action
 private _actionTranspondermodes = [
 	"orbis_gpws_TransponderModes",
-	"TCAS",
+	"Transponder",
 	"",
 	{},
 	{([nil, nil, 1] call orbis_awesome_fnc_isCrew) && !(_target getVariable ["orbis_gpws_transponderMode", 0] < 0)},

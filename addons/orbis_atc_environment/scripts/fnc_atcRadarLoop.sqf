@@ -3,10 +3,6 @@ private _controller = param [1, player];
 
 private _planes = [];
 private _helies = [];
-private _planesModeC = [];
-private _heliesModeC = [];
-private _planesStandBy = [];
-private _heliesStandBy = [];
 private _loadData = _monitor getVariable ["orbis_atc_radar_data", [0, [], [], [], []]];
 _loadData params ["_timeNext", "_trailsOld", "_planeMarkers", "_heliMarkers", "_trailMarkers"];
 
@@ -16,28 +12,45 @@ if (((_controller distance _monitor) > 10) || !(player getVariable ["orbis_atc_i
 
 // update planes info
 if (time > _timeNext) then {
+	private ["_planesAI", "_heliesAI", "_planesModeC", "_heliesModeC", "_planesStandBy", "_heliesStandBy",
+	"_planeMarkersModeC", "_heliMarkersModeC", "_planeMarkersStandBy", "_heliMarkersStandBy"];
+
 	_planes = (entities "Plane") select {(side driver _x in [side _controller, civilian]) && (alive _x) && (isEngineOn _x)};
 	_helies = (entities "Helicopter") select {(side driver _x in [side _controller, civilian]) && (alive _x) && (isEngineOn _x)};
-	_planesModeC = _planes select {_x getVariable ["orbis_gpws_transponderMode", 0] isEqualTo 2};
-	_heliesModeC = _helies select {_x getVariable ["orbis_gpws_transponderMode", 0] isEqualTo 2};
-	_planesStandBy = _planes select {_x getVariable ["orbis_gpws_transponderMode", 0] isEqualTo 1};
-	_heliesStandBy = _helies select {_x getVariable ["orbis_gpws_transponderMode", 0] isEqualTo 1};
+	_planesAI = _planes select {private _return = false; {if (_x getVariable ["orbis_gpws_hasGPWS", false]) exitWith {_return = true;}} forEach (crew _x); _return};
+	_heliesAI = _helies select {private _return = false; {if (_x getVariable ["orbis_gpws_hasGPWS", false]) exitWith {_return = true;}} forEach (crew _x); _return};
+
+	_planesModeC = (_planes - _planesAI) select {_x getVariable ["orbis_gpws_transponderMode", 0] isEqualTo 2};
+	_heliesModeC = (_helies - _heliesAI) select {_x getVariable ["orbis_gpws_transponderMode", 0] isEqualTo 2};
+	_planesStandBy = (_planes - _planesAI) select {_x getVariable ["orbis_gpws_transponderMode", 0] isEqualTo 1};
+	_heliesStandBy = (_helies - _heliesAI) select {_x getVariable ["orbis_gpws_transponderMode", 0] isEqualTo 1};
+
+	_planesModeC = _planesModeC + (_planesAI select {(getPos _x select 2) >= 5});
+	_heliesModeC = _heliesModeC + (_heliesAI select {(getPos _x select 2) >= 5});
+	_planesStandBy = _planesStandBy + (_planesAI select {(getPos _x select 2) < 5});
+	_heliesStandBy = _heliesStandBy +( _heliesAI select {(getPos _x select 2) < 5});
 
 	{
-		_x params ["_marker0", "_marker1", "_marker2", "_marker3"];
+		_x params ["_marker0", "_marker1", "_marker2", "_marker3", "_marker4"];
 		deleteMarkerLocal _marker0;
 		deleteMarkerLocal _marker1;
 		deleteMarkerLocal _marker2;
 		deleteMarkerLocal _marker3;
+		deleteMarkerLocal _marker4;
 	} forEach (_planeMarkers + _heliMarkers);
 
 	{
 		deleteMarkerLocal _x;
 	} forEach _trailMarkers;
 
-	_planeMarkers = [_planes, "b_plane"] call orbis_atc_fnc_createMarkers;
-	_heliMarkers = [_helies, "b_air"] call orbis_atc_fnc_createMarkers;
+	_planeMarkersModeC = [_planesModeC, "b_plane", 2] call orbis_atc_fnc_createMarkers;
+	_heliMarkersModeC = [_heliesModeC, "b_air", 2] call orbis_atc_fnc_createMarkers;
+	_planeMarkersStandBy = [_planesStandBy, "b_plane", 1] call orbis_atc_fnc_createMarkers;
+	_heliMarkersStandBy = [_heliesStandBy, "b_air", 1] call orbis_atc_fnc_createMarkers;
 	_trailMarkers = [_trailsOld] call orbis_atc_fnc_createTrails;
+
+	_planeMarkers = _planeMarkersModeC + _planeMarkersStandBy;
+	_heliMarkers = _heliMarkersModeC + _heliMarkersStandBy;
 	[_planeMarkers, _heliMarkers] call orbis_atc_fnc_updateMarkerSpacing;
 	missionNamespace setVariable ["oribs_atc_planeMarkers", _planeMarkers];
 	missionNamespace setVariable ["oribs_atc_heliMarkers", _heliMarkers];

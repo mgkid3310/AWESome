@@ -14,7 +14,7 @@ if (_GPWSenabled isEqualType true) then {
 		_enable = false;
 	};
 } else {
-	if !(getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbis_gpws_GPWS_enabled") > 0) then {
+	if !(getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbis_gpws_GPWSenabled") > 0) then {
 		_enable = false;
 	};
 };
@@ -33,7 +33,7 @@ if (_modeCurrent isEqualTo "init") then {
 		_vehicle setVariable ["orbis_gpws_GPWSmode", orbis_gpws_personallDefault, true];
 	};
 
-	if (getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbis_gpws_GPWS_default") isEqualTo "f16") exitWith {
+	if (getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbis_gpws_defaultGPWS") isEqualTo "f16") exitWith {
 		_vehicle setVariable ["orbis_gpws_GPWSmode", "f16", true];
 	};
 

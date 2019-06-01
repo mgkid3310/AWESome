@@ -132,7 +132,7 @@ private _actionVolumeHigh = [
 ];
 
 // TCAS parent action
-private _actionTCASmodes = [
+/* private _actionTCASmodes = [
 	"orbis_gpws_TCASModes",
 	"TCAS",
 	"",
@@ -142,10 +142,10 @@ private _actionTCASmodes = [
 	[],
 	[0, 0, 0],
 	10
-];
+]; */
 
 // TCAS TA/RA TA STBY
-private _actionTCASTARA = [
+/* private _actionTCASTARA = [
 	"tcas_TARA",
 	"TA/RA",
 	"",
@@ -177,7 +177,7 @@ private _actionTCASSTBY = [
 	[],
 	[0, 0, 0],
 	10
-];
+]; */
 
 // Transponder parent action
 private _actionTranspondermodes = [
@@ -308,7 +308,7 @@ orbis_awesome_ACEInteractions pushBack [1.42, [
 	true
 ]];
 
-orbis_awesome_ACEInteractions pushBack [2, [
+/* orbis_awesome_ACEInteractions pushBack [2, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome"],
@@ -335,7 +335,7 @@ orbis_awesome_ACEInteractions pushBack [2.3, [
 	["ACE_SelfActions", "AWESome", "orbis_gpws_TCASModes"],
 	_actionTCASSTBY,
 	true
-]];
+]]; */
 
 orbis_awesome_ACEInteractions pushBack [3, [
 	"Plane",

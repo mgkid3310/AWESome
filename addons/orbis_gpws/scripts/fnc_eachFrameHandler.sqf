@@ -7,10 +7,22 @@ if (!([nil, nil, 1] call orbis_awesome_fnc_isCrew) || !(alive _vehicle) || (_tim
 	missionNamespace setVariable ["orbis_gpws_frameOld", diag_frameNo];
 };
 
-private _modePublic = _vehicle getVariable ["orbisGPWSmode", "off"];
-private _modeLocal = _vehicle getVariable ["orbisGPWSmodeLocal", "off"];
+// check flight phase
+private _altAGLS = getPos _vehicle select 2;
+private _altASL = getPosASL _vehicle select 2;
+private _altRadar = _altAGLS min _altASL;
+private _climeASL = velocity _vehicle select 2; // m/s
+private _flapStatus = _vehicle animationSourcePhase "flap";
+private _gearStatus = _vehicle animationSourcePhase "gear";
+private _flightphase = (_vehicle getVariable ["orbis_gpws_flightPhaseParam", ["taxing", 0, 0, 0]]) select 0;
+private _flightphaseOutput = [_vehicle, _flightphase, _altRadar, _climeASL, _flapStatus, _gearStatus] call orbis_gpws_fnc_flightPhaseCheck;
+_vehicle setVariable ["orbis_gpws_flightPhaseParam", _flightphaseOutput];
 
-if (_target getVariable ["orbisGPWSenabled", false]) then {
+// run GPWS
+private _modePublic = _vehicle getVariable ["orbis_gpws_GPWSmode", "off"];
+private _modeLocal = _vehicle getVariable ["orbis_gpws_GPWSmodeLocal", "off"];
+
+if (_target getVariable ["orbis_gpws_GPWSenabled", false]) then {
 	_modePublic = "off";
 };
 

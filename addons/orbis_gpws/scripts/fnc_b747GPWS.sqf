@@ -3,7 +3,7 @@
 private _vehicle = _this select 0;
 
 private _loadData = _vehicle getVariable ["orbis_gpws_b747Data", ["taxing", time, getPosASL _vehicle select 2, [], false, false, 0]];
-_loadData params ["_flightphase", "_timeOld", "_altASLOld", "_criticalWarningLog", "_gearwarned", "_flapsWarned", "_bankWarnedTime"];
+_loadData params ["_timeOld", "_criticalWarningLog", "_gearwarned", "_flapsWarned", "_bankWarnedTime"];
 
 if !(_timeOld < time) exitWith {
 	_vehicle setVariable ["orbis_gpws_b747Data", _loadData];
@@ -15,17 +15,16 @@ private _altASL = getPosASL _vehicle select 2;
 private _altRadar = _altAGLS min _altASL;
 private _posExpect = (getPosASL _vehicle) vectorAdd (velocity _vehicle vectorMultiply orbis_gpws_posExpectTime);
 private _expectTerrainAlt = 0 max getTerrainHeightASL _posExpect;
-private _cosAOA = (vectorDir _vehicle) vectorCos (velocity _vehicle);
 private _flapStatus = _vehicle animationSourcePhase "flap";
 private _gearStatus = _vehicle animationSourcePhase "gear";
-private _climeASL = (_altASL - _altASLOld) / (time - _timeOld); // m/s
+private _climeASL = velocity _vehicle select 2; // m/s
 
 private _pitchAndBank = _vehicle call BIS_fnc_getPitchBank;
 private _pitchAngle = _pitchAndBank select 0;
 private _bankAngle = _pitchAndBank select 1;
 
 // flight phase check
-private _flightphaseOutput = [_vehicle, _flightphase, _altRadar, _climeASL, _flapStatus, _gearStatus] call orbis_gpws_fnc_flightPhaseCheck;
+private _flightphaseOutput = _vehicle getVariable ["orbis_gpws_flightPhaseParam", ["taxing", 0, 0, 0]];
 private _flightphase = _flightphaseOutput select 0;
 private _distance = _flightphaseOutput select 1;
 private _altDiff = _flightphaseOutput select 2;
@@ -289,4 +288,4 @@ if (_vehicle getVariable ["orbis_gpws_GPWSready", true]) then {
 	};
 };
 
-_vehicle setVariable ["orbis_gpws_b747Data", [_flightphase, time, _altASL, _criticalWarningLog, _gearwarned, _flapsWarned, _bankWarnedTime]];
+_vehicle setVariable ["orbis_gpws_b747Data", [time, _criticalWarningLog, _gearwarned, _flapsWarned, _bankWarnedTime]];

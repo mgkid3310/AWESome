@@ -16,13 +16,10 @@ private _altRadar = _altAGLS min _altASL;
 private _posExpect = (getPosASL _vehicle) vectorAdd (velocity _vehicle vectorMultiply orbis_gpws_f16PullupTime);
 private _expectTerrainAlt = 0 max getTerrainHeightASL _posExpect;
 private _cosAOA = (vectorDir _vehicle) vectorCos (velocity _vehicle);
-private _flapStatus = _vehicle animationSourcePhase "flap";
-private _gearStatus = _vehicle animationSourcePhase "gear";
-private _climeASL = (_altASL - _altASLOld) / (time - _timeOld); // m/s
 private _speedStall = getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "stallSpeed");
 
 // flight phase check
-private _flightphaseOutput = [_vehicle, _flightphase, _altRadar, _climeASL, _flapStatus, _gearStatus] call orbis_gpws_fnc_flightPhaseCheck;
+private _flightphaseOutput = _vehicle getVariable ["orbis_gpws_flightPhaseParam", ["taxing", 0, 0, 0]];
 private _flightphase = _flightphaseOutput select 0;
 
 // incoming mssile check (RWR)
@@ -170,4 +167,4 @@ if (_vehicle getVariable ["orbis_gpws_GPWSreadyBeep", true]) then {
 	};
 };
 
-_vehicle setVariable ["orbis_gpws_f16Data", [_flightphase, time, _altASL, _ctrWarnOld, _target/* , _targetOld */]];
+_vehicle setVariable ["orbis_gpws_f16Data", [time, _ctrWarnOld, _target/* , _targetOld */]];

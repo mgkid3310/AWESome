@@ -3,7 +3,7 @@
 private _vehicle = _this select 0;
 
 private _loadData = _vehicle getVariable ["orbis_gpws_ritaData", ["taxing", time, getPosASL _vehicle select 2]];
-_loadData params ["_flightphase", "_timeOld", "_altASLOld"];
+_loadData params ["_timeOld"];
 
 if !(_timeOld < time) exitWith {
 	_vehicle setVariable ["orbis_gpws_ritaData", _loadData];
@@ -16,9 +16,6 @@ private _altRadar = _altAGLS min _altASL;
 private _posExpect = (getPosASL _vehicle) vectorAdd (velocity _vehicle vectorMultiply orbis_gpws_ritaPullupTime);
 private _expectTerrainAlt = 0 max getTerrainHeightASL _posExpect;
 private _cosAOA = (vectorDir _vehicle) vectorCos (velocity _vehicle);
-private _flapStatus = _vehicle animationSourcePhase "flap";
-private _gearStatus = _vehicle animationSourcePhase "gear";
-private _climeASL = (_altASL - _altASLOld) / (time - _timeOld); // m/s
 private _currentSpeed = speed _vehicle;
 
 private _pitchAndBank = _vehicle call BIS_fnc_getPitchBank;
@@ -26,7 +23,7 @@ private _pitchAngle = _pitchAndBank select 0;
 private _bankAngle = _pitchAndBank select 1;
 
 // flight phase check
-private _flightphaseOutput = [_vehicle, _flightphase, _altRadar, _climeASL, _flapStatus, _gearStatus] call orbis_gpws_fnc_flightPhaseCheck;
+private _flightphaseOutput = _vehicle getVariable ["orbis_gpws_flightPhaseParam", ["taxing", 0, 0, 0]];
 private _flightphase = _flightphaseOutput select 0;
 
 private _damageNow = damage _vehicle;
@@ -93,4 +90,4 @@ if (_vehicle getVariable ["orbis_gpws_GPWSready", true]) then {
 	};
 };
 
-_vehicle setVariable ["orbis_gpws_ritaData", [_flightphase, time, _altASL]];
+_vehicle setVariable ["orbis_gpws_ritaData", [time]];

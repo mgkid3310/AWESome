@@ -133,46 +133,94 @@ private _actionVolumeHigh = [
 
 // TCAS parent action
 private _actionTCASmodes = [
-	"orbisTCASmodes",
+	"orbis_gpws_TCASModes",
 	"TCAS",
 	"",
 	{},
-	{([nil, nil, 1] call orbis_awesome_fnc_isCrew) && !(_target getVariable ["orbisTCASmode", 0] < 0)},
+	{([nil, nil, 1] call orbis_awesome_fnc_isCrew) && !(_target getVariable ["orbis_gpws_TCASmode", 0] < 0)},
 	{},
 	[],
 	[0, 0, 0],
 	10
 ];
 
-// TCAS mode C STBY off
-private _actionModeC = [
-	"tcas_modeC",
+// TCAS TA/RA TA STBY
+private _actionTCASTARA = [
+	"tcas_TARA",
+	"TA/RA",
+	"",
+	{_target setVariable ["orbis_gpws_tcasMode", 2, true]},
+	{(_target getVariable ["orbis_gpws_tcasMode", 0] != 2)},
+	{},
+	[],
+	[0, 0, 0],
+	10
+];
+private _actionTCASTA = [
+	"tcas_TA",
+	"TA",
+	"",
+	{_target setVariable ["orbis_gpws_tcasMode", 1, true]},
+	{(_target getVariable ["orbis_gpws_tcasMode", 0] != 1)},
+	{},
+	[],
+	[0, 0, 0],
+	10
+];
+private _actionTCASSTBY = [
+	"tcas_stby",
+	"Stand by",
+	"",
+	{_target setVariable ["orbis_gpws_tcasMode", 0, true]},
+	{(_target getVariable ["orbis_gpws_tcasMode", 0] != 0)},
+	{},
+	[],
+	[0, 0, 0],
+	10
+];
+
+// Transponder parent action
+private _actionTranspondermodes = [
+	"orbis_gpws_TransponderModes",
+	"TCAS",
+	"",
+	{},
+	{([nil, nil, 1] call orbis_awesome_fnc_isCrew) && !(_target getVariable ["orbis_gpws_transponderMode", 0] < 0)},
+	{},
+	[],
+	[0, 0, 0],
+	10
+];
+
+// Transponder Mode C STBY off
+private _actionTransponderModeC = [
+	"transponder_modeC",
 	"Mode C",
 	"",
-	{_target setVariable ["orbisTCASmode", 2, true]},
-	{(_target getVariable ["orbisTCASmode", 0] != 2)},
+	{_target setVariable ["orbis_gpws_transponderMode", 2, true]},
+	{(_target getVariable ["orbis_gpws_transponderMode", 0] != 2)},
 	{},
 	[],
 	[0, 0, 0],
 	10
 ];
-private _actionSTBY = [
-	"tcas_stby",
+private _actionTransponderSTBY = [
+	"transponder_stby",
 	"Stand By",
 	"",
-	{_target setVariable ["orbisTCASmode", 1, true]},
-	{(_target getVariable ["orbisTCASmode", 0] != 1)},
+	{_target setVariable ["orbis_gpws_transponderMode", 1, true]},
+	{(_target getVariable ["orbis_gpws_transponderMode", 0] != 1)},
 	{},
 	[],
 	[0, 0, 0],
 	10
 ];
-private _actionOff = [
-	"tcas_off",
+private _actionTransponderOff = [
+	"transponder_off",
 	"Off",
 	"",
-	{_target setVariable ["orbisTCASmode", 0, true]},
-	{(_target getVariable ["orbisTCASmode", 0] != 0)},
+	{_target setVariable ["orbis_gpws_transponderMode", 0, true]},
+	{(_target getVariable ["orbis_gpws_transponderMode", 0] != 0)},
 	{},
 	[],
 	[0, 0, 0],
@@ -270,21 +318,50 @@ orbis_awesome_ACEInteractions pushBack [2, [
 orbis_awesome_ACEInteractions pushBack [2.1, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", "orbisTCASmodes"],
-	_actionModeC,
+	["ACE_SelfActions", "AWESome", "orbis_gpws_TCASModes"],
+	_actionTCASTARA,
 	true
 ]];
 orbis_awesome_ACEInteractions pushBack [2.2, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", "orbisTCASmodes"],
-	_actionSTBY,
+	["ACE_SelfActions", "AWESome", "orbis_gpws_TCASModes"],
+	_actionTCASTA,
 	true
 ]];
 orbis_awesome_ACEInteractions pushBack [2.3, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", "orbisTCASmodes"],
-	_actionOff,
+	["ACE_SelfActions", "AWESome", "orbis_gpws_TCASModes"],
+	_actionTCASSTBY,
+	true
+]];
+
+orbis_awesome_ACEInteractions pushBack [3, [
+	"Plane",
+	1,
+	["ACE_SelfActions", "AWESome"],
+	_actionTranspondermodes,
+	true
+]];
+orbis_awesome_ACEInteractions pushBack [3.1, [
+	"Plane",
+	1,
+	["ACE_SelfActions", "AWESome", "orbis_gpws_TransponderModes"],
+	_actionTransponderModeC,
+	true
+]];
+orbis_awesome_ACEInteractions pushBack [3.2, [
+	"Plane",
+	1,
+	["ACE_SelfActions", "AWESome", "orbis_gpws_TransponderModes"],
+	_actionTransponderSTBY,
+	true
+]];
+orbis_awesome_ACEInteractions pushBack [3.3, [
+	"Plane",
+	1,
+	["ACE_SelfActions", "AWESome", "orbis_gpws_TransponderModes"],
+	_actionTransponderOff,
 	true
 ]];

@@ -87,56 +87,56 @@ private _closeChecklist = [
 	10
 ];
 
-orbis_awesome_ACEInteractions pushBack [4, [
+orbis_awesome_ACEInteractions pushBack [5, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome"],
 	_checklistMain,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [4.1, [
+orbis_awesome_ACEInteractions pushBack [5.1, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_openChecklist01,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [4.2, [
+orbis_awesome_ACEInteractions pushBack [5.2, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_openChecklist02,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [4.3, [
+orbis_awesome_ACEInteractions pushBack [5.3, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_openChecklist03,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [4.4, [
+orbis_awesome_ACEInteractions pushBack [5.4, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_openChecklist04,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [4.5, [
+orbis_awesome_ACEInteractions pushBack [5.5, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_openChecklist05,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [4.6, [
+orbis_awesome_ACEInteractions pushBack [5.6, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],
 	_openChecklist06,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [4.7, [
+orbis_awesome_ACEInteractions pushBack [5.7, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "checklistMain"],

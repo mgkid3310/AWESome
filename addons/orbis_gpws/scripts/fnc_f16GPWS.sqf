@@ -2,7 +2,7 @@
 
 private _vehicle = _this select 0;
 
-private _loadData = _vehicle getVariable ["orbis_gpws_f16Data", ["taxing", time, getPosASL _vehicle select 2, []/* , objNull */]];
+private _loadData = _vehicle getVariable ["orbis_gpws_f16Data", [time, []/* , objNull */]];
 _loadData params ["_timeOld", "_ctrWarnOld"/* , "_targetOld" */];
 
 if !(_timeOld < time) exitWith {

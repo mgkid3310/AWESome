@@ -11,7 +11,7 @@ if ((_weapon in orbis_gpws_ChaffFlareList) && !(_vehicle getVariable ["orbis_gpw
 	} forEach ((magazinesAllTurrets _vehicle) select {_x select 0 in getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines")});
 	private _ammosFired = (getNumber (configFile >> "CfgWeapons" >> _weapon >> _mode >> "burst")) * (getNumber (configFile >> "CfgWeapons" >> _weapon >> _mode >> "multiplier"));
 	private _resultingAmmo = _CMammoCount - _ammosFired;
-	private _lowCMcount = getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbis_gpws_GPWS_lowCMcount");
+	private _lowCMcount = getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "orbis_gpws_lowCMcount");
 
 	if (_vehicle getVariable ["orbis_gpws_nextCMcount", _CMammoCount] < _CMammoCount) exitWith {};
 	_vehicle setVariable ["orbis_gpws_nextCMcount", _resultingAmmo];

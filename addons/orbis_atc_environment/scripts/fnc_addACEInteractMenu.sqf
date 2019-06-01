@@ -33,21 +33,21 @@ private _actionATISstop = [
 ];
 
 // planes
-orbis_awesome_ACEInteractions pushBack [3, [
+orbis_awesome_ACEInteractions pushBack [4, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome"],
 	_actionATISmain,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [3.1, [
+orbis_awesome_ACEInteractions pushBack [4.1, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "actionATIS"],
 	_actionATISlisten,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [3.2, [
+orbis_awesome_ACEInteractions pushBack [4.2, [
 	"Plane",
 	1,
 	["ACE_SelfActions", "AWESome", "actionATIS"],
@@ -56,21 +56,21 @@ orbis_awesome_ACEInteractions pushBack [3.2, [
 ]];
 
 // helicopters
-orbis_awesome_ACEInteractions pushBack [3, [
+orbis_awesome_ACEInteractions pushBack [4, [
 	"Helicopter",
 	1,
 	["ACE_SelfActions", "AWESome"],
 	_actionATISmain,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [3.1, [
+orbis_awesome_ACEInteractions pushBack [4.1, [
 	"Helicopter",
 	1,
 	["ACE_SelfActions", "AWESome", "actionATIS"],
 	_actionATISlisten,
 	true
 ]];
-orbis_awesome_ACEInteractions pushBack [3.2, [
+orbis_awesome_ACEInteractions pushBack [4.2, [
 	"Helicopter",
 	1,
 	["ACE_SelfActions", "AWESome", "actionATIS"],

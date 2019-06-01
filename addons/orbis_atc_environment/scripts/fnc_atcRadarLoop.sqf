@@ -3,6 +3,10 @@ private _controller = param [1, player];
 
 private _planes = [];
 private _helies = [];
+private _planesModeC = [];
+private _heliesModeC = [];
+private _planesStandBy = [];
+private _heliesStandBy = [];
 private _loadData = _monitor getVariable ["orbis_atc_radar_data", [0, [], [], [], []]];
 _loadData params ["_timeNext", "_trailsOld", "_planeMarkers", "_heliMarkers", "_trailMarkers"];
 
@@ -14,6 +18,10 @@ if (((_controller distance _monitor) > 10) || !(player getVariable ["orbis_atc_i
 if (time > _timeNext) then {
 	_planes = (entities "Plane") select {(side driver _x in [side _controller, civilian]) && (alive _x) && (isEngineOn _x)};
 	_helies = (entities "Helicopter") select {(side driver _x in [side _controller, civilian]) && (alive _x) && (isEngineOn _x)};
+	_planesModeC = _planes select {_x getVariable ["orbis_gpws_transponderMode", 0] isEqualTo 2};
+	_heliesModeC = _helies select {_x getVariable ["orbis_gpws_transponderMode", 0] isEqualTo 2};
+	_planesStandBy = _planes select {_x getVariable ["orbis_gpws_transponderMode", 0] isEqualTo 1};
+	_heliesStandBy = _helies select {_x getVariable ["orbis_gpws_transponderMode", 0] isEqualTo 1};
 
 	{
 		_x params ["_marker0", "_marker1", "_marker2", "_marker3"];

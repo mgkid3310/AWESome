@@ -24,3 +24,4 @@ if ((_controller distance _monitor) > 10) then {
 };
 
 _controller setVariable ["orbis_atc_isUsingRadarScreen", false];
+_controller setVariable ["orbis_atc_exitRadar", false];

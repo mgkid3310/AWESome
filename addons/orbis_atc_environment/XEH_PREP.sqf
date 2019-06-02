@@ -14,6 +14,7 @@ orbis_atc_fnc_getInAddAction = compile preProcessFileLineNumbers "orbis_atc_envi
 orbis_atc_fnc_listenATISbroadcast = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_listenATISbroadcast.sqf";
 orbis_atc_fnc_periodicCheck = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_periodicCheck.sqf";
 orbis_atc_fnc_playAndSleep = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_playAndSleep.sqf";
+orbis_atc_fnc_radarScreenOff = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_radarScreenOff.sqf";
 orbis_atc_fnc_radarScreenOn = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_radarScreenOn.sqf";
 orbis_atc_fnc_speakATIS = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_speakATIS.sqf";
 orbis_atc_fnc_speakNumber = compile preProcessFileLineNumbers "orbis_atc_environment\scripts\fnc_speakNumber.sqf";

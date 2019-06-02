@@ -23,4 +23,4 @@ if ((_controller distance _monitor) > 10) then {
 	[parseText format["<t align='center'>Became too far from the Radar Screen</t>"], [0.25, 1, 0.5, 0.05], [1, 1], 2] spawn BIS_fnc_textTiles;
 };
 
-_controller setVariable ["orbis_atc_isUsingRadarScreen", false, true];
+_controller setVariable ["orbis_atc_isUsingRadarScreen", false];

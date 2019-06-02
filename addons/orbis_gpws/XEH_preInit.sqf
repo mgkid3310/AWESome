@@ -17,6 +17,14 @@
 	[[false, true], ["High", "Low"], 0]
 ] call CBA_Settings_fnc_init;
 
+[
+	"orbis_gpws_automaticTransponder",
+	"CHECKBOX",
+	["Use Automatic Transponder", "Transponder mode is change automatically"],
+	"AWESome GPWS",
+	true
+] call CBA_Settings_fnc_init;
+
 // add actions (ACE / vanilla) & events
 if (orbis_awesome_hasACEInteractMenu) then {
 	[] call orbis_gpws_fnc_addACEInteractMenu;

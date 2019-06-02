@@ -18,6 +18,36 @@ private _flightphase = (_vehicle getVariable ["orbis_gpws_flightPhaseParam", ["t
 private _flightphaseOutput = [_vehicle, _flightphase, _altRadar, _climeASL, _flapStatus, _gearStatus] call orbis_gpws_fnc_flightPhaseCheck;
 _vehicle setVariable ["orbis_gpws_flightPhaseParam", _flightphaseOutput];
 
+// automated transponder
+if (orbis_gpws_automaticTransponder) then {
+	switch (_vehicle getVariable ["orbis_gpws_transponderMode", 0]) do {
+		case (2): {
+			if !(isEngineOn _vehicle) exitWith {
+				_vehicle setVariable ["orbis_gpws_transponderMode", 0, true];
+			};
+			if (_altRadar < 5) exitWith {
+				_vehicle setVariable ["orbis_gpws_transponderMode", 1, true];
+			};
+		};
+		case (1): {
+			if !(isEngineOn _vehicle) exitWith {
+				_vehicle setVariable ["orbis_gpws_transponderMode", 0, true];
+			};
+			if (_altRadar >= 5) exitWith {
+				_vehicle setVariable ["orbis_gpws_transponderMode", 2, true];
+			};
+		};
+		case (0): {
+			if ((isEngineOn _vehicle) && (_altRadar >= 5)) exitWith {
+				_vehicle setVariable ["orbis_gpws_transponderMode", 2, true];
+			};
+			if (isEngineOn _vehicle) exitWith {
+				_vehicle setVariable ["orbis_gpws_transponderMode", 1, true];
+			};
+		};
+	};
+};
+
 // run GPWS
 private _modePublic = _vehicle getVariable ["orbis_gpws_GPWSmode", "off"];
 private _modeLocal = _vehicle getVariable ["orbis_gpws_GPWSmodeLocal", "off"];

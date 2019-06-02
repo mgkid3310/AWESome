@@ -25,7 +25,7 @@ if (orbis_gpws_automaticTransponder) then {
 			if !(isEngineOn _vehicle) exitWith {
 				_vehicle setVariable ["orbis_gpws_transponderMode", 0, true];
 			};
-			if (_altRadar < 5) exitWith {
+			if (isTouchingGround _x) exitWith {
 				_vehicle setVariable ["orbis_gpws_transponderMode", 1, true];
 			};
 		};
@@ -33,12 +33,12 @@ if (orbis_gpws_automaticTransponder) then {
 			if !(isEngineOn _vehicle) exitWith {
 				_vehicle setVariable ["orbis_gpws_transponderMode", 0, true];
 			};
-			if (_altRadar >= 5) exitWith {
+			if !(isTouchingGround _x) exitWith {
 				_vehicle setVariable ["orbis_gpws_transponderMode", 2, true];
 			};
 		};
 		case (0): {
-			if ((isEngineOn _vehicle) && (_altRadar >= 5)) exitWith {
+			if ((isEngineOn _vehicle) && !(isTouchingGround _x)) exitWith {
 				_vehicle setVariable ["orbis_gpws_transponderMode", 2, true];
 			};
 			if (isEngineOn _vehicle) exitWith {

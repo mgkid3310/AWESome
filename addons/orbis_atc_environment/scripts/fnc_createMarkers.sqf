@@ -47,30 +47,30 @@ private _return = [];
 		};
 	};
 
-	_marker0 = createMarkerLocal [format ["orbis_atc_%1_%2_0", _type, _forEachIndex], getPos _x];
+	_marker0 = createMarkerLocal [format ["orbis_atc_%1_%2_%3_0", _type, _mode, _forEachIndex], getPos _x];
 	_marker0 setMarkerTypeLocal _type;
 	_marker0 setMarkerColorLocal "colorBLUFOR";
 	_marker0 setMarkerTextLocal "";
 
-	_marker1 = createMarkerLocal [format ["orbis_atc_%1_%2_1", _type, _forEachIndex], getPos _x];
+	_marker1 = createMarkerLocal [format ["orbis_atc_%1_%2_%3_1", _type, _mode, _forEachIndex], getPos _x];
 	_marker1 setMarkerTypeLocal _type;
 	_marker1 setMarkerColorLocal "colorBLUFOR";
 	_marker1 setMarkerSizeLocal [0, 0];
 	_marker1 setMarkerTextLocal _line1;
 
-	_marker2 = createMarkerLocal [format ["orbis_atc_%1_%2_2", _type, _forEachIndex], getPos _x];
+	_marker2 = createMarkerLocal [format ["orbis_atc_%1_%2_%3_2", _type, _mode, _forEachIndex], getPos _x];
 	_marker2 setMarkerTypeLocal _type;
 	_marker2 setMarkerColorLocal "colorBLUFOR";
 	_marker2 setMarkerSizeLocal [0, 0];
 	_marker2 setMarkerTextLocal _line2;
 
-	_marker3 = createMarkerLocal [format ["orbis_atc_%1_%2_3", _type, _forEachIndex], getPos _x];
+	_marker3 = createMarkerLocal [format ["orbis_atc_%1_%2_%3_3", _type, _mode, _forEachIndex], getPos _x];
 	_marker3 setMarkerTypeLocal _type;
 	_marker3 setMarkerColorLocal "colorBLUFOR";
 	_marker3 setMarkerSizeLocal [0, 0];
 	_marker3 setMarkerTextLocal _line3;
 
-	_marker4 = createMarkerLocal [format ["orbis_atc_%1_%2_4", _type, _forEachIndex], getPos _x];
+	_marker4 = createMarkerLocal [format ["orbis_atc_%1_%2_%3_4", _type, _mode, _forEachIndex], getPos _x];
 	_marker4 setMarkerTypeLocal _type;
 	_marker4 setMarkerColorLocal "colorOPFOR";
 	_marker4 setMarkerSizeLocal [0, 0];

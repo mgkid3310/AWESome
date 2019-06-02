@@ -6,7 +6,7 @@ private _helies = [];
 private _loadData = _monitor getVariable ["orbis_atc_radar_data", [0, [], [], [], []]];
 _loadData params ["_timeNext", "_trailsOld", "_planeMarkers", "_heliMarkers", "_trailMarkers"];
 
-if (((_controller distance _monitor) > 10) || !(player getVariable ["orbis_atc_isUsingRadarScreen", true])) exitWith {
+if (((_controller distance _monitor) > 10) || (_controller getVariable ["orbis_atc_exitRadar", false])) exitWith {
 	[_monitor, _controller, _planeMarkers + _heliMarkers, _trailMarkers] call orbis_atc_fnc_atcRadarExit;
 };
 

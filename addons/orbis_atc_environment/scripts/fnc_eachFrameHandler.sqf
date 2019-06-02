@@ -13,9 +13,9 @@ private _radarScreenParam = player getVariable ["orbis_atc_radarScreenParam", []
 if (_startRadarScreen isEqualType []) then {
 	_isUsingRadarScreen = true;
 	_radarScreenParam = _startRadarScreen;
-	player setVariable ["orbis_atc_isUsingRadarScreen", true, true];
-	player setVariable ["orbis_atc_startRadarScreen", false, true];
-	player setVariable ["orbis_atc_radarScreenParam", _radarScreenParam, true];
+	player setVariable ["orbis_atc_isUsingRadarScreen", true];
+	player setVariable ["orbis_atc_startRadarScreen", false];
+	player setVariable ["orbis_atc_radarScreenParam", _radarScreenParam];
 };
 
 if (_isUsingRadarScreen) then {

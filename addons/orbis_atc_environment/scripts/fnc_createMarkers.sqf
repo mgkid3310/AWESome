@@ -72,7 +72,7 @@ private _return = [];
 
 	_marker4 = createMarkerLocal [format ["orbis_atc_%1_%2_%3_4", _type, _mode, _forEachIndex], getPos _x];
 	_marker4 setMarkerTypeLocal _type;
-	_marker4 setMarkerColorLocal "colorOPFOR";
+	_marker4 setMarkerColorLocal "ColorRed";
 	_marker4 setMarkerSizeLocal [0, 0];
 	_marker4 setMarkerTextLocal _line4;
 

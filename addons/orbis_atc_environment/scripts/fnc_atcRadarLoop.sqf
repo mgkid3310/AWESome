@@ -25,10 +25,10 @@ if (time > _timeNext) then {
 	_planesStandBy = (_planes - _planesAuto) select {_x getVariable ["orbis_gpws_transponderMode", 0] isEqualTo 1};
 	_heliesStandBy = (_helies - _heliesAuto) select {_x getVariable ["orbis_gpws_transponderMode", 0] isEqualTo 1};
 
-	_planesModeC = _planesModeC + (_planesAuto select {(getPos _x select 2) >= 5});
-	_heliesModeC = _heliesModeC + (_heliesAuto select {(getPos _x select 2) >= 5});
-	_planesStandBy = _planesStandBy + (_planesAuto select {(getPos _x select 2) < 5});
-	_heliesStandBy = _heliesStandBy + (_heliesAuto select {(getPos _x select 2) < 5});
+	_planesModeC = _planesModeC + (_planesAuto select {((getPos _x select 2) min (getPosASL _x select 2)) >= 5});
+	_heliesModeC = _heliesModeC + (_heliesAuto select {((getPos _x select 2) min (getPosASL _x select 2)) >= 5});
+	_planesStandBy = _planesStandBy + (_planesAuto select {((getPos _x select 2) min (getPosASL _x select 2)) < 5});
+	_heliesStandBy = _heliesStandBy + (_heliesAuto select {((getPos _x select 2) min (getPosASL _x select 2)) < 5});
 
 	{
 		_x params ["_marker0", "_marker1", "_marker2", "_marker3", "_marker4"];

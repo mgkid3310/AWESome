@@ -1,4 +1,4 @@
-private _global = param [0, true];
+private _global = param [0, false];
 private _console = param [1, 0];
 
 private _pos = [0, 0, 0];

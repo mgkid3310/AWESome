@@ -1,11 +1,12 @@
 params ["_monitor", "_controller", "_vehicleMarkers", "_trailMarkers"];
 
 {
-	_x params ["_marker0", "_marker1", "_marker2", "_marker3"];
+	_x params ["_marker0", "_marker1", "_marker2", "_marker3", "_marker4"];
 	deleteMarkerLocal _marker0;
 	deleteMarkerLocal _marker1;
 	deleteMarkerLocal _marker2;
 	deleteMarkerLocal _marker3;
+	deleteMarkerLocal _marker4;
 } forEach _vehicleMarkers;
 
 {

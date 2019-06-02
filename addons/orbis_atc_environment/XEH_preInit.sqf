@@ -10,11 +10,19 @@
 ] call CBA_Settings_fnc_init;
 
 [
-	"orbis_atc_unitSetting",
+	"orbis_atc_unitSettingAlt",
 	"LIST",
-	["ATC display unit", "Set display units for altitude and speed"],
+	["ATC Altitude unit", "Set display unit for altitude"],
 	"AWESome ATC",
-	[[0, 1, 2, 3], ["kph / meter", "knot / meter", "kph / feet", "knot / feet"], 0]
+	[[false, true], ["meter (10m)", "feet (100ft)"], 0]
+] call CBA_Settings_fnc_init;
+
+[
+	"orbis_atc_unitSettingSpd",
+	"LIST",
+	["ATC Speed unit", "Set display unit for speed"],
+	"AWESome ATC",
+	[[false, true], ["kph (km/h)", "knot (kn)"], 0]
 ] call CBA_Settings_fnc_init;
 
 [

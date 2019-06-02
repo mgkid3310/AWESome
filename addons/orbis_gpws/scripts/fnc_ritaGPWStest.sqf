@@ -1,7 +1,7 @@
 private _vehicle = _this select 0;
 
-_vehicle setVariable ["orbisGPWStestReady", false, true];
-_vehicle setVariable ["orbisGPWStestStop", false, true];
+_vehicle setVariable ["orbis_gpws_GPWStestReady", false, true];
+_vehicle setVariable ["orbis_gpws_GPWStestStop", false, true];
 
 ["rita", "altitude", 0.5] call orbis_gpws_fnc_playTestSound; // done
 ["rita", "angle", 0.5] call orbis_gpws_fnc_playTestSound; // done
@@ -21,5 +21,5 @@ _vehicle setVariable ["orbisGPWStestStop", false, true];
 ["rita", "spodam", 0.5] call orbis_gpws_fnc_playTestSound;
 ["rita", "SysF", 0.5] call orbis_gpws_fnc_playTestSound;
 
-_vehicle setVariable ["orbisGPWStestReady", true, true];
-_vehicle setVariable ["orbisGPWStestStop", false, true];
+_vehicle setVariable ["orbis_gpws_GPWStestReady", true, true];
+_vehicle setVariable ["orbis_gpws_GPWStestStop", false, true];

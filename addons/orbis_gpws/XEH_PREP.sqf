@@ -14,7 +14,6 @@ orbis_gpws_fnc_isMSLCritical = compile preprocessFileLineNumbers "orbis_gpws\scr
 orbis_gpws_fnc_flightPhaseCheck = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_flightPhaseCheck.sqf";
 orbis_gpws_fnc_getInAddAction = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_getInAddAction.sqf";
 orbis_gpws_fnc_getInMan = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_getInMan.sqf";
-orbis_gpws_fnc_periodicCheck = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_periodicCheck.sqf";
 orbis_gpws_fnc_playTestSound = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_playTestSound.sqf";
 orbis_gpws_fnc_ritaGPWS = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_ritaGPWS.sqf";
 orbis_gpws_fnc_ritaGPWSinit = compile preprocessFileLineNumbers "orbis_gpws\scripts\fnc_ritaGPWSinit.sqf";

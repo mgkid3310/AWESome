@@ -4,9 +4,9 @@ private _vehicle = _this select 0;
 private _sound = _this select 1;
 private _duration = param [2, getNumber (configFile >> "CfgSounds" >> _sound >> "length")];
 private _delay = param [3, 0];
-private _mode = param [4, "orbisGPWSready"];
+private _mode = param [4, "orbis_gpws_GPWSready"];
 
-private _volumeLow = _vehicle getVariable ["orbisGPWSvolumeLow", false];
+private _volumeLow = _vehicle getVariable ["orbis_gpws_GPWSvolumeLow", false];
 if (_volumeLow) then {
 	_sound = format ["%1_low", _sound];
 };

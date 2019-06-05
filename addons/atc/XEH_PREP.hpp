@@ -11,6 +11,7 @@ PREP(getInAddAction);
 PREP(listenATISbroadcast);
 PREP(periodicCheck);
 PREP(playAndSleep);
+PREP(radarScreenOff);
 PREP(radarScreenOn);
 PREP(speakATIS);
 PREP(speakNumber);

@@ -25,6 +25,9 @@ if (isNumber (_class >> "draconicTorqueXCoef")) then {
 
 // _speedPerformance
 _thrustCoef = getArray (_class >> "thrustCoef");
+if !(count _thrustCoef > 0) then {
+	_thrustCoef = [1, 1];
+};
 _altFullForce = getNumber (_class >> "altFullForce");
 _altNoForce = getNumber (_class >> "altNoForce");
 _speedStall = getNumber (_class >> "stallSpeed");

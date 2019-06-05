@@ -1,4 +1,4 @@
 name = "AWESome"
-prefix = "awesome"
+prefix = "orbis"
 author = "Orbis2358"
 files = ["mod.cpp", "icon.jpg"]

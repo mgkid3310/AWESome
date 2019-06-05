@@ -10,7 +10,7 @@ private _return = [];
 		_x params ["_vehicle", "_position"];
 
 		if ((alive _vehicle) && (isEngineOn _vehicle) && (_vehicle in _filter)) then {
-			_marker = createMarkerLocal [format ["GVAR(trail_)%1_%2", _timeIndex, _forEachIndex], _position];
+			_marker = createMarkerLocal [format ["orbis_atc_trail%1_%2", _timeIndex, _forEachIndex], _position];
 			_marker setMarkerTypeLocal "hd_dot_noShadow";
 			_marker setMarkerColorLocal "colorBLUFOR";
 			_marker setMarkerTextLocal "";

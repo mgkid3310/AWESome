@@ -22,10 +22,10 @@ if (time > _timeNext) then {
 	_planesAuto = [_planes] call FUNC(getAutoTransponders);
 	_heliesAuto = [_helies] call FUNC(getAutoTransponders);
 
-	_planesModeC = (_planes - _planesAuto) select {_x getVariable [QGVAR(transponderMode), 0] isEqualTo 2};
-	_heliesModeC = (_helies - _heliesAuto) select {_x getVariable [QGVAR(transponderMode), 0] isEqualTo 2};
-	_planesStandBy = (_planes - _planesAuto) select {_x getVariable [QGVAR(transponderMode), 0] isEqualTo 1};
-	_heliesStandBy = (_helies - _heliesAuto) select {_x getVariable [QGVAR(transponderMode), 0] isEqualTo 1};
+	_planesModeC = (_planes - _planesAuto) select {_x getVariable [QEGVAR(gpws,transponderMode), 0] isEqualTo 2};
+	_heliesModeC = (_helies - _heliesAuto) select {_x getVariable [QEGVAR(gpws,transponderMode), 0] isEqualTo 2};
+	_planesStandBy = (_planes - _planesAuto) select {_x getVariable [QEGVAR(gpws,transponderMode), 0] isEqualTo 1};
+	_heliesStandBy = (_helies - _heliesAuto) select {_x getVariable [QEGVAR(gpws,transponderMode), 0] isEqualTo 1};
 
 	_planesModeC = _planesModeC + (_planesAuto select {!isTouchingGround _x});
 	_heliesModeC = _heliesModeC + (_heliesAuto select {!isTouchingGround _x});

@@ -1,0 +1,12 @@
+PREP(addACEInteractMenu);
+PREP(attachTowingVehicle);
+PREP(canAttachTowingVehicle);
+PREP(canDetachTowingVehicle);
+PREP(deployTowBar);
+PREP(detachTowingVehicle);
+PREP(eachFrameHandlerTow);
+PREP(getInAddAction);
+PREP(getTowTarget);
+PREP(parkingBrakeRelease);
+PREP(parkingBrakeSet);
+PREP(removeTowBar);

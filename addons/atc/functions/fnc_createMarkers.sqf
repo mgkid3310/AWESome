@@ -24,7 +24,7 @@ private _return = [];
 		case (_verticalSpd < -GVAR(minVerticalSpd)): {_verticalTrend = toString [8595];};
 	};
 
-	_speedDisplay = round ([_speed, _speed * EGVAR(main,kphToKnot]) select GVAR(unitSettingSpd));
+	_speedDisplay = round ([_speed, _speed * EGVAR(main,kphToKnot)] select GVAR(unitSettingSpd));
 	_heading = round direction _x;
 
 	_line1 = format ["%1", _callsign];

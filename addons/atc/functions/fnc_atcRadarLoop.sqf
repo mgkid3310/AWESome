@@ -8,7 +8,7 @@ private _helies = [];
 private _loadData = _monitor getVariable [QGVAR(radar_data), [0, [], [], [], []]];
 _loadData params ["_timeNext", "_trailsOld", "_planeMarkers", "_heliMarkers", "_trailMarkers"];
 
-if (((_controller distance _monitor) > 10) || !(player getVariable [QGVAR(isUsingRadarScreen), true])) exitWith {
+if (((_controller distance _monitor) > 10) || (_controller getVariable QGVAR(exitRadar), false])) exitWith {
 	[_monitor, _controller, _planeMarkers + _heliMarkers, _trailMarkers] call FUNC(atcRadarExit);
 };
 

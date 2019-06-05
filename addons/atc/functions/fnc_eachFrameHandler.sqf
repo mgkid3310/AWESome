@@ -15,9 +15,9 @@ private _radarScreenParam = player getVariable [QGVAR(radarScreenParam), []];
 if (_startRadarScreen isEqualType []) then {
 	_isUsingRadarScreen = true;
 	_radarScreenParam = _startRadarScreen;
-	player setVariable [QGVAR(isUsingRadarScreen), true, true];
-	player setVariable [QGVAR(startRadarScreen), false, true];
-	player setVariable [QGVAR(radarScreenParam), _radarScreenParam, true];
+	player setVariable [QGVAR(isUsingRadarScreen), true];
+	player setVariable [QGVAR(startRadarScreen), false];
+	player setVariable [QGVAR(radarScreenParam), _radarScreenParam];
 };
 
 if (_isUsingRadarScreen) then {

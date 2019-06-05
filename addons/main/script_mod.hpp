@@ -1,5 +1,5 @@
 #define MAINPREFIX z
-#define PREFIX awesome
+#define PREFIX orbis
 
 #include "script_version.hpp"
 

@@ -1,6 +1,6 @@
 #define COMPONENT ground
 #define COMPONENT_BEAUTIFIED Ground
-#include "\z\awesome\addons\main\script_mod.hpp"
+#include "\z\orbis\addons\main\script_mod.hpp"
 
 // #define DEBUG_MODE_FULL
 // #define DISABLE_COMPILE_CACHE
@@ -13,4 +13,4 @@
     #define DEBUG_SETTINGS DEBUG_SETTINGS_GROUND
 #endif
 
-#include "\z\awesome\addons\main\script_macros.hpp"
+#include "\z\orbis\addons\main\script_macros.hpp"

@@ -84,7 +84,7 @@ distinguish between planes in a same group.
 
 To enable this feature, you need to add the following code  
 to the target object's init field:  
-[this] call orbis_atc_fnc_addRadarScreen;  
+[this] call FUNC(addRadarScreen);  
 &nbsp;
 
 4. ATIS (Automatic Terminal Information Service)  
@@ -99,7 +99,7 @@ ground
 To let the controller manually update the data, disable  
 'Real-time ATIS data update' option in addon setting, and  
 add the following code to the target object's init field:  
-[this] call orbis_atc_fnc_addATCConsole;  
+[this] call FUNC(addATCConsole);  
 &nbsp;
 
 5. Ground System  

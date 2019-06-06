@@ -1,0 +1,3 @@
+hemtt build
+
+pause>nul

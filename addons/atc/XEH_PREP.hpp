@@ -17,3 +17,4 @@ PREP(speakATIS);
 PREP(speakNumber);
 PREP(updateATISdata);
 PREP(updateMarkerSpacing);
+PREP(setCustomCallsign);

@@ -9,7 +9,7 @@ ADDON = true;
 	"LIST",
 	["Toggle ATC Radar display name", "Toggles between the pilot's name and callsign displayed ATC Radar screen"],
 	"AWESome ATC",
-	[[false, true], ["Name", "Callsign"], 0]
+	[[0, 1, 2], ["Name", "Callsign", "Custom Callsign"], 0]
 ] call CBA_Settings_fnc_init;
 
 [

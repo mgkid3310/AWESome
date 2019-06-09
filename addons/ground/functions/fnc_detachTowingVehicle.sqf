@@ -2,11 +2,11 @@
 
 private _car = _this select 0;
 
-private _eventID = _car getVariable ["orbis_towingEvent", 0];
-private _plane = _car getVariable ["orbis_towingTarget", objNull];
+private _eventID = _car getVariable [QGVAR(towingEvent), 0];
+private _plane = _car getVariable [QGVAR(towingTarget), objNull];
 removeMissionEventHandler ["EachFrame", _eventID];
 
-private _towBar = _car getVariable ["orbis_towBarObject", objNull];
+private _towBar = _car getVariable [QGVAR(towBarObject), objNull];
 _plane allowDamage true;
 _car enableCollisionWith _plane;
 _towBar enableCollisionWith _plane;
@@ -16,16 +16,16 @@ if !(local _plane) then {
 	[_towBar, _plane] remoteExec ["enableCollisionWith", _plane];
 };
 
-_car setVariable ["orbis_towingEvent", nil];
-_car setVariable ["orbis_isTowingPlane", false];
-_car setVariable ["orbis_towingTarget", nil];
+_car setVariable [QGVAR(towingEvent), nil];
+_car setVariable [QGVAR(isTowingPlane), false];
+_car setVariable [QGVAR(towingTarget), nil];
 
-_car setVariable ["orbis_offsetOldArray", nil];
-_car setVariable ["orbis_posBarOld", nil];
-_car setVariable ["orbis_towingPosRelCar", nil];
-_car setVariable ["orbis_towingPosRelPlane", nil];
-_car setVariable ["orbis_towingRotateCenter", nil];
-_car setVariable ["orbis_towingTimeOld", nil];
-_car setVariable ["orbis_towingFrameOld", nil];
+_car setVariable [QGVAR(offsetOldArray), nil];
+_car setVariable [QGVAR(posBarOld), nil];
+_car setVariable [QGVAR(towingPosRelCar), nil];
+_car setVariable [QGVAR(towingPosRelPlane), nil];
+_car setVariable [QGVAR(towingRotateCenter), nil];
+_car setVariable [QGVAR(towingTimeOld), nil];
+_car setVariable [QGVAR(towingFrameOld), nil];
 
-player setVariable ["orbis_towVehicle", nil];
+player setVariable [QGVAR(towVehicle), nil];

@@ -54,7 +54,7 @@ if (GVAR(automaticTransponder)) then {
 private _modePublic = _vehicle getVariable [QGVAR(GPWSmode), "off"];
 private _modeLocal = _vehicle getVariable [QGVAR(GPWSmodeLocal), "off"];
 
-if (_target getVariable [QGVAR(GPWSenabled), false]) then {
+if (_target getVariable [QGVAR(isGPWSenabled), false]) then {
 	_modePublic = "off";
 };
 

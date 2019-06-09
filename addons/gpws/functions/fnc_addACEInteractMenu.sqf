@@ -6,7 +6,7 @@ private _actionGPWSmodes = [
 	"GPWS",
 	"",
 	{},
-	{([nil, nil, 1] call EFUNC(main,isCrew)) && (_target getVariable [QGVAR(GPWSenabled), false])},
+	{([nil, nil, 1] call EFUNC(main,isCrew)) && (_target getVariable [QGVAR(isGPWSenabled), false])},
 	{},
 	[],
 	[0, 0, 0],

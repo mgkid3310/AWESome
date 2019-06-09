@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-player setVariable [QGVAR(hasGPWS), true, true];
+player setVariable [QGVAR(hasAWESomeGPWS), true, true];
 
 // init global variables
 GVAR(takeoffAlt) = 60;

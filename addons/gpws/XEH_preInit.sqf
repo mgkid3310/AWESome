@@ -5,7 +5,7 @@ ADDON = true;
 
 // add addon settings
 [
-	QGVAR(personallDefault),
+	QGVAR(personalDefault),
 	"LIST",
 	["Default GPWS Mode", "Activates default GPWS when boarding planes with GPWS turned off"],
 	"AWESome GPWS",

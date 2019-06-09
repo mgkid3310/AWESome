@@ -9,9 +9,9 @@ _cloudArray params ["_overcast", "_cloudBaseKm", "_cloudHeightKm"];
 _atmosphereArray params ["_hasACEWeather", "_temperature", "_dewPoint", "_QFE"];
 _remarksArray params ["_rain", "_lightnings"];
 
-vehicle player setVariable ["orbisATISready", false, true];
-vehicle player setVariable ["orbisATISstop", false, true];
-vehicle player setVariable ["orbisATISlastTime", CBA_missionTime, true];
+vehicle player setVariable [QGVAR(isATISready), false, true];
+vehicle player setVariable [QGVAR(stopATIS), false, true];
+vehicle player setVariable [QGVAR(lastATIStime), CBA_missionTime, true];
 
 // time
 [format ["orbis_phonetic_%1", floor ((_date select 3) / 10)]] call FUNC(playAndSleep);
@@ -141,5 +141,5 @@ if ((_fogApply > 0) || (!(_overcast < 0.7) && (_rain > 0)) || (!(_overcast < 0.4
 	};
 };
 
-vehicle player setVariable ["orbisATISready", true, true];
-vehicle player setVariable ["orbisATISstop", true, true];
+vehicle player setVariable [QGVAR(isATISready), true, true];
+vehicle player setVariable [QGVAR(stopATIS), true, true];

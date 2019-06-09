@@ -54,8 +54,6 @@ if (time > _timeNext) then {
 	_planeMarkers = _planeMarkersModeC + _planeMarkersStandBy;
 	_heliMarkers = _heliMarkersModeC + _heliMarkersStandBy;
 	[_planeMarkers, _heliMarkers] call FUNC(updateMarkerSpacing);
-	missionNamespace setVariable ["oribs_atc_planeMarkers", _planeMarkers];
-	missionNamespace setVariable ["oribs_atc_heliMarkers", _heliMarkers];
 
 	private _trails = [];
 	{

@@ -76,15 +76,17 @@ Here, altitude is displayed in multiples of 10m or 100ft,
 so if the unit is set to "feet (100ft)" and 083 is displayed  
 as altitude, the actual altitude would be 8300ft.  
 
-Pilot name/callsign setting and units for speed & altitude  
-can be changed at addon settings tab. Supports kph/knot  
-for speed and meter/feet for altitude. Note that unit  
-callsign uses the unit's group ID and therefore cannot  
-distinguish between planes in a same group.  
+Pilot name/callsign/custom callsign setting and units for  
+speed & altitude can be changed at addon settings tab.  
+Supports kph/knot for speed and meter/feet for altitude. To  
+set a custom callsign, add this to the plane's init field:  
+`[this, "My Callsign"] call orbis_atc_fnc_setCustomCallsign;`  
+If no custom callsign is set, it defaults to the unit's  
+group ID.  
 
 To enable this feature, you need to add the following code  
 to the target object's init field:  
-[this] call orbis_atc_fnc_addRadarScreen;  
+`[this] call orbis_atc_fnc_addRadarScreen;`  
 &nbsp;
 
 4. ATIS (Automatic Terminal Information Service)  
@@ -99,7 +101,7 @@ ground
 To let the controller manually update the data, disable  
 'Real-time ATIS data update' option in addon setting, and  
 add the following code to the target object's init field:  
-[this] call orbis_atc_fnc_addATCConsole;  
+`[this] call orbis_atc_fnc_addATCConsole;`  
 &nbsp;
 
 5. Ground System  

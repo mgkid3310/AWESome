@@ -19,11 +19,3 @@ ADDON = true;
 	"AWESome Aerodynamics",
 	[0, 1, 1, 2]
 ] call CBA_Settings_fnc_init;
-
-[
-	QGVAR(frameInterval),
-	"SLIDER",
-	["Loop Interval (Dev feature)", "Higher values have lower accuracy & low FPS drop"],
-	"AWESome Aerodynamics",
-	[0, 12, 0, 0]
-] call CBA_Settings_fnc_init;

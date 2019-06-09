@@ -54,8 +54,6 @@ if (time > _timeNext) then {
 	_planeMarkers = _planeMarkersModeC + _planeMarkersStandBy;
 	_heliMarkers = _heliMarkersModeC + _heliMarkersStandBy;
 	[_planeMarkers, _heliMarkers] call FUNC(updateMarkerSpacing);
-	missionNamespace setVariable [QGVAR(planeMarkers), _planeMarkers];
-	missionNamespace setVariable [QGVAR(heliMarkers), _heliMarkers];
 
 	private _trails = [];
 	{

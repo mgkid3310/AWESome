@@ -24,5 +24,7 @@ if (_isUsingRadarScreen) then {
 	_radarScreenParam call FUNC(atcRadarLoop);
 };
 
+[] call FUNC(periodicCheck);
+
 missionNamespace setVariable [QGVAR(timeOld), time];
 missionNamespace setVariable [QGVAR(frameOld), diag_frameNo];

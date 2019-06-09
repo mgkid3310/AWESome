@@ -1,10 +1,10 @@
 #include "script_component.hpp"
 
-private _car = player getVariable ["orbis_towVehicle", objNull];
+private _car = player getVariable [QGVAR(towVehicle), objNull];
 if (isNull _car) exitWith {};
-if !(_car getVariable ["orbis_isTowingPlane", false]) exitWith {};
+if !(_car getVariable [QGVAR(isTowingPlane), false]) exitWith {};
 
-private _plane = _car getVariable ["orbis_towingTarget", objNull];
+private _plane = _car getVariable [QGVAR(towingTarget), objNull];
 if (isNull _plane) exitWith {};
 
 if !((alive _car) && (alive _plane)) exitWith {[_car] call FUNC(detachTowingVehicle)};
@@ -19,8 +19,8 @@ if (speed _car < (-1 * GVAR(maxSpeedReverse))) then {
 private _posCarNow = getPosASL _car;
 private _posPlaneNow = getPosASL _plane;
 
-private _towBar = _car getVariable ["orbis_towBarObject", objNull];
-private _ownerOld = _car getVariable ["orbis_towingOwner", owner _plane];
+private _towBar = _car getVariable [QGVAR(towBarObject), objNull];
+private _ownerOld = _car getVariable [QGVAR(towingOwner), owner _plane];
 if !(_ownerOld isEqualTo owner _plane) then {
 	_plane allowDamage false;
 	_car disableCollisionWith _plane;
@@ -30,16 +30,16 @@ if !(_ownerOld isEqualTo owner _plane) then {
 		[_car, _plane] remoteExec ["disableCollisionWith", _plane];
 		[_towBar, _plane] remoteExec ["disableCollisionWith", _plane];
 	};
-	_car setVariable ["orbis_towingOwner", owner _plane];
+	_car setVariable [QGVAR(towingOwner), owner _plane];
 };
 
-private _offsetOldArray = _car getVariable ["orbis_offsetOldArray", []];
-private _posBarOld = _car getVariable ["orbis_posBarOld", []];
-private _posRelCar = _car getVariable ["orbis_towingPosRelCar", []];
-private _posRelPlane = _car getVariable ["orbis_towingPosRelPlane", []];
-private _rotateCenter = _car getVariable ["orbis_towingRotateCenter", []];
-private _timeOld = _car getVariable ["orbis_towingTimeOld", time];
-private _frameOld = _car getVariable ["orbis_towingFrameOld", diag_frameNo];
+private _offsetOldArray = _car getVariable [QGVAR(offsetOldArray), []];
+private _posBarOld = _car getVariable [QGVAR(posBarOld), []];
+private _posRelCar = _car getVariable [QGVAR(towingPosRelCar), []];
+private _posRelPlane = _car getVariable [QGVAR(towingPosRelPlane), []];
+private _rotateCenter = _car getVariable [QGVAR(towingRotateCenter), []];
+private _timeOld = _car getVariable [QGVAR(towingTimeOld), time];
+private _frameOld = _car getVariable [QGVAR(towingFrameOld), diag_frameNo];
 
 if (!(time > _timeOld) || (diag_frameNo < (_frameOld + GVAR(perFrame)))) exitWith {};
 
@@ -110,7 +110,7 @@ if (_isInit || (count _offsetOldArray >= GVAR(maxIntegralItem))) then {
 	_offsetOldArray deleteAt 0;
 };
 _offsetOldArray pushBack _offsetVector;
-_car setVariable ["orbis_offsetOldArray", _offsetOldArray];
-_car setVariable ["orbis_posBarOld", AGLtoASL (_car modelToWorld _posRelCar)];
-_car setVariable ["orbis_towingTimeOld", time];
-_car setVariable ["orbis_towingFrameOld", diag_frameNo];
+_car setVariable [QGVAR(offsetOldArray), _offsetOldArray];
+_car setVariable [QGVAR(posBarOld), AGLtoASL (_car modelToWorld _posRelCar)];
+_car setVariable [QGVAR(towingTimeOld), time];
+_car setVariable [QGVAR(towingFrameOld), diag_frameNo];

@@ -8,7 +8,7 @@
 class CfgVehicles {
 	class Air;
 	class Plane: Air {
-		GVAR(GPWSenabled) = 1;
+		GVAR(isGPWSenabled) = 1;
 		GVAR(defaultGPWS) = GPWS_NONE;
 		GVAR(lowCMcount) = 20;
 	};

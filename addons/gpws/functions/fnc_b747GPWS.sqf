@@ -105,7 +105,7 @@ if ((_altInfo == 1000) && (_altRadar > (1200 * EGVAR(main,ftToM)))) then {
 _vehicle setVariable [QGVAR(altInformLevel), _altInfo];
 
 // GPWS general speech work
-if (_vehicle getVariable [QGVAR(GPWSready), true]) then {
+if (_vehicle getVariable [QGVAR(isGPWSready), true]) then {
 
 	// log & update critical warnings
 	if (_terrainWarn || _dontSink || _sinkRate) then {
@@ -118,42 +118,42 @@ if (_vehicle getVariable [QGVAR(GPWSready), true]) then {
 		// b747_PULLUP (inFlight)
 		case (_isCritical && (count _criticalWarningLog > 2)): {
 			DEV_CHAT("orbis_gpws: b747_PULLUP");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_PULLUP", GVAR(delay)] spawn FUNC(speakGPWS);
 		};
 
 		// b747_TOOLOWT (takeOff / inFlight / landing)
 		case (_tooLow && _terrainWarn): {
 			DEV_CHAT("orbis_gpws: b747_TOOLOWT");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_TOOLOWT", GVAR(delay)] spawn FUNC(speakGPWS);
 		};
 
 		// b747_TERRAIN (takeOff / inFlight / landing)
 		case (_terrainWarn): {
 			DEV_CHAT("orbis_gpws: b747_TERRAIN");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_TERRAIN", GVAR(delay)] spawn FUNC(speakGPWS);
 		};
 
 		// b747_DONTSNK (takeOff)
 		case (_dontSink): {
 			DEV_CHAT("orbis_gpws: b747_DONTSNK");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_DONTSNK", GVAR(delay)] spawn FUNC(speakGPWS);
 		};
 
 		// b747_SNKRATE
 		case (_sinkRate): {
 			DEV_CHAT("orbis_gpws: b747_SNKRATE");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_SNKRATE", GVAR(delay)] spawn FUNC(speakGPWS);
 		};
 
 		// b747_BNKANGL
 		case ((time + 5 > _bankWarnedTime) && (abs _bankAngle > GVAR(maxBankAngle))): {
 			DEV_CHAT("orbis_gpws: b747_BNKANGL");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_BNKANGL", GVAR(delay)] spawn FUNC(speakGPWS);
 			_bankWarnedTime = time;
 		};
@@ -161,7 +161,7 @@ if (_vehicle getVariable [QGVAR(GPWSready), true]) then {
 		// b747_FLAPS (inFlight, landing, final)
 		case (_tooLow && !_flapsWarned && (_flightphase in ["inFlight", "landing", "final"]) && (_flapStatus < 0.1)): {
 			DEV_CHAT("orbis_gpws: b747_FLAPS");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_FLAPS", GVAR(delay)] spawn FUNC(speakGPWS);
 			_flapsWarned = true;
 		};
@@ -169,7 +169,7 @@ if (_vehicle getVariable [QGVAR(GPWSready), true]) then {
 		// b747_GEAR (inFlight, landing, final)
 		case (_tooLow && !_gearWarned && (_flightphase in ["inFlight", "landing", "final"]) && (_gearStatus > 0.9)): {
 			DEV_CHAT("orbis_gpws: b747_GEAR");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_GEAR", GVAR(delay)] spawn FUNC(speakGPWS);
 			_gearWarned = true;
 		};
@@ -177,14 +177,14 @@ if (_vehicle getVariable [QGVAR(GPWSready), true]) then {
 		// b747_GLIDESLOPE (landing, final)
 		case ((_flightphase in ["landing", "final"]) && (((_altDiffDesired - 50) min (_altDiffDesired * 0.8)) > _altDiff)): {
 			DEV_CHAT("orbis_gpws: b747_GLIDESLOPE");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_GLIDESLOPE", GVAR(delay)] spawn FUNC(speakGPWS);
 		};
 
 		// b747_MIN (landing / final)
 		case ((_flightphase in ["landing", "final"]) && (_altRadar < (GVAR(minAlt) * EGVAR(main,ftToM))) && (_minWarnLevel < 2) && (_climeASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_MIN");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_MIN"] spawn FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(minWarnLevel), 2];
 		};
@@ -192,7 +192,7 @@ if (_vehicle getVariable [QGVAR(GPWSready), true]) then {
 		// b747_APPRMIN (landing / final)
 		case ((_flightphase in ["landing", "final"]) && (_altRadar < (GVAR(appMinAlt) * EGVAR(main,ftToM))) && (_minWarnLevel < 1) && (_climeASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_APPRMIN");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_APPRMIN"] spawn FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(minWarnLevel), 1];
 		};
@@ -200,7 +200,7 @@ if (_vehicle getVariable [QGVAR(GPWSready), true]) then {
 		// b747_10 (landing / final)
 		case ((_flightphase in ["landing", "final"]) && (_altRadar < (10 * EGVAR(main,ftToM))) && (_altInfo > 10) && (_climeASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_10");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_10"] spawn FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 10];
 		};
@@ -208,7 +208,7 @@ if (_vehicle getVariable [QGVAR(GPWSready), true]) then {
 		// b747_20 (landing / final)
 		case ((_flightphase in ["landing", "final"]) && (_altRadar < (20 * EGVAR(main,ftToM))) && (_altInfo > 20) && (_climeASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_20");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_20"] spawn FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 20];
 		};
@@ -216,7 +216,7 @@ if (_vehicle getVariable [QGVAR(GPWSready), true]) then {
 		// b747_30 (landing / final)
 		case ((_flightphase in ["landing", "final"]) && (_altRadar < (30 * EGVAR(main,ftToM))) && (_altInfo > 30) && (_climeASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_30");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_30"] spawn FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 30];
 		};
@@ -224,7 +224,7 @@ if (_vehicle getVariable [QGVAR(GPWSready), true]) then {
 		// b747_40 (landing / final)
 		case ((_flightphase in ["landing", "final"]) && (_altRadar < (40 * EGVAR(main,ftToM))) && (_altInfo > 40) && (_climeASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_40");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_40"] spawn FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 40];
 		};
@@ -232,7 +232,7 @@ if (_vehicle getVariable [QGVAR(GPWSready), true]) then {
 		// b747_50 (landing / final)
 		case ((_flightphase in ["landing", "final"]) && (_altRadar < (50 * EGVAR(main,ftToM))) && (_altInfo > 50) && (_climeASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_50");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_50"] spawn FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 50];
 		};
@@ -240,7 +240,7 @@ if (_vehicle getVariable [QGVAR(GPWSready), true]) then {
 		// b747_100 (landing / final)
 		case ((_flightphase in ["landing", "final"]) && (_altRadar < (100 * EGVAR(main,ftToM))) && (_altInfo > 100) && (_climeASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_100");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_100"] spawn FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 100];
 		};
@@ -248,7 +248,7 @@ if (_vehicle getVariable [QGVAR(GPWSready), true]) then {
 		// b747_200 (landing / final)
 		case ((_flightphase in ["landing", "final"]) && (_altRadar < (200 * EGVAR(main,ftToM))) && (_altInfo > 200) && (_climeASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_200");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_200", GVAR(delay)] spawn FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 200];
 		};
@@ -256,7 +256,7 @@ if (_vehicle getVariable [QGVAR(GPWSready), true]) then {
 		// b747_300 (landing / final)
 		case ((_flightphase in ["landing", "final"]) && (_altRadar < (300 * EGVAR(main,ftToM))) && (_altInfo > 300) && (_climeASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_300");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_300", GVAR(delay)] spawn FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 300];
 		};
@@ -264,7 +264,7 @@ if (_vehicle getVariable [QGVAR(GPWSready), true]) then {
 		// b747_400 (landing / final)
 		case ((_flightphase in ["landing", "final"]) && (_altRadar < (400 * EGVAR(main,ftToM))) && (_altInfo > 400) && (_climeASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_400");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_400", GVAR(delay)] spawn FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 400];
 		};
@@ -272,7 +272,7 @@ if (_vehicle getVariable [QGVAR(GPWSready), true]) then {
 		// b747_500 (landing / final)
 		case ((_flightphase in ["landing", "final"]) && (_altRadar < (500 * EGVAR(main,ftToM))) && (_altInfo > 500) && (_climeASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_500");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_500", GVAR(delay)] spawn FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 500];
 		};
@@ -280,7 +280,7 @@ if (_vehicle getVariable [QGVAR(GPWSready), true]) then {
 		// b747_1000 (landing / final)
 		case ((_flightphase in ["landing", "final"]) && (_altRadar < (1000 * EGVAR(main,ftToM))) && (_altRadar > (800 * EGVAR(main,ftToM))) && (_altInfo > 1000) && (_climeASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_1000");
-			_vehicle setVariable [QGVAR(GPWSready), false];
+			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_1000", GVAR(delay)] spawn FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 1000];
 		};

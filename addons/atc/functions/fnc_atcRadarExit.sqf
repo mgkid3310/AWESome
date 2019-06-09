@@ -25,6 +25,6 @@ if ((_controller distance _monitor) > 10) then {
 	[parseText format["<t align='center'>Became too far from the Radar Screen</t>"], [0.25, 1, 0.5, 0.05], [1, 1], 2] spawn BIS_fnc_textTiles;
 };
 
-_monitor setVariable [QGVAR(radar_data), [0, [], [], [], []]];
+_monitor setVariable [QGVAR(radarData), nil];
 _controller setVariable [QGVAR(isUsingRadarScreen), false];
 _controller setVariable [QGVAR(exitRadar), false];

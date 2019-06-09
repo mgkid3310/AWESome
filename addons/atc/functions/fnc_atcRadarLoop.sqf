@@ -5,7 +5,7 @@ private _controller = param [1, player];
 
 private _planes = [];
 private _helies = [];
-private _loadData = _monitor getVariable [QGVAR(radar_data), [0, [], [], [], []]];
+private _loadData = _monitor getVariable [QGVAR(radarData), [0, [], [], [], []]];
 _loadData params ["_timeNext", "_trailsOld", "_planeMarkers", "_heliMarkers", "_trailMarkers"];
 
 if (((_controller distance _monitor) > 10) || (_controller getVariable [QGVAR(exitRadar), false])) exitWith {
@@ -54,6 +54,8 @@ if (time > _timeNext) then {
 	_planeMarkers = _planeMarkersModeC + _planeMarkersStandBy;
 	_heliMarkers = _heliMarkersModeC + _heliMarkersStandBy;
 	[_planeMarkers, _heliMarkers] call FUNC(updateMarkerSpacing);
+	missionNamespace setVariable [QGVAR(planeMarkers), _planeMarkers];
+	missionNamespace setVariable [QGVAR(heliMarkers), _heliMarkers];
 
 	private _trails = [];
 	{
@@ -66,7 +68,7 @@ if (time > _timeNext) then {
 	};
 
 	_timeNext = time + GVAR(radarUpdateInterval);
-	_monitor setVariable [QGVAR(radar_data), [_timeNext, _trails, _planeMarkers, _heliMarkers, _trailMarkers]];
+	_monitor setVariable [QGVAR(radarData), [_timeNext, _trails, _planeMarkers, _heliMarkers, _trailMarkers]];
 };
 
 // ACE_map capability

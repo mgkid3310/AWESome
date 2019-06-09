@@ -1,12 +1,7 @@
 #include "script_component.hpp"
 
-private _lastTime = 0;
-
-while {true} do {
-	_lastTime = (vehicle player) getVariable ["orbisATISlastTime", CBA_missionTime];
-	if (_lastTime > (CBA_missionTime + 60)) then {
-		(vehicle player) setVariable ["orbisATISready", true, true];
-	};
-
-	sleep 10;
+private _isATISready = (vehicle player) getVariable [QGVAR(isATISready), true];
+private _lastTime = (vehicle player) getVariable [QGVAR(lastATIStime), CBA_missionTime];
+if (!_isATISready && (CBA_missionTime > (_lastTime + 60))) then {
+	(vehicle player) setVariable [QGVAR(isATISready), true, true];
 };

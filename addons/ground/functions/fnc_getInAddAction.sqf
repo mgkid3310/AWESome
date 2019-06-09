@@ -14,4 +14,4 @@ if (_vehicle isKindOf "Offroad_01_base_F") then {
 	_vehicle addAction ["Release Parking Brake", QUOTE([_this select 0] call FUNC(parkingBrakeRelease)), nil, 1, false, true, "", QUOTE(([nil, nil, 1] call EFUNC(main,isCrew)) && (_target getVariable [QGVAR(parkingBrakeSet), true])), 10];
 }; */
 
-_vehicle setVariable [QGVAR(hasAction), true, true];
+_vehicle setVariable [QGVAR(hasAction), true];

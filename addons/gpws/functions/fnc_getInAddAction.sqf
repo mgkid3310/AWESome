@@ -22,4 +22,4 @@ _vehicle addAction ["Transponder Mode C", QUOTE((_this select 0) setVariable [QG
 _vehicle addAction ["Transponder Stand By", QUOTE((_this select 0) setVariable [QGVAR(transponderMode), 1, true]), nil, 1.0132, false, true, "", QUOTE(([nil, _target, 1] call EFUNC(main,isCrew)) && (_target getVariable [QGVAR(transponderMode), 0] != 1)), 100];
 _vehicle addAction ["Transponder Off", QUOTE((_this select 0) setVariable [QGVAR(transponderMode), 0, true]), nil, 1.0133, false, true, "", QUOTE(([nil, _target, 1] call EFUNC(main,isCrew)) && (_target getVariable [QGVAR(transponderMode), 0] != 0)), 100];
 
-_vehicle setVariable [QGVAR(hasAction), true, true];
+_vehicle setVariable [QGVAR(hasAction), true];

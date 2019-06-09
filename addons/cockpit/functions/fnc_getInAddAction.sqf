@@ -9,4 +9,5 @@ _vehicle addAction ["Open Checklist", QUOTE([GVAR(lastChecklist)] call FUNC(open
 _vehicle addAction ["Next Checklist", QUOTE([true] call FUNC(nextChecklist)), nil, 1.0152, false, true, "", QUOTE(([nil, _target, 1] call EFUNC(main,isCrew)) && !(GVAR(currentChecklist) isEqualTo 'none')), 100];
 _vehicle addAction ["Previouse Checklist", QUOTE([false] call FUNC(nextChecklist)), nil, 1.0153, false, true, "", QUOTE(([nil, _target, 1] call EFUNC(main,isCrew)) && !(GVAR(currentChecklist) isEqualTo 'none')), 100];
 _vehicle addAction ["Close Checklist", QUOTE(['none'] call FUNC(openChecklist)), nil, 1.0154, false, true, "", QUOTE(([nil, _target, 1] call EFUNC(main,isCrew)) && !(GVAR(currentChecklist) isEqualTo 'none')), 100];
-_vehicle setVariable [QGVAR(hasAction), true, true];
+
+_vehicle setVariable [QGVAR(hasAction), true];

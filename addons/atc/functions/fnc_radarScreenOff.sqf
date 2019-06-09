@@ -1,3 +1,5 @@
-if !(player getVariable ["orbis_atc_isUsingRadarScreen", false]) exitWith {};
+#include "script_component.hpp"
 
-player setVariable ["orbis_atc_exitRadar", true];
+if !(player getVariable [QGVAR(isUsingRadarScreen), false]) exitWith {};
+
+player setVariable [QGVAR(exitRadar), true];

@@ -19,29 +19,29 @@ if ((_weapon in GVAR(ChaffFlareList)) && !(_vehicle getVariable [QGVAR(CMrunning
 	_vehicle setVariable [QGVAR(CMrunning), true];
 
 	DEV_CHAT("orbis_gpws: f16ChaffFlare waiting");
-	waitUntil {(_vehicle getVariable [QGVAR(GPWSready), true]) || !((alive _vehicle) && (player in _vehicle))};
+	waitUntil {(_vehicle getVariable [QGVAR(isGPWSready), true]) || !((alive _vehicle) && (player in _vehicle))};
 
 	if ((alive _vehicle) && (player in _vehicle)) then {
 		switch (true) do {
 			// f16_chaffFlareOut
 			case (_resultingAmmo <= 0): {
 				DEV_CHAT("orbis_gpws: f16_chaffFlareOut");
-				_vehicle setVariable [QGVAR(GPWSready), false];
+				_vehicle setVariable [QGVAR(isGPWSready), false];
 				[_vehicle, "f16_chaffFlareOut"] spawn FUNC(speakGPWS);
 			};
 
 			// f16_chaffFlareLow
-			case ((_resultingAmmo <= _lowCMcount) && !(_vehicle getVariable ["CMlowAlerted", false])): {
+			case ((_resultingAmmo <= _lowCMcount) && !(_vehicle getVariable [QGVAR(lowCMalerted), false])): {
 				DEV_CHAT("orbis_gpws: f16_chaffFlareLow");
-				_vehicle setVariable [QGVAR(GPWSready), false];
+				_vehicle setVariable [QGVAR(isGPWSready), false];
 				[_vehicle, "f16_chaffFlareLow"] spawn FUNC(speakGPWS);
-				_vehicle setVariable ["CMlowAlerted", true];
+				_vehicle setVariable [QGVAR(lowCMalerted), true];
 			};
 
 			// f16_chaffFlare
 			default {
 				DEV_CHAT("orbis_gpws: f16_chaffFlare");
-				_vehicle setVariable [QGVAR(GPWSready), false];
+				_vehicle setVariable [QGVAR(isGPWSready), false];
 				[_vehicle, "f16_chaffFlare"] spawn FUNC(speakGPWS);
 			};
 		};

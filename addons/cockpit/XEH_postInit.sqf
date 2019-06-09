@@ -14,7 +14,7 @@ GVAR(checklistArray) = [
 
 GVAR(speedMaxShake) = 600;
 GVAR(groundShake) = 0.0015;
-GVAR(speedShake) = 0.00005;
+GVAR(speedShake) = 0.00003;
 GVAR(touchdownShake) = 0.8;
 
 // add EventHandlers

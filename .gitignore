@@ -1,3 +1,5 @@
+*.bikey
 *.biprivatekey
+*.bisign
 *.exe
 *.pbo

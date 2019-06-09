@@ -2,7 +2,7 @@
 
 private _car = _this select 0;
 
-if (!(_car getVariable ["orbis_hasTowBarDeployed", false]) || (_car getVariable ["orbis_isTowingPlane", false])) exitWith {
+if (!(_car getVariable [QGVAR(hasTowBarDeployed), false]) || (_car getVariable [QGVAR(isTowingPlane), false])) exitWith {
 	[objNull, [0, 0, 0], [0, 0, 0], [0, 0, 0]]
 };
 
@@ -14,8 +14,8 @@ private _availablePlanes = _car nearEntities ["Plane", 100];
 private _availableHelis = (_car nearEntities ["Helicopter", 100]) select {0 < count getArray (configFile >> "CfgVehicles" >> (typeOf _x) >> "driveOnComponent")};
 private _availableTargets = _availablePlanes + _availableHelis;
 
-private _checkStart = getArray (configFile >> "CfgVehicles" >> (typeOf _car) >> "orbis_towBarCheckStart");
-private _checkEnd = getArray (configFile >> "CfgVehicles" >> (typeOf _car) >> "orbis_towBarCheckEnd");
+private _checkStart = getArray (configFile >> "CfgVehicles" >> (typeOf _car) >> QGVAR(towBarCheckStart));
+private _checkEnd = getArray (configFile >> "CfgVehicles" >> (typeOf _car) >> QGVAR(towBarCheckEnd));
 private _checkCenter = (_checkStart vectorAdd _checkEnd) vectorMultiply 0.5;
 
 private _attachPos = [];
@@ -56,7 +56,7 @@ private _rotateCenter = [0, 0, 0];
 } forEach _availableTargets;
 
 if (isNull _target) then {
-	_towBar = _car getVariable ["orbis_towBarObject", objNull];
+	_towBar = _car getVariable [QGVAR(towBarObject), objNull];
 	_surfaces = lineIntersectsSurfaces [
 		AGLToASL (_car modelToWorld _checkStart),
 		AGLToASL (_car modelToWorld _checkEnd),

@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-player setVariable ["hasOrbisATC", true, true];
+player setVariable [QGVAR(hasAWESomeATC), true, true];
 
 GVAR(minVerticalSpd) = 3.048; // 600ft/min
 
@@ -22,6 +22,5 @@ GVAR(spaceMin) = 0.9;
 	[false] call FUNC(updateATISdata);
 };
 
-// run periodic check
-[] spawn FUNC(periodicCheck);
+// add EventHandlers
 addMissionEventHandler ["EachFrame", {[] call FUNC(eachFrameHandler)}];

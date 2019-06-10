@@ -1,7 +1,7 @@
 # AWESome : Aerial Warfare Enhanced Somehow  
 
 Enhances the ARMA 3's flight environments to be more  
-realistic (Aerodynamics, GWPS, ATC, etc.).  
+realistic (Aerodynamics, GPWS, ATC, etc.).  
 
 Recommended to use with ACE since AWESome will take  
 advantage of ACE when able such as ACE Interactions,  

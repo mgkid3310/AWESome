@@ -1,3 +1,3 @@
-hemtt build --release
+hemtt build --release --force
 
 pause>nul

@@ -1,9 +1,11 @@
 # AWESome : Aerial Warfare Enhanced Somehow  
 
-Makes ARMA 3's flight environments more realistic (GWPS,  
-wind effect, etc.). Recommended to use with ACE since it  
-will enable ACE Interaction instead of vanilla actions  
-and give more specific weather data on ATIS.  
+Enhances the ARMA 3's flight environments to be more  
+realistic (Aerodynamics, GWPS, ATC and more).  
+
+Recommended to use with ACE since it will enable ACE  
+Interaction instead of vanilla actions and give more  
+specific weather data on ATIS.  
 
 This addon is SP/MP capable and basically works as a  
 client-side mod, and gives some additional features when  

@@ -78,8 +78,8 @@ as altitude, the actual altitude would be 8300ft.
 
 Pilot name/callsign/custom callsign setting and units for  
 speed & altitude can be changed at addon settings tab.  
-Supports kph/knot for speed and meter/feet for altitude. To  
-set a custom callsign, add this to the plane's init field:  
+Supports kph/knot for speed and meter/feet for altitude.  
+To set a custom callsign, add this to the plane's init field:  
 `[this, "My Callsign"] call orbis_atc_fnc_setCustomCallsign;`  
 If no custom callsign is set, it defaults to the unit's  
 group ID.  

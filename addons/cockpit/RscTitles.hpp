@@ -46,12 +46,12 @@ class RscTitles {
 			class text_v1: text_static_base {
 				idc = 1811;
 				y = "0.0004 * (228.1 + 45.8) * safezoneW + 0.2 * safezoneH + safezoneY";
-				onLoad = QUOTE((_this select 0) ctrlSetText ((str round ((GVAR(landingSpeed) - 10) min 120)) + 'KIAS'));
+				onLoad = QUOTE((_this select 0) ctrlSetText (((GVAR(landingSpeed) - 10) min 120) call FUNC(processSpeed)));
 			};
 			class text_vr: text_static_base {
 				idc = 1812;
 				y = "0.0004 * (228.1 + 45.8 * 2) * safezoneW + 0.2 * safezoneH + safezoneY";
-				onLoad = QUOTE((_this select 0) ctrlSetText ((str round GVAR(landingSpeed)) + 'KIAS'));
+				onLoad = QUOTE((_this select 0) ctrlSetText (GVAR(landingSpeed) call FUNC(processSpeed)));
 			};
 			class text_pitch: text_static_base {
 				idc = 1813;
@@ -61,17 +61,17 @@ class RscTitles {
 			class text_v2: text_static_base {
 				idc = 1814;
 				y = "0.0004 * (228.1 + 45.8 * 4) * safezoneW + 0.2 * safezoneH + safezoneY";
-				onLoad = QUOTE((_this select 0) ctrlSetText ((str round (20 + GVAR(landingSpeed))) + 'KIAS'));
+				onLoad = QUOTE((_this select 0) ctrlSetText ((20 + GVAR(landingSpeed)) call FUNC(processSpeed)));
 			};
 			class text_flaps_1: text_static_base {
 				idc = 1815;
 				y = "0.0004 * (228.1 + 45.8 * 6) * safezoneW + 0.2 * safezoneH + safezoneY";
-				onLoad = QUOTE((_this select 0) ctrlSetText ((str round (60 + GVAR(landingSpeed))) + 'KIAS'));
+				onLoad = QUOTE((_this select 0) ctrlSetText ((60 + GVAR(landingSpeed)) call FUNC(processSpeed)));
 			};
 			class text_flaps_up: text_static_base {
 				idc = 1816;
 				y = "0.0004 * (228.1 + 45.8 * 7) * safezoneW + 0.2 * safezoneH + safezoneY";
-				onLoad = QUOTE((_this select 0) ctrlSetText ((str round (100 + GVAR(landingSpeed))) + 'KIAS'));
+				onLoad = QUOTE((_this select 0) ctrlSetText ((100 + GVAR(landingSpeed)) call FUNC(processSpeed)));
 			};
 			// class buttonPrevious: buttonPrevious_base {};
 			// class buttonNext: buttonNext_base {};
@@ -86,12 +86,12 @@ class RscTitles {
 			class text_descent_speed: text_static_base {
 				idc = 1811;
 				y = "0.0004 * (228.1 + 45.8 * 2) * safezoneW + 0.2 * safezoneH + safezoneY";
-				onLoad = QUOTE((_this select 0) ctrlSetText ((str round (60 + GVAR(landingSpeed))) + 'KIAS'));
+				onLoad = QUOTE((_this select 0) ctrlSetText ((60 + GVAR(landingSpeed)) call FUNC(processSpeed)));
 			};
 			class text_speed_establish: text_static_base {
 				idc = 1812;
 				y = "0.0004 * (723.6 + 45.8 * 3) * safezoneW + 0.2 * safezoneH + safezoneY";
-				onLoad = QUOTE((_this select 0) ctrlSetText ((str round (30 + GVAR(landingSpeed))) + 'KIAS'));
+				onLoad = QUOTE((_this select 0) ctrlSetText ((30 + GVAR(landingSpeed)) call FUNC(processSpeed)));
 			};
 			// class buttonPrevious: buttonPrevious_base {};
 			// class buttonNext: buttonNext_base {};
@@ -106,7 +106,7 @@ class RscTitles {
 			class text_landing_speed: text_static_base {
 				idc = 1811;
 				y = "0.0004 * (228.1 + 45.8 * 2) * safezoneW + 0.2 * safezoneH + safezoneY";
-				onLoad = QUOTE((_this select 0) ctrlSetText ((str round GVAR(landingSpeed)) + 'KIAS'));
+				onLoad = QUOTE((_this select 0) ctrlSetText (GVAR(landingSpeed) call FUNC(processSpeed)));
 			};
 			// class buttonPrevious: buttonPrevious_base {};
 			// class buttonNext: buttonNext_base {};

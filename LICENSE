@@ -11,12 +11,13 @@ and should be done so in all derived works.
 
 This license has exceptions as following:
 
-1. In case of a subfolder that contains a LICENSE file, all contents in the folder
+1. In case of a folder that contains a LICENSE file, all contents in the folder
 and its subfolders follow the license written in the LICENSE file instead of what's
 inherited from its upper folder.
 
-2. Some files may have seperate license or have original authors, and is listed
-in the 'Seperate Licenses' paragraph in this file.
+2. Some files may have seperate license or have different authors. Such files are
+listed in the 'Seperate Licenses' paragraph in this file or have details about
+its license and authors in its header.
 
 
 Seperate Licenses

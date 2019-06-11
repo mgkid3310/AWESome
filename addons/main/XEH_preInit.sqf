@@ -7,8 +7,9 @@ ADDON = true;
 AWESOME_DEVMODE_LOG = false;
 
 // check if has ACE modules
-GVAR(hasACEMap) = isClass (configFile >> "CfgPatches" >> "ace_map");
 GVAR(hasACEInteractMenu) = isClass (configFile >> "CfgPatches" >> "ace_interact_menu");
+GVAR(hasACEMap) = isClass (configFile >> "CfgPatches" >> "ace_map");
+GVAR(hasACEUnits) = isClass (configFile >> "CfgPatches" >> "ace_units");
 GVAR(hasACEWeather) = isClass (configFile >> "CfgPatches" >> "ace_weather");
 
 // init actions variable

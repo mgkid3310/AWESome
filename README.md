@@ -19,7 +19,28 @@ addon for applications.
 
 **Features**  
 
-1. Voice Informer, GPWS(Ground Proximity Warning)  
+1. Realistic Aerodynamics (drag, lift, etc.)  
+
+Basic drag model is replaced with an enhanced model so  
+that it better reflects the drag in real life. This will  
+generate drag that's much more complicated than a simple  
+polynomial function and create many effects such as the  
+so-called 'Sound barrier'.  
+Vehicle's fuel status and weapon loadout will now affect  
+mass and aerodynamic characteristics of the vehicle,  
+resulting in high aerodynamic drag and lowered stability  
+when armed heavily.  
+This also brings air density and wind into consideration.  
+Air density is calculated based on altitude, temperature  
+and humidity which gets more accurate if ACE3 weather is  
+used together.  
+
+Can enable/disable at addon settings (enabled as default),  
+and effects of wind can be adjusted with "Wind Multiplier"  
+setting.  
+&nbsp;
+
+2. Voice Informer & GPWS  
 
 GPWS(incl. Voice Informer) has three modes: B747, F-16  
 and Rita. B747's GPWS has more familiar sounds from  
@@ -42,28 +63,7 @@ been in the plane, the GPWS mode will not change and
 stay as it was.  
 &nbsp;
 
-2. Realistic Aerodynamics (drag, lift, etc.)  
-
-Basic drag model is replaced with an enhanced model so  
-that it better reflects the drag in real life. This will  
-generate drag that's much more complicated than a simple  
-polynomial function and create many effects such as the  
-so-called 'Sound barrier'.  
-Vehicle's fuel status and weapon loadout will now affect  
-mass and aerodynamic characteristics of the vehicle,  
-resulting in high aerodynamic drag and lowered stability  
-when armed heavily.  
-This also brings air density and wind into consideration.  
-Air density is calculated based on altitude, temperature  
-and humidity which gets more accurate if ACE3 weather is  
-used together.  
-
-Can enable/disable at addon settings (enabled as default),  
-and effects of wind can be adjusted with "Wind Multiplier"  
-setting.  
-&nbsp;
-
-3. ATC (Air Traffic Controller) Radar Screen  
+3. ATC (Air Traffic Controller) Systems  
 
 Shows friendly & civilian planes on map with name, speed,  
 altitude, and heading. Useful when commanding multiple  
@@ -106,7 +106,17 @@ add the following code to the target object's init field:
 `[this] call orbis_atc_fnc_addATCConsole;`  
 &nbsp;
 
-5. Ground System  
+5. Cockpit Utility  
+
+Adds camera shake feature reflecting the vehicle's speed and  
+status including the touchdown speed, and checklists feature  
+for fixed-wing pilots which provides decision speed, rotate  
+speed, landing speed and many more automatically filled in.  
+This helps pilots to check if they have anything forgotten  
+and gives reference speeds for takeoff and landing.  
+&nbsp;
+
+6. Ground System  
 
 Provides towing vehicle & system for all planes. Works in  
 MP and does not require other players to use this addon for  
@@ -120,16 +130,6 @@ stop the vehicle and disconnect target plane using Action.
 
 NOTICE : moving too fast may occur collisions, so drive  
 with caution when towing.  
-&nbsp;
-
-6. Cockpit Utility  
-
-Adds camera shake feature reflecting the vehicle's speed and  
-status including the touchdown speed, and checklists feature  
-for fixed-wing pilots which provides decision speed, rotate  
-speed, landing speed and many more automatically filled in.  
-This helps pilots to check if they have anything forgotten  
-and gives reference speeds for takeoff and landing.  
 &nbsp;
 
 ----------------

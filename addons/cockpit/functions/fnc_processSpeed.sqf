@@ -15,8 +15,8 @@ if (EGVAR(main,hasACEUnits)) exitWith {
 };
 
 private _output = switch (GVAR(checklistUnits)) do {
-  case "KIAS": { _kias + " KIAS" };
-  case "KM/H": { _kph + " KM/H" };
+  case "KIAS": { (_kias toFixed 0) + " KIAS" };
+  case "KM/H": { (_kph toFixed 0) + " KM/H" };
 };
 
 _output

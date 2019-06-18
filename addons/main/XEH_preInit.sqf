@@ -11,7 +11,6 @@ GVAR(hasACEInteractMenu) = isClass (configFile >> "CfgPatches" >> "ace_interact_
 GVAR(hasACEMap) = isClass (configFile >> "CfgPatches" >> "ace_map");
 GVAR(hasACEUnits) = isClass (configFile >> "CfgPatches" >> "ace_units");
 GVAR(hasACEWeather) = isClass (configFile >> "CfgPatches" >> "ace_weather");
-GVAR(hasACEUnits) = isClass (configFile >> "CfgPatches" >> "ace_units");
 
 // init actions variable
 GVAR(ACEInteractions) = [];

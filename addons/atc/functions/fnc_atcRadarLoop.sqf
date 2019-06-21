@@ -14,22 +14,27 @@ if !(time > _timeOld) exitWith {};
 
 private _planes = (entities "Plane") select {(side driver _x in [side _controller, civilian]) && (alive _x)};
 private _helies = (entities "Helicopter") select {(side driver _x in [side _controller, civilian]) && (alive _x)};
+
 private _planesAuto = [_planes] call FUNC(getAutoTransponders);
 private _heliesAuto = [_helies] call FUNC(getAutoTransponders);
+private _planesManual = _planes - _planesAuto;
+private _heliesManual = _helies - _heliesAuto;
 
-private _planesModeC = (_planes - _planesAuto) select {_x getVariable [QEGVAR(gpws,transponderMode), 0] isEqualTo 2};
-private _heliesModeC = (_helies - _heliesAuto) select {_x getVariable [QEGVAR(gpws,transponderMode), 0] isEqualTo 2};
-private _planesStandBy = (_planes - _planesAuto) select {_x getVariable [QEGVAR(gpws,transponderMode), 0] isEqualTo 1};
-private _heliesStandBy = (_helies - _heliesAuto) select {_x getVariable [QEGVAR(gpws,transponderMode), 0] isEqualTo 1};
+private _planesModeC = _planesManual select {_x getVariable [QEGVAR(gpws,transponderMode), 0] isEqualTo 2};
+private _heliesModeC = _heliesManual select {_x getVariable [QEGVAR(gpws,transponderMode), 0] isEqualTo 2};
+private _planesStandBy = _planesManual select {_x getVariable [QEGVAR(gpws,transponderMode), 0] isEqualTo 1};
+private _heliesStandBy = _heliesManual select {_x getVariable [QEGVAR(gpws,transponderMode), 0] isEqualTo 1};
 
-_planesModeC = _planesModeC + (_planesAuto select {!isTouchingGround _x});
-_heliesModeC = _heliesModeC + (_heliesAuto select {!isTouchingGround _x});
-_planesStandBy = _planesStandBy + (_planesAuto select {isTouchingGround _x});
-_heliesStandBy = _heliesStandBy + (_heliesAuto select {isTouchingGround _x});
+_planesModeC = _planesModeC + (_planesAuto select {(isEngineOn _x) && (!isTouchingGround _x)});
+_heliesModeC = _heliesModeC + (_heliesAuto select {(isEngineOn _x) && (!isTouchingGround _x)});
+_planesStandBy = _planesStandBy + (_planesAuto select {(isEngineOn _x) && (isTouchingGround _x)});
+_heliesStandBy = _heliesStandBy + (_heliesAuto select {(isEngineOn _x) && (isTouchingGround _x)});
 
 {
 	_trailLog pushBack [_x, getPos _x, time];
 } forEach (_planesModeC + _heliesModeC);
+
+_trailLog = _trailLog select {(_x select 0 in (_planesModeC + _heliesModeC)) && ((_x select 2) + GVAR(radarTrailLength) + 1 >= time)};
 
 // update planes info
 if (time > _radarTime + GVAR(radarUpdateInterval)) then {
@@ -45,8 +50,6 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	{
 		deleteMarkerLocal _x;
 	} forEach _trailMarkers;
-
-	_trailLog = _trailLog select {(_x select 2) + GVAR(radarTrailLength) + 1 >= time};
 
 	private _planeMarkersModeC = [_planesModeC, "b_plane", 2] call FUNC(createMarkers);
 	private _heliMarkersModeC = [_heliesModeC, "b_air", 2] call FUNC(createMarkers);

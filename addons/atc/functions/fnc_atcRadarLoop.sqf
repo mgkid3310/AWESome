@@ -33,21 +33,6 @@ _heliesStandBy = _heliesStandBy + (_heliesAuto select {isTouchingGround _x});
 
 // update planes info
 if (time > _radarTime + GVAR(radarUpdateInterval)) then {
-	private ["_planeMarkersModeC", "_heliMarkersModeC", "_planeMarkersStandBy", "_heliMarkersStandBy"];
-
-	_planesAuto = [_planes] call FUNC(getAutoTransponders);
-	_heliesAuto = [_helies] call FUNC(getAutoTransponders);
-
-	_planesModeC = (_planes - _planesAuto) select {_x getVariable [QEGVAR(gpws,transponderMode), 0] isEqualTo 2};
-	_heliesModeC = (_helies - _heliesAuto) select {_x getVariable [QEGVAR(gpws,transponderMode), 0] isEqualTo 2};
-	_planesStandBy = (_planes - _planesAuto) select {_x getVariable [QEGVAR(gpws,transponderMode), 0] isEqualTo 1};
-	_heliesStandBy = (_helies - _heliesAuto) select {_x getVariable [QEGVAR(gpws,transponderMode), 0] isEqualTo 1};
-
-	_planesModeC = _planesModeC + (_planesAuto select {!isTouchingGround _x});
-	_heliesModeC = _heliesModeC + (_heliesAuto select {!isTouchingGround _x});
-	_planesStandBy = _planesStandBy + (_planesAuto select {isTouchingGround _x});
-	_heliesStandBy = _heliesStandBy + (_heliesAuto select {isTouchingGround _x});
-
 	{
 		_x params ["_marker0", "_marker1", "_marker2", "_marker3", "_marker4"];
 		deleteMarkerLocal _marker0;
@@ -63,10 +48,10 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 
 	_trailLog = _trailLog select {(_x select 2) + GVAR(radarTrailLength) + 1 >= time};
 
-	_planeMarkersModeC = [_planesModeC, "b_plane", 2] call FUNC(createMarkers);
-	_heliMarkersModeC = [_heliesModeC, "b_air", 2] call FUNC(createMarkers);
-	_planeMarkersStandBy = [_planesStandBy, "b_plane", 1] call FUNC(createMarkers);
-	_heliMarkersStandBy = [_heliesStandBy, "b_air", 1] call FUNC(createMarkers);
+	private _planeMarkersModeC = [_planesModeC, "b_plane", 2] call FUNC(createMarkers);
+	private _heliMarkersModeC = [_heliesModeC, "b_air", 2] call FUNC(createMarkers);
+	private _planeMarkersStandBy = [_planesStandBy, "b_plane", 1] call FUNC(createMarkers);
+	private _heliMarkersStandBy = [_heliesStandBy, "b_air", 1] call FUNC(createMarkers);
 	_trailMarkers = [_trailLog, _planesModeC + _heliesModeC] call FUNC(createTrails);
 
 	_planeMarkers = _planeMarkersModeC + _planeMarkersStandBy;

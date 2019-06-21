@@ -37,6 +37,6 @@ private _return = [];
 			_return pushBack _marker;
 		};
 	};
-} forEach (_targets select {(alive _x) && (isEngineOn _x)});
+} forEach _targets;
 
 _return

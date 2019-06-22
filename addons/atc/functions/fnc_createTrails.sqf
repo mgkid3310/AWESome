@@ -13,16 +13,15 @@ private _return = [];
 
 			for "_index" from (count _targetTrail - 1) to 0 step -1 do {
 				if ((_targetTrail select _index select 2) + _trailNum <= time) exitWith {
-					_posMarker = _targetTrail select _index select 1;
-					/* if (_index isEqualTo (count _targetTrail - 1)) then {
+					if (_index isEqualTo (count _targetTrail - 1)) then {
 						_posMarker = _targetTrail select _index select 1;
 					} else {
 						_pos1 = _targetTrail select _index select 1;
 						_pos2 = _targetTrail select (_index + 1) select 1;
 						_time1 = _targetTrail select _index select 2;
 						_time2 = _targetTrail select (_index + 1) select 2;
-						_posMarker = _pos1 vectorAdd ((_pos2 vectorDiff _pos1) vectorMultiply ((time - _time1) / (_time2 - _time1)));
-					}; */
+						_posMarker = _pos1 vectorAdd ((_pos2 vectorDiff _pos1) vectorMultiply ((time - _trailNum - _time1) / (_time2 - _time1)));
+					};
 					_targetArray = [_targetTrail select _index select 0, _posMarker];
 				};
 			};

@@ -27,7 +27,7 @@ private _return = [];
 
 			if !(count _posMarker > 0) exitWith {};
 
-			_marker = createMarkerLocal [format ["orbis_atc_trail_%1_%2", _targetTrail select _index select 0, _trailNum], _posMarker];
+			_marker = createMarkerLocal [format ["orbis_atc_trail_%1_%2", _targetObject, _trailNum], _posMarker];
 			_marker setMarkerTypeLocal "hd_dot_noShadow";
 			_marker setMarkerColorLocal "colorBLUFOR";
 			_marker setMarkerTextLocal "";

@@ -30,11 +30,11 @@ _heliesModeC = _heliesModeC + (_heliesAuto select {(isEngineOn _x) && (!isTouchi
 _planesStandBy = _planesStandBy + (_planesAuto select {(isEngineOn _x) && (isTouchingGround _x)});
 _heliesStandBy = _heliesStandBy + (_heliesAuto select {(isEngineOn _x) && (isTouchingGround _x)});
 
-private ["_vehicle", "_vehicleTrail", "_targetTrail"];
+private ["_targetObject", "_vehicleTrail", "_targetTrail"];
 private _trailLog = [];
 {
-	_vehicle = _x;
-	_vehicleTrail = _trailLogOld select {_x select 0 isEqualTo _vehicle};
+	_targetObject = _x;
+	_vehicleTrail = _trailLogOld select {_x select 0 isEqualTo _targetObject};
 	_targetTrail = _vehicleTrail select {(_x select 2) + GVAR(radarTrailLength) >= time};
 
 	if (_vehicleTrail find (_targetTrail select 0) > 0) then {

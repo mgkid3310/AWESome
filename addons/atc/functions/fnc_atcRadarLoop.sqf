@@ -4,7 +4,7 @@ private _monitor = _this select 0;
 private _controller = param [1, player];
 
 private _loadData = _monitor getVariable [QGVAR(radarData), [0, 0, [], [], [], []]];
-_loadData params ["_timeOld", "_radarTime", "_trailLog", "_planeMarkers", "_heliMarkers", "_trailMarkers"];
+_loadData params ["_timeOld", "_radarTime", "_trailLogOld", "_planeMarkers", "_heliMarkers", "_trailMarkers"];
 
 if (((_controller distance _monitor) > 10) || (_controller getVariable [QGVAR(exitRadar), false])) exitWith {
 	[_monitor, _controller, _planeMarkers + _heliMarkers, _trailMarkers] call FUNC(atcRadarExit);
@@ -30,11 +30,21 @@ _heliesModeC = _heliesModeC + (_heliesAuto select {(isEngineOn _x) && (!isTouchi
 _planesStandBy = _planesStandBy + (_planesAuto select {(isEngineOn _x) && (isTouchingGround _x)});
 _heliesStandBy = _heliesStandBy + (_heliesAuto select {(isEngineOn _x) && (isTouchingGround _x)});
 
+private ["_vehicle", "_vehicleTrail", "_targetTrail"];
+private _trailLog = [];
 {
-	_trailLog pushBack [_x, getPos _x, time];
-} forEach (_planesModeC + _heliesModeC);
+	_vehicle = _x;
+	_vehicleTrail = _trailLogOld select {_x select 0 isEqualTo _vehicle};
+	_targetTrail = _vehicleTrail select {(_x select 2) + GVAR(radarTrailLength) >= time};
 
-_trailLog = _trailLog select {(_x select 0 in (_planesModeC + _heliesModeC)) && ((_x select 2) + GVAR(radarTrailLength) + 1 >= time)};
+	if (_vehicleTrail find (_targetTrail select 0) > 0) then {
+		_trailLog pushBack (_vehicleTrail select ((_vehicleTrail find (_targetTrail select 0)) - 1));
+	};
+	_trailLog append _targetTrail;
+	_trailLog pushBack [_x, getPos _x, time];
+
+	_trailLogOld = _trailLogOld - _vehicleTrail;
+} forEach (_planesModeC + _heliesModeC);
 
 // update planes info
 if (time > _radarTime + GVAR(radarUpdateInterval)) then {

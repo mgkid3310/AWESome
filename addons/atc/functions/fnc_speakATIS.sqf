@@ -88,16 +88,16 @@ if ((_fogApply > 0) || (!(_overcast < 0.7) && (_rain > 0)) || (!(_overcast < 0.4
 	// fog
 	switch (true) do {
 		case (_fogApply > 0.7): {
-			sleep 0.3;
+			sleep 0.2;
 			["orbis_common_heavy"] call FUNC(playAndSleep);
 			["orbis_common_fog"] call FUNC(playAndSleep);
 		};
 		case (_fogApply > 0.3): {
-			sleep 0.3;
+			sleep 0.2;
 			["orbis_common_fog"] call FUNC(playAndSleep);
 		};
 		case (_fogApply > 0): {
-			sleep 0.3;
+			sleep 0.2;
 			["orbis_common_light"] call FUNC(playAndSleep);
 			["orbis_common_fog"] call FUNC(playAndSleep);
 		};
@@ -107,16 +107,16 @@ if ((_fogApply > 0) || (!(_overcast < 0.7) && (_rain > 0)) || (!(_overcast < 0.4
 	if !(_overcast < 0.7) then {
 		switch (true) do {
 			case (_rain > 0.7): {
-				sleep 0.3;
+				sleep 0.2;
 				["orbis_common_heavy"] call FUNC(playAndSleep);
 				["orbis_common_rain"] call FUNC(playAndSleep);
 			};
 			case (_rain > 0.3): {
-				sleep 0.3;
+				sleep 0.2;
 				["orbis_common_rain"] call FUNC(playAndSleep);
 			};
 			case (_rain > 0): {
-				sleep 0.3;
+				sleep 0.2;
 				["orbis_common_light"] call FUNC(playAndSleep);
 				["orbis_common_rain"] call FUNC(playAndSleep);
 			};
@@ -127,16 +127,16 @@ if ((_fogApply > 0) || (!(_overcast < 0.7) && (_rain > 0)) || (!(_overcast < 0.4
 	if !(_overcast < 0.4) then {
 		switch (true) do {
 			case (_lightnings > 0.7): {
-				sleep 0.3;
+				sleep 0.2;
 				["orbis_common_heavy"] call FUNC(playAndSleep);
 				["orbis_common_lightning"] call FUNC(playAndSleep);
 			};
 			case (_lightnings > 0.3): {
-				sleep 0.3;
+				sleep 0.2;
 				["orbis_common_lightning"] call FUNC(playAndSleep);
 			};
 			case (_lightnings > 0.1): {
-				sleep 0.3;
+				sleep 0.2;
 				["orbis_common_light"] call FUNC(playAndSleep);
 				["orbis_common_lightning"] call FUNC(playAndSleep);
 			};

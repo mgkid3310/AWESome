@@ -17,6 +17,9 @@ _aerodynamicsArray params ["_dragArray", "_liftArray", "_angleOfIndicence", "_to
 _speedPerformance params ["_thrustCoef", "_altFullForce", "_altNoForce", "_speedStall", "_speedMax"];
 _physicalProperty params ["_massError", "_massStandard", "_fuelCapacity"];
 
+private _aeroData = _vehicle getVariable [QGVAR(aeroData), [airplaneThrottle _vehicle, velocityModelSpace _vehicle, _vehicle vectorWorldToModel wind]];
+_aeroData params ["_throttleOld", "_modelVelocityOld", "_modelWindOld"];
+
 // check for ammo on pylons
 private ["_magazineClass", "_ammoClass", "_massFull", "_countFull", "_massMagazine", "_airFriction", "_sideAirFriction", "_pylonDragCoef2"];
 private _massPylon = 0;
@@ -42,17 +45,20 @@ private _pylonDragCoef2 = [0, 0, 0];
 private _pylonDragArray = [_pylonDragCoef2 vectorMultiply (1 / (1 max _massPylon)), [0, 0, 0], [0, 0, 0]];
 
 // get current vehicle mass and apply
-private ["_massCurrent", "_fuelMass"];
+private ["_massCurrent", "_massFuel"];
 if (_massError) then {
 	_massCurrent = 10000;
 } else {
-	_fuelMass = 0.8 * (fuel _vehicle) * _fuelCapacity;
+	_massFuel = 0.8 * (fuel _vehicle) * _fuelCapacity;
 	if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
-		_fuelMass = _fuelMass + 0.8 * (_vehicle animationPhase "auxtank_switch") * _fuelCapacity;
+		_massFuel = _massFuel + 0.8 * (_vehicle animationPhase "auxtank_switch") * _fuelCapacity;
 	};
-	_massCurrent = (_massStandard * GVAR(massStandardRatio)) + _fuelMass + _massPylon;
+	_massCurrent = (_massStandard * GVAR(massStandardRatio)) + _massFuel + _massPylon;
 };
 _vehicle setMass _massCurrent;
+
+// correct fuel consumption
+private _throttle = (_throttleOld + airplaneThrottle _vehicle) / 2;
 
 // get effective drag config
 private _dragArrayEff = _dragArray;
@@ -69,7 +75,7 @@ if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 _dragMultiplier = _dragMultiplier * GVAR(dragMultiplier);
 
 // atmosphere data setup
-private _altitude = ((getPosASL _vehicle) select 2) * GVAR(altitudeMultiplier);
+private _altitudeASL = getPosASL _vehicle select 2;
 private ["_temperatureSL", "_pressureSL", "_humidity"];
 if (EGVAR(main,hasACEWeather)) then {
 	_temperatureSL = ace_weather_currentTemperature; // Celsius
@@ -81,27 +87,29 @@ if (EGVAR(main,hasACEWeather)) then {
 	_humidity = linearConversion [0, 0.5, overcast, 0, 1, true]; // relative
 };
 
-private _temperatureArray = [_altitude, _temperatureSL] call FUNC(getAirTemperature);
+private _temperatureArray = [_altitudeASL, _temperatureSL] call FUNC(getAirTemperature);
 private _temperature = _temperatureArray select 4; // Celsius
-private _pressure = [_altitude, _temperatureArray, _pressureSL] call FUNC(getAirPressure); // hPa
-private _density = [_altitude, _temperature, _pressure, _humidity] call FUNC(getAirDensity); // kg/m^3
+private _pressure = [_altitudeASL, _temperatureArray, _pressureSL] call FUNC(getAirPressure); // hPa
+private _density = [_altitudeASL, _temperature, _pressure, _humidity] call FUNC(getAirDensity); // kg/m^3
 
 private _temperatureRatio = (_temperature + 273.15) / (_temperatureSL + 273.15);
 private _pressureRatio = _pressure / _pressureSL;
 private _densityRatio = _density / 1.2754;
 
 // get TAS and etc.
-private _modelvelocity = velocityModelSpace _vehicle;
-private _modelWind = _vehicle vectorWorldToModel wind;
+private _modelvelocity = (_modelVelocityOld vectorAdd velocityModelSpace _vehicle) vectorMultiply 0.5;
+private _modelWind = (_modelWindOld vectorAdd (_vehicle vectorWorldToModel wind)) vectorMultiply 0.5;
 private _windApply = _modelWind vectorMultiply GVAR(windMultiplier);
 private _trueAirVelocity = _modelvelocity vectorDiff _windApply;
+private _altitudeAGLS = getPos _vehicle select 2;
+private _engineDamage = _vehicle getHitPointDamage "hitEngine";
 private _thrustVector = _vehicle animationSourcePhase "thrustVector";
 
 // build parameter array
 private _paramDefault = [_modelvelocity, _massCurrent, _massError];
-private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityRatio, getPos _vehicle select 2];
-private _paramThrust = [_thrustCoef, airplaneThrottle _vehicle, _vehicle getHitPointDamage "hitEngine", _thrustVector];
-private _paramAltitude = [_altFullForce, _altNoForce, _altitude];
+private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityRatio, _altitudeAGLS];
+private _paramThrust = [_thrustCoef, _throttle, _engineDamage, _thrustVector];
+private _paramAltitude = [_altFullForce, _altNoForce, _altitudeASL];
 private _paramAtmosphere = [_temperatureRatio, _pressureRatio];
 private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio];
 
@@ -146,3 +154,5 @@ _vehicle addForce [_vehicle vectorModelToWorld (_forceApply vectorMultiply _time
 // report if needed (dev script)
 // diag_log format ["orbis_aerodynamics _massCurrent: %1, _dragArrayEff: %2, _pylonDragArray: %3, _dragDefault: %4, _dragEnhanced: %5, _dragPylon: %6", _massCurrent, _dragArrayEff, _pylonDragArray, _dragDefault, _dragEnhanced, _dragPylon];
 // diag_log format ["orbis_aerodynamics _massCurrent: %1, _forceApply: %2, _timeStep: %3", _massCurrent, _forceApply, _timeStep];
+
+_vehicle setVariable [QGVAR(aeroData), [airplaneThrottle _vehicle, velocityModelSpace _vehicle, _vehicle vectorWorldToModel wind]];

@@ -18,7 +18,7 @@ if (!GVAR(enabled) || (_vehicle isEqualTo player) || (_timeOld < 0) || (_frameOl
 if (diag_frameNo < (_frameOld + GVAR(frameInterval))) exitWith {};
 
 if ((driver _vehicle isEqualTo player) && (_vehicle isKindOf "Plane")) then {
-	[_vehicle, player, _timeOld] call FUNC(fixedWingLoop);
+	[_vehicle, _timeOld] call FUNC(fixedWingLoop);
 };
 
 missionNamespace setVariable [QGVAR(timeOld), time];

@@ -6,7 +6,6 @@ GVAR(pylonDragRatio) = 0.001; // Cd 0.1 for FIR Mk84
 GVAR(massStandardRatio) = 0.8;
 GVAR(dragMultiplier) = 1;
 GVAR(thrustMultiplier) = 1;
-GVAR(altitudeMultiplier) = 1;
 GVAR(dragSourceMultiplier) = [1.0, 0.1, 1.0];
 GVAR(thrustFactor) = 7.2;
 GVAR(liftGFactor) = 2.5;

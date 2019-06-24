@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-params ["_vehicle", "_player", "_timeOld"];
+params ["_vehicle", "_timeOld"];
 
 private _timeStep = time - _timeOld;
 if !(_timeStep > 0) exitWith {};

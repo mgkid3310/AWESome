@@ -14,7 +14,7 @@ GVAR(kphToKnot) = 1 / GVAR(knotToMps);
 GVAR(knotToKph) = 1.852;
 GVAR(kphToKnot) = 1 / GVAR(knotToKph);
 
-// check if has ACE modules
+// check if ACE modules exist
 GVAR(hasACEInteractMenu) = isClass (configFile >> "CfgPatches" >> "ace_interact_menu");
 GVAR(hasACEMap) = isClass (configFile >> "CfgPatches" >> "ace_map");
 GVAR(hasACEUnits) = isClass (configFile >> "CfgPatches" >> "ace_units");

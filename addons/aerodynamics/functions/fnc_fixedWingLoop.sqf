@@ -21,7 +21,8 @@ private _aeroData = _vehicle getVariable [QGVAR(aeroData), [airplaneThrottle _ve
 _aeroData params ["_throttleOld", "_modelVelocityOld", "_modelWindOld"];
 
 // correct fuel consumption
-private _throttle = (_throttleOld + airplaneThrottle _vehicle) / 2;
+private _throttleNew = airplaneThrottle _vehicle;
+private _throttle = (_throttleNew + _throttleOld) / 2;
 private _fuelFlowDefault = 0.3 * _throttle ^ 2 + 0.03;
 private _fuelFlowEnhanced = (0.3 * _throttle ^ 2 + 0.03) * GVAR(fuelFlowMultiplier);
 _vehicle setFuel (fuel _vehicle - (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity));
@@ -100,8 +101,10 @@ private _pressureRatio = _pressure / _pressureSL;
 private _densityRatio = _density / 1.2754;
 
 // get TAS and etc.
-private _modelvelocity = (_modelVelocityOld vectorAdd velocityModelSpace _vehicle) vectorMultiply 0.5;
-private _modelWind = (_modelWindOld vectorAdd (_vehicle vectorWorldToModel wind)) vectorMultiply 0.5;
+private _modelvelocityNew = velocityModelSpace _vehicle;
+private _modelvelocity = (_modelvelocityNew vectorAdd _modelVelocityOld) vectorMultiply 0.5;
+private _modelWindNew = _vehicle vectorWorldToModel wind;
+private _modelWind = (_modelWindNew vectorAdd _modelWindOld) vectorMultiply 0.5;
 private _windApply = _modelWind vectorMultiply GVAR(windMultiplier);
 private _trueAirVelocity = _modelvelocity vectorDiff _windApply;
 private _altitudeAGLS = getPos _vehicle select 2;
@@ -158,4 +161,4 @@ _vehicle addForce [_vehicle vectorModelToWorld (_forceApply vectorMultiply _time
 // diag_log format ["orbis_aerodynamics _massCurrent: %1, _dragArrayEff: %2, _pylonDragArray: %3, _dragDefault: %4, _dragEnhanced: %5, _dragPylon: %6", _massCurrent, _dragArrayEff, _pylonDragArray, _dragDefault, _dragEnhanced, _dragPylon];
 // diag_log format ["orbis_aerodynamics _massCurrent: %1, _forceApply: %2, _timeStep: %3", _massCurrent, _forceApply, _timeStep];
 
-_vehicle setVariable [QGVAR(aeroData), [airplaneThrottle _vehicle, velocityModelSpace _vehicle, _vehicle vectorWorldToModel wind]];
+_vehicle setVariable [QGVAR(aeroData), [_throttleNew, _modelvelocityNew, _modelWindNew]];

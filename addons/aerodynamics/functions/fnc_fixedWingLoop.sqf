@@ -20,6 +20,12 @@ _physicalProperty params ["_massError", "_massStandard", "_fuelCapacity"];
 private _aeroData = _vehicle getVariable [QGVAR(aeroData), [airplaneThrottle _vehicle, velocityModelSpace _vehicle, _vehicle vectorWorldToModel wind]];
 _aeroData params ["_throttleOld", "_modelVelocityOld", "_modelWindOld"];
 
+// correct fuel consumption
+private _throttle = (_throttleOld + airplaneThrottle _vehicle) / 2;
+private _fuelFlowDefault = 0.3 * _throttle ^ 2 + 0.03;
+private _fuelFlowEnhanced = (0.3 * _throttle ^ 2 + 0.03) * GVAR(fuelFlowMultiplier);
+_vehicle setFuel (fuel _vehicle - (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity));
+
 // check for ammo on pylons
 private ["_magazineClass", "_ammoClass", "_massFull", "_countFull", "_massMagazine", "_airFriction", "_sideAirFriction", "_pylonDragCoef2"];
 private _massPylon = 0;
@@ -56,9 +62,6 @@ if (_massError) then {
 	_massCurrent = (_massStandard * GVAR(massStandardRatio)) + _massFuel + _massPylon;
 };
 _vehicle setMass _massCurrent;
-
-// correct fuel consumption
-private _throttle = (_throttleOld + airplaneThrottle _vehicle) / 2;
 
 // get effective drag config
 private _dragArrayEff = _dragArray;

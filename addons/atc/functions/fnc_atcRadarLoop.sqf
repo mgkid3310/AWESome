@@ -61,10 +61,10 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		deleteMarkerLocal _x;
 	} forEach _trailMarkers;
 
-	private _planeMarkersModeC = [_planesModeC, "b_plane", 2] call FUNC(createMarkers);
-	private _heliMarkersModeC = [_heliesModeC, "b_air", 2] call FUNC(createMarkers);
-	private _planeMarkersStandBy = [_planesStandBy, "b_plane", 1] call FUNC(createMarkers);
-	private _heliMarkersStandBy = [_heliesStandBy, "b_air", 1] call FUNC(createMarkers);
+	private _planeMarkersModeC = [_planesModeC, "b_plane", 2] call FUNC(createRadarMarker);
+	private _heliMarkersModeC = [_heliesModeC, "b_air", 2] call FUNC(createRadarMarker);
+	private _planeMarkersStandBy = [_planesStandBy, "b_plane", 1] call FUNC(createRadarMarker);
+	private _heliMarkersStandBy = [_heliesStandBy, "b_air", 1] call FUNC(createRadarMarker);
 	_trailMarkers = [_trailLog, _planesModeC + _heliesModeC] call FUNC(createTrails);
 
 	_planeMarkers = _planeMarkersModeC + _planeMarkersStandBy;

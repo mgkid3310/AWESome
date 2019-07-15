@@ -2,4 +2,5 @@
 
 if (player getVariable [QGVAR(isUsingRadar), false]) exitWith {};
 
-player setVariable [QGVAR(startRadarScreen), _this];
+player setVariable [QGVAR(isUsingRadar), _this];
+player setVariable [QGVAR(radarParam), _this];

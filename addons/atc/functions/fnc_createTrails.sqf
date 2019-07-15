@@ -2,11 +2,11 @@
 
 params ["_trailLog", "_targets"];
 
-private ["_targetObject", "_targetTrail", "_pos1", "_pos2", "_time1", "_time2", "_posMarker", "_marker"];
+private ["_target", "_targetTrail", "_pos1", "_pos2", "_time1", "_time2", "_posMarker", "_marker"];
 private _return = [];
 {
-	_targetObject = _x;
-	_targetTrail = _trailLog select {_x select 0 isEqualTo _targetObject};
+	_target = _x;
+	_targetTrail = _trailLog select {_x select 0 isEqualTo _target};
 	if (count _targetTrail > 0) then {
 		for "_trailNum" from 1 to GVAR(radarTrailLength) do {
 			_posMarker = [];
@@ -27,7 +27,7 @@ private _return = [];
 
 			if !(count _posMarker > 0) exitWith {};
 
-			_marker = createMarkerLocal [format ["orbis_atc_trail_%1_%2", _targetObject, _trailNum], _posMarker];
+			_marker = createMarkerLocal [format ["orbis_atc_trail_%1_%2", _target, _trailNum], _posMarker];
 			_marker setMarkerTypeLocal "hd_dot_noShadow";
 			_marker setMarkerColorLocal "colorBLUFOR";
 			_marker setMarkerTextLocal "";

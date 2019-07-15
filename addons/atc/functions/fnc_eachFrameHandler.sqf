@@ -8,19 +8,19 @@ if (!(alive player) || (_timeOld < 0) || (_frameOld < 0)) exitWith {
 	missionNamespace setVariable [QGVAR(frameOld), diag_frameNo];
 };
 
-private _isUsingRadarScreen = player getVariable [QGVAR(isUsingRadarScreen), false];
+private _isUsingRadar = player getVariable [QGVAR(isUsingRadar), false];
 private _startRadarScreen = player getVariable [QGVAR(startRadarScreen), false];
 private _radarScreenParam = player getVariable [QGVAR(radarScreenParam), []];
 
 if (_startRadarScreen isEqualType []) then {
-	_isUsingRadarScreen = true;
+	_isUsingRadar = true;
 	_radarScreenParam = _startRadarScreen;
-	player setVariable [QGVAR(isUsingRadarScreen), true];
+	player setVariable [QGVAR(isUsingRadar), true];
 	player setVariable [QGVAR(startRadarScreen), false];
 	player setVariable [QGVAR(radarScreenParam), _radarScreenParam];
 };
 
-if (_isUsingRadarScreen) then {
+if (_isUsingRadar) then {
 	_radarScreenParam call FUNC(atcRadarLoop);
 };
 

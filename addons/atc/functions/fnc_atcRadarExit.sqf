@@ -26,5 +26,5 @@ if ((_controller distance _monitor) > 10) then {
 };
 
 _monitor setVariable [QGVAR(radarData), nil];
-_controller setVariable [QGVAR(isUsingRadarScreen), false];
+_controller setVariable [QGVAR(isUsingRadar), false];
 _controller setVariable [QGVAR(exitRadar), false];

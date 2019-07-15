@@ -3,7 +3,7 @@ PREP(addATCConsole);
 PREP(addRadarScreen);
 PREP(atcRadarExit);
 PREP(atcRadarLoop);
-PREP(createMarkers);
+PREP(createRadarMarker);
 PREP(createTrails);
 PREP(eachFrameHandler);
 PREP(getAutoTransponders);

@@ -9,7 +9,18 @@ private _return = [];
 {
 	_speed = 3.6 * vectorMagnitude velocity _x;
 	_altitude = getPosASL _x select 2;
-	_callsign = [name driver _x, groupId group driver _x, _x getVariable [QGVAR(customCallsign), groupId group driver _x]] select GVAR(displayCallsign);
+
+	switch (GVAR(displayCallsign)) do {
+		case (1): {
+			_callsign = groupId group driver _x;
+		};
+		case (2): {
+			_callsign = _x getVariable [QGVAR(customCallsign), groupId group driver _x];
+		};
+		default {
+			_callsign = name driver _x;
+		};
+	};
 
 	if (GVAR(unitSettingAlt)) then {
 		_altitudeDisplay = round (_altitude * EGVAR(main,mToFt) / 100);

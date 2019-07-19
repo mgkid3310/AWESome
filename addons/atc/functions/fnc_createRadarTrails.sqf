@@ -9,7 +9,12 @@ if !(GVAR(drawProjectileTrails)) then {
 private ["_target", "_targetTrail", "_pos1", "_pos2", "_time1", "_time2", "_posMarker", "_marker", "_side", "_markerColor"];
 private _return = [];
 {
-	_target = _x;
+	if (_x in _projectiles) then {
+		_target = _x select 0;
+	} else {
+		_target = _x;
+	};
+
 	_targetTrail = _trailLog select {_x select 0 isEqualTo _target};
 	if (count _targetTrail > 0) then {
 		for "_trailNum" from 1 to GVAR(radarTrailLength) do {
@@ -32,7 +37,7 @@ private _return = [];
 			if !(count _posMarker > 0) exitWith {};
 
 			if (_x in _projectiles) then {
-				_side = _x getVariable [QGVAR(projectileSide), civilian];
+				_side = _x select 2;
 			} else {
 				_side = side driver _x;
 			};

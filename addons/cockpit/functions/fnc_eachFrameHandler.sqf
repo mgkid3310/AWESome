@@ -7,7 +7,7 @@ if ((_vehicle isEqualTo player) || (_timeOld < 0)) exitWith {
 	missionNamespace setVariable [QGVAR(timeOld), time];
 };
 
-if (_vehicle isKindOf "Plane") then {
+if ((_vehicle isKindOf "Plane") || (_vehicle isKindOf "Helicopter")) then {
 	[_vehicle, player, _timeOld] call FUNC(headShakeLoop);
 };
 

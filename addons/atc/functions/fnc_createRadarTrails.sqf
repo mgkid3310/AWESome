@@ -2,7 +2,7 @@
 
 params ["_trailLog", "_vehicles", ["_projectiles", []], ["_isObserver", false]];
 
-if !(GVAR(drawProjectileTrails)) then {
+if !(GVAR(displayProjectileTrails)) then {
 	_projectiles = [];
 };
 

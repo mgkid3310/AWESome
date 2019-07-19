@@ -37,19 +37,19 @@ ADDON = true;
 ] call CBA_Settings_fnc_init;
 
 [
-	QGVAR(drawProjectileTrails),
-	"CHECKBOX",
-	["Draw missile trails", "Enable/disable drawing missile trails"],
-	"AWESome ATC",
-	false
-] call CBA_Settings_fnc_init;
-
-[
 	QGVAR(radarTrailLength),
 	"SLIDER",
 	["ATC display trail length", "Set display trail length"],
 	"AWESome ATC",
 	[0, 10, 5, 0]
+] call CBA_Settings_fnc_init;
+
+[
+	QGVAR(displayProjectileTrails),
+	"CHECKBOX",
+	["Display missile trails", "Enable/disable missile trails"],
+	"AWESome ATC",
+	false
 ] call CBA_Settings_fnc_init;
 
 [

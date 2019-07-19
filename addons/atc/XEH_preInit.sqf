@@ -33,7 +33,7 @@ ADDON = true;
 	"SLIDER",
 	["ATC display Update Interval", "Set display update interval"],
 	"AWESome ATC",
-	[0, 5, 0.5, 2]
+	[0, 5, 0, 2]
 ] call CBA_Settings_fnc_init;
 
 [

@@ -42,7 +42,10 @@ _planesStandBy = _planesStandBy + (_planesAuto select {(isEngineOn _x) && (isTou
 _heliesStandBy = _heliesStandBy + (_heliesAuto select {(isEngineOn _x) && (isTouchingGround _x)});
 
 private _trackedWeapons = missionNamespace getVariable [QGVAR(trackedWeapons), []];
-_trackedWeapons = _trackedWeapons select {_x select 2 isEqualTo side _controller};
+if !(_isObserver) then {
+	_trackedWeapons = _trackedWeapons select {_x select 2 isEqualTo side _controller};
+};
+
 private _weaponObjects = _trackedWeapons apply {_x select 0};
 
 private ["_targetObject", "_vehicleTrail", "_targetTrail"];

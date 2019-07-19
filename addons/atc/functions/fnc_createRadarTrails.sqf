@@ -1,8 +1,12 @@
 #include "script_component.hpp"
 
-params ["_trailLog", "_targets"];
+params ["_trailLog", "_vehicles", ["_projectiles", []], ["_isObserver", false]];
 
-private ["_target", "_targetTrail", "_pos1", "_pos2", "_time1", "_time2", "_posMarker", "_marker"];
+if !(GVAR(drawProjectileTrails)) then {
+	_projectiles = [];
+};
+
+private ["_target", "_targetTrail", "_pos1", "_pos2", "_time1", "_time2", "_posMarker", "_marker", "_side", "_markerColor"];
 private _return = [];
 {
 	_target = _x;
@@ -27,13 +31,38 @@ private _return = [];
 
 			if !(count _posMarker > 0) exitWith {};
 
+			if (_x in _projectiles) then {
+				_side = _x getVariable [QGVAR(projectileSide), civilian];
+			} else {
+				_side = side driver _x;
+			};
+
+			if (_isObserver) then {
+				switch (_side) do {
+					case (west): {
+						_markerColor = "colorBLUFOR";
+					};
+					case (east): {
+						_markerColor = "colorOPFOR";
+					};
+					case (independent): {
+						_markerColor = "colorIndependent";
+					};
+					default {
+						_markerColor = "colorCivilian";
+					};
+				};
+			} else {
+				_markerColor = "colorBLUFOR";
+			};
+
 			_marker = createMarkerLocal [format ["orbis_atc_trail_%1_%2", _target, _trailNum], _posMarker];
 			_marker setMarkerTypeLocal "hd_dot_noShadow";
-			_marker setMarkerColorLocal "colorBLUFOR";
+			_marker setMarkerColorLocal _markerColor;
 			_marker setMarkerTextLocal "";
 			_return pushBack _marker;
 		};
 	};
-} forEach _targets;
+} forEach (_vehicles + _projectiles);
 
 _return

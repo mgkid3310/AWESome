@@ -7,7 +7,7 @@ private _loadData = _monitor getVariable [QGVAR(radarData), [0, 0, [], [], [], [
 _loadData params ["_timeOld", "_radarTime", "_trailLogOld", "_planeMarkers", "_heliMarkers", "_weaponMarkers", "_trailMarkers"];
 
 if (((_controller distance _monitor) > 10) || (_controller getVariable [QGVAR(exitRadar), false])) exitWith {
-	[_monitor, _controller, _planeMarkers + _heliMarkers, _trailMarkers] call FUNC(atcRadarExit);
+	[_monitor, _controller, _planeMarkers + _heliMarkers + _weaponMarkers, _trailMarkers] call FUNC(atcRadarExit);
 };
 
 if !(time > _timeOld) exitWith {};

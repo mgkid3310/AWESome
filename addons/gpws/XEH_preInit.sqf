@@ -7,7 +7,7 @@ ADDON = true;
 [
 	QGVAR(personalDefault),
 	"LIST",
-	["Default GPWS Mode", "Activates default GPWS when boarding planes with GPWS turned off"],
+	["Default GPWS Mode", "Default GPWS is activated when boarding initialized planes"],
 	"AWESome GPWS",
 	[["none", "b747", "f16", "rita"], ["No default setting", "B747", "Betty (F-16)", "Rita"], 0]
 ] call CBA_Settings_fnc_init;
@@ -23,7 +23,7 @@ ADDON = true;
 [
 	QGVAR(automaticTransponder),
 	"CHECKBOX",
-	["Use Automatic Transponder", "Transponder mode is change automatically"],
+	["Use Automatic Transponder", "Transponder mode will be automatically changed to appropriate mode"],
 	"AWESome GPWS",
 	true
 ] call CBA_Settings_fnc_init;

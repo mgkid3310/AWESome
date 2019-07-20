@@ -47,6 +47,9 @@ if !(_isObserver) then {
 };
 
 private _weaponObjects = _trackedWeapons apply {_x select 0};
+if !(GVAR(displayProjectileTrails)) then {
+	_weaponObjects = [];
+};
 
 private ["_targetObject", "_vehicleTrail", "_targetTrail"];
 private _trailLog = [];

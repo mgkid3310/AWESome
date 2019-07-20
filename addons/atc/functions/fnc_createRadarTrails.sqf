@@ -2,10 +2,6 @@
 
 params ["_trailLog", "_vehicles", ["_projectiles", []], ["_isObserver", false]];
 
-if !(GVAR(displayProjectileTrails)) then {
-	_projectiles = [];
-};
-
 private ["_target", "_targetTrail", "_pos1", "_pos2", "_time1", "_time2", "_posMarker", "_marker", "_side", "_markerColor"];
 private _return = [];
 {

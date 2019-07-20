@@ -7,7 +7,7 @@ ADDON = true;
 [
 	QGVAR(shakeEnabled),
 	"LIST",
-	["Camera Shake", "Can enable or disable camera shake feature"],
+	["Camera Shake", "Enable/disable camera shake feature"],
 	"AWESome Cockpit",
 	[[true, false], ["Enabled", "Disabled"], 0]
 ] call CBA_Settings_fnc_init;
@@ -15,7 +15,7 @@ ADDON = true;
 [
 	QGVAR(groundMultiplier),
 	"SLIDER",
-	["Shake Multiplier (ground)", "Set multiplier for camera shake on ground"],
+	["Shake Multiplier (ground)", "Sets multiplier for camera shake on ground (incl. touchdown)"],
 	"AWESome Cockpit",
 	[0, 1, 1, 2]
 ] call CBA_Settings_fnc_init;
@@ -23,7 +23,7 @@ ADDON = true;
 [
 	QGVAR(speedMultiplier),
 	"SLIDER",
-	["Shake Multiplier (in-flight)", "Set multiplier for in-flight camera shake"],
+	["Shake Multiplier (in-flight)", "Sets multiplier for in-flight camera shake"],
 	"AWESome Cockpit",
 	[0, 1, 1, 2]
 ] call CBA_Settings_fnc_init;
@@ -32,7 +32,7 @@ if !(EGVAR(main,hasACEUnits)) then {
 	[
 		QGVAR(checklistUnits),
 		"LIST",
-		["Checklist Units", "Units to use for speeds on checklists"],
+		["Checklist Units", "Selects speed unit used on checklists"],
 		"AWESome Cockpit",
 		[["KIAS", "KM/H"], ["KIAS", "km/h"], 0]
 	] call CBA_Settings_fnc_init;

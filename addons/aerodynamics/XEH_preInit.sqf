@@ -15,7 +15,7 @@ ADDON = true;
 [
 	QGVAR(windMultiplier),
 	"SLIDER",
-	["Wind Multiplier", "Set wind effect multiplier"],
+	["Wind Multiplier", "Sets how strong the wind effect will be"],
 	"AWESome Aerodynamics",
 	[0, 1, 1, 2]
 ] call CBA_Settings_fnc_init;

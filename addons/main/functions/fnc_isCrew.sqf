@@ -19,15 +19,17 @@ switch (_mode) do {
 
 private _role = assignedVehicleRole _player;
 private _return = false;
-switch (toLower (_role select 0)) do {
-	case ("driver"): {
-		_return = true;
-	};
-	case ("turret"): {
-		if ((_role select 1) isEqualTo [0]) then {
+if (_role isEqualTo []) then {
+	switch (toLower (_role select 0)) do {
+		case ("driver"): {
 			_return = true;
 		};
+		case ("turret"): {
+			_return = (_role select 1) isEqualTo [0];
+		};
 	};
+} else {
+	_return = _player in [driver _vehicle, gunner _vehicle];
 };
 
 _return

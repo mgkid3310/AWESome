@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 
 private _player = param [0, player];
-private _vehicle = param [1, vehicle player];
+private _vehicle = param [1, vehicle _player];
 private _mode = param [2, 0]; // 0: both, 1: plane, 2: heli
 
 if !(_player in _vehicle) exitWith {false};

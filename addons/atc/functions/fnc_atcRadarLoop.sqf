@@ -23,8 +23,8 @@ if (_isObserver) then {
 };
 
 {
-	_x setVariable [QGVAR(eventFired), _x addEventHandler ["Fired", {_this spawn FUNC(eventFired)}]];
-} forEach ((_plane + _helies) select {_x getVariable [QGVAR(eventFired), -1] < 0});
+	_x setVariable [QGVAR(eventWeaponFire), _x addEventHandler ["Fired", {_this spawn FUNC(eventWeaponFire)}]];
+} forEach ((_plane + _helies) select {_x getVariable [QGVAR(eventWeaponFire), -1] < 0});
 
 // update planes info
 if (time > _radarTime + GVAR(radarUpdateInterval)) then {

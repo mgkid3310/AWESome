@@ -17,9 +17,17 @@ switch (_mode) do {
 	};
 };
 
-private _role = assignedVehicleRole _player;
+private _role = [];
+if (_player getVariable [QGVAR(hasAWESomeMain), false]) then {
+	_role = (_player getVariable [QGVAR(crewStatus), []]) select 1;
+} else {
+	_role = assignedVehicleRole _player;
+};
+
 private _return = false;
 if (_role isEqualTo []) then {
+	_return = _player in [driver _vehicle, gunner _vehicle];
+} else {
 	switch (toLower (_role select 0)) do {
 		case ("driver"): {
 			_return = true;
@@ -28,8 +36,6 @@ if (_role isEqualTo []) then {
 			_return = (_role select 1) isEqualTo [0];
 		};
 	};
-} else {
-	_return = _player in [driver _vehicle, gunner _vehicle];
 };
 
 _return

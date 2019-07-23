@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-params ["_trailLog", "_vehicles", ["_projectiles", []], ["_isObserver", false]];
+params ["_trailLog", "_vehicles", ["_projectiles", []], ["_radarSide", civilian], ["_isObserver", false]];
 
 private ["_target", "_targetTrail", "_pos1", "_pos2", "_time1", "_time2", "_posMarker", "_marker", "_side", "_markerColor"];
 private _return = [];
@@ -41,20 +41,30 @@ private _return = [];
 			if (_isObserver) then {
 				switch (_side) do {
 					case (west): {
-						_markerColor = "colorBLUFOR";
+						_markerColor = "ColorWEST";
 					};
 					case (east): {
-						_markerColor = "colorOPFOR";
+						_markerColor = "ColorEAST";
 					};
 					case (independent): {
-						_markerColor = "colorIndependent";
+						_markerColor = "ColorGUER";
 					};
 					default {
-						_markerColor = "colorCivilian";
+						_markerColor = "ColorCIV";
 					};
 				};
 			} else {
-				_markerColor = "colorBLUFOR";
+				switch (true) do {
+					case (_side isEqualTo _radarSide): {
+						_markerColor = "ColorWEST";
+					};
+					case (_side isEqualTo civilian): {
+						_markerColor = "ColorWEST";
+					};
+					default {
+						_markerColor = "ColorYellow";
+					};
+				};
 			};
 
 			_marker = createMarkerLocal [format ["orbis_atc_trail_%1_%2", _target, _trailNum], _posMarker];

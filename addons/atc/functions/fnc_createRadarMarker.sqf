@@ -1,13 +1,13 @@
 #include "script_component.hpp"
 
-params ["_array", "_type", ["_mode", 2], ["_isObserver", false]];
+params ["_array", "_type", ["_mode", 2], ["_radarSide", civilian], ["_isObserver", false]];
 
 private ["_vehicle", "_speed", "_altitude", "_callsign", "_altitudeDisplay", "_verticalSpd", "_verticalTrend", "_speedDisplay", "_heading", "_side", "_markerColor",
 	"_line1", "_line2", "_line3", "_line4", "_marker0", "_marker1", "_marker2", "_marker3", "_marker4"
 ];
 private _return = [];
 {
-	if (_mode > 2) then {
+	if (_mode isEqualTo 3) then {
 		_vehicle = _x select 0;
 	} else {
 		_vehicle = _x;
@@ -16,23 +16,29 @@ private _return = [];
 	_speed = 3.6 * vectorMagnitude velocity _vehicle;
 	_altitude = getPosASL _vehicle select 2;
 
-	if (_mode < 3) then {
-		switch (GVAR(displayCallsign)) do {
-			case (1): {
-				_callsign = groupId group driver _vehicle;
-			};
-			case (2): {
-				_callsign = _vehicle getVariable [QGVAR(customCallsign), groupId group driver _vehicle];
-			};
-			default {
-				_callsign = name driver _vehicle;
+	switCh (_mode) do {
+		case (3): {
+			_callsign = getText (configFile >> "CfgWeapons" >> (_x select 1) >> "displayName");
+		};
+		case (4): {
+			_callsign = getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName");
+		};
+		default {
+			switch (GVAR(displayCallsign)) do {
+				case (1): {
+					_callsign = groupId group driver _vehicle;
+				};
+				case (2): {
+					_callsign = _vehicle getVariable [QGVAR(customCallsign), groupId group driver _vehicle];
+				};
+				default {
+					_callsign = name driver _vehicle;
+				};
 			};
 		};
-	} else {
-		_callsign = getText (configFile >> "CfgWeapons" >> (_x select 1) >> "displayName");
 	};
 
-	if (_mode > 2) then {
+	if (_mode isEqualTo 3) then {
 		_side = _x select 2;
 	} else {
 		_side = side driver _vehicle;
@@ -41,20 +47,30 @@ private _return = [];
 	if (_isObserver) then {
 		switch (_side) do {
 			case (west): {
-				_markerColor = "colorBLUFOR";
+				_markerColor = "ColorWEST";
 			};
 			case (east): {
-				_markerColor = "colorOPFOR";
+				_markerColor = "ColorEAST";
 			};
 			case (independent): {
-				_markerColor = "colorIndependent";
+				_markerColor = "ColorGUER";
 			};
 			default {
-				_markerColor = "colorCivilian";
+				_markerColor = "ColorCIV";
 			};
 		};
 	} else {
-		_markerColor = "colorBLUFOR";
+		switch (true) do {
+			case (_side isEqualTo _radarSide): {
+				_markerColor = "ColorWEST";
+			};
+			case (_side isEqualTo civilian): {
+				_markerColor = "ColorWEST";
+			};
+			default {
+				_markerColor = "ColorYellow";
+			};
+		};
 	};
 
 	if (GVAR(unitSettingAlt)) then {
@@ -78,7 +94,7 @@ private _return = [];
 	_line3 = "";
 	_line4 = "";
 
-	if (_mode > 1) then {
+	if (_mode in [2, 3]) then {
 		_line2 = format ["%1%2     %3", _altitudeDisplay, _verticalTrend, _speedDisplay];
 		_line3 = format ["%1", _heading];
 

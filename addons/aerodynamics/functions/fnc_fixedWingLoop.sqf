@@ -23,9 +23,10 @@ _aeroData params ["_throttleOld", "_modelVelocityOld", "_modelWindOld"];
 // correct fuel consumption
 private _throttleNew = airplaneThrottle _vehicle;
 private _throttle = (_throttleNew + _throttleOld) / 2;
+private _fuelCurrent = fuel _vehicle;
 private _fuelFlowDefault = 0.3 * _throttle ^ 2 + 0.03;
 private _fuelFlowEnhanced = (0.3 * _throttle ^ 2 + 0.03) * GVAR(fuelFlowMultiplier);
-_vehicle setFuel (fuel _vehicle - (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity));
+_vehicle setFuel (_fuelCurrent - (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity));
 
 // check for ammo on pylons
 private ["_magazineClass", "_ammoClass", "_massFull", "_countFull", "_massMagazine", "_airFriction", "_sideAirFriction", "_pylonDragCoef2"];
@@ -56,7 +57,7 @@ private ["_massCurrent", "_massFuel"];
 if (_massError) then {
 	_massCurrent = 10000;
 } else {
-	_massFuel = 0.8 * (fuel _vehicle) * _fuelCapacity;
+	_massFuel = 0.8 * _fuelCurrent * _fuelCapacity;
 	if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 		_massFuel = _massFuel + 0.8 * (_vehicle animationPhase "auxtank_switch") * _fuelCapacity;
 	};

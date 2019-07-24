@@ -20,12 +20,45 @@ _physicalProperty params ["_massError", "_massStandard", "_fuelCapacity"];
 private _aeroData = _vehicle getVariable [QGVAR(aeroData), [airplaneThrottle _vehicle, velocityModelSpace _vehicle, _vehicle vectorWorldToModel wind]];
 _aeroData params ["_throttleOld", "_modelVelocityOld", "_modelWindOld"];
 
+// atmosphere data setup
+private _altitudeASL = getPosASL _vehicle select 2;
+private ["_temperatureSL", "_pressureSL", "_humidity"];
+if (EGVAR(main,hasACEWeather)) then {
+	_temperatureSL = ace_weather_currentTemperature; // Celsius
+	_pressureSL = 0 call ace_weather_fnc_calculateBarometricPressure; // hPa
+	_humidity = ace_weather_currentHumidity; // relative
+} else {
+	_temperatureSL = 15; // Celsius
+	_pressureSL = 1013.25; // hPa
+	_humidity = linearConversion [0, 0.5, overcast, 0, 1, true]; // relative
+};
+
+private _temperatureArray = [_altitudeASL, _temperatureSL] call FUNC(getAirTemperature);
+private _temperature = _temperatureArray select 4; // Celsius
+private _pressure = [_altitudeASL, _temperatureArray, _pressureSL] call FUNC(getAirPressure); // hPa
+private _density = [_altitudeASL, _temperature, _pressure, _humidity] call FUNC(getAirDensity); // kg/m^3
+
+private _temperatureRatio = (_temperature + 273.15) / (_temperatureSL + 273.15);
+private _pressureRatio = _pressure / _pressureSL;
+private _densityRatio = _density / 1.2754;
+
+// get TAS and etc.
+private _modelVelocityNew = velocityModelSpace _vehicle;
+private _modelVelocity = (_modelVelocityNew vectorAdd _modelVelocityOld) vectorMultiply 0.5;
+private _modelWindNew = _vehicle vectorWorldToModel wind;
+private _modelWind = (_modelWindNew vectorAdd _modelWindOld) vectorMultiply 0.5;
+private _modelWindApply = _modelWind vectorMultiply GVAR(windMultiplier);
+private _trueAirVelocity = _modelVelocity vectorDiff _modelWindApply;
+private _altitudeAGLS = getPos _vehicle select 2;
+private _engineDamage = _vehicle getHitPointDamage "hitEngine";
+private _thrustVector = _vehicle animationSourcePhase "thrustVector";
+
 // correct fuel consumption
 private _throttleNew = airplaneThrottle _vehicle;
 private _throttle = (_throttleNew + _throttleOld) / 2;
 private _fuelCurrent = fuel _vehicle;
 private _fuelFlowDefault = 0.3 * _throttle ^ 2 + 0.03;
-private _fuelFlowEnhanced = (0.3 * _throttle ^ 2 + 0.03) * GVAR(fuelFlowMultiplier);
+private _fuelFlowEnhanced = [_throttle] call FUNC(getFuelFlowEnganced);
 _vehicle setFuel (_fuelCurrent - (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity));
 
 // check for ammo on pylons
@@ -78,39 +111,6 @@ if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 
 // devmode
 _dragMultiplier = _dragMultiplier * GVAR(dragMultiplier);
-
-// atmosphere data setup
-private _altitudeASL = getPosASL _vehicle select 2;
-private ["_temperatureSL", "_pressureSL", "_humidity"];
-if (EGVAR(main,hasACEWeather)) then {
-	_temperatureSL = ace_weather_currentTemperature; // Celsius
-	_pressureSL = 0 call ace_weather_fnc_calculateBarometricPressure; // hPa
-	_humidity = ace_weather_currentHumidity; // relative
-} else {
-	_temperatureSL = 15; // Celsius
-	_pressureSL = 1013.25; // hPa
-	_humidity = linearConversion [0, 0.5, overcast, 0, 1, true]; // relative
-};
-
-private _temperatureArray = [_altitudeASL, _temperatureSL] call FUNC(getAirTemperature);
-private _temperature = _temperatureArray select 4; // Celsius
-private _pressure = [_altitudeASL, _temperatureArray, _pressureSL] call FUNC(getAirPressure); // hPa
-private _density = [_altitudeASL, _temperature, _pressure, _humidity] call FUNC(getAirDensity); // kg/m^3
-
-private _temperatureRatio = (_temperature + 273.15) / (_temperatureSL + 273.15);
-private _pressureRatio = _pressure / _pressureSL;
-private _densityRatio = _density / 1.2754;
-
-// get TAS and etc.
-private _modelVelocityNew = velocityModelSpace _vehicle;
-private _modelVelocity = (_modelVelocityNew vectorAdd _modelVelocityOld) vectorMultiply 0.5;
-private _modelWindNew = _vehicle vectorWorldToModel wind;
-private _modelWind = (_modelWindNew vectorAdd _modelWindOld) vectorMultiply 0.5;
-private _modelWindApply = _modelWind vectorMultiply GVAR(windMultiplier);
-private _trueAirVelocity = _modelVelocity vectorDiff _modelWindApply;
-private _altitudeAGLS = getPos _vehicle select 2;
-private _engineDamage = _vehicle getHitPointDamage "hitEngine";
-private _thrustVector = _vehicle animationSourcePhase "thrustVector";
 
 // build parameter array
 private _paramDefault = [_modelVelocity, _massCurrent, _massError];

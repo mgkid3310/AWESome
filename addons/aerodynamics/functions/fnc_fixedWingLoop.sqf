@@ -58,7 +58,7 @@ private _throttleNew = airplaneThrottle _vehicle;
 private _throttle = (_throttleNew + _throttleOld) / 2;
 private _fuelCurrent = fuel _vehicle;
 private _fuelFlowDefault = 0.3 * _throttle ^ 2 + 0.03;
-private _fuelFlowEnhanced = [_throttle] call FUNC(getFuelFlowEnganced);
+private _fuelFlowEnhanced = [_throttle] call FUNC(getFuelFlowEnhanced);
 _vehicle setFuel (_fuelCurrent - (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity));
 
 // check for ammo on pylons

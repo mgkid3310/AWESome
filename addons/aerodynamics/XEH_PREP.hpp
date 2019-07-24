@@ -9,7 +9,7 @@ PREP(getAirPressure);
 PREP(getAirTemperature);
 PREP(getDragDefault);
 PREP(getDragEnhanced);
-PREP(getFuelFlowEnganced);
+PREP(getFuelFlowEnhanced);
 PREP(getLiftDefault);
 PREP(getLiftEnhanced);
 PREP(getThrustDefault);

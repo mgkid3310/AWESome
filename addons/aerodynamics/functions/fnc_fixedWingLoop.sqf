@@ -54,8 +54,8 @@ private _engineDamage = _vehicle getHitPointDamage "hitEngine";
 private _thrustVector = _vehicle animationSourcePhase "thrustVector";
 
 // correct fuel consumption
-private _throttleNew = airplaneThrottle _vehicle;
-private _throttle = (_throttleNew + _throttleOld) / 2;
+private _throttleInput = airplaneThrottle _vehicle;
+private _throttle = [_throttleOld, _throttleInput, _timeStep] call FUNC(getEffectiveThrottle);
 private _fuelCurrent = fuel _vehicle;
 private _fuelFlowDefault = 0.3 * _throttle ^ 2 + 0.03;
 private _fuelFlowEnhanced = [_throttle] call FUNC(getFuelFlowEnhanced);
@@ -162,4 +162,4 @@ _vehicle addForce [_vehicle vectorModelToWorld (_forceApply vectorMultiply _time
 // diag_log format ["orbis_aerodynamics _massCurrent: %1, _dragArrayEff: %2, _pylonDragArray: %3, _dragDefault: %4, _dragEnhanced: %5, _dragPylon: %6", _massCurrent, _dragArrayEff, _pylonDragArray, _dragDefault, _dragEnhanced, _dragPylon];
 // diag_log format ["orbis_aerodynamics _massCurrent: %1, _forceApply: %2, _timeStep: %3", _massCurrent, _forceApply, _timeStep];
 
-_vehicle setVariable [QGVAR(aeroData), [_throttleNew, _modelVelocityNew, _modelWindNew]];
+_vehicle setVariable [QGVAR(aeroData), [_throttle, _modelVelocityNew, _modelWindNew]];

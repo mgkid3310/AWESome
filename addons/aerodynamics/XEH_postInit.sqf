@@ -2,6 +2,8 @@
 
 // init global variables
 GVAR(frameInterval) = 1;
+GVAR(throttleClimbRate) = 0.4;
+GVAR(throttleDropRate) = 0.7;
 GVAR(pylonDragRatio) = 0.001; // Cd 0.1 for FIR Mk84
 GVAR(massStandardRatio) = 0.8;
 GVAR(fuelFlowMultiplier) = 1;

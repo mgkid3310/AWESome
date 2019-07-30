@@ -115,10 +115,10 @@ _dragMultiplier = _dragMultiplier * GVAR(dragMultiplier);
 // build parameter array
 private _paramDefault = [_modelVelocity, _massCurrent, _massError];
 private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityRatio, _altitudeAGLS];
+private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio];
 private _paramThrust = [_thrustCoef, _throttle, _engineDamage, _thrustVector];
 private _paramAltitude = [_altFullForce, _altNoForce, _altitudeASL];
 private _paramAtmosphere = [_temperatureRatio, _pressureRatio];
-private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio];
 
 // thrust correction
 private _thrustDefault = [_paramDefault, _paramThrust, _speedMax, _paramAltitude] call FUNC(getThrustDefault);

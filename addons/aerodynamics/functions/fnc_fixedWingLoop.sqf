@@ -58,7 +58,7 @@ private _throttleInput = airplaneThrottle _vehicle;
 private _throttle = [_throttleOld, _throttleInput, _timeStep] call FUNC(getEffectiveThrottle);
 private _fuelCurrent = fuel _vehicle;
 private _fuelFlowDefault = 0.3 * _throttle ^ 2 + 0.03;
-private _fuelFlowEnhanced = [_throttle] call FUNC(getFuelFlowEnhanced);
+private _fuelFlowEnhanced = [_vehicle, _throttle] call FUNC(getFuelFlowEnhanced);
 _vehicle setFuel (_fuelCurrent - (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity));
 
 // 3rd party support
@@ -114,11 +114,11 @@ if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 };
 
 // devmode
-_dragMultiplier = _dragMultiplier * GVAR(dragMultiplier);
+_dragMultiplier = _dragMultiplier * (_vehicle getVariable [QGVAR(dragMultiplier), 1]) * GVAR(dragMultiplierGlobal);
 
 // build parameter array
-private _paramDefault = [_modelVelocity, _massCurrent, _massError];
-private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityRatio, _altitudeAGLS];
+private _paramDefault = [_vehicle, _modelVelocity, _massCurrent, _massError];
+private _paramEnhanced = [_vehicle, _trueAirVelocity, _massStandard, _massError, _densityRatio, _altitudeAGLS];
 private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio];
 private _paramThrust = [_thrustCoef, _throttle, _engineDamage, _thrustVector];
 private _paramAltitude = [_altFullForce, _altNoForce, _altitudeASL];

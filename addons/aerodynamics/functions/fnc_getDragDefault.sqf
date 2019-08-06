@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 
 params ["_paramArray", "_dragArray", "_paramAltitude", "_isAdvanced"];
-_paramArray params ["_modelvelocity", "_massCurrent", "_massError"];
+_paramArray params ["_vehicle", "_modelvelocity", "_massCurrent", "_massError"];
 _dragArray params ["_coef2", "_coef1", "_coef0"];
 _paramAltitude params ["_altFullForce", "_altNoForce", "_altitude"];
 

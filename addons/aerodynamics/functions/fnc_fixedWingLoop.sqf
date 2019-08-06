@@ -62,8 +62,8 @@ private _fuelFlowEnhanced = [_throttle] call FUNC(getFuelFlowEnhanced);
 _vehicle setFuel (_fuelCurrent - (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity));
 
 // 3rd party support
-GVAR(effectiveThrottle) = _throttle;
-GVAR(fuelFlowEnhanced) = _fuelFlowEnhanced;
+_vehicle setVariable [QGVAR(effectiveThrottle), _throttle];
+_vehicle setVariable [QGVAR(fuelFlowEnhanced), _fuelFlowEnhanced];
 
 // check for ammo on pylons
 private ["_magazineClass", "_ammoClass", "_massFull", "_countFull", "_massMagazine", "_airFriction", "_sideAirFriction", "_pylonDragCoef2"];

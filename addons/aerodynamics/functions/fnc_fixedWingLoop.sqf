@@ -61,6 +61,10 @@ private _fuelFlowDefault = 0.3 * _throttle ^ 2 + 0.03;
 private _fuelFlowEnhanced = [_throttle] call FUNC(getFuelFlowEnhanced);
 _vehicle setFuel (_fuelCurrent - (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity));
 
+// 3rd party support
+GVAR(effectiveThrottle) = _throttle;
+GVAR(fuelFlowEnhanced) = _fuelFlowEnhanced;
+
 // check for ammo on pylons
 private ["_magazineClass", "_ammoClass", "_massFull", "_countFull", "_massMagazine", "_airFriction", "_sideAirFriction", "_pylonDragCoef2"];
 private _massPylon = 0;

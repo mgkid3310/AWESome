@@ -18,10 +18,10 @@ if (!GVAR(enabled) || (_vehicle isEqualTo player) || (_timeOld < 0) || (_frameOl
 if (diag_frameNo < (_frameOld + GVAR(frameInterval))) exitWith {};
 
 if ((driver _vehicle isEqualTo player) && (_vehicle isKindOf "Plane")) then {
-	missionNamespace setVariable [QGVAR(aerodynamicsActive), true];
+	missionNamespace setVariable [QGVAR(isActive), true];
 	[_vehicle, _timeOld] call FUNC(fixedWingLoop);
 } else {
-	missionNamespace setVariable [QGVAR(aerodynamicsActive), false];
+	missionNamespace setVariable [QGVAR(isActive), false];
 	if ((_vehicle getVariable [QGVAR(aeroData), false]) isEqualType []) then {
 		_vehicle setVariable [QGVAR(aeroData), nil];
 	};

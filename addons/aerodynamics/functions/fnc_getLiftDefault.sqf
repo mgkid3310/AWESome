@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 
 params ["_paramArray", "_liftArray", "_speedMax", "_angleOfIndicence"];
-_paramArray params ["_modelvelocity", "_massCurrent", "_massError"];
+_paramArray params ["_vehicle", "_modelvelocity", "_massCurrent", "_massError"];
 
 // if (_massError) exitWith {[0, 0, 0]};
 

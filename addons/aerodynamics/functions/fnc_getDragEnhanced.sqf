@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 
 params ["_paramArray", "_dragArray", "_dragMultiplier", ["_liftVector", false], ["_speedStall", 0]];
-_paramArray params ["_trueAirVelocity", "_massStandard", "_massError", "_densityRatio", "_height"];
+_paramArray params ["_vehicle", "_trueAirVelocity", "_massStandard", "_massError", "_densityRatio", "_height"];
 _dragArray params ["_coef2", "_coef1", "_coef0"];
 
 // if (_massError) exitWith {[0, 0, 0]};

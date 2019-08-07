@@ -119,7 +119,7 @@ _dragMultiplier = _dragMultiplier * (_vehicle getVariable [QGVAR(dragMultiplier)
 // build parameter array
 private _paramDefault = [_vehicle, _modelVelocity, _massCurrent, _massError];
 private _paramEnhanced = [_vehicle, _trueAirVelocity, _massStandard, _massError, _densityRatio, _altitudeAGLS];
-private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio];
+private _paramPylon = [_vehicle, _trueAirVelocity, _massPylon, _massError, _densityRatio];
 private _paramThrust = [_thrustCoef, _throttle, _engineDamage, _thrustVector];
 private _paramAltitude = [_altFullForce, _altNoForce, _altitudeASL];
 private _paramAtmosphere = [_temperatureRatio, _pressureRatio];

@@ -21,11 +21,7 @@ GVAR(geInducedDragMultiplier) = 0.6;
 GVAR(noForceoOnGround) = false;
 
 // add EventHandlers
-player addEventHandler ["GetInMan", {_this call FUNC(eventGetInMan)}];
 addMissionEventHandler ["EachFrame", {[] call FUNC(eachFrameHandler)}];
 
-if !(vehicle player isEqualTo player) then {
-	[player, "", vehicle player, []] call FUNC(eventGetInMan);
-};
-
-["Plane", "init", {_this call FUNC(vehicleInit)}, true, [], true] call CBA_fnc_addClassEventHandler;
+["Plane", "Init", {_this call FUNC(vehicleInit)}, true, [], true] call CBA_fnc_addClassEventHandler;
+["Plane", "LandedTouchDown", {_this call FUNC(eventTouchdown)}, true, [], true] call CBA_fnc_addClassEventHandler;

@@ -2,7 +2,11 @@
 
 private _vehicle = _this select 0;
 
-private ["_isAdvanced", "_dragArray", "_liftArray", "_angleOfIndicence", "_torqueXCoef", "_speedStall", "_speedMax", "_massError", "_massStandard", "_fuelCapacity"];
+private ["_isAdvanced",
+	"_dragArray", "_liftArray", "_angleOfIndicence", "_flapsFrictionCoef", "_gearsUpFrictionCoef", "_airBrakeFrictionCoef", "_torqueXCoef",
+	"_thrustCoef", "_altFullForce", "_altNoForce", "_speedStall", "_speedMax",
+	"_massError", "_massStandard", "_fuelCapacity"
+];
 private _className = typeOf _vehicle;
 private _class = (configFile >> "CfgVehicles" >> _className);
 
@@ -17,6 +21,9 @@ if (_isAdvanced) then {
 
 _liftArray = getArray (_class >> "envelope");
 _angleOfIndicence = getNumber (_class >> "angleOfIndicence");
+_flapsFrictionCoef = getNumber (_class >> "flapsFrictionCoef");
+_gearsUpFrictionCoef = getNumber (_class >> "gearsUpFrictionCoef");
+_airBrakeFrictionCoef = getNumber (_class >> "airBrakeFrictionCoef");
 if (isNumber (_class >> "draconicTorqueXCoef")) then {
 	_torqueXCoef = getNumber (_class >> "draconicTorqueXCoef");
 } else {
@@ -42,7 +49,7 @@ if !(_massStandard > 0) then {
 };
 _fuelCapacity = getNumber (_class >> "fuelCapacity");
 
-private _aerodynamicsArray = [_dragArray, _liftArray, _angleOfIndicence, _torqueXCoef];
+private _aerodynamicsArray = [_dragArray, _liftArray, _angleOfIndicence, _flapsFrictionCoef, _gearsUpFrictionCoef, _airBrakeFrictionCoef, _torqueXCoef];
 private _speedPerformance = [_thrustCoef, _altFullForce, _altNoForce, _speedStall, _speedMax];
 private _physicalProperty = [_massError, _massStandard, _fuelCapacity];
 private _return = [_isAdvanced, _aerodynamicsArray, _speedPerformance, _physicalProperty];

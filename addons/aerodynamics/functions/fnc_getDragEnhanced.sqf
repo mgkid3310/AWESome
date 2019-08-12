@@ -1,7 +1,8 @@
 #include "script_component.hpp"
 
-params ["_paramArray", "_dragArray", "_dragMultiplier", ["_liftVector", false], ["_speedStall", 0]];
-_paramArray params ["_vehicle", "_trueAirVelocity", "_massStandard", "_massError", "_densityRatio", "_height"];
+params ["_paramArray", "_paramDrag", ["_liftVector", false], ["_speedStall", 0]];
+_paramArray params ["_trueAirVelocity", "_massStandard", "_massError", "_densityRatio", "_height"];
+_paramDrag params ["_dragArray", "_dragMultiplier", "_flapsFCoef", "_flapStatus", "_gearsUpFCoef", "_gearStatus", "_airBrakeFCoef", "_airBrakeStatus"];
 _dragArray params ["_coef2", "_coef1", "_coef0"];
 
 // if (_massError) exitWith {[0, 0, 0]};
@@ -66,8 +67,10 @@ private _dragWave = [0, 0, 0];
 	_dragWave set [_velIndex, _force * _massStandard * _densityRatio * (GVAR(dragSourceMultiplier) select 2)];
 } forEach [[0, 0], [1, 2], [2, 1]];
 
-// sum up drags
-private _dragForceEnhanced = (_dragParasite vectorAdd _dragInduced vectorAdd _dragWave) vectorMultiply _dragMultiplier;
+// sum up drags (induced drag is not affected by flap/gear status)
+private _vehicleEffect = (_flapsFCoef * _flapStatus) + (_gearsUpFCoef * (1 - _gearStatus)) + (_airBrakeFCoef * _airBrakeStatus);
+private _dragForceEnhanced = (_dragParasite vectorAdd _dragWave) vectorMultiply (1 + _vehicleEffect);
+_dragForceEnhanced = (_dragForceEnhanced vectorAdd _dragInduced) vectorMultiply _dragMultiplier;
 
 // report if needed (dev script)
 // diag_log format ["orbis_aerodynamics _dragParasite: %1, _dragInduced: %2, _dragForceEnhanced: %3", _dragParasite, _dragInduced, _dragForceEnhanced];

@@ -1,8 +1,8 @@
 #include "script_component.hpp"
 
 params ["_paramArray", "_paramThrust", "_speedMax", "_paramAltitude"];
-_paramArray params ["_vehicle", "_modelvelocity", "_massCurrent", "_massError"];
-_paramThrust params ["_thrustCoef", "_throttle", "_engineDamage", "_thrustVector"];
+_paramArray params ["_modelvelocity", "_massCurrent", "_massError"];
+_paramThrust params ["_thrustCoef", "_thrustMultiplier", "_throttle", "_engineDamage", "_thrustVector"];
 _paramAltitude params ["_altFullForce", "_altNoForce", "_altitude"];
 
 // if (_massError) exitWith {[0, 0, 0]};

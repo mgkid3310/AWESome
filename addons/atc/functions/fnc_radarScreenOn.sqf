@@ -3,4 +3,4 @@
 if (player getVariable [QGVAR(isUsingRadar), false]) exitWith {};
 
 player setVariable [QGVAR(isUsingRadar), true];
-player setVariable [QGVAR(radarParam), _this];
+player setVariable [QGVAR(radarParam), [_this select 0, player]];

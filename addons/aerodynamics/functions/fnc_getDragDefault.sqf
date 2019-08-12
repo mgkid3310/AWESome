@@ -1,7 +1,8 @@
 #include "script_component.hpp"
 
-params ["_paramArray", "_dragArray", "_paramAltitude", "_isAdvanced"];
-_paramArray params ["_vehicle", "_modelvelocity", "_massCurrent", "_massError"];
+params ["_paramArray", "_paramDrag", "_paramAltitude", "_isAdvanced"];
+_paramArray params ["_modelvelocity", "_massCurrent", "_massError"];
+_paramDrag params ["_dragArray", "_dragMultiplier", "_flapsFCoef", "_flapStatus", "_gearsUpFCoef", "_gearStatus", "_airBrakeFCoef", "_airBrakeStatus"];
 _dragArray params ["_coef2", "_coef1", "_coef0"];
 _paramAltitude params ["_altFullForce", "_altNoForce", "_altitude"];
 
@@ -31,6 +32,9 @@ if (_isAdvanced) then {
 };
 
 _dragForceDefault = _dragForceDefault vectorMultiply linearConversion [_altFullForce, _altNoForce, _altitude, 1, 0, true];
+
+private _vehicleEffect = (_flapsFCoef * _flapStatus) + (_gearsUpFCoef * (1 - _gearStatus)) + (_airBrakeFCoef * _airBrakeStatus);
+_dragForceDefault = _dragForceDefault vectorMultiply (1 + _vehicleEffect);
 
 // report if needed (dev script)
 // diag_log format ["orbis_aerodynamics _dragForceDefault: %1", _dragForceDefault];

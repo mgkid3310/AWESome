@@ -13,7 +13,7 @@ if !(_aeroConfigs isEqualType []) then {
 };
 
 _aeroConfigs params ["_isAdvanced", "_aerodynamicsArray", "_speedPerformance", "_physicalProperty"];
-_aerodynamicsArray params ["_dragArray", "_liftArray", "_angleOfIndicence", "_torqueXCoef"];
+_aerodynamicsArray params ["_dragArray", "_liftArray", "_angleOfIndicence", "_flapsFCoef", "_gearsUpFCoef", "_airBrakeFCoef", "_torqueXCoef"];
 _speedPerformance params ["_thrustCoef", "_altFullForce", "_altNoForce", "_speedStall", "_speedMax"];
 _physicalProperty params ["_massError", "_massStandard", "_fuelCapacity"];
 
@@ -52,6 +52,9 @@ private _trueAirVelocity = _modelVelocity vectorDiff _modelWindApply;
 private _altitudeAGLS = getPos _vehicle select 2;
 private _engineDamage = _vehicle getHitPointDamage "hitEngine";
 private _thrustVector = _vehicle animationSourcePhase "thrustVector";
+private _flapStatus = _vehicle animationSourcePhase "flap";
+private _gearStatus = _vehicle animationSourcePhase "gear";
+private _airBrakeStatus = _vehicle animationSourcePhase "speedBrake";
 
 // correct fuel consumption
 private _throttleInput = airplaneThrottle _vehicle;
@@ -102,9 +105,10 @@ if (_massError) then {
 };
 _vehicle setMass _massCurrent;
 
-// get effective drag config
-private _dragArrayEff = _dragArray;
-private _dragMultiplier = 1;
+// calculate multipliers
+private _thrustMultiplier = (_vehicle getVariable [QGVAR(thrustMultiplier), 1]) * GVAR(thrustMultiplierGlobal);
+private _liftMultiplier = (_vehicle getVariable [QGVAR(liftMultiplier), 1]) * GVAR(liftMultiplierGlobal);
+private _dragMultiplier = (_vehicle getVariable [QGVAR(dragMultiplier), 1]) * GVAR(dragMultiplierGlobal);
 
 // F/A-18 canopy compatibility
 if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
@@ -113,14 +117,14 @@ if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 	};
 };
 
-// devmode
-_dragMultiplier = _dragMultiplier * (_vehicle getVariable [QGVAR(dragMultiplier), 1]) * GVAR(dragMultiplierGlobal);
-
 // build parameter array
-private _paramDefault = [_vehicle, _modelVelocity, _massCurrent, _massError];
-private _paramEnhanced = [_vehicle, _trueAirVelocity, _massStandard, _massError, _densityRatio, _altitudeAGLS];
-private _paramPylon = [_vehicle, _trueAirVelocity, _massPylon, _massError, _densityRatio];
-private _paramThrust = [_thrustCoef, _throttle, _engineDamage, _thrustVector];
+private _paramDefault = [_modelVelocity, _massCurrent, _massError];
+private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityRatio, _altitudeAGLS];
+private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio];
+private _paramThrust = [_thrustCoef, _thrustMultiplier, _throttle, _engineDamage, _thrustVector];
+private _paramLift = [_liftArray, _liftMultiplier, _flapsFCoef, _flapStatus];
+private _paramDrag = [_dragArray, _dragMultiplier, _flapsFCoef, _flapStatus, _gearsUpFCoef, _gearStatus, _airBrakeFCoef, _airBrakeStatus];
+private _paramPylonDrag = [_pylonDragArray, _dragMultiplier, 0, 0, 0, 1, 0, 0];
 private _paramAltitude = [_altFullForce, _altNoForce, _altitudeASL];
 private _paramAtmosphere = [_temperatureRatio, _pressureRatio];
 
@@ -130,14 +134,14 @@ private _thrustEnhanced = [_paramEnhanced, _paramThrust, _speedMax, _paramAtmosp
 private _thrustCorrection = _thrustEnhanced vectorDiff _thrustDefault;
 
 // get lift force correction
-private _liftDefault = [_paramDefault, _liftArray, _speedMax, _angleOfIndicence] call FUNC(getLiftDefault);
-private _liftEnhanced = [_paramEnhanced, _liftArray, _speedMax, _angleOfIndicence] call FUNC(getLiftEnhanced);
+private _liftDefault = [_paramDefault, _paramLift, _speedMax, _angleOfIndicence] call FUNC(getLiftDefault);
+private _liftEnhanced = [_paramEnhanced, _paramLift, _speedMax, _angleOfIndicence] call FUNC(getLiftEnhanced);
 private _liftCorrection = _liftEnhanced vectorDiff _liftDefault;
 
 // get drag force correction
-private _dragDefault = [_paramDefault, _dragArrayEff, _paramAltitude, _isAdvanced] call FUNC(getDragDefault);
-private _dragEnhanced = [_paramEnhanced, _dragArrayEff, _dragMultiplier, _liftEnhanced, _speedStall] call FUNC(getDragEnhanced);
-private _dragPylon = [_paramPylon, _pylonDragArray, _dragMultiplier] call FUNC(getDragEnhanced);
+private _dragDefault = [_paramDefault, _paramDrag, _paramAltitude, _isAdvanced] call FUNC(getDragDefault);
+private _dragEnhanced = [_paramEnhanced, _paramDrag, _liftEnhanced, _speedStall] call FUNC(getDragEnhanced);
+private _dragPylon = [_paramPylon, _paramPylonDrag] call FUNC(getDragEnhanced);
 private _dragCorrection = (_dragEnhanced vectorAdd _dragPylon) vectorDiff _dragDefault;
 
 // get torque correction
@@ -163,7 +167,7 @@ _vehicle addForce [_vehicle vectorModelToWorld (_forceApply vectorMultiply _time
 // _vehicle addtorque [_vehicle vectorModelToWorld (_torqueCorrection vectorMultiply _timeStep)];
 
 // report if needed (dev script)
-// diag_log format ["orbis_aerodynamics _massCurrent: %1, _dragArrayEff: %2, _pylonDragArray: %3, _dragDefault: %4, _dragEnhanced: %5, _dragPylon: %6", _massCurrent, _dragArrayEff, _pylonDragArray, _dragDefault, _dragEnhanced, _dragPylon];
-// diag_log format ["orbis_aerodynamics _massCurrent: %1, _forceApply: %2, _timeStep: %3", _massCurrent, _forceApply, _timeStep];
+// diag_log format ["orbis_aerodynamics _thrustDefault: %1, _thrustEnhanced: %2, _liftDefault: %3, _liftEnhanced: %4", _thrustDefault, _thrustEnhanced, _liftDefault, _liftEnhanced];
+// diag_log format ["orbis_aerodynamics _massCurrent: %1, _dragDefault: %2, _dragEnhanced: %3, _dragPylon: %4", _massCurrent, _dragDefault, _dragEnhanced, _dragPylon];
 
 _vehicle setVariable [QGVAR(aeroData), [_throttle, _modelVelocityNew, _modelWindNew]];

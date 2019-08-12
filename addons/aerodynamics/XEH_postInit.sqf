@@ -19,9 +19,10 @@ GVAR(geFactor) = 0.1;
 GVAR(geLiftMultiplier) = 0.6;
 GVAR(geInducedDragMultiplier) = 0.6;
 GVAR(noForceoOnGround) = false;
+GVAR(compensateCrabLanding) = true;
 
 // add EventHandlers
 addMissionEventHandler ["EachFrame", {[] call FUNC(eachFrameHandler)}];
 
 ["Plane", "Init", {_this call FUNC(vehicleInit)}, true, [], true] call CBA_fnc_addClassEventHandler;
-["Plane", "LandedTouchDown", {_this call FUNC(eventTouchdown)}, true, [], true] call CBA_fnc_addClassEventHandler;
+// ["Plane", "LandedTouchDown", {_this call FUNC(eventTouchdown)}, true, [], true] call CBA_fnc_addClassEventHandler;

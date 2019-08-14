@@ -11,7 +11,7 @@ private _liftValue = [_liftArray, _speedMax, 1.25 / (count _liftArray - 1), _spe
 
 GVAR(liftFlapFactor) params ["_speedL", "_speedH", "_factorL", "_factorH"];
 private _flapFactor = _flapsFCoef * _flapStatus * linearConversion [_speedL, _speedH, _speedKPH / _speedMax, _factorL, _factorH, true];
-_liftValue = _liftValue * _liftMultiplier * (1 + _flapFactor);
+_liftValue = _liftValue * (1 + _flapFactor);
 
 private _liftForceDefault = [0, 0, _liftValue * GVAR(liftGFactor) * _massCurrent];
 

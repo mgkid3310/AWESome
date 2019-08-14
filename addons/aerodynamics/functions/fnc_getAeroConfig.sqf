@@ -21,9 +21,21 @@ if (_isAdvanced) then {
 
 _liftArray = getArray (_class >> "envelope");
 _angleOfIndicence = getNumber (_class >> "angleOfIndicence");
-_flapsFrictionCoef = getNumber (_class >> "flapsFrictionCoef");
-_gearsUpFrictionCoef = getNumber (_class >> "gearsUpFrictionCoef");
-_airBrakeFrictionCoef = getNumber (_class >> "airBrakeFrictionCoef");
+if (getNumber (_class >> "flaps") > 0) then {
+	_flapsFrictionCoef = getNumber (_class >> "flapsFrictionCoef");
+} else {
+	_flapsFrictionCoef = 0;
+};
+if (getNumber (_class >> "gearRetracting") > 0) then {
+	_gearsUpFrictionCoef = getNumber (_class >> "gearsUpFrictionCoef");
+} else {
+	_gearsUpFrictionCoef = 0;
+};
+if (getNumber (_class >> "airBrake") > 0) then {
+	_airBrakeFrictionCoef = getNumber (_class >> "airBrakeFrictionCoef");
+} else {
+	_airBrakeFrictionCoef = 0;
+};
 if (isNumber (_class >> "draconicTorqueXCoef")) then {
 	_torqueXCoef = getNumber (_class >> "draconicTorqueXCoef");
 } else {

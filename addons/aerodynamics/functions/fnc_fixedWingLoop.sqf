@@ -17,8 +17,8 @@ _aerodynamicsArray params ["_dragArray", "_liftArray", "_angleOfIndicence", "_fl
 _speedPerformance params ["_thrustCoef", "_altFullForce", "_altNoForce", "_speedStall", "_speedMax"];
 _physicalProperty params ["_massError", "_massStandard", "_fuelCapacity"];
 
-private _aeroData = _vehicle getVariable [QGVAR(aeroData), [airplaneThrottle _vehicle, velocityModelSpace _vehicle, _vehicle vectorWorldToModel wind]];
-_aeroData params ["_throttleOld", "_modelVelocityOld", "_modelWindOld"];
+private _fWingData = _vehicle getVariable [QGVAR(fWingData), [airplaneThrottle _vehicle, velocityModelSpace _vehicle, _vehicle vectorWorldToModel wind]];
+_fWingData params ["_throttleOld", "_modelVelocityOld", "_modelWindOld"];
 
 // atmosphere data setup
 private _altitudeASL = getPosASL _vehicle select 2;
@@ -161,7 +161,9 @@ if ((isTouchingGround _vehicle) && GVAR(noForceoOnGround)) then {
 };
 
 // calculate and apply required impulse (force times timestep)
-_vehicle addForce [_vehicle vectorModelToWorld (_forceApply vectorMultiply _timeStep), getCenterOfMass _vehicle];
+if (GVAR(applyForce)) then {
+	_vehicle addForce [_vehicle vectorModelToWorld (_forceApply vectorMultiply _timeStep), getCenterOfMass _vehicle];
+};
 
 // calculate and apply required angular impulse (torque times timestep)
 // _vehicle addtorque [_vehicle vectorModelToWorld (_torqueCorrection vectorMultiply _timeStep)];
@@ -170,4 +172,4 @@ _vehicle addForce [_vehicle vectorModelToWorld (_forceApply vectorMultiply _time
 // diag_log format ["orbis_aerodynamics _thrustDefault: %1, _thrustEnhanced: %2, _liftDefault: %3, _liftEnhanced: %4", _thrustDefault, _thrustEnhanced, _liftDefault, _liftEnhanced];
 // diag_log format ["orbis_aerodynamics _massCurrent: %1, _dragDefault: %2, _dragEnhanced: %3, _dragPylon: %4", _massCurrent, _dragDefault, _dragEnhanced, _dragPylon];
 
-_vehicle setVariable [QGVAR(aeroData), [_throttle, _modelVelocityNew, _modelWindNew]];
+_vehicle setVariable [QGVAR(fWingData), [_throttle, _modelVelocityNew, _modelWindNew]];

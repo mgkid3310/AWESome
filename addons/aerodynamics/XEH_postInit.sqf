@@ -13,6 +13,7 @@ GVAR(dragMultiplierGlobal) = 1;
 GVAR(dragSourceMultiplier) = [1.0, 0.1, 1.0];
 GVAR(thrustFactor) = 3.6;
 GVAR(liftGFactor) = 2.5;
+GVAR(liftFlapFactor) = [0.27, 0.5, 3.0, 0.5];
 GVAR(waveCdArray) = [0.7, 0.98, 1.0, 1.03, 2.4, 0.2, 0.1, -3.5];
 GVAR(wingHeight) = 1;
 GVAR(wingSpan) = 12;
@@ -20,6 +21,7 @@ GVAR(geFactor) = 0.1;
 GVAR(geLiftMultiplier) = 0.6;
 GVAR(geInducedDragMultiplier) = 0.6;
 GVAR(noForceoOnGround) = false;
+GVAR(applyForce) = true;
 GVAR(compensateCrabLanding) = true;
 
 // add EventHandlers

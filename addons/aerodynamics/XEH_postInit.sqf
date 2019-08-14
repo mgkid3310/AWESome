@@ -20,6 +20,7 @@ GVAR(geFactor) = 0.1;
 GVAR(geLiftMultiplier) = 0.6;
 GVAR(geInducedDragMultiplier) = 0.6;
 GVAR(noForceoOnGround) = false;
+GVAR(applyForce) = true;
 GVAR(compensateCrabLanding) = true;
 
 // add EventHandlers

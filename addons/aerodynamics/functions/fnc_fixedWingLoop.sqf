@@ -161,7 +161,9 @@ if ((isTouchingGround _vehicle) && GVAR(noForceoOnGround)) then {
 };
 
 // calculate and apply required impulse (force times timestep)
-_vehicle addForce [_vehicle vectorModelToWorld (_forceApply vectorMultiply _timeStep), getCenterOfMass _vehicle];
+if (GVAR(applyForce)) then {
+	_vehicle addForce [_vehicle vectorModelToWorld (_forceApply vectorMultiply _timeStep), getCenterOfMass _vehicle];
+};
 
 // calculate and apply required angular impulse (torque times timestep)
 // _vehicle addtorque [_vehicle vectorModelToWorld (_torqueCorrection vectorMultiply _timeStep)];

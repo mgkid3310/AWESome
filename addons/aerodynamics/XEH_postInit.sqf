@@ -13,6 +13,7 @@ GVAR(dragMultiplierGlobal) = 1;
 GVAR(dragSourceMultiplier) = [1.0, 0.1, 1.0];
 GVAR(thrustFactor) = 3.6;
 GVAR(liftGFactor) = 2.5;
+GVAR(liftFlapFactor) = [0.5, 0.27, 3.0, 0.5];
 GVAR(waveCdArray) = [0.7, 0.98, 1.0, 1.03, 2.4, 0.2, 0.1, -3.5];
 GVAR(wingHeight) = 1;
 GVAR(wingSpan) = 12;

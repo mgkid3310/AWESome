@@ -42,6 +42,12 @@ private _temperatureRatio = (_temperature + 273.15) / (_temperatureSL + 273.15);
 private _pressureRatio = _pressure / _pressureSL;
 private _densityRatio = _density / 1.2754;
 
+// calculate multipliers
+private _fuelFlowMultiplier = (_vehicle getVariable [QGVAR(fuelFlowMultiplier), 1]) * GVAR(fuelFlowMultiplierGlobal);
+private _thrustMultiplier = (_vehicle getVariable [QGVAR(thrustMultiplier), 1]) * GVAR(thrustMultiplierGlobal);
+private _liftMultiplier = (_vehicle getVariable [QGVAR(liftMultiplier), 1]) * GVAR(liftMultiplierGlobal);
+private _dragMultiplier = (_vehicle getVariable [QGVAR(dragMultiplier), 1]) * GVAR(dragMultiplierGlobal);
+
 // get TAS and etc.
 private _modelVelocityNew = velocityModelSpace _vehicle;
 private _modelVelocity = (_modelVelocityNew vectorAdd _modelVelocityOld) vectorMultiply 0.5;
@@ -61,7 +67,7 @@ private _throttleInput = airplaneThrottle _vehicle;
 private _throttle = [_throttleOld, _throttleInput, _timeStep] call FUNC(getEffectiveThrottle);
 private _fuelCurrent = fuel _vehicle;
 private _fuelFlowDefault = 0.3 * _throttle ^ 2 + 0.03;
-private _fuelFlowEnhanced = [_vehicle, _throttle] call FUNC(getFuelFlowEnhanced);
+private _fuelFlowEnhanced = [_throttle, _fuelFlowMultiplier] call FUNC(getFuelFlowEnhanced);
 _vehicle setFuel (_fuelCurrent - (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity));
 
 // 3rd party support
@@ -104,11 +110,6 @@ if (_massError) then {
 	_massCurrent = (_massStandard * GVAR(massStandardRatio)) + _massFuel + _massPylon;
 };
 _vehicle setMass _massCurrent;
-
-// calculate multipliers
-private _thrustMultiplier = (_vehicle getVariable [QGVAR(thrustMultiplier), 1]) * GVAR(thrustMultiplierGlobal);
-private _liftMultiplier = (_vehicle getVariable [QGVAR(liftMultiplier), 1]) * GVAR(liftMultiplierGlobal);
-private _dragMultiplier = (_vehicle getVariable [QGVAR(dragMultiplier), 1]) * GVAR(dragMultiplierGlobal);
 
 // F/A-18 canopy compatibility
 if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {

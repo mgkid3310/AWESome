@@ -19,7 +19,7 @@ if ((_weapon in GVAR(ChaffFlareList)) && !(_vehicle getVariable [QGVAR(CMrunning
 	_vehicle setVariable [QGVAR(CMrunning), true];
 
 	DEV_CHAT("orbis_gpws: f16ChaffFlare waiting");
-	waitUntil {((_vehicle getVariable [QGVAR(isGPWSready), -1]) < time) || !((alive _vehicle) && (player in _vehicle))};
+	waitUntil {((_vehicle getVariable [QGVAR(nextGPWStime), -1]) < time) || !((alive _vehicle) && (player in _vehicle))};
 
 	if ((alive _vehicle) && (player in _vehicle)) then {
 		switch (true) do {

@@ -5,7 +5,7 @@ private _vehicle = _this select 0;
 private _sound = _this select 1;
 private _duration = param [2, getNumber (configFile >> "CfgSounds" >> _sound >> "length")];
 private _delay = param [3, 0];
-private _mode = param [4, QGVAR(isGPWSready)];
+private _mode = param [4, QGVAR(nextGPWStime)];
 
 private _volumeLow = _vehicle getVariable [QGVAR(GPWSvolumeLow), false];
 if (_volumeLow) then {

@@ -50,7 +50,7 @@ switch (_damageWarnLevel) do {
 };
 
 // GPWS general speach
-if ((_vehicle getVariable [QGVAR(isGPWSready), -1]) < time) then {
+if ((_vehicle getVariable [QGVAR(nextGPWStime), -1]) < time) then {
 	switch (true) do {
 		// rita_pullUp (inFlight)
 		case ((_expectTerrainAlt > (_posExpect select 2)) && (_flightphase isEqualTo "inFlight")): {

@@ -26,20 +26,20 @@ if ((_weapon in GVAR(ChaffFlareList)) && !(_vehicle getVariable [QGVAR(CMrunning
 			// f16_chaffFlareOut
 			case (_resultingAmmo <= 0): {
 				DEV_CHAT("orbis_gpws: f16_chaffFlareOut");
-				[_vehicle, "f16_chaffFlareOut"] spawn FUNC(speakGPWS);
+				[_vehicle, "f16_chaffFlareOut"] call FUNC(speakGPWS);
 			};
 
 			// f16_chaffFlareLow
 			case ((_resultingAmmo <= _lowCMcount) && !(_vehicle getVariable [QGVAR(lowCMalerted), false])): {
 				DEV_CHAT("orbis_gpws: f16_chaffFlareLow");
-				[_vehicle, "f16_chaffFlareLow"] spawn FUNC(speakGPWS);
+				[_vehicle, "f16_chaffFlareLow"] call FUNC(speakGPWS);
 				_vehicle setVariable [QGVAR(lowCMalerted), true];
 			};
 
 			// f16_chaffFlare
 			default {
 				DEV_CHAT("orbis_gpws: f16_chaffFlare");
-				[_vehicle, "f16_chaffFlare"] spawn FUNC(speakGPWS);
+				[_vehicle, "f16_chaffFlare"] call FUNC(speakGPWS);
 			};
 		};
 	};

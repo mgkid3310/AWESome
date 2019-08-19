@@ -4,7 +4,7 @@
 private _vehicle = _this select 0;
 
 private _loadData = _vehicle getVariable [QGVAR(b747Data), [time, [], false, false, 0]];
-_loadData params ["_timeOld", "_criticalWarningLog", "_gearwarned", "_flapsWarned", "_bankWarnedTime"];
+_loadData params ["_timeOld", "_criticalWarningLog", "_gearWarned", "_flapsWarned", "_bankWarnTime"];
 
 if !(_timeOld < time) exitWith {
 	_vehicle setVariable [QGVAR(b747Data), _loadData];
@@ -151,11 +151,11 @@ if (_vehicle getVariable [QGVAR(isGPWSready), true]) then {
 		};
 
 		// b747_BNKANGL
-		case ((time + 5 > _bankWarnedTime) && (abs _bankAngle > GVAR(maxBankAngle))): {
+		case ((_bankWarnTime + 5 < time) && (abs _bankAngle > GVAR(maxBankAngle))): {
 			DEV_CHAT("orbis_gpws: b747_BNKANGL");
 			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "b747_BNKANGL", GVAR(delay)] spawn FUNC(speakGPWS);
-			_bankWarnedTime = time;
+			_bankWarnTime = time;
 		};
 
 		// b747_FLAPS (inFlight, landing, final)
@@ -289,4 +289,4 @@ if (_vehicle getVariable [QGVAR(isGPWSready), true]) then {
 	};
 };
 
-_vehicle setVariable [QGVAR(b747Data), [time, _criticalWarningLog, _gearwarned, _flapsWarned, _bankWarnedTime]];
+_vehicle setVariable [QGVAR(b747Data), [time, _criticalWarningLog, _gearWarned, _flapsWarned, _bankWarnTime]];

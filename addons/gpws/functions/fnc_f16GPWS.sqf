@@ -4,7 +4,7 @@
 private _vehicle = _this select 0;
 
 private _loadData = _vehicle getVariable [QGVAR(f16Data), [time, []/* , objNull */]];
-_loadData params ["_timeOld", "_ctrWarnOld"/* , "_targetOld" */];
+_loadData params ["_timeOld", "_ctrWarnOld", "_altitudeWarnTime"/* , "_target", "_targetOld" */];
 
 if !(_timeOld < time) exitWith {
 	_vehicle setVariable [QGVAR(f16Data), _loadData];
@@ -105,10 +105,11 @@ if (_vehicle getVariable [QGVAR(isGPWSready), true]) then {
 		};
 
 		// f16_altitude (inFlight)
-		case ((_altRadar < GVAR(f16LowAltitude)) && (_flightphase isEqualTo "inFlight")): {
+		case ((_altitudeWarnTime + 5 < time) && (_altRadar < GVAR(f16LowAltitude)) && (_flightphase isEqualTo "inFlight")): {
 			DEV_CHAT("orbis_gpws: f16_altitude");
 			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "f16_altitude"] spawn FUNC(speakGPWS);
+			_altitudeWarnTime = time;
 		};
 
 		// f16_warning
@@ -168,4 +169,4 @@ if (_vehicle getVariable [QGVAR(isGPWSreadyBeep), true]) then {
 	};
 };
 
-_vehicle setVariable [QGVAR(f16Data), [time, _ctrWarnOld, _target/* , _targetOld */]];
+_vehicle setVariable [QGVAR(f16Data), [time, _ctrWarnOld, _altitudeWarnTime/* , _target, _targetOld */]];

@@ -105,7 +105,7 @@ if ((_altInfo == 1000) && (_altRadar > (1200 * EGVAR(main,ftToM)))) then {
 _vehicle setVariable [QGVAR(altInformLevel), _altInfo];
 
 // GPWS general speech work
-if ((_vehicle getVariable [QGVAR(isGPWSready), -1]) < time) then {
+if ((_vehicle getVariable [QGVAR(nextGPWStime), -1]) < time) then {
 
 	// log & update critical warnings
 	if (_terrainWarn || _dontSink || _sinkRate) then {

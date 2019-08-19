@@ -50,40 +50,35 @@ switch (_damageWarnLevel) do {
 };
 
 // GPWS general speach
-if (_vehicle getVariable [QGVAR(isGPWSready), true]) then {
+if ((_vehicle getVariable [QGVAR(isGPWSready), -1]) < time) then {
 	switch (true) do {
 		// rita_pullUp (inFlight)
 		case ((_expectTerrainAlt > (_posExpect select 2)) && (_flightphase isEqualTo "inFlight")): {
 			DEV_CHAT("orbis_gpws: rita_pullUp");
-			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "rita_pullUp"] spawn FUNC(speakGPWS);
 		};
 
 		// rita_altitude (inFlight)
 		case ((_altRadar < GVAR(ritaLowAltitude)) && (_flightphase isEqualTo "inFlight")): {
 			DEV_CHAT("orbis_gpws: rita_altitude");
-			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "rita_altitude"] spawn FUNC(speakGPWS);
 		};
 
 		// rita_overload
 		case ((_cosAOA < cos GVAR(ritaMaxAOA)) && (speed _vehicle > 50)): {
 			DEV_CHAT("orbis_gpws: rita_overload");
-			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "rita_overload"] spawn FUNC(speakGPWS);
 		};
 
 		// rita_angle (takeOff / inFlight / landing / final)
 		case ((_pitchAngle < GVAR(ritaMaxDive)) && (_flightphase in ["takeOff", "inFlight", "landing", "final"])): {
 			DEV_CHAT("orbis_gpws: rita_angle");
-			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "rita_angle"] spawn FUNC(speakGPWS);
 		};
 
 		// rita_speed
 		case (_currentSpeed > (getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "maxSpeed"))): {
 			DEV_CHAT("orbis_gpws: rita_speed");
-			_vehicle setVariable [QGVAR(isGPWSready), false];
 			[_vehicle, "rita_speed"] spawn FUNC(speakGPWS);
 		};
 

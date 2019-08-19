@@ -108,7 +108,7 @@
 	};
 	class f16_lowSpeed {
 		name = "F16 Low Speed";
-		length = 1.50;
+		length = 1.60;
 		sound[] = {QPATHTOF(sounds\F16\LOW_SPEED.ogg), F16_VOL, 1};
 		titles[] = {};
 	};

@@ -77,55 +77,55 @@ if ((_vehicle getVariable [QGVAR(isGPWSready), -1]) < time) then {
 		// f16_counter
 		case (_counterGo): {
 			DEV_CHAT("orbis_gpws: f16_counter");
-			[_vehicle, "f16_counter"] spawn FUNC(speakGPWS);
+			[_vehicle, "f16_counter"] call FUNC(speakGPWS);
 			_ctrWarnOld = _ctrWarnMSLs;
 		};
 
 		// f16_jammer
 		/* case (_jammerGo): {
 			DEV_CHAT("orbis_gpws: f16_jammer");
-			[_vehicle, "f16_jammer"] spawn FUNC(speakGPWS);
+			[_vehicle, "f16_jammer"] call FUNC(speakGPWS);
 			_vehicle setVariable ["radarLocks", _targeting];
 		}; */
 
 		// f16_IFF
 		/* case (_IFFgo): {
 			DEV_CHAT("orbis_gpws: f16_IFF");
-			[_vehicle, "f16_IFF"] spawn FUNC(speakGPWS);
+			[_vehicle, "f16_IFF"] call FUNC(speakGPWS);
 			_IFFgo = false;
 		}; */
 
 		// f16_pullUp (inFlight)
 		case ((_expectTerrainAlt > (_posExpect select 2)) && (_flightphase isEqualTo "inFlight")): {
 			DEV_CHAT("orbis_gpws: f16_pullUp");
-			[_vehicle, "f16_pullUp"] spawn FUNC(speakGPWS);
+			[_vehicle, "f16_pullUp"] call FUNC(speakGPWS);
 		};
 
 		// f16_altitude (inFlight)
 		case ((_altitudeWarnTime + 5 < time) && (_altRadar < GVAR(f16LowAltitude)) && (_flightphase isEqualTo "inFlight")): {
 			DEV_CHAT("orbis_gpws: f16_altitude");
-			[_vehicle, "f16_altitude"] spawn FUNC(speakGPWS);
+			[_vehicle, "f16_altitude"] call FUNC(speakGPWS);
 			_altitudeWarnTime = time;
 		};
 
 		// f16_warning
 		case ((_damageNow > GVAR(warningDamageLevel)) && (_damageWarnLevel < 2)): {
 			DEV_CHAT("orbis_gpws: f16_warning");
-			[_vehicle, "f16_warning"] spawn FUNC(speakGPWS);
+			[_vehicle, "f16_warning"] call FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(damageWarnLevel), 2];
 		};
 
 		// f16_caution
 		case ((_damageNow > GVAR(cautionDamageLevel)) && (_damageWarnLevel < 1)): {
 			DEV_CHAT("orbis_gpws: f16_caution");
-			[_vehicle, "f16_caution"] spawn FUNC(speakGPWS);
+			[_vehicle, "f16_caution"] call FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(damageWarnLevel), 1];
 		};
 
 		// f16_bingo
 		case ((fuel _vehicle < GVAR(f16BingoFuel)) && !(_vehicle getVariable ["bingoAlerted", false])): {
 			DEV_CHAT("orbis_gpws: f16_bingo");
-			[_vehicle, "f16_bingo"] spawn FUNC(speakGPWS);
+			[_vehicle, "f16_bingo"] call FUNC(speakGPWS);
 			_vehicle setVariable ["bingoAlerted", true];
 		};
 
@@ -139,20 +139,20 @@ if ((_vehicle getVariable [QGVAR(isGPWSreadyBeep), -1]) < time) then {
 		// f16_SAM
 		/* case (_samGo): {
 			DEV_CHAT("orbis_gpws: f16_SAM");
-			[_vehicle, "f16_SAM", nil, nil, QGVAR(isGPWSreadyBeep)] spawn FUNC(speakGPWS);
+			[_vehicle, "f16_SAM", nil, nil, QGVAR(isGPWSreadyBeep)] call FUNC(speakGPWS);
 			_samGo = false;
 		}; */
 
 		// f16_lowSpeed
 		case ((speed _vehicle < _speedStall) && !(isTouchingGround _vehicle)): {
 			DEV_CHAT("orbis_gpws: f16_lowSpeed");
-			[_vehicle, "f16_lowSpeed", nil, nil, QGVAR(isGPWSreadyBeep)] spawn FUNC(speakGPWS);
+			[_vehicle, "f16_lowSpeed", nil, nil, QGVAR(isGPWSreadyBeep)] call FUNC(speakGPWS);
 		};
 
 		// f16_highAOA
 		case ((_cosAOA < cos GVAR(f16MaxAOA)) && (speed _vehicle > 50)): {
 			DEV_CHAT("orbis_gpws: f16_highAOA");
-			[_vehicle, "f16_highAOA", nil, nil, QGVAR(isGPWSreadyBeep)] spawn FUNC(speakGPWS);
+			[_vehicle, "f16_highAOA", nil, nil, QGVAR(isGPWSreadyBeep)] call FUNC(speakGPWS);
 		};
 
 		default {};

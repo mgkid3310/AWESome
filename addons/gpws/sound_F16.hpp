@@ -72,7 +72,7 @@
 	};
 	class f16_highAOA {
 		name = "F16 High AOA";
-		length = 0.993;
+		length = 0.998;
 		sound[] = {QPATHTOF(sounds\F16\HIGH_AOA.ogg), F16_VOL, 1};
 		titles[] = {};
 	};
@@ -108,7 +108,7 @@
 	};
 	class f16_lowSpeed {
 		name = "F16 Low Speed";
-		length = 1.54;
+		length = 1.59;
 		sound[] = {QPATHTOF(sounds\F16\LOW_SPEED.ogg), F16_VOL, 1};
 		titles[] = {};
 	};

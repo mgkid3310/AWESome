@@ -2,7 +2,6 @@
 #include "header_macros.hpp"
 
 params ["_unit", "_role", "_vehicle", "_turret"];
-
 DEV_CHAT("orbis_gpws: getInMan run");
 
 if !([_unit, _vehicle, 1] call EFUNC(main,isCrew)) exitWith {};

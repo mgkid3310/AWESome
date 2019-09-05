@@ -2,7 +2,10 @@
 #include "header_macros.hpp"
 
 DEV_CHAT("orbis_gpws: f16ChaffFlare run");
-params ["_vehicle", "_weapon", "_muzzle", "_mode"];
+params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
+
+if (_projectile in GVAR(f16ChaffFlareProjectiles)) exitWith {};
+GVAR(f16ChaffFlareProjectiles) pushBack _projectile;
 
 if ((_weapon in GVAR(ChaffFlareList)) && !(_vehicle getVariable [QGVAR(CMrunning), false])) then {
 	DEV_CHAT("orbis_gpws: f16ChaffFlare active");

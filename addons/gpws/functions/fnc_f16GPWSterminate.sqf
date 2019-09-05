@@ -8,4 +8,4 @@ private _gpwsEventHandlers = _vehicle getVariable [QGVAR(GPWSeventHandlers), [_c
 _vehicle removeEventHandler ["Fired", _gpwsEventHandlers select 0];
 _vehicle removeEventHandler ["IncomingMissile", _gpwsEventHandlers select 1];
 
-GVAR(f16ChaffFlareProjectiles) = [];
+// GVAR(f16ChaffFlareProjectiles) = [];

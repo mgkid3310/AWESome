@@ -11,7 +11,7 @@ if !(_timeOld < time) exitWith {
 };
 
 // cleanup chaff flare array
-GVAR(f16ChaffFlareProjectiles) = GVAR(f16ChaffFlareProjectiles) select {alive _x};
+// GVAR(f16ChaffFlareProjectiles) = GVAR(f16ChaffFlareProjectiles) select {alive _x};
 
 // flight status check
 private _altAGLS = getPos _vehicle select 2;

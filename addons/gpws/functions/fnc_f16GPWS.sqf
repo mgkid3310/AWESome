@@ -10,6 +10,9 @@ if !(_timeOld < time) exitWith {
 	_vehicle setVariable [QGVAR(f16Data), _loadData];
 };
 
+// cleanup chaff flare array
+GVAR(f16ChaffFlareProjectiles) = GVAR(f16ChaffFlareProjectiles) select {alive _x};
+
 // flight status check
 private _altAGLS = getPos _vehicle select 2;
 private _altASL = getPosASL _vehicle select 2;

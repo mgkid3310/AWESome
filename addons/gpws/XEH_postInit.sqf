@@ -19,7 +19,7 @@ GVAR(minAlt) = 250;
 GVAR(delay) = 2.0;
 
 // f16
-GVAR(ChaffFlareList) = ["CMFlareLauncher", "FIR_CMLauncher", "js_w_fa18_CMFlareLauncher"];
+GVAR(ChaffFlareList) = ["CMFlareLauncher", "FIR_CMLauncher", "js_w_fa18_CMFlareLauncher", "js_w_fa18_CMChaffLauncher"];
 GVAR(f16PullupTime) = 4;
 GVAR(f16LowAltitude) = 50;
 GVAR(f16MaxAOA) = 20; // deg
@@ -71,3 +71,5 @@ if !(vehicle player isEqualTo player) then {
 };
 player addEventHandler ["GetInMan", {_this spawn FUNC(getInMan)}];
 addMissionEventHandler ["EachFrame", {[] call FUNC(eachFrameHandler)}];
+
+["Plane", "Init", {_this call FUNC(vehicleInit)}, true, [], true] call CBA_fnc_addClassEventHandler;

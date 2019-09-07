@@ -1,48 +1,76 @@
 #include "script_component.hpp"
 #include "header_macros.hpp"
 
-DEV_CHAT("orbis_gpws: f16ChaffFlare run");
 params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
+DEV_CHAT("orbis_gpws: f16ChaffFlare run");
 
-if ((_weapon in GVAR(ChaffFlareList)) && !(_unit getVariable [QGVAR(CMrunning), false])) then {
-	DEV_CHAT("orbis_gpws: f16ChaffFlare active");
-	private _CMammoCount = 0;
-	{
-		_CMammoCount = _CMammoCount + (_x select 2);
-	} forEach ((magazinesAllTurrets _unit) select {_x select 0 in getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines")});
-	private _ammosFired = (getNumber (configFile >> "CfgWeapons" >> _weapon >> _mode >> "burst")) * (getNumber (configFile >> "CfgWeapons" >> _weapon >> _mode >> "multiplier"));
-	private _resultingAmmo = _CMammoCount - _ammosFired;
-	private _lowCMcount = getNumber (configFile >> "CfgVehicles" >> (typeOf _unit) >> QGVAR(lowCMcount));
+if !(_weapon in GVAR(ChaffFlareList)) exitWith {};
+DEV_CHAT("orbis_gpws: f16ChaffFlare active");
 
-	if (_unit getVariable [QGVAR(nextCMcount), _CMammoCount] < _CMammoCount) exitWith {};
-	_unit setVariable [QGVAR(nextCMcount), _resultingAmmo];
-	_unit setVariable [QGVAR(CMrunning), true];
+private _weaponState = weaponState [_unit, [-1], _weapon];
+private _CMammoCount = _weaponState select 4;
 
-	DEV_CHAT("orbis_gpws: f16ChaffFlare waiting");
-	waitUntil {((_unit getVariable [QGVAR(nextGPWStime), -1]) < time) || !((alive _unit) && (player in _unit))};
+private _burstNumber = getNumber (configFile >> "CfgWeapons" >> _weapon >> _mode >> "burst");
+private _multiplier = getNumber (configFile >> "CfgWeapons" >> _weapon >> _mode >> "multiplier");
+private _ammosFired = _burstNumber * _multiplier;
+if ((typeOf _unit) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
+	if (_weapon == "js_w_fa18_CMFlareLauncher") then {
+		_ammosFired = _ammosFired * (js_jc_fa18_ew_CMRpt * js_jc_fa18_ew_flareNum);
+	};
+	if (_weapon == "js_w_fa18_CMChaffLauncher") then {
+		_ammosFired = _ammosFired * (js_jc_fa18_ew_CMRpt * js_jc_fa18_ew_chaffNum);
+	};
+};
 
-	if ((alive _unit) && (player in _unit)) then {
-		switch (true) do {
-			// f16_chaffFlareOut
-			case (_resultingAmmo <= 0): {
-				DEV_CHAT("orbis_gpws: f16_chaffFlareOut");
-				[_unit, "f16_chaffFlareOut"] call FUNC(speakGPWS);
-			};
+private _nextCMcountArray = _unit getVariable [QGVAR(nextCMcountArray), []];
+private _weaponCMarray = _nextCMcountArray select {_x select 0 == _weapon};
+private _nextCMarray = [[_weapon, _mode, _CMammoCount, _CMammoCount], _weaponCMarray select 0] select (count _weaponCMarray > 0);
+_nextCMarray params ["_weaponOld", "_modeOld", "_nextCMcount", "_CMammoCountOld"];
 
-			// f16_chaffFlareLow
-			case ((_resultingAmmo <= _lowCMcount) && !(_unit getVariable [QGVAR(lowCMalerted), false])): {
-				DEV_CHAT("orbis_gpws: f16_chaffFlareLow");
-				[_unit, "f16_chaffFlareLow"] call FUNC(speakGPWS);
-				_unit setVariable [QGVAR(lowCMalerted), true];
-			};
+private _fullMagAmmo = getNumber (configFile >> "CfgMagazines" >> (_weaponState select 3) >> "count");
+if (!(_CMammoCount < _CMammoCountOld) && (_CMammoCount < _fullMagAmmo)) then {_nextCMcount = _CMammoCount};
+if ((_modeOld == _mode) && (_nextCMcount < _CMammoCount)) exitWith {};
 
-			// f16_chaffFlare
-			default {
-				DEV_CHAT("orbis_gpws: f16_chaffFlare");
-				[_unit, "f16_chaffFlare"] call FUNC(speakGPWS);
-			};
+private _resultingAmmo = (_CMammoCount - _ammosFired) max 0;
+private _lowCMcount = getNumber (configFile >> "CfgVehicles" >> (typeOf _unit) >> QGVAR(lowCMcount));
+private _lowCMalerted = _unit getVariable [QGVAR(lowCMalerted), false];
+if ((_resultingAmmo > _lowCMcount) && _lowCMalerted) then {
+	_unit setVariable [QGVAR(lowCMalerted), false];
+	_lowCMalerted = false;
+};
+
+_nextCMcountArray = _nextCMcountArray - _weaponCMarray;
+_nextCMcountArray pushBack [_weapon, _mode, _resultingAmmo, _CMammoCount];
+_unit setVariable [QGVAR(nextCMcountArray), _nextCMcountArray];
+
+if !((alive _unit) && ((_unit getVariable [QGVAR(GPWSmodeLocal), "off"]) == "f16") && ([player, _unit, 1] call EFUNC(main,isCrew))) exitWith {};
+if ((_unit getVariable [QGVAR(lastChaffFlaretime), -1]) + 0.86 > time) exitWith {};
+
+DEV_CHAT("orbis_gpws: f16ChaffFlare waiting");
+waitUntil {(_unit getVariable [QGVAR(nextGPWStime), -1]) < time};
+
+if ((alive _unit) && ((_unit getVariable [QGVAR(GPWSmodeLocal), "off"]) == "f16") && ([player, _unit, 1] call EFUNC(main,isCrew))) then {
+	switch (true) do {
+		// f16_chaffFlareOut
+		case (_resultingAmmo <= 0): {
+			DEV_CHAT("orbis_gpws: f16_chaffFlareOut");
+			[_unit, "f16_chaffFlareOut"] call FUNC(speakGPWS);
+			_unit setVariable [QGVAR(lastChaffFlaretime), time];
+		};
+
+		// f16_chaffFlareLow
+		case ((_resultingAmmo <= _lowCMcount) && !_lowCMalerted): {
+			DEV_CHAT("orbis_gpws: f16_chaffFlareLow");
+			[_unit, "f16_chaffFlareLow"] call FUNC(speakGPWS);
+			_unit setVariable [QGVAR(lastChaffFlaretime), time];
+			_unit setVariable [QGVAR(lowCMalerted), true];
+		};
+
+		// f16_chaffFlare
+		default {
+			DEV_CHAT("orbis_gpws: f16_chaffFlare");
+			[_unit, "f16_chaffFlare"] call FUNC(speakGPWS);
+			_unit setVariable [QGVAR(lastChaffFlaretime), time];
 		};
 	};
-
-	_unit setVariable [QGVAR(CMrunning), false];
 };

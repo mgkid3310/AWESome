@@ -22,3 +22,4 @@ PREP(ritaGPWStest);
 PREP(speakGPWS);
 PREP(startGPWS);
 PREP(terminateGPWS);
+PREP(vehicleInit);

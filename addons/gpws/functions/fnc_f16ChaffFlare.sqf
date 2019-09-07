@@ -59,7 +59,7 @@ if ((alive _unit) && ((_unit getVariable [QGVAR(GPWSmodeLocal), "off"]) == "f16"
 		};
 
 		// f16_chaffFlareLow
-		case ((_resultingAmmo <= _lowCMcount) && !_lowCMalerted): {
+		case (((_resultingAmmo + _multiplier) <= _lowCMcount) && !_lowCMalerted): {
 			DEV_CHAT("orbis_gpws: f16_chaffFlareLow");
 			[_unit, "f16_chaffFlareLow"] call FUNC(speakGPWS);
 			_unit setVariable [QGVAR(lastChaffFlaretime), time];

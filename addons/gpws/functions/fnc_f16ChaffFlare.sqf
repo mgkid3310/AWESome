@@ -27,7 +27,7 @@ private _weaponCMarray = _nextCMcountArray select {_x select 0 == _weapon};
 private _nextCMarray = [[_weapon, _mode, _CMammoCount, _CMammoCount], _weaponCMarray select 0] select (count _weaponCMarray > 0);
 _nextCMarray params ["_weaponOld", "_modeOld", "_nextCMcount", "_CMammoCountOld"];
 
-private _fullMagAmmo = getNumber (configFile >> "CfgMagazines" >> (_weaponState select 3) >> "count");
+private _fullMagAmmo = getNumber (configFile >> "CfgMagazines" >> _magazine >> "count");
 if (!(_CMammoCount < _CMammoCountOld) && (_CMammoCount <= _fullMagAmmo)) then {_nextCMcount = _CMammoCount};
 if ((_modeOld == _mode) && (_nextCMcount < _CMammoCount)) exitWith {};
 

@@ -7,9 +7,6 @@ DEV_CHAT("orbis_gpws: f16ChaffFlare run");
 if !(_weapon in GVAR(ChaffFlareList)) exitWith {};
 DEV_CHAT("orbis_gpws: f16ChaffFlare active");
 
-private _weaponState = weaponState [_unit, [-1], _weapon];
-private _CMammoCount = _weaponState select 4;
-
 private _burstNumber = getNumber (configFile >> "CfgWeapons" >> _weapon >> _mode >> "burst");
 private _multiplier = getNumber (configFile >> "CfgWeapons" >> _weapon >> _mode >> "multiplier");
 private _ammosFired = _burstNumber * _multiplier;
@@ -22,21 +19,24 @@ if ((typeOf _unit) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 	};
 };
 
+private _weaponState = weaponState [_unit, [-1], _weapon];
+private _CMammoCount = (_weaponState select 4) + _multiplier;
+
 private _nextCMcountArray = _unit getVariable [QGVAR(nextCMcountArray), []];
 private _weaponCMarray = _nextCMcountArray select {_x select 0 == _weapon};
 private _nextCMarray = [[_weapon, _mode, _CMammoCount, _CMammoCount], _weaponCMarray select 0] select (count _weaponCMarray > 0);
 _nextCMarray params ["_weaponOld", "_modeOld", "_nextCMcount", "_CMammoCountOld"];
 
 private _fullMagAmmo = getNumber (configFile >> "CfgMagazines" >> (_weaponState select 3) >> "count");
-if (!(_CMammoCount < _CMammoCountOld) && (_CMammoCount < _fullMagAmmo)) then {_nextCMcount = _CMammoCount};
+if (!(_CMammoCount < _CMammoCountOld) && (_CMammoCount <= _fullMagAmmo)) then {_nextCMcount = _CMammoCount};
 if ((_modeOld == _mode) && (_nextCMcount < _CMammoCount)) exitWith {};
 
-private _resultingAmmo = (_CMammoCount - _ammosFired) max 0;
+private _resultingAmmo = _CMammoCount - _ammosFired;
 private _lowCMcount = getNumber (configFile >> "CfgVehicles" >> (typeOf _unit) >> QGVAR(lowCMcount));
-private _lowCMalerted = _unit getVariable [QGVAR(lowCMalerted), false];
-if ((_resultingAmmo > _lowCMcount) && _lowCMalerted) then {
-	_unit setVariable [QGVAR(lowCMalerted), false];
-	_lowCMalerted = false;
+private _lowCMalerted = _unit getVariable [QGVAR(lowCMalerted), []];
+if ((_resultingAmmo > _lowCMcount) && (_weapon in _lowCMalerted)) then {
+	_lowCMalerted = _lowCMalerted - [_weapon];
+	_unit setVariable [QGVAR(lowCMalerted), _lowCMalerted];
 };
 
 _nextCMcountArray = _nextCMcountArray - _weaponCMarray;
@@ -59,11 +59,11 @@ if ((alive _unit) && ((_unit getVariable [QGVAR(GPWSmodeLocal), "off"]) == "f16"
 		};
 
 		// f16_chaffFlareLow
-		case (((_resultingAmmo + _multiplier) <= _lowCMcount) && !_lowCMalerted): {
+		case ((_resultingAmmo <= _lowCMcount) && !(_weapon in _lowCMalerted)): {
 			DEV_CHAT("orbis_gpws: f16_chaffFlareLow");
 			[_unit, "f16_chaffFlareLow"] call FUNC(speakGPWS);
 			_unit setVariable [QGVAR(lastChaffFlaretime), time];
-			_unit setVariable [QGVAR(lowCMalerted), true];
+			_unit setVariable [QGVAR(lowCMalerted), _lowCMalerted + [_weapon]];
 		};
 
 		// f16_chaffFlare

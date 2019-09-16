@@ -15,7 +15,7 @@ private _isReplay = !(_replay < 0);
 if (_isReplay && (_replay < count (missionNamespace getVariable [QGVAR(radarReplayData), []]))) exitWith {};
 
 private ["_time", "_replayData", "_replayTime"];
-_replayData = (missionNamespace getVariable [QGVAR(radarReplayData), []) select _replay;
+_replayData = (missionNamespace getVariable [QGVAR(radarReplayData), []]) select _replay;
 _replayTime = missionNamespace getVariable [QGVAR(radarReplayTime), false];
 if !(_replayTime isEqualType 0) then {
 	_replayTime = time;

@@ -2,20 +2,26 @@
 
 private _player = param [0, player];
 private _vehicle = param [1, vehicle _player];
-private _mode = param [2, 0]; // 0: both, 1: plane, 2: heli
+private _mode = param [2, 0]; // -1: pass, 0: plane/heli, 1: plane, 2: heli
 
-if !(_player in _vehicle) exitWith {false};
+if !(_player in crew _vehicle) exitWith {false};
+
+private _typeMatch = false;
 switch (_mode) do {
 	case (0): {
-		if !((_vehicle isKindOf "Plane") || (_vehicle isKindOf "Helicopter")) exitWith {false};
+		_typeMatch = (_vehicle isKindOf "Plane") || (_vehicle isKindOf "Helicopter");
 	};
 	case (1): {
-		if !(_vehicle isKindOf "Plane") exitWith {false};
+		_typeMatch = _vehicle isKindOf "Plane";
 	};
 	case (2): {
-		if !(_vehicle isKindOf "Helicopter") exitWith {false};
+		_typeMatch = _vehicle isKindOf "Helicopter";
+	};
+	default {
+		_typeMatch = true;
 	};
 };
+if !(_typeMatch) exitWith {false};
 
 private _role = [];
 if (_player getVariable [QGVAR(hasAWESomeMain), false]) then {

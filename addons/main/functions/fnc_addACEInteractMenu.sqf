@@ -5,7 +5,7 @@ private _actionMain = [
 	"AWESome",
 	"",
 	{},
-	{[] call FUNC(isCrew)},
+	{[_player, _target, 0] call FUNC(isCrew)},
 	{},
 	[],
 	[0, 0, 0],

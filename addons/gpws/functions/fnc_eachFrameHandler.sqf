@@ -4,7 +4,7 @@ private _vehicle = vehicle player;
 private _timeOld = missionNamespace getVariable [QGVAR(timeOld), -1];
 private _frameOld = missionNamespace getVariable [QGVAR(frameOld), -1];
 
-if (!([nil, nil, 1] call EFUNC(main,isCrew)) || !(alive _vehicle) || (_timeOld < 0) || (_frameOld < 0)) exitWith {
+if (!([player, _vehicle, 1] call EFUNC(main,isCrew)) || !(alive _vehicle) || (_timeOld < 0) || (_frameOld < 0)) exitWith {
 	missionNamespace setVariable [QGVAR(timeOld), time];
 	missionNamespace setVariable [QGVAR(frameOld), diag_frameNo];
 };

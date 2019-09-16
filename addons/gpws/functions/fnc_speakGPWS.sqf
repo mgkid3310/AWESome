@@ -13,7 +13,8 @@ if (_volumeLow) then {
 };
 
 if !((alive _vehicle) && (player in _vehicle)) exitWith {};
-playSound _sound;
 
-if (isNil {_duration}) exitWith {_duration = 0};
+[QEGVAR(main,playSoundVehicle), [_sound]] call CBA_fnc_localEvent;
+
+if (isNil {_duration}) then {_duration = 0};
 _vehicle setVariable [_mode, time + _duration + _delay];

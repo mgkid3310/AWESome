@@ -1,6 +1,7 @@
 #include "script_component.hpp"
 
-params ["_baseArray", "_windArray", "_visibilityArray", "_cloudArray", "_atmosphereArray", "_remarksArray"];
+params ["_vehicle", "_ATISdata", ["_mode", 0]];
+_ATISdata params ["_baseArray", "_windArray", "_visibilityArray", "_cloudArray", "_atmosphereArray", "_remarksArray"];
 
 _baseArray params ["_pos", "_date"];
 _windArray params ["_windDir", "_windStr", "_gusts"];
@@ -9,97 +10,97 @@ _cloudArray params ["_overcast", "_cloudBaseKm", "_cloudHeightKm"];
 _atmosphereArray params ["_hasACEWeather", "_temperature", "_dewPoint", "_QFE"];
 _remarksArray params ["_rain", "_lightnings"];
 
-vehicle player setVariable [QGVAR(isATISready), false, true];
-vehicle player setVariable [QGVAR(stopATIS), false, true];
-vehicle player setVariable [QGVAR(lastATIStime), CBA_missionTime, true];
+_vehicle setVariable [QGVAR(isATISready), false];
+_vehicle setVariable [QGVAR(stopATIS), false];
+_vehicle setVariable [QGVAR(lastATIStime), CBA_missionTime];
 
 // time
-[format ["orbis_phonetic_%1", floor ((_date select 3) / 10)]] call FUNC(playAndSleep);
-[format ["orbis_phonetic_%1", floor ((_date select 3) % 10)]] call FUNC(playAndSleep);
-[format ["orbis_phonetic_%1", floor ((_date select 4) / 10)]] call FUNC(playAndSleep);
-[format ["orbis_phonetic_%1", floor ((_date select 4) % 10)]] call FUNC(playAndSleep);
-["orbis_phonetic_z"] call FUNC(playAndSleep);
-["orbis_common_observation"] call FUNC(playAndSleep);
+[_vehicle, format ["orbis_phonetic_%1", floor ((_date select 3) / 10)], _mode] call FUNC(playAndSleep);
+[_vehicle, format ["orbis_phonetic_%1", floor ((_date select 3) % 10)], _mode] call FUNC(playAndSleep);
+[_vehicle, format ["orbis_phonetic_%1", floor ((_date select 4) / 10)], _mode] call FUNC(playAndSleep);
+[_vehicle, format ["orbis_phonetic_%1", floor ((_date select 4) % 10)], _mode] call FUNC(playAndSleep);
+[_vehicle, "orbis_phonetic_z", _mode] call FUNC(playAndSleep);
+[_vehicle, "orbis_common_observation", _mode] call FUNC(playAndSleep);
 
-sleep 0.3;
+ATIS_SLEEP(0.3)
 
 // wind direction
-["orbis_common_wind"] call FUNC(playAndSleep);
+[_vehicle, "orbis_common_wind", _mode] call FUNC(playAndSleep);
 
-sleep 0.1;
+ATIS_SLEEP(0.1)
 
-[format ["orbis_phonetic_%1", floor (_windDir / 100)]] call FUNC(playAndSleep);
-[format ["orbis_phonetic_%1", floor ((_windDir % 100) / 10)]] call FUNC(playAndSleep);
-[format ["orbis_phonetic_%1", floor (_windDir % 10)]] call FUNC(playAndSleep);
+[_vehicle, format ["orbis_phonetic_%1", floor (_windDir / 100)], _mode] call FUNC(playAndSleep);
+[_vehicle, format ["orbis_phonetic_%1", floor ((_windDir % 100) / 10)], _mode] call FUNC(playAndSleep);
+[_vehicle, format ["orbis_phonetic_%1", floor (_windDir % 10)], _mode] call FUNC(playAndSleep);
 
 // wind speed
-["orbis_common_at"] call FUNC(playAndSleep);
-[_windStr] call FUNC(speakNumber);
+[_vehicle, "orbis_common_at", _mode] call FUNC(playAndSleep);
+[_vehicle, _windStr, 0, _mode] call FUNC(speakNumber);
 
 // gust
-/* ["orbis_common_gusting"] call FUNC(playAndSleep);
-[_gusts] call FUNC(speakNumber); */
+/* [_vehicle, "orbis_common_gusting", _mode] call FUNC(playAndSleep);
+[_vehicle, _gusts, 0, _mode] call FUNC(speakNumber); */
 
-sleep 0.3;
+ATIS_SLEEP(0.3)
 
 // visibility
-["orbis_common_visibility"] call FUNC(playAndSleep);
+[_vehicle, "orbis_common_visibility", _mode] call FUNC(playAndSleep);
 if (_visibility >= 10) then {
-	["orbis_phonetic_1"] call FUNC(playAndSleep);
-	["orbis_phonetic_0"] call FUNC(playAndSleep);
+	[_vehicle, "orbis_phonetic_1", _mode] call FUNC(playAndSleep);
+	[_vehicle, "orbis_phonetic_0", _mode] call FUNC(playAndSleep);
 } else {
-	[_visibility, -1] call FUNC(speakNumber);
+	[_vehicle, _visibility, -1, _mode] call FUNC(speakNumber);
 };
 
-sleep 0.3;
+ATIS_SLEEP(0.3)
 
 // cloud
-/* ["orbis_common_scattered"] call FUNC(playAndSleep);
-["orbis_phonetic_1"] call FUNC(playAndSleep);
-["orbis_common_hundred"] call FUNC(playAndSleep);
-["orbis_common_broken"] call FUNC(playAndSleep);
-["orbis_phonetic_1"] call FUNC(playAndSleep);
-["orbis_common_thousand"] call FUNC(playAndSleep);
+/* [_vehicle, "orbis_common_scattered", _mode] call FUNC(playAndSleep);
+[_vehicle, "orbis_phonetic_1", _mode] call FUNC(playAndSleep);
+[_vehicle, "orbis_common_hundred", _mode] call FUNC(playAndSleep);
+[_vehicle, "orbis_common_broken", _mode] call FUNC(playAndSleep);
+[_vehicle, "orbis_phonetic_1", _mode] call FUNC(playAndSleep);
+[_vehicle, "orbis_common_thousand", _mode] call FUNC(playAndSleep);
 
-sleep 0.3; */
+ATIS_SLEEP(0.3) */
 
 if (_hasACEWeather) then {
 	// temperature
-	["orbis_common_temperature"] call FUNC(playAndSleep);
-	[_temperature] call FUNC(speakNumber);
+	[_vehicle, "orbis_common_temperature", _mode] call FUNC(playAndSleep);
+	[_vehicle, _temperature, 0, _mode] call FUNC(speakNumber);
 
 	// dewpoint
-	["orbis_common_dewpoint"] call FUNC(playAndSleep);
-	[_dewPoint] call FUNC(speakNumber);
+	[_vehicle, "orbis_common_dewpoint", _mode] call FUNC(playAndSleep);
+	[_vehicle, _dewPoint, 0, _mode] call FUNC(speakNumber);
 
-	sleep 0.3;
+	ATIS_SLEEP(0.3)
 
 	// altimeter
-	["orbis_common_altimeter"] call FUNC(playAndSleep);
-	[_QFE] call FUNC(speakNumber);
+	[_vehicle, "orbis_common_altimeter", _mode] call FUNC(playAndSleep);
+	[_vehicle, _QFE, 0, _mode] call FUNC(speakNumber);
 
-	sleep 0.3;
+	ATIS_SLEEP(0.3)
 };
 
 // remarks
 if ((_fogApply > 0) || (!(_overcast < 0.7) && (_rain > 0)) || (!(_overcast < 0.4) && (_lightnings > 0.1))) then {
-	["orbis_common_remarks"] call FUNC(playAndSleep);
+	[_vehicle, "orbis_common_remarks", _mode] call FUNC(playAndSleep);
 
 	// fog
 	switch (true) do {
 		case (_fogApply > 0.7): {
-			sleep 0.2;
-			["orbis_common_heavy"] call FUNC(playAndSleep);
-			["orbis_common_fog"] call FUNC(playAndSleep);
+			ATIS_SLEEP(0.2)
+			[_vehicle, "orbis_common_heavy", _mode] call FUNC(playAndSleep);
+			[_vehicle, "orbis_common_fog", _mode] call FUNC(playAndSleep);
 		};
 		case (_fogApply > 0.3): {
-			sleep 0.2;
-			["orbis_common_fog"] call FUNC(playAndSleep);
+			ATIS_SLEEP(0.2)
+			[_vehicle, "orbis_common_fog", _mode] call FUNC(playAndSleep);
 		};
 		case (_fogApply > 0): {
-			sleep 0.2;
-			["orbis_common_light"] call FUNC(playAndSleep);
-			["orbis_common_fog"] call FUNC(playAndSleep);
+			ATIS_SLEEP(0.2)
+			[_vehicle, "orbis_common_light", _mode] call FUNC(playAndSleep);
+			[_vehicle, "orbis_common_fog", _mode] call FUNC(playAndSleep);
 		};
 	};
 
@@ -107,18 +108,18 @@ if ((_fogApply > 0) || (!(_overcast < 0.7) && (_rain > 0)) || (!(_overcast < 0.4
 	if !(_overcast < 0.7) then {
 		switch (true) do {
 			case (_rain > 0.7): {
-				sleep 0.2;
-				["orbis_common_heavy"] call FUNC(playAndSleep);
-				["orbis_common_rain"] call FUNC(playAndSleep);
+				ATIS_SLEEP(0.2)
+				[_vehicle, "orbis_common_heavy", _mode] call FUNC(playAndSleep);
+				[_vehicle, "orbis_common_rain", _mode] call FUNC(playAndSleep);
 			};
 			case (_rain > 0.3): {
-				sleep 0.2;
-				["orbis_common_rain"] call FUNC(playAndSleep);
+				ATIS_SLEEP(0.2)
+				[_vehicle, "orbis_common_rain", _mode] call FUNC(playAndSleep);
 			};
 			case (_rain > 0): {
-				sleep 0.2;
-				["orbis_common_light"] call FUNC(playAndSleep);
-				["orbis_common_rain"] call FUNC(playAndSleep);
+				ATIS_SLEEP(0.2)
+				[_vehicle, "orbis_common_light", _mode] call FUNC(playAndSleep);
+				[_vehicle, "orbis_common_rain", _mode] call FUNC(playAndSleep);
 			};
 		};
 	};
@@ -127,22 +128,22 @@ if ((_fogApply > 0) || (!(_overcast < 0.7) && (_rain > 0)) || (!(_overcast < 0.4
 	if !(_overcast < 0.4) then {
 		switch (true) do {
 			case (_lightnings > 0.7): {
-				sleep 0.2;
-				["orbis_common_heavy"] call FUNC(playAndSleep);
-				["orbis_common_lightning"] call FUNC(playAndSleep);
+				ATIS_SLEEP(0.2)
+				[_vehicle, "orbis_common_heavy", _mode] call FUNC(playAndSleep);
+				[_vehicle, "orbis_common_lightning", _mode] call FUNC(playAndSleep);
 			};
 			case (_lightnings > 0.3): {
-				sleep 0.2;
-				["orbis_common_lightning"] call FUNC(playAndSleep);
+				ATIS_SLEEP(0.2)
+				[_vehicle, "orbis_common_lightning", _mode] call FUNC(playAndSleep);
 			};
 			case (_lightnings > 0.1): {
-				sleep 0.2;
-				["orbis_common_light"] call FUNC(playAndSleep);
-				["orbis_common_lightning"] call FUNC(playAndSleep);
+				ATIS_SLEEP(0.2)
+				[_vehicle, "orbis_common_light", _mode] call FUNC(playAndSleep);
+				[_vehicle, "orbis_common_lightning", _mode] call FUNC(playAndSleep);
 			};
 		};
 	};
 };
 
-vehicle player setVariable [QGVAR(isATISready), true, true];
-vehicle player setVariable [QGVAR(stopATIS), true, true];
+_vehicle setVariable [QGVAR(isATISready), true];
+_vehicle setVariable [QGVAR(stopATIS), true];

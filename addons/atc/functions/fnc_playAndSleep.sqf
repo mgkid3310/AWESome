@@ -8,9 +8,6 @@ private _length = getNumber (configFile >> "CfgSounds" >> _sound >> "length");
 if (_vehicle getVariable [QGVAR(stopATIS), false]) exitWith {};
 if !([player, _vehicle, _mode] call EFUNC(main,isCrew)) exitWith {sleep _length};
 
-private _crew = allPlayers select {[_x, vehicle player] call EFUNC(main,isCrew)};
-private _targets = _crew select {_x getVariable [QGVAR(hasAWESomeATC), false]};
-
-[_sound] remoteExec ["playSound", _targets];
+[QEGVAR(main,playSoundVehicle), [_sound]] call CBA_fnc_localEvent;
 
 sleep _length;

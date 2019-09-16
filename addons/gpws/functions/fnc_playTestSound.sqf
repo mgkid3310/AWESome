@@ -18,7 +18,7 @@ if (!_isStop && (_modeGiven isEqualTo _modeLocal)) then {
 		_soundName = _soundName + "_low";
 	};
 
-	[_soundName] remoteExec ["playSound", _targets];
+	[QEGVAR(main,playSoundVehicle), [_soundName], _targets] call CBA_fnc_targetEvent;
 
 	sleep (_length + _term);
 };

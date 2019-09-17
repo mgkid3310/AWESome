@@ -1,4 +1,4 @@
-#define VOL_GENERAL 4 // 10x
+#define VOL_GENERAL 40 // 1x
 
 class CfgSounds {
 	#include "sound_common.hpp"

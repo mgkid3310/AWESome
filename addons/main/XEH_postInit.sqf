@@ -11,8 +11,8 @@ if (GVAR(hasACEInteractMenu)) then {
 [QGVAR(playSoundVehicle), {_this call FUNC(playSoundVehicle)}] call CBA_fnc_addEventHandler;
 addMissionEventHandler ["EachFrame", {[] call FUNC(eachFrameHandler)}];
 
-orbis_temp = {
+/* orbis_temp = {
 	params ["_standard", "_insideSoundCoef"];
 
 	ln (_standard / _insideSoundCoef);
-};
+}; */

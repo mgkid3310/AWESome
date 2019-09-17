@@ -28,7 +28,7 @@ private _nextCMarray = [[_weapon, _mode, _CMammoCount, _CMammoCount], _weaponCMa
 _nextCMarray params ["_weaponOld", "_modeOld", "_nextCMcount", "_CMammoCountOld"];
 
 private _fullMagAmmo = getNumber (configFile >> "CfgMagazines" >> (_weaponState select 3) >> "count");
-if (!(_CMammoCount < _CMammoCountOld) && !(_CMammoCount > _fullMagAmmo)) then {_nextCMcount = _CMammoCount}; // fire on new shot when reloaded
+if (!(_CMammoCount < _CMammoCountOld) && !(_CMammoCount > _fullMagAmmo)) then {_nextCMcount = _CMammoCount}; // fire on new shot after reload
 if ((_modeOld == _mode) && (_nextCMcount < _CMammoCount)) exitWith {}; // fire if mode has been changed
 
 private _resultingAmmo = _CMammoCount - _ammosFired;

@@ -17,7 +17,7 @@ ADDON = true;
 	"LIST",
 	["ATC Altitude unit", "Sets display unit for altitude on the ATC radar screen"],
 	"AWESome ATC",
-	[[false, true], ["meter (10m)", "feet (100ft)"], 0]
+	[[false, true], ["meter (x10m)", "feet (x100ft)"], 0]
 ] call CBA_Settings_fnc_init;
 
 [
@@ -46,18 +46,18 @@ ADDON = true;
 
 [
 	QGVAR(displayProjectileTrails),
-	"CHECKBOX",
-	["Display missile trails", "Enable/disable drawing missile trails"],
+	"LIST",
+	["Display missile trails", "Determines if missile trails will be drawn, displaying missile trails may lower FPS"],
 	"AWESome ATC",
-	false
+	[[true, false], ["Diaplay", "Hide"], 1]
 ] call CBA_Settings_fnc_init;
 
 [
 	QGVAR(realtimeATIS),
-	"CHECKBOX",
+	"LIST",
 	["Real-time ATIS data update", "Use real-time data whenever the ATIS is played"],
 	"AWESome ATC",
-	true
+	[[true, false], ["Real-time data", "Manual Update (by ATC)"], 0]
 ] call CBA_Settings_fnc_init;
 
 // add actions (ACE / vanilla)

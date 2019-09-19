@@ -22,10 +22,10 @@ ADDON = true;
 
 [
 	QGVAR(automaticTransponder),
-	"CHECKBOX",
+	"LIST",
 	["Use Automatic Transponder", "Transponder mode will be automatically changed to appropriate mode"],
 	"AWESome GPWS",
-	true
+	[[true, false], ["Automatic", "Manual"], 0]
 ] call CBA_Settings_fnc_init;
 
 // add actions (ACE / vanilla) & events

@@ -75,7 +75,7 @@ Altitude Speed
 Heading  
 
 Here, altitude is displayed in multiples of 10m or 100ft,  
-so if the unit is set to "feet (100ft)" and 083 is displayed  
+so if the unit is set to "feet (x100ft)" and 083 is displayed  
 as altitude, the actual altitude would be 8300ft.  
 
 Pilot name/callsign/custom callsign setting and units for  

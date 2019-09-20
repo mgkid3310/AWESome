@@ -16,4 +16,6 @@ PREP(getLiftEnhanced);
 PREP(getThrustDefault);
 PREP(getThrustEnhanced);
 PREP(getTorque);
+PREP(getVehicleWind);
+PREP(simulateDynamicWind);
 PREP(vehicleInit);

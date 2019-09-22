@@ -17,9 +17,7 @@ if (!GVAR(enabled) || (_vehicle isEqualTo player) || (_timeOld < 0) || (_frameOl
 };
 if (diag_frameNo < (_frameOld + GVAR(frameInterval))) exitWith {};
 
-if (GVAR(dynamicWindEnabled)) then {
-	[] call FUNC(simulateDynamicWind);
-};
+[GVAR(dynamicWindMode)] call FUNC(simulateDynamicWind);
 
 if (driver _vehicle isEqualTo player) then {
 	private _simulation = toLower getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "simulation");

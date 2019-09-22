@@ -51,7 +51,7 @@ private _dragMultiplier = (_vehicle getVariable [QGVAR(dragMultiplier), 1]) * GV
 // get TAS and etc.
 private _modelVelocityNew = velocityModelSpace _vehicle;
 private _modelVelocity = (_modelVelocityNew vectorAdd _modelVelocityOld) vectorMultiply 0.5;
-private _windSimulated = [_vehicle, GVAR(dynamicWindEnabled)] call FUNC(getVehicleWind);
+private _windSimulated = [_vehicle, GVAR(dynamicWindMode)] call FUNC(getVehicleWind);
 private _modelWindNew = _vehicle vectorWorldToModel _windSimulated;
 private _modelWind = (_modelWindNew vectorAdd _modelWindOld) vectorMultiply 0.5;
 private _modelWindApply = _modelWind vectorMultiply GVAR(windMultiplier);

@@ -16,7 +16,7 @@ GVAR(maxSinkRate) = -40;
 GVAR(maxBankAngle) = 45;
 GVAR(appMinAlt) = 350;
 GVAR(minAlt) = 250;
-GVAR(delay) = 2.0;
+GVAR(b747Delay) = 2.0;
 
 // f16
 GVAR(ChaffFlareList) = ["CMFlareLauncher", "FIR_CMLauncher", "js_w_fa18_CMFlareLauncher", "js_w_fa18_CMChaffLauncher"];

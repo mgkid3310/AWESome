@@ -139,20 +139,20 @@ if ((_vehicle getVariable [QGVAR(nextBeepTime), -1]) < time) then {
 		// f16_SAM
 		/* case (_samGo): {
 			DEV_CHAT("orbis_gpws: f16_SAM");
-			[_vehicle, "f16_SAM", nil, nil, QGVAR(nextBeepTime)] call FUNC(speakGPWS);
+			[_vehicle, "f16_SAM", nil, QGVAR(nextBeepTime)] call FUNC(speakGPWS);
 			_samGo = false;
 		}; */
 
 		// f16_lowSpeed
 		case ((speed _vehicle < _speedStall) && !(isTouchingGround _vehicle)): {
 			DEV_CHAT("orbis_gpws: f16_lowSpeed");
-			[_vehicle, "f16_lowSpeed", nil, nil, QGVAR(nextBeepTime)] call FUNC(speakGPWS);
+			[_vehicle, "f16_lowSpeed", nil, QGVAR(nextBeepTime)] call FUNC(speakGPWS);
 		};
 
 		// f16_highAOA
 		case ((_cosAOA < cos GVAR(f16MaxAOA)) && (speed _vehicle > 50)): {
 			DEV_CHAT("orbis_gpws: f16_highAOA");
-			[_vehicle, "f16_highAOA", nil, nil, QGVAR(nextBeepTime)] call FUNC(speakGPWS);
+			[_vehicle, "f16_highAOA", nil, QGVAR(nextBeepTime)] call FUNC(speakGPWS);
 		};
 
 		default {};

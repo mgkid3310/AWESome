@@ -1,7 +1,6 @@
 #include "script_component.hpp"
 
-private _global = param [0, false];
-private _console = param [1, 0];
+params [["_global", false], ["_console", 0]];
 
 private _pos = [0, 0, 0];
 if (isArray (configFile >> "CfgWorlds" >> worldName >> "ilsPosition")) then {

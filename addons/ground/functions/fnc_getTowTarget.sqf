@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-private _car = _this select 0;
+params ["_car"];
 
 if (!(_car getVariable [QGVAR(hasTowBarDeployed), false]) || (_car getVariable [QGVAR(isTowingPlane), false])) exitWith {
 	[objNull, [0, 0, 0], [0, 0, 0], [0, 0, 0]]

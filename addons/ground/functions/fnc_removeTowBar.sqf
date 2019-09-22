@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-private _car = _this select 0;
+params ["_car"];
 
 private _bar = _car getVariable [QGVAR(towBarObject), objNull];
 deleteVehicle _bar;

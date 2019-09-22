@@ -1,8 +1,7 @@
 #include "script_component.hpp"
 
-private _vehicle = param [0, vehicle player];
-private _sound = param [1, ""];
-private _mode = param [2, 0];
+params [["_vehicle", vehicle player], ["_sound", ""], ["_mode", 0]];
+
 private _length = getNumber (configFile >> "CfgSounds" >> _sound >> "length");
 
 if (_vehicle getVariable [QGVAR(stopATIS), false]) exitWith {};

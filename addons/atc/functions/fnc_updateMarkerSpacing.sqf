@@ -1,6 +1,7 @@
 #include "script_component.hpp"
 
-private _array = param [0, []];
+params [["_array", []]];
+
 private _scaleNow = ctrlMapScale ((findDisplay 12) displayCtrl 51);
 
 {

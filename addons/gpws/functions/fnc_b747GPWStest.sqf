@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-private _vehicle = _this select 0;
+params ["_vehicle"];
 
 _vehicle setVariable [QGVAR(GPWStestReady), false, true];
 _vehicle setVariable [QGVAR(GPWStestStop), false, true];

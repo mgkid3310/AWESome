@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-private _vehicle = _this select 0;
+params ["_vehicle"];
 
 private _aeroConfigs = _vehicle getVariable [QGVAR(aeroConfig), false];
 if !(_aeroConfigs isEqualType []) then {

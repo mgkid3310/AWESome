@@ -1,8 +1,6 @@
 #include "script_component.hpp"
 
-private _sound = param [0, ""];
-private _vehicle = param [1, vehicle player];
-private _standard = param [2, 0.3];
+params [["_sound", ""], ["_vehicle", vehicle player], ["_standard", 0.3]];
 
 if (_sound isEqualTo "") exitWith {};
 

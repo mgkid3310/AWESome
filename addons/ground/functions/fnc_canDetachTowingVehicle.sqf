@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-private _car = _this select 0;
+params ["_car"];
 
 private _isTowing = _car getVariable [QGVAR(isTowingPlane), false];
 

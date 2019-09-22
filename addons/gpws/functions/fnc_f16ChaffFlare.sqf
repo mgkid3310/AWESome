@@ -29,9 +29,9 @@ _nextCMarray params ["_weaponOld", "_modeOld", "_nextCMcount", "_CMammoCountOld"
 
 private _fullMagAmmo = getNumber (configFile >> "CfgMagazines" >> (_weaponState select 3) >> "count");
 if (!(_CMammoCount < _CMammoCountOld) && !(_CMammoCount > _fullMagAmmo)) then {_nextCMcount = _CMammoCount}; // fire on new shot after reload
-if ((_modeOld == _mode) && (_nextCMcount < _CMammoCount)) exitWith {}; // fire if mode has been changed
+if ((_modeOld == _mode) && (_burstNumber != 1) && (_nextCMcount < _CMammoCount)) exitWith {}; // fire if mode has been changed / single burst mode
 
-private _resultingAmmo = _CMammoCount - _ammosFired;
+private _resultingAmmo = [_CMammoCount - _ammosFired, -1] select ((_burstNumber == 1) && (_CMammoCount > _fullMagAmmo));
 private _lowCMcount = getNumber (configFile >> "CfgVehicles" >> (typeOf _unit) >> QGVAR(lowCMcount));
 private _lowCMalerted = _unit getVariable [QGVAR(lowCMalerted), []];
 if ((_resultingAmmo > _lowCMcount) && (_weapon in _lowCMalerted)) then {

@@ -79,7 +79,7 @@ class text_static_base: control_base {
 	offsetY = 0;
 	offsetPressedX = 0;
 	offsetPressedY = 0;
-	onButtonClick = QUOTE([false] call FUNC(nextChecklist));
+	onButtonClick = QUOTE([-1] call FUNC(nextChecklist));
 };
 class buttonNext_base: buttonPrevious_base {
 	idc = 1802;
@@ -87,5 +87,5 @@ class buttonNext_base: buttonPrevious_base {
 	y = "0.0004 * 1051 * safezoneW + 0.2 * safezoneH + safezoneY";
 	w = "0.0004 * 113 * safezoneW";
 	h = "0.0004 * 51 * safezoneW";
-	onButtonClick = QUOTE([true] call FUNC(nextChecklist));
+	onButtonClick = QUOTE([1] call FUNC(nextChecklist));
 }; */

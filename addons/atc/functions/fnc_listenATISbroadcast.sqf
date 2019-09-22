@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 
-private _vehicle = param [0, vehicle player];
-private _mode = param [1, 0];
+params [["_vehicle", vehicle player], ["_mode", 0]];
+
 private _ATISdata = missionNamespace getVariable [QGVAR(ATISdata), false];
 
 if (GVAR(realtimeATIS)) then {

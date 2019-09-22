@@ -1,9 +1,6 @@
 #include "script_component.hpp"
 
-private _vehicle = _this select 0;
-private _number = _this select 1;
-private _minimumPower = param [2, 0];
-private _mode = param [3, 0];
+params ["_vehicle", "_number", ["_minimumPower", 0], ["_mode", 0]];
 
 _number = (10 ^ _minimumPower) * round (_number / (10 ^ _minimumPower));
 if (_number < 0) then {

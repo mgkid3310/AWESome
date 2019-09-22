@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-private _array = _this param [0, []];
+params [["_array", []]];
 
 private _return = _array;
 private ["_vehicle", "_crews"];

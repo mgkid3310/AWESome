@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-private _car = _this select 0;
+params ["_car"];
 
 private _angle = getNumber (configFile >> "CfgVehicles" >> (typeOf _car) >> QGVAR(towBarAngle));
 private _posRel = getArray (configFile >> "CfgVehicles" >> (typeOf _car) >> QGVAR(towBarPosRel));

@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-private _vehicle = _this select 0;
+params ["_vehicle"];
 
 private ["_isAdvanced",
 	"_dragArray", "_liftArray", "_angleOfIndicence", "_flapsFrictionCoef", "_gearsUpFrictionCoef", "_airBrakeFrictionCoef", "_torqueXCoef",

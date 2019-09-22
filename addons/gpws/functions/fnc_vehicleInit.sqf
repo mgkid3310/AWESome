@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-private _vehicle = _this select 0;
+params ["_vehicle"];
 
 private _firedEventHandlerID = _vehicle getVariable [QGVAR(firedEventHandlerID), false];
 if !(_firedEventHandlerID isEqualType 0) then {

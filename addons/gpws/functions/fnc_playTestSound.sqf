@@ -1,8 +1,6 @@
 #include "script_component.hpp"
 
-private _modeGiven = _this select 0;
-private _sound = _this select 1;
-private _term = param [2, 0];
+params ["_modeGiven", "_sound", ["_term", 0]];
 
 private _soundName = format ["%1_%2", _modeGiven, _sound];
 private _length = getNumber (configFile >> "CfgSounds" >> _soundName >> "length");

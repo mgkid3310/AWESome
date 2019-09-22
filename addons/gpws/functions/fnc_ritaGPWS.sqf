@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 #include "header_macros.hpp"
 
-private _vehicle = _this select 0;
+params ["_vehicle"];
 
 private _loadData = _vehicle getVariable [QGVAR(ritaData), [time]];
 _loadData params ["_timeOld"];

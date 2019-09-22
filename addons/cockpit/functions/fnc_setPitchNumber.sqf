@@ -1,6 +1,7 @@
 #include "script_component.hpp"
 
-private _control = _this select 0;
+params ["_control"];
+
 private _angleConfig = (configFile >> 'CfgVehicles' >> (typeOf vehicle player) >> 'landingAoa');
 
 if (isNumber _angleConfig) then {

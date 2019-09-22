@@ -1,8 +1,6 @@
 #include "script_component.hpp"
 
-private _monitor = _this select 0;
-private _controller = param [1, player];
-private _replay = param [2, -1];
+params ["_monitor", ["_controller", player], ["_replay", -1]];
 
 private _loadData = _monitor getVariable [QGVAR(replayData), [0, 0, [], [], [], []]];
 _loadData params ["_timeOld", "_radarTime", "_trailLogOld", "_planeMarkers", "_heliMarkers", "_weaponMarkers", "_trailMarkers"];

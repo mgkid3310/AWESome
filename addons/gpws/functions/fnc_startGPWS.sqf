@@ -1,7 +1,6 @@
 #include "script_component.hpp"
 
-private _vehicle = param [0, vehicle player];
-private _mode = param [1, "off"];
+params [["_vehicle", vehicle player], ["_mode", "off"]];
 
 switch (_mode) do {
 	case ("b747"): {

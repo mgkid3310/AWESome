@@ -1,8 +1,8 @@
 #include "script_component.hpp"
 
-params ["_posASL", ["_dynamicWindEnabled", GVAR(dynamicWindEnabled)]];
+params ["_posASL", ["_dynamicWindMode", GVAR(dynamicWindMode)]];
 
-if !(_dynamicWindEnabled) exitWith {wind};
+if !(_dynamicWindMode) exitWith {wind};
 
 if !(_posASL isEqualType []) then {
 	_posASL = getPosASL _posASL;

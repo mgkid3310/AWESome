@@ -13,11 +13,11 @@ ADDON = true;
 ] call CBA_Settings_fnc_init;
 
 [
-	QGVAR(dynamicWindEnabled),
+	QGVAR(dynamicWindMode),
 	"LIST",
 	["Dynamic Winds", "Enable/Disable dynamic wind effects, e.g., gust, wake turbulence and more."],
 	"AWESome Aerodynamics",
-	[[true, false], ["Dynamic", "Simple"], 0]
+	[[2, 1, 0], ["Dynamic", "Simple", "Static"], 0]
 ] call CBA_Settings_fnc_init;
 
 [

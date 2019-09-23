@@ -12,6 +12,15 @@ for "_resX" from -GVAR(gridResolution) to GVAR(gridResolution) do {
 	};
 };
 
+/* private "_start";
+{
+	_start = ASLtoAGL _x;
+	{
+		drawLine3D [_start, ASLtoAGL _x, [1, 1, 1, 1]];
+	} forEach _samplePoints;
+} forEach _samplePoints; */
+// diag_log str [diag_frameNo, count _samplePoints, _samplePoints];
+
 private _wind = [0, 0, 0];
 {
 	_wind = _wind vectorAdd ([_x, _dynamicWindMode] call FUNC(getWindPosASL));

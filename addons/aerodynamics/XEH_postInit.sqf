@@ -3,7 +3,8 @@
 // init global variables
 GVAR(frameInterval) = 1;
 GVAR(gridResolution) = 2;
-GVAR(totalGridSize) = 6;
+GVAR(gridSizeX) = 12;
+GVAR(gridSizeY) = 16;
 GVAR(throttleClimbRate) = 0.4;
 GVAR(throttleDropRate) = 0.7;
 GVAR(pylonDragRatio) = 0.002; // Cd 0.2 for FIR Mk84

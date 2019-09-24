@@ -22,17 +22,19 @@ private _windAverage = [0, 0, 0];
 _windAverage = _windAverage vectorMultiply (1 / count _samplePoints);
 
 // sampling grid test
-/* private ["_start", "_end", "_vector"];
-{
-	_start = ASLtoAGL _x;
-	_vector = [_start, _dynamicWindMode] call FUNC(getWindPosASL);
-	drawLine3D [_start, _start vectorAdd _vector, [1, 0, 0, 1]];
+if (GVAR(showSamplingGrid)) then {
+	private ["_start", "_end", "_vector"];
 	{
-		_end = ASLtoAGL _x;
-		drawLine3D [_start, _end, [1, 1, 1, 1]];
+		_start = ASLtoAGL _x;
+		_vector = [_start, _dynamicWindMode] call FUNC(getWindPosASL);
+		drawLine3D [_start, _start vectorAdd _vector, [1, 0, 0, 1]];
+		{
+			_end = ASLtoAGL _x;
+			drawLine3D [_start, _end, [1, 1, 1, 1]];
+		} forEach _samplePoints;
 	} forEach _samplePoints;
-} forEach _samplePoints;
-diag_log str [diag_frameNo, count _samplePoints, _samplePoints];
-systemChat str [wind, _windAverage]; */
+	diag_log str [diag_frameNo, count _samplePoints, _samplePoints];
+	systemChat str [wind, _windAverage];
+};
 
 _windAverage

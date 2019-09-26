@@ -9,10 +9,19 @@ if (isArray (configFile >> "CfgWorlds" >> worldName >> "ilsPosition")) then {
 if !(_console isEqualType 0) then {
 	_pos = getPos _console;
 };
-_pos set [2, (getTerrainHeightASL _pos) max 0];
+_pos set [2, ((getTerrainHeightASL _pos) max 0) + 1];
 
-private _windDir = (windDir + 180) % 360;
-private _windStr = (vectorMagnitude wind) * (900 / 463);
+private ["_windSimulated", "_windDir", "_windStr"];
+if (isClass (configFile >> "CfgPatches" >> "orbis_aerodynamics")) then {
+	_windSimulated = [_pos, GVAR(dynamicWindMode)] call EFUNC(aerodynamics,getWindPosASL);
+	_windSimulated set [2, 0];
+
+	_windDir = _windSimulated getDir [0, 0, 0];
+	_windStr = (vectorMagnitude _windSimulated) * (900 / 463)
+} else {
+	_windDir = (windDir + 180) % 360;
+	_windStr = (vectorMagnitude wind) * (900 / 463);
+};
 
 fogParams params ["_fogValue", "_fogDecay", "_fogBase"];
 private _fogAltDiff = ((_pos select 2) - _fogBase) max 0;

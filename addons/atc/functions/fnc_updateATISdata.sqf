@@ -17,7 +17,7 @@ if (isClass (configFile >> "CfgPatches" >> "orbis_aerodynamics")) then {
 	_windSimulated set [2, 0];
 
 	_windDir = _windSimulated getDir [0, 0, 0];
-	_windStr = (vectorMagnitude _windSimulated) * (900 / 463)
+	_windStr = (vectorMagnitude _windSimulated) * (900 / 463);
 } else {
 	_windDir = (windDir + 180) % 360;
 	_windStr = (vectorMagnitude wind) * (900 / 463);

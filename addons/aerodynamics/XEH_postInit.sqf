@@ -8,7 +8,7 @@ GVAR(gridSizeY) = 16;
 GVAR(showSamplingGrid) = false;
 GVAR(throttleClimbRate) = 0.4;
 GVAR(throttleDropRate) = 0.7;
-GVAR(pylonDragRatio) = 0.002; // Cd 0.2 for FIR Mk84
+GVAR(pylonDragRatio) = 0.002; // 0.5*Cd*A*rho = 0.12 for FIR Mk84 (0.06, 1000kg)
 GVAR(massStandardRatio) = 0.8;
 GVAR(fuelFlowMultiplierGlobal) = 1;
 GVAR(thrustMultiplierGlobal) = 1;

@@ -2,6 +2,8 @@
 
 params ["_array", "_maxValue", "_stepSizeRatio", "_input"];
 
+if !(count _array > 0) exitWith {0};
+
 private _return = 0;
 private _stepSize = _maxValue * _stepSizeRatio;
 if (_input < (_stepSize * (count _array - 1))) then {

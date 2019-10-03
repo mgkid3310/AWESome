@@ -3,8 +3,8 @@
 params ["_vehicle"];
 
 private ["_isAdvanced",
-	"_dragArray", "_liftArray", "_angleOfIndicence", "_flapsFrictionCoef", "_gearsUpFrictionCoef", "_airBrakeFrictionCoef", "_torqueXCoef",
 	"_thrustCoef", "_altFullForce", "_altNoForce", "_speedStall", "_speedMax",
+	"_dragArray", "_liftArray", "_angleOfIndicence", "_flapsFCoef", "_gearsUpFCoef", "_airBrakeFCoef", "_torqueXCoef",
 	"_massError", "_massStandard", "_fuelCapacity"
 ];
 private _className = typeOf _vehicle;
@@ -22,19 +22,19 @@ if (_isAdvanced) then {
 _liftArray = getArray (_class >> "envelope");
 _angleOfIndicence = getNumber (_class >> "angleOfIndicence");
 if (getNumber (_class >> "flaps") > 0) then {
-	_flapsFrictionCoef = getNumber (_class >> "flapsFrictionCoef");
+	_flapsFCoef = getNumber (_class >> "flapsFrictionCoef");
 } else {
-	_flapsFrictionCoef = 0;
+	_flapsFCoef = 0;
 };
 if (getNumber (_class >> "gearRetracting") > 0) then {
-	_gearsUpFrictionCoef = getNumber (_class >> "gearsUpFrictionCoef");
+	_gearsUpFCoef = getNumber (_class >> "gearsUpFrictionCoef");
 } else {
-	_gearsUpFrictionCoef = 0;
+	_gearsUpFCoef = 0;
 };
 if (getNumber (_class >> "airBrake") > 0) then {
-	_airBrakeFrictionCoef = getNumber (_class >> "airBrakeFrictionCoef");
+	_airBrakeFCoef = getNumber (_class >> "airBrakeFrictionCoef");
 } else {
-	_airBrakeFrictionCoef = 0;
+	_airBrakeFCoef = 0;
 };
 if (isNumber (_class >> "draconicTorqueXCoef")) then {
 	_torqueXCoef = getNumber (_class >> "draconicTorqueXCoef");
@@ -61,8 +61,8 @@ if !(_massStandard > 0) then {
 };
 _fuelCapacity = getNumber (_class >> "fuelCapacity");
 
-private _aerodynamicsArray = [_dragArray, _liftArray, _angleOfIndicence, _flapsFrictionCoef, _gearsUpFrictionCoef, _airBrakeFrictionCoef, _torqueXCoef];
 private _speedPerformance = [_thrustCoef, _altFullForce, _altNoForce, _speedStall, _speedMax];
+private _aerodynamicsArray = [_dragArray, _liftArray, _angleOfIndicence, _flapsFCoef, _gearsUpFCoef, _airBrakeFCoef, _torqueXCoef];
 private _physicalProperty = [_massError, _massStandard, _fuelCapacity];
 private _return = [_isAdvanced, _aerodynamicsArray, _speedPerformance, _physicalProperty];
 

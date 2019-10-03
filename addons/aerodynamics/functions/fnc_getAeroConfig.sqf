@@ -3,8 +3,8 @@
 params ["_vehicle"];
 
 private ["_isAdvanced",
-	"_thrustCoef", "_altFullForce", "_altNoForce", "_speedStall", "_speedMax",
 	"_dragArray", "_liftArray", "_angleOfIndicence", "_flapsFCoef", "_gearsUpFCoef", "_airBrakeFCoef", "_torqueXCoef",
+	"_thrustCoef", "_vtolMode", "_altFullForce", "_altNoForce", "_speedStall", "_speedMax",
 	"_massError", "_massStandard", "_fuelCapacity"
 ];
 private _className = typeOf _vehicle;
@@ -47,6 +47,7 @@ _thrustCoef = getArray (_class >> "thrustCoef");
 if !(count _thrustCoef > 0) then {
 	_thrustCoef = [1, 1, 1, 1, 1, 0.6666, 0.3333, 0, 0, 0];
 };
+_vtolMode = getNumber (_class >> "vtol");
 _altFullForce = getNumber (_class >> "altFullForce");
 _altNoForce = getNumber (_class >> "altNoForce");
 _speedStall = getNumber (_class >> "stallSpeed");
@@ -61,8 +62,8 @@ if !(_massStandard > 0) then {
 };
 _fuelCapacity = getNumber (_class >> "fuelCapacity");
 
-private _speedPerformance = [_thrustCoef, _altFullForce, _altNoForce, _speedStall, _speedMax];
 private _aerodynamicsArray = [_dragArray, _liftArray, _angleOfIndicence, _flapsFCoef, _gearsUpFCoef, _airBrakeFCoef, _torqueXCoef];
+private _speedPerformance = [_thrustCoef, _vtolMode, _altFullForce, _altNoForce, _speedStall, _speedMax];
 private _physicalProperty = [_massError, _massStandard, _fuelCapacity];
 private _return = [_isAdvanced, _aerodynamicsArray, _speedPerformance, _physicalProperty];
 

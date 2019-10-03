@@ -16,6 +16,7 @@ GVAR(liftMultiplierGlobal) = 1;
 GVAR(dragMultiplierGlobal) = 1;
 GVAR(dragSourceMultiplier) = [1.0, 0.1, 1.0];
 GVAR(thrustFactor) = 0.152;
+GVAR(vtolThrustFactor) = [0.2, 0.5, 2.0, 1.0];
 GVAR(liftGFactor) = 2.5;
 GVAR(liftFlapFactor) = [0.27, 0.5, 3.0, 0.5];
 GVAR(waveCdArray) = [0.7, 0.98, 1.0, 1.03, 2.4, 0.2, 0.1, -3.5];

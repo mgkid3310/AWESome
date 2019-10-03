@@ -16,7 +16,7 @@ _liftValue = _liftValue * (1 + (_geMultiplier * GVAR(geLiftMultiplier)));
 
 GVAR(liftFlapFactor) params ["_speedL", "_speedH", "_factorL", "_factorH"];
 private _flapFactor = _flapsFCoef * _flapStatus * linearConversion [_speedL, _speedH, _speedKPH / _speedMax, _factorL, _factorH, true];
-_liftValue = _liftValue * _liftMultiplier * (1 + _flapFactor);
+_liftValue = _liftValue * (1 + _flapFactor) * _liftMultiplier;
 
 private _liftForceEnhanced = (vectorNormalized _airVel) vectorCrossProduct [_liftValue * GVAR(liftGFactor) * _massStandard * _densityRatio, 0, 0];
 _liftForceEnhanced set [2, abs (_liftForceEnhanced select 2)];

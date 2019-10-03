@@ -14,7 +14,7 @@ if !(_aeroConfigs isEqualType []) then {
 
 _aeroConfigs params ["_isAdvanced", "_aerodynamicsArray", "_speedPerformance", "_physicalProperty"];
 _aerodynamicsArray params ["_dragArray", "_liftArray", "_angleOfIndicence", "_flapsFCoef", "_gearsUpFCoef", "_airBrakeFCoef", "_torqueXCoef"];
-_speedPerformance params ["_thrustCoef", "_altFullForce", "_altNoForce", "_speedStall", "_speedMax"];
+_speedPerformance params ["_thrustCoef", "_vtolMode", "_altFullForce", "_altNoForce", "_speedStall", "_speedMax"];
 _physicalProperty params ["_massError", "_massStandard", "_fuelCapacity"];
 
 private _fWingData = _vehicle getVariable [QGVAR(fWingData), [airplaneThrottle _vehicle, velocityModelSpace _vehicle, _vehicle vectorWorldToModel wind]];
@@ -123,7 +123,7 @@ if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 private _paramDefault = [_modelVelocity, _massCurrent, _massError];
 private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityRatio, _altitudeAGLS];
 private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio];
-private _paramThrust = [_thrustCoef, _thrustMultiplier, _throttle, _engineDamage, _thrustVector];
+private _paramThrust = [_thrustCoef, _vtolMode, _thrustMultiplier, _throttle, _engineDamage, _thrustVector];
 private _paramLift = [_liftArray, _liftMultiplier, _flapsFCoef, _flapStatus];
 private _paramDrag = [_dragArray, _dragMultiplier, _flapsFCoef, _flapStatus, _gearsUpFCoef, _gearStatus, _airBrakeFCoef, _airBrakeStatus];
 private _paramPylonDrag = [_pylonDragArray, _dragMultiplier, 0, 0, 0, 1, 0, 0];

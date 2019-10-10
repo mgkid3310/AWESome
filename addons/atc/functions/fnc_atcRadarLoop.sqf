@@ -21,18 +21,36 @@ if (_isObserver) then {
 if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	missionNameSpace setVariable [QGVAR(markerIndex), 0];
 
+	private _allPlanes = entities "Plane";
+	private _allHelies = entities "Helicopter";
+
 	private ["_planes", "_helies"];
 	if (_isObserver) then {
-		_planes = (entities "Plane") select {alive _x};
-		_helies = (entities "Helicopter") select {alive _x};
+		_planes = _allPlanes select {alive _x};
+		_helies = _allHelies select {alive _x};
 	} else {
-		_planes = (entities "Plane") select {(side driver _x in [_radarSide, civilian]) && (alive _x)};
-		_helies = (entities "Helicopter") select {(side driver _x in [_radarSide, civilian]) && (alive _x)};
+		_planes = _allPlanes select {(side driver _x in [_radarSide, civilian]) && (alive _x)};
+		_helies = _allHelies select {(side driver _x in [_radarSide, civilian]) && (alive _x)};
 	};
 
-	private _planesBogie = [];
-	private _heliesBogie = [];
-	if (!_isObserver && (_radarMode > 0)) then {};
+	private ["_planesUnknown", "_heliesUnknown", "_planesBogie", "_heliesBogie", "_planesBandit", "_heliesBandit"];
+	if (!_isObserver && (_radarMode > 0)) then {
+		_planesUnknown = (_allPlanes - _planes) select {true};
+		_heliesUnknown = (_allHelies - _helies) select {true};
+
+		_planesBogie = _planesUnknown select {!(_x getVariable [QGVAR(isBandit), false])};
+		_heliesBogie = _heliesUnknown select {!(_x getVariable [QGVAR(isBandit), false])};
+		_planesBandit = _planesUnknown select {_x getVariable [QGVAR(isBandit), false]};
+		_heliesBandit = _heliesUnknown select {_x getVariable [QGVAR(isBandit), false]};
+	} else {
+		_planesUnknown = [];
+		_heliesUnknown = [];
+
+		_planesBogie = [];
+		_heliesBogie = [];
+		_planesBandit = [];
+		_heliesBandit = [];
+	};
 
 	private _additionalPlanes = missionNameSpace getVariable [QGVAR(additionalPlanes), []];
 	private _additionalHelies = missionNameSpace getVariable [QGVAR(additionalHelies), []];
@@ -139,4 +157,4 @@ if (EGVAR(main,hasACEMap)) then {
 };
 
 // update marker line spacing
-[_vehicleMarkers + _weaponMarkers] call FUNC(updateMarkerSpacing);
+[_vehicleMarkers + _weaponMarkers + _antiAirMarkers] call FUNC(updateMarkerSpacing);

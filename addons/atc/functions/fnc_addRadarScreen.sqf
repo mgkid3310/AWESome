@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-params ["_screen"];
+params ["_monitor", ["_radarMode", 0]];
 
 if (EGVAR(main,hasACEInteractMenu)) then {
 	private _actionRadarStart = [
@@ -10,7 +10,7 @@ if (EGVAR(main,hasACEInteractMenu)) then {
 		{_this call FUNC(radarScreenOn)},
 		{!(_player getVariable [QGVAR(isUsingRadar), false])},
 		{},
-		[],
+		_radarMode,
 		[0, 0, 0],
 		10
 	] call ace_interact_menu_fnc_createAction;
@@ -21,14 +21,14 @@ if (EGVAR(main,hasACEInteractMenu)) then {
 		{_this call FUNC(radarScreenOff)},
 		{_player getVariable [QGVAR(isUsingRadar), false]},
 		{},
-		[],
+		_radarMode,
 		[0, 0, 0],
 		10
 	] call ace_interact_menu_fnc_createAction;
 
-	[_screen, 0, ["ACE_MainActions"], _actionRadarStart] call ace_interact_menu_fnc_addActionToObject;
-	[_screen, 0, ["ACE_MainActions"], _actionRadarStop] call ace_interact_menu_fnc_addActionToObject;
+	[_monitor, 0, ["ACE_MainActions"], _actionRadarStart] call ace_interact_menu_fnc_addActionToObject;
+	[_monitor, 0, ["ACE_MainActions"], _actionRadarStop] call ace_interact_menu_fnc_addActionToObject;
 } else {
-	_screen addAction ["Watch ATC Radar Screen", {_this call FUNC(radarScreenOn)}, nil, 1.011, true, true, "", "!(_this getVariable ['orbis_atc_isUsingRadar', false])", 5];
-	_screen addAction ["Stop Watching Radar Screen", {_this call FUNC(radarScreenOff)}, nil, 1.011, false, true, "", "_this getVariable ['orbis_atc_isUsingRadar', false]", 5];
+	_monitor addAction ["Watch ATC Radar Screen", {[_this select 0, _this select 1, _this select 3] call FUNC(radarScreenOn)}, _radarMode, 1.011, true, true, "", "!(_this getVariable ['orbis_atc_isUsingRadar', false])", 5];
+	_monitor addAction ["Stop Watching Radar Screen", {[_this select 0, _this select 1, _this select 3] call FUNC(radarScreenOff)}, _radarMode, 1.011, false, true, "", "_this getVariable ['orbis_atc_isUsingRadar', false]", 5];
 };

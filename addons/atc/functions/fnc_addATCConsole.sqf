@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-params ["_screen"];
+params ["_monitor"];
 
 if (EGVAR(main,hasACEInteractMenu)) then {
 	private _actionATISmain = [
@@ -48,12 +48,12 @@ if (EGVAR(main,hasACEInteractMenu)) then {
 		10
 	] call ace_interact_menu_fnc_createAction;
 
-	[_screen, 0, ["ACE_MainActions"], _actionATISmain] call ace_interact_menu_fnc_addActionToObject;
-	[_screen, 0, ["ACE_MainActions", "actionATISconsole"], _actionATISupdate] call ace_interact_menu_fnc_addActionToObject;
-	[_screen, 0, ["ACE_MainActions", "actionATISconsole"], _actionATISlisten] call ace_interact_menu_fnc_addActionToObject;
-	[_screen, 0, ["ACE_MainActions", "actionATISconsole"], _actionATISstop] call ace_interact_menu_fnc_addActionToObject;
+	[_monitor, 0, ["ACE_MainActions"], _actionATISmain] call ace_interact_menu_fnc_addActionToObject;
+	[_monitor, 0, ["ACE_MainActions", "actionATISconsole"], _actionATISupdate] call ace_interact_menu_fnc_addActionToObject;
+	[_monitor, 0, ["ACE_MainActions", "actionATISconsole"], _actionATISlisten] call ace_interact_menu_fnc_addActionToObject;
+	[_monitor, 0, ["ACE_MainActions", "actionATISconsole"], _actionATISstop] call ace_interact_menu_fnc_addActionToObject;
 } else {
-	_screen addAction ["Update ATIS data", {[true, _this select 0] call FUNC(updateATISdata)}, nil, 1.012, true, true, "", "", 5];
-	_screen addAction ["Listen to ATIS", {[_this select 1, -1] call FUNC(listenATISbroadcast)}, nil, 1.013, false, true, "", "_this getVariable ['orbis_atc_isATISready', true]", 10];
-	_screen addAction ["Stop Listening to ATIS", {(_this select 1) setVariable [QGVAR(stopATIS), true, true]}, nil, 1.013, false, true, "", "!(_this getVariable ['orbis_atc_stopATIS', true])", 10];
+	_monitor addAction ["Update ATIS data", {[true, _this select 0] call FUNC(updateATISdata)}, nil, 1.012, true, true, "", "", 5];
+	_monitor addAction ["Listen to ATIS", {[_this select 1, -1] call FUNC(listenATISbroadcast)}, nil, 1.013, false, true, "", "_this getVariable ['orbis_atc_isATISready', true]", 10];
+	_monitor addAction ["Stop Listening to ATIS", {(_this select 1) setVariable [QGVAR(stopATIS), true, true]}, nil, 1.013, false, true, "", "!(_this getVariable ['orbis_atc_stopATIS', true])", 10];
 };

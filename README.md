@@ -94,6 +94,7 @@ The `_radarMode` parameter works in 3 modes:
 0: Civilian, same side or civilian side aircrafts only  
 1: Military, civilian mode plus radar detected aircrafts  
 2: Observer, all alive aircrafts  
+If mode is not defined, 0 (Civilian Mode) is used as default  
 &nbsp;
 
 4. ATIS (Automatic Terminal Information Service)  

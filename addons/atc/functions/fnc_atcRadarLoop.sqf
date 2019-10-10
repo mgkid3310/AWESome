@@ -18,30 +18,28 @@ if (_isObserver) then {
 	_radarMode = 2;
 };
 
-if (_isObserver) then {
-	_planes = (entities "Plane") select {alive _x};
-	_helies = (entities "Helicopter") select {alive _x};
-} else {
-	_planes = (entities "Plane") select {(side driver _x in [_radarSide, civilian]) && (alive _x)};
-	_helies = (entities "Helicopter") select {(side driver _x in [_radarSide, civilian]) && (alive _x)};
-
-	if (_radarMode > 0) then {
-
-	};
-};
-
-private _additionalPlanes = missionNameSpace getVariable [QGVAR(additionalPlanes), []];
-private _additionalHelies = missionNameSpace getVariable [QGVAR(additionalHelies), []];
-{
-	_planes pushBackUnique _x;
-} forEach _additionalPlanes;
-{
-	_helies pushBackUnique _x;
-} forEach _additionalHelies;
-
 // update planes info
 if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	missionNameSpace setVariable [QGVAR(markerIndex), 0];
+
+	if (_isObserver) then {
+		_planes = (entities "Plane") select {alive _x};
+		_helies = (entities "Helicopter") select {alive _x};
+	} else {
+		_planes = (entities "Plane") select {(side driver _x in [_radarSide, civilian]) && (alive _x)};
+		_helies = (entities "Helicopter") select {(side driver _x in [_radarSide, civilian]) && (alive _x)};
+	};
+
+	if (!_isObserver && (_radarMode > 0)) then {};
+
+	private _additionalPlanes = missionNameSpace getVariable [QGVAR(additionalPlanes), []];
+	private _additionalHelies = missionNameSpace getVariable [QGVAR(additionalHelies), []];
+	{
+		_planes pushBackUnique _x;
+	} forEach _additionalPlanes;
+	{
+		_helies pushBackUnique _x;
+	} forEach _additionalHelies;
 
 	private _planesAuto = [_planes] call FUNC(getAutoTransponders);
 	private _heliesAuto = [_helies] call FUNC(getAutoTransponders);

@@ -89,11 +89,20 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	private _airborneVehicles = _planesModeC + _planesUnknown + _heliesModeC + _heliesUnknown;
 	private _monitoringVehicles = _airborneVehicles + _SAMlaunchers;
 
+	private ["_knownWeapons", "_detectedWeapons", "_bogieWeapons", "_banditWeapons"];
 	private _trackedWeapons = missionNamespace getVariable [QGVAR(trackedWeapons), []];
 	if !(_isObserver) then {
-		private _friendlyWeapons = _trackedWeapons select {(_x select 3) isEqualTo _radarSide};
-		private _detectedWeapons = _trackedWeapons select {([_monitor, _x select 2] call FUNC(simulateRadarDetection)) || (_x select 4)};
-		_trackedWeapons = _friendlyWeapons + _detectedWeapons;
+		_knownWeapons = _trackedWeapons select {(_x select 3) isEqualTo _radarSide};
+		_detectedWeapons = _trackedWeapons select {([_monitor, _x select 2] call FUNC(simulateRadarDetection)) || (_x select 4)};
+
+		_bogieWeapons = _detectedWeapons select {!(_radarSide in ((_x select 2) getVariable [QGVAR(isHostileTo), []]))};
+		_banditWeapons = _detectedWeapons select {_radarSide in ((_x select 2) getVariable [QGVAR(isHostileTo), []])};
+
+		_trackedWeapons = _knownWeapons + _detectedWeapons;
+	} else {
+		_knownWeapons = _trackedWeapons;
+		_bogieWeapons = [];
+		_banditWeapons = [];
 	};
 	private _weaponObjects = [[], _trackedWeapons apply {_x select 0}] select GVAR(displayProjectileTrails);
 
@@ -144,7 +153,11 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	private _heliMarkersBandit = [_heliesBandit, "b_air", true, _radarSide, 2] call FUNC(createVehicleMarker);
 	private _markersUnknown = _planeMarkersBogie + _heliMarkersBogie + _planeMarkersBandit + _heliMarkersBandit;
 
-	_weaponMarkers = [_trackedWeapons, "b_plane", true, _radarSide, _colorMode] call FUNC(createWeaponMarker);
+	private _knownWeaponMarkers = [_knownWeapons, "b_plane", true, _radarSide, _colorMode] call FUNC(createWeaponMarker);
+	private _bogieWeaponMarkers = [_bogieWeapons, "b_plane", true, _radarSide, 1] call FUNC(createWeaponMarker);
+	private _banditWeaponMarkers = [_banditWeapons, "b_plane", true, _radarSide, 2] call FUNC(createWeaponMarker);
+	_weaponMarkers = _knownWeaponMarkers + _bogieWeaponMarkers + _banditWeaponMarkers;
+
 	_antiAirMarkers = [_SAMlaunchers, "b_antiair", false, _radarSide, _colorMode] call FUNC(createAntiAirMarker);
 
 	_trailMarkers = _trailsModeC + _trailsBogie + _trailsBandit + _weaponTrails;

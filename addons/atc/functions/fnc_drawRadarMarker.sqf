@@ -43,30 +43,33 @@ if (_mode in [2, 3]) then {
 	};
 };
 
-private _marker0 = createMarkerLocal [format ["orbis_atc_%1_%2_%3_0", _type, _mode, _forEachIndex], getPos _vehicle];
+private _markerIndex = missionNameSpace getVariable [QGVAR(markerIndex), 0];
+missionNameSpace setVariable [QGVAR(markerIndex), _markerIndex + 1];
+
+private _marker0 = createMarkerLocal [format ["orbis_atc_%1_0", _markerIndex], getPos _vehicle];
 _marker0 setMarkerTypeLocal _type;
 _marker0 setMarkerColorLocal _markerColor;
 _marker0 setMarkerTextLocal "";
 
-private _marker1 = createMarkerLocal [format ["orbis_atc_%1_%2_%3_1", _type, _mode, _forEachIndex], getPos _vehicle];
+private _marker1 = createMarkerLocal [format ["orbis_atc_%1_1", _markerIndex], getPos _vehicle];
 _marker1 setMarkerTypeLocal _type;
 _marker1 setMarkerColorLocal _markerColor;
 _marker1 setMarkerSizeLocal [0, 0];
 _marker1 setMarkerTextLocal _line1;
 
-private _marker2 = createMarkerLocal [format ["orbis_atc_%1_%2_%3_2", _type, _mode, _forEachIndex], getPos _vehicle];
+private _marker2 = createMarkerLocal [format ["orbis_atc_%1_2", _markerIndex], getPos _vehicle];
 _marker2 setMarkerTypeLocal _type;
 _marker2 setMarkerColorLocal _markerColor;
 _marker2 setMarkerSizeLocal [0, 0];
 _marker2 setMarkerTextLocal _line2;
 
-private _marker3 = createMarkerLocal [format ["orbis_atc_%1_%2_%3_3", _type, _mode, _forEachIndex], getPos _vehicle];
+private _marker3 = createMarkerLocal [format ["orbis_atc_%1_3", _markerIndex], getPos _vehicle];
 _marker3 setMarkerTypeLocal _type;
 _marker3 setMarkerColorLocal _markerColor;
 _marker3 setMarkerSizeLocal [0, 0];
 _marker3 setMarkerTextLocal _line3;
 
-private _marker4 = createMarkerLocal [format ["orbis_atc_%1_%2_%3_4", _type, _mode, _forEachIndex], getPos _vehicle];
+private _marker4 = createMarkerLocal [format ["orbis_atc_%1_4", _markerIndex], getPos _vehicle];
 _marker4 setMarkerTypeLocal _type;
 _marker4 setMarkerColorLocal "ColorRed";
 _marker4 setMarkerSizeLocal [0, 0];

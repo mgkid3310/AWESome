@@ -41,6 +41,8 @@ private _additionalHelies = missionNameSpace getVariable [QGVAR(additionalHelies
 
 // update planes info
 if (time > _radarTime + GVAR(radarUpdateInterval)) then {
+	missionNameSpace setVariable [QGVAR(markerIndex), 0];
+
 	private _planesAuto = [_planes] call FUNC(getAutoTransponders);
 	private _heliesAuto = [_helies] call FUNC(getAutoTransponders);
 	private _planesManual = _planes - _planesAuto;

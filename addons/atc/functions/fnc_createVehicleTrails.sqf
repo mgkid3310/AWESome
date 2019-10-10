@@ -31,7 +31,10 @@ private _return = [];
 			_side = side driver _x;
 			_markerColor = [_side, _radarSide, _radarMode] call FUNC(getRadarMarkerColor);
 
-			_marker = createMarkerLocal [format ["orbis_atc_trail_%1_%2", _target, _trailNum], _posMarker];
+			private _markerIndex = missionNameSpace getVariable [QGVAR(markerIndex), 0];
+			missionNameSpace setVariable [QGVAR(markerIndex), _markerIndex + 1];
+
+			_marker = createMarkerLocal [format ["orbis_atc_%1_trail", _markerIndex], _posMarker];
 			_marker setMarkerTypeLocal "hd_dot_noShadow";
 			_marker setMarkerColorLocal _markerColor;
 			_marker setMarkerTextLocal "";

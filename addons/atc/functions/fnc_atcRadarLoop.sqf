@@ -39,10 +39,6 @@ private _additionalHelies = missionNameSpace getVariable [QGVAR(additionalHelies
 	_helies pushBackUnique _x;
 } forEach _additionalHelies;
 
-{
-	_x setVariable [QGVAR(eventWeaponFire), _x addEventHandler ["Fired", {_this spawn FUNC(eventWeaponFire)}]];
-} forEach ((_plane + _helies) select {_x getVariable [QGVAR(eventWeaponFire), -1] < 0});
-
 // update planes info
 if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	private _planesAuto = [_planes] call FUNC(getAutoTransponders);

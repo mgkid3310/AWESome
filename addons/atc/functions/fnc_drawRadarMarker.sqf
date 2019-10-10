@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-params ["_vehicle", "_callsign", "_mode", "_markerColor"];
+params ["_vehicle", "_callsign", "_displayDetails", "_markerColor"];
 
 private _speed = 3.6 * vectorMagnitude velocity _vehicle;
 private _altitude = getPosASL _vehicle select 2;
@@ -26,7 +26,7 @@ private _line2 = "";
 private _line3 = "";
 private _line4 = "";
 
-if (_mode in [2, 3]) then { // 2: Mode C, 3: Weapons
+if (_displayDetails) then {
 	_line2 = format ["%1%2     %3", _altitude, _verticalTrend, _speedDisplay];
 	_line3 = format ["%1", _heading];
 

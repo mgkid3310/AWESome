@@ -139,10 +139,10 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		deleteMarkerLocal _x;
 	} forEach _trailMarkers;
 
-	private _trailsModeC = [_trailLog, _planesModeC + _heliesModeC, _radarSide, _colorMode] call FUNC(createVehicleTrails);
-	private _trailsBogie = [_trailLog, _planesBogie + _heliesBogie, _radarSide, 1] call FUNC(createVehicleTrails);
-	private _trailsBandit = [_trailLog, _planesBandit + _heliesBandit, _radarSide, 2] call FUNC(createVehicleTrails);
-	private _weaponTrails = [_trailLog, _weaponObjects, _radarSide, _colorMode] call FUNC(createWeaponTrails);
+	private _trailsModeC = [_trailLog, _planesModeC + _heliesModeC, true, _radarSide, _colorMode] call FUNC(createVehicleTrails);
+	private _trailsBogie = [_trailLog, _planesBogie + _heliesBogie, true, _radarSide, 1] call FUNC(createVehicleTrails);
+	private _trailsBandit = [_trailLog, _planesBandit + _heliesBandit, true, _radarSide, 2] call FUNC(createVehicleTrails);
+	private _weaponTrails = [_trailLog, _weaponObjects, true, _radarSide, _colorMode] call FUNC(createWeaponTrails);
 
 	private _planeMarkersModeC = [_planesModeC, "b_plane", true, _radarSide, _colorMode] call FUNC(createVehicleMarker);
 	private _heliMarkersModeC = [_heliesModeC, "b_air", true, _radarSide, _colorMode] call FUNC(createVehicleMarker);

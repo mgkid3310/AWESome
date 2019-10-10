@@ -21,7 +21,7 @@ private _SAMlaunchers = [];
 	_SAMlaunchers pushBackUnique _x;
 } forEach (missionNameSpace getVariable [QGVAR(additionalSAMs), []]);
 
-// eventHandler
+// add Eventhandlers
 {
 	_x setVariable [QGVAR(eventWeaponFire), _x addEventHandler ["Fired", {_this spawn FUNC(eventWeaponFire)}]];
 } forEach ((_planes + _helies + _SAMlaunchers) select {_x getVariable [QGVAR(eventWeaponFire), -1] < 0});

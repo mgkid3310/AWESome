@@ -29,8 +29,8 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		_planes = _allPlanes select {alive _x};
 		_helies = _allHelies select {alive _x};
 	} else {
-		_planes = _allPlanes select {(side driver _x in [_radarSide, civilian]) && (alive _x)};
-		_helies = _allHelies select {(side driver _x in [_radarSide, civilian]) && (alive _x)};
+		_planes = _allPlanes select {((side driver _x) in [_radarSide, civilian]) && (alive _x)};
+		_helies = _allHelies select {((side driver _x) in [_radarSide, civilian]) && (alive _x)};
 	};
 
 	private ["_planesUnknown", "_heliesUnknown", "_planesBogie", "_heliesBogie", "_planesBandit", "_heliesBandit"];
@@ -78,7 +78,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 
 	private _SAMlaunchers = [];
 	if !(_isObserver) then {
-		_SAMlaunchers = _SAMlaunchers select {side _x isEqualTo _radarSide};
+		_SAMlaunchers = _SAMlaunchers select {(side _x) isEqualTo _radarSide};
 	};
 
 	private _additionalSAMs = missionNameSpace getVariable [QGVAR(additionalSAMs), []];
@@ -100,7 +100,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	_trailLog = [];
 	{
 		_targetObject = _x;
-		_vehicleTrail = _trailLogOld select {_x select 0 isEqualTo _targetObject};
+		_vehicleTrail = _trailLogOld select {(_x select 0) isEqualTo _targetObject};
 		_targetTrail = _vehicleTrail select {(_x select 2) + GVAR(radarTrailLength) >= time};
 
 		if (_vehicleTrail find (_targetTrail select 0) > 0) then {

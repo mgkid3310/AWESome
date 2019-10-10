@@ -21,16 +21,16 @@ if (_isObserver) then {
 if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	missionNameSpace setVariable [QGVAR(markerIndex), 0];
 
-	private _allPlanes = entities "Plane";
-	private _allHelies = entities "Helicopter";
+	private _allPlanes = (entities "Plane") select {alive _x};
+	private _allHelies = (entities "Helicopter") select {alive _x};
 
 	private ["_planes", "_helies"];
 	if (_isObserver) then {
-		_planes = _allPlanes select {alive _x};
-		_helies = _allHelies select {alive _x};
+		_planes = _allPlanes;
+		_helies = _allHelies;
 	} else {
-		_planes = _allPlanes select {((side driver _x) in [_radarSide, civilian]) && (alive _x)};
-		_helies = _allHelies select {((side driver _x) in [_radarSide, civilian]) && (alive _x)};
+		_planes = _allPlanes select {(side driver _x) in [_radarSide, civilian]};
+		_helies = _allHelies select {(side driver _x) in [_radarSide, civilian]};
 	};
 
 	private ["_planesUnknown", "_heliesUnknown", "_planesBogie", "_heliesBogie", "_planesBandit", "_heliesBandit"];
@@ -127,7 +127,9 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		deleteMarkerLocal _x;
 	} forEach _trailMarkers;
 
-	private _vehicleTarils = [_trailLog, _airborneVehicles, _radarSide, _colorMode] call FUNC(createVehicleTrails);
+	private _trailsModeC = [_trailLog, _planesModeC + _heliesModeC, _radarSide, _colorMode] call FUNC(createVehicleTrails);
+	private _trailsBogie = [_trailLog, _planesBogie + _heliesBogie, _radarSide, 1] call FUNC(createVehicleTrails);
+	private _trailsBandit = [_trailLog, _planesBandit + _heliesBandit, _radarSide, 2] call FUNC(createVehicleTrails);
 	private _weaponTrails = [_trailLog, _weaponObjects, _radarSide, _colorMode] call FUNC(createWeaponTrails);
 
 	private _planeMarkersModeC = [_planesModeC, "b_plane", true, _radarSide, _colorMode] call FUNC(createVehicleMarker);
@@ -145,7 +147,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	_weaponMarkers = [_trackedWeapons, "b_plane", true, _radarSide, _colorMode] call FUNC(createWeaponMarker);
 	_antiAirMarkers = [_SAMlaunchers, "b_antiair", false, _radarSide, _colorMode] call FUNC(createAntiAirMarker);
 
-	_trailMarkers = _vehicleTarils + _weaponTrails;
+	_trailMarkers = _trailsModeC + _trailsBogie + _trailsBandit + _weaponTrails;
 	_vehicleMarkers = _markersKnown + _markersUnknown;
 
 	_radarTime = time;

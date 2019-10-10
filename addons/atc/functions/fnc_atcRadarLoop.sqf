@@ -3,10 +3,10 @@
 params ["_monitor", ["_controller", player], ["_radarMode", 0]];
 
 private _loadData = _monitor getVariable [QGVAR(radarData), [0, 0, [], [], [], []]];
-_loadData params ["_timeOld", "_radarTime", "_trailLog", "_trailMarkers", "_planeMarkers", "_heliMarkers", "_weaponMarkers", "_antiAirMarkers"];
+_loadData params ["_timeOld", "_radarTime", "_trailLog", "_trailMarkers", "_vehicleMarkers", "_weaponMarkers", "_antiAirMarkers"];
 
 if (!(alive _controller) || ((_controller distance _monitor) > 10) || (_controller getVariable [QGVAR(exitRadar), false])) exitWith {
-	[_monitor, _controller, _planeMarkers + _heliMarkers + _weaponMarkers, _trailMarkers] call FUNC(atcRadarExit);
+	[_monitor, _controller, _trailMarkers, _vehicleMarkers + _weaponMarkers + _antiAirMarkers] call FUNC(atcRadarExit);
 };
 
 if !(time > _timeOld) exitWith {};
@@ -96,7 +96,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		deleteMarkerLocal _marker2;
 		deleteMarkerLocal _marker3;
 		deleteMarkerLocal _marker4;
-	} forEach (_planeMarkers + _heliMarkers + _weaponMarkers + _antiAirMarkers);
+	} forEach (_vehicleMarkers + _weaponMarkers + _antiAirMarkers);
 
 	{
 		deleteMarkerLocal _x;
@@ -112,13 +112,12 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	_antiAirMarkers = [_SAMlaunchers, "b_antiair", 4, _radarSide, _radarMode] call FUNC(createAntiAirMarker);
 
 	_trailMarkers = _vehicleTarils + _weaponTrails;
-	_planeMarkers = _planeMarkersModeC + _planeMarkersStandBy;
-	_heliMarkers = _heliMarkersModeC + _heliMarkersStandBy;
+	_vehicleMarkers = _planeMarkersModeC + _planeMarkersStandBy + _planeMarkersBogie + _heliMarkersModeC + _heliMarkersStandBy + _heliMarkersBogie;
 
 	_radarTime = time;
 };
 
-_monitor setVariable [QGVAR(radarData), [time, _radarTime, _trailLog, _trailMarkers, _planeMarkers, _heliMarkers, _weaponMarkers, _antiAirMarkers]];
+_monitor setVariable [QGVAR(radarData), [time, _radarTime, _trailLog, _trailMarkers, _vehicleMarkers, _weaponMarkers, _antiAirMarkers]];
 
 // ACE_map capability
 if (EGVAR(main,hasACEMap)) then {
@@ -128,4 +127,4 @@ if (EGVAR(main,hasACEMap)) then {
 };
 
 // update marker line spacing
-[_planeMarkers + _heliMarkers + _weaponMarkers] call FUNC(updateMarkerSpacing);
+[_vehicleMarkers + _weaponMarkers] call FUNC(updateMarkerSpacing);

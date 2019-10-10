@@ -6,9 +6,9 @@ private _speed = 3.6 * vectorMagnitude velocity _vehicle;
 private _altitude = getPosASL _vehicle select 2;
 
 if (GVAR(unitSettingAlt)) then {
-	_altitude = round (_altitude * EGVAR(main,mToFt) / 100);
+	_altitude = 0 max round (_altitude * EGVAR(main,mToFt) / 100);
 } else {
-	_altitude = round (_altitude / 10);
+	_altitude = 0 max round (_altitude / 10);
 };
 
 private _verticalSpd = velocity _vehicle select 2;

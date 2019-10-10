@@ -20,6 +20,7 @@ PREP(playAndSleep);
 PREP(radarScreenOff);
 PREP(radarScreenOn);
 PREP(setCustomCallsign);
+PREP(simulateRadarDetection);
 PREP(speakATIS);
 PREP(speakNumber);
 PREP(updateATISdata);

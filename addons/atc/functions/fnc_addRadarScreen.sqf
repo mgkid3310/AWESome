@@ -26,8 +26,8 @@ if (EGVAR(main,hasACEInteractMenu)) then {
 		10
 	] call ace_interact_menu_fnc_createAction;
 
-	[_screen, 0, ["ACE_MainActions", "AWESome"], _actionRadarStart] call ace_interact_menu_fnc_addActionToObject;
-	[_screen, 0, ["ACE_MainActions", "AWESome"], _actionRadarStop] call ace_interact_menu_fnc_addActionToObject;
+	[_screen, 0, ["ACE_MainActions"], _actionRadarStart] call ace_interact_menu_fnc_addActionToObject;
+	[_screen, 0, ["ACE_MainActions"], _actionRadarStop] call ace_interact_menu_fnc_addActionToObject;
 } else {
 	_screen addAction ["Watch ATC Radar Screen", {_this call FUNC(radarScreenOn)}, nil, 1.011, true, true, "", "!(_this getVariable ['orbis_atc_isUsingRadar', false])", 5];
 	_screen addAction ["Stop Watching Radar Screen", {_this call FUNC(radarScreenOff)}, nil, 1.011, false, true, "", "_this getVariable ['orbis_atc_isUsingRadar', false]", 5];

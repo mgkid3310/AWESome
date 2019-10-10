@@ -13,6 +13,9 @@ if !(time > _timeOld) exitWith {};
 
 private _radarSide = side _controller;
 private _isObserver = _controller getVariable [QGVAR(isObserver), false];
+if (_radarMode isEqualTo 2) then {
+	_isObserver = true;
+};
 if (_isObserver) then {
 	_radarMode = -1;
 };

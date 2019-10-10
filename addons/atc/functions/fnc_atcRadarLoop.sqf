@@ -89,7 +89,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		_trailLog pushBack [_x, getPos _x, time];
 
 		_trailLogOld = _trailLogOld - _vehicleTrail;
-	} forEach (_planesModeC + _heliesModeC + _weaponObjects);
+	} forEach (_planesModeC + _planesBogie + _heliesModeC + _heliesBogie + _weaponObjects);
 
 	{
 		_x params ["_marker0", "_marker1", "_marker2", "_marker3", "_marker4"];
@@ -110,6 +110,8 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	private _heliMarkersModeC = [_heliesModeC, "b_air", true, _radarSide, _radarMode] call FUNC(createVehicleMarker);
 	private _planeMarkersStandBy = [_planesStandBy, "b_plane", false, _radarSide, _radarMode] call FUNC(createVehicleMarker);
 	private _heliMarkersStandBy = [_heliesStandBy, "b_air", false, _radarSide, _radarMode] call FUNC(createVehicleMarker);
+	private _planeMarkersBogie = [_planesBogie, "b_plane", true, _radarSide, 1] call FUNC(createVehicleMarker);
+	private _heliMarkersBogie = [_heliesBogie, "b_air", true, _radarSide, 1] call FUNC(createVehicleMarker);
 	_weaponMarkers = [_trackedWeapons, "b_plane", true, _radarSide, _radarMode] call FUNC(createWeaponMarker);
 	_antiAirMarkers = [_SAMlaunchers, "b_antiair", false, _radarSide, _radarMode] call FUNC(createAntiAirMarker);
 

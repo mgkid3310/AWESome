@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-params ["_trailLog", "_vehicles", ["_projectiles", []], ["_radarSide", civilian], ["_radarMode", 0]];
+params ["_trailLog", "_vehicles", ["_projectiles", []], ["_radarSide", civilian], ["_colorMode", 0]];
 
 private ["_target", "_targetTrail", "_pos1", "_pos2", "_time1", "_time2", "_posMarker", "_marker", "_side", "_markerColor"];
 private _return = [];
@@ -29,7 +29,7 @@ private _return = [];
 			if !(count _posMarker > 0) exitWith {};
 
 			_side = side driver _x;
-			_markerColor = [_side, _radarSide, _radarMode] call FUNC(getRadarMarkerColor);
+			_markerColor = [_side, _radarSide, _colorMode] call FUNC(getRadarMarkerColor);
 
 			private _markerIndex = missionNameSpace getVariable [QGVAR(markerIndex), 0];
 			missionNameSpace setVariable [QGVAR(markerIndex), _markerIndex + 1];

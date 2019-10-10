@@ -86,6 +86,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		_SAMlaunchers pushBackUnique _x;
 	} forEach _additionalSAMs;
 
+	private _airborneVehicles = _planesModeC + _planesUnknown + _heliesModeC + _heliesUnknown;
 	private _trackedWeapons = missionNamespace getVariable [QGVAR(trackedWeapons), []];
 	if !(_isObserver) then {
 		_trackedWeapons = _trackedWeapons select {(_x select 2 isEqualTo _radarSide) || (_x select 3)};
@@ -93,7 +94,6 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	private _weaponObjects = [[], _trackedWeapons apply {_x select 0}] select GVAR(displayProjectileTrails);
 
 	private ["_targetObject", "_vehicleTrail", "_targetTrail"];
-	private _trailTargets = _planesModeC + _planesUnknown + _heliesModeC + _heliesUnknown;
 	private _trailLogOld = _trailLog;
 	_trailLog = [];
 	{
@@ -108,7 +108,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		_trailLog pushBack [_x, getPos _x, time];
 
 		_trailLogOld = _trailLogOld - _vehicleTrail;
-	} forEach (_trailTargets + _weaponObjects);
+	} forEach (_airborneVehicles + _weaponObjects);
 
 	{
 		_x params ["_marker0", "_marker1", "_marker2", "_marker3", "_marker4"];
@@ -123,7 +123,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		deleteMarkerLocal _x;
 	} forEach _trailMarkers;
 
-	private _vehicleTarils = [_trailLog, _trailTargets, _radarSide, _colorMode] call FUNC(createVehicleTrails);
+	private _vehicleTarils = [_trailLog, _airborneVehicles, _radarSide, _colorMode] call FUNC(createVehicleTrails);
 	private _weaponTrails = [_trailLog, _weaponObjects, _radarSide, _colorMode] call FUNC(createWeaponTrails);
 
 	private _planeMarkersModeC = [_planesModeC, "b_plane", true, _radarSide, _colorMode] call FUNC(createVehicleMarker);

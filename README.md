@@ -90,7 +90,7 @@ To enable this feature, you need to add the following code
 to the target object's init field:  
 `[this, _radarMode] call orbis_atc_fnc_addRadarScreen;`  
 
-The `_radarMode` parameter works in 3 modes:
+The `_radarMode` parameter works in 3 modes:  
 0: Civilian, same side or civilian side aircrafts only  
 1: Military, civilian mode plus radar detected aircrafts  
 2: Observer, all alive aircrafts  

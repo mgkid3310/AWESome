@@ -11,7 +11,6 @@ if (!(alive _controller) || ((_controller distance _monitor) > 10) || (_controll
 
 if !(time > _timeOld) exitWith {};
 
-private ["_planes", "_helies"];
 private _radarSide = side _controller;
 private _isObserver = _controller getVariable [QGVAR(isObserver), false];
 if (_isObserver) then {
@@ -22,6 +21,7 @@ if (_isObserver) then {
 if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	missionNameSpace setVariable [QGVAR(markerIndex), 0];
 
+	private ["_planes", "_helies"];
 	if (_isObserver) then {
 		_planes = (entities "Plane") select {alive _x};
 		_helies = (entities "Helicopter") select {alive _x};

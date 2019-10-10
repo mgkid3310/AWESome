@@ -7,18 +7,24 @@ private _return = [];
 {
 	_vehicle = _x;
 
-	if (_radarMode isEqualTo 1) then {
-		_callsign = "Bogie";
-	} else {
-		switch (GVAR(displayCallsign)) do {
-			case (1): {
-				_callsign = groupId group driver _vehicle;
-			};
-			case (2): {
-				_callsign = _vehicle getVariable [QGVAR(customCallsign), groupId group driver _vehicle];
-			};
-			default {
-				_callsign = name driver _vehicle;
+	switch (_radarMode) do {
+		case (1): {
+			_callsign = format ["Bogie #%1", _vehicle getVariable [QGVAR(bogieNumber), 0]];
+		};
+		case (2): {
+			_callsign = format ["Bandit #%1", _vehicle getVariable [QGVAR(bogieNumber), 0]];
+		};
+		default {
+			switch (GVAR(displayCallsign)) do {
+				case (1): {
+					_callsign = groupId group driver _vehicle;
+				};
+				case (2): {
+					_callsign = _vehicle getVariable [QGVAR(customCallsign), groupId group driver _vehicle];
+				};
+				default {
+					_callsign = name driver _vehicle;
+				};
 			};
 		};
 	};

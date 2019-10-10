@@ -5,7 +5,7 @@ params ["_side", ["_radarSide", civilian], ["_radarMode", 0]];
 private _markerColor = "ColorCIV";
 
 switch (_radarMode) do {
-	case (2): {
+	case (-1): {
 		switch (_side) do {
 			case (west): {
 				_markerColor = "ColorWEST";
@@ -20,6 +20,12 @@ switch (_radarMode) do {
 				_markerColor = "ColorCIV";
 			};
 		};
+	};
+	case (1): { // Bogie
+		_markerColor = "ColorYellow";
+	};
+	case (2): { // Bandit
+		_markerColor = "ColorEAST";
 	};
 	default {
 		switch (true) do {

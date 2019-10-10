@@ -87,9 +87,11 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	} forEach _additionalSAMs;
 
 	private _airborneVehicles = _planesModeC + _planesUnknown + _heliesModeC + _heliesUnknown;
+	private _monitoringVehicles = _airborneVehicles + _SAMlaunchers;
+
 	private _trackedWeapons = missionNamespace getVariable [QGVAR(trackedWeapons), []];
 	if !(_isObserver) then {
-		_trackedWeapons = _trackedWeapons select {(_x select 2 isEqualTo _radarSide) || (_x select 3)};
+		_trackedWeapons = _trackedWeapons select {((_x select 2) in _monitoringVehicles) || ((_x select 3) isEqualTo _radarSide) || (_x select 4)};
 	};
 	private _weaponObjects = [[], _trackedWeapons apply {_x select 0}] select GVAR(displayProjectileTrails);
 
@@ -145,6 +147,8 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	_vehicleMarkers = _markersKnown + _markersUnknown;
 
 	_radarTime = time;
+
+	missionNameSpace setVariable [QGVAR(monitoringVehicles), _monitoringVehicles];
 };
 
 _monitor setVariable [QGVAR(radarData), [time, _radarTime, _trailLog, _trailMarkers, _vehicleMarkers, _weaponMarkers, _antiAirMarkers]];

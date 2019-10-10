@@ -35,8 +35,8 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 
 	private ["_planesUnknown", "_heliesUnknown", "_planesBogie", "_heliesBogie", "_planesBandit", "_heliesBandit"];
 	if (!_isObserver && (_radarMode > 0)) then {
-		_planesUnknown = (_allPlanes - _planes) select {true};
-		_heliesUnknown = (_allHelies - _helies) select {true};
+		_planesUnknown = (_allPlanes - _planes) select {[_monitor, _x] call FUNC(simulateRadarDetection)};
+		_heliesUnknown = (_allHelies - _helies) select {[_monitor, _x] call FUNC(simulateRadarDetection)};
 
 		_planesBogie = _planesUnknown select {!(_radarSide in (_x getVariable [QGVAR(isHostileTo), []]))};
 		_heliesBogie = _heliesUnknown select {!(_radarSide in (_x getVariable [QGVAR(isHostileTo), []]))};

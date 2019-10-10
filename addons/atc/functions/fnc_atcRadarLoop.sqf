@@ -38,10 +38,10 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		_planesUnknown = (_allPlanes - _planes) select {true};
 		_heliesUnknown = (_allHelies - _helies) select {true};
 
-		_planesBogie = _planesUnknown select {!(_x getVariable [QGVAR(isBandit), false])};
-		_heliesBogie = _heliesUnknown select {!(_x getVariable [QGVAR(isBandit), false])};
-		_planesBandit = _planesUnknown select {_x getVariable [QGVAR(isBandit), false]};
-		_heliesBandit = _heliesUnknown select {_x getVariable [QGVAR(isBandit), false]};
+		_planesBogie = _planesUnknown select {!(_radarSide in (_x getVariable [QGVAR(isHostileTo), []]))};
+		_heliesBogie = _heliesUnknown select {!(_radarSide in (_x getVariable [QGVAR(isHostileTo), []]))};
+		_planesBandit = _planesUnknown select {_radarSide in (_x getVariable [QGVAR(isHostileTo), []])};
+		_heliesBandit = _heliesUnknown select {_radarSide in (_x getVariable [QGVAR(isHostileTo), []])};
 	} else {
 		_planesUnknown = [];
 		_heliesUnknown = [];

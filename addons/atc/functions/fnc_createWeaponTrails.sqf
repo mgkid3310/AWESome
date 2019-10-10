@@ -7,7 +7,7 @@ private _return = [];
 {
 	_target = _x select 0;
 
-	_targetTrail = _trailLog select {_x select 0 isEqualTo _target};
+	_targetTrail = _trailLog select {(_x select 0) isEqualTo _target};
 	if (count _targetTrail > 0) then {
 		for "_trailNum" from 1 to GVAR(radarTrailLength) do {
 			_posMarker = [];

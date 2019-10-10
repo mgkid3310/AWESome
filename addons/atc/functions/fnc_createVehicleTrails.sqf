@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-params ["_trailLog", "_vehicles", ["_projectiles", []], ["_radarSide", civilian], ["_colorMode", 0]];
+params ["_trailLog", "_vehicles", ["_radarSide", civilian], ["_colorMode", 0]];
 
 private ["_target", "_targetTrail", "_pos1", "_pos2", "_time1", "_time2", "_posMarker", "_marker", "_side", "_markerColor"];
 private _return = [];
@@ -41,6 +41,6 @@ private _return = [];
 			_return pushBack _marker;
 		};
 	};
-} forEach (_vehicles + _projectiles);
+} forEach _vehicles;
 
 _return

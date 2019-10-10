@@ -26,7 +26,7 @@ private _line2 = "";
 private _line3 = "";
 private _line4 = "";
 
-if (_mode in [2, 3]) then {
+if (_mode in [2, 3]) then { // 2: Mode C, 3: Weapons
 	_line2 = format ["%1%2     %3", _altitude, _verticalTrend, _speedDisplay];
 	_line3 = format ["%1", _heading];
 

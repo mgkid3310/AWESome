@@ -1,9 +1,9 @@
 #include "script_component.hpp"
 
-params ["_monitor", ["_controller", player]];
+params ["_monitor", ["_controller", player], ["_radarMode", 0]];
 
 private _loadData = _monitor getVariable [QGVAR(radarData), [0, 0, [], [], [], []]];
-_loadData params ["_timeOld", "_radarTime", "_trailLog", "_trailMarkers", "_planeMarkers", "_heliMarkers", "_weaponMarkers", "_launcherMarkers"];
+_loadData params ["_timeOld", "_radarTime", "_trailLog", "_trailMarkers", "_planeMarkers", "_heliMarkers", "_weaponMarkers", "_antiAirMarkers"];
 
 if (!(alive _controller) || ((_controller distance _monitor) > 10) || (_controller getVariable [QGVAR(exitRadar), false])) exitWith {
 	[_monitor, _controller, _planeMarkers + _heliMarkers + _weaponMarkers, _trailMarkers] call FUNC(atcRadarExit);
@@ -15,11 +15,19 @@ private ["_planes", "_helies"];
 private _radarSide = side _controller;
 private _isObserver = _controller getVariable [QGVAR(isObserver), false];
 if (_isObserver) then {
+	_radarMode = 2;
+};
+
+if (_isObserver) then {
 	_planes = (entities "Plane") select {alive _x};
 	_helies = (entities "Helicopter") select {alive _x};
 } else {
 	_planes = (entities "Plane") select {(side driver _x in [_radarSide, civilian]) && (alive _x)};
 	_helies = (entities "Helicopter") select {(side driver _x in [_radarSide, civilian]) && (alive _x)};
+
+	if (_radarMode > 0) then {
+
+	};
 };
 
 private _additionalPlanes = missionNameSpace getVariable [QGVAR(additionalPlanes), []];
@@ -92,28 +100,29 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		deleteMarkerLocal _marker2;
 		deleteMarkerLocal _marker3;
 		deleteMarkerLocal _marker4;
-	} forEach (_planeMarkers + _heliMarkers + _weaponMarkers + _launcherMarkers);
+	} forEach (_planeMarkers + _heliMarkers + _weaponMarkers + _antiAirMarkers);
 
 	{
 		deleteMarkerLocal _x;
 	} forEach _trailMarkers;
 
-	_trailMarkers = [_trailLog, _planesModeC + _heliesModeC, _weaponObjects, _radarSide, _isObserver] call FUNC(createRadarTrails);
-	private _planeMarkersModeC = [_planesModeC, "b_plane", 2, _radarSide, _isObserver] call FUNC(createRadarMarker);
-	private _heliMarkersModeC = [_heliesModeC, "b_air", 2, _radarSide, _isObserver] call FUNC(createRadarMarker);
-	private _planeMarkersStandBy = [_planesStandBy, "b_plane", 1, _radarSide, _isObserver] call FUNC(createRadarMarker);
-	private _heliMarkersStandBy = [_heliesStandBy, "b_air", 1, _radarSide, _isObserver] call FUNC(createRadarMarker);
-	_weaponMarkers = [_trackedWeapons, "b_plane", 3, _radarSide, _isObserver] call FUNC(createRadarMarker);
-	_launcherMarkers = [_SAMlaunchers, "b_antiair", 4, _radarSide, _isObserver] call FUNC(createRadarMarker);
+	private _vehicleTarils = [_trailLog, _planesModeC + _heliesModeC, _weaponObjects, _radarSide, _radarMode] call FUNC(createVehicleTrails);
+	private _weaponTrails = [_trailLog, _planesModeC + _heliesModeC, _weaponObjects, _radarSide, _radarMode] call FUNC(createWeaponTrails);
+	private _planeMarkersModeC = [_planesModeC, "b_plane", 2, _radarSide, _radarMode] call FUNC(createVehicleMarker);
+	private _heliMarkersModeC = [_heliesModeC, "b_air", 2, _radarSide, _radarMode] call FUNC(createVehicleMarker);
+	private _planeMarkersStandBy = [_planesStandBy, "b_plane", 1, _radarSide, _radarMode] call FUNC(createVehicleMarker);
+	private _heliMarkersStandBy = [_heliesStandBy, "b_air", 1, _radarSide, _radarMode] call FUNC(createVehicleMarker);
+	_weaponMarkers = [_trackedWeapons, "b_plane", 3, _radarSide, _radarMode] call FUNC(createWeaponMarker);
+	_antiAirMarkers = [_SAMlaunchers, "b_antiair", 4, _radarSide, _radarMode] call FUNC(createAntiAirMarker);
 
+	_trailMarkers = _vehicleTarils + _weaponTrails;
 	_planeMarkers = _planeMarkersModeC + _planeMarkersStandBy;
 	_heliMarkers = _heliMarkersModeC + _heliMarkersStandBy;
-	[_planeMarkers + _heliMarkers + _weaponMarkers] call FUNC(updateMarkerSpacing);
 
 	_radarTime = time;
 };
 
-_monitor setVariable [QGVAR(radarData), [time, _radarTime, _trailLog, _trailMarkers, _planeMarkers, _heliMarkers, _weaponMarkers, _launcherMarkers]];
+_monitor setVariable [QGVAR(radarData), [time, _radarTime, _trailLog, _trailMarkers, _planeMarkers, _heliMarkers, _weaponMarkers, _antiAirMarkers]];
 
 // ACE_map capability
 if (EGVAR(main,hasACEMap)) then {
@@ -123,4 +132,4 @@ if (EGVAR(main,hasACEMap)) then {
 };
 
 // update marker line spacing
-[_planeMarkers + _heliMarkers] call FUNC(updateMarkerSpacing);
+[_planeMarkers + _heliMarkers + _weaponMarkers] call FUNC(updateMarkerSpacing);

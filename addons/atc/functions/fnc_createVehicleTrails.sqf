@@ -1,15 +1,11 @@
 #include "script_component.hpp"
 
-params ["_trailLog", "_vehicles", ["_projectiles", []], ["_radarSide", civilian], ["_isObserver", false]];
+params ["_trailLog", "_vehicles", ["_projectiles", []], ["_radarSide", civilian], ["_radarMode", 0]];
 
 private ["_target", "_targetTrail", "_pos1", "_pos2", "_time1", "_time2", "_posMarker", "_marker", "_side", "_markerColor"];
 private _return = [];
 {
-	if (_x isEqualType []) then {
-		_target = _x select 0;
-	} else {
-		_target = _x;
-	};
+	_target = _x;
 
 	_targetTrail = _trailLog select {_x select 0 isEqualTo _target};
 	if (count _targetTrail > 0) then {
@@ -32,40 +28,8 @@ private _return = [];
 
 			if !(count _posMarker > 0) exitWith {};
 
-			if (_x isEqualType []) then {
-				_side = _x select 2;
-			} else {
-				_side = side driver _x;
-			};
-
-			if (_isObserver) then {
-				switch (_side) do {
-					case (west): {
-						_markerColor = "ColorWEST";
-					};
-					case (east): {
-						_markerColor = "ColorEAST";
-					};
-					case (independent): {
-						_markerColor = "ColorGUER";
-					};
-					default {
-						_markerColor = "ColorCIV";
-					};
-				};
-			} else {
-				switch (true) do {
-					case (_side isEqualTo _radarSide): {
-						_markerColor = "ColorWEST";
-					};
-					case (_side isEqualTo civilian): {
-						_markerColor = "ColorWEST";
-					};
-					default {
-						_markerColor = "ColorYellow";
-					};
-				};
-			};
+			_side = side driver _x;
+			_markerColor = [_side, _radarSide, _radarMode] call FUNC(getRadarMarkerColor);
 
 			_marker = createMarkerLocal [format ["orbis_atc_trail_%1_%2", _target, _trailNum], _posMarker];
 			_marker setMarkerTypeLocal "hd_dot_noShadow";

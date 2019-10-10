@@ -1,6 +1,10 @@
 #include "script_component.hpp"
 
-params ["_monitor", "_controller", "_vehicleMarkers", "_trailMarkers"];
+params ["_monitor", "_controller", "_trailMarkers", "_vehicleMarkers"];
+
+{
+	deleteMarkerLocal _x;
+} forEach _trailMarkers;
 
 {
 	_x params ["_marker0", "_marker1", "_marker2", "_marker3", "_marker4"];
@@ -10,10 +14,6 @@ params ["_monitor", "_controller", "_vehicleMarkers", "_trailMarkers"];
 	deleteMarkerLocal _marker3;
 	deleteMarkerLocal _marker4;
 } forEach _vehicleMarkers;
-
-{
-	deleteMarkerLocal _x;
-} forEach _trailMarkers;
 
 if (EGVAR(main,hasACEMap)) then {
 	{

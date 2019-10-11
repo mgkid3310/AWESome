@@ -30,19 +30,19 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	private _allPlanes = (entities "Plane") select {alive _x};
 	private _allHelies = (entities "Helicopter") select {alive _x};
 
-	private ["_planes", "_helies"];
+	private ["_planesKnown", "_heliesKnown"];
 	if (_isObserver) then {
-		_planes = _allPlanes;
-		_helies = _allHelies;
+		_planesKnown = _allPlanes;
+		_heliesKnown = _allHelies;
 	} else {
-		_planes = _allPlanes select {(side driver _x) in [_radarSide, civilian]};
-		_helies = _allHelies select {(side driver _x) in [_radarSide, civilian]};
+		_planesKnown = _allPlanes select {(side driver _x) in [_radarSide, civilian]};
+		_heliesKnown = _allHelies select {(side driver _x) in [_radarSide, civilian]};
 	};
 
 	private ["_planesUnknown", "_heliesUnknown", "_planesBogie", "_heliesBogie", "_planesBandit", "_heliesBandit"];
 	if (!_isObserver && (_radarMode > 0)) then {
-		_planesUnknown = (_allPlanes - _planes) select {[_monitor, _x] call FUNC(simulateRadarDetection)};
-		_heliesUnknown = (_allHelies - _helies) select {[_monitor, _x] call FUNC(simulateRadarDetection)};
+		_planesUnknown = (_allPlanes - _planesKnown) select {[_monitor, _x] call FUNC(simulateRadarDetection)};
+		_heliesUnknown = (_allHelies - _heliesKnown) select {[_monitor, _x] call FUNC(simulateRadarDetection)};
 
 		_planesBogie = _planesUnknown select {!(_radarSide in (_x getVariable [QGVAR(isHostileTo), []]))};
 		_heliesBogie = _heliesUnknown select {!(_radarSide in (_x getVariable [QGVAR(isHostileTo), []]))};
@@ -61,16 +61,16 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	private _additionalPlanes = missionNameSpace getVariable [QGVAR(additionalPlanes), []];
 	private _additionalHelies = missionNameSpace getVariable [QGVAR(additionalHelies), []];
 	{
-		_planes pushBackUnique _x;
+		_planesKnown pushBackUnique _x;
 	} forEach _additionalPlanes;
 	{
-		_helies pushBackUnique _x;
+		_heliesKnown pushBackUnique _x;
 	} forEach _additionalHelies;
 
-	private _planesAuto = [_planes] call FUNC(getAutoTransponders);
-	private _heliesAuto = [_helies] call FUNC(getAutoTransponders);
-	private _planesManual = _planes - _planesAuto;
-	private _heliesManual = _helies - _heliesAuto;
+	private _planesAuto = [_planesKnown] call FUNC(getAutoTransponders);
+	private _heliesAuto = [_heliesKnown] call FUNC(getAutoTransponders);
+	private _planesManual = _planesKnown - _planesAuto;
+	private _heliesManual = _heliesKnown - _heliesAuto;
 
 	private _planesModeC = _planesManual select {_x getVariable [QEGVAR(gpws,transponderMode), 0] isEqualTo 2};
 	private _heliesModeC = _heliesManual select {_x getVariable [QEGVAR(gpws,transponderMode), 0] isEqualTo 2};
@@ -179,7 +179,7 @@ _monitor setVariable [QGVAR(radarData), [time, _radarTime, _trailLog, _trailMark
 // ACE_map capability
 if (EGVAR(main,hasACEMap)) then {
 	{
-		_x setVariable ["ace_map_hideBlueForceMarker", (vehicle _x) in (_planes + _helies)];
+		_x setVariable ["ace_map_hideBlueForceMarker", (vehicle _x) in (_planesKnown + _heliesKnown)];
 	} forEach allPlayers;
 };
 

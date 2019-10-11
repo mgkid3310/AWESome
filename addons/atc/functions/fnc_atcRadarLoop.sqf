@@ -27,8 +27,8 @@ if (_isObserver) then {
 if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	missionNameSpace setVariable [QGVAR(markerIndex), 0];
 
-	private _allPlanes = (entities "Plane") select {alive _x};
-	private _allHelies = (entities "Helicopter") select {alive _x};
+	private _allPlanes = (entities "Plane") select {(alive _x) && (0 < getNumber (configFile >> "CfgVehicles" >> (typeOf _x) >> "radarTarget"))};
+	private _allHelies = (entities "Helicopter") select {(alive _x) && (0 < getNumber (configFile >> "CfgVehicles" >> (typeOf _x) >> "radarTarget"))};
 
 	private ["_planesKnown", "_heliesKnown"];
 	if (_isObserver) then {

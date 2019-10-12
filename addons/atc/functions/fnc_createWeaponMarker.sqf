@@ -6,7 +6,7 @@ private ["_projectile", "_radarDetection", "_callsign", "_side", "_markerColor",
 private _return = [];
 {
 	_projectile = _x select 0;
-	_radarDetection = param [4, 0];
+	_radarDetection = _x param [4, 0];
 
 	if ((_radarDetection < GVAR(minRadarDetection)) && (_targetType in [1, 2])) then {
 		_callsign = "Missile";

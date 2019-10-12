@@ -2,17 +2,31 @@
 
 params ["_array", "_type", ["_displayDetails", true], ["_radarSide", civilian], ["_targetType", 0]];
 
-private ["_vehicle", "_callsign", "_side", "_markerColor", "_markerArray"];
+private ["_vehicle", "_radarDetection", "_callsign", "_side", "_markerColor", "_markerArray"];
 private _return = [];
 {
-	_vehicle = _x;
+	if (_targetType in [1, 2]) then {
+		_vehicle = _x select 0;
+		_radarDetection = _x select 1;
+	} else {
+		_vehicle = _x;
+		_radarDetection = 0;
+	}
 
 	switch (_targetType) do {
 		case (1): {
-			_callsign = format ["Bogie #%1", _vehicle getVariable [QGVAR(bogieNumber), 0]];
+			if (_radarDetection < GVAR(minRadarDetection)) then {
+				_callsign = "Bogie";
+			} else {
+				_callsign = getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName");
+			};
 		};
 		case (2): {
-			_callsign = format ["Bandit #%1", _vehicle getVariable [QGVAR(bogieNumber), 0]];
+			if (_radarDetection < GVAR(minRadarDetection)) then {
+				_callsign = "Bandit";
+			} else {
+				_callsign = getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName");
+			};
 		};
 		default {
 			switch (GVAR(displayCallsign)) do {

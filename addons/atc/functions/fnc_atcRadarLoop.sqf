@@ -41,13 +41,13 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 
 	private ["_planesUnknown", "_heliesUnknown", "_planesBogie", "_heliesBogie", "_planesBandit", "_heliesBandit"];
 	if (!_isObserver && (_radarMode > 0)) then {
-		_planesUnknown = (_allPlanes - _planesKnown) select {[_monitor, _x] call FUNC(simulateRadarDetection)};
-		_heliesUnknown = (_allHelies - _heliesKnown) select {[_monitor, _x] call FUNC(simulateRadarDetection)};
+		_planesUnknown = (_allPlanes - _planesKnown) apply {[_x, [_monitor, _x] call FUNC(simulateRadarDetection)]};
+		_heliesUnknown = (_allHelies - _heliesKnown) apply {[_x, [_monitor, _x] call FUNC(simulateRadarDetection)]};
 
-		_planesBogie = _planesUnknown select {!(_radarSide in (_x getVariable [QGVAR(isHostileTo), []]))};
-		_heliesBogie = _heliesUnknown select {!(_radarSide in (_x getVariable [QGVAR(isHostileTo), []]))};
-		_planesBandit = _planesUnknown select {_radarSide in (_x getVariable [QGVAR(isHostileTo), []])};
-		_heliesBandit = _heliesUnknown select {_radarSide in (_x getVariable [QGVAR(isHostileTo), []])};
+		_planesBogie = _planesUnknown select {((_x select 1) > 1) && !(_radarSide in ((_x select 0) getVariable [QGVAR(isHostileTo), []]))};
+		_heliesBogie = _heliesUnknown select {((_x select 1) > 1) && !(_radarSide in ((_x select 0) getVariable [QGVAR(isHostileTo), []]))};
+		_planesBandit = _planesUnknown select {((_x select 1) > 1) && (_radarSide in ((_x select 0) getVariable [QGVAR(isHostileTo), []]))};
+		_heliesBandit = _heliesUnknown select {((_x select 1) > 1) && (_radarSide in ((_x select 0) getVariable [QGVAR(isHostileTo), []]))};
 	} else {
 		_planesUnknown = [];
 		_heliesUnknown = [];
@@ -99,10 +99,10 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	private _trackedWeapons = missionNamespace getVariable [QGVAR(trackedWeapons), []];
 	if !(_isObserver) then {
 		_knownWeapons = _trackedWeapons select {(_x select 2) isEqualTo _radarSide};
-		_detectedWeapons = (_trackedWeapons - _knownWeapons) select {[_monitor, _x select 0] call FUNC(simulateRadarDetection)};
+		_detectedWeapons = (_trackedWeapons - _knownWeapons) apply {_x pushBack ([_monitor, _x select 0] call FUNC(simulateRadarDetection))};
 
-		_bogieWeapons = _detectedWeapons select {!(_radarSide in (_x select 3)};
-		_banditWeapons = _detectedWeapons select {_radarSide in (_x select 3};
+		_bogieWeapons = _detectedWeapons select {((_x select 4) > 1) && !(_radarSide in (_x select 3))};
+		_banditWeapons = _detectedWeapons select {((_x select 4) > 1) && (_radarSide in (_x select 3))};
 
 		_trackedWeapons = _knownWeapons + _detectedWeapons;
 	} else {

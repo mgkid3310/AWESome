@@ -2,7 +2,7 @@
 
 player setVariable [QGVAR(hasAWESomeATC), true, true];
 
-GVAR(minRadarDetection) = 10;
+GVAR(minRadarDetection) = 16; // maximum radar range x0.5
 
 GVAR(minVerticalSpd) = 3.048; // 600ft/min
 

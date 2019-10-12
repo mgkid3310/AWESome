@@ -92,8 +92,6 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		_SAMlaunchers pushBackUnique _x;
 	} forEach _additionalSAMs;
 
-	private _airborneVehicles = _planesModeC + _heliesModeC + ((_planesUnknown + _heliesUnknown) apply {_x select 0});
-
 	private ["_knownWeapons", "_detectedWeapons", "_bogieWeapons", "_banditWeapons"];
 	private _trackedWeapons = missionNamespace getVariable [QGVAR(trackedWeapons), []];
 	if !(_isObserver) then {

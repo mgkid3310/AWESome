@@ -96,7 +96,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	private _trackedWeapons = missionNamespace getVariable [QGVAR(trackedWeapons), []];
 	if !(_isObserver) then {
 		_knownWeapons = _trackedWeapons select {(_x select 2) isEqualTo _radarSide};
-		_detectedWeapons = (_trackedWeapons - _knownWeapons) apply {_x + [[_monitor, _x select 0] call FUNC(simulateRadarDetection)]};
+		_detectedWeapons = (_trackedWeapons - _knownWeapons) apply {_x + [[_monitor, _x select 0, 1] call FUNC(simulateRadarDetection)]};
 
 		_bogieWeapons = _detectedWeapons select {((_x select 4) > 1) && !(_radarSide in (_x select 3))};
 		_banditWeapons = _detectedWeapons select {((_x select 4) > 1) && (_radarSide in (_x select 3))};
@@ -107,7 +107,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		_bogieWeapons = [];
 		_banditWeapons = [];
 	};
-	private _weaponObjects = [[], _trackedWeapons] select GVAR(displayProjectileTrails);
+	private _weaponObjects = [[], _trackedWeapons apply {_x select 0}] select GVAR(displayProjectileTrails);
 
 	private ["_targetObject", "_vehicleTrail", "_targetTrail"];
 	private _trailLogOld = _trailLog;
@@ -124,7 +124,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		_trailLog pushBack [_x, getPos _x, time];
 
 		_trailLogOld = _trailLogOld - _vehicleTrail;
-	} forEach (_planesModeC + _heliesModeC + ((_planesUnknown + _heliesUnknown + _weaponObjects) apply {_x select 0}));
+	} forEach (_planesModeC + _heliesModeC + _planesBogie + _heliesBogie + _planesBandit + _heliesBandit + _weaponObjects);
 
 	{
 		_x params ["_marker0", "_marker1", "_marker2", "_marker3", "_marker4"];

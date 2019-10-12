@@ -9,7 +9,7 @@ private _return = [];
 
 	_callsign = getText (configFile >> "CfgWeapons" >> (_x select 1) >> "displayName");
 
-	_side = _x select 3;
+	_side = _x select 2;
 	_markerColor = [_side, _radarSide, _colorMode] call FUNC(getRadarMarkerColor);
 
 	_markerArray = [_projectile, _callsign, _displayDetails, _markerColor] call FUNC(drawRadarMarker);

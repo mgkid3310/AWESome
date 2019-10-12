@@ -23,6 +23,6 @@ if ((_ammo isKindOf ["MissileCore", configFile >> "CfgAmmo"]) || (_ammo isKindOf
 	_unit setVariable [QGVAR(isHostileTo), _isHostileTo];
 
 	private _trackedWeapons = missionNamespace getVariable [QGVAR(trackedWeapons), []];
-	_trackedWeapons pushBack [_projectile, _weapon, _unit, side driver _unit, _unit in _monitoringVehicles];
+	_trackedWeapons pushBack [_projectile, _weapon, side driver _unit, _isHostileTo];
 	missionNamespace setVariable [QGVAR(trackedWeapons), _trackedWeapons];
 };

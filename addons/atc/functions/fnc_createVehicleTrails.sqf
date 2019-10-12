@@ -32,7 +32,7 @@ private _return = [];
 
 			if !(count _posMarker > 0) exitWith {};
 
-			_side = side driver _x;
+			_side = side driver _target;
 			_markerColor = [_side, _radarSide, _targetType] call FUNC(getRadarMarkerColor);
 
 			private _markerIndex = missionNameSpace getVariable [QGVAR(markerIndex), 0];

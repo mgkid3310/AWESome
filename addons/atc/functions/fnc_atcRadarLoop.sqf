@@ -92,8 +92,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		_SAMlaunchers pushBackUnique _x;
 	} forEach _additionalSAMs;
 
-	private _airborneVehicles = _planesModeC + _planesUnknown + _heliesModeC + _heliesUnknown;
-	private _monitoringVehicles = _airborneVehicles + _SAMlaunchers;
+	private _airborneVehicles = _planesModeC + _heliesModeC + ((_planesUnknown + _heliesUnknown) apply {_x select 0});
 
 	private ["_knownWeapons", "_detectedWeapons", "_bogieWeapons", "_banditWeapons"];
 	private _trackedWeapons = missionNamespace getVariable [QGVAR(trackedWeapons), []];
@@ -110,7 +109,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		_bogieWeapons = [];
 		_banditWeapons = [];
 	};
-	private _weaponObjects = [[], _trackedWeapons apply {_x select 0}] select GVAR(displayProjectileTrails);
+	private _weaponObjects = [[], _trackedWeapons] select GVAR(displayProjectileTrails);
 
 	private ["_targetObject", "_vehicleTrail", "_targetTrail"];
 	private _trailLogOld = _trailLog;
@@ -127,7 +126,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		_trailLog pushBack [_x, getPos _x, time];
 
 		_trailLogOld = _trailLogOld - _vehicleTrail;
-	} forEach (_airborneVehicles + _weaponObjects);
+	} forEach (_planesModeC + _heliesModeC + ((_planesUnknown + _heliesUnknown + _weaponObjects) apply {_x select 0}));
 
 	{
 		_x params ["_marker0", "_marker1", "_marker2", "_marker3", "_marker4"];
@@ -170,8 +169,6 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	_vehicleMarkers = _markersKnown + _markersUnknown;
 
 	_radarTime = time;
-
-	missionNameSpace setVariable [QGVAR(monitoringVehicles), _monitoringVehicles];
 };
 
 _monitor setVariable [QGVAR(radarData), [time, _radarTime, _trailLog, _trailMarkers, _vehicleMarkers, _weaponMarkers, _antiAirMarkers]];

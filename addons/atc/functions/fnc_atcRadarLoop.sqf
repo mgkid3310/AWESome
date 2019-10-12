@@ -17,10 +17,10 @@ if (_radarMode isEqualTo 2) then {
 	_isObserver = true;
 };
 
-private _colorMode = 0;
+private _targetType = 0;
 if (_isObserver) then {
 	_radarMode = -1;
-	_colorMode = -1;
+	_targetType = -1;
 };
 
 // update planes info
@@ -142,15 +142,15 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		deleteMarkerLocal _x;
 	} forEach _trailMarkers;
 
-	private _trailsModeC = [_trailLog, _planesModeC + _heliesModeC, _radarSide, _colorMode] call FUNC(createVehicleTrails);
+	private _trailsModeC = [_trailLog, _planesModeC + _heliesModeC, _radarSide, _targetType] call FUNC(createVehicleTrails);
 	private _trailsBogie = [_trailLog, _planesBogie + _heliesBogie, _radarSide, 1] call FUNC(createVehicleTrails);
 	private _trailsBandit = [_trailLog, _planesBandit + _heliesBandit, _radarSide, 2] call FUNC(createVehicleTrails);
-	private _weaponTrails = [_trailLog, _weaponObjects, _radarSide, _colorMode] call FUNC(createWeaponTrails);
+	private _weaponTrails = [_trailLog, _weaponObjects, _radarSide, _targetType] call FUNC(createWeaponTrails);
 
-	private _planeMarkersModeC = [_planesModeC, "b_plane", true, _radarSide, _colorMode] call FUNC(createVehicleMarker);
-	private _heliMarkersModeC = [_heliesModeC, "b_air", true, _radarSide, _colorMode] call FUNC(createVehicleMarker);
-	private _planeMarkersStandBy = [_planesStandBy, "b_plane", false, _radarSide, _colorMode] call FUNC(createVehicleMarker);
-	private _heliMarkersStandBy = [_heliesStandBy, "b_air", false, _radarSide, _colorMode] call FUNC(createVehicleMarker);
+	private _planeMarkersModeC = [_planesModeC, "b_plane", true, _radarSide, _targetType] call FUNC(createVehicleMarker);
+	private _heliMarkersModeC = [_heliesModeC, "b_air", true, _radarSide, _targetType] call FUNC(createVehicleMarker);
+	private _planeMarkersStandBy = [_planesStandBy, "b_plane", false, _radarSide, _targetType] call FUNC(createVehicleMarker);
+	private _heliMarkersStandBy = [_heliesStandBy, "b_air", false, _radarSide, _targetType] call FUNC(createVehicleMarker);
 	private _markersKnown = _planeMarkersModeC + _heliMarkersModeC + _planeMarkersStandBy + _heliMarkersStandBy;
 
 	private _planeMarkersBogie = [_planesBogie, "b_plane", true, _radarSide, 1] call FUNC(createVehicleMarker);
@@ -159,12 +159,12 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	private _heliMarkersBandit = [_heliesBandit, "b_air", true, _radarSide, 2] call FUNC(createVehicleMarker);
 	private _markersUnknown = _planeMarkersBogie + _heliMarkersBogie + _planeMarkersBandit + _heliMarkersBandit;
 
-	private _knownWeaponMarkers = [_knownWeapons, "b_plane", true, _radarSide, _colorMode] call FUNC(createWeaponMarker);
+	private _knownWeaponMarkers = [_knownWeapons, "b_plane", true, _radarSide, _targetType] call FUNC(createWeaponMarker);
 	private _bogieWeaponMarkers = [_bogieWeapons, "b_plane", true, _radarSide, 1] call FUNC(createWeaponMarker);
 	private _banditWeaponMarkers = [_banditWeapons, "b_plane", true, _radarSide, 2] call FUNC(createWeaponMarker);
 	_weaponMarkers = _knownWeaponMarkers + _bogieWeaponMarkers + _banditWeaponMarkers;
 
-	_antiAirMarkers = [_SAMlaunchers, "b_antiair", false, _radarSide, _colorMode] call FUNC(createAntiAirMarker);
+	_antiAirMarkers = [_SAMlaunchers, "b_antiair", false, _radarSide, _targetType] call FUNC(createAntiAirMarker);
 
 	_trailMarkers = _trailsModeC + _trailsBogie + _trailsBandit + _weaponTrails;
 	_vehicleMarkers = _markersKnown + _markersUnknown;

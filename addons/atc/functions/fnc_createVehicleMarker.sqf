@@ -11,7 +11,7 @@ private _return = [];
 	} else {
 		_vehicle = _x;
 		_radarDetection = 0;
-	}
+	};
 
 	switch (_targetType) do {
 		case (1): {

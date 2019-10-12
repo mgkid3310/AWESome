@@ -23,12 +23,12 @@ if (_isObserver) then {
 	_targetType = -1;
 };
 
+private _allPlanes = (entities "Plane") select {(alive _x) && (0 < getNumber (configFile >> "CfgVehicles" >> (typeOf _x) >> "radarTarget"))};
+private _allHelies = (entities "Helicopter") select {(alive _x) && (0 < getNumber (configFile >> "CfgVehicles" >> (typeOf _x) >> "radarTarget"))};
+
 // update planes info
 if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	missionNameSpace setVariable [QGVAR(markerIndex), 0];
-
-	private _allPlanes = (entities "Plane") select {(alive _x) && (0 < getNumber (configFile >> "CfgVehicles" >> (typeOf _x) >> "radarTarget"))};
-	private _allHelies = (entities "Helicopter") select {(alive _x) && (0 < getNumber (configFile >> "CfgVehicles" >> (typeOf _x) >> "radarTarget"))};
 
 	private ["_planesKnown", "_heliesKnown"];
 	if (_isObserver) then {
@@ -176,7 +176,7 @@ _monitor setVariable [QGVAR(radarData), [time, _radarTime, _trailLog, _trailMark
 // ACE_map capability
 if (EGVAR(main,hasACEMap)) then {
 	{
-		_x setVariable ["ace_map_hideBlueForceMarker", (vehicle _x) in (_planesKnown + _heliesKnown)];
+		_x setVariable ["ace_map_hideBlueForceMarker", (vehicle _x) in (_allPlanes + _allHelies)];
 	} forEach allPlayers;
 };
 

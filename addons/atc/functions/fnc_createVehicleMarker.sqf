@@ -5,7 +5,7 @@ params ["_array", "_type", ["_displayDetails", true], ["_radarSide", civilian], 
 private ["_vehicle", "_radarDetection", "_callsign", "_side", "_markerColor", "_markerArray"];
 private _return = [];
 {
-	if (_targetType in [1, 2]) then {
+	if (_x isEqualType []) then {
 		_vehicle = _x select 0;
 		_radarDetection = _x select 1;
 	} else {

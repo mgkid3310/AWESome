@@ -2,7 +2,7 @@
 
 params ["_monitor", ["_controller", player], ["_radarMode", 0]];
 
-private _loadData = _monitor getVariable [QGVAR(radarData), [0, 0, [], [], [], []]];
+private _loadData = _monitor getVariable [QGVAR(radarData), [0, 0, [], [], [], [], []]];
 _loadData params ["_timeOld", "_radarTime", "_trailLog", "_trailMarkers", "_vehicleMarkers", "_weaponMarkers", "_antiAirMarkers"];
 
 if (!(alive _controller) || ((_controller distance _monitor) > 10) || (_controller getVariable [QGVAR(exitRadar), false])) exitWith {

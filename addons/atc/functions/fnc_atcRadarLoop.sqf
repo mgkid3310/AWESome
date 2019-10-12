@@ -107,7 +107,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		_bogieWeapons = [];
 		_banditWeapons = [];
 	};
-	private _weaponObjects = [[], _trackedWeapons apply {_x select 0}] select GVAR(displayProjectileTrails);
+	private _trailProjectiles = [[], _trackedWeapons] select GVAR(displayProjectileTrails);
 
 	private ["_targetObject", "_vehicleTrail", "_targetTrail"];
 	private _trailLogOld = _trailLog;
@@ -124,7 +124,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		_trailLog pushBack [_x, getPos _x, time];
 
 		_trailLogOld = _trailLogOld - _vehicleTrail;
-	} forEach (_planesModeC + _heliesModeC + _planesBogie + _heliesBogie + _planesBandit + _heliesBandit + _weaponObjects);
+	} forEach (_planesModeC + _heliesModeC + ((_planesBogie + _heliesBogie + _planesBandit + _heliesBandit + _trailProjectiles) apply {_x select 0}));
 
 	{
 		_x params ["_marker0", "_marker1", "_marker2", "_marker3", "_marker4"];
@@ -142,7 +142,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	private _trailsModeC = [_trailLog, _planesModeC + _heliesModeC, _radarSide, _targetType] call FUNC(createVehicleTrails);
 	private _trailsBogie = [_trailLog, _planesBogie + _heliesBogie, _radarSide, 1] call FUNC(createVehicleTrails);
 	private _trailsBandit = [_trailLog, _planesBandit + _heliesBandit, _radarSide, 2] call FUNC(createVehicleTrails);
-	private _weaponTrails = [_trailLog, _weaponObjects, _radarSide, _targetType] call FUNC(createWeaponTrails);
+	private _weaponTrails = [_trailLog, _trailProjectiles, _radarSide, _targetType] call FUNC(createWeaponTrails);
 
 	private _planeMarkersModeC = [_planesModeC, "b_plane", true, _radarSide, _targetType] call FUNC(createVehicleMarker);
 	private _heliMarkersModeC = [_heliesModeC, "b_air", true, _radarSide, _targetType] call FUNC(createVehicleMarker);

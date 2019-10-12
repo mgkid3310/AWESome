@@ -1,13 +1,13 @@
 #include "script_component.hpp"
 
-params ["_array", "_type", ["_displayDetails", true], ["_radarSide", civilian], ["_colorMode", 0]];
+params ["_array", "_type", ["_displayDetails", true], ["_radarSide", civilian], ["_targetType", 0]];
 
 private ["_vehicle", "_callsign", "_side", "_markerColor", "_markerArray"];
 private _return = [];
 {
 	_vehicle = _x;
 
-	switch (_colorMode) do {
+	switch (_targetType) do {
 		case (1): {
 			_callsign = format ["Bogie #%1", _vehicle getVariable [QGVAR(bogieNumber), 0]];
 		};
@@ -30,7 +30,7 @@ private _return = [];
 	};
 
 	_side = side driver _vehicle;
-	_markerColor = [_side, _radarSide, _colorMode] call FUNC(getRadarMarkerColor);
+	_markerColor = [_side, _radarSide, _targetType] call FUNC(getRadarMarkerColor);
 
 	_markerArray = [_vehicle, _callsign, _displayDetails, _markerColor] call FUNC(drawRadarMarker);
 	_return pushback _markerArray;

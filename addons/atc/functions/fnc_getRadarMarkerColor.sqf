@@ -1,10 +1,10 @@
 #include "script_component.hpp"
 
-params ["_side", ["_radarSide", civilian], ["_colorMode", 0]];
+params ["_side", ["_radarSide", civilian], ["_targetType", 0]];
 
 private _markerColor = "ColorCIV";
 
-switch (_colorMode) do {
+switch (_targetType) do {
 	case (-1): {
 		switch (_side) do {
 			case (west): {

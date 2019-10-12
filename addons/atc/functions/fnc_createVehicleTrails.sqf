@@ -5,7 +5,7 @@ params ["_trailLog", "_vehicles", ["_radarSide", civilian], ["_targetType", 0]];
 private ["_target", "_targetTrail", "_pos1", "_pos2", "_time1", "_time2", "_posMarker", "_marker", "_side", "_markerColor"];
 private _return = [];
 {
-	if (_targetType in [1, 2]) then {
+	if (_x isEqualType []) then {
 		_target = _x select 0;
 	} else {
 		_target = _x;

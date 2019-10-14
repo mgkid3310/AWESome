@@ -40,15 +40,11 @@ private _detectingPower = _radarCrossSection * _rangeRatio ^ 4; // 1 for 5m^2 RC
 private _altAGL = (ASLToAGL _posTargetASL) select 2;
 private _altASL = _posTargetASL select 2;
 private _altRadar = 1 max (_altAGL min _altASL);
-
-private _radius = _distance * tan (_azimuthBandwith / 2);
 private _psi = acos ((_posRadarASL distance2D _posTargetASL) / _distance);
-private _altEff = _radius min (_altRadar / cos _psi);
-private _altFactor = sqrt ((_radius ^ 2) - (_altEff ^ 2));
-private _angleFactor = 1 min (_pulseWidth * GVAR(speedOfLight) * (tan _psi) / (4 * _radius));
+private _groundClutterArea = [_distance, _azimuthBandwith, _pulseWidth, _altRadar, _psi] call FUNC(getGroundClutterArea);
 
 private _volumeClutter = GVAR(volumeClutterFactor) * rain * _rangeRatio ^ 2;
-private _groundClutter = GVAR(groundClutterFactor) * _altFactor * _angleFactor * _rangeRatio ^ 2;
+private _groundClutter = GVAR(groundClutterFactor) * _groundClutterArea * _rangeRatio ^ 4;
 private _radarClutter = 1 + _volumeClutter * _vClutterMultiplier + _groundClutter * _gClutterMultiplier; // 1 for background noise
 
 private _radarDetection = _detectingPower / _radarClutter;

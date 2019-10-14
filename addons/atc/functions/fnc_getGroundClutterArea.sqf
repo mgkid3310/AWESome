@@ -10,8 +10,8 @@ private _x0 = _height / sin _psi;
 private _x1 = -(_x0 - (_d / 2)) * tan _psi;
 private _x2 = -(_x0 + (_d / 2)) * tan _psi;
 
-private _S1 = 2 * (_r ^ 2) * acos (_x1 / _r) - _x1 * sqrt ((_r ^ 2) - (_x1 ^ 2));
-private _S2 = 2 * (_r ^ 2) * acos (_x2 / _r) - _x2 * sqrt ((_r ^ 2) - (_x2 ^ 2));
+private _S1 = 2 * (_r ^ 2) * acos (abs _x1 / _r) - abs _x1 * sqrt ((_r ^ 2) - (_x1 ^ 2));
+private _S2 = 2 * (_r ^ 2) * acos (abs _x2 / _r) - abs _x2 * sqrt ((_r ^ 2) - (_x2 ^ 2));
 
 private _A = if ((_x1 * _x2) < 0) then {_S1 + _S2} else {_S1 - _S2};
 private _area = ((sin _psi) / ((cos _psi) ^ 2)) * abs _A;

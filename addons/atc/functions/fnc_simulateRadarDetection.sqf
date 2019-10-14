@@ -10,16 +10,8 @@ _advancedParams params [["_azimuthBandwith", 1], ["_pulseWidth", 0.000001]];
 if (_isMaster) then {[100, 0] select (isTouchingGround _target)};
 
 private ["_posRadarASL", "_posTargetASL"];
-if (_radar isEqualType []) then {
-	_posRadarASL = _radar;
-} else {
-	_posRadarASL = getPosASL _radar;
-};
-if (_target isEqualType []) then {
-	_posTargetASL = _target;
-} else {
-	_posTargetASL = getPosASL _target;
-};
+private _posRadarASL = if (_radar isEqualType []) then {_radar} else {getPosASL _radar};
+private _posTargetASL = if (_target isEqualType []) then {_target} else {_posTargetASL = getPosASL _target};
 if (terrainIntersect [ASLToAGL _posRadarASL, ASLToAGL _posTargetASL]) exitWith {0};
 
 private _deadzoneRange = _pulseWidth * GVAR(speedOfLight) / 2; // m
@@ -29,8 +21,6 @@ if !(_distance > _deadzoneRange) exitWith {0};
 
 if ((_radarTargetSize < 0) && (_target isEqualType "")) then {
 	_radarTargetSize = getNumber (configFile >> "CfgVehicles" >> (typeOf _target) >> "radarTargetSize");
-} else {
-	_radarTargetSize = 1;
 };
 private _radarCrossSection = _radarTargetSize ^ 4; // x5m^2
 private _rangeRatio = 1000 * _radarRange / _distance;

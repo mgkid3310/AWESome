@@ -14,6 +14,6 @@ private _S1 = 2 * (_r ^ 2) * acos (abs _x1 / _r) - abs _x1 * sqrt ((_r ^ 2) - (_
 private _S2 = 2 * (_r ^ 2) * acos (abs _x2 / _r) - abs _x2 * sqrt ((_r ^ 2) - (_x2 ^ 2));
 
 private _A = if ((_x1 * _x2) < 0) then {_S1 + _S2} else {_S1 - _S2};
-private _area = ((sin _psi) / ((cos _psi) ^ 2)) * abs _A;
+private _area = ((sin _psi) / ((cos _psi) ^ 2)) * _A;
 
-_area
+abs _area

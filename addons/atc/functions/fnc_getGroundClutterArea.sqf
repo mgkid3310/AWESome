@@ -3,7 +3,7 @@ params ["_range", "_azimuthBandwith", "_pulseWidth", "_height", "_psi"];
 private _r = _range * tan (_azimuthBandwith / 2);
 private _d = _pulseWidth * GVAR(speedOfLight) / 2;
 
-if (abs _psi < 1) exitWith {2 * _r * _d};
+if (abs _psi < 1) exitWith {if (_height < _r) then {2 * _d} * sqrt ((_r ^ 2) - (_height ^ 2)) else {0}};
 if (abs _psi > 89) exitWith {if (_height < (_d / 2)) then {pi * (_r ^ 2)} else {0}};
 
 private _x0 = _height / sin _psi;

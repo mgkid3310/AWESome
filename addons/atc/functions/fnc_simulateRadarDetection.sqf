@@ -29,13 +29,9 @@ private _altASL = getPosASL _target select 2;
 private _altRadar = 1 max (_altAGLS min _altASL);
 
 private _radius = _distance * tan (_azimuthBandwith / 2);
-private _psi = acos ((_radar distance2D _target) / _distance);
-private _altEff = _altRadar / cos _psi;
-private _altFactor = if (_altEff < _radius) then {
-	sqrt ((_radius ^ 2) - (_altEff ^ 2))
-} else {
-	0
-};
+private _psi = acos ((_posRadarASL distance2D _posTargetASL) / _distance);
+private _altEff = _radius min (_altRadar / cos _psi);
+private _altFactor = sqrt ((_radius ^ 2) - (_altEff ^ 2));
 private _angleFactor = 1 min (_pulseWidth * GVAR(speedOfLight) * (tan _psi) / (4 * _radius));
 
 private _volumeClutter = GVAR(volumeClutterFactor) * rain * _rangeRatio ^ 2;

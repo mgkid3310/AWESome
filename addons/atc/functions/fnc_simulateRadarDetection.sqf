@@ -43,4 +43,5 @@ private _radarClutter = 1 + _volumeClutter * _vClutterMultiplier + _groundClutte
 
 private _radarDetection = _detectingPower / _radarClutter;
 
-_radarDetection
+[_rangeRatio, _detectingPower, _volumeClutter, _groundClutter, _psi, _altFactor, _angleFactor]
+// _radarDetection

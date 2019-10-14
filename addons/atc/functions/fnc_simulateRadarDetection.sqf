@@ -29,7 +29,7 @@ private _detectingPower = _radarCrossSection * _rangeRatio ^ 4; // 1 for 5m^2 RC
 
 private _altAGL = (ASLToAGL _posTargetASL) select 2;
 private _altASL = _posTargetASL select 2;
-private _altRadar = 1 max (_altAGL min _altASL);
+private _altRadar = 0 max (_altAGL min _altASL);
 private _psi = acos ((_posRadarASL distance2D _posTargetASL) / _distance);
 private _groundClutterArea = [_distance, _azimuthBandwith, _pulseWidth, _altRadar, _psi] call FUNC(getGroundClutterArea);
 

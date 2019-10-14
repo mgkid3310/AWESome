@@ -2,6 +2,7 @@
 
 player setVariable [QGVAR(hasAWESomeATC), true, true];
 
+GVAR(speedOfLight) = 299792458; // m/s
 GVAR(volumeClutterFactor) = 1;
 GVAR(groundClutterFactor) = 1;
 GVAR(minRadarDetection) = 16; // maximum radar range x0.5

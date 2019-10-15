@@ -42,7 +42,7 @@ private _volumeReflectivity = ((6 * 10 ^ -14) * _rainfallRate ^ 1.6) / ((GVAR(sp
 private _terrainReflectivity = 0.001;
 
 private _volumeClutter = GVAR(volumeClutterFactor) * _volumeClutterCell * _volumeReflectivity * (10 ^ -0.32) * _rangeRatio ^ 4;
-private _groundClutter = GVAR(groundClutterFactor) * _groundClutterArea * _terrainReflectivity * _rangeRatio ^ 4;
+private _groundClutter = GVAR(groundClutterFactor) * _groundClutterArea * _terrainReflectivity* (10 ^ -0.16) * _rangeRatio ^ 4;
 private _radarClutter = 1 + _volumeClutter * _vClutterMultiplier + _groundClutter * _gClutterMultiplier; // 1 for background noise
 
 private _radarDetection = _detectingPower / _radarClutter;

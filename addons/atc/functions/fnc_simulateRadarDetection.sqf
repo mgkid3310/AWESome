@@ -34,11 +34,13 @@ private _altRadar = 0 max (_altAGL min _altASL);
 private _cellRadius = _distance * tan (_azimuthBandwith / 2);
 private _cellLength = _pulseWidthMicroS * (10 ^ -6) * GVAR(speedOfLight) / 2;
 private _psi = acos ((_posRadarASL distance2D _posTargetASL) / _distance);
+private _volumeClutterCell = pi * _cellLength * _cellRadius ^ 2;
 private _groundClutterArea = [_cellRadius, _cellLength, _altRadar, _psi] call FUNC(getCylinderlutterArea); // m^2
 
+private _volumeReflectivity = 10 ^ (4 * log _radarFrequencyGHz + linearConversion [0, 1, rain, -12, -9]);
 private _terrainReflectivity = 0.001;
 
-private _volumeClutter = GVAR(volumeClutterFactor) * rain * _rangeRatio ^ 2;
+private _volumeClutter = GVAR(volumeClutterFactor) * _volumeReflectivity * _volumeClutterCell * _rangeRatio ^ 4;
 private _groundClutter = GVAR(groundClutterFactor) * _groundClutterArea * _terrainReflectivity * _rangeRatio ^ 4;
 private _radarClutter = 1 + _volumeClutter * _vClutterMultiplier + _groundClutter * _gClutterMultiplier; // 1 for background noise
 

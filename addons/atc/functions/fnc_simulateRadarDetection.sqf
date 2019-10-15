@@ -40,7 +40,7 @@ private _groundClutterArea = [_cellRadius, _cellLength, _altRadar, _psi] call FU
 private _volumeReflectivity = 10 ^ (4 * log _radarFrequencyGHz + linearConversion [0, 1, rain, -12, -9]);
 private _terrainReflectivity = 0.001;
 
-private _volumeClutter = GVAR(volumeClutterFactor) * _volumeReflectivity * _volumeClutterCell * _rangeRatio ^ 4;
+private _volumeClutter = GVAR(volumeClutterFactor) * _volumeClutterCell * _volumeReflectivity * _rangeRatio ^ 4;
 private _groundClutter = GVAR(groundClutterFactor) * _groundClutterArea * _terrainReflectivity * _rangeRatio ^ 4;
 private _radarClutter = 1 + _volumeClutter * _vClutterMultiplier + _groundClutter * _gClutterMultiplier; // 1 for background noise
 

@@ -1,9 +1,6 @@
 #include "script_component.hpp"
 
-params ["_range", "_azimuthBandwith", "_pulseWidth", "_height", "_psi"];
-
-private _r = _range * tan (_azimuthBandwith / 2);
-private _d = _pulseWidth * GVAR(speedOfLight) / 2;
+params ["_r", "_d", "_height", "_psi"];
 
 if (abs _psi < 1) exitWith {if (_height < _r) then {2 * _d * sqrt ((_r ^ 2) - (_height ^ 2))} else {0}};
 if (abs _psi > 89) exitWith {if (_height < (_d / 2)) then {pi * (_r ^ 2)} else {0}};

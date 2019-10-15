@@ -37,9 +37,9 @@ private _psi = acos ((_posRadarASL distance2D _posTargetASL) / _distance);
 private _volumeClutterCell = pi * _cellLength * _cellRadius ^ 2;
 private _groundClutterArea = [_cellRadius, _cellLength, _altRadar, _psi] call FUNC(getCylinderlutterArea); // m^2
 
-private _terrainReflectivity = 0.001;
 private _rainfallRate = 16 * rain * ([0, 1] select (overcast > 0.5)); // mm/hr
 private _volumeReflectivity = ((6 * 10 ^ -14) * _rainfallRate ^ 1.6) / ((GVAR(speedOfLight) / (_radarFrequencyGHz * 10 ^ 9)) ^ 4); // m^-1
+private _terrainReflectivity = 0.001;
 
 private _volumeClutter = GVAR(volumeClutterFactor) * _volumeClutterCell * _volumeReflectivity * (10 ^ -0.32) * _rangeRatio ^ 4;
 private _groundClutter = GVAR(groundClutterFactor) * _groundClutterArea * _terrainReflectivity * _rangeRatio ^ 4;

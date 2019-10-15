@@ -4,7 +4,7 @@ params ["_monitor", "_target", ["_radarTargetSize", -1]];
 
 private _radarParams = _monitor getVariable [QGVAR(radarParams), []];
 _radarParams params [["_radar", _monitor], ["_radarRange", 30], ["_isMaster", false], ["_performanceParams", []], ["_advancedParams", []]];
-_performanceParams params [["_counterStealth", 0], ["_vClutterMultiplier", 1], ["_gClutterMultiplier", 1]];
+_performanceParams params [["_counterStealth", 0], ["_vClutterReduction", 10 ^ 3], ["_gClutterReduction", 10 ^ 3]];
 _advancedParams params [["_radarFrequencyGHz", 10], ["_azimuthBandwith", 1], ["_pulseWidthMicroS", 1]];
 
 if (_isMaster) then {[100, 0] select (isTouchingGround _target)};
@@ -41,9 +41,9 @@ private _rainfallRate = 16 * rain * ([0, 1] select (overcast > 0.5)); // mm/hr
 private _volumeReflectivity = ((6 * 10 ^ -14) * _rainfallRate ^ 1.6) / ((GVAR(speedOfLight) / (_radarFrequencyGHz * 10 ^ 9)) ^ 4); // m^-1
 private _terrainReflectivity = 0.001;
 
-private _volumeClutter = GVAR(volumeClutterFactor) * _volumeClutterCell * _volumeReflectivity * (10 ^ -0.32) * _rangeRatio ^ 4;
-private _groundClutter = GVAR(groundClutterFactor) * _groundClutterArea * _terrainReflectivity * (10 ^ -0.16) * _rangeRatio ^ 4;
-private _radarClutter = 1 + _volumeClutter * _vClutterMultiplier + _groundClutter * _gClutterMultiplier; // 1 for background noise
+private _volumeClutter = ((_volumeClutterCell * _volumeReflectivity) / (_vClutterReduction * 10 ^ 0.32)) * _rangeRatio ^ 4;
+private _groundClutter = ((_groundClutterArea * _terrainReflectivity) / (_gClutterReduction * 10 ^ 0.16)) * _rangeRatio ^ 4;
+private _radarClutter = 1 + GVAR(volumeClutterFactor) * _volumeClutter + GVAR(groundClutterFactor) * _groundClutter; // 1 for background noise
 
 private _radarDetection = _detectingPower / _radarClutter;
 

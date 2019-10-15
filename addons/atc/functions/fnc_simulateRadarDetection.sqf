@@ -11,7 +11,7 @@ if (_isMaster) then {[100, 0] select (isTouchingGround _target)};
 
 private ["_posRadarASL", "_posTargetASL"];
 private _posRadarASL = if (_radar isEqualType []) then {_radar} else {getPosASL _radar};
-private _posTargetASL = if (_target isEqualType []) then {_target} else {_posTargetASL = getPosASL _target};
+private _posTargetASL = if (_target isEqualType []) then {_target} else {getPosASL _target};
 if (terrainIntersect [ASLToAGL _posRadarASL, ASLToAGL _posTargetASL]) exitWith {0};
 
 private _deadzoneRange = _pulseWidth * GVAR(speedOfLight) / 2; // m

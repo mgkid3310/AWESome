@@ -31,7 +31,7 @@ private _altAGL = (ASLToAGL _posTargetASL) select 2;
 private _altASL = _posTargetASL select 2;
 private _altRadar = 0 max (_altAGL min _altASL);
 private _psi = acos ((_posRadarASL distance2D _posTargetASL) / _distance);
-private _groundClutterArea = [_distance, _azimuthBandwith, _pulseWidth, _altRadar, _psi] call FUNC(getGroundClutterArea);
+private _groundClutterArea = [_distance, _azimuthBandwith, _pulseWidth, _altRadar, _psi] call FUNC(getGroundClutterArea); // m^2
 
 private _volumeClutter = GVAR(volumeClutterFactor) * rain * _rangeRatio ^ 2;
 private _groundClutter = GVAR(groundClutterFactor) * _groundClutterArea * _rangeRatio ^ 4;

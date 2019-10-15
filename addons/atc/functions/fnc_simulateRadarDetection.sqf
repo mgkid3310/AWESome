@@ -46,5 +46,5 @@ private _radarClutter = 1 + _volumeClutter * _vClutterMultiplier + _groundClutte
 
 private _radarDetection = _detectingPower / _radarClutter;
 
-diag_log str [_rangeRatio, _detectingPower, _volumeClutter, _groundClutter, _psi, _volumeClutterCell, _groundClutterArea, _terrainReflectivity];
+// diag_log str [_rangeRatio, _detectingPower, _volumeClutter, _groundClutter, _psi, _volumeClutterCell, _groundClutterArea, _terrainReflectivity];
 _radarDetection

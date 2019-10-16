@@ -9,6 +9,11 @@ if (_isMaster) then {[GVAR(minRadarDetection), 0] select (isTouchingGround _targ
 
 private _performanceParams = _radar getVariable [QGVAR(performanceParams), []];
 private _radarDetailParams = _radar getVariable [QGVAR(radarDetailParams), []];
+if (_radarDetailParams isEqualType "") then {
+	private _index = (GVAR(radarParameterOptions) apply {toUpper (_x select 0)}) find toUpper _radarDetailParams;
+	_radarDetailParams = if (_index < 0) then {[]} else {GVAR(radarParameterOptions) select _index select 1};
+};
+
 _performanceParams params [["_radarRange", 30], ["_counterStealth", 0], ["_vClutterReduction", 10 ^ 3], ["_gClutterReduction", 10 ^ 3]];
 _radarDetailParams params [["_radarFrequencyGHz", 16.5], ["_pulseWidthMicroS", 1.25], ["_azimuthBeamwidth", 2.2], ["_elevationBeamwidth", 3.8]];
 

@@ -22,7 +22,7 @@ if !(_distance > _deadzoneRange) exitWith {0};
 if ((_radarTargetSize < 0) && (_target isEqualType "")) then {
 	_radarTargetSize = getNumber (configFile >> "CfgVehicles" >> (typeOf _target) >> "radarTargetSize");
 };
-private _radarCrossSection = _radarTargetSize ^ 4; // x5m^2
+private _radarCrossSection = 5 * _radarTargetSize ^ 4; // m^2
 private _rangeRatio = 1000 * _radarRange / _distance;
 
 private _detectingPower = _radarCrossSection * _rangeRatio ^ 4; // 1 for 5m^2 RCS aircraft at maximum radar range, high altitude
@@ -43,7 +43,7 @@ private _terrainReflectivity = 10 ^ -3;
 
 private _volumeClutter = ((_volumeClutterCell * _volumeReflectivity) / (_vClutterReduction * 10 ^ 0.32)) * _rangeRatio ^ 4;
 private _groundClutter = ((_groundClutterArea * _terrainReflectivity) / (_gClutterReduction * 10 ^ 0.16)) * _rangeRatio ^ 4;
-private _radarClutter = 1 + GVAR(volumeClutterFactor) * _volumeClutter + GVAR(groundClutterFactor) * _groundClutter; // 1 for background noise
+private _radarClutter = 5 + GVAR(volumeClutterFactor) * _volumeClutter + GVAR(groundClutterFactor) * _groundClutter; // 5 for background noise
 
 private _radarDetection = _detectingPower / _radarClutter;
 

@@ -2,9 +2,11 @@
 
 player setVariable [QGVAR(hasAWESomeATC), true, true];
 
-// set default radar parameters
-GVAR(radarParams_APG76V) = [16.5, 1.25, 2.2, 3.8];
-GVAR(radarParams_APS145) = [0.45, 13, 7, 20];
+// set default radar parameter options
+GVAR(radarParameterOptions) = [
+	["APG76V", [16.5, 1.25, 2.2, 3.8]],
+	["APS145", [0.45, 13, 7, 20]]
+];
 
 // init global variables
 GVAR(speedOfLight) = 299792458; // m/s

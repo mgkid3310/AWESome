@@ -5,7 +5,7 @@ params ["_monitor", "_target", ["_radarTargetSize", -1]];
 private _radarParams = _monitor getVariable [QGVAR(radarParams), []];
 _radarParams params [["_radar", _monitor], ["_radarRange", 30], ["_isMaster", false], ["_performanceParams", []], ["_advancedParams", []]];
 _performanceParams params [["_counterStealth", 0], ["_vClutterReduction", 10 ^ 3], ["_gClutterReduction", 10 ^ 3]];
-_advancedParams params [["_radarFrequencyGHz", 10], ["_azimuthBandwith", 1], ["_pulseWidthMicroS", 1]];
+_advancedParams params [["_radarFrequencyGHz", 10], ["_azimuthBeamwidth", 2.2], ["_elevationBeamwidth", 3.8], ["_pulseWidthMicroS", 1]];
 
 if (_isMaster) then {[100, 0] select (isTouchingGround _target)};
 
@@ -31,11 +31,12 @@ private _altAGL = (ASLToAGL _posTargetASL) select 2;
 private _altASL = _posTargetASL select 2;
 private _altRadar = 0 max (_altAGL min _altASL);
 
-private _cellRadius = _distance * tan (_azimuthBandwith / 2);
+private _azimuthRadius = _distance * tan (_azimuthBeamwidth / 2);
+private _elevationRadius = _distance * tan (_elevationBeamwidth / 2);
 private _cellLength = _pulseWidthMicroS * (10 ^ -6) * GVAR(speedOfLight) / 2;
 private _psi = acos ((_posRadarASL distance2D _posTargetASL) / _distance);
-private _volumeClutterCell = pi * _cellLength * _cellRadius ^ 2;
-private _groundClutterArea = [_cellRadius, _cellLength, _altRadar, _psi] call FUNC(getCylinderlutterArea); // m^2
+private _volumeClutterCell = pi * _azimuthRadius * _elevationRadius * _cellLength;
+private _groundClutterArea = [_azimuthRadius, _elevationRadius, _cellLength, _altRadar, _psi] call FUNC(getCylinderlutterArea); // m^2
 
 private _rainfallRate = 16 * rain * ([0, 1] select (overcast > 0.5)); // mm/hr
 private _volumeReflectivity = ((6 * 10 ^ -14) * _rainfallRate ^ 1.6) / ((GVAR(speedOfLight) / (_radarFrequencyGHz * 10 ^ 9)) ^ 4); // m^-1

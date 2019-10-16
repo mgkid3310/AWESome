@@ -3,11 +3,14 @@
 params ["_monitor", "_target", ["_radarTargetSize", -1]];
 
 private _radarParams = _monitor getVariable [QGVAR(radarParams), []];
-_radarParams params [["_radar", _monitor], ["_radarRange", 30], ["_isMaster", false], ["_performanceParams", []], ["_advancedParams", []]];
-_performanceParams params [["_counterStealth", 0], ["_vClutterReduction", 10 ^ 3], ["_gClutterReduction", 10 ^ 3]];
-_advancedParams params [["_radarFrequencyGHz", 16.5], ["_azimuthBeamwidth", 2.2], ["_elevationBeamwidth", 3.8], ["_pulseWidthMicroS", 1.25]];
+_radarParams params [["_radar", _monitor], ["_isMaster", false]];
 
-if (_isMaster) then {[100, 0] select (isTouchingGround _target)};
+if (_isMaster) then {[GVAR(minRadarDetection), 0] select (isTouchingGround _target)};
+
+private _performanceParams = _radar getVariable [QGVAR(performanceParams), []];
+private _radarDetailParams = _radar getVariable [QGVAR(radarDetailParams), []];
+_performanceParams params [["_radarRange", 30], ["_counterStealth", 0], ["_vClutterReduction", 10 ^ 3], ["_gClutterReduction", 10 ^ 3]];
+_radarDetailParams params [["_radarFrequencyGHz", 16.5], ["_pulseWidthMicroS", 1.25], ["_azimuthBeamwidth", 2.2], ["_elevationBeamwidth", 3.8]];
 
 private ["_posRadarASL", "_posTargetASL"];
 private _posRadarASL = if (_radar isEqualType []) then {_radar} else {getPosASL _radar};

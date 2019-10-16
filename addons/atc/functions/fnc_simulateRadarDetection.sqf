@@ -5,7 +5,7 @@ params ["_monitor", "_target", ["_radarTargetSize", -1]];
 private _radarParams = _monitor getVariable [QGVAR(radarParams), []];
 _radarParams params [["_radar", _monitor], ["_radarRange", 30], ["_isMaster", false], ["_performanceParams", []], ["_advancedParams", []]];
 _performanceParams params [["_counterStealth", 0], ["_vClutterReduction", 10 ^ 3], ["_gClutterReduction", 10 ^ 3]];
-_advancedParams params [["_radarFrequencyGHz", 10], ["_azimuthBeamwidth", 2.2], ["_elevationBeamwidth", 3.8], ["_pulseWidthMicroS", 10]];
+_advancedParams params [["_radarFrequencyGHz", 16.5], ["_azimuthBeamwidth", 2.2], ["_elevationBeamwidth", 3.8], ["_pulseWidthMicroS", 1.25]];
 
 if (_isMaster) then {[100, 0] select (isTouchingGround _target)};
 

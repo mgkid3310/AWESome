@@ -48,7 +48,7 @@ private _groundClutterArea = [_azimuthRadius, _elevationRadius, _cellLength, _al
 
 private _rainfallRate = 16 * rain * ([0, 1] select (overcast > 0.5)); // mm/hr
 private _volumeReflectivity = ((6 * 10 ^ -14) * _rainfallRate ^ 1.6) / ((GVAR(speedOfLight) / (_radarFrequencyGHz * 10 ^ 9)) ^ 4); // m^-1
-private _terrainReflectivity = 10 ^ -3;
+private _terrainReflectivity = 10 ^ linearConversion [0, 90, abs _psi, -3, -2];
 
 private _volumeClutter = ((_volumeClutterCell * _volumeReflectivity) / (_vClutterReduction * 10 ^ 0.32)) * _rangeRatio ^ 4;
 private _groundClutter = ((_groundClutterArea * _terrainReflectivity) / (_gClutterReduction * 10 ^ 0.16)) * _rangeRatio ^ 4;

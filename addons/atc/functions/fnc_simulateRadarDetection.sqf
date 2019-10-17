@@ -44,7 +44,7 @@ private _elevationRadius = _distance * tan (_elevationBeamwidth / 2);
 private _cellLength = _pulseWidthMicroS * (10 ^ -6) * GVAR(speedOfLight) / 2;
 private _psi = acos ((_posRadarASL distance2D _posTargetASL) / _distance);
 private _volumeClutterCell = pi * _azimuthRadius * _elevationRadius * _cellLength;
-private _groundClutterArea = [_azimuthRadius, _elevationRadius, _cellLength, _altRadar, _psi] call FUNC(getCylinderlutterArea); // m^2
+private _groundClutterArea = [_azimuthRadius, _elevationRadius, _cellLength, _altRadar, _psi] call FUNC(getGroundClutterArea); // m^2
 
 private _rainfallRate = 16 * rain * ([0, 1] select (overcast > 0.5)); // mm/hr
 private _volumeReflectivity = ((6 * 10 ^ -14) * _rainfallRate ^ 1.6) / ((GVAR(speedOfLight) / (_radarFrequencyGHz * 10 ^ 9)) ^ 4); // m^-1

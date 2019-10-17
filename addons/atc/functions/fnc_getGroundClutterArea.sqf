@@ -2,7 +2,7 @@
 
 params ["_rAz", "_rEl", "_d", "_height", "_psi"];
 
-if (abs _psi < 1) exitWith {if (_height < _rEl) then {2 * _d * sqrt ((_rEl ^ 2) - (_height ^ 2))} else {0}};
+if (abs _psi < 1) exitWith {if (_height < _rEl) then {2 * _d * (_rAz / _rEl) * sqrt ((_rEl ^ 2) - (_height ^ 2))} else {0}};
 if (abs _psi > 89) exitWith {if (_height < (_d / 2)) then {pi * _rAz * _rEl} else {0}};
 
 private _x0 = _height / sin _psi;

@@ -20,6 +20,7 @@ _radarDetailParams params [["_radarFrequencyGHz", 16.5], ["_pulseWidthMicroS", 1
 private ["_posRadarASL", "_posTargetASL"];
 private _posRadarASL = if (_radarPos isEqualType []) then {_radarPos} else {getPosASL _radarPos};
 private _posTargetASL = if (_target isEqualType []) then {_target} else {getPosASL _target};
+
 if (terrainIntersect [ASLToAGL _posRadarASL, ASLToAGL _posTargetASL]) exitWith {0};
 
 private _deadzoneRange = _pulseWidthMicroS * (10 ^ -6) * GVAR(speedOfLight) / 2; // m

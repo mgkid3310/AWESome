@@ -14,16 +14,16 @@ if (_radarDetailParams isEqualType "") then {
 	_radarDetailParams = if (_index < 0) then {[]} else {GVAR(radarParameterOptions) select _index select 1};
 };
 
-_performanceParams params [["_radarRange", 30], ["_counterStealth", 0], ["_vClutterReduction", 10 ^ 3], ["_gClutterReduction", 10 ^ 3]];
+_performanceParams params [["_radarPos", _radar], ["_radarRange", 30], ["_counterStealth", 0], ["_volumeCR", 10 ^ 3], ["_groundCR", 10 ^ 3]];
 _radarDetailParams params [["_radarFrequencyGHz", 16.5], ["_pulseWidthMicroS", 1.25], ["_azimuthBeamwidth", 2.2], ["_elevationBeamwidth", 3.8]];
 
 private ["_posRadarASL", "_posTargetASL"];
-private _posRadarASL = if (_radar isEqualType []) then {_radar} else {getPosASL _radar};
+private _posRadarASL = if (_radarPos isEqualType []) then {_radarPos} else {getPosASL _radarPos};
 private _posTargetASL = if (_target isEqualType []) then {_target} else {getPosASL _target};
 if (terrainIntersect [ASLToAGL _posRadarASL, ASLToAGL _posTargetASL]) exitWith {0};
 
-private _deadzoneRange = _pulseWidth * GVAR(speedOfLight) / 2; // m
-private _distance = _deadzoneRange max (_posRadarASL distance _posTargetASL); // m
+private _deadzoneRange = _pulseWidthMicroS * (10 ^ -6) * GVAR(speedOfLight) / 2; // m
+private _distance = _deadzoneRange max (_posRadarASL vectorDistance _posTargetASL); // m
 
 if !(_distance > _deadzoneRange) exitWith {0};
 

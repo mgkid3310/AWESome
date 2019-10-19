@@ -47,15 +47,21 @@ private _psi = acos ((_posRadarASL distance2D _posTargetASL) / _distance);
 private _volumeClutterCell = pi * _azimuthRadius * _elevationRadius * _cellLength;
 private _groundClutterArea = [_azimuthRadius, _elevationRadius, _cellLength, _altRadar, _psi] call FUNC(getGroundClutterArea); // m^2
 
+// systemChat str [_azimuthRadius, _elevationRadius, _cellLength, _psi, _volumeClutterCell, _groundClutterArea];
+
 private _rainfallRate = 16 * rain * ([0, 1] select (overcast > 0.5)); // mm/hr
 private _volumeReflectivity = ((6 * 10 ^ -14) * _rainfallRate ^ 1.6) / ((GVAR(speedOfLight) / (_radarFrequencyGHz * 10 ^ 9)) ^ 4); // m^-1
 private _terrainReflectivity = 10 ^ linearConversion [0, 90, abs _psi, -3, -2];
+
+// systemChat str [_rainfallRate, _volumeReflectivity, _terrainReflectivity];
 
 private _volumeClutter = ((_volumeClutterCell * _volumeReflectivity) / (_volumeCR * 10 ^ 0.32)) * _rangeRatio ^ 4;
 private _groundClutter = ((_groundClutterArea * _terrainReflectivity) / (_groundCR * 10 ^ 0.16)) * _rangeRatio ^ 4;
 private _radarClutter = 5 + GVAR(volumeClutterFactor) * _volumeClutter + GVAR(groundClutterFactor) * _groundClutter; // 5 for background noise
 
 private _radarDetection = _detectingPower / _radarClutter;
+
+// systemChat str [_volumeClutter, _groundClutter, _radarClutter, _radarDetection];
 
 // diag_log str [_target, _rangeRatio, _detectingPower, _volumeClutter, _groundClutter, _psi, _volumeClutterCell, _groundClutterArea, _terrainReflectivity];
 _radarDetection

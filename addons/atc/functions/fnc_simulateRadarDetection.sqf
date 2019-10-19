@@ -44,7 +44,7 @@ private _altASL = _posTargetASL select 2;
 private _altRadar = 0 max (_altAGL min _altASL);
 private _psi = acos ((_posRadarASL distance2D _posTargetASL) / _distance);
 
-// systemChat str [_azimuthRadius, _elevationRadius, _cellLength, _psi, _volumeClutterCell, _groundClutterArea];
+// systemChat str [_azimuthRadius, _elevationRadius, _cellLength, _altRadar, _psi];
 
 private _rainfallRate = 16 * rain * ([0, 1] select (overcast > 0.5)); // mm/hr
 private _volumeReflectivity = ((6 * 10 ^ -14) * _rainfallRate ^ 1.6) / ((GVAR(speedOfLight) / (_radarFrequencyGHz * 10 ^ 9)) ^ 4); // m^-1
@@ -54,6 +54,8 @@ private _terrainReflectivity = 10 ^ linearConversion [90, 0, _psi, -3, -2, true]
 
 private _volumeClutterCell = pi * _azimuthRadius * _elevationRadius * _cellLength;
 private _groundClutterArea = [_azimuthRadius, _elevationRadius, _cellLength, _altRadar, _psi] call FUNC(getGroundClutterArea); // m^2
+
+// systemChat str [_volumeClutterCell, _groundClutterArea];
 
 private _volumeClutter = ((_volumeReflectivity * _volumeClutterCell) / (_volumeCR * 10 ^ 0.32)) * _rangeRatio ^ 4;
 private _groundClutter = ((_terrainReflectivity * _groundClutterArea) / (_groundCR * 10 ^ 0.16)) * _rangeRatio ^ 4;

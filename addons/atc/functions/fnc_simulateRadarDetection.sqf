@@ -36,12 +36,12 @@ private _rangeRatio = 1000 * _radarRange / _distance;
 
 private _detectingPower = _radarCrossSection * _rangeRatio ^ 4; // 1 for 5m^2 RCS aircraft at maximum radar range, high altitude
 
-private _altAGL = (ASLToAGL _posTargetASL) select 2;
-private _altASL = _posTargetASL select 2;
-private _altRadar = 0 max (_altAGL min _altASL);
 private _azimuthRadius = _distance * tan (_azimuthBeamwidth / 2);
 private _elevationRadius = _distance * tan (_elevationBeamwidth / 2);
 private _cellLength = _pulseWidthMicroS * (10 ^ -6) * GVAR(speedOfLight) / 2;
+private _altAGL = (ASLToAGL _posTargetASL) select 2;
+private _altASL = _posTargetASL select 2;
+private _altRadar = 0 max (_altAGL min _altASL);
 private _psi = acos ((_posRadarASL distance2D _posTargetASL) / _distance);
 
 private _rainfallRate = 16 * rain * ([0, 1] select (overcast > 0.5)); // mm/hr

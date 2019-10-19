@@ -25,7 +25,7 @@ private _dragParasite = [0, 0, 0];
 private _dragInduced = [0, 0, 0];
 if (_liftVector isEqualType []) then {
 	private _inducedConst = (2 * 1.2754) / (_densityRatio * pi * 0.5 * 400);
-	private _inducedValue = ((vectorMagnitude _liftVector) / (_airSpeed max (_speedStall / 3.6))) ^ 2;
+	private _inducedValue = ((vectorMagnitude _liftVector) / (_airSpeed max (_speedStall / 3.6) max 1)) ^ 2;
 	_dragInduced = (vectorNormalized _airVel) vectorMultiply (_inducedConst * _inducedValue * (GVAR(dragSourceMultiplier) select 1));
 
 	private _hOverD = (((_height max 0) + GVAR(wingHeight)) / GVAR(wingSpan));

@@ -10,14 +10,8 @@ if (!([player, _vehicle, 1] call EFUNC(main,isCrew)) || !(alive _vehicle) || (_t
 };
 
 // check flight phase
-private _altAGLS = getPos _vehicle select 2;
-private _altASL = getPosASL _vehicle select 2;
-private _altRadar = _altAGLS min _altASL;
-private _climeASL = velocity _vehicle select 2; // m/s
-private _flapStatus = _vehicle animationSourcePhase "flap";
-private _gearStatus = _vehicle animationSourcePhase "gear";
 private _flightphase = (_vehicle getVariable [QGVAR(flightPhaseParam), ["taxing", 0, 0, 0]]) select 0;
-private _flightphaseOutput = [_vehicle, _flightphase, _altRadar, _climeASL, _flapStatus, _gearStatus] call FUNC(flightPhaseCheck);
+private _flightphaseOutput = [_vehicle, _flightphase] call FUNC(flightPhaseCheck);
 _vehicle setVariable [QGVAR(flightPhaseParam), _flightphaseOutput];
 
 // automated transponder

@@ -1,8 +1,15 @@
 #include "script_component.hpp"
 #include "header_macros.hpp"
 
-params ["_vehicle", ["_flightphase", "taxing"], "_altRadar", "_climeASL", "_flapStatus", "_gearStatus"];
+params ["_vehicle", ["_flightphase", "taxing"]];
 private ["_headingDiff", "_approachAngle", "_ILSarray"];
+private _altAGLS = getPos _vehicle select 2;
+private _altASLW = getPosASLW _vehicle select 2;
+private _altRadar = _altAGLS min _altASLW;
+private _altASL = getPosASL _vehicle select 2;
+private _climeASL = velocity _vehicle select 2; // m/s
+private _flapStatus = _vehicle animationSourcePhase "flap";
+private _gearStatus = _vehicle animationSourcePhase "gear";
 private _currentILSindex = -1;
 private _distance = 10000;
 private _distanceReturn = 10000;

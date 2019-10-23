@@ -12,8 +12,8 @@ if !(_timeOld < time) exitWith {
 
 // flight status check
 private _altAGLS = getPos _vehicle select 2;
-private _altASL = getPosASL _vehicle select 2;
-private _altRadar = _altAGLS min _altASL;
+private _altASLW = getPosASLW _vehicle select 2;
+private _altRadar = _altAGLS min _altASLW;
 private _posExpect = (getPosASL _vehicle) vectorAdd (velocity _vehicle vectorMultiply GVAR(posExpectTime));
 private _expectTerrainAlt = 0 max getTerrainHeightASL _posExpect;
 private _flapStatus = _vehicle animationSourcePhase "flap";
@@ -32,7 +32,7 @@ private _altDiff = _flightphaseOutput select 2;
 private _altDiffDesired = _flightphaseOutput select 3;
 
 private _tooLow = !(_flightphase in ["taxing", "takeOff", "touchDown"]) && (_altRadar < GVAR(tooLowAlt));
-private _terrainWarn = (_altRadar > 5) && (_flightphase in ["takeOff", "inFlight", "landing"]) && ((_expectTerrainAlt + GVAR(terrainWarningHeight)) > _altASL);
+private _terrainWarn = (_altRadar > 5) && (_flightphase in ["takeOff", "inFlight", "landing"]) && ((_expectTerrainAlt + GVAR(terrainWarningHeight)) > (getPosASL _vehicle select 2));
 private _dontSink = (_flightphase isEqualTo "takeOff") && (_altRadar > 5) && (_altRadar < 100) && (_climeASL < 0);
 private _sinkRate = _climeASL < GVAR(maxSinkRate);
 private _isCritical = _terrainWarn || _dontSink || _sinkRate;

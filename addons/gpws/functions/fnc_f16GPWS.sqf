@@ -12,8 +12,8 @@ if !(_timeOld < time) exitWith {
 
 // flight status check
 private _altAGLS = getPos _vehicle select 2;
-private _altASL = getPosASL _vehicle select 2;
-private _altRadar = _altAGLS min _altASL;
+private _altASLW = getPosASLW _vehicle select 2;
+private _altRadar = _altAGLS min _altASLW;
 private _posExpect = (getPosASL _vehicle) vectorAdd (velocity _vehicle vectorMultiply GVAR(f16PullupTime));
 private _expectTerrainAlt = 0 max getTerrainHeightASL _posExpect;
 private _cosAOA = (vectorDir _vehicle) vectorCos (velocity _vehicle);

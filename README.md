@@ -97,21 +97,21 @@ The `_radarMode` (default: 0) parameter works in 3 modes:
 
 When using Military mode, custom parameters can be used:  
 `monitor setVariable ["orbis_atc_radarParams", [radarObject, isMaster]]`  
-`monitor`: Monitor object the atc radar was added  
-`radarObject`: Radar object (default: monitor)  
-`isMaster`: displays all airborne objects if true (default: false)  
+monitor: Monitor object the atc radar was added  
+radarObject: Radar object (default: monitor)  
+isMaster: displays all airborne objects if true (default: false)  
 
 `radar setVariable ["orbis_atc_performanceParams", [radarPos, radarRange, counterStealth, volumeCR, groundCR]]`  
-`radar`: radarObject from "orbis_atc_radarParams"  
-`radarPos`: Position of the radar, can be object or position ASL (default: radar)  
-`radarRange`: Standard detecting range for RCS 5m^2 vehicle in km (default: 30)  
-`counterStealth`: No effect for now (default: 0)  
-`volumeCR`: Volume clutter reduction ratio (default: 1000)  
-`groundCR`: Ground clutter reduction ratio (default: 1000)  
+radar: radarObject from "orbis_atc_radarParams"  
+radarPos: Position of the radar, can be object or position ASL (default: radar)  
+radarRange: Standard detecting range for RCS 5m^2 vehicle in km (default: 30)  
+counterStealth: No effect for now (default: 0)  
+volumeCR: Volume clutter reduction ratio (default: 1000)  
+groundCR: Ground clutter reduction ratio (default: 1000)  
 
 `radar setVariable ["orbis_atc_radarDetailParams", radarDetailParams]`  
-`radar`: Radar object  
-`radarDetailParams`: Radar detail parameters (default: [])  
+radar: Radar object  
+radarDetailParams: Radar detail parameters (default: [])  
 
 `radarDetailParams` can be used in two modes: preset/custom.  
 There are two presets available, `"AN/APG76"` and `"AN/APS145"`.  
@@ -122,11 +122,11 @@ clutter values and therefore cannot detect low-altitude aircrafts
 in certain situations.  
 
 When using custom values, the parameters are as follows:  
-`radarDetailParams = [radarFrequency, pulseWidth, azimuthBeamwidth, elevationBeamwidth]``  
-`radarFrequency`: Frequency of radar beam in GHz (default: 16.5)  
-`pulseWidth`: Pulse width of radar beam in micro seconds (default: 1.25)  
-`azimuthBeamwidth`: Azimuth beam width in degrees (default: 2.2)  
-`elevationBeamwidth`: Elevation beam width in degrees (default: 3.8)  
+`radarDetailParams = [radarFrequency, pulseWidth, azimuthBeamwidth, elevationBeamwidth]`  
+radarFrequency: Frequency of radar beam in GHz (default: 16.5)  
+pulseWidth: Pulse width of radar beam in micro seconds (default: 1.25)  
+azimuthBeamwidth: Azimuth beam width in degrees (default: 2.2)  
+elevationBeamwidth: Elevation beam width in degrees (default: 3.8)  
 &nbsp;
 
 4. ATIS (Automatic Terminal Information Service)  

@@ -90,30 +90,30 @@ To enable this feature, you need to add the following code
 to the target object's init field:  
 `[this, _radarMode] call orbis_atc_fnc_addRadarScreen;`  
 
-The `_radarMode` (default: `0`) parameter works in 3 modes:  
-`0`: Civilian, same side or civilian side aircrafts only  
-`1`: Military, civilian mode plus radar detected aircrafts  
-`2`: Observer, all alive aircrafts  
+The `_radarMode` (default: 0) parameter works in 3 modes:  
+0: Civilian, same side or civilian side aircrafts only  
+1: Military, civilian mode plus radar detected aircrafts  
+2: Observer, all alive aircrafts  
 
 When using Military mode, custom parameters can be used:  
-`_monitor setVariable ["orbis_atc_radarParams", [_radarObject, _isMaster]]`  
-`_monitor`: Monitor object the atc radar was added  
-`_radarObject`: Radar object (default: `_monitor`)  
-`_isMaster`: displays all airborne objects if true (default: `false`)  
+`monitor setVariable ["orbis_atc_radarParams", [radarObject, isMaster]]`  
+monitor: Monitor object the atc radar was added  
+radarObject: Radar object (default: monitor)  
+isMaster: displays all airborne objects if true (default: false)  
 
-`_radar setVariable ["orbis_atc_performanceParams", [_radarPos, _radarRange, _counterStealth, _volumeCR, _groundCR]]`  
-`_radar`: `_radarObject` from `"orbis_atc_radarParams"`  
-`_radarPos`: Position of the `_radar`, can be object or position ASL (default: `_radar`)  
-`_radarRange`: Standard detecting range for RCS 5m^2 vehicle in km (default: `30`)  
-`_counterStealth`: No effect for now (default: `0`)  
-`_volumeCR`: Volume clutter reduction ratio (default: `1000`)  
-`_groundCR`: Ground clutter reduction ratio (default: `1000`)  
+`radar setVariable ["orbis_atc_performanceParams", [radarPos, radarRange, counterStealth, volumeCR, groundCR]]`  
+radar: radarObject from "orbis_atc_radarParams"  
+radarPos: Position of the radar, can be object or position ASL (default: radar)  
+radarRange: Standard detecting range for RCS 5m^2 vehicle in km (default: 30)  
+counterStealth: No effect for now (default: 0)  
+volumeCR: Volume clutter reduction ratio (default: 1000)  
+groundCR: Ground clutter reduction ratio (default: 1000)  
 
-`radar setVariable ["orbis_atc_radarDetailParams", _radarDetailParams]`  
-`_radar`: Radar object  
-`_radarDetailParams`: Radar detail parameters (default: [])  
+`radar setVariable ["orbis_atc_radarDetailParams", radarDetailParams]`  
+radar: Radar object  
+radarDetailParams: Radar detail parameters (default: [])  
 
-`_radarDetailParams` can be used in two modes: preset/custom.  
+`radarDetailParams` can be used in two modes: preset/custom.  
 There are two presets available, `"AN/APG76"` and `"AN/APS145"`.  
 APG76 was used in A-6 aircraft, and APS145 is used in E-2A/B/C.  
 APG76 works well against ground clutter but is weak against rain.  
@@ -122,11 +122,11 @@ clutter values and therefore cannot detect low-altitude aircrafts
 in certain situations.  
 
 When using custom values, the parameters are as follows:  
-`_radarDetailParams = [_radarFrequency, _pulseWidth, _azimuthBeamwidth, _elevationBeamwidth]`  
-`_radarFrequency`: Frequency of radar beam in GHz (default: `16.5`)  
-`_pulseWidth`: Pulse width of radar beam in micro seconds (default: `1.25`)  
-`_azimuthBeamwidth`: Azimuth beam width in degrees (default: `2.2`)  
-`_elevationBeamwidth`: Elevation beam width in degrees (default: `3.8`)  
+`radarDetailParams = [radarFrequency, pulseWidth, azimuthBeamwidth, elevationBeamwidth]`  
+radarFrequency: Frequency of radar beam in GHz (default: 16.5)  
+pulseWidth: Pulse width of radar beam in micro seconds (default: 1.25)  
+azimuthBeamwidth: Azimuth beam width in degrees (default: 2.2)  
+elevationBeamwidth: Elevation beam width in degrees (default: 3.8)  
 &nbsp;
 
 4. ATIS (Automatic Terminal Information Service)  

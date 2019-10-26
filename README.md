@@ -68,7 +68,7 @@ stay as it was.
 Shows friendly & civilian planes on map with name, speed,  
 altitude, and heading. Useful when commanding multiple  
 planes. Information lines are consisted of the following  
-three lines :  
+three lines:  
 
 Pilot's Name or Callsign  
 Altitude Speed  
@@ -133,7 +133,7 @@ plane's front gear at the end of the towbar, then use Action
 to connect target plane to the towbar. After towing around,  
 stop the vehicle and disconnect target plane using Action.  
 
-NOTICE : moving too fast may occur collisions, so drive  
+NOTICE: moving too fast may occur collisions, so drive  
 with caution when towing.  
 &nbsp;
 

@@ -14,7 +14,7 @@ if (_radarDetailParams isEqualType "") then {
 	_radarDetailParams = if (_index < 0) then {[]} else {GVAR(radarParameterOptions) select _index select 1};
 };
 
-_performanceParams params [["_radarPos", _radar], ["_radarRange", 30], ["_counterStealth", 0], ["_volumeCR", 10 ^ 3], ["_groundCR", 10 ^ 3]];
+_performanceParams params [["_radarPos", _radar], ["_radarRange", 30], ["_counterStealth", 0], ["_volumeCR", 10 ^ 3], ["_groundCR", 10 ^ 1]];
 _radarDetailParams params [["_radarFrequencyGHz", 16.5], ["_pulseWidthMicroS", 1.25], ["_azimuthBeamwidth", 2.2], ["_elevationBeamwidth", 3.8]];
 
 private ["_posRadarASL", "_posTargetASL"];

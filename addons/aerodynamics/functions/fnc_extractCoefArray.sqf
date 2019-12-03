@@ -12,6 +12,10 @@ if (_input < (_stepSize * (count _array - 1))) then {
 	private _upperStep = _stepSize * (_index + 1);
 	private _lowerValue = _array select _index;
 	private _upperValue = _array select (_index + 1);
+
+	if (_lowerValue isEqualType "") then {_lowerValue = call compile _lowerValue};
+	if (_upperValue isEqualType "") then {_upperValue = call compile _upperValue};
+
 	_return = linearConversion [_lowerStep, _upperStep, _input, _lowerValue, _upperValue, true];
 } else {
 	_return = _array select (count _array - 1);

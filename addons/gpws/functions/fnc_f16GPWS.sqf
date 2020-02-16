@@ -150,13 +150,13 @@ if ((_vehicle getVariable [QGVAR(nextBeepTime), -1]) < time) then {
 		}; */
 
 		// f16_lowSpeed
-		case ((speed _vehicle < _speedStall) && !(isTouchingGround _vehicle)): {
+		case ((abs speed _vehicle < _speedStall) && !(isTouchingGround _vehicle)): {
 			DEV_CHAT("orbis_gpws: f16_lowSpeed");
 			[_vehicle, "f16_lowSpeed", nil, QGVAR(nextBeepTime)] call FUNC(speakGPWS);
 		};
 
 		// f16_highAOA
-		case ((_cosAOA < cos GVAR(f16MaxAOA)) && (speed _vehicle > 50)): {
+		case ((_cosAOA < cos GVAR(f16MaxAOA)) && (abs speed _vehicle > 50)): {
 			DEV_CHAT("orbis_gpws: f16_highAOA");
 			[_vehicle, "f16_highAOA", nil, QGVAR(nextBeepTime)] call FUNC(speakGPWS);
 		};

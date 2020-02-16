@@ -65,7 +65,7 @@ if ((_vehicle getVariable [QGVAR(nextGPWStime), -1]) < time) then {
 		};
 
 		// rita_overload
-		case ((_cosAOA < cos GVAR(ritaMaxAOA)) && (speed _vehicle > 50)): {
+		case ((_cosAOA < cos GVAR(ritaMaxAOA)) && (abs speed _vehicle > 50)): {
 			DEV_CHAT("orbis_gpws: rita_overload");
 			[_vehicle, "rita_overload"] call FUNC(speakGPWS);
 		};

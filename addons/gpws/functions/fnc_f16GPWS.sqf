@@ -22,7 +22,7 @@ private _vtolMode = getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) 
 private _thrustVector = 0 max (_vehicle animationSourcePhase "thrustVector");
 
 if (_vtolMode > 0) then {
-	_speedStall = _speedStall * cos (_thrustVector * 90);
+	_speedStall = _speedStall * (abs cos (_thrustVector * 90) toFixed 4);
 };
 
 // flight phase check

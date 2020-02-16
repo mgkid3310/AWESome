@@ -18,6 +18,12 @@ private _posExpect = (getPosASL _vehicle) vectorAdd (velocity _vehicle vectorMul
 private _expectTerrainAlt = 0 max getTerrainHeightASL _posExpect;
 private _cosAOA = (vectorDir _vehicle) vectorCos (velocity _vehicle);
 private _speedStall = getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "stallSpeed");
+private _vtolMode = getNumber (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "vtol");
+private _thrustVector = 0 max (_vehicle animationSourcePhase "thrustVector");
+
+if (_vtolMode > 0) then {
+	_speedStall = _speedStall * cos (_thrustVector * 90);
+};
 
 // flight phase check
 private _flightphaseOutput = _vehicle getVariable [QGVAR(flightPhaseParam), ["taxing", 0, 0, 0]];

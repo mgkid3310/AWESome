@@ -28,3 +28,19 @@ GVAR(dynamicWindMode) = 0;
 	"AWESome Aerodynamics",
 	[0, 1, 1, 2]
 ] call CBA_Settings_fnc_init;
+
+[
+	QGVAR(pylonMassMultiplierGlobal),
+	"SLIDER",
+	["Pylon Mass Multiplier", "Sets the multiplier for pylon weapon's mass"],
+	"AWESome Aerodynamics",
+	[0, 1, 1, 2]
+] call CBA_Settings_fnc_init;
+
+[
+	QGVAR(pylonDragMultiplierGlobal),
+	"SLIDER",
+	["Pylon Drag Multiplier", "Sets the multiplier for pylon weapon's drag"],
+	"AWESome Aerodynamics",
+	[0, 1, 1, 2]
+] call CBA_Settings_fnc_init;

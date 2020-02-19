@@ -76,7 +76,7 @@ _vehicle setVariable [QGVAR(effectiveThrottle), _throttle];
 _vehicle setVariable [QGVAR(fuelFlowEnhanced), _fuelFlowEnhanced];
 
 // check for ammo on pylons
-private ["_magazineClass", "_ammoClass", "_massFull", "_countFull", "_massMagazine", "_airFriction", "_sideAirFriction", "_pylonDragCoef2"];
+private ["_magazineClass", "_ammoClass", "_massFull", "_countFull", "_massMagazine", "_airFriction", "_sideAirFriction"];
 private _massPylon = 0;
 private _pylonDragCoef2 = [0, 0, 0];
 {

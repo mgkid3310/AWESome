@@ -47,6 +47,8 @@ private _fuelFlowMultiplier = (_vehicle getVariable [QGVAR(fuelFlowMultiplier), 
 private _thrustMultiplier = (_vehicle getVariable [QGVAR(thrustMultiplier), 1]) * GVAR(thrustMultiplierGlobal);
 private _liftMultiplier = (_vehicle getVariable [QGVAR(liftMultiplier), 1]) * GVAR(liftMultiplierGlobal);
 private _dragMultiplier = (_vehicle getVariable [QGVAR(dragMultiplier), 1]) * GVAR(dragMultiplierGlobal);
+private _pylonMassMultiplier = (_vehicle getVariable [QGVAR(pylonMassMultiplier), 1]) * GVAR(pylonMassMultiplierGlobal);
+private _pylonDragMultiplier = (_vehicle getVariable [QGVAR(pylonDragMultiplier), 1]) * GVAR(pylonDragMultiplierGlobal);
 
 // get TAS and etc.
 private _modelVelocityNew = velocityModelSpace _vehicle;
@@ -97,7 +99,8 @@ private _pylonDragCoef2 = [0, 0, 0];
 	// report if needed (dev script)
 	// diag_log format ["orbis_aerodynamics pylonNum: %1, magazine: %2, _massMagazine: %3, _coefMagazine: %4", _forEachIndex + 1, _x, _massMagazine, _coefMagazine];
 } forEach (getPylonMagazines _vehicle);
-private _pylonDragArray = [_pylonDragCoef2 vectorMultiply (1 / (1 max _massPylon)), [0, 0, 0], [0, 0, 0]];
+private _pylonDragArray = [_pylonDragCoef2 vectorMultiply (_pylonDragMultiplier / (1 max _massPylon)), [0, 0, 0], [0, 0, 0]];
+_massPylon = _massPylon * _pylonMassMultiplier;
 
 // get current vehicle mass and apply
 private ["_massCurrent", "_massFuel"];

@@ -21,8 +21,16 @@ GVAR(yOffset) = -0.4;
 
 GVAR(scaleStd) = 0.0015;
 if (isNumber (configFile >> "CfgWorlds" >> worldName >> "mapSize")) then {
-	GVAR(scaleStd) = (GVAR(scaleStd) * 30720) / getNumber (configFile >> "CfgWorlds" >> worldName >> "mapSize");
+	switch (toLower worldName) do {
+		case ("tsau_earth_updated"): {
+			GVAR(scaleStd) = GVAR(scaleStd) * 30720 / 102400;
+		};
+		default {
+			GVAR(scaleStd) = GVAR(scaleStd) * 30720 / getNumber (configFile >> "CfgWorlds" >> worldName >> "mapSize");
+		};
+	};
 };
+
 GVAR(fontMax) = 0.1;
 GVAR(fontMin) = 0.05;
 GVAR(spaceMax) = 1.8;

@@ -156,7 +156,7 @@ private _dragCorrection = (_dragEnhanced vectorAdd _dragPylon) vectorDiff _dragD
 
 // sum up corrections and bring wheel friction into calculation if needed (todo)
 private _forceApply = _thrustCorrection vectorAdd _liftCorrection vectorAdd _dragCorrection;
-if ((isTouchingGround _vehicle) && GVAR(noForceoOnGround)) then {
+if ((isTouchingGround _vehicle) && GVAR(noForceOnGround)) then {
 	_forceApply set [0, 0];
 	_forceApply set [1, 0];
 	_forceApply set [2, 0];

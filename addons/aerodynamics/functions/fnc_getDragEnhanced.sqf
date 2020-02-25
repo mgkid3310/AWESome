@@ -38,24 +38,27 @@ GVAR(waveCdArray) params ["_machCritical", "_transStart", "_machMaxCd", "_transE
 private _machNumber = _airSpeed / sqrt (103497 / _densityRatio);
 private _waveCdMultiplier = 0;
 switch (true) do {
+	case (_machNumber < _machCritical): {
+		_waveCdMultiplier = 0;
+	};
 	case (_machNumber < _transStart): {
-		_waveCdMultiplier = ((_multiplierMax - _roundFwd) / ((_transStart - _machCritical) ^ 4)) * (((_machCritical max _machNumber min _transStart) - _machCritical) ^ 4);
+		_waveCdMultiplier = (_multiplierMax - _roundFwd) * (((_machNumber - _machCritical) / (_transStart - _machCritical)) ^ 4);
 	};
 	case (_machNumber < _machMaxCd): {
 		private _slope = 4 * (_multiplierMax - _roundFwd) / (_transStart - _machCritical);
 		private _power = _slope * (_machMaxCd - _transStart) / _roundFwd;
-		_waveCdMultiplier = _multiplierMax - (_roundFwd / ((_machMaxCd - _transStart) ^ _power)) * ((_machMaxCd - _machNumber) ^ _power);
+		_waveCdMultiplier = _multiplierMax - _roundFwd * (((_machNumber - _machMaxCd) / (_transStart - _machMaxCd)) ^ _power);
 	};
 	case (_machNumber == _machMaxCd): {
 		_waveCdMultiplier = _multiplierMax;
 	};
 	case (_machNumber < _transEnd): {
-		private _slope = _machPower * (_multiplierMax - _roundAft) / _transEnd;
-		private _power = -_slope * (_transEnd - _machMaxCd) / _roundAft;
-		_waveCdMultiplier = _multiplierMax - (_roundAft / ((_transEnd - _machMaxCd) ^ _power)) * ((_machNumber - _machMaxCd) ^ _power);
+		private _slope = abs _machPower * (_multiplierMax - _roundAft) / _transEnd;
+		private _power = _slope * (_transEnd - _machMaxCd) / _roundAft;
+		_waveCdMultiplier = _multiplierMax - _roundAft * (((_machNumber - _machMaxCd) / (_transEnd - _machMaxCd)) ^ _power);
 	};
 	default {
-		_waveCdMultiplier = (_multiplierMax - _roundAft) * (_machNumber ^ _machPower) / (_transEnd ^ _machPower);
+		_waveCdMultiplier = (_multiplierMax - _roundAft) * ((_machNumber / _transEnd) ^ _machPower);
 	};
 };
 private _waveCoef = _coef2 vectorMultiply _waveCdMultiplier;

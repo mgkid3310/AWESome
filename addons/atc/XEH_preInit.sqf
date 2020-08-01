@@ -53,11 +53,11 @@ ADDON = true;
 ] call CBA_Settings_fnc_init;
 
 [
-	QGVAR(realtimeATIS),
+	QGVAR(ATISupdateInterval),
 	"LIST",
-	["Real-time ATIS data update", "Use real-time data whenever the ATIS is played"],
+	["ATIS update interval", "Sets ATIS update interval with option for real-time data and manual update by ATC"],
 	"AWESome ATC",
-	[[true, false], ["Real-time data", "Manual Update (by ATC)"], 0]
+	[[15, 30, 0, -1], ["15min", "30min", "Real-time data", "Manual Update (by ATC)"], 0]
 ] call CBA_Settings_fnc_init;
 
 // add actions (ACE / vanilla)

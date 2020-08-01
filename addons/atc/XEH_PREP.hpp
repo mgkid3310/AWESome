@@ -13,6 +13,7 @@ PREP(eachFrameHandler);
 PREP(eventWeaponFire);
 PREP(getAutoTransponders);
 PREP(getGroundClutterArea);
+PREP(getIdentifier);
 PREP(getInAddAction);
 PREP(getRadarMarkerColor);
 PREP(listenATISbroadcast);

@@ -37,9 +37,8 @@ GVAR(spaceMax) = 1.8;
 GVAR(spaceMin) = 0.9;
 
 // run initial ATIS data update
-[] spawn {
-	sleep 10;
-	[false] call FUNC(updateATISdata);
+if !((missionNamespace getVariable [QGVAR(ATISdata), false]) isEqualType []) then {
+	[true] call FUNC(updateATISdata);
 };
 
 // add EventHandlers

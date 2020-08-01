@@ -1,6 +1,14 @@
 #include "script_component.hpp"
 
-params [["_global", false], ["_console", 0]];
+params [["_global", false], ["_withIdentifier", true], ["_console", 0]];
+
+private ["_identifier"];
+if (_withIdentifier) then {
+	_identifier = (missionNamespace getVariable [QGVAR(ATISdata), [[64]]]) select 0 select 0; // 64: Z(90), 65: A
+	_identifier = [_identifier, 1] call FUNC(getIdentifier);
+} else {
+	_identifier = "";
+};
 
 private _pos = [0, 0, 0];
 if (isArray (configFile >> "CfgWorlds" >> worldName >> "ilsPosition")) then {
@@ -44,14 +52,14 @@ if (EGVAR(main,hasACEWeather)) then {
 	_QNH = 0 call ace_weather_fnc_calculateBarometricPressure;
 };
 
-private _baseArray = [_pos, date];
+private _baseArray = [_identifier, CBA_missionTime, date, _pos];
 private _windArray = [_windDir, _windStr, gusts];
 private _visibilityArray = [_visibility, _fogApply];
 private _cloudArray = [overcast, _cloudBaseKm, _cloudHeightKm];
 private _atmosphereArray = [EGVAR(main,hasACEWeather), _temperature, _dewPoint, _QNH];
 private _remarksArray = [rain, lightnings];
 
-// [[_pos, _date], [_windDir, _windStr, _gusts], [_visibility, _fogApply], [_overcast, _cloudBaseKm, _cloudHeightKm], [_hasACEWeather, _temperature, _dewPoint, _QNH], [_rain, _lightnings]]
+// [[_identifier, _time, _date, _pos], [_windDir, _windStr, _gusts], [_visibility, _fogApply], [_overcast, _cloudBaseKm, _cloudHeightKm], [_hasACEWeather, _temperature, _dewPoint, _QNH], [_rain, _lightnings]]
 private _ATISdata = [_baseArray, _windArray, _visibilityArray, _cloudArray, _atmosphereArray, _remarksArray];
 missionNamespace setVariable [QGVAR(ATISdata), _ATISdata, _global];
 

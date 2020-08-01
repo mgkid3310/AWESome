@@ -3,16 +3,24 @@
 params ["_vehicle", "_ATISdata", ["_mode", 0]];
 _ATISdata params ["_baseArray", "_windArray", "_visibilityArray", "_cloudArray", "_atmosphereArray", "_remarksArray"];
 
-_baseArray params ["_pos", "_date"];
+_baseArray params ["_identifier", "_time", "_date", "_pos"];
 _windArray params ["_windDir", "_windStr", "_gusts"];
 _visibilityArray params ["_visibility", "_fogApply"];
 _cloudArray params ["_overcast", "_cloudBaseKm", "_cloudHeightKm"];
-_atmosphereArray params ["_hasACEWeather", "_temperature", "_dewPoint", "_QFE"];
+_atmosphereArray params ["_hasACEWeather", "_temperature", "_dewPoint", "_QNH"];
 _remarksArray params ["_rain", "_lightnings"];
 
 _vehicle setVariable [QGVAR(isATISready), false];
 _vehicle setVariable [QGVAR(stopATIS), false];
 _vehicle setVariable [QGVAR(lastATIStime), CBA_missionTime];
+
+// identifier
+if (_identifier != "") then {
+	[_vehicle, "orbis_common_information", _mode] call FUNC(playAndSleep);
+	[_vehicle, format ["orbis_phonetic_%1", toLower _identifier], _mode] call FUNC(playAndSleep);
+
+	ATIS_SLEEP(0.3)
+};
 
 // time
 [_vehicle, format ["orbis_phonetic_%1", floor ((_date select 3) / 10)], _mode] call FUNC(playAndSleep);
@@ -77,7 +85,7 @@ if (_hasACEWeather) then {
 
 	// altimeter
 	[_vehicle, "orbis_common_altimeter", _mode] call FUNC(playAndSleep);
-	[_vehicle, _QFE, 0, _mode] call FUNC(speakNumber);
+	[_vehicle, _QNH, 0, _mode] call FUNC(speakNumber);
 
 	ATIS_SLEEP(0.3)
 };
@@ -143,6 +151,15 @@ if ((_fogApply > 0) || (!(_overcast < 0.7) && (_rain > 0)) || (!(_overcast < 0.4
 			};
 		};
 	};
+
+	ATIS_SLEEP(0.3)
+};
+
+// advise
+if (_identifier != "") then {
+	[_vehicle, "orbis_phrase_advise", _mode] call FUNC(playAndSleep);
+	[_vehicle, "orbis_common_information", _mode] call FUNC(playAndSleep);
+	[_vehicle, format ["orbis_phonetic_%1", toLower _identifier], _mode] call FUNC(playAndSleep);
 };
 
 _vehicle setVariable [QGVAR(isATISready), true];

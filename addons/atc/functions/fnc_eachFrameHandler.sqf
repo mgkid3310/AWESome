@@ -36,5 +36,17 @@ if (_isUsingRadar) then {
 
 [] call FUNC(periodicCheck);
 
+// ATIS data update check
+if (GVAR(ATISupdateInterval) > 0) then {
+	private _ATISdata = missionNamespace getVariable [QGVAR(ATISdata), false];
+	if !(_ATISdata isEqualType []) then {
+		[true] call FUNC(updateATISdata);
+	} else {
+		if (CBA_missionTime > (_ATISdata select 0 select 1) + GVAR(ATISupdateInterval) * 60) then {
+			[true] call FUNC(updateATISdata);
+		};
+	};
+};
+
 missionNamespace setVariable [QGVAR(timeOld), time];
 missionNamespace setVariable [QGVAR(frameOld), diag_frameNo];

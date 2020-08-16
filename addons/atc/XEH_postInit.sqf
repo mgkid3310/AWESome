@@ -38,7 +38,7 @@ GVAR(spaceMin) = 0.9;
 
 // run initial ATIS data update
 if !((missionNamespace getVariable [QGVAR(ATISdata), false]) isEqualType []) then {
-	[true] call FUNC(updateATISdata);
+	[true, true] call FUNC(updateATISdata);
 };
 
 // add EventHandlers

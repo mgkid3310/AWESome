@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-params [["_global", false], ["_withIdentifier", true], ["_console", 0]];
+params [["_isPublic", false], ["_withIdentifier", true], ["_console", 0]];
 
 private ["_identifier"];
 if (_withIdentifier) then {
@@ -61,6 +61,6 @@ private _remarksArray = [rain, lightnings];
 
 // [[_identifier, _time, _date, _pos], [_windDir, _windStr, _gusts], [_visibility, _fogApply], [_overcast, _cloudBaseKm, _cloudHeightKm], [_hasACEWeather, _temperature, _dewPoint, _QNH], [_rain, _lightnings]]
 private _ATISdata = [_baseArray, _windArray, _visibilityArray, _cloudArray, _atmosphereArray, _remarksArray];
-missionNamespace setVariable [QGVAR(ATISdata), _ATISdata, _global];
+missionNamespace setVariable [QGVAR(ATISdata), _ATISdata, _isPublic];
 
 _ATISdata

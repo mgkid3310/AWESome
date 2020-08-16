@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-player setVariable [QGVAR(hasAWESomeGPWS), true, true];
+missionNamespace setVariable [QGVAR(hasAWESomeGPWS_) + getPlayerUID player, true, true];
 
 // init global variables
 GVAR(takeoffAlt) = 60;

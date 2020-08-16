@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-player setVariable [QGVAR(hasAWESomeMain), true, true];
+missionNamespace setVariable [QGVAR(hasAWESomeMain_) + getPlayerUID player, true, true];
 
 // setup ACE Interactions
 if (GVAR(hasACEInteractMenu)) then {

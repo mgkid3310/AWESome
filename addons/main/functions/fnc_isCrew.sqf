@@ -24,7 +24,7 @@ switch (_mode) do {
 if !(_typeMatch) exitWith {false};
 
 private _role = [];
-if (_player getVariable [QGVAR(hasAWESomeMain), false]) then {
+if (missionNamespace getVariable [QGVAR(hasAWESomeMain_) + getPlayerUID player, false]) then {
 	_role = (_player getVariable [QGVAR(crewStatus), []]) select 1;
 } else {
 	_role = assignedVehicleRole _player;

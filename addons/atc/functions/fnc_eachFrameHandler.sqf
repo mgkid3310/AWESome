@@ -36,6 +36,13 @@ if (_isUsingRadar) then {
 
 [] call FUNC(periodicCheck);
 
+// ATIS status check
+private _isATISready = (vehicle player) getVariable [QGVAR(isATISready), true];
+private _lastTime = (vehicle player) getVariable [QGVAR(lastATIStime), CBA_missionTime];
+if (!_isATISready && (CBA_missionTime > (_lastTime + 60))) then {
+	(vehicle player) setVariable [QGVAR(isATISready), true, true];
+};
+
 // ATIS data update check
 if (GVAR(ATISupdateInterval) > 0) then {
 	private _ATISdata = missionNamespace getVariable [QGVAR(ATISdata), false];

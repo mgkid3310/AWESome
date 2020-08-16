@@ -1,11 +1,5 @@
 #include "script_component.hpp"
 
-private _isATISready = (vehicle player) getVariable [QGVAR(isATISready), true];
-private _lastTime = (vehicle player) getVariable [QGVAR(lastATIStime), CBA_missionTime];
-if (!_isATISready && (CBA_missionTime > (_lastTime + 60))) then {
-	(vehicle player) setVariable [QGVAR(isATISready), true, true];
-};
-
 private _additionalPlanes = missionNamespace getVariable [QGVAR(additionalPlanes), []];
 _additionalPlanes = _additionalPlanes select {alive _x};
 missionNamespace setVariable [QGVAR(additionalPlanes), _additionalPlanes];

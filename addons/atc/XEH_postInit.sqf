@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-player setVariable [QGVAR(hasAWESomeATC), true, true];
+missionNamespace setVariable [QGVAR(hasAWESomeATC_) + getPlayerUID player, true, true];
 
 // set default radar parameter options
 GVAR(radarParameterOptions) = [

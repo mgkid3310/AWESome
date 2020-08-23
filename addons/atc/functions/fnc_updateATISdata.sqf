@@ -5,7 +5,7 @@ params [["_isPublic", false], ["_withIdentifier", true], ["_console", 0]];
 private ["_identifier"];
 if (_withIdentifier) then {
 	_identifier = (missionNamespace getVariable [QGVAR(ATISdata), [[""]]]) select 0 select 0;
-	_identifier = [_identifier, 1] call FUNC(getIdentifier);
+	_identifier = [_identifier, 0] call FUNC(getIdentifier);
 } else {
 	_identifier = "";
 };

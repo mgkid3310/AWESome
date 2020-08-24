@@ -57,7 +57,7 @@ ADDON = true;
 	"LIST",
 	["ATIS update interval", "Sets ATIS update interval with option for real-time data and manual update by ATC"],
 	"AWESome ATC",
-	[[15, 30, 0, -1], ["15min", "30min", "Real-time data", "Manual Update (by ATC)"], 0]
+	[[5, 15, 30, 0, -1], ["5min", "15min", "30min", "Real-time data", "Manual Update (by ATC)"], 1]
 ] call CBA_Settings_fnc_init;
 
 // add actions (ACE / vanilla)

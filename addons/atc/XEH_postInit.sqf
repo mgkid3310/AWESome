@@ -36,11 +36,6 @@ GVAR(fontMin) = 0.05;
 GVAR(spaceMax) = 1.8;
 GVAR(spaceMin) = 0.9;
 
-// run initial ATIS data update
-if !((missionNamespace getVariable [QGVAR(ATISdata), false]) isEqualType []) then {
-	[true, true] call FUNC(updateATISdata);
-};
-
 // add EventHandlers
 [QGVAR(speakATIS), {_this spawn FUNC(speakATIS)}] call CBA_fnc_addEventHandler;
 addMissionEventHandler ["EachFrame", {[] call FUNC(eachFrameHandler)}];

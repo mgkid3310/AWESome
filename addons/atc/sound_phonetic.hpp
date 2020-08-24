@@ -74,7 +74,7 @@
 	class orbis_phonetic_c {
 		name = "Phonetic C";
 		length = 0.5;
-		sound[] = {QPATHTOF(sounds\phonetic\chalie.ogg), VOL_GENERAL, 1};
+		sound[] = {QPATHTOF(sounds\phonetic\charlie.ogg), VOL_GENERAL, 1};
 		titles[] = {};
 	};
 	class orbis_phonetic_d {

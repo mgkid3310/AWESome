@@ -3,7 +3,7 @@
 params ["_altitude", "_temperatureSL"];
 
 private ["_altitudeBase", "_pressureBase", "_temperatureStd", "_temperatureLR", "_temperature"];
-private _temperatureSATP= 25;
+private _temperatureSATP = 25;
 _altitude = _altitude min 120000;
 switch (true) do {
 	// subscript 0

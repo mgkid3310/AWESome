@@ -38,8 +38,8 @@ private _temperature = _temperatureArray select 4; // Celsius
 private _pressure = [_altitudeASL, _temperatureArray, _pressureSL] call FUNC(getAirPressure); // hPa
 private _density = [_altitudeASL, _temperature, _pressure, _humidity] call FUNC(getAirDensity); // kg/m^3
 
-private _temperatureRatio = (_temperature + 273.15) / (_temperatureSL + 273.15);
-private _pressureRatio = _pressure / _pressureSL;
+private _temperatureRatio = (_temperature + 273.15) / 285.15;
+private _pressureRatio = _pressure / 1013.25;
 private _densityRatio = _density / 1.2754;
 
 // calculate multipliers

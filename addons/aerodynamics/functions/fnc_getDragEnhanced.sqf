@@ -24,7 +24,7 @@ private _dragParasite = [0, 0, 0];
 // induced drag (including lift-dependent parasite & wave drag)
 private _dragInduced = [0, 0, 0];
 if (_liftVector isEqualType []) then {
-	private _inducedConst = (2 * 1.2754) / (_densityRatio * pi * 0.5 * 400);
+	private _inducedConst = (2 * 1.225) / (_densityRatio * pi * 0.5 * 400);
 	private _inducedValue = ((vectorMagnitude _liftVector) / (_airSpeed max (_speedStall / 3.6) max GVAR(minStallSpeed))) ^ 2;
 	_dragInduced = (vectorNormalized _airVel) vectorMultiply (_inducedConst * _inducedValue * (GVAR(dragSourceMultiplier) select 1));
 

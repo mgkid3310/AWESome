@@ -2,7 +2,7 @@
 
 params ["_paramArray", "_paramDrag", ["_liftVector", false], ["_speedStall", 0]];
 _paramArray params ["_trueAirVelocity", "_massStandard", "_massError", "_densityRatio", "_height"];
-_paramDrag params ["_dragArray", "_dragMultiplier", "_flapsFCoef", "_flapPhase", "_gearsUpFCoef", "_gearPhase", "_airBrakeFCoef", "_airBrakePhase"];
+_paramDrag params ["_dragArray", "_dragMultiplier", "_flapsFCoef", "_flapPhase", "_gearsUpFCoef", "_gearPhase", "_airBrakeFCoef", "_speedBrakePhase"];
 _dragArray params ["_coef2", "_coef1", "_coef0"];
 
 // if (_massError) exitWith {[0, 0, 0]};
@@ -71,7 +71,7 @@ private _dragWave = [0, 0, 0];
 } forEach [[0, 0], [1, 2], [2, 1]];
 
 // sum up drags (induced drag is not affected by flap/gear status)
-private _vehicleEffect = (_flapsFCoef * _flapPhase) + (_gearsUpFCoef * (1 - _gearPhase)) + (_airBrakeFCoef * _airBrakePhase);
+private _vehicleEffect = (_flapsFCoef * _flapPhase) + (_gearsUpFCoef * (1 - _gearPhase)) + (_airBrakeFCoef * _speedBrakePhase);
 private _dragForceEnhanced = (_dragParasite vectorAdd _dragWave) vectorMultiply (1 + _vehicleEffect);
 _dragForceEnhanced = (_dragForceEnhanced vectorAdd _dragInduced) vectorMultiply _dragMultiplier;
 

@@ -63,7 +63,7 @@ private _engineDamage = _vehicle getHitPointDamage "hitEngine";
 private _thrustVector = 0 max (_vehicle animationSourcePhase "thrustVector");
 private _flapPhase = _vehicle animationSourcePhase "flap";
 private _gearPhase = _vehicle animationSourcePhase "gear";
-private _airBrakePhase = _vehicle animationSourcePhase "speedBrake";
+private _speedBrakePhase = _vehicle animationSourcePhase "speedBrake";
 
 // correct fuel consumption
 private _throttleInput = airplaneThrottle _vehicle;
@@ -128,7 +128,7 @@ private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityR
 private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio];
 private _paramThrust = [_thrustCoef, _vtolMode, _thrustMultiplier, _throttle, _engineDamage, _thrustVector];
 private _paramLift = [_liftArray, _liftMultiplier, _flapsFCoef, _flapPhase];
-private _paramDrag = [_dragArray, _dragMultiplier, _flapsFCoef, _flapPhase, _gearsUpFCoef, _gearPhase, _airBrakeFCoef, _airBrakePhase];
+private _paramDrag = [_dragArray, _dragMultiplier, _flapsFCoef, _flapPhase, _gearsUpFCoef, _gearPhase, _airBrakeFCoef, _speedBrakePhase];
 private _paramPylonDrag = [_pylonDragArray, _dragMultiplier, 0, 0, 0, 1, 0, 0];
 private _paramAltitude = [_altFullForce, _altNoForce, _altitudeASL];
 private _paramAtmosphere = [_temperatureRatio, _pressureRatio];

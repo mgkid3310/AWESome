@@ -11,14 +11,24 @@ private _burstNumber = getNumber (configFile >> "CfgWeapons" >> _weapon >> _mode
 private _multiplier = getNumber (configFile >> "CfgWeapons" >> _weapon >> _mode >> "multiplier");
 private _ammosFired = _burstNumber * _multiplier;
 
+private ["_cmRpt", "_flareNum", "_chaffNum"];
 if ((typeOf _unit) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
+	if (isNil "js_jc_fa18_ew_CMRpt") then {
+		_cmRpt = _unit getVariable ["js_jc_fa18_ew_CMRpt", 1];
+		_flareNum = _unit getVariable ["js_jc_fa18_ew_flareNum", 1];
+		_chaffNum = _unit getVariable ["js_jc_fa18_ew_chaffNum", 1];
+	} else {
+		_cmRpt = js_jc_fa18_ew_CMRpt;
+		_flareNum = js_jc_fa18_ew_flareNum;
+		_chaffNum = js_jc_fa18_ew_chaffNum;
+	};
+
 	if (_weapon == "js_w_fa18_CMFlareLauncher") then {
-		_ammosFired = _ammosFired * (_unit getVariable ["js_jc_fa18_ew_flareNum", js_jc_fa18_ew_flareNum]);
+		_ammosFired = _ammosFired * _cmRpt * _flareNum;
 	};
 	if (_weapon == "js_w_fa18_CMChaffLauncher") then {
-		_ammosFired = _ammosFired * (_unit getVariable ["js_jc_fa18_ew_chaffNum", js_jc_fa18_ew_chaffNum]);
+		_ammosFired = _ammosFired * _cmRpt * _chaffNum;
 	};
-	_ammosFired = _ammosFired * (_unit getVariable ["js_jc_fa18_ew_CMRpt", js_jc_fa18_ew_CMRpt]);
 };
 
 private _weaponState = weaponState [_unit, [-1], _weapon];

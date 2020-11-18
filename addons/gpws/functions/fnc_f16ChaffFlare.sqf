@@ -10,13 +10,15 @@ DEV_CHAT("orbis_gpws: f16ChaffFlare active");
 private _burstNumber = getNumber (configFile >> "CfgWeapons" >> _weapon >> _mode >> "burst");
 private _multiplier = getNumber (configFile >> "CfgWeapons" >> _weapon >> _mode >> "multiplier");
 private _ammosFired = _burstNumber * _multiplier;
+
 if ((typeOf _unit) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 	if (_weapon == "js_w_fa18_CMFlareLauncher") then {
-		_ammosFired = _ammosFired * (js_jc_fa18_ew_CMRpt * js_jc_fa18_ew_flareNum);
+		_ammosFired = _ammosFired * (_unit getVariable ["js_jc_fa18_ew_flareNum", js_jc_fa18_ew_flareNum]);
 	};
 	if (_weapon == "js_w_fa18_CMChaffLauncher") then {
-		_ammosFired = _ammosFired * (js_jc_fa18_ew_CMRpt * js_jc_fa18_ew_chaffNum);
+		_ammosFired = _ammosFired * (_unit getVariable ["js_jc_fa18_ew_chaffNum", js_jc_fa18_ew_chaffNum]);
 	};
+	_ammosFired = _ammosFired * (_unit getVariable ["js_jc_fa18_ew_CMRpt", js_jc_fa18_ew_CMRpt];
 };
 
 private _weaponState = weaponState [_unit, [-1], _weapon];

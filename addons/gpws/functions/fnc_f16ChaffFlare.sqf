@@ -18,7 +18,7 @@ if ((typeOf _unit) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 	if (_weapon == "js_w_fa18_CMChaffLauncher") then {
 		_ammosFired = _ammosFired * (_unit getVariable ["js_jc_fa18_ew_chaffNum", js_jc_fa18_ew_chaffNum]);
 	};
-	_ammosFired = _ammosFired * (_unit getVariable ["js_jc_fa18_ew_CMRpt", js_jc_fa18_ew_CMRpt];
+	_ammosFired = _ammosFired * (_unit getVariable ["js_jc_fa18_ew_CMRpt", js_jc_fa18_ew_CMRpt]);
 };
 
 private _weaponState = weaponState [_unit, [-1], _weapon];

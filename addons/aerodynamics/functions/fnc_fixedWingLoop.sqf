@@ -17,8 +17,23 @@ _aerodynamicsArray params ["_dragArray", "_liftArray", "_angleOfIndicence", "_fl
 _speedPerformance params ["_thrustCoef", "_vtolMode", "_altFullForce", "_altNoForce", "_speedStall", "_speedMax"];
 _physicalProperty params ["_massError", "_massStandard", "_fuelCapacity"];
 
-private _fWingData = _vehicle getVariable [QGVAR(fWingData), [airplaneThrottle _vehicle, velocityModelSpace _vehicle, _vehicle vectorWorldToModel wind]];
-_fWingData params ["_throttleOld", "_modelVelocityOld", "_modelWindOld"];
+private _fWingData = _vehicle getVariable [QGVAR(fWingData), [airplaneThrottle _vehicle, velocityModelSpace _vehicle, _vehicle vectorWorldToModel wind/* , [] */]];
+_fWingData params ["_throttleOld", "_modelVelocityOld", "_modelWindOld"/* , "_controlInputs" */];
+
+// maintain input if dialog is open
+/* if (dialog && !(_controlInputs isEqualTo [])) then {
+	_controlInputs params ["_throttleInput", "_aileronPhase", "_aileronBPhase", "_aileronTPhase", "_elevatorPhase", "_rudderPhase", "_thrustVector", "_flapPhase", "_gearPhase", "_speedBrakePhase"];
+	_vehicle setAirplaneThrottle _throttleInput;
+	_vehicle animateSource ["aileron", _aileronPhase, true];
+	_vehicle animateSource ["aileronB", _aileronBPhase, true];
+	_vehicle animateSource ["aileronT", _aileronTPhase, true];
+	_vehicle animateSource ["elevator", _elevatorPhase, true];
+	_vehicle animateSource ["rudder", _rudderPhase, true];
+	_vehicle animateSource ["thrustVector", _thrustVector, true];
+	_vehicle animateSource ["flap", _flapPhase, true];
+	_vehicle animateSource ["gear", _gearPhase, true];
+	_vehicle animateSource ["speedBrake", _speedBrakePhase, true];
+}; */
 
 // atmosphere data setup
 private _altitudeASL = getPosASL _vehicle select 2;
@@ -60,6 +75,11 @@ private _modelWindApply = _modelWind vectorMultiply GVAR(windMultiplier);
 private _trueAirVelocity = _modelVelocity vectorDiff _modelWindApply;
 private _altitudeAGLS = getPos _vehicle select 2;
 private _engineDamage = _vehicle getHitPointDamage "hitEngine";
+/* private _aileronPhase = _vehicle animationSourcePhase "aileron";
+private _aileronBPhase = _vehicle animationSourcePhase "aileronB";
+private _aileronTPhase = _vehicle animationSourcePhase "aileronT";
+private _elevatorPhase = _vehicle animationSourcePhase "elevator";
+private _rudderPhase = _vehicle animationSourcePhase "rudder"; */
 private _thrustVector = 0 max (_vehicle animationSourcePhase "thrustVector");
 private _flapPhase = _vehicle animationSourcePhase "flap";
 private _gearPhase = _vehicle animationSourcePhase "gear";
@@ -173,8 +193,13 @@ if (GVAR(applyForce)) then {
 // calculate and apply required angular impulse (torque times timestep)
 // _vehicle addtorque [_vehicle vectorModelToWorld (_torqueCorrection vectorMultiply _timeStep)];
 
+// save last manual control input
+/* if (!dialog) then {
+	_controlInputs = [_throttleInput, _aileronPhase, _aileronBPhase, _aileronTPhase, _elevatorPhase, _rudderPhase, _thrustVector, _flapPhase, _gearPhase, _speedBrakePhase];
+}; */
+
 // report if needed (dev script)
 // diag_log format ["orbis_aerodynamics _thrustDefault: %1, _thrustEnhanced: %2, _liftDefault: %3, _liftEnhanced: %4", _thrustDefault, _thrustEnhanced, _liftDefault, _liftEnhanced];
 // diag_log format ["orbis_aerodynamics _massCurrent: %1, _dragDefault: %2, _dragEnhanced: %3, _dragPylon: %4", _massCurrent, _dragDefault, _dragEnhanced, _dragPylon];
 
-_vehicle setVariable [QGVAR(fWingData), [_throttle, _modelVelocityNew, _modelWindNew]];
+_vehicle setVariable [QGVAR(fWingData), [_throttle, _modelVelocityNew, _modelWindNew/* , _controlInputs */]];

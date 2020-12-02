@@ -1,6 +1,11 @@
 name = "AWESome"
 prefix = "orbis"
 author = "Orbis2358"
-files = ["icon.jpg", "LICENSE", "mod.cpp", "README.md"]
+files = [
+	"icon.jpg",
+	"LICENSE",
+	"mod.cpp",
+	"README.md"
+]
 keyname = "Orbis2358_AWESome_{{version}}"
 signame = "Orbis2358_AWESome_{{version}}"

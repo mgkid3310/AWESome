@@ -89,9 +89,26 @@ private _speedBrakePhase = _vehicle animationSourcePhase "speedBrake";
 private _throttleInput = airplaneThrottle _vehicle;
 private _throttle = [_throttleOld, _throttleInput, _timeStep] call FUNC(getEffectiveThrottle);
 private _fuelCurrent = fuel _vehicle;
-private _fuelFlowDefault = 0.3 * _throttle ^ 2 + 0.03;
-private _fuelFlowEnhanced = [_throttle, _fuelFlowMultiplier] call FUNC(getFuelFlowEnhanced);
-_vehicle setFuel (_fuelCurrent - (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity));
+private _fuelFlowDefault = [0, 0.3 * _throttle ^ 2 + 0.03] select isEngineOn _vehicle;
+private _fuelFlowEnhanced = [_throttle, isEngineOn _vehicle, _fuelFlowMultiplier] call FUNC(getFuelFlowEnhanced);
+
+// F/A-18 external fuel tank compatibility
+private ["_auxtankSwitch", "_abSwitch", "_auxtankLevel"];
+if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
+	_auxtankSwitch = _vehicle animationPhase "auxtank_switch";
+	_abSwitch = [1, 2] select (_vehicle animationPhase "ab_switch" > 0.1);
+
+	if (_auxtankSwitch > 0.05) then {
+		_auxtankLevel = _auxtankSwitch + ([0, 0.0005 * _abSwitch * _timeStep] select isEngineOn _vehicle);
+		_auxtankLevel = _auxtankLevel - _fuelFlowEnhanced * _abSwitch * (_timeStep / _fuelCapacity) / 1.1845;
+		_vehicle animateSource ["auxtank_switch", _auxtankLevel, true];
+		_vehicle setFuel 1;
+	} else {
+		_vehicle setFuel (_fuelCurrent - (_fuelFlowEnhanced - _fuelFlowDefault) * _abSwitch * (_timeStep / _fuelCapacity));
+	};
+} else {
+	_vehicle setFuel (_fuelCurrent - (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity));
+};
 
 // 3rd party support
 _vehicle setVariable [QGVAR(effectiveThrottle), _throttle];
@@ -129,7 +146,7 @@ if (_massError) then {
 } else {
 	_massFuel = 0.8 * _fuelCurrent * _fuelCapacity;
 	if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
-		_massFuel = _massFuel + 0.8 * (_vehicle animationPhase "auxtank_switch") * _fuelCapacity;
+		_massFuel = _massFuel + 1.1845 * (_vehicle animationPhase "auxtank_switch") * _fuelCapacity;
 	};
 	_massCurrent = (_massStandard * GVAR(massStandardRatio)) + _massFuel + _massPylon;
 };

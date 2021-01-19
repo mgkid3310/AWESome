@@ -23,7 +23,8 @@ its license and authors in its header.
 Seperate Licenses
 
 1. Following files are licensed under GNU General Public License by ACE team:
-\tools\build.by
+\tools\build.py
+\tools\make.py
 
 2. I do not have nor know exact license of the files included in listed folders:
 \addons\orbis_gpws\sounds\

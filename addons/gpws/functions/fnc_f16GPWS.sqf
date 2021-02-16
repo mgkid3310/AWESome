@@ -3,7 +3,7 @@
 
 params ["_vehicle"];
 
-private _loadData = _vehicle getVariable [QGVAR(f16Data), [time, []/* , objNull */]];
+private _loadData = _vehicle getVariable [QGVAR(f16Data), [time, [], time/* , objNull, objNull */]];
 _loadData params ["_timeOld", "_ctrWarnOld", "_altitudeWarnTime"/* , "_target", "_targetOld" */];
 
 if !(_timeOld < time) exitWith {

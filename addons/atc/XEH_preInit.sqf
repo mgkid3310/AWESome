@@ -9,7 +9,16 @@ ADDON = true;
 	"LIST",
 	["Toggle ATC Radar display name", "Selects the pilot's name or callsign to be displayed on the ATC radar screen"],
 	"AWESome ATC",
-	[[0, 1, 2], ["Name", "Callsign", "Custom Callsign"], 0]
+	[[0, 1, 2, 3], ["Perosnal Callsign", "Squad Callsign", "Vehicle Callsign"m "Pilot Name"], 0]
+] call CBA_Settings_fnc_init;
+
+[
+	QGVAR(personalCallsign),
+	"EDITBOX",
+	["Set your personal callsign", "Sets your perosnal callsign displayed on ATC radar screen"],
+	"AWESome ATC",
+	"",
+	2
 ] call CBA_Settings_fnc_init;
 
 [

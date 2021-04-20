@@ -34,10 +34,13 @@ private _return = [];
 					_callsign = groupId group driver _vehicle;
 				};
 				case (2): {
-					_callsign = _vehicle getVariable [QGVAR(customCallsign), groupId group driver _vehicle];
+					_callsign = _vehicle getVariable [QGVAR(vehicleCallsign), groupId group driver _vehicle];
+				};
+				case (3): {
+					_callsign = name driver _vehicle;
 				};
 				default {
-					_callsign = name driver _vehicle;
+					_callsign = driver _vehicle getVariable [QGVAR(perosnalCallsign), name driver _vehicle];
 				};
 			};
 		};

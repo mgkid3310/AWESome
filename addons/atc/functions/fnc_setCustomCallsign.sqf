@@ -2,4 +2,4 @@
 
 params ["_vehicle", "_customCallsign"];
 
-_vehicle setVariable [QGVAR(customCallsign), _customCallsign, true];
+_vehicle setVariable [QGVAR(vehicleCallsign), _customCallsign, true];

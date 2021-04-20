@@ -8,6 +8,12 @@ if (!(alive player) || (_timeOld < 0) || (_frameOld < 0)) exitWith {
 	missionNamespace setVariable [QGVAR(frameOld), diag_frameNo];
 };
 
+// update callsign to server
+if !((player getVariable [QGVAR(personalCallsign), name player]) isEqualTo GVAR(personalCallsign)) then {
+	player setVariable [QGVAR(personalCallsign), GVAR(personalCallsign), true];
+};
+
+// track radar entities
 private _planes = (entities "Plane") select {alive _x};
 private _helies = (entities "Helicopter") select {alive _x};
 private _SAMlaunchers = [];

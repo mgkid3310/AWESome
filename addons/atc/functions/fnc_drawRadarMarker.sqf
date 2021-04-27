@@ -24,7 +24,7 @@ private _heading = round direction _vehicle;
 private _line1 = format ["%1", _callsign];
 private _line2 = "";
 private _line3 = "";
-private _line4 = ["", "EM"] select {getDammage _vehicle > 0.6};
+private _line4 = ["", "EM"] select (getDammage _vehicle > 0.6);
 
 if (_displayDetails) then {
 	_line2 = format ["%1%2     %3", _altitude, _verticalTrend, _speedDisplay];

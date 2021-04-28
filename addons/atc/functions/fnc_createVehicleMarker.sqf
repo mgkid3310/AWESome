@@ -40,7 +40,10 @@ private _return = [];
 					_callsign = name driver _vehicle;
 				};
 				default {
-					_callsign = driver _vehicle getVariable [QGVAR(perosnalCallsign), name driver _vehicle];
+					_callsign = driver _vehicle getVariable [QGVAR(personalCallsign), name driver _vehicle];
+					if (_callsign isEqualTo "") then {
+						_callsign = name driver _vehicle;
+					};
 				};
 			};
 		};

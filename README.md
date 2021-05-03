@@ -97,7 +97,7 @@ The `_radarMode` (default: 0) parameter works in 3 modes:
 
 The `_distance` (default: 10) parameter is a number type  
 parameter which determines how far the controller can move  
-from the radar monitor. zero or negative `_distance` value  
+from the radar monitor. Zero or negative `_distance` value  
 will allow an infinite distance.  
 
 When using Military mode, custom parameters can be used:  

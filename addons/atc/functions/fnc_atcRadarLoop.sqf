@@ -1,12 +1,16 @@
 #include "script_component.hpp"
 
-params ["_monitor", ["_controller", player], ["_radarMode", 0]];
+params ["_monitor", ["_controller", player], ["_radarMode", 0], ["_distance", 10]];
 
 private _loadData = _monitor getVariable [QGVAR(radarData), [0, 0, [], [], [], [], []]];
 _loadData params ["_timeOld", "_radarTime", "_trailLog", "_trailMarkers", "_vehicleMarkers", "_weaponMarkers", "_antiAirMarkers"];
 
-if (!(alive _controller) || ((_controller distance _monitor) > 10) || (_controller getVariable [QGVAR(exitRadar), false])) exitWith {
-	[_monitor, _controller, _trailMarkers, _vehicleMarkers + _weaponMarkers + _antiAirMarkers] call FUNC(atcRadarExit);
+if (!(alive _controller) || (_controller getVariable [QGVAR(exitRadar), false])) exitWith {
+	[_monitor, _controller, _distance, _trailMarkers, _vehicleMarkers + _weaponMarkers + _antiAirMarkers] call FUNC(atcRadarExit);
+};
+
+if ((_distance > 0) && ((_controller distance _monitor) > _distance)) exitWith {
+	[_monitor, _controller, _distance, _trailMarkers, _vehicleMarkers + _weaponMarkers + _antiAirMarkers] call FUNC(atcRadarExit);
 };
 
 if !(time > _timeOld) exitWith {};

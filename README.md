@@ -88,12 +88,17 @@ group ID.
 
 To enable this feature, you need to add the following code  
 to the target object's init field:  
-`[this, _radarMode] call orbis_atc_fnc_addRadarScreen;`  
+`[this, _radarMode, _distance] call orbis_atc_fnc_addRadarScreen;`  
 
 The `_radarMode` (default: 0) parameter works in 3 modes:  
 0: Civilian, same side or civilian side aircrafts only  
 1: Military, civilian mode plus radar detected aircrafts  
 2: Observer, all alive aircrafts  
+
+The `_distance` (default: 10) parameter is a number type  
+parameter which determines how far the controller can move  
+from the radar monitor. zero or negative `_distance` value  
+will allow an infinite distance.  
 
 When using Military mode, custom parameters can be used:  
 `monitor setVariable ["orbis_atc_radarParams", [radarObject, isMaster]]`  

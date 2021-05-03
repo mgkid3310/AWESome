@@ -2,6 +2,8 @@
 
 params ["_monitor", ["_radarMode", 0], ["_distance", 10]];
 
+private _interactDistance = [10, 10 min _distance] select (_distance > 0);
+
 if (EGVAR(main,hasACEInteractMenu)) then {
 	private _actionRadarStart = [
 		"startATCradar",
@@ -12,7 +14,7 @@ if (EGVAR(main,hasACEInteractMenu)) then {
 		{},
 		[_radarMode, _distance],
 		[0, 0, 0],
-		10 min _distance
+		_interactDistance
 	] call ace_interact_menu_fnc_createAction;
 	private _actionRadarStop = [
 		"stopATCradar",
@@ -23,7 +25,7 @@ if (EGVAR(main,hasACEInteractMenu)) then {
 		{},
 		[_radarMode, _distance],
 		[0, 0, 0],
-		10 min _distance
+		_interactDistance
 	] call ace_interact_menu_fnc_createAction;
 
 	[_monitor, 0, ["ACE_MainActions"], _actionRadarStart] call ace_interact_menu_fnc_addActionToObject;

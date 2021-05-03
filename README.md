@@ -78,12 +78,12 @@ Here, altitude is displayed in multiples of 10m or 100ft,
 so if the unit is set to "feet (x100ft)" and 083 is displayed  
 as altitude, the actual altitude would be 8300ft.  
 
-Pilot name/callsign/custom callsign setting and units for  
+Pilot name/callsign & Vehicle callsign setting and units for  
 speed & altitude can be changed at addon settings tab.  
 Supports kph/knot for speed and meter/feet for altitude.  
-To set a custom callsign, add this to the plane's init field:  
+To set a vehicle callsign, add this to the plane's init field:  
 `[this, "My Callsign"] call orbis_atc_fnc_setCustomCallsign;`  
-If no custom callsign is set, it defaults to the unit's  
+If no vehicle callsign is set, it defaults to the unit's  
 group ID.  
 
 To enable this feature, you need to add the following code  

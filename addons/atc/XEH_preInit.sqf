@@ -9,13 +9,13 @@ ADDON = true;
 	"LIST",
 	["Toggle ATC Radar display name", "Selects the pilot's name or callsign to be displayed on the ATC radar screen"],
 	"AWESome ATC",
-	[[0, 1, 2, 3], ["Perosnal Callsign", "Squad Callsign", "Vehicle Callsign", "Pilot Name"], 0]
+	[[0, 1, 2, 3], ["Personal Callsign", "Squad Callsign", "Vehicle Callsign", "Pilot Name"], 0]
 ] call CBA_Settings_fnc_init;
 
 [
 	QGVAR(personalCallsign),
 	"EDITBOX",
-	["Set your personal callsign", "Sets your perosnal callsign displayed on ATC radar screen"],
+	["Set your personal callsign", "Sets your personal callsign displayed on ATC radar screen"],
 	"AWESome ATC",
 	"",
 	2
@@ -58,7 +58,7 @@ ADDON = true;
 	"LIST",
 	["Display missile trails", "Determines if missile trails will be drawn, displaying missile trails may lower FPS"],
 	"AWESome ATC",
-	[[true, false], ["Diaplay", "Hide"], 1]
+	[[true, false], ["Display", "Hide"], 1]
 ] call CBA_Settings_fnc_init;
 
 [

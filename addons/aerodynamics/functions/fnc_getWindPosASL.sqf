@@ -7,10 +7,10 @@ if !(_dynamicWindMode > 0) exitWith {wind};
 private _altRadar = ((_posASL select 2) - (getTerrainHeightASL _posASL)) max 1;
 
 // calculate global wind
-private _windVariability = linearConversion [0, 0.5, gusts, 0, GVAR(maxWindVariability), true];
 private _altitudeProfile = 1.219 * (exp (-0.15 * _altRadar / 80) - exp (-3.2175 * _altRadar / 80));
+private _windVariability = linearConversion [0, 0.5, gusts, 0, GVAR(maxWindVariability), true];
 private _perlinNoise = 0 random [CBA_missionTime / 60, 0.5]; // perlin noise with 60s grid size
-private _globalWind = wind vectorMultiply (1 + _windVariability * _altitudeProfile * (_perlinNoise - 0.5));
+private _globalWind = wind vectorMultiply (1 + _altitudeProfile * _windVariability * (_perlinNoise - 0.5));
 
 // wind gust
 private _timePassed = 0

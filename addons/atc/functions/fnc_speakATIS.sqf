@@ -4,7 +4,7 @@ params ["_vehicle", "_ATISdata", ["_mode", 0]];
 _ATISdata params ["_baseArray", "_windArray", "_visibilityArray", "_cloudArray", "_atmosphereArray", "_remarksArray"];
 
 _baseArray params ["_identifier", "_time", "_date", "_pos"];
-_windArray params ["_windDir", "_windStr", "_gusts"];
+_windArray params ["_windDir", "_windStr", "_gusting"];
 _visibilityArray params ["_visibility", "_fogApply"];
 _cloudArray params ["_overcast", "_cloudBaseKm", "_cloudHeightKm"];
 _atmosphereArray params ["_hasACEWeather", "_temperature", "_dewPoint", "_QNH"];
@@ -46,8 +46,10 @@ ATIS_SLEEP(0.1)
 [_vehicle, _windStr, 0, _mode] call FUNC(speakNumber);
 
 // gust
-/* [_vehicle, "orbis_common_gusting", _mode] call FUNC(playAndSleep);
-[_vehicle, _gusts, 0, _mode] call FUNC(speakNumber); */
+if (_gusting > 1.5 * _windStr) then {
+	[_vehicle, "orbis_common_gusting", _mode] call FUNC(playAndSleep);
+	[_vehicle, _gusting, 0, _mode] call FUNC(speakNumber);
+};
 
 ATIS_SLEEP(0.3)
 

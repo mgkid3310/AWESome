@@ -19,18 +19,20 @@ if !(_console isEqualType 0) then {
 };
 _pos set [2, ((getTerrainHeightASL _pos) max 0) + 1];
 
-private ["_windSimulated", "_windDir", "_windStr"];
+private ["_windSimulated", "_windDir", "_windStr", "_gusting"];
 if (isClass (configFile >> "CfgPatches" >> "orbis_aerodynamics")) then {
-	_windSimulated = [_pos, EGVAR(aerodynamics,dynamicWindMode)] call EFUNC(aerodynamics,getWindPosASL);
+	_windSimulated = [_pos, 0] call EFUNC(aerodynamics,getWindPosASL);
 	_windSimulated set [2, 0];
 
 	_windDir = _windSimulated getDir [0, 0, 0];
 	_windStr = (vectorMagnitude _windSimulated) * (900 / 463);
+	_gusting = _windStr * (1 + gusts * EGVAR(aerodynamics,gustMultiplier) / 2);
 
 	// systemChat str [_pos, getTerrainHeightASL _pos, wind, _windSimulated, _windDir, _windStr];
 } else {
 	_windDir = (windDir + 180) % 360;
 	_windStr = (vectorMagnitude wind) * (900 / 463);
+	_gusting = _windStr;
 };
 
 fogParams params ["_fogValue", "_fogDecay", "_fogBase"];
@@ -53,7 +55,7 @@ if (EGVAR(main,hasACEWeather)) then {
 };
 
 private _baseArray = [_identifier, CBA_missionTime, date, _pos];
-private _windArray = [_windDir, _windStr, gusts];
+private _windArray = [_windDir, _windStr, _gusting];
 private _visibilityArray = [_visibility, _fogApply];
 private _cloudArray = [overcast, _cloudBaseKm, _cloudHeightKm];
 private _atmosphereArray = [EGVAR(main,hasACEWeather), _temperature, _dewPoint, _QNH];

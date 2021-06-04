@@ -16,7 +16,7 @@ private _globalWind = wind vectorMultiply (1 + _altitudeProfile * _windVariabili
 private _timePassed = 0;
 private _timeDuration = 60;
 if !(_dynamicWindMode < 2) then {
-	_globalWind = _globalWind + _altitudeProfile * gusts * GVAR(gustMultiplier) * sin (180 * _timePassed / _timeDuration);
+	_globalWind = _globalWind vectorMultiply (1 + _altitudeProfile * gusts * GVAR(gustMultiplier) * sin (180 * _timePassed / _timeDuration));
 };
 
 // surface wind deflection

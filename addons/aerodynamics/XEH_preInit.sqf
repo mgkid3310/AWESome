@@ -19,7 +19,6 @@ ADDON = true;
 	"AWESome Aerodynamics",
 	[[2, 1, 0], ["Dynamic", "Simple", "Static"], 0]
 ] call CBA_Settings_fnc_init;
-GVAR(dynamicWindMode) = 0;
 
 [
 	QGVAR(windMultiplier),

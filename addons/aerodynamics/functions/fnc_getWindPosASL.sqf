@@ -13,7 +13,7 @@ private _perlinNoise = 0 random [CBA_missionTime / 60, 0.5]; // perlin noise wit
 private _globalWind = wind vectorMultiply (1 + _altitudeProfile * _windVariability * (_perlinNoise - 0.5));
 
 // wind gust
-private _timePassed = 0
+private _timePassed = 0;
 private _timeDuration = 60;
 if !(_dynamicWindMode < 2) then {
 	_globalWind = _globalWind + _altitudeProfile * gusts * GVAR(gustMultiplier) * sin (180 * _timePassed / _timeDuration);
@@ -50,6 +50,6 @@ if !(_dynamicWindMode < 2) then {
 };
 
 // sum wind components
-private _returnWind = _deflectedWind + _seaBrease + _wakeTurbulence;
+private _returnWind = _deflectedWind vectorAdd _seaBrease vectorAdd _wakeTurbulence;
 
 _returnWind

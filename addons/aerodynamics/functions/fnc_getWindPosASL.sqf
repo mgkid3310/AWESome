@@ -12,6 +12,13 @@ private _altitudeProfile = 1.219 * (exp (-0.15 * _altRadar / 80) - exp (-3.2175 
 private _perlinNoise = 0 random [CBA_missionTime / 60, 0.5]; // perlin noise with 60s grid size
 private _globalWind = wind vectorMultiply (1 + _windVariability * _altitudeProfile * (_perlinNoise - 0.5));
 
+// wind gust
+private _timePassed = 0
+private _timeDuration = 60;
+if !(_dynamicWindMode < 2) then {
+	_globalWind = _globalWind + _altitudeProfile * gusts * GVAR(gustMultiplier) * sin (180 * _timePassed / _timeDuration);
+};
+
 // surface wind deflection
 private ["_surfaceNormal", "_windNormal", "_dotProduct", "_surfaceRatio", "_surfaceGradient", "_altitudeFactor", "_deflectedVector", "_deflectedWind"];
 private _windMagnitude = vectorMagnitude _globalWind;

@@ -26,7 +26,7 @@ if (isClass (configFile >> "CfgPatches" >> "orbis_aerodynamics")) then {
 
 	_windDir = _windSimulated getDir [0, 0, 0];
 	_windStr = (vectorMagnitude _windSimulated) * (900 / 463);
-	_gusting = _windStr * (1 + gusts * EGVAR(aerodynamics,gustMultiplier) / 2);
+	_gusting = _windStr * (1 + gusts * EGVAR(aerodynamics,gustMultiplier));
 
 	// systemChat str [_pos, getTerrainHeightASL _pos, wind, _windSimulated, _windDir, _windStr];
 } else {

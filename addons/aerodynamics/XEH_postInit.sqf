@@ -2,10 +2,11 @@
 
 // init global variables
 GVAR(frameInterval) = 1;
-GVAR(gridResolution) = 2;
+GVAR(gridResolution) = 0; // 2
 GVAR(gridSizeX) = 12;
 GVAR(gridSizeY) = 16;
 GVAR(showSamplingGrid) = false;
+GVAR(maxWindVariability) = 0.4;
 GVAR(throttleClimbRate) = 0.4;
 GVAR(throttleDropRate) = 0.7;
 GVAR(pylonDragRatio) = 0.002; // 0.5*Cd*A*rho = 0.12 for FIR Mk84 (0.06, 1000kg)

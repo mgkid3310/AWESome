@@ -28,9 +28,9 @@ if (_windMagnitude > 0.01) then {
 
 	_dotProduct = -0.866 max (_surfaceNormal vectorDotProduct _windNormal) min 0.866;
 	_surfaceRatio = _dotProduct / (_dotProduct - 1);
-	_surfaceGradient = vectorNormalized ((_surfaceNormal vectorMultiply _surfaceRatio) + (_windNormal vectorMultiply (1 - _surfaceRatio)));
+	_surfaceGradient = vectorNormalized ((_surfaceNormal vectorMultiply _surfaceRatio) vectorAdd (_windNormal vectorMultiply (1 - _surfaceRatio)));
 
-	_altitudeFactor = (3 / _altRadar) min 1;
+	_altitudeFactor = (_altRadar / 80) min 1;
 	_deflectedVector = ((_windNormal vectorMultiply _altitudeFactor) vectorAdd (_surfaceGradient vectorMultiply (1 - _altitudeFactor)));
 
 	_deflectedWind = _deflectedVector vectorMultiply _windMagnitude;

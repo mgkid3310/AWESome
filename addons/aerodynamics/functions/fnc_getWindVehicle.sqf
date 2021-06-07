@@ -32,10 +32,10 @@ if (GVAR(showSamplingGrid)) then {
 		_start = ASLtoAGL _x;
 		_vector = [_start, _dynamicWindMode] call FUNC(getWindPosASL);
 		drawLine3D [_start, _start vectorAdd _vector, [1, 0, 0, 1]];
-		{
+		/* {
 			_end = ASLtoAGL _x;
 			drawLine3D [_start, _end, [1, 1, 1, 1]];
-		} forEach _samplePoints;
+		} forEach _samplePoints; */
 	} forEach _samplePoints;
 	diag_log str [diag_frameNo, count _samplePoints, _samplePoints];
 	systemChat str [wind, _windAverage];

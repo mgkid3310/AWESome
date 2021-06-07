@@ -1,7 +1,8 @@
 PREP(addACEInteractMenu);
+PREP(combinationProduct);
 PREP(eachFrameHandler);
 PREP(isCrew);
+PREP(perlinNoise);
 PREP(perlinNoise1D);
-// PREP(perlinNoise2D);
 PREP(playSoundVehicle);
 PREP(setupACEInteractMenu);

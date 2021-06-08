@@ -7,6 +7,7 @@ GVAR(gridSizeX) = 12;
 GVAR(gridSizeY) = 16;
 GVAR(showSamplingGrid) = false;
 GVAR(maxWindVariability) = 0.4;
+GVAR(windWavelength) = 60;
 GVAR(gustMultiplier) = 0.5;
 GVAR(throttleClimbRate) = 0.4;
 GVAR(throttleDropRate) = 0.7;

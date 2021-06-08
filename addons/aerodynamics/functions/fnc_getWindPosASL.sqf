@@ -9,7 +9,7 @@ private _altRadar = ((_posASL select 2) - (getTerrainHeightASL _posASL)) max 1;
 // calculate global wind
 private _altitudeProfile = 1.219 * (exp (-0.15 * _altRadar / 80) - exp (-3.2175 * _altRadar / 80));
 private _windVariability = linearConversion [0, 0.5, gusts, 0, GVAR(maxWindVariability), true];
-private _perlinNoise = [CBA_missionTime / 60, 0] call EFUNC(main,perlinNoise1D); // perlin noise with 60s grid size
+private _perlinNoise = [CBA_missionTime / GVAR(windWavelength), 0] call EFUNC(main,perlinNoise1D); // perlin noise with 60s grid size
 private _globalWind = wind vectorMultiply (1 + _altitudeProfile * _windVariability * (_perlinNoise - 0.5));
 
 // wind gust

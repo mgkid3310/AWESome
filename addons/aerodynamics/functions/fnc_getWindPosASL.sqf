@@ -20,15 +20,14 @@ if !(_dynamicWindMode < 2) then {
 };
 
 // surface wind deflection
-private ["_surfaceNormal", "_windNormal", "_dotProduct", "_surfaceRatio", "_surfaceGradient", "_altitudeFactor", "_deflectedVector", "_deflectedWind"];
+private ["_windNormal", "_surfaceNormal", "_dotProduct", "_surfaceGradient", "_altitudeFactor", "_deflectedVector", "_deflectedWind"];
 private _windMagnitude = vectorMagnitude _globalWind;
 if (_windMagnitude > 0.01) then {
-	_surfaceNormal = surfaceNormal _posASL;
 	_windNormal = vectorNormalized _globalWind;
+	_surfaceNormal = surfaceNormal _posASL;
 
-	_dotProduct = -0.866 max (_surfaceNormal vectorDotProduct _windNormal) min 0.866;
-	_surfaceRatio = _dotProduct / (_dotProduct - 1);
-	_surfaceGradient = vectorNormalized ((_surfaceNormal vectorMultiply _surfaceRatio) vectorAdd (_windNormal vectorMultiply (1 - _surfaceRatio)));
+	_dotProduct = -0.866 max (_windNormal vectorDotProduct _surfaceNormal) min 0.866;
+	_surfaceGradient = vectorNormalized (_windNormal vectorDiff (_surfaceNormal vectorMultiply _dotProduct));
 
 	_altitudeFactor = (_altRadar / 80) min 1;
 	_deflectedVector = ((_windNormal vectorMultiply _altitudeFactor) vectorAdd (_surfaceGradient vectorMultiply (1 - _altitudeFactor)));

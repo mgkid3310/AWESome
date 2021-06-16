@@ -15,7 +15,7 @@ if (_radarDetailParams isEqualType "") then {
 };
 
 _performanceParams params [["_radarPos", _radar], ["_radarRange", 30], ["_counterStealth", 0], ["_volumeCR", 10 ^ 3], ["_groundCR", 10 ^ 1]];
-_radarDetailParams params [["_radarFrequencyGHz", 16.5], ["_pulseWidthMicroS", 1.25], ["_azimuthBeamwidth", 2.2], ["_elevationBeamwidth", 3.8]];
+_radarDetailParams params [["_radarFrequencyGHz", 2.8], ["_pulseWidthMicroS", 1], ["_azimuthBeamwidth", 1.4], ["_elevationBeamwidth", 5]];
 
 private ["_posRadarASL", "_posTargetASL"];
 private _posRadarASL = if (_radarPos isEqualType []) then {_radarPos} else {getPosASL _radarPos};

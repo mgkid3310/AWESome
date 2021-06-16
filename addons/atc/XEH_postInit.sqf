@@ -4,6 +4,7 @@ missionNamespace setVariable [QGVAR(hasAWESomeATC_) + getPlayerUID player, true,
 
 // set default radar parameter options
 GVAR(radarParameterOptions) = [
+	["ASR-11", [2.8, 1, 1.4, 5]],
 	["AN/APG76", [16.5, 1.25, 2.2, 3.8]],
 	["AN/APS145", [0.45, 13, 7, 20]]
 ];

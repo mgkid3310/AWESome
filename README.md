@@ -102,7 +102,7 @@ will allow an infinite distance.
 
 When using Military mode, custom parameters can be used:  
 `monitor setVariable ["orbis_atc_radarParams", [radarObject, isMaster]]`  
-monitor: Monitor object the atc radar was added  
+monitor: Monitor object the atc radar Interaction was added  
 radarObject: Radar object (default: monitor)  
 isMaster: displays all airborne objects if true (default: false)  
 
@@ -119,12 +119,10 @@ radar: Radar object
 radarDetailParams: Radar detail parameters (default: [])  
 
 `radarDetailParams` can be used in two modes: preset/custom.  
-There are two presets available, `"AN/APG76"` and `"AN/APS145"`.  
-APG76 was used in A-6 aircraft, and APS145 is used in E-2A/B/C.  
-APG76 works well against ground clutter but is weak against rain.  
-APS145 has almost no effect from rain, but gets highter ground  
-clutter values and therefore cannot detect low-altitude aircrafts  
-in certain situations.  
+The list of available presets is as follows:
+`"APS-11"`: used in airports as surveillance radar  
+`"AN/APG76"`: used in A-6, weak against rain  
+`"AN/APS145"`: used in E-2C, weak against ground clutter  
 
 When using custom values, the parameters are as follows:  
 `radarDetailParams = [radarFrequency, pulseWidth, azimuthBeamwidth, elevationBeamwidth]`  

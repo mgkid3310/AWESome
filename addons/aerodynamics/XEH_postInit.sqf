@@ -10,7 +10,7 @@ GVAR(maxWindVariability) = 0.4;
 GVAR(windWavelength) = 60;
 GVAR(gustChance) = 0.3;
 GVAR(maxGustDuration) = 240;
-GVAR(gustMultiplier) = 1;
+GVAR(gustMultiplier) = 1.5;
 GVAR(throttleClimbRate) = 0.4;
 GVAR(throttleDropRate) = 0.7;
 GVAR(pylonDragRatio) = 0.002; // 0.5*Cd*A*rho = 0.12 for FIR Mk84 (0.06, 1000kg)

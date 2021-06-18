@@ -119,7 +119,7 @@ radar: Radar object
 radarDetailParams: Radar detail parameters (default: [])  
 
 `radarDetailParams` can be used in two modes: preset/custom.  
-The list of available presets is as follows:
+The list of available presets is as follows:  
 `"APS-11"`: used in airports as surveillance radar  
 `"AN/APG76"`: used in A-6, weak against rain  
 `"AN/APS145"`: used in E-2C, weak against ground clutter  

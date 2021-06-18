@@ -4,18 +4,16 @@ params ["_vehicle", ["_dynamicWindMode", GVAR(dynamicWindMode)]];
 
 if !(_dynamicWindMode > 0) exitWith {wind};
 
+if !((_dynamicWindMode > 1) && (GVAR(gridResolution) > 0)) exitWith {[getPosASL _vehicle, _dynamicWindMode] call FUNC(getWindPosASL)};
+
 private _samplePoints = [];
 private _resolution = 0 max GVAR(gridResolution);
 private _gridSizeX = 0 max GVAR(gridSizeX) / 2;
 private _gridSizeY = 0 max GVAR(gridSizeY) / 2;
-if ((_dynamicWindMode > 1) && (_resolution > 0)) then {
-	for "_resX" from -_resolution to _resolution do {
-		for "_resY" from -_resolution to _resolution do {
-			_samplePoints pushBack AGLToASL (_vehicle modelToWorld [_resX * _gridSizeX / _resolution, _resY * _gridSizeY / _resolution, 0]);
-		};
+for "_resX" from -_resolution to _resolution do {
+	for "_resY" from -_resolution to _resolution do {
+		_samplePoints pushBack AGLToASL (_vehicle modelToWorld [_resX * _gridSizeX / _resolution, _resY * _gridSizeY / _resolution, 0]);
 	};
-} else {
-	_samplePoints pushBack getPosASL _vehicle;
 };
 
 private _windAverage = [0, 0, 0];

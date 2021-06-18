@@ -46,7 +46,7 @@ ATIS_SLEEP(0.1)
 [_vehicle, _windStr, 0, _mode] call FUNC(speakNumber);
 
 // gust
-if (_gusting > 1.5 * _windStr) then {
+if (((_gusting > 1.5 * _windStr) && (_gusting > _windStr + 3)) || (_gusting > _windStr + 10)) then {
 	[_vehicle, "orbis_common_gusting", _mode] call FUNC(playAndSleep);
 	[_vehicle, _gusting, 0, _mode] call FUNC(speakNumber);
 };

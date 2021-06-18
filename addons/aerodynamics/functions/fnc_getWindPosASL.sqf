@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-params ["_posASL", ["_dynamicWindMode", GVAR(dynamicWindMode)], ["_time", _time]]; // _time for debugging
+params ["_posASL", ["_dynamicWindMode", GVAR(dynamicWindMode)], ["_time", CBA_missionTime]]; // _time for debugging
 
 if !(_dynamicWindMode > 0) exitWith {wind};
 

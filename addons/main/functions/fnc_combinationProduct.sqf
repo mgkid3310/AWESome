@@ -1,3 +1,5 @@
+#include "script_component.hpp"
+
 params [_list, [_indexes, []]];
 
 if (count _list > count _indexes) then {

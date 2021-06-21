@@ -1,3 +1,5 @@
+#include "script_component.hpp"
+
 params ["_coord", ["_seed", 0]];
 
 if (_coord isEqualType 0) then {
@@ -17,7 +19,7 @@ private _dotProducts = [];
 	_offsetVector = [];
 	for "_i" from 0 to (count _coord - 1) do {
 		_randomVector pushBack ((((_x select _i) + _seed) random 2) - 1);
-		_vectorMagnitude = _vectorMagnitude + ((_randomVector select _i) ^ 2)
+		_vectorMagnitude = _vectorMagnitude + ((_randomVector select _i) ^ 2);
 		_offsetVector pushBack ((_coord select _i) - (_x select _i));
 	};
 	if (_vectorMagnitude isEqualTo 0) then {_vectorMagnitude = 1};

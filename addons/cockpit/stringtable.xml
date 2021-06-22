@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="AWESome">
+	<Package name="Cockpit">
+		<Key ID="STR_orbis_cockpit_category">
+			<English>AWESome Cockpit</English>
+			<Korean>AWESome Cockpit</Korean>
+		</Key>
+
+		<Key ID="STR_orbis_cockpit_shakeEnabled_name">
+			<English>Camera Shake</English>
+			<Korean>Camera Shake</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_shakeEnabled_tooltip">
+			<English>Enable/disable camera shake feature</English>
+			<Korean>Enable/disable camera shake feature</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_shakeEnabled_true">
+			<English>Enabled</English>
+			<Korean>Enabled</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_shakeEnabled_false">
+			<English>Disabled</English>
+			<Korean>Disabled</Korean>
+		</Key>
+
+		<Key ID="STR_orbis_cockpit_groundMultiplier_name">
+			<English>Shake Multiplier (ground)</English>
+			<Korean>Shake Multiplier (ground)</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_groundMultiplier_tooltip">
+			<English>Multiplier for camera shake on ground (incl. touchdown)</English>
+			<Korean>Multiplier for camera shake on ground (incl. touchdown)</Korean>
+		</Key>
+
+		<Key ID="STR_orbis_cockpit_speedMultiplier_name">
+			<English>Shake Multiplier (in-flight)</English>
+			<Korean>Shake Multiplier (in-flight)</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_speedMultiplier_tooltip">
+			<English>Multiplier for in-flight camera shake</English>
+			<Korean>Multiplier for in-flight camera shake</Korean>
+		</Key>
+
+		<Key ID="STR_orbis_cockpit_checklistUnits_name">
+			<English>Checklist Units</English>
+			<Korean>Checklist Units</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_checklistUnits_tooltip">
+			<English>Speed unit used on checklists</English>
+			<Korean>Speed unit used on checklists</Korean>
+		</Key>
+	</Package>
+</Project>

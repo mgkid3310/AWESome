@@ -7,16 +7,16 @@ ADDON = true;
 [
 	QGVAR(displayCallsign),
 	"LIST",
-	["Toggle ATC Radar display name", "Selects the pilot's name or callsign to be displayed on the ATC radar screen"],
-	"AWESome ATC",
-	[[0, 1, 2, 3], ["Personal Callsign", "Squad Callsign", "Vehicle Callsign", "Pilot Name"], 0]
+	[localize LSTRING(displayCallsign_name), localize LSTRING(displayCallsign_tooltip)],
+	localize LSTRING(category),
+	[[0, 1, 2, 3], [localize LSTRING(personal), localize LSTRING(squad), localize LSTRING(aircraft), localize LSTRING(pilot)], 0]
 ] call CBA_Settings_fnc_init;
 
 [
 	QGVAR(personalCallsign),
 	"EDITBOX",
-	["Set your personal callsign", "Sets your personal callsign displayed on ATC radar screen"],
-	"AWESome ATC",
+	[localize LSTRING(personalCallsign_name), localize LSTRING(personalCallsign_tooltip)],
+	localize LSTRING(category),
 	"",
 	2
 ] call CBA_Settings_fnc_init;
@@ -24,49 +24,49 @@ ADDON = true;
 [
 	QGVAR(unitSettingAlt),
 	"LIST",
-	["ATC Altitude unit", "Sets display unit for altitude on the ATC radar screen"],
-	"AWESome ATC",
-	[[false, true], ["meter (x10m)", "feet (x100ft)"], 0]
+	[localize LSTRING(unitSettingAlt_name), localize LSTRING(unitSettingAlt_tooltip)],
+	localize LSTRING(category),
+	[[false, true], [localize LSTRING(unitSettingAlt_meter]), localize LSTRING(unitSettingAlt_feet)], 0]
 ] call CBA_Settings_fnc_init;
 
 [
 	QGVAR(unitSettingSpd),
 	"LIST",
-	["ATC Speed unit", "Sets display unit for speed on the ATC radar screen"],
-	"AWESome ATC",
-	[[false, true], ["kph (km/h)", "knot (kn)"], 0]
+	[localize LSTRING(unitSettingSpd_name), localize LSTRING(unitSettingSpd_tooltip)],
+	localize LSTRING(category),
+	[[false, true], [localize LSTRING(unitSettingSpd_kph]), localize LSTRING(unitSettingSpd_knot)], 0]
 ] call CBA_Settings_fnc_init;
 
 [
 	QGVAR(radarUpdateInterval),
 	"SLIDER",
-	["ATC display Update Interval", "Sets ATC radar screen update interval, values below 0.50(s) may lower FPS"],
-	"AWESome ATC",
+	[localize LSTRING(radarUpdateInterval_name), localize LSTRING(radarUpdateInterval_tooltip)],
+	localize LSTRING(category),
 	[0, 5, 0.5, 2]
 ] call CBA_Settings_fnc_init;
 
 [
 	QGVAR(radarTrailLength),
 	"SLIDER",
-	["ATC display trail length", "Sets trail length on ATC radar screen"],
-	"AWESome ATC",
+	[localize LSTRING(radarTrailLength_name), localize LSTRING(radarTrailLength_tooltip)],
+	localize LSTRING(category),
 	[0, 10, 5, 0]
 ] call CBA_Settings_fnc_init;
 
 [
 	QGVAR(displayProjectileTrails),
 	"LIST",
-	["Display missile trails", "Determines if missile trails will be drawn, displaying missile trails may lower FPS"],
-	"AWESome ATC",
-	[[true, false], ["Display", "Hide"], 1]
+	[localize LSTRING(displayProjectileTrails_name), localize LSTRING(displayProjectileTrails_tooltip)],
+	localize LSTRING(category),
+	[[true, false], [localize LSTRING(display), localize LSTRING(hide)], 1]
 ] call CBA_Settings_fnc_init;
 
 [
 	QGVAR(updateIntervalATIS),
 	"LIST",
-	["ATIS update interval", "Sets ATIS update interval with option for real-time data and manual update by ATC"],
-	"AWESome ATC",
-	[[5, 15, 30, 0, -1], ["5min", "15min", "30min", "Real-time data", "Manual Update (by ATC)"], 1]
+	[localize LSTRING(updateIntervalATIS_name), localize LSTRING(updateIntervalATIS_tooltip)],
+	localize LSTRING(category),
+	[[5, 15, 30, 0, -1], ["5min", "15min", "30min", localize LSTRING(realTime), localize LSTRING(manual)], 1]
 ] call CBA_Settings_fnc_init;
 
 // add actions (ACE / vanilla)

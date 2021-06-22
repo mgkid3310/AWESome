@@ -2,7 +2,7 @@
 
 private _actionATISmain = [
 	"actionATIS",
-	"ATIS",
+	localize LSTRING(actionATIS),
 	"",
 	{},
 	{[_player, _target, 0] call EFUNC(main,isCrew)},
@@ -13,7 +13,7 @@ private _actionATISmain = [
 ];
 private _actionATISlisten = [
 	"startATIS",
-	"Listen to ATIS",
+	localize LSTRING(startATIS),
 	"",
 	{[_target, 0] call FUNC(listenATISbroadcast)},
 	{([_player, _target, 0] call EFUNC(main,isCrew)) && (_target getVariable [QGVAR(isATISready), true])},
@@ -24,7 +24,7 @@ private _actionATISlisten = [
 ];
 private _actionATISstop = [
 	"stopATIS",
-	"Stop Listening ATIS",
+	localize LSTRING(stopATIS),
 	"",
 	{_target setVariable [QGVAR(stopATIS), true, true]},
 	{([_player, _target, 0] call EFUNC(main,isCrew)) && !(_target getVariable [QGVAR(stopATIS), true])},

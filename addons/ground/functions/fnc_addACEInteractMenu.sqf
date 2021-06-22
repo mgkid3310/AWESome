@@ -3,7 +3,7 @@
 // towbar actions
 private _deployTowBar = [
 	"deployTowBar",
-	"Deploy Towbar",
+	localize LSTRING(deployTowBar),
 	"",
 	{[_target] call FUNC(deployTowBar)},
 	{!(_target getVariable [QGVAR(hasTowBarDeployed), false]) && (abs (speed _target) < 1)},
@@ -14,7 +14,7 @@ private _deployTowBar = [
 ];
 private _removeTowBar = [
 	"removeTowBar",
-	"Remove Towbar",
+	localize LSTRING(removeTowBar),
 	"",
 	{[_target] call FUNC(removeTowBar)},
 	{(_target getVariable [QGVAR(hasTowBarDeployed), false]) && (abs (speed _target) < 1)},

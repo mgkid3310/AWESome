@@ -49,5 +49,46 @@
 			<English>Speed unit used on checklists</English>
 			<Korean>Speed unit used on checklists</Korean>
 		</Key>
+
+		<Key ID="STR_orbis_cockpit_checklistMain">
+			<English>Checklist</English>
+			<Korean>Checklist</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_openChecklist01">
+			<English>Pre-Start</English>
+			<Korean>Pre-Start</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_openChecklist02">
+			<English>Startup + Before Taxi</English>
+			<Korean>Startup + Before Taxi</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_openChecklist03">
+			<English>Before Takeoff</English>
+			<Korean>Before Takeoff</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_openChecklist04">
+			<English>Takeoff</English>
+			<Korean>Takeoff</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_openChecklist05">
+			<English>Descent + Approach</English>
+			<Korean>Descent + Approach</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_openChecklist06">
+			<English>Landing + Taxi To Ramp</English>
+			<Korean>Landing + Taxi To Ramp</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_nextChecklist">
+			<English>Next Checklist</English>
+			<Korean>Next Checklist</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_prevChecklist">
+			<English>Previouse Checklist</English>
+			<Korean>Previouse Checklist</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_closeChecklist">
+			<English>Close Checklist</English>
+			<Korean>Close Checklist</Korean>
+		</Key>
 	</Package>
 </Project>

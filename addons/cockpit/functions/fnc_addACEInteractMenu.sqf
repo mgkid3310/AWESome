@@ -2,7 +2,7 @@
 
 private _checklistMain = [
 	"checklistMain",
-	"Checklist",
+	localize LSTRING(checklistMain),
 	"",
 	{["none"] call FUNC(openChecklist)},
 	{[_player, _target, 1] call EFUNC(main,isCrew)},
@@ -13,7 +13,7 @@ private _checklistMain = [
 ];
 private _openChecklist01 = [
 	"openChecklist01",
-	"Pre-Start",
+	localize LSTRING(openChecklist01),
 	"",
 	{["pre_start_checklist"] call FUNC(openChecklist)},
 	{([_player, _target, 1] call EFUNC(main,isCrew)) && !(GVAR(currentChecklist) isEqualTo "pre_start_checklist")},
@@ -24,7 +24,7 @@ private _openChecklist01 = [
 ];
 private _openChecklist02 = [
 	"openChecklist02",
-	"Startup + Before Taxi",
+	localize LSTRING(openChecklist02),
 	"",
 	{["startup_before_taxi_checklist"] call FUNC(openChecklist)},
 	{([_player, _target, 1] call EFUNC(main,isCrew)) && !(GVAR(currentChecklist) isEqualTo "startup_before_taxi_checklist")},
@@ -35,7 +35,7 @@ private _openChecklist02 = [
 ];
 private _openChecklist03 = [
 	"openChecklist03",
-	"Before Takeoff",
+	localize LSTRING(openChecklist03),
 	"",
 	{["before_takeoff_checklist"] call FUNC(openChecklist)},
 	{([_player, _target, 1] call EFUNC(main,isCrew)) && !(GVAR(currentChecklist) isEqualTo "before_takeoff_checklist")},
@@ -46,7 +46,7 @@ private _openChecklist03 = [
 ];
 private _openChecklist04 = [
 	"openChecklist04",
-	"Takeoff",
+	localize LSTRING(openChecklist04),
 	"",
 	{["takeoff_checklist"] call FUNC(openChecklist)},
 	{([_player, _target, 1] call EFUNC(main,isCrew)) && !(GVAR(currentChecklist) isEqualTo "takeoff_checklist")},
@@ -57,7 +57,7 @@ private _openChecklist04 = [
 ];
 private _openChecklist05 = [
 	"openChecklist05",
-	"Descent + Approach",
+	localize LSTRING(openChecklist05),
 	"",
 	{["descent_approach_checklist"] call FUNC(openChecklist)},
 	{([_player, _target, 1] call EFUNC(main,isCrew)) && !(GVAR(currentChecklist) isEqualTo "descent_approach_checklist")},
@@ -68,7 +68,7 @@ private _openChecklist05 = [
 ];
 private _openChecklist06 = [
 	"openChecklist06",
-	"Landing + Taxi To Ramp",
+	localize LSTRING(openChecklist06),
 	"",
 	{["landing_taxi_to_ramp_checklist"] call FUNC(openChecklist)},
 	{([_player, _target, 1] call EFUNC(main,isCrew)) && !(GVAR(currentChecklist) isEqualTo "landing_taxi_to_ramp_checklist")},
@@ -79,7 +79,7 @@ private _openChecklist06 = [
 ];
 private _closeChecklist = [
 	"closeChecklist",
-	"Close Checklist",
+	localize LSTRING(closeChecklist),
 	"",
 	{["none"] call FUNC(openChecklist)},
 	{([_player, _target, 1] call EFUNC(main,isCrew)) && !(GVAR(currentChecklist) isEqualTo "none")},

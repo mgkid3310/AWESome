@@ -2,7 +2,7 @@
 
 // GPWS parent action
 private _actionGPWSmodes = [
-	QGVAR(GPWSmodes),
+	"actionGPWS",
 	"GPWS",
 	"",
 	{},
@@ -239,7 +239,7 @@ EGVAR(main,ACEInteractions) pushBack [1, [
 EGVAR(main,ACEInteractions) pushBack [1.1, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", QGVAR(GPWSmodes)],
+	["ACE_SelfActions", "AWESome", "actionGPWS"],
 	_actionTurnOff,
 	true
 ]];
@@ -247,21 +247,21 @@ EGVAR(main,ACEInteractions) pushBack [1.1, [
 EGVAR(main,ACEInteractions) pushBack [1.21, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", QGVAR(GPWSmodes)],
+	["ACE_SelfActions", "AWESome", "actionGPWS"],
 	_actionB747,
 	true
 ]];
 EGVAR(main,ACEInteractions) pushBack [1.22, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", QGVAR(GPWSmodes)],
+	["ACE_SelfActions", "AWESome", "actionGPWS"],
 	_actionF16,
 	true
 ]];
 EGVAR(main,ACEInteractions) pushBack [1.23, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", QGVAR(GPWSmodes)],
+	["ACE_SelfActions", "AWESome", "actionGPWS"],
 	_actionRita,
 	true
 ]];
@@ -269,28 +269,28 @@ EGVAR(main,ACEInteractions) pushBack [1.23, [
 EGVAR(main,ACEInteractions) pushBack [1.31, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", QGVAR(GPWSmodes)],
+	["ACE_SelfActions", "AWESome", "actionGPWS"],
 	_testB747,
 	true
 ]];
 EGVAR(main,ACEInteractions) pushBack [1.32, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", QGVAR(GPWSmodes)],
+	["ACE_SelfActions", "AWESome", "actionGPWS"],
 	_testF16,
 	true
 ]];
 EGVAR(main,ACEInteractions) pushBack [1.33, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", QGVAR(GPWSmodes)],
+	["ACE_SelfActions", "AWESome", "actionGPWS"],
 	_testRita,
 	true
 ]];
 EGVAR(main,ACEInteractions) pushBack [1.34, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", QGVAR(GPWSmodes)],
+	["ACE_SelfActions", "AWESome", "actionGPWS"],
 	_testStop,
 	true
 ]];
@@ -298,14 +298,14 @@ EGVAR(main,ACEInteractions) pushBack [1.34, [
 EGVAR(main,ACEInteractions) pushBack [1.41, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", QGVAR(GPWSmodes)],
+	["ACE_SelfActions", "AWESome", "actionGPWS"],
 	_actionVolumeLow,
 	true
 ]];
 EGVAR(main,ACEInteractions) pushBack [1.42, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", QGVAR(GPWSmodes)],
+	["ACE_SelfActions", "AWESome", "actionGPWS"],
 	_actionVolumeHigh,
 	true
 ]];

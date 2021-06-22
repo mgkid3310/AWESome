@@ -4,7 +4,7 @@ params [["_vehicle", vehicle player], ["_mode", 0]];
 
 private _ATISdata = missionNamespace getVariable [QGVAR(ATISdata), false];
 
-if (GVAR(ATISupdateInterval) == 0) then {
+if (GVAR(updateIntervalATIS) == 0) then {
 	_ATISdata = [false, false] call FUNC(updateATISdata);
 };
 

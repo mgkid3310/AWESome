@@ -62,7 +62,7 @@ ADDON = true;
 ] call CBA_Settings_fnc_init;
 
 [
-	QGVAR(ATISupdateInterval),
+	QGVAR(updateIntervalATIS),
 	"LIST",
 	["ATIS update interval", "Sets ATIS update interval with option for real-time data and manual update by ATC"],
 	"AWESome ATC",

@@ -3,7 +3,7 @@
 // GPWS parent action
 private _actionGPWSmodes = [
 	"actionGPWS",
-	"GPWS",
+	localize LSTRING(actionGPWS),
 	"",
 	{},
 	{([_player, _target, 1] call EFUNC(main,isCrew)) && (_target getVariable [QGVAR(isGPWSenabled), false])},
@@ -16,7 +16,7 @@ private _actionGPWSmodes = [
 // turn GPWS off
 private _actionTurnOff = [
 	"turnOff",
-	"Turn off GPWS",
+	localize LSTRING(turnOff),
 	"",
 	{_target setVariable [QGVAR(GPWSmode), "off", true]},
 	{(_target getVariable [QGVAR(GPWSmodeLocal), "off"] != "off")},
@@ -29,7 +29,7 @@ private _actionTurnOff = [
 // set mode action
 private _actionB747 = [
 	"actionB747",
-	"Set to B747 GPWS",
+	localize LSTRING(actionB747),
 	"",
 	{_target setVariable [QGVAR(GPWSmode), "b747", true]},
 	{(_target getVariable [QGVAR(GPWSmodeLocal), "off"] != "b747")},
@@ -40,7 +40,7 @@ private _actionB747 = [
 ];
 private _actionF16 = [
 	"actionF16",
-	"Set to Betty (F-16)",
+	localize LSTRING(actionF16),
 	"",
 	{_target setVariable [QGVAR(GPWSmode), "f16", true]},
 	{(_target getVariable [QGVAR(GPWSmodeLocal), "off"] != "f16")},
@@ -51,7 +51,7 @@ private _actionF16 = [
 ];
 private _actionRita = [
 	"actionRita",
-	"Set to Rita",
+	localize LSTRING(actionRita),
 	"",
 	{_target setVariable [QGVAR(GPWSmode), "rita", true]},
 	{(_target getVariable [QGVAR(GPWSmodeLocal), "off"] != "rita")},
@@ -64,7 +64,7 @@ private _actionRita = [
 // test action
 private _testB747 = [
 	"testB747",
-	"Test GPWS (B747)",
+	localize LSTRING(testB747),
 	"",
 	{[_target] spawn FUNC(b747GPWStest)},
 	{(_target getVariable [QGVAR(GPWSmodeLocal), "off"] isEqualTo "b747") && (_target getVariable [QGVAR(GPWStestReady), true])},
@@ -75,7 +75,7 @@ private _testB747 = [
 ];
 private _testF16 = [
 	"testF16",
-	"Test GPWS (Betty)",
+	localize LSTRING(testF16),
 	"",
 	{[_target] spawn FUNC(f16GPWStest)},
 	{(_target getVariable [QGVAR(GPWSmodeLocal), "off"] isEqualTo "f16") && (_target getVariable [QGVAR(GPWStestReady), true])},
@@ -86,7 +86,7 @@ private _testF16 = [
 ];
 private _testRita = [
 	"testRita",
-	"Test GPWS (Rita)",
+	localize LSTRING(testRita),
 	"",
 	{[_target] spawn FUNC(ritaGPWStest)},
 	{(_target getVariable [QGVAR(GPWSmodeLocal), "off"] isEqualTo "rita") && (_target getVariable [QGVAR(GPWStestReady), true])},
@@ -99,7 +99,7 @@ private _testRita = [
 // stop currently running GPWS test
 private _testStop = [
 	"testStop",
-	"Stop GPWS Test",
+	localize LSTRING(testStop),
 	"",
 	{_target setVariable [QGVAR(GPWStestStop), true, true]},
 	{(_target getVariable [QGVAR(GPWSmodeLocal), "off"] != "off") && !(_target getVariable [QGVAR(GPWStestReady), true]) && !(_target getVariable [QGVAR(GPWStestStop), false])},
@@ -112,7 +112,7 @@ private _testStop = [
 // volume change
 private _actionVolumeLow = [
 	"volumeLow",
-	"Lower Volume",
+	localize LSTRING(volumeLow),
 	"",
 	{_target setVariable [QGVAR(GPWSvolumeLow), true, true]},
 	{!(_target getVariable [QGVAR(GPWSvolumeLow), false])},
@@ -123,7 +123,7 @@ private _actionVolumeLow = [
 ];
 private _actionVolumeHigh = [
 	"volumeHigh",
-	"Increase Volume",
+	localize LSTRING(volumeHigh),
 	"",
 	{_target setVariable [QGVAR(GPWSvolumeLow), false, true]},
 	{(_target getVariable [QGVAR(GPWSvolumeLow), false])},
@@ -135,8 +135,8 @@ private _actionVolumeHigh = [
 
 // TCAS parent action
 /* private _actionTCASmodes = [
-	QGVAR(TCASModes),
-	"TCAS",
+	"actionTCAS",
+	localize LSTRING(actionTCAS),
 	"",
 	{},
 	{([nil, nil, 1] call EFUNC(main,isCrew)) && !(_target getVariable [QGVAR(TCASmode), 0] < 0)},
@@ -148,8 +148,8 @@ private _actionVolumeHigh = [
 
 // TCAS TA/RA TA STBY
 /* private _actionTCASTARA = [
-	"tcas_TARA",
-	"TA/RA",
+	"modeTARA",
+	localize LSTRING(modeTARA),
 	"",
 	{_target setVariable [QGVAR(tcasMode), 2, true]},
 	{(_target getVariable [QGVAR(tcasMode), 0] != 2)},
@@ -159,8 +159,8 @@ private _actionVolumeHigh = [
 	10
 ];
 private _actionTCASTA = [
-	"tcas_TA",
-	"TA",
+	"modeTA",
+	localize LSTRING(modeTA),
 	"",
 	{_target setVariable [QGVAR(tcasMode), 1, true]},
 	{(_target getVariable [QGVAR(tcasMode), 0] != 1)},
@@ -170,8 +170,8 @@ private _actionTCASTA = [
 	10
 ];
 private _actionTCASSTBY = [
-	"tcas_stby",
-	"Stand by",
+	"modeSTBY",
+	localize LSTRING(modeSTBY),
 	"",
 	{_target setVariable [QGVAR(tcasMode), 0, true]},
 	{(_target getVariable [QGVAR(tcasMode), 0] != 0)},
@@ -184,7 +184,7 @@ private _actionTCASSTBY = [
 // Transponder parent action
 private _actionTransponderModes = [
 	"actionTransponderModes",
-	"Transponder",
+	localize LSTRING(actionTransponderModes),
 	"",
 	{},
 	{([nil, nil, 1] call EFUNC(main,isCrew)) && !(_target getVariable [QGVAR(transponderMode), 0] < 0)},
@@ -197,7 +197,7 @@ private _actionTransponderModes = [
 // Transponder Mode C STBY off
 private _actionTransponderModeC = [
 	"transponderModeC",
-	"Mode C",
+	localize LSTRING(transponderModeC),
 	"",
 	{_target setVariable [QGVAR(transponderMode), 2, true]},
 	{(_target getVariable [QGVAR(transponderMode), 0] != 2)},
@@ -208,7 +208,7 @@ private _actionTransponderModeC = [
 ];
 private _actionTransponderSTBY = [
 	"transponderSTBY",
-	"Stand By",
+	localize LSTRING(transponderSTBY),
 	"",
 	{_target setVariable [QGVAR(transponderMode), 1, true]},
 	{(_target getVariable [QGVAR(transponderMode), 0] != 1)},
@@ -219,7 +219,7 @@ private _actionTransponderSTBY = [
 ];
 private _actionTransponderOff = [
 	"transponderOff",
-	"Off",
+	localize LSTRING(transponderOff),
 	"",
 	{_target setVariable [QGVAR(transponderMode), 0, true]},
 	{(_target getVariable [QGVAR(transponderMode), 0] != 0)},
@@ -320,21 +320,21 @@ EGVAR(main,ACEInteractions) pushBack [1.42, [
 EGVAR(main,ACEInteractions) pushBack [2.1, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", QGVAR(TCASModes)],
+	["ACE_SelfActions", "AWESome", "actionTCAS"],
 	_actionTCASTARA,
 	true
 ]];
 EGVAR(main,ACEInteractions) pushBack [2.2, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", QGVAR(TCASModes)],
+	["ACE_SelfActions", "AWESome", "actionTCAS"],
 	_actionTCASTA,
 	true
 ]];
 EGVAR(main,ACEInteractions) pushBack [2.3, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", QGVAR(TCASModes)],
+	["ACE_SelfActions", "AWESome", "actionTCAS"],
 	_actionTCASSTBY,
 	true
 ]]; */

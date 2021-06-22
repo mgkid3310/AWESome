@@ -2,7 +2,7 @@
 
 private _actionMain = [
 	"AWESome",
-	"AWESome",
+	localize LSTRING(AWESome),
 	"",
 	{},
 	{[_player, _target, 0] call FUNC(isCrew)},

@@ -125,5 +125,18 @@
 			<English>Manual Update (by ATC)</English>
 			<Korean>Manual Update (by ATC)</Korean>
 		</Key>
+
+		<Key ID="STR_orbis_atc_actionATIS">
+			<English>ATIS</English>
+			<Korean>ATIS</Korean>
+		</Key>
+		<Key ID="STR_orbis_atc_startATIS">
+			<English>Listen to ATIS</English>
+			<Korean>Listen to ATIS</Korean>
+		</Key>
+		<Key ID="STR_orbis_atc_stopATIS">
+			<English>Stop Listening ATIS</English>
+			<Korean>Stop Listening ATIS</Korean>
+		</Key>
 	</Package>
 </Project>

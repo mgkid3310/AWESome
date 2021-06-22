@@ -34,7 +34,7 @@ if !(EGVAR(main,hasACEUnits)) then {
 		"LIST",
 		["Checklist Units", "Selects speed unit used on checklists"],
 		"AWESome Cockpit",
-		[["KIAS", "KM/H"], ["KIAS", "km/h"], 0]
+		[["KIAS", "kph"], ["KIAS", "km/h"], 0]
 	] call CBA_Settings_fnc_init;
 };
 

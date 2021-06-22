@@ -27,7 +27,7 @@ _vehicle setVariable [QGVAR(isGPWSenabled), true, true];
 // GPWS initialization
 private _modeCurrent = _vehicle getVariable [QGVAR(GPWSmode), "init"];
 if (_modeCurrent isEqualTo "init") then {
-	_vehicle setVariable [QGVAR(GPWSvolumeLow), GVAR(defaultVolumeLow), true];
+	_vehicle setVariable [QGVAR(GPWSvolumeLow), GVAR(defaultVolume), true];
 
 	if !(GVAR(personalDefault) isEqualTo "none") exitWith {
 		_vehicle setVariable [QGVAR(GPWSmode), GVAR(personalDefault), true];

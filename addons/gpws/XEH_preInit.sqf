@@ -13,7 +13,7 @@ ADDON = true;
 ] call CBA_Settings_fnc_init;
 
 [
-	QGVAR(defaultVolumeLow),
+	QGVAR(defaultVolume),
 	"LIST",
 	["Default GPWS Volume", "Sets default GPWS volume (high/low)"],
 	"AWESome GPWS",

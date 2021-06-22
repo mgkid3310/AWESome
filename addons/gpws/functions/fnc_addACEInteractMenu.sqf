@@ -28,7 +28,7 @@ private _actionTurnOff = [
 
 // set mode action
 private _actionB747 = [
-	"b747",
+	"actionB747",
 	"Set to B747 GPWS",
 	"",
 	{_target setVariable [QGVAR(GPWSmode), "b747", true]},
@@ -39,7 +39,7 @@ private _actionB747 = [
 	10
 ];
 private _actionF16 = [
-	"f16",
+	"actionF16",
 	"Set to Betty (F-16)",
 	"",
 	{_target setVariable [QGVAR(GPWSmode), "f16", true]},
@@ -50,7 +50,7 @@ private _actionF16 = [
 	10
 ];
 private _actionRita = [
-	"rita",
+	"actionRita",
 	"Set to Rita",
 	"",
 	{_target setVariable [QGVAR(GPWSmode), "rita", true]},
@@ -63,7 +63,7 @@ private _actionRita = [
 
 // test action
 private _testB747 = [
-	"f16Test",
+	"testB747",
 	"Test GPWS (B747)",
 	"",
 	{[_target] spawn FUNC(b747GPWStest)},
@@ -74,7 +74,7 @@ private _testB747 = [
 	10
 ];
 private _testF16 = [
-	"f16Test",
+	"testF16",
 	"Test GPWS (Betty)",
 	"",
 	{[_target] spawn FUNC(f16GPWStest)},
@@ -85,7 +85,7 @@ private _testF16 = [
 	10
 ];
 private _testRita = [
-	"ritaTest",
+	"testRita",
 	"Test GPWS (Rita)",
 	"",
 	{[_target] spawn FUNC(ritaGPWStest)},
@@ -182,8 +182,8 @@ private _actionTCASSTBY = [
 ]; */
 
 // Transponder parent action
-private _actionTranspondermodes = [
-	QGVAR(TransponderModes),
+private _actionTransponderModes = [
+	"actionTransponderModes",
 	"Transponder",
 	"",
 	{},
@@ -196,7 +196,7 @@ private _actionTranspondermodes = [
 
 // Transponder Mode C STBY off
 private _actionTransponderModeC = [
-	"transponder_modeC",
+	"transponderModeC",
 	"Mode C",
 	"",
 	{_target setVariable [QGVAR(transponderMode), 2, true]},
@@ -207,7 +207,7 @@ private _actionTransponderModeC = [
 	10
 ];
 private _actionTransponderSTBY = [
-	"transponder_stby",
+	"transponderSTBY",
 	"Stand By",
 	"",
 	{_target setVariable [QGVAR(transponderMode), 1, true]},
@@ -218,7 +218,7 @@ private _actionTransponderSTBY = [
 	10
 ];
 private _actionTransponderOff = [
-	"transponder_off",
+	"transponderOff",
 	"Off",
 	"",
 	{_target setVariable [QGVAR(transponderMode), 0, true]},
@@ -349,21 +349,21 @@ EGVAR(main,ACEInteractions) pushBack [3, [
 EGVAR(main,ACEInteractions) pushBack [3.1, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", QGVAR(TransponderModes)],
+	["ACE_SelfActions", "AWESome", "actionTransponderModes"],
 	_actionTransponderModeC,
 	true
 ]];
 EGVAR(main,ACEInteractions) pushBack [3.2, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", QGVAR(TransponderModes)],
+	["ACE_SelfActions", "AWESome", "actionTransponderModes"],
 	_actionTransponderSTBY,
 	true
 ]];
 EGVAR(main,ACEInteractions) pushBack [3.3, [
 	"Plane",
 	1,
-	["ACE_SelfActions", "AWESome", QGVAR(TransponderModes)],
+	["ACE_SelfActions", "AWESome", "actionTransponderModes"],
 	_actionTransponderOff,
 	true
 ]];

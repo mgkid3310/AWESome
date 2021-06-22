@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="AWESome">
+	<Package name="GPWS">
+		<Key ID="STR_orbis_gpws_category">
+			<English>AWESome GPWS</English>
+			<Korean>AWESome GPWS</Korean>
+		</Key>
+
+		<Key ID="STR_orbis_cockpit_personalDefault_name">
+			<English>Default GPWS Mode</English>
+			<Korean>Default GPWS Mode</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_personalDefault_tooltip">
+			<English>Default GPWS is activated when boarding initialized planes</English>
+			<Korean>Default GPWS is activated when boarding initialized planes</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_personalDefault_none">
+			<English>No default setting</English>
+			<Korean>No default setting</Korean>
+		</Key>
+
+		<Key ID="STR_orbis_cockpit_defaultVolume_name">
+			<English>Default GPWS Volume</English>
+			<Korean>Default GPWS Volume</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_defaultVolume_tooltip">
+			<English>Default GPWS volume (high/low)</English>
+			<Korean>Default GPWS volume (high/low)</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_defaultVolume_high">
+			<English>High</English>
+			<Korean>High</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_defaultVolume_low">
+			<English>Low</English>
+			<Korean>Low</Korean>
+		</Key>
+
+		<Key ID="STR_orbis_cockpit_automaticTransponder_name">
+			<English>Use Automatic Transponder</English>
+			<Korean>Use Automatic Transponder</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_automaticTransponder_tooltip">
+			<English>Transponder mode will be automatically changed to appropriate mode</English>
+			<Korean>Transponder mode will be automatically changed to appropriate mode</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_automaticTransponder_automatic">
+			<English>Automatic</English>
+			<Korean>Automatic</Korean>
+		</Key>
+		<Key ID="STR_orbis_cockpit_automaticTransponder_manual">
+			<English>Manual</English>
+			<Korean>Manual</Korean>
+		</Key>
+	</Package>
+</Project>

@@ -7,39 +7,39 @@ ADDON = true;
 [
 	QGVAR(enabled),
 	"LIST",
-	["Advanced Aerodynamics", "Can enable or disable Advanced Aerodynamics"],
-	"AWESome Aerodynamics",
-	[[true, false], ["Enabled", "Disabled"], 0]
+	[localize LSTRING(enabled_name), localize LSTRING(enabled_tooltip)],
+	localize LSTRING(category),
+	[[true, false], [localize LSTRING(enabled_true), localize LSTRING(enabled_false)], 0]
 ] call CBA_Settings_fnc_init;
 
 [
 	QGVAR(dynamicWindMode),
 	"LIST",
-	["Dynamic Winds", "Enable/Disable dynamic wind effects, e.g., gust, wake turbulence and more."],
-	"AWESome Aerodynamics",
-	[[2, 1, 0], ["Dynamic", "Simple", "Static"], 0]
+	[localize LSTRING(dynamicWindMode_name), localize LSTRING(dynamicWindMode_tooltip)],
+	localize LSTRING(category),
+	[[2, 1, 0], [localize LSTRING(dynamic), localize LSTRING(simple), localize LSTRING(static)], 0]
 ] call CBA_Settings_fnc_init;
 
 [
 	QGVAR(windMultiplier),
 	"SLIDER",
-	["Wind Multiplier", "Sets how strong the wind effect will be"],
-	"AWESome Aerodynamics",
+	[localize LSTRING(windMultiplier_name), localize LSTRING(windMultiplier_tooltip)],
+	localize LSTRING(category),
 	[0, 1, 1, 2]
 ] call CBA_Settings_fnc_init;
 
 [
 	QGVAR(pylonMassMultiplierGlobal),
 	"SLIDER",
-	["Pylon Mass Multiplier", "Sets the multiplier for pylon weapon's mass"],
-	"AWESome Aerodynamics",
+	[localize LSTRING(pylonMassMultiplierGlobal_name), localize LSTRING(pylonMassMultiplierGlobal_tooltip)],
+	localize LSTRING(category),
 	[0, 1, 1, 2]
 ] call CBA_Settings_fnc_init;
 
 [
 	QGVAR(pylonDragMultiplierGlobal),
 	"SLIDER",
-	["Pylon Drag Multiplier", "Sets the multiplier for pylon weapon's drag"],
-	"AWESome Aerodynamics",
+	[localize LSTRING(pylonDragMultiplierGlobal_name), localize LSTRING(pylonDragMultiplierGlobal_tooltip)],
+	localize LSTRING(category),
 	[0, 1, 1, 2]
 ] call CBA_Settings_fnc_init;

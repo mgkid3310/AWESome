@@ -7,24 +7,24 @@ ADDON = true;
 [
 	QGVAR(shakeEnabled),
 	"LIST",
-	["Camera Shake", "Enable/disable camera shake feature"],
-	"AWESome Cockpit",
-	[[true, false], ["Enabled", "Disabled"], 0]
+	[localize LSTRING(shakeEnabled_name), localize LSTRING(shakeEnabled_tooltip)],
+	localize LSTRING(category),
+	[[true, false], [localize LSTRING(shakeEnabled_true), localize LSTRING(shakeEnabled_false)], 0]
 ] call CBA_Settings_fnc_init;
 
 [
 	QGVAR(groundMultiplier),
 	"SLIDER",
-	["Shake Multiplier (ground)", "Sets multiplier for camera shake on ground (incl. touchdown)"],
-	"AWESome Cockpit",
+	[localize LSTRING(groundMultiplier_name), localize LSTRING(groundMultiplier_tooltip)],
+	localize LSTRING(category),
 	[0, 1, 1, 2]
 ] call CBA_Settings_fnc_init;
 
 [
 	QGVAR(speedMultiplier),
 	"SLIDER",
-	["Shake Multiplier (in-flight)", "Sets multiplier for in-flight camera shake"],
-	"AWESome Cockpit",
+	[localize LSTRING(speedMultiplier_name), localize LSTRING(speedMultiplier_tooltip)],
+	localize LSTRING(category),
 	[0, 1, 1, 2]
 ] call CBA_Settings_fnc_init;
 
@@ -32,8 +32,8 @@ if !(EGVAR(main,hasACEUnits)) then {
 	[
 		QGVAR(checklistUnits),
 		"LIST",
-		["Checklist Units", "Selects speed unit used on checklists"],
-		"AWESome Cockpit",
+		[localize LSTRING(checklistUnits_name), localize LSTRING(checklistUnits_tooltip)],
+		localize LSTRING(category),
 		[["KIAS", "kph"], ["KIAS", "km/h"], 0]
 	] call CBA_Settings_fnc_init;
 };

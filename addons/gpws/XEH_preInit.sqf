@@ -7,25 +7,25 @@ ADDON = true;
 [
 	QGVAR(personalDefault),
 	"LIST",
-	["Default GPWS Mode", "Default GPWS is activated when boarding initialized planes"],
-	"AWESome GPWS",
-	[["none", "b747", "f16", "rita"], ["No default setting", "B747", "Betty (F-16)", "Rita"], 0]
+	[localize LSTRING(personalDefault_name), localize LSTRING(personalDefault_tooltip)],
+	localize LSTRING(category),
+	[["none", "b747", "f16", "rita"], [localize LSTRING(personalDefault_none), "B747", "Betty (F-16)", "Rita"], 0]
 ] call CBA_Settings_fnc_init;
 
 [
 	QGVAR(defaultVolume),
 	"LIST",
-	["Default GPWS Volume", "Sets default GPWS volume (high/low)"],
-	"AWESome GPWS",
-	[[false, true], ["High", "Low"], 0]
+	[localize LSTRING(defaultVolume_name), localize LSTRING(defaultVolume_tooltip)],
+	localize LSTRING(category),
+	[[false, true], [localize LSTRING(defaultVolume_high), localize LSTRING(defaultVolume_low)], 0]
 ] call CBA_Settings_fnc_init;
 
 [
 	QGVAR(automaticTransponder),
 	"LIST",
-	["Use Automatic Transponder", "Transponder mode will be automatically changed to appropriate mode"],
-	"AWESome GPWS",
-	[[true, false], ["Automatic", "Manual"], 0]
+	[localize LSTRING(automaticTransponder_name), localize LSTRING(automaticTransponder_tooltip)],
+	localize LSTRING(category),
+	[[true, false], [localize LSTRING(automaticTransponder_automatic), localize LSTRING(automaticTransponder_manual)], 0]
 ] call CBA_Settings_fnc_init;
 
 // add actions (ACE / vanilla) & events

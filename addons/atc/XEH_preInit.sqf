@@ -26,7 +26,7 @@ ADDON = true;
 	"LIST",
 	[localize LSTRING(unitSettingAlt_name), localize LSTRING(unitSettingAlt_tooltip)],
 	localize LSTRING(category),
-	[[false, true], [localize LSTRING(unitSettingAlt_meter]), localize LSTRING(unitSettingAlt_feet)], 0]
+	[[false, true], [localize LSTRING(unitSettingAlt_meter), localize LSTRING(unitSettingAlt_feet)], 0]
 ] call CBA_Settings_fnc_init;
 
 [
@@ -34,7 +34,7 @@ ADDON = true;
 	"LIST",
 	[localize LSTRING(unitSettingSpd_name), localize LSTRING(unitSettingSpd_tooltip)],
 	localize LSTRING(category),
-	[[false, true], [localize LSTRING(unitSettingSpd_kph]), localize LSTRING(unitSettingSpd_knot)], 0]
+	[[false, true], [localize LSTRING(unitSettingSpd_kph), localize LSTRING(unitSettingSpd_knot)], 0]
 ] call CBA_Settings_fnc_init;
 
 [

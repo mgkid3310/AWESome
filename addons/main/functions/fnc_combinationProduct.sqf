@@ -1,11 +1,11 @@
 #include "script_component.hpp"
 
-params [_list, [_indexes, []]];
+params ["_list", ["_indexes", []]];
 
 if (count _list > count _indexes) then {
 	private _products = [];
 
-	for "_i" from 0 to (count _list - 1) do {
+	for "_i" from 0 to (count (_list select 0) - 1) do {
 		_products append ([_list, _indexes + [_i]] call FUNC(combinatnionProduct));
 	};
 

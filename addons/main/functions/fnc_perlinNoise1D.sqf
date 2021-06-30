@@ -1,3 +1,5 @@
+#include "script_component.hpp"
+
 params ["_coord", ["_seed", 0]];
 
 private _lowEnd = floor _coord;

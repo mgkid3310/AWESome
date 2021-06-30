@@ -5,4 +5,5 @@ PREP(isCrew);
 // PREP(perlinNoise);
 PREP(perlinNoise1D);
 PREP(playSoundVehicle);
+PREP(randomNumber);
 PREP(setupACEInteractMenu);

@@ -5,8 +5,8 @@ private _highEnd = _lowEnd + 1;
 private _offsetLow = _coord - _lowEnd;
 private _offsetHigh = _coord - _highEnd;
 
-private _gradLow = ((_lowEnd + _seed) random 2) - 1;
-private _gradHIgh = ((_highEnd + _seed) random 2) - 1;
+private _gradLow = [[-1, 1], [_lowEnd, _seed]] call FUNC(randomNumber);
+private _gradHIgh = [[-1, 1], [_highEnd, _seed]] call FUNC(randomNumber);
 private _dotLow = _gradLow * _offsetLow;
 private _dotHigh = _gradHIgh * _offsetHigh;
 

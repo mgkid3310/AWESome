@@ -15,19 +15,19 @@ private ["_randomVector", "_vectorMagnitude", "_offsetVector", "_dot"];
 private _dotProducts = [];
 {
 	_randomVector = [];
-	_vectorMagnitude = 0;
 	_offsetVector = [];
+	_vectorMagnitude = 0;
 	for "_i" from 0 to (count _coord - 1) do {
 		_randomVector pushBack ((((_x select _i) + _seed) random 2) - 1);
-		_vectorMagnitude = _vectorMagnitude + ((_randomVector select _i) ^ 2);
 		_offsetVector pushBack ((_coord select _i) - (_x select _i));
+		_vectorMagnitude = _vectorMagnitude + ((_randomVector select _i) ^ 2);
 	};
 	if (_vectorMagnitude isEqualTo 0) then {_vectorMagnitude = 1};
-	_randomVector = _randomVector apply {_x / sqrt _vectorMagnitude};
+	_randomVector = _randomVector apply {1 / sqrt _vectorMagnitude};
 
-	_dot = [];
+	_dot = 0;
 	for "_i" from 0 to (count _coord - 1) do {
-		_dot pushBack ((_randomVector select _i) * (_offsetVector select _i));
+		_dot = _dot + ((_randomVector select _i) * (_offsetVector select _i));
 	};
 	_dotProducts pushBack _dot;
 } forEach ([_ranges] call FUNC(combinationProduct));

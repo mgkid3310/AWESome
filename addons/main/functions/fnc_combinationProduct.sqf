@@ -5,7 +5,7 @@ params ["_list", ["_indexes", []]];
 private _products = [];
 if (count _list > count _indexes) then {
 	for "_i" from 0 to (count (_list select count _indexes) - 1) do {
-		_products append ([_list, _indexes + [_i]] call FUNC(combinatnionProduct));
+		_products append ([_list, _indexes + [_i]] call FUNC(combinationProduct));
 	};
 } else {
 	{

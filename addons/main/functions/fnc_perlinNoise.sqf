@@ -23,7 +23,7 @@ private _dotProducts = [];
 		_vectorMagnitude = _vectorMagnitude + ((_randomVector select _i) ^ 2);
 	};
 	if (_vectorMagnitude isEqualTo 0) then {_vectorMagnitude = 1};
-	_randomVector = _randomVector apply {1 / sqrt _vectorMagnitude};
+	_randomVector = _randomVector apply {_x / sqrt _vectorMagnitude};
 
 	_dot = 0;
 	for "_i" from 0 to (count _coord - 1) do {

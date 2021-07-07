@@ -33,12 +33,12 @@ private _dotProducts = [];
 } forEach ([_ranges] call FUNC(combinationProduct));
 
 private ["_interpolated", "_offset", "_smoothStep"];
-for "_i" from 0 to (count _coord - 1) do {
+for "_i" from (count _coord - 1) to 0 step -1 do {
 	_interpolated = [];
 	for "_j" from 0 to ((count _dotProducts / 2) - 1) do {
 		_offset = (_coord select _i) - (_ranges select _i select 0);
 		_smoothStep = (_offset ^ 2) * (3 - 2 * _offset);
-		_interpolated pushBack linearConversion [0, 1, _smoothStep, (_dotProducts select (2 * _j)), (_dotProducts select (2 * _j + 1)), true];
+		_interpolated pushBack linearConversion [0, 1, _smoothStep, _dotProducts select (2 * _j), _dotProducts select (2 * _j + 1), true];
 	};
 	_dotProducts = _interpolated;
 };

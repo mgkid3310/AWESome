@@ -11,7 +11,7 @@ private _ranges = [];
 	_ranges pushBack [floor _x, floor _x + 1];
 } forEach _coord;
 
-private ["_randomVector", "_vectorMagnitude", "_offsetVector", "_dot"];
+private ["_randomVector", "_offsetVector", "_vectorMagnitude", "_dot"];
 private _dotProducts = [];
 {
 	_randomVector = [];
@@ -35,9 +35,9 @@ private _dotProducts = [];
 private ["_interpolated", "_offset", "_smoothStep"];
 for "_i" from (count _coord - 1) to 0 step -1 do {
 	_interpolated = [];
+	_offset = (_coord select _i) - (_ranges select _i select 0);
+	_smoothStep = (_offset ^ 2) * (3 - 2 * _offset);
 	for "_j" from 0 to ((count _dotProducts / 2) - 1) do {
-		_offset = (_coord select _i) - (_ranges select _i select 0);
-		_smoothStep = (_offset ^ 2) * (3 - 2 * _offset);
 		_interpolated pushBack linearConversion [0, 1, _smoothStep, _dotProducts select (2 * _j), _dotProducts select (2 * _j + 1), true];
 	};
 	_dotProducts = _interpolated;

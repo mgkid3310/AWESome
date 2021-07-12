@@ -18,7 +18,7 @@ private _dotProducts = [];
 	_offsetVector = [];
 	_vectorMagnitude = 0;
 	for "_i" from 0 to (count _coord - 1) do {
-		_randomVector pushBack ([[-1, 1], [_x select _i, _i + _seed]] call FUNC(randomNumber));
+		_randomVector pushBack ([[-1, 1], [_x select _i, _i + _seed]] call FUNC(randomNumber2D));
 		_offsetVector pushBack ((_coord select _i) - (_x select _i));
 		_vectorMagnitude = _vectorMagnitude + ((_randomVector select _i) ^ 2);
 	};

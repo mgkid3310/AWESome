@@ -15,9 +15,9 @@ private _globalWind = wind vectorMultiply (1 + _altitudeProfile * _windVariabili
 // wind gust
 private ["_timePassed", "_gustStrength"];
 private _timeGrid = GVAR(maxGustDuration) * floor (_time / GVAR(maxGustDuration));
-private _durationRatio = [1, [_timeGrid, 1]] call EFUNC(main,randomNumber);
+private _durationRatio = [1, [_timeGrid, 1]] call EFUNC(main,randomNumber2D);
 private _timeDuration = linearConversion [0, 1, _durationRatio, GVAR(maxGustDuration) / 2, GVAR(maxGustDuration), true];
-if (!(_dynamicWindMode < 2) && (([1, [_timeGrid, 0]] call EFUNC(main,randomNumber)) < GVAR(gustChance)) && (_time < (_timeGrid + _timeDuration))) then {
+if (!(_dynamicWindMode < 2) && (([1, [_timeGrid, 0]] call EFUNC(main,randomNumber2D)) < GVAR(gustChance)) && (_time < (_timeGrid + _timeDuration))) then {
 	_timePassed = _time - _timeGrid;
 	_gustStrength = _altitudeProfile * gusts * GVAR(gustMultiplier);
 	_globalWind = _globalWind vectorMultiply (1 + _gustStrength * sin (180 * _timePassed / _timeDuration));

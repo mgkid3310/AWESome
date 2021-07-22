@@ -75,6 +75,6 @@ _marker4 setMarkerColorLocal "ColorRed";
 _marker4 setMarkerSizeLocal [0, 0];
 _marker4 setMarkerTextLocal _line4;
 
-private _return = [_marker0, _marker1, _marker2, _marker3, _marker4, getPos _vehicle];
+private _return = [[_marker0, _marker1, _marker2, _marker3, _marker4], getPos _vehicle];
 
 _return

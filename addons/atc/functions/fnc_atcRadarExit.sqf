@@ -7,12 +7,9 @@ params ["_monitor", "_controller", "_distance", "_trailMarkers", "_vehicleMarker
 } forEach _trailMarkers;
 
 {
-	_x params ["_marker0", "_marker1", "_marker2", "_marker3", "_marker4"];
-	deleteMarkerLocal _marker0;
-	deleteMarkerLocal _marker1;
-	deleteMarkerLocal _marker2;
-	deleteMarkerLocal _marker3;
-	deleteMarkerLocal _marker4;
+	{
+		deleteMarkerLocal _x;
+	} forEach (_x select 0);
 } forEach _vehicleMarkers;
 
 if (EGVAR(main,hasACEMap)) then {

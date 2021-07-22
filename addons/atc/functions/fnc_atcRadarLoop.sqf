@@ -131,12 +131,9 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	} forEach (_planesModeC + _heliesModeC + ((_planesBogie + _heliesBogie + _planesBandit + _heliesBandit + _trailWeapons) apply {_x select 0}));
 
 	{
-		_x params ["_marker0", "_marker1", "_marker2", "_marker3", "_marker4"];
-		deleteMarkerLocal _marker0;
-		deleteMarkerLocal _marker1;
-		deleteMarkerLocal _marker2;
-		deleteMarkerLocal _marker3;
-		deleteMarkerLocal _marker4;
+		{
+			deleteMarkerLocal _x;
+		} forEach (_x select 0);
 	} forEach (_vehicleMarkers + _weaponMarkers + _antiAirMarkers);
 
 	{

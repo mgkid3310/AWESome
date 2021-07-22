@@ -5,7 +5,8 @@ params [["_array", []]];
 private _scaleNow = ctrlMapScale ((findDisplay 12) displayCtrl 51);
 
 {
-	_x params ["_marker0", "_marker1", "_marker2", "_marker3", "_marker4", "_pos"];
+	_x params ["_markers", "_pos"];
+	_markers params ["_marker0", "_marker1", "_marker2", "_marker3", "_marker4"];
 
 	private _xOffset = GVAR(xOffset) * (_scaleNow / GVAR(scaleStd));
 	private _yOffset = GVAR(yOffset) * (_scaleNow / GVAR(scaleStd));

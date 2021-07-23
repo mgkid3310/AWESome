@@ -2,8 +2,8 @@
 
 params ["_monitor", ["_controller", player], ["_radarMode", 0], ["_distance", 10]];
 
-private _loadData = _monitor getVariable [QGVAR(radarData), [0, 0, [], [], [], [], []]];
-_loadData params ["_timeOld", "_radarTime", "_trailLog", "_trailMarkers", "_vehicleMarkers", "_weaponMarkers", "_antiAirMarkers"];
+private _radarData = _monitor getVariable [QGVAR(radarData), [0, 0, [], [], [], [], []]];
+_radarData params ["_timeOld", "_radarTime", "_trailLog", "_trailMarkers", "_vehicleMarkers", "_weaponMarkers", "_antiAirMarkers"];
 
 if (!(alive _controller) || (_controller getVariable [QGVAR(exitRadar), false])) exitWith {
 	[_monitor, _controller, _distance, _trailMarkers, _vehicleMarkers + _weaponMarkers + _antiAirMarkers] call FUNC(atcRadarExit);
@@ -86,14 +86,14 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	_planesStandBy = _planesStandBy + (_planesAuto select {(isEngineOn _x) && (isTouchingGround _x)});
 	_heliesStandBy = _heliesStandBy + (_heliesAuto select {(isEngineOn _x) && (isTouchingGround _x)});
 
-	private _SAMlaunchers = [];
+	private _antiAirVehicles = [];
 	if !(_isObserver) then {
-		_SAMlaunchers = _SAMlaunchers select {(side _x) isEqualTo _radarSide};
+		_antiAirVehicles = _antiAirVehicles select {(side _x) isEqualTo _radarSide};
 	};
 
 	private _additionalSAMs = missionNameSpace getVariable [QGVAR(additionalSAMs), []];
 	{
-		_SAMlaunchers pushBackUnique _x;
+		_antiAirVehicles pushBackUnique _x;
 	} forEach _additionalSAMs;
 
 	private ["_knownWeapons", "_detectedWeapons", "_bogieWeapons", "_banditWeapons"];
@@ -162,7 +162,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	private _banditWeaponMarkers = [_banditWeapons, "b_plane", true, _radarSide, 2] call FUNC(createWeaponMarker);
 	_weaponMarkers = _knownWeaponMarkers + _bogieWeaponMarkers + _banditWeaponMarkers;
 
-	_antiAirMarkers = [_SAMlaunchers, "b_antiair", false, _radarSide, _targetType] call FUNC(createAntiAirMarker);
+	_antiAirMarkers = [_antiAirVehicles, "b_antiair", false, _radarSide, _targetType] call FUNC(createAntiAirMarker);
 
 	_trailMarkers = _trailsModeC + _trailsBogie + _trailsBandit + _weaponTrails;
 	_vehicleMarkers = _markersKnown + _markersUnknown;

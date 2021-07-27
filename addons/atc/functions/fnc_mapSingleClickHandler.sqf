@@ -19,7 +19,7 @@ private _distanceList = _markerPosList apply {_x distance2D _pos};
 private _minDistance = selectMin _distanceList;
 private _scaleNow = ctrlMapScale ((findDisplay 12) displayCtrl 51);
 
-if (_minDistance > _scaleNow) exitWith {};
+if (_minDistance > _scaleNow * GVAR(mapClickRange)) exitWith {};
 
 private _minIndex = _distanceList find _minDistance;
 private _position = _markerPosList select _minIndex;

@@ -37,7 +37,9 @@ GVAR(fontMin) = 0.05;
 GVAR(spaceMax) = 1.8;
 GVAR(spaceMin) = 0.9;
 
+GVAR(mapClickRange) = 300;
+
 // add EventHandlers
 [QGVAR(speakATIS), {_this spawn FUNC(speakATIS)}] call CBA_fnc_addEventHandler;
 addMissionEventHandler ["EachFrame", {[] call FUNC(eachFrameHandler)}];
-addMissionEventHandler ["MapSingleClick", {[] call FUNC(mapSingleClickHandler)}];
+addMissionEventHandler ["MapSingleClick", {_this call FUNC(mapSingleClickHandler)}];

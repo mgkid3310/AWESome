@@ -196,5 +196,5 @@ if (EGVAR(main,hasACEMap)) then {
 
 _blueGCI = [_blueGCI] call FUNC(updateMarkerGCI);
 _redGCI = [_redGCI] call FUNC(updateMarkerGCI);
-_lineGCI = [_lineGCI] call FUNC(updateMarkerGCI);
+_lineGCI = [_lineGCI] call FUNC(updateLineGCI);
 _monitor setVariable [QGVAR(dataGCI), [_blueGCI, _redGCI, _lineGCI]];

@@ -23,19 +23,19 @@ _line setMarkerSizeLocal [10, _lenght / 2];
 _line setMarkerDirLocal _bearing;
 
 private _marker1 = createMarkerLocal [format ["orbis_gci_%1_1", _markerIndex], _position];
-_marker1 setMarkerTypeLocal _type;
+_marker1 setMarkerTypeLocal "hd_dot_noShadow";
 _marker1 setMarkerColorLocal "ColorWEST";
 _marker1 setMarkerSizeLocal [0, 0];
 _marker1 setMarkerTextLocal str _bearing;
 
 private _marker2 = createMarkerLocal [format ["orbis_gci_%1_2", _markerIndex], _position];
-_marker2 setMarkerTypeLocal _type;
+_marker2 setMarkerTypeLocal "hd_dot_noShadow";
 _marker2 setMarkerColorLocal "ColorWEST";
 _marker2 setMarkerSizeLocal [0, 0];
 _marker2 setMarkerTextLocal format ["%1m %2m/s", _lenght, _radialSpeed];
 
 private _marker3 = createMarkerLocal [format ["orbis_gci_%1_3", _markerIndex], _position];
-_marker3 setMarkerTypeLocal _type;
+_marker3 setMarkerTypeLocal "hd_dot_noShadow";
 _marker3 setMarkerColorLocal "ColorWEST";
 _marker3 setMarkerSizeLocal [0, 0];
 _marker3 setMarkerTextLocal format ["%1m %2m/s", _altDiff, _vRelSpeed];

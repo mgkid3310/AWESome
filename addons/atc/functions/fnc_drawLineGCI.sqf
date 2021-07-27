@@ -26,7 +26,7 @@ private _marker1 = createMarkerLocal [format ["orbis_gci_%1_1", _markerIndex], _
 _marker1 setMarkerTypeLocal _type;
 _marker1 setMarkerColorLocal "ColorWEST";
 _marker1 setMarkerSizeLocal [0, 0];
-_marker1 setMarkerTextLocal _bearing;
+_marker1 setMarkerTextLocal str _bearing;
 
 private _marker2 = createMarkerLocal [format ["orbis_gci_%1_2", _markerIndex], _position];
 _marker2 setMarkerTypeLocal _type;

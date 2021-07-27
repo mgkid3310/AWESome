@@ -36,7 +36,7 @@ if (_vehicle in (_markersKnown apply {_x select 2})) then {
 	{
 		_lineGCI pushBack ([_circle, _x] call FUNC(drawLineGCI));
 	} forEach _redGCI;
-else {
+} else {
 	_circle = [_position, _vehicle, "ColorEAST"] call FUNC(drawMarkerGCI);
 	_redGCI pushBack _circle;
 	{

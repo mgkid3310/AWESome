@@ -40,3 +40,4 @@ GVAR(spaceMin) = 0.9;
 // add EventHandlers
 [QGVAR(speakATIS), {_this spawn FUNC(speakATIS)}] call CBA_fnc_addEventHandler;
 addMissionEventHandler ["EachFrame", {[] call FUNC(eachFrameHandler)}];
+addMissionEventHandler ["MapSingleClick", {[] call FUNC(mapSingleClickHandler)}];

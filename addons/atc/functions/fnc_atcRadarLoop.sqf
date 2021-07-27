@@ -5,12 +5,17 @@ params ["_monitor", ["_controller", player], ["_radarMode", 0], ["_distance", 10
 private _radarData = _monitor getVariable [QGVAR(radarData), [0, 0, [], [], [], [], []]];
 _radarData params ["_timeOld", "_radarTime", "_trailLog", "_trailMarkers", "_vehicleMarkers", "_weaponMarkers", "_antiAirMarkers"];
 
+private _dataGCI = _monitor getVariable [QGVAR(dataGCI), [[], [], []]];
+_dataGCI params ["_blueGCI", "_redGCI", "_lineGCI"];
+
+private _allMarkers = _vehicleMarkers + _weaponMarkers + _antiAirMarkers + _blueGCI + _redGCI + _lineGCI;
+
 if (!(alive _controller) || (_controller getVariable [QGVAR(exitRadar), false])) exitWith {
-	[_monitor, _controller, _distance, _trailMarkers, _vehicleMarkers + _weaponMarkers + _antiAirMarkers] call FUNC(atcRadarExit);
+	[_monitor, _controller, _distance, _trailMarkers, _allMarkers] call FUNC(atcRadarExit);
 };
 
 if ((_distance > 0) && ((_controller distance _monitor) > _distance)) exitWith {
-	[_monitor, _controller, _distance, _trailMarkers, _vehicleMarkers + _weaponMarkers + _antiAirMarkers] call FUNC(atcRadarExit);
+	[_monitor, _controller, _distance, _trailMarkers, _allMarkers] call FUNC(atcRadarExit);
 };
 
 if !(time > _timeOld) exitWith {};
@@ -131,14 +136,14 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	} forEach (_planesModeC + _heliesModeC + ((_planesBogie + _heliesBogie + _planesBandit + _heliesBandit + _trailWeapons) apply {_x select 0}));
 
 	{
+		deleteMarkerLocal _x;
+	} forEach _trailMarkers;
+
+	{
 		{
 			deleteMarkerLocal _x;
 		} forEach (_x select 0);
-	} forEach (_vehicleMarkers + _weaponMarkers + _antiAirMarkers);
-
-	{
-		deleteMarkerLocal _x;
-	} forEach _trailMarkers;
+	} forEach _allMarkers;
 
 	private _trailsModeC = [_trailLog, _planesModeC + _heliesModeC, _radarSide, _targetType] call FUNC(createVehicleTrails);
 	private _trailsBogie = [_trailLog, _planesBogie + _heliesBogie, _radarSide, 1] call FUNC(createVehicleTrails);
@@ -164,6 +169,13 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 
 	_antiAirMarkers = [_antiAirVehicles, "b_antiair", false, _radarSide, _targetType] call FUNC(createAntiAirMarker);
 
+	_blueGCI = [_blueGCI apply {_x select 2}, "ColorWEST"] call FUNC(createMarkerGCI);
+	_redGCI = [_redGCI apply {_x select 2}, "ColorEAST"] call FUNC(createMarkerGCI);
+	_lineGCI = [_blueGCI, _redGCI] call FUNC(createLineGCI);
+
+	_monitor setVariable [QGVAR(vehiclesGCI), [_markersKnown, _markersUnknown]];
+	_monitor setVariable [QGVAR(dataGCI), [_blueGCI, _redGCI, _lineGCI]];
+
 	_trailMarkers = _trailsModeC + _trailsBogie + _trailsBandit + _weaponTrails;
 	_vehicleMarkers = _markersKnown + _markersUnknown;
 
@@ -179,5 +191,10 @@ if (EGVAR(main,hasACEMap)) then {
 	} forEach allPlayers;
 };
 
-// update marker line spacing
-[_vehicleMarkers + _weaponMarkers + _antiAirMarkers] call FUNC(updateMarkerSpacing);
+// update marker per frame
+[_vehicleMarkers + _weaponMarkers + _antiAirMarkers + _lineGCI] call FUNC(updateMarkerSpacing);
+
+_blueGCI = [_blueGCI] call FUNC(updateMarkerGCI);
+_redGCI = [_redGCI] call FUNC(updateMarkerGCI);
+_lineGCI = [_lineGCI] call FUNC(updateMarkerGCI);
+_monitor setVariable [QGVAR(dataGCI), [_blueGCI, _redGCI, _lineGCI]];

@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-params ["_monitor", ["_controller", player], ["_radarMode", 0], ["_distance", 10]];
+params ["_monitor", ["_controller", player], ["_radarMode", 1], ["_distance", 10]];
 
 private _radarData = _monitor getVariable [QGVAR(radarData), [0, 0, [], [], [], [], []]];
 _radarData params ["_timeOld", "_radarTime", "_trailLog", "_trailMarkers", "_vehicleMarkers", "_weaponMarkers", "_antiAirMarkers"];

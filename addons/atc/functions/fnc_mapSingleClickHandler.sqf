@@ -39,7 +39,7 @@ switch (true) do {
 	default {};
 };
 
-private _markerColor = [side driver _x, side _controller, _targetType] call FUNC(getRadarMarkerColor);
+private _markerColor = [side driver _vehicle, side _controller, _targetType] call FUNC(getRadarMarkerColor);
 private _circle = [_position, _vehicle, _markerColor] call FUNC(drawMarkerGCI);;
 if (_vehicle in (_markersKnown apply {_x select 2})) then {
 	_blueGCI pushBack _circle;

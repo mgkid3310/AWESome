@@ -197,7 +197,7 @@ if (EGVAR(main,hasACEMap)) then {
 };
 
 // update marker per frame
-[_vehicleMarkers + _weaponMarkers + _antiAirMarkers + _lineGCI] call FUNC(updateMarkerSpacing);
+[_vehicleMarkers + _weaponMarkers + _antiAirMarkers] call FUNC(updateMarkerSpacing);
 
 _blueGCI = [_blueGCI] call FUNC(updateMarkerGCI);
 _redGCI = [_redGCI] call FUNC(updateMarkerGCI);

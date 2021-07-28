@@ -7,6 +7,8 @@ params ["_units", "_pos", "_alt", "_shift"];
 private _radarParam = player getVariable [QGVAR(radarParam), [player]];
 _radarParam params ["_monitor", ["_controller", player], ["_radarMode", 0]];
 
+if ((_controller getVariable [QGVAR(isObserver), false]) || !(_radarMode isEqualTo 1)) exitWith {};
+
 private _vehiclesGCI = _monitor getVariable [QGVAR(vehiclesGCI), [[], [], []]];
 private _dataGCI = _monitor getVariable [QGVAR(dataGCI), [[], [], []]];
 _vehiclesGCI params ["_markersKnown", "_markersBogie", "_markersBandit"];
@@ -32,7 +34,6 @@ if (_vehicle getVariable [QGVAR(selectedGCI), false]) exitWith {
 
 private _targetType = 0;
 switch (true) do {
-	case ((_controller getVariable [QGVAR(isObserver), false]) || (_radarMode isEqualTo 2)): {_targetType = -1};
 	case (_vehicle in (_markersBogie apply {_x select 2})): {_targetType = 1};
 	case (_vehicle in (_markersBandit apply {_x select 2})): {_targetType = 2};
 	default {};

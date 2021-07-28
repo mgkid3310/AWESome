@@ -165,11 +165,18 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 
 	_antiAirMarkers = [_antiAirVehicles, "b_antiair", false, _radarSide, _targetType] call FUNC(createAntiAirMarker);
 
-	private _bogieGCI = [_redGCI apply {_x select 2} select {_x in (_planesBogie + _heliesBogie)}, _radarSide, 1] call FUNC(createMarkerGCI);
-	private _banditGCI = [_redGCI apply {_x select 2} select {_x in (_planesBandit + _heliesBandit)}, _radarSide, 2] call FUNC(createMarkerGCI);
-	_blueGCI = [_blueGCI apply {_x select 2}, _radarSide, _targetType] call FUNC(createMarkerGCI);
-	_redGCI = _bogieGCI + _banditGCI;
-	_lineGCI = [_blueGCI, _redGCI] call FUNC(createLineGCI);
+	private ["_bogieGCI", "_banditGCI"];
+	if (_radarMode isEqualTo 1) then {
+		_blueGCI = [_blueGCI apply {_x select 2}, _radarSide, _targetType] call FUNC(createMarkerGCI);
+		_bogieGCI = [_redGCI apply {_x select 2} select {_x in (_planesBogie + _heliesBogie)}, _radarSide, 1] call FUNC(createMarkerGCI);
+		_banditGCI = [_redGCI apply {_x select 2} select {_x in (_planesBandit + _heliesBandit)}, _radarSide, 2] call FUNC(createMarkerGCI);
+		_redGCI = _bogieGCI + _banditGCI;
+		_lineGCI = [_blueGCI, _redGCI] call FUNC(createLineGCI);
+	} else {
+		_blueGCI = [];
+		_redGCI = [];
+		_lineGCI = [];
+	};
 
 	_monitor setVariable [QGVAR(vehiclesGCI), [_markersKnown, _planeMarkersBogie + _heliMarkersBogie, _planeMarkersBandit + _heliMarkersBandit]];
 	_monitor setVariable [QGVAR(dataGCI), [_blueGCI, _redGCI, _lineGCI]];

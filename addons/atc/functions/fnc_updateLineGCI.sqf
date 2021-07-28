@@ -13,6 +13,7 @@ private _ySpace = (linearConversion [GVAR(fontMin), GVAR(fontMax), _scaleNow, GV
 	_markers params ["_line", "_marker1", "_marker2", "_marker3"];
 
 	if (((_vehicles select 0) getVariable [QGVAR(selectedGCI), false]) && ((_vehicles select 1) getVariable [QGVAR(selectedGCI), false])) then {
+		_line setMarkerSizeLocal [GVAR(lineWidth) * _scaleNow, ((_distance / 2) - GVAR(circleRadius)) max 0];
 		_marker1 setMarkerPosLocal (_pos vectorAdd [_xOffset, _yOffset, 0]);
 		_marker2 setMarkerPosLocal (_pos vectorAdd [_xOffset, _yOffset - _ySpace, 0]);
 		_marker3 setMarkerPosLocal (_pos vectorAdd [_xOffset, _yOffset - (_ySpace * 2), 0]);

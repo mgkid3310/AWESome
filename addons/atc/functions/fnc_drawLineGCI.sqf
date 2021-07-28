@@ -7,7 +7,7 @@ _red params ["_circleRed", "_posRed", "_vehicleRed"];
 private _scaleNow = ctrlMapScale ((findDisplay 12) displayCtrl 51);
 private _position = (_posRed vectorAdd _posBlue) vectorMultiply 0.5;
 private _vector = _posRed vectorDiff _posBlue;
-private _distance = vectorMagnitude _vector;
+private _distance = _posRed distance2D _posBlue;
 private _direction = _vector call CBA_fnc_vectDir;
 
 private _bearing = round _direction;

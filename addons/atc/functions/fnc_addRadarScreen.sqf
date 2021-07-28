@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-params ["_monitor", ["_radarMode", 0], ["_distance", 10]];
+params ["_monitor", ["_radarMode", 1], ["_distance", 10]];
 
 private _interactDistance = [10, 10 min _distance] select (_distance > 0);
 

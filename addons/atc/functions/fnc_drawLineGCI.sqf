@@ -26,18 +26,18 @@ private _marker1 = createMarkerLocal [format ["orbis_gci_%1_1", _markerIndexGCI]
 _marker1 setMarkerTypeLocal "hd_dot_noShadow";
 _marker1 setMarkerColorLocal "ColorWEST";
 _marker1 setMarkerSizeLocal [0, 0];
-_marker1 setMarkerTextLocal str _bearing;
+_marker1 setMarkerTextLocal str round _bearing;
 
 private _marker2 = createMarkerLocal [format ["orbis_gci_%1_2", _markerIndexGCI], _position];
 _marker2 setMarkerTypeLocal "hd_dot_noShadow";
 _marker2 setMarkerColorLocal "ColorWEST";
 _marker2 setMarkerSizeLocal [0, 0];
-_marker2 setMarkerTextLocal format ["%1m %2m/s", _lenght, _radialSpeed];
+_marker2 setMarkerTextLocal format ["%1km %2m/s", [_lenght / 1000, 1] call BIS_fnc_cutDecimals, round _radialSpeed];
 
 private _marker3 = createMarkerLocal [format ["orbis_gci_%1_3", _markerIndexGCI], _position];
 _marker3 setMarkerTypeLocal "hd_dot_noShadow";
 _marker3 setMarkerColorLocal "ColorWEST";
 _marker3 setMarkerSizeLocal [0, 0];
-_marker3 setMarkerTextLocal format ["%1m %2m/s", _altDiff, _vRelSpeed];
+_marker3 setMarkerTextLocal format ["%1m %2m/s", round _altDiff, round _vRelSpeed];
 
 [[_line, _marker1, _marker2, _marker3, _marker4], _position, [_vehicleBlue, _vehicleRed]]

@@ -5,13 +5,14 @@ if !(player getVariable [QGVAR(isUsingRadar), false]) exitWith {};
 params ["_units", "_pos", "_alt", "_shift"];
 
 private _radarParam = player getVariable [QGVAR(radarParam), [player]];
-private _vehiclesGCI = (_radarParam select 0) getVariable [QGVAR(vehiclesGCI), [[], []]];
-private _dataGCI = (_radarParam select 0) getVariable [QGVAR(dataGCI), [[], [], []]];
+_radarParam params ["_monitor", ["_controller", player], ["_radarMode", 0]];
 
-_vehiclesGCI params ["_markersKnown", "_markersUnknown"];
+private _vehiclesGCI = _monitor getVariable [QGVAR(vehiclesGCI), [[], [], []]];
+private _dataGCI = _monitor getVariable [QGVAR(dataGCI), [[], [], []]];
+_vehiclesGCI params ["_markersKnown", "_markersBogie", "_markersBandit"];
 _dataGCI params ["_blueGCI", "_redGCI", "_lineGCI"];
 
-private _radarMarkers = _markersKnown + _markersUnknown;
+private _radarMarkers = _markersKnown + _markersBogie + _markersBandit;
 private _markerPosList = _radarMarkers apply {_x select 1};
 private _markerVehicleList = _radarMarkers apply {_x select 2};
 
@@ -29,15 +30,22 @@ if (_vehicle getVariable [QGVAR(selectedGCI), false]) exitWith {
 	_vehicle setVariable [QGVAR(selectedGCI), false];
 };
 
-private "_circle";
+private _targetType = 0;
+switch (true) do {
+	case ((_controller getVariable [QGVAR(isObserver), false]) || (_radarMode isEqualTo 2)): {_targetType = -1};
+	case (_vehicle in (_markersBogie apply {_x select 2})): {_targetType = 1};
+	case (_vehicle in (_markersBandit apply {_x select 2})): {_targetType = 2};
+	default {};
+};
+
+private _markerColor = [side driver _x, side _controller, _targetType] call FUNC(getRadarMarkerColor);
+private _circle = [_position, _vehicle, _markerColor] call FUNC(drawMarkerGCI);;
 if (_vehicle in (_markersKnown apply {_x select 2})) then {
-	_circle = [_position, _vehicle, "ColorWEST"] call FUNC(drawMarkerGCI);
 	_blueGCI pushBack _circle;
 	{
 		_lineGCI pushBack ([_circle, _x] call FUNC(drawLineGCI));
 	} forEach _redGCI;
 } else {
-	_circle = [_position, _vehicle, "ColorEAST"] call FUNC(drawMarkerGCI);
 	_redGCI pushBack _circle;
 	{
 		_lineGCI pushBack ([_x, _circle] call FUNC(drawLineGCI));

@@ -21,11 +21,7 @@ if ((_distance > 0) && ((_controller distance _monitor) > _distance)) exitWith {
 if !(time > _timeOld) exitWith {};
 
 private _radarSide = side _controller;
-private _isObserver = _controller getVariable [QGVAR(isObserver), false];
-if (_radarMode isEqualTo 2) then {
-	_isObserver = true;
-};
-
+private _isObserver = (_controller getVariable [QGVAR(isObserver), false]) || (_radarMode isEqualTo 2);
 private _targetType = 0;
 if (_isObserver) then {
 	_radarMode = -1;
@@ -169,11 +165,13 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 
 	_antiAirMarkers = [_antiAirVehicles, "b_antiair", false, _radarSide, _targetType] call FUNC(createAntiAirMarker);
 
-	_blueGCI = [_blueGCI apply {_x select 2}, "ColorWEST"] call FUNC(createMarkerGCI);
-	_redGCI = [_redGCI apply {_x select 2}, "ColorEAST"] call FUNC(createMarkerGCI);
+	private _bogieGCI = [_redGCI apply {_x select 2} select {_x in (_planesBogie + _heliesBogie)}, _radarSide, 1] call FUNC(createMarkerGCI);
+	private _banditGCI = [_redGCI apply {_x select 2} select {_x in (_planesBandit + _heliesBandit)}, _radarSide, 2] call FUNC(createMarkerGCI);
+	_blueGCI = [_blueGCI apply {_x select 2}, _radarSide, _targetType] call FUNC(createMarkerGCI);
+	_redGCI = _bogieGCI + _banditGCI;
 	_lineGCI = [_blueGCI, _redGCI] call FUNC(createLineGCI);
 
-	_monitor setVariable [QGVAR(vehiclesGCI), [_markersKnown, _markersUnknown]];
+	_monitor setVariable [QGVAR(vehiclesGCI), [_markersKnown, _planeMarkersBogie + _heliMarkersBogie, _planeMarkersBandit + _heliMarkersBandit]];
 	_monitor setVariable [QGVAR(dataGCI), [_blueGCI, _redGCI, _lineGCI]];
 
 	_trailMarkers = _trailsModeC + _trailsBogie + _trailsBandit + _weaponTrails;

@@ -5,7 +5,7 @@ params [["_array", []]];
 private _scaleNow = ctrlMapScale ((findDisplay 12) displayCtrl 51);
 private _xOffset = GVAR(xOffset) * (_scaleNow / GVAR(scaleStd));
 private _yOffset = GVAR(yOffset) * (_scaleNow / GVAR(scaleStd));
-private _ySpace = (linearConversion [GVAR(fontMin), GVAR(fontMax), _scaleNow, GVAR(spaceMax), GVAR(spaceMin), true]) * (_scaleNow / GVAR(scaleStd));
+private _ySpace = (linearConversion [GVAR(scaleMin), GVAR(scaleMax), _scaleNow, GVAR(spaceMax), GVAR(spaceMin), true]) * (_scaleNow / GVAR(scaleStd));
 
 {
 	_x params ["_markers", "_pos"];

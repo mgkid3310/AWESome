@@ -32,8 +32,8 @@ if (isNumber (configFile >> "CfgWorlds" >> worldName >> "mapSize")) then {
 	};
 };
 
-GVAR(fontMax) = 0.1;
-GVAR(fontMin) = 0.05;
+GVAR(scaleMax) = 0.1;
+GVAR(scaleMin) = 0.05;
 GVAR(spaceMax) = 1.8;
 GVAR(spaceMin) = 0.9;
 

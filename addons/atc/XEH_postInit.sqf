@@ -39,7 +39,7 @@ GVAR(spaceMin) = 0.9;
 
 GVAR(mapClickRange) = 800;
 GVAR(lineWidth) = 100;
-GVAR(circleRadius) = 500;
+GVAR(circleRadius) = 750;
 
 // add EventHandlers
 [QGVAR(speakATIS), {_this spawn FUNC(speakATIS)}] call CBA_fnc_addEventHandler;

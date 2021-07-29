@@ -7,12 +7,8 @@ ADDON = true;
 AWESOME_DEVMODE_LOG = false;
 
 // init global variables
-GVAR(ftToM) = 0.3048;
-GVAR(mToFt) = 1 / GVAR(ftToM);
-GVAR(knotToMps) = 0.514444;
-GVAR(kphToKnot) = 1 / GVAR(knotToMps);
-GVAR(knotToKph) = 1.852;
-GVAR(kphToKnot) = 1 / GVAR(knotToKph);
+GVAR(ft2m) = 0.3048;
+GVAR(km2NM) = 1.852;
 
 // check if ACE modules exist
 GVAR(hasACEInteractMenu) = isClass (configFile >> "CfgPatches" >> "ace_interact_menu");

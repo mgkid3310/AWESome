@@ -6,7 +6,7 @@ private _speed = 3.6 * vectorMagnitude velocity _vehicle;
 private _altitude = getPosASL _vehicle select 2;
 
 if (GVAR(unitSettingAlt)) then {
-	_altitude = 0 max round (_altitude * EGVAR(main,mToFt) / 100);
+	_altitude = 0 max round (_altitude / EGVAR(main,ft2m) / 100);
 } else {
 	_altitude = 0 max round (_altitude / 10);
 };
@@ -18,7 +18,7 @@ switch (true) do {
 	case (_verticalSpd < -GVAR(minVerticalSpd)): {_verticalTrend = toString [8595];};
 };
 
-private _speedDisplay = round ([_speed, _speed * EGVAR(main,kphToKnot)] select GVAR(unitSettingSpd));
+private _speedDisplay = round ([_speed, _speed / EGVAR(main,km2NM)] select GVAR(unitSettingSpd));
 private _heading = round direction _vehicle;
 
 private _line1 = format ["%1", _callsign];

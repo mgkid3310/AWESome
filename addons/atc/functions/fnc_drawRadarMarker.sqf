@@ -18,7 +18,7 @@ switch (true) do {
 	case (_verticalSpd < -GVAR(minVerticalSpd)): {_verticalTrend = toString [8595];};
 };
 
-private _speedDisplay = round ([_speed, _speed / EGVAR(main,km2NM)] select GVAR(unitSettingSpd));
+private _speedDisplay = round ([_speed, _speed / EGVAR(main,NM2km)] select GVAR(unitSettingSpd));
 private _heading = round direction _vehicle;
 
 private _line1 = format ["%1", _callsign];

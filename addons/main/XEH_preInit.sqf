@@ -8,7 +8,7 @@ AWESOME_DEVMODE_LOG = false;
 
 // init global variables
 GVAR(ft2m) = 0.3048;
-GVAR(km2NM) = 1.852;
+GVAR(NM2km) = 1.852;
 
 // check if ACE modules exist
 GVAR(hasACEInteractMenu) = isClass (configFile >> "CfgPatches" >> "ace_interact_menu");

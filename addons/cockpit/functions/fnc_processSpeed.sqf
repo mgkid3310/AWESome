@@ -6,7 +6,7 @@ Author: SynixeBrett
 
 params ["_kias"];
 
-private _kph = _kias * EGVAR(main,km2NM);
+private _kph = _kias * EGVAR(main,NM2km);
 
 if (EGVAR(main,hasACEUnits)) exitWith {
 	private _units = (vehicle ACE_player) call ace_units_fnc_speedUnits;

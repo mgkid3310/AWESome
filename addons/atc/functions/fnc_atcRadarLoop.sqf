@@ -165,11 +165,14 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 
 	_antiAirMarkers = [_antiAirVehicles, "b_antiair", false, _radarSide, _targetType] call FUNC(createAntiAirMarker);
 
-	private ["_bogieGCI", "_banditGCI"];
+	private ["_bogies", "_bandits", "_bogieGCI", "_banditGCI"];
 	if (_radarMode isEqualTo 1) then {
+		_bogies = (_planesBogie + _heliesBogie) apply {_x select 0};
+		_bandits = (_planesBandit + _heliesBandit) apply {_x select 0};
+
 		_blueGCI = [_blueGCI apply {_x select 2}, _radarSide, _targetType] call FUNC(createMarkerGCI);
-		_bogieGCI = [_redGCI apply {_x select 2} select {_x in (_planesBogie + _heliesBogie)}, _radarSide, 1] call FUNC(createMarkerGCI);
-		_banditGCI = [_redGCI apply {_x select 2} select {_x in (_planesBandit + _heliesBandit)}, _radarSide, 2] call FUNC(createMarkerGCI);
+		_bogieGCI = [_redGCI apply {_x select 2} select {_x in _bogies}, _radarSide, 1] call FUNC(createMarkerGCI);
+		_banditGCI = [_redGCI apply {_x select 2} select {_x in _bandits}, _radarSide, 2] call FUNC(createMarkerGCI);
 		_redGCI = _bogieGCI + _banditGCI;
 		_lineGCI = [_blueGCI, _redGCI] call FUNC(createLineGCI);
 	} else {

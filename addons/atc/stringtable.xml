@@ -5,6 +5,18 @@
 			<English>AWESome ATC</English>
 			<Korean>AWESome ATC</Korean>
 		</Key>
+		<Key ID="STR_orbis_atc_radar">
+			<English>ATC Radar Screen</English>
+			<Korean>ATC Radar Screen</Korean>
+		</Key>
+		<Key ID="STR_orbis_atc_atis">
+			<English>ATIS</English>
+			<Korean>ATIS</Korean>
+		</Key>
+		<Key ID="STR_orbis_atc_gci">
+			<English>GCI</English>
+			<Korean>GCI</Korean>
+		</Key>
 
 		<Key ID="STR_orbis_atc_displayCallsign_name">
 			<English>Toggle ATC Radar display name</English>
@@ -137,6 +149,40 @@
 		<Key ID="STR_orbis_atc_stopATIS">
 			<English>Stop Listening ATIS</English>
 			<Korean>Stop Listening ATIS</Korean>
+		</Key>
+
+		<Key ID="STR_orbis_atc_unitSettingLatGCI_name">
+			<English>GCI distance/radial speed unit</English>
+			<Korean>GCI distance/radial speed unit</Korean>
+		</Key>
+		<Key ID="STR_orbis_atc_unitSettingLatGCI_tooltip">
+			<English>Units to show distance and radial speed between two planes</English>
+			<Korean>Units to show distance and radial speed between two planes</Korean>
+		</Key>
+		<Key ID="STR_orbis_atc_unitSettingGCI_km">
+			<English>km, km/h</English>
+			<Korean>km, km/h</Korean>
+		</Key>
+		<Key ID="STR_orbis_atc_unitSettingGCI_NM">
+			<English>NM, kn</English>
+			<Korean>NM, kn</Korean>
+		</Key>
+
+		<Key ID="STR_orbis_atc_unitSettingHozGCI_name">
+			<English>GCI altitude/vertical speed unit</English>
+			<Korean>GCI altitude/vertical speed unit</Korean>
+		</Key>
+		<Key ID="STR_orbis_atc_unitSettingHozGCI_tooltip">
+			<English>Units to show altitude difference and vertical speed between two planes</English>
+			<Korean>Units to show altitude difference and vertical speed between two planes</Korean>
+		</Key>
+		<Key ID="STR_orbis_atc_unitSettingGCI_m">
+			<English>m, m/s</English>
+			<Korean>m, m/s</Korean>
+		</Key>
+		<Key ID="STR_orbis_atc_unitSettingGCI_ft">
+			<English>ft, fpm</English>
+			<Korean>ft, fpm</Korean>
 		</Key>
 	</Package>
 </Project>

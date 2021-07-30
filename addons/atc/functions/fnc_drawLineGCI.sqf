@@ -14,9 +14,9 @@ private _bearing = round _direction;
 if (_bearing isEqualTo 0) then {_bearing = 360};
 private _radialSpd = (velocity _vehicleRed vectorDiff velocity _vehicleBlue) vectorDotProduct vectorNormalized _vector;
 private _altDiff = (getPosASL _vehicleRed select 2) - (getPosASL _vehicleBlue select 2);
-private _vRelSpd = (velocity _vehicleRed select 2) - (velocity _vehicleBlue select 2);
+private _relVerticalSpd = (velocity _vehicleRed select 2) - (velocity _vehicleBlue select 2);
 
-private ["_distanceInfo", "_radialSpdInfo", "_altDiffInfo", "_vRelSpdInfo"];
+private ["_distanceInfo", "_radialSpdInfo", "_altDiffInfo", "_relVerticalSpdInfo"];
 if (GVAR(unitSettingLatGCI)) then {
 	_distanceInfo = format ["%1NM", (_distance / 1000 / EGVAR(main,NM2km)) toFixed 1];
 	_radialSpdInfo = format ["%1%2kn", ["", "+"] select (_radialSpd >= 0), round (_radialSpd * 3.6 / EGVAR(main,NM2km))];
@@ -26,15 +26,15 @@ if (GVAR(unitSettingLatGCI)) then {
 };
 if (GVAR(unitSettingHozGCI)) then {
 	_altDiffInfo = format ["%1%2ft", ["", "+"] select (_altDiff >= 0), round (_altDiff / EGVAR(main,ft2m))];
-	_vRelSpdInfo = format ["%1%2fpm", ["", "+"] select (_vRelSpd >= 0), round (_vRelSpd * 60 / EGVAR(main,ft2m))];
+	_relVerticalSpdInfo = format ["%1%2fpm", ["", "+"] select (_relVerticalSpd >= 0), round (_relVerticalSpd * 60 / EGVAR(main,ft2m))];
 } else {
 	_altDiffInfo = format ["%1%2m", ["", "+"] select (_altDiff >= 0), round _altDiff];
-	_vRelSpdInfo = format ["%1%2m/s", ["", "+"] select (_vRelSpd >= 0), round _vRelSpd];
+	_relVerticalSpdInfo = format ["%1%2m/s", ["", "+"] select (_relVerticalSpd >= 0), round _relVerticalSpd];
 };
 
 private _line1 = format ["BRG %1", _bearing];
 private _line2 = format ["%1 %2", _distanceInfo, _radialSpdInfo];
-private _line3 = format ["%1 %2", _altDiffInfo, _vRelSpdInfo];
+private _line3 = format ["%1 %2", _altDiffInfo, _relVerticalSpdInfo];
 
 private _markerIndexGCI = missionNameSpace getVariable [QGVAR(markerIndexGCI), 0];
 missionNameSpace setVariable [QGVAR(markerIndexGCI), _markerIndexGCI + 1];

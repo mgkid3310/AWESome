@@ -91,9 +91,9 @@ to the target object's init field:
 `[this, _radarMode, _distance] call orbis_atc_fnc_addRadarScreen;`  
 
 The `_radarMode` (default: 1) parameter works in 3 modes:  
-0: Civilian, same side or civilian side aircrafts only  
-1: Military, civilian mode plus radar detected aircrafts  
-2: Observer, all alive aircrafts  
+0: Civilian, same side or civilian side aircraft only  
+1: Military, civilian mode plus radar detected aircraft  
+2: Observer, all alive aircraft  
 
 The `_distance` (default: 10) parameter is a number type  
 parameter which determines how far the controller can move  
@@ -130,6 +130,14 @@ radarFrequency: Frequency of radar beam in GHz (default: 16.5)
 pulseWidth: Pulse width of radar beam in micro seconds (default: 1.25)  
 azimuthBeamwidth: Azimuth beam width in degrees (default: 2.2)  
 elevationBeamwidth: Elevation beam width in degrees (default: 3.8)  
+
+Military ATC radar includes tools for GCI. When clicking on  
+radar markers on map, a circle will appear around the marker  
+and lines will be displayed from friendly/civilian aircraft  
+to bogie/bandit aircraft. Bearing, distance, radial speed,  
+altitude difference and relative vertical speed will be shown  
+for ATC controller to provide target information to pilots or  
+coordinate intercepts.  
 &nbsp;
 
 4. ATIS (Automatic Terminal Information Service)  

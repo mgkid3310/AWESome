@@ -16,7 +16,13 @@ private _radialSpd = (velocity _vehicleRed vectorDiff velocity _vehicleBlue) vec
 private _altDiff = (getPosASL _vehicleRed select 2) - (getPosASL _vehicleBlue select 2);
 private _relVerticalSpd = (velocity _vehicleRed select 2) - (velocity _vehicleBlue select 2);
 
-private ["_distanceInfo", "_radialSpdInfo", "_altDiffInfo", "_relVerticalSpdInfo"];
+private ["_bearingPadding", "_distanceInfo", "_radialSpdInfo", "_altDiffInfo", "_relVerticalSpdInfo"];
+switch (count str round _bearing) do {
+	case (0): {_bearingPadding = "000"};
+	case (1): {_bearingPadding = "00"};
+	case (2): {_bearingPadding = "0"};
+	default {_bearingPadding = ""};
+};
 if (GVAR(unitSettingLatGCI)) then {
 	_distanceInfo = format ["%1NM", (_distance / 1000 / EGVAR(main,NM2km)) toFixed 1];
 	_radialSpdInfo = format ["%1%2kn", ["", "+"] select (_radialSpd >= 0), round (_radialSpd * 3.6 / EGVAR(main,NM2km))];
@@ -32,7 +38,7 @@ if (GVAR(unitSettingHozGCI)) then {
 	_relVerticalSpdInfo = format ["%1%2m/s", ["", "+"] select (_relVerticalSpd >= 0), round _relVerticalSpd];
 };
 
-private _line1 = format ["BRG %1", _bearing];
+private _line1 = format ["BRG %1%2", _bearingPadding, _bearing];
 private _line2 = format ["%1 %2", _distanceInfo, _radialSpdInfo];
 private _line3 = format ["%1 %2", _altDiffInfo, _relVerticalSpdInfo];
 

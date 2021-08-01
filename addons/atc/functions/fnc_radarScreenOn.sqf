@@ -2,7 +2,7 @@
 
 if (player getVariable [QGVAR(isUsingRadar), false]) exitWith {};
 
-params ["_monitor", "_controller", ["_settings", [0, 10]]];
+params ["_monitor", "_controller", ["_settings", []]];
 _settings params [["_radarMode", 1], ["_distance", 10]];
 
 player setVariable [QGVAR(isUsingRadar), true];

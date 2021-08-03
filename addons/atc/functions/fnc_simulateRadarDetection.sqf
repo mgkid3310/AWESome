@@ -42,7 +42,8 @@ private _cellLength = _pulseWidthMicroS * (10 ^ -6) * GVAR(speedOfLight) / 2;
 private _altAGL = (ASLToAGL _posTargetASL) select 2;
 private _altASL = _posTargetASL select 2;
 private _altRadar = 0 max (_altAGL min _altASL);
-private _psi = acos ((_posRadarASL distance2D _posTargetASL) / _distance);
+private _distance2D = _posRadarASL distance2D _posTargetASL;
+private _psi = acos ((_distance2D / _distance) min 1);
 
 // systemChat str [_azimuthRadius, _elevationRadius, _cellLength, _altRadar, _psi];
 

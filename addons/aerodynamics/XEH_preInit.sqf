@@ -29,6 +29,14 @@ ADDON = true;
 ] call CBA_Settings_fnc_init;
 
 [
+	QGVAR(fuelMassMultiplierGlobal),
+	"SLIDER",
+	[localize LSTRING(fuelMassMultiplierGlobal_name), localize LSTRING(fuelMassMultiplierGlobal_tooltip)],
+	localize LSTRING(category),
+	[0, 1, 1, 2]
+] call CBA_Settings_fnc_init;
+
+[
 	QGVAR(pylonMassMultiplierGlobal),
 	"SLIDER",
 	[localize LSTRING(pylonMassMultiplierGlobal_name), localize LSTRING(pylonMassMultiplierGlobal_tooltip)],

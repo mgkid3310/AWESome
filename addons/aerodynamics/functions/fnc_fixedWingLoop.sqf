@@ -144,7 +144,7 @@ private ["_massCurrent", "_massFuel"];
 if (_massError) then {
 	_massCurrent = 10000;
 } else {
-	_massFuel = 0.8 * _fuelCurrent * _fuelCapacity;
+	_massFuel = GVAR(fuelFlowStandard) * _fuelCurrent * _fuelCapacity / 0.33;
 	if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 		_massFuel = _massFuel + 1.1845 * (_vehicle animationPhase "auxtank_switch") * _fuelCapacity;
 	};

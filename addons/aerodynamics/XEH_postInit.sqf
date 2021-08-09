@@ -14,6 +14,7 @@ GVAR(gustMultiplier) = 1.5;
 GVAR(throttleClimbRate) = 0.4;
 GVAR(throttleDropRate) = 0.7;
 GVAR(pylonDragRatio) = 0.002; // 0.5*Cd*A*rho = 0.12 for FIR Mk84 (0.06, 1000kg)
+GVAR(fuelFlowStandard) = 1.3; // assume 1.3kg/s of fuel burn
 GVAR(massStandardRatio) = 0.8;
 GVAR(fuelFlowMultiplierGlobal) = 1;
 GVAR(thrustMultiplierGlobal) = 1;

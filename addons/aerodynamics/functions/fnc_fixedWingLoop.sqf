@@ -148,7 +148,7 @@ if (_massError) then {
 	if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 		_massFuel = _massFuel + 1.1845 * (_vehicle animationPhase "auxtank_switch") * _fuelCapacity;
 	};
-	_massCurrent = (_massStandard * GVAR(massStandardRatio)) + _massFuel + _massPylon;
+	_massCurrent = (_massStandard * GVAR(massStandardRatio)) + _massFuel * GVAR(fuelMassMultiplierGlobal) + _massPylon;
 };
 _vehicle setMass _massCurrent;
 

@@ -137,7 +137,7 @@ private _pylonDragCoef2 = [0, 0, 0];
 	// diag_log format ["orbis_aerodynamics pylonNum: %1, magazine: %2, _massMagazine: %3, _coefMagazine: %4", _forEachIndex + 1, _x, _massMagazine, _coefMagazine];
 } forEach (getPylonMagazines _vehicle);
 private _pylonDragArray = [_pylonDragCoef2 vectorMultiply (_pylonDragMultiplier / (1 max _massPylon)), [0, 0, 0], [0, 0, 0]];
-_massPylon = _massPylon * _pylonMassMultiplier;
+_massPylon = _massPylon * linearConversion [0.5, 1, _massStandard / GVAR(massStandardValue), 0.5, 1, true];
 
 // get current vehicle mass and apply
 private ["_massCurrent", "_massFuel"];
@@ -148,7 +148,7 @@ if (_massError) then {
 	if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 		_massFuel = _massFuel + 1.1845 * linearConversion [0, 1, _vehicle animationPhase "auxtank_switch", 0, _massStandard * GVAR(massFuelRatio), true];
 	};
-	_massCurrent = _massStandard * GVAR(massStandardRatio) + _massFuel * GVAR(fuelMassMultiplierGlobal) + _massPylon;
+	_massCurrent = _massStandard * GVAR(massStandardRatio) + _massFuel * GVAR(fuelMassMultiplierGlobal) + _massPylon * _pylonMassMultiplier;
 };
 _vehicle setMass _massCurrent;
 

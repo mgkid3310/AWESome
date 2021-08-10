@@ -144,11 +144,11 @@ private ["_massCurrent", "_massFuel"];
 if (_massError) then {
 	_massCurrent = 10000;
 } else {
-	_massFuel = GVAR(fuelFlowStandard) * _fuelCurrent * _fuelCapacity / 0.33;
+	_massFuel = linearConversion [0, 1, _fuelCurrent, 0, _massStandard * GVAR(massFuelRatio), true];
 	if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
-		_massFuel = _massFuel + 1.1845 * (_vehicle animationPhase "auxtank_switch") * _fuelCapacity;
+		_massFuel = _massFuel + 1.1845 * linearConversion [0, 1, _vehicle animationPhase "auxtank_switch", 0, _massStandard * GVAR(massFuelRatio), true];
 	};
-	_massCurrent = (_massStandard * GVAR(massStandardRatio)) + _massFuel * GVAR(fuelMassMultiplierGlobal) + _massPylon;
+	_massCurrent = _massStandard * GVAR(massStandardRatio) + _massFuel * GVAR(fuelMassMultiplierGlobal) + _massPylon;
 };
 _vehicle setMass _massCurrent;
 

@@ -4,7 +4,7 @@ class CfgPatches {
 	class ADDON {
 		name = COMPONENT_NAME;
 		author = "Orbis2358";
-		requiredVersion = 1.84;
+		requiredVersion = REQUIRED_VERSION;
 		requiredAddons[] = {"orbis_main"};
 		units[] = {};
 		weapons[] = {};

@@ -65,7 +65,8 @@ private _dragMultiplier = (_vehicle getVariable [QGVAR(dragMultiplier), 1]) * GV
 private _pylonMassMultiplier = (_vehicle getVariable [QGVAR(pylonMassMultiplier), 1]) * GVAR(pylonMassMultiplierGlobal);
 private _pylonDragMultiplier = (_vehicle getVariable [QGVAR(pylonDragMultiplier), 1]) * GVAR(pylonDragMultiplierGlobal);
 
-// get TAS and etc.
+// read vehicle status
+private _throttleInput = airplaneThrottle _vehicle;
 private _modelVelocityNew = velocityModelSpace _vehicle;
 private _modelVelocity = (_modelVelocityNew vectorAdd _modelVelocityOld) vectorMultiply 0.5;
 private _windSimulated = [_vehicle, GVAR(dynamicWindMode)] call FUNC(getWindVehicle);
@@ -86,11 +87,10 @@ private _gearPhase = _vehicle animationSourcePhase "gear";
 private _speedBrakePhase = _vehicle animationSourcePhase "speedBrake";
 
 // correct fuel consumption
-private _throttleInput = airplaneThrottle _vehicle;
-private _throttleDefault = [_throttleOld, _throttleInput, _timeStep] call FUNC(getEffectiveThrottle);
+private _throttleEffective = [_throttleOld, _throttleInput, _timeStep] call FUNC(getEffectiveThrottle);
 private _fuelCurrent = fuel _vehicle;
-private _fuelFlowDefault = [0, 0.3 * _throttleDefault ^ 2 + 0.03] select isEngineOn _vehicle;
-private _fuelFlowEnhanced = [_throttleDefault, isEngineOn _vehicle, _fuelFlowMultiplier] call FUNC(getFuelFlowEnhanced);
+private _fuelFlowDefault = [0, 0.3 * _throttleEffective ^ 2 + 0.03] select isEngineOn _vehicle;
+private _fuelFlowEnhanced = [_throttleEffective, isEngineOn _vehicle, _fuelFlowMultiplier] call FUNC(getFuelFlowEnhanced);
 
 // F/A-18 external fuel tank compatibility
 private ["_auxtankSwitch", "_abSwitch", "_auxtankLevel"];
@@ -111,7 +111,7 @@ if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 };
 
 // 3rd party support
-_vehicle setVariable [QGVAR(effectiveThrottle), _throttleDefault];
+_vehicle setVariable [QGVAR(effectiveThrottle), _throttleEffective];
 _vehicle setVariable [QGVAR(fuelFlowEnhanced), _fuelFlowEnhanced];
 
 // check for ammo on pylons
@@ -144,11 +144,11 @@ private ["_massCurrent", "_massFuel"];
 if (_massError) then {
 	_massCurrent = 10000;
 } else {
-	_massFuel = linearConversion [0, 1, _fuelCurrent, 0, _massStandard * GVAR(massFuelRatio), true];
+	_massFuel = linearConversion [0, 1, _fuelCurrent, 0, _massStandard * _massFuelRatio, true];
 	if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
-		_massFuel = _massFuel + 1.1845 * linearConversion [0, 1, _vehicle animationPhase "auxtank_switch", 0, _massStandard * GVAR(massFuelRatio), true];
+		_massFuel = _massFuel + 1.1845 * linearConversion [0, 1, _vehicle animationPhase "auxtank_switch", 0, _massStandard * _massFuelRatio, true];
 	};
-	_massCurrent = _massStandard * GVAR(massStandardRatio) + _massFuel * GVAR(fuelMassMultiplierGlobal) + _massPylon * _pylonMassMultiplier;
+	_massCurrent = _massStandard * _massStandardRatio + _massFuel * GVAR(fuelMassMultiplierGlobal) + _massPylon * _pylonMassMultiplier;
 };
 _vehicle setMass _massCurrent;
 
@@ -162,7 +162,7 @@ if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 // build parameter array
 private _paramDefault = [_modelVelocity, _massCurrent, _massError];
 private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityRatio, _altitudeAGLS];
-private _paramThrust = [_thrustCoef, _vtolMode, _thrustMultiplier, _throttleDefault, _engineDamage, _thrustVector];
+private _paramThrust = [_thrustCoef, _vtolMode, _thrustMultiplier, _throttleEffective, _engineDamage, _thrustVector];
 private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio];
 private _paramLift = [_liftArray, _liftMultiplier, _flapsFCoef, _flapPhase];
 private _paramDrag = [_dragArray, _dragMultiplier, _flapsFCoef, _flapPhase, _gearsUpFCoef, _gearPhase, _airBrakeFCoef, _speedBrakePhase];
@@ -219,4 +219,4 @@ if (GVAR(applyForce)) then {
 // diag_log format ["orbis_aerodynamics _thrustDefault: %1, _thrustEnhanced: %2, _liftDefault: %3, _liftEnhanced: %4", _thrustDefault, _thrustEnhanced, _liftDefault, _liftEnhanced];
 // diag_log format ["orbis_aerodynamics _massCurrent: %1, _dragDefault: %2, _dragEnhanced: %3, _dragPylon: %4", _massCurrent, _dragDefault, _dragEnhanced, _dragPylon];
 
-_vehicle setVariable [QGVAR(fWingData), [_throttleDefault, _modelVelocityNew, _modelWindNew/* , _controlInputs */]];
+_vehicle setVariable [QGVAR(fWingData), [_throttleEffective, _modelVelocityNew, _modelWindNew/* , _controlInputs */]];

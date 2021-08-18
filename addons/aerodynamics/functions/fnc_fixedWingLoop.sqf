@@ -12,7 +12,7 @@ if !(_aeroConfigs isEqualType []) then {
 	_vehicle setVariable [QGVAR(aeroConfig), _aeroConfigs];
 };
 
-_aeroConfigs params ["_isAdvanced", "_aerodynamicsArray", "_speedPerformance", "_physicalProperty"];
+_aeroConfigs params ["_isAdvanced", "_aerodynamicsArray", "_speedPerformance", "_physicalProperty", "_configREB"];
 _aerodynamicsArray params ["_dragArray", "_liftArray", "_angleOfIndicence", "_flapsFCoef", "_gearsUpFCoef", "_airBrakeFCoef", "_torqueXCoef"];
 _speedPerformance params ["_thrustCoef", "_vtolMode", "_altFullForce", "_altNoForce", "_speedStall", "_speedMax"];
 _physicalProperty params ["_massError", "_massStandard", "_fuelCapacity"];
@@ -64,6 +64,8 @@ private _liftMultiplier = (_vehicle getVariable [QGVAR(liftMultiplier), 1]) * GV
 private _dragMultiplier = (_vehicle getVariable [QGVAR(dragMultiplier), 1]) * GVAR(dragMultiplierGlobal);
 private _pylonMassMultiplier = (_vehicle getVariable [QGVAR(pylonMassMultiplier), 1]) * GVAR(pylonMassMultiplierGlobal);
 private _pylonDragMultiplier = (_vehicle getVariable [QGVAR(pylonDragMultiplier), 1]) * GVAR(pylonDragMultiplierGlobal);
+private _massStandardRatio = GVAR(massStandardRatio);
+private _massFuelRatio = GVAR(massFuelRatio);
 
 // read vehicle status
 private _throttleInput = airplaneThrottle _vehicle;
@@ -85,6 +87,21 @@ private _thrustVector = 0 max (_vehicle animationSourcePhase "thrustVector");
 private _flapPhase = _vehicle animationSourcePhase "flap";
 private _gearPhase = _vehicle animationSourcePhase "gear";
 private _speedBrakePhase = _vehicle animationSourcePhase "speedBrake";
+
+// REBalanced compatibility
+if (_configREB param [0, 0] > 0) then {
+	_configREB params ["_isREB", "_throttleAB", "_thrustRef" "_thrustMil", "_thrustAB", "_ffMultiplierAB", "_gWeight", "_zfWeight", "_fWeight"];
+
+	if (_throttleInput > _throttleAB) then {
+		_fuelFlowMultiplier = _fuelFlowMultiplier * _ffMultiplierAB;
+		_thrustMultiplier = _thrustMultiplier * _thrustAB / _thrustRef;
+	} else {
+		_thrustMultiplier = _thrustMultiplier * _thrustMil / _thrustRef;
+	};
+
+	_massStandardRatio = _zfWeight / _gWeight;
+	_massFuelRatio = _fWeight / _gWeight;
+};
 
 // correct fuel consumption
 private _throttleEffective = [_throttleOld, _throttleInput, _timeStep] call FUNC(getEffectiveThrottle);

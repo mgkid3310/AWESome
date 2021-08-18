@@ -90,13 +90,13 @@ private _speedBrakePhase = _vehicle animationSourcePhase "speedBrake";
 
 // config data compatibility
 if (_configData param [0, 0] > 0) then {
-	_configData params ["_enabled", "_throttleAB", "_thrustRef" "_thrustMil", "_thrustAB", "_ffMultiplierAB", "_gWeight", "_zfWeight", "_fWeight"];
+	_configData params ["_enabled", "_abThrottle", "_refThrust" "_milThrust", "_abThrust", "_abFuelMultiplier", "_gWeight", "_zfWeight", "_fWeight"];
 
-	if (_throttleInput > _throttleAB) then {
-		_fuelFlowMultiplier = _fuelFlowMultiplier * _ffMultiplierAB;
-		_thrustMultiplier = _thrustMultiplier * _thrustAB / _thrustRef;
+	if (_throttleInput > _abThrottle) then {
+		_fuelFlowMultiplier = _fuelFlowMultiplier * _abFuelMultiplier;
+		_thrustMultiplier = _thrustMultiplier * _abThrust / _refThrust;
 	} else {
-		_thrustMultiplier = _thrustMultiplier * _thrustMil / _thrustRef;
+		_thrustMultiplier = _thrustMultiplier * _milThrust / _refThrust;
 	};
 
 	_massStandardRatio = _zfWeight / _gWeight;

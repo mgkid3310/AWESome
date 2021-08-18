@@ -65,14 +65,14 @@ _fuelCapacity = getNumber (_class >> "fuelCapacity");
 private _configData = [];
 if (isArray (_class >> "AWESome_ConfigData")) then {
 	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "enabled");
-	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "AB_throttle");
-	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "ref_thrust");
-	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "mil_thrust");
-	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "AB_thrust");
-	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "AB_ffMultiplier");
-	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "gross_weight");
-	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "zf_weight");
-	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "fuel_weight");
+	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "abThrottle");
+	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "refThrust");
+	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "milThrust");
+	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "abThrust");
+	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "abFuelMultiplier");
+	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "grossWeight");
+	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "zfWeight");
+	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "fuelWeight");
 } else {
 	_configData pushBack 0;
 };

@@ -12,7 +12,7 @@ if !(_aeroConfigs isEqualType []) then {
 	_vehicle setVariable [QGVAR(aeroConfig), _aeroConfigs];
 };
 
-_aeroConfigs params ["_isAdvanced", "_aerodynamicsArray", "_speedPerformance", "_physicalProperty", "_configREB"];
+_aeroConfigs params ["_isAdvanced", "_aerodynamicsArray", "_speedPerformance", "_physicalProperty", "_configData"];
 _aerodynamicsArray params ["_dragArray", "_liftArray", "_angleOfIndicence", "_flapsFCoef", "_gearsUpFCoef", "_airBrakeFCoef", "_torqueXCoef"];
 _speedPerformance params ["_thrustCoef", "_vtolMode", "_altFullForce", "_altNoForce", "_speedStall", "_speedMax"];
 _physicalProperty params ["_massError", "_massStandard", "_fuelCapacity"];
@@ -88,9 +88,9 @@ private _flapPhase = _vehicle animationSourcePhase "flap";
 private _gearPhase = _vehicle animationSourcePhase "gear";
 private _speedBrakePhase = _vehicle animationSourcePhase "speedBrake";
 
-// REBalanced compatibility
-if (_configREB param [0, 0] > 0) then {
-	_configREB params ["_isREB", "_throttleAB", "_thrustRef" "_thrustMil", "_thrustAB", "_ffMultiplierAB", "_gWeight", "_zfWeight", "_fWeight"];
+// config data compatibility
+if (_configData param [0, 0] > 0) then {
+	_configData params ["_enabled", "_throttleAB", "_thrustRef" "_thrustMil", "_thrustAB", "_ffMultiplierAB", "_gWeight", "_zfWeight", "_fWeight"];
 
 	if (_throttleInput > _throttleAB) then {
 		_fuelFlowMultiplier = _fuelFlowMultiplier * _ffMultiplierAB;

@@ -62,25 +62,25 @@ if !(_massStandard > 0) then {
 };
 _fuelCapacity = getNumber (_class >> "fuelCapacity");
 
-private _configREB = [];
-if (isArray (_class >> "REB_AWESome_config")) then {
-	_configREB pushBack getNumber (_config >> "REB_AWESome_config" >> "enabled");
-	_configREB pushBack getNumber (_config >> "REB_AWESome_config" >> "AB_throttle");
-	_configREB pushBack getNumber (_config >> "REB_AWESome_config" >> "ref_thrust");
-	_configREB pushBack getNumber (_config >> "REB_AWESome_config" >> "mil_thrust");
-	_configREB pushBack getNumber (_config >> "REB_AWESome_config" >> "AB_thrust");
-	_configREB pushBack getNumber (_config >> "REB_AWESome_config" >> "AB_ffMultiplier");
-	_configREB pushBack getNumber (_config >> "REB_AWESome_config" >> "gross_weight");
-	_configREB pushBack getNumber (_config >> "REB_AWESome_config" >> "zf_weight");
-	_configREB pushBack getNumber (_config >> "REB_AWESome_config" >> "fuel_weight");
+private _configData = [];
+if (isArray (_class >> "AWESome_ConfigData")) then {
+	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "enabled");
+	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "AB_throttle");
+	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "ref_thrust");
+	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "mil_thrust");
+	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "AB_thrust");
+	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "AB_ffMultiplier");
+	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "gross_weight");
+	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "zf_weight");
+	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "fuel_weight");
 } else {
-	_configREB pushBack 0;
+	_configData pushBack 0;
 };
 
 private _aerodynamicsArray = [_dragArray, _liftArray, _angleOfIndicence, _flapsFCoef, _gearsUpFCoef, _airBrakeFCoef, _torqueXCoef];
 private _speedPerformance = [_thrustCoef, _vtolMode, _altFullForce, _altNoForce, _speedStall, _speedMax];
 private _physicalProperty = [_massError, _massStandard, _fuelCapacity];
-private _return = [_isAdvanced, _aerodynamicsArray, _speedPerformance, _physicalProperty, _configREB];
+private _return = [_isAdvanced, _aerodynamicsArray, _speedPerformance, _physicalProperty, _configData];
 
 // report if needed (dev script)
 // diag_log format ["orbis_aerodynamics aeroConfig: %1", _return];

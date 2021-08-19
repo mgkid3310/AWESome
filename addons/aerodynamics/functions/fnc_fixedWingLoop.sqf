@@ -105,8 +105,8 @@ if (_configData param [0, 0] > 0) then {
 	_massStandardRatio = _zfWeight / _gWeight;
 	_massFuelRatio = _fWeight / _gWeight;
 };
-private _externalGetFuel = (_configData select 2) param [0, ""];
-private _externalSetFuel = (_configData select 2) param [1, ""];
+private _getExternalFuel = (_configData select 2) param [0, ""];
+private _setExternalFuel = (_configData select 2) param [1, ""];
 
 // get correct fuel consumption
 private _throttleEffective = [_throttleOld, _throttleInput, _timeStep] call FUNC(getEffectiveThrottle);
@@ -134,8 +134,8 @@ if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 // apply fuel update
 private _fuelConsumption = (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity);
 
-if !(_externalSetFuel isEqualTo "") then {
-	_fuelConsumption = [_vehicle, _fuelConsumption] call compile _externalSetFuel;
+if !(_setExternalFuel isEqualTo "") then {
+	_fuelConsumption = [_vehicle, _fuelConsumption] call compile _setExternalFuel;
 };
 _vehicle setFuel ((_fuelCurrent - _fuelConsumption) min 1);
 
@@ -173,8 +173,8 @@ private ["_massCurrent", "_massFuel"];
 if (_massError) then {
 	_massCurrent = 10000;
 } else {
-	if !(_externalGetFuel isEqualTo "") then {
-		_massFuel = linearConversion [0, 1, _fuelCurrent + ([_vehicle] call compile _externalGetFuel), 0, _massStandard * _massFuelRatio, false];
+	if !(_getExternalFuel isEqualTo "") then {
+		_massFuel = linearConversion [0, 1, _fuelCurrent + ([_vehicle] call compile _getExternalFuel), 0, _massStandard * _massFuelRatio, false];
 	} else {
 		_massFuel = linearConversion [0, 1, _fuelCurrent, 0, _massStandard * _massFuelRatio, true];
 	};

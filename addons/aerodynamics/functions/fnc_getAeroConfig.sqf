@@ -62,24 +62,31 @@ if !(_massStandard > 0) then {
 };
 _fuelCapacity = getNumber (_class >> "fuelCapacity");
 
-private _configData = [];
+private _configEnabled = 0;
+private _engineData = [];
+private _weightData = [];
+private _miscData = [];
 if (isArray (_class >> "AWESome_ConfigData")) then {
-	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "enabled");
-	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "abThrottle");
-	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "refThrust");
-	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "milThrust");
-	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "abThrust");
-	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "abFuelMultiplier");
-	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "grossWeight");
-	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "zfWeight");
-	_configData pushBack getNumber (_config >> "AWESome_ConfigData" >> "fuelWeight");
-} else {
-	_configData pushBack 0;
+	_configEnabled = getNumber (_config >> "AWESome_ConfigData" >> "enabled");
+
+	_engineData pushBack getNumber (_config >> "AWESome_ConfigData" >> "abThrottle");
+	_engineData pushBack getNumber (_config >> "AWESome_ConfigData" >> "refThrust");
+	_engineData pushBack getNumber (_config >> "AWESome_ConfigData" >> "milThrust");
+	_engineData pushBack getNumber (_config >> "AWESome_ConfigData" >> "abThrust");
+	_engineData pushBack getNumber (_config >> "AWESome_ConfigData" >> "abFuelMultiplier");
+
+	_weightData pushBack getNumber (_config >> "AWESome_ConfigData" >> "grossWeight");
+	_weightData pushBack getNumber (_config >> "AWESome_ConfigData" >> "zfWeight");
+	_weightData pushBack getNumber (_config >> "AWESome_ConfigData" >> "fuelWeight");
+
+	_miscData pushBack getText (_config >> "AWESome_ConfigData" >> "externalGetFuel");
+	_miscData pushBack getText (_config >> "AWESome_ConfigData" >> "externalSetFuel");
 };
 
 private _aerodynamicsArray = [_dragArray, _liftArray, _angleOfIndicence, _flapsFCoef, _gearsUpFCoef, _airBrakeFCoef, _torqueXCoef];
 private _speedPerformance = [_thrustCoef, _vtolMode, _altFullForce, _altNoForce, _speedStall, _speedMax];
 private _physicalProperty = [_massError, _massStandard, _fuelCapacity];
+private _configData = [_configEnabled, _engineData, _weightData, _miscData];
 private _return = [_isAdvanced, _aerodynamicsArray, _speedPerformance, _physicalProperty, _configData];
 
 // report if needed (dev script)

@@ -66,21 +66,22 @@ private _configEnabled = 0;
 private _engineData = [];
 private _weightData = [];
 private _miscData = [];
-if (isArray (_class >> "AWESome_ConfigData")) then {
-	_configEnabled = getNumber (_config >> "AWESome_ConfigData" >> "enabled");
+if (isClass (_class >> "AWESome_ConfigData")) then {
+	_configEnabled = getNumber (_class >> "AWESome_ConfigData" >> "enabled");
 
-	_engineData pushBack getNumber (_config >> "AWESome_ConfigData" >> "abThrottle");
-	_engineData pushBack getNumber (_config >> "AWESome_ConfigData" >> "refThrust");
-	_engineData pushBack getNumber (_config >> "AWESome_ConfigData" >> "milThrust");
-	_engineData pushBack getNumber (_config >> "AWESome_ConfigData" >> "abThrust");
-	_engineData pushBack getNumber (_config >> "AWESome_ConfigData" >> "abFuelMultiplier");
+	_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "abThrottle");
+	_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "refThrust");
+	_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "milThrust");
+	_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "abThrust");
+	_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "abFuelMultiplier");
 
-	_weightData pushBack getNumber (_config >> "AWESome_ConfigData" >> "grossWeight");
-	_weightData pushBack getNumber (_config >> "AWESome_ConfigData" >> "zfWeight");
-	_weightData pushBack getNumber (_config >> "AWESome_ConfigData" >> "fuelWeight");
+	_weightData pushBack getNumber (_class >> "AWESome_ConfigData" >> "grossWeight");
+	_weightData pushBack getNumber (_class >> "AWESome_ConfigData" >> "zfWeight");
+	_weightData pushBack getNumber (_class >> "AWESome_ConfigData" >> "fuelWeight");
 
-	_miscData pushBack getText (_config >> "AWESome_ConfigData" >> "getExternalFuel");
-	_miscData pushBack getText (_config >> "AWESome_ConfigData" >> "setExternalFuel");
+	_miscData pushBack getNumber (_class >> "AWESome_ConfigData" >> "useExternalFuel");
+	_miscData pushBack getText (_class >> "AWESome_ConfigData" >> "getExternalFuel");
+	_miscData pushBack getText (_class >> "AWESome_ConfigData" >> "setExternalFuel");
 };
 
 private _aerodynamicsArray = [_dragArray, _liftArray, _angleOfIndicence, _flapsFCoef, _gearsUpFCoef, _airBrakeFCoef, _torqueXCoef];

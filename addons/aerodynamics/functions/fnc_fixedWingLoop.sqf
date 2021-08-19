@@ -69,6 +69,7 @@ private _massFuelRatio = GVAR(massFuelRatio);
 
 // read vehicle status
 private _throttleInput = airplaneThrottle _vehicle;
+private _fuelCurrent = fuel _vehicle;
 private _modelVelocityNew = velocityModelSpace _vehicle;
 private _modelVelocity = (_modelVelocityNew vectorAdd _modelVelocityOld) vectorMultiply 0.5;
 private _windSimulated = [_vehicle, GVAR(dynamicWindMode)] call FUNC(getWindVehicle);
@@ -90,7 +91,9 @@ private _speedBrakePhase = _vehicle animationSourcePhase "speedBrake";
 
 // config data compatibility
 if (_configData param [0, 0] > 0) then {
-	_configData params ["_enabled", "_abThrottle", "_refThrust" "_milThrust", "_abThrust", "_abFuelMultiplier", "_gWeight", "_zfWeight", "_fWeight"];
+	_configData params ["_configEnabled", "_engineData", "_weightData"];
+	_engineData params ["_abThrottle", "_refThrust" "_milThrust", "_abThrust", "_abFuelMultiplier"];
+	_weightData params ["_gWeight", "_zfWeight", "_fWeight"];
 
 	if (_throttleInput > _abThrottle) then {
 		_fuelFlowMultiplier = _fuelFlowMultiplier * _abFuelMultiplier;
@@ -102,30 +105,39 @@ if (_configData param [0, 0] > 0) then {
 	_massStandardRatio = _zfWeight / _gWeight;
 	_massFuelRatio = _fWeight / _gWeight;
 };
+private _externalGetFuel = (_configData select 2) param [0, ""];
+private _externalSetFuel = (_configData select 2) param [1, ""];
 
-// correct fuel consumption
+// get correct fuel consumption
 private _throttleEffective = [_throttleOld, _throttleInput, _timeStep] call FUNC(getEffectiveThrottle);
-private _fuelCurrent = fuel _vehicle;
 private _fuelFlowDefault = [0, 0.3 * _throttleEffective ^ 2 + 0.03] select isEngineOn _vehicle;
 private _fuelFlowEnhanced = [_throttleEffective, isEngineOn _vehicle, _fuelFlowMultiplier] call FUNC(getFuelFlowEnhanced);
 
 // F/A-18 external fuel tank compatibility
-private ["_auxtankSwitch", "_abSwitch", "_auxtankLevel"];
+private ["_auxtankSwitch", "_abSwitch"];
 if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 	_auxtankSwitch = _vehicle animationPhase "auxtank_switch";
 	_abSwitch = [1, 2] select (_vehicle animationPhase "ab_switch" > 0.1);
 
-	if (_auxtankSwitch > 0.05) then {
-		_auxtankLevel = _auxtankSwitch + ([0, 0.0005 * _abSwitch * _timeStep] select isEngineOn _vehicle);
-		_auxtankLevel = _auxtankLevel - _fuelFlowEnhanced * _abSwitch * (_timeStep / _fuelCapacity) / 1.1845;
-		_vehicle animateSource ["auxtank_switch", _auxtankLevel, true];
-		_vehicle setFuel 1;
+	if (_auxtankSwitch > 0) then {
+		_auxtankSwitch = _auxtankSwitch + ([0, 0.0005 * _abSwitch * _timeStep] select isEngineOn _vehicle);
+		_auxtankSwitch = _auxtankSwitch - _fuelFlowEnhanced * _abSwitch * (_timeStep / _fuelCapacity) / 1.1845;
+		_vehicle animateSource ["auxtank_switch", _auxtankSwitch max 0, true];
+		_vehicle setFuel (_fuelCurrent + (_auxtankSwitch min 0));
+
+		_fuelFlowEnhanced = 0;
 	} else {
-		_vehicle setFuel (_fuelCurrent - (_fuelFlowEnhanced - _fuelFlowDefault) * _abSwitch * (_timeStep / _fuelCapacity));
+		_fuelFlowEnhanced = _fuelFlowEnhanced * _abSwitch;
 	};
-} else {
-	_vehicle setFuel (_fuelCurrent - (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity));
 };
+
+// apply fuel update
+private _fuelConsumption = (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity);
+
+if !(_externalSetFuel isEqualTo "") then {
+	_fuelConsumption = [_vehicle, _fuelConsumption] call compile _externalSetFuel;
+};
+_vehicle setFuel ((_fuelCurrent - _fuelConsumption) min 1);
 
 // 3rd party support
 _vehicle setVariable [QGVAR(effectiveThrottle), _throttleEffective];
@@ -161,10 +173,16 @@ private ["_massCurrent", "_massFuel"];
 if (_massError) then {
 	_massCurrent = 10000;
 } else {
-	_massFuel = linearConversion [0, 1, _fuelCurrent, 0, _massStandard * _massFuelRatio, true];
+	if !(_externalGetFuel isEqualTo "") then {
+		_massFuel = linearConversion [0, 1, _fuelCurrent + ([_vehicle] call compile _externalGetFuel), 0, _massStandard * _massFuelRatio, false];
+	} else {
+		_massFuel = linearConversion [0, 1, _fuelCurrent, 0, _massStandard * _massFuelRatio, true];
+	};
+
 	if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 		_massFuel = _massFuel + 1.1845 * linearConversion [0, 1, _vehicle animationPhase "auxtank_switch", 0, _massStandard * _massFuelRatio, true];
 	};
+
 	_massCurrent = _massStandard * _massStandardRatio + _massFuel * GVAR(fuelMassMultiplierGlobal) + _massPylon * _pylonMassMultiplier;
 };
 _vehicle setMass _massCurrent;

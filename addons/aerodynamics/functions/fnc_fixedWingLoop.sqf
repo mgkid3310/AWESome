@@ -92,7 +92,7 @@ private _speedBrakePhase = _vehicle animationSourcePhase "speedBrake";
 // config data compatibility
 if (_configData param [0, 0] > 0) then {
 	_configData params ["_configEnabled", "_engineData", "_weightData"];
-	_engineData params ["_abThrottle", "_refThrust" "_milThrust", "_abThrust", "_abFuelMultiplier"];
+	_engineData params ["_abThrottle", "_refThrust", "_milThrust", "_abThrust", "_abFuelMultiplier"];
 	_weightData params ["_gWeight", "_zfWeight", "_fWeight"];
 
 	if (_throttleInput > _abThrottle) then {
@@ -105,8 +105,9 @@ if (_configData param [0, 0] > 0) then {
 	_massStandardRatio = _zfWeight / _gWeight;
 	_massFuelRatio = _fWeight / _gWeight;
 };
-private _getExternalFuel = (_configData select 2) param [0, ""];
-private _setExternalFuel = (_configData select 2) param [1, ""];
+private _useExternalFuel = (_configData select 3) param [0, 0];
+private _getExternalFuel = (_configData select 3) param [1, ""];
+private _setExternalFuel = (_configData select 3) param [2, ""];
 
 // get correct fuel consumption
 private _throttleEffective = [_throttleOld, _throttleInput, _timeStep] call FUNC(getEffectiveThrottle);
@@ -119,10 +120,10 @@ if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 	_auxtankSwitch = _vehicle animationPhase "auxtank_switch";
 	_abSwitch = [1, 2] select (_vehicle animationPhase "ab_switch" > 0.1);
 
-	if (_auxtankSwitch > 0) then {
+	if (_auxtankSwitch > 0.05) then {
 		_auxtankSwitch = _auxtankSwitch + ([0, 0.0005 * _abSwitch * _timeStep] select isEngineOn _vehicle);
 		_auxtankSwitch = _auxtankSwitch - _fuelFlowEnhanced * _abSwitch * (_timeStep / _fuelCapacity) / 1.1845;
-		_vehicle animateSource ["auxtank_switch", _auxtankSwitch max 0, true];
+		_vehicle animate ["auxtank_switch", _auxtankSwitch max 0, true];
 		_vehicle setFuel (_fuelCurrent + (_auxtankSwitch min 0));
 
 		_fuelFlowEnhanced = 0;
@@ -132,12 +133,16 @@ if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 };
 
 // apply fuel update
-private _fuelConsumption = (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity);
+private _fuelCorrection = (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity);
+_vehicle setFuel ((_fuelCurrent - _fuelCorrection) min 1);
 
-if !(_setExternalFuel isEqualTo "") then {
-	_fuelConsumption = [_vehicle, _fuelConsumption] call compile _setExternalFuel;
+private ["_fuelExternal", "_fuelDraw"];
+if !(_useExternalFuel > 0) then {
+	_fuelExternal = [_vehicle] call compile _getExternalFuel;
+	_fuelDraw = (1 - fuel _vehicle) min _fuelExternal;
+	_vehicle setFuel (fuel _vehicle + _fuelDraw);
+	[_vehicle, _fuelExternal - _fuelDraw] call compile _getExternalFuel;
 };
-_vehicle setFuel ((_fuelCurrent - _fuelConsumption) min 1);
 
 // 3rd party support
 _vehicle setVariable [QGVAR(effectiveThrottle), _throttleEffective];

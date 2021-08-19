@@ -79,8 +79,8 @@ if (isArray (_class >> "AWESome_ConfigData")) then {
 	_weightData pushBack getNumber (_config >> "AWESome_ConfigData" >> "zfWeight");
 	_weightData pushBack getNumber (_config >> "AWESome_ConfigData" >> "fuelWeight");
 
-	_miscData pushBack getText (_config >> "AWESome_ConfigData" >> "externalGetFuel");
-	_miscData pushBack getText (_config >> "AWESome_ConfigData" >> "externalSetFuel");
+	_miscData pushBack getText (_config >> "AWESome_ConfigData" >> "getExternalFuel");
+	_miscData pushBack getText (_config >> "AWESome_ConfigData" >> "setExternalFuel");
 };
 
 private _aerodynamicsArray = [_dragArray, _liftArray, _angleOfIndicence, _flapsFCoef, _gearsUpFCoef, _airBrakeFCoef, _torqueXCoef];

@@ -137,11 +137,11 @@ private _fuelCorrection = (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / 
 _vehicle setFuel ((_fuelCurrent - _fuelCorrection) min 1);
 
 private ["_fuelExternal", "_fuelDraw"];
-if !(_useExternalFuel > 0) then {
+if (_useExternalFuel > 0) then {
 	_fuelExternal = [_vehicle] call compile _getExternalFuel;
 	_fuelDraw = (1 - fuel _vehicle) min _fuelExternal;
 	_vehicle setFuel (fuel _vehicle + _fuelDraw);
-	[_vehicle, _fuelExternal - _fuelDraw] call compile _getExternalFuel;
+	[_vehicle, _fuelExternal - _fuelDraw] call compile _setExternalFuel;
 };
 
 // 3rd party support

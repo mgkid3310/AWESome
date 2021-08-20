@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 
 params ["_paramArray", "_paramDrag", ["_liftVector", false], ["_speedStall", 0]];
-_paramArray params ["_trueAirVelocity", "_massStandard", "_massError", "_densityRatio", "_height"];
+_paramArray params ["_trueAirVelocity", "_massCurrent", "_massError", "_densityRatio", "_height"];
 _paramDrag params ["_dragArray", "_dragMultiplier", "_flapsFCoef", "_flapPhase", "_gearsUpFCoef", "_gearPhase", "_airBrakeFCoef", "_speedBrakePhase"];
 _dragArray params ["_coef2", "_coef1", "_coef0"];
 
@@ -18,7 +18,7 @@ private _dragParasite = [0, 0, 0];
 	private _force = (_coef2 select _coefIndex) * _velAxis * _airSpeed;
 	_force = _force + (_coef1 select _coefIndex) * _velAxis;
 	_force = _force + (_coef0 select _coefIndex) * ([1, -1] select (_velAxis < 0));
-	_dragParasite set [_velIndex, _force * _massStandard * _densityRatio * (GVAR(dragSourceMultiplier) select 0)];
+	_dragParasite set [_velIndex, _force * _massCurrent * _densityRatio * (GVAR(dragSourceMultiplier) select 0)];
 } forEach [[0, 0], [1, 2], [2, 1]];
 
 // induced drag (including lift-dependent parasite & wave drag)
@@ -67,7 +67,7 @@ private _dragWave = [0, 0, 0];
 	_x params ["_velIndex", "_coefIndex"];
 	private _velAxis = _airVel select _velIndex;
 	private _force = (_waveCoef select _coefIndex) * _velAxis * _airSpeed;
-	_dragWave set [_velIndex, _force * _massStandard * _densityRatio * (GVAR(dragSourceMultiplier) select 2)];
+	_dragWave set [_velIndex, _force * _massCurrent * _densityRatio * (GVAR(dragSourceMultiplier) select 2)];
 } forEach [[0, 0], [1, 2], [2, 1]];
 
 // sum up drags (induced drag is not affected by flap/gear status)

@@ -202,8 +202,8 @@ if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 // build parameter array
 private _paramDefault = [_modelVelocity, _massCurrent, _massError];
 private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityRatio, _altitudeAGLS];
-private _paramThrust = [_thrustCoef, _vtolMode, _thrustMultiplier, _throttleEffective, _engineDamage, _thrustVector];
 private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio];
+private _paramThrust = [_thrustCoef, _vtolMode, _thrustMultiplier, _throttleEffective, _engineDamage, _thrustVector];
 private _paramLift = [_liftArray, _liftMultiplier, _flapsFCoef, _flapPhase];
 private _paramDrag = [_dragArray, _dragMultiplier, _flapsFCoef, _flapPhase, _gearsUpFCoef, _gearPhase, _airBrakeFCoef, _speedBrakePhase];
 private _paramPylonDrag = [_pylonDragArray, _dragMultiplier, 0, 0, 0, 1, 0, 0];

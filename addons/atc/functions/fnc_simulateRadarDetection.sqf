@@ -11,7 +11,7 @@ private _performanceParams = _radar getVariable [QGVAR(performanceParams), []];
 private _radarDetailParams = _radar getVariable [QGVAR(radarDetailParams), []];
 if (_radarDetailParams isEqualType "") then {
 	private _index = (GVAR(radarParameterOptions) apply {toUpper (_x select 0)}) find toUpper _radarDetailParams;
-	_radarDetailParams = [GVAR(radarParameterOptions) select _index select 1, []] select (_index < 0);
+	_radarDetailParams = if (_index < 0) then {[]} else {GVAR(radarParameterOptions) select _index select 1};
 };
 
 _performanceParams params [["_radarPos", _radar], ["_radarRange", 30], ["_counterStealth", 0], ["_volumeCR", 10 ^ 3], ["_groundCR", 10 ^ 1]];

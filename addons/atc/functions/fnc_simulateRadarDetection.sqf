@@ -47,7 +47,7 @@ private _psi = acos ((_distance2D / _distance) min 1);
 
 // systemChat str [_azimuthRadius, _elevationRadius, _cellLength, _altRadar, _psi];
 
-private _rainfallRate = 16 * rain * ([0, 1] select (overcast > 0.5)); // mm/hr
+private _rainfallRate = [0, 16 * rain] select (overcast > 0.5); // mm/hr
 private _volumeReflectivity = ((6 * 10 ^ -14) * _rainfallRate ^ 1.6) / ((GVAR(speedOfLight) / (_radarFrequencyGHz * 10 ^ 9)) ^ 4); // m^-1
 private _terrainReflectivity = 10 ^ linearConversion [90, 0, _psi, -3, -2, true];
 

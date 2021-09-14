@@ -39,15 +39,15 @@ class CfgVehicles {
 		GVAR(defaultGPWS) = GPWS_NONE;
 		GVAR(lowCMcount) = LOW_CM_DEFAULT;
 	};
-	class FIR_AV8B_Base: Plane_CAS_01_base_F {
+	class FIR_AV8B_Base: Plane_Fighter_03_base_F {
 		GVAR(defaultGPWS) = GPWS_NONE;
 		GVAR(lowCMcount) = LOW_CM_DEFAULT;
 	};
-	class FIR_AV8B_NA_Base: Plane_CAS_01_base_F {
+	class FIR_AV8B_NA_Base: Plane_Fighter_03_base_F {
 		GVAR(defaultGPWS) = GPWS_NONE;
 		GVAR(lowCMcount) = LOW_CM_DEFAULT;
 	};
-	class FIR_AV8B_GR7_Base: Plane_CAS_01_base_F {
+	class FIR_AV8B_GR7_Base: Plane_Fighter_03_base_F {
 		GVAR(defaultGPWS) = GPWS_NONE;
 		GVAR(lowCMcount) = LOW_CM_DEFAULT;
 	};

@@ -185,7 +185,7 @@ with caution when towing.
 
 **Issue Tracking**  
 
-To report issues, please use Github's issue tracker  
+To report issues or request features, please use Github's issue tracker  
 
 https://github.com/mgkid3310/AWESome/issues  
 
@@ -193,15 +193,15 @@ https://github.com/mgkid3310/AWESome/issues
 
 **Steam Workshop**  
 
-You can subscribe this addon on Steam Workshop  
+You can subscribe to this addon on Steam Workshop  
 
 https://steamcommunity.com/sharedfiles/filedetails/?id=1301399507  
 
 ----------------
 
-**BI Forum thread**  
+**BI Forum Thread**  
 
-For more specific update notes, please visit BI forum thread  
+BI forum thread is also available, but updates and responses may be slower  
 
 https://forums.bohemia.net/forums/topic/217012-awesome-aerial-warfare-enhanced-somehow/  
 
@@ -213,5 +213,8 @@ Orbis2358 (mgkid3310@naver.com) : Project Manager & Programmer
 &nbsp;
 
 **Contributors**  
+
+Feel free to add your name here upon any contributions including  
+code / translation PR  
 
 N/A  

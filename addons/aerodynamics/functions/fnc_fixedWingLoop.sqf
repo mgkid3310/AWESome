@@ -204,9 +204,9 @@ if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 };
 
 // build parameter array
-private _paramDefault = [_modelVelocity, _massEffective, _massError];
-private _paramEnhanced = [_trueAirVelocity, _massEffective, _massError, _densityRatio, _altitudeAGLS];
-private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio];
+private _paramDefault = [_modelVelocity, _massCurrent, _massError];
+private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityRatio, _altitudeAGLS];
+private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio, _altitudeAGLS];
 private _paramThrust = [_thrustCoef, _vtolMode, _thrustMultiplier, _throttleEffective, _engineDamage, _thrustVector];
 private _paramLift = [_liftArray, _liftMultiplier, _flapsFCoef, _flapPhase];
 private _paramDrag = [_dragArray, _dragMultiplier, _flapsFCoef, _flapPhase, _gearsUpFCoef, _gearPhase, _airBrakeFCoef, _speedBrakePhase];
@@ -236,7 +236,8 @@ private _dragCorrection = (_dragEnhanced vectorAdd _dragPylon) vectorDiff _dragD
 // private _torqueCorrection = (_torqueEnhanced vectorMultiply (_massStandard / _massCurrent)) vectorDiff _torqueDefault;
 
 // sum up corrections and bring wheel friction into calculation if needed (todo)
-private _forceApply = _thrustCorrection vectorAdd _liftCorrection vectorAdd _dragCorrection;
+private _forceSum = _thrustCorrection vectorAdd _liftCorrection vectorAdd _dragCorrection;
+private _forceApply = _forceSum vectorMultiply (_massEffective / _massCurrent);
 if ((isTouchingGround _vehicle) && GVAR(noForceOnGround)) then {
 	_forceApply set [0, 0];
 	_forceApply set [1, 0];

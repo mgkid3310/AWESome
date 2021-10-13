@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 
-params ["_paramArray", "_paramLift", "_speedMax", "_angleOfIndicence"];
-_paramArray params ["_trueAirVelocity", "_massCurrent", "_massError", "_densityRatio", "_height"];
+params ["_paramEnhanced", "_paramLift", "_speedMax", "_angleOfIndicence"];
+_paramEnhanced params ["_trueAirVelocity", "_massStandard", "_massError", "_densityRatio", "_height"];
 _paramLift params ["_liftArray", "_liftMultiplier", "_flapsFCoef", "_flapPhase"];
 
 // if (_massError) exitWith {[0, 0, 0]};
@@ -18,7 +18,7 @@ GVAR(liftFlapFactor) params ["_speedL", "_speedH", "_factorL", "_factorH"];
 private _flapFactor = _flapsFCoef * _flapPhase * linearConversion [_speedL, _speedH, _speedKPH / _speedMax, _factorL, _factorH, true];
 _liftValue = _liftValue * (1 + _flapFactor) * _liftMultiplier;
 
-private _liftForceEnhanced = (vectorNormalized _airVel) vectorCrossProduct [_liftValue * GVAR(liftGFactor) * _massCurrent * _densityRatio, 0, 0];
+private _liftForceEnhanced = (vectorNormalized _airVel) vectorCrossProduct [_liftValue * GVAR(liftGFactor) * _massStandard * _densityRatio, 0, 0];
 _liftForceEnhanced set [2, abs (_liftForceEnhanced select 2)];
 
 // report if needed (dev script)

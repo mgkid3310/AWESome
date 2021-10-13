@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 
-params ["_paramArray", "_paramLift", "_speedMax", "_angleOfIndicence"];
-_paramArray params ["_modelvelocity", "_massCurrent", "_massError"];
+params ["_paramDefault", "_paramLift", "_speedMax", "_angleOfIndicence"];
+_paramDefault params ["_modelvelocity", "_massCurrent", "_massError"];
 _paramLift params ["_liftArray", "_liftMultiplier", "_flapsFCoef", "_flapPhase"];
 
 // if (_massError) exitWith {[0, 0, 0]};

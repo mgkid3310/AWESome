@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 
-params ["_paramArray", "_paramDrag", "_paramAltitude", "_isAdvanced"];
-_paramArray params ["_modelvelocity", "_massCurrent", "_massError"];
+params ["_paramDefault", "_paramDrag", "_paramAltitude", "_isAdvanced"];
+_paramDefault params ["_modelvelocity", "_massCurrent", "_massError"];
 _paramDrag params ["_dragArray", "_dragMultiplier", "_flapsFCoef", "_flapPhase", "_gearsUpFCoef", "_gearPhase", "_airBrakeFCoef", "_speedBrakePhase"];
 _dragArray params ["_coef2", "_coef1", "_coef0"];
 _paramAltitude params ["_altFullForce", "_altNoForce", "_altitude"];

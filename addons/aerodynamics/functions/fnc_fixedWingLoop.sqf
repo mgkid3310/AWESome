@@ -173,7 +173,7 @@ private _pylonDragCoef2 = [0, 0, 0];
 private _pylonDragArray = [_pylonDragCoef2 vectorMultiply (_pylonDragMultiplier / (1 max _massPylon)), [0, 0, 0], [0, 0, 0]];
 _massPylon = _massPylon * linearConversion [0.5, 1, _massStandard / GVAR(massStandardValue), 0.5, 1, true];
 
-// get current vehicle mass and apply
+// get current vehicle mass
 private ["_massCurrent", "_massFuel"];
 if (_massError) then {
 	_massCurrent = 10000;
@@ -190,7 +190,11 @@ if (_massError) then {
 
 	_massCurrent = _massStandard * _massStandardRatio + _massFuel * GVAR(fuelMassMultiplierGlobal) + _massPylon * _pylonMassMultiplier;
 };
-_vehicle setMass _massCurrent;
+
+// apply effective mass
+private _massEffective = (_massStandard ^ 2) / _massCurrent;
+_vehicle setVariable [QGVAR(massCurrent), _massCurrent];
+_vehicle setMass _massEffective;
 
 // F/A-18 canopy compatibility
 if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
@@ -200,8 +204,8 @@ if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 };
 
 // build parameter array
-private _paramDefault = [_modelVelocity, _massCurrent, _massError];
-private _paramEnhanced = [_trueAirVelocity, _massCurrent, _massError, _densityRatio, _altitudeAGLS];
+private _paramDefault = [_modelVelocity, _massEffective, _massError];
+private _paramEnhanced = [_trueAirVelocity, _massEffective, _massError, _densityRatio, _altitudeAGLS];
 private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio];
 private _paramThrust = [_thrustCoef, _vtolMode, _thrustMultiplier, _throttleEffective, _engineDamage, _thrustVector];
 private _paramLift = [_liftArray, _liftMultiplier, _flapsFCoef, _flapPhase];

@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 
 params ["_paramEnhanced", "_paramThrust", "_speedMax", "_paramAtmosphere"];
-_paramEnhanced params ["_modelvelocity", "_massStandard", "_massError", "_densityRatio"];
+_paramEnhanced params ["_trueAirVelocity", "_massStandard", "_massError", "_densityRatio", "_height"];
 _paramThrust params ["_thrustCoef", "_vtolMode", "_thrustMultiplier", "_throttle", "_engineDamage", "_thrustVector"];
 _paramAtmosphere params ["_temperatureRatio", "_pressureRatio"];
 

@@ -1,3 +1,3 @@
 hemtt update
 
-pause>nul
+pause

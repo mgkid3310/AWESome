@@ -3,7 +3,7 @@
 params ["_vehicle"];
 
 private ["_isAdvanced",
-	"_dragArray", "_liftArray", "_angleOfIndicence", "_flapsFCoef", "_gearsUpFCoef", "_airBrakeFCoef", "_torqueXCoef",
+	"_dragArray", "_liftArray", "_angleOfIncidence", "_flapsFCoef", "_gearsUpFCoef", "_airBrakeFCoef", "_torqueXCoef",
 	"_thrustCoef", "_vtolMode", "_altFullForce", "_altNoForce", "_speedStall", "_speedMax",
 	"_massError", "_massStandard", "_fuelCapacity"
 ];
@@ -20,7 +20,7 @@ if (_isAdvanced) then {
 };
 
 _liftArray = getArray (_class >> "envelope");
-_angleOfIndicence = getNumber (_class >> "angleOfIndicence");
+_angleOfIncidence = getNumber (_class >> "angleOfIndicence"); // config name itself is a typo
 if (getNumber (_class >> "flaps") > 0) then {
 	_flapsFCoef = getNumber (_class >> "flapsFrictionCoef");
 } else {
@@ -84,7 +84,7 @@ if (isClass (_class >> "AWESome_ConfigData")) then {
 	_miscData pushBack getText (_class >> "AWESome_ConfigData" >> "setExternalFuel");
 };
 
-private _aerodynamicsArray = [_dragArray, _liftArray, _angleOfIndicence, _flapsFCoef, _gearsUpFCoef, _airBrakeFCoef, _torqueXCoef];
+private _aerodynamicsArray = [_dragArray, _liftArray, _angleOfIncidence, _flapsFCoef, _gearsUpFCoef, _airBrakeFCoef, _torqueXCoef];
 private _speedPerformance = [_thrustCoef, _vtolMode, _altFullForce, _altNoForce, _speedStall, _speedMax];
 private _physicalProperty = [_massError, _massStandard, _fuelCapacity];
 private _configData = [_configEnabled, _engineData, _weightData, _miscData];

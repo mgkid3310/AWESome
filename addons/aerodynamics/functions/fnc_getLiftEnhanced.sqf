@@ -1,13 +1,13 @@
 #include "script_component.hpp"
 
-params ["_paramEnhanced", "_paramLift", "_speedMax", "_angleOfIndicence"];
+params ["_paramEnhanced", "_paramLift", "_speedMax", "_angleOfIncidence"];
 _paramEnhanced params ["_trueAirVelocity", "_massStandard", "_massError", "_densityRatio", "_height"];
 _paramLift params ["_liftArray", "_liftMultiplier", "_flapsFCoef", "_flapPhase"];
 
 // if (_massError) exitWith {[0, 0, 0]};
 
 private _airVel = _trueAirVelocity vectorMultiply -1;
-private _speedKPH = (_trueAirVelocity vectorDotProduct [0, cos deg _angleOfIndicence, sin deg _angleOfIndicence]) * 3.6;
+private _speedKPH = (_trueAirVelocity vectorDotProduct [0, cos deg _angleOfIncidence, sin deg _angleOfIncidence]) * 3.6;
 private _liftValue = [_liftArray, _speedMax, 1.25 / (count _liftArray - 1), _speedKPH] call FUNC(extractCoefArray);
 
 private _hOverD = ((_height max 0) + GVAR(wingHeight)) / GVAR(wingSpan);

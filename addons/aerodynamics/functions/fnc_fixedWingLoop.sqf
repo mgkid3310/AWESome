@@ -13,7 +13,7 @@ if !(_aeroConfigs isEqualType []) then {
 };
 
 _aeroConfigs params ["_isAdvanced", "_aerodynamicsArray", "_speedPerformance", "_physicalProperty", "_configData"];
-_aerodynamicsArray params ["_dragArray", "_liftArray", "_angleOfIndicence", "_flapsFCoef", "_gearsUpFCoef", "_airBrakeFCoef", "_torqueXCoef"];
+_aerodynamicsArray params ["_dragArray", "_liftArray", "_angleOfIncidence", "_flapsFCoef", "_gearsUpFCoef", "_airBrakeFCoef", "_torqueXCoef"];
 _speedPerformance params ["_thrustCoef", "_vtolMode", "_altFullForce", "_altNoForce", "_speedStall", "_speedMax"];
 _physicalProperty params ["_massError", "_massStandard", "_fuelCapacity"];
 
@@ -220,8 +220,8 @@ private _thrustEnhanced = [_paramEnhanced, _paramThrust, _speedMax, _paramAtmosp
 private _thrustCorrection = _thrustEnhanced vectorDiff _thrustDefault;
 
 // get lift force correction
-private _liftDefault = [_paramDefault, _paramLift, _speedMax, _angleOfIndicence] call FUNC(getLiftDefault);
-private _liftEnhanced = [_paramEnhanced, _paramLift, _speedMax, _angleOfIndicence] call FUNC(getLiftEnhanced);
+private _liftDefault = [_paramDefault, _paramLift, _speedMax, _angleOfIncidence] call FUNC(getLiftDefault);
+private _liftEnhanced = [_paramEnhanced, _paramLift, _speedMax, _angleOfIncidence] call FUNC(getLiftEnhanced);
 private _liftCorrection = _liftEnhanced vectorDiff _liftDefault;
 
 // get drag force correction

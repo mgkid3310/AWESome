@@ -1,12 +1,12 @@
 #include "script_component.hpp"
 
-params ["_paramDefault", "_paramLift", "_speedMax", "_angleOfIndicence"];
+params ["_paramDefault", "_paramLift", "_speedMax", "_angleOfIncidence"];
 _paramDefault params ["_modelvelocity", "_massCurrent", "_massError"];
 _paramLift params ["_liftArray", "_liftMultiplier", "_flapsFCoef", "_flapPhase"];
 
 // if (_massError) exitWith {[0, 0, 0]};
 
-private _speedKPH = (_modelvelocity vectorDotProduct [0, cos deg _angleOfIndicence, sin deg _angleOfIndicence]) * 3.6;
+private _speedKPH = (_modelvelocity vectorDotProduct [0, cos deg _angleOfIncidence, sin deg _angleOfIncidence]) * 3.6;
 private _liftValue = [_liftArray, _speedMax, 1.25 / (count _liftArray - 1), _speedKPH] call FUNC(extractCoefArray);
 
 GVAR(liftFlapFactor) params ["_speedL", "_speedH", "_factorL", "_factorH"];

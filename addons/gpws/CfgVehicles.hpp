@@ -17,15 +17,15 @@ class CfgVehicles {
 	class Plane_Fighter_03_base_F: Plane_Base_F {};
 
 	// JS_JC
-	class JS_JC_FA18E: Plane {
+	class JS_JC_FA18E: Plane_Base_F {
 		GVAR(defaultGPWS) = GPWS_NONE;
 		GVAR(lowCMcount) = LOW_CM_DEFAULT;
 	};
-	class JS_JC_FA18F: Plane {
+	class JS_JC_FA18F: Plane_Base_F {
 		GVAR(defaultGPWS) = GPWS_NONE;
 		GVAR(lowCMcount) = LOW_CM_DEFAULT;
 	};
-	class JS_JC_SU35: Plane {
+	class JS_JC_SU35: Plane_Base_F {
 		GVAR(defaultGPWS) = GPWS_NONE;
 		GVAR(lowCMcount) = LOW_CM_DEFAULT;
 	};

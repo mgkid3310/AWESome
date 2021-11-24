@@ -64,6 +64,7 @@ private _liftMultiplier = (_vehicle getVariable [QGVAR(liftMultiplier), 1]) * GV
 private _dragMultiplier = (_vehicle getVariable [QGVAR(dragMultiplier), 1]) * GVAR(dragMultiplierGlobal);
 private _pylonMassMultiplier = (_vehicle getVariable [QGVAR(pylonMassMultiplier), 1]) * GVAR(pylonMassMultiplierGlobal);
 private _pylonDragMultiplier = (_vehicle getVariable [QGVAR(pylonDragMultiplier), 1]) * GVAR(pylonDragMultiplierGlobal);
+private _controlSensitivity = (_vehicle getVariable [QGVAR(controlSensitivity), 1]) * GVAR(controlSensitivityGlobal);
 private _massStandardRatio = GVAR(massStandardRatio);
 private _massFuelRatio = GVAR(massFuelRatio);
 
@@ -192,7 +193,7 @@ if (_massError) then {
 };
 
 // apply effective mass
-private _massEffective = (_massStandard ^ 2) / _massCurrent;
+private _massEffective = (_massStandard ^ 2) * _controlSensitivity / _massCurrent;
 _vehicle setVariable [QGVAR(massCurrent), _massCurrent];
 _vehicle setMass _massEffective;
 

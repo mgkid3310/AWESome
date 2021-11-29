@@ -92,7 +92,7 @@ private _speedBrakePhase = _vehicle animationSourcePhase "speedBrake";
 
 // config data compatibility
 if (_configData param [0, 0] > 0) then {
-	_configData params ["_configEnabled", "_engineData", "_weightData"];
+	_configData params ["_configEnabled", "_engineData", "_weightData", "_miscData", "_codeIntercept"];
 	_engineData params ["_abThrottle", "_refThrust", "_milThrust", "_abThrust", "_abFuelMultiplier"];
 	_weightData params ["_gWeight", "_zfWeight", "_fWeight"];
 
@@ -105,6 +105,8 @@ if (_configData param [0, 0] > 0) then {
 
 	_massStandardRatio = _zfWeight / _gWeight;
 	_massFuelRatio = _fWeight / _gWeight;
+
+	{call compile _x} forEach _codeIntercept;
 };
 private _useExternalFuel = (_configData select 3) param [0, 0];
 private _getExternalFuel = (_configData select 3) param [1, ""];

@@ -66,6 +66,7 @@ private _configEnabled = 0;
 private _engineData = [];
 private _weightData = [];
 private _miscData = [];
+private _codeIntercept = [];
 if (isClass (_class >> "AWESome_ConfigData")) then {
 	_configEnabled = getNumber (_class >> "AWESome_ConfigData" >> "enabled");
 
@@ -82,12 +83,16 @@ if (isClass (_class >> "AWESome_ConfigData")) then {
 	_miscData pushBack getNumber (_class >> "AWESome_ConfigData" >> "useExternalFuel");
 	_miscData pushBack getText (_class >> "AWESome_ConfigData" >> "getExternalFuel");
 	_miscData pushBack getText (_class >> "AWESome_ConfigData" >> "setExternalFuel");
+
+	if (isArray (_class >> "AWESome_ConfigData" >> "codeIntercept")) then {
+		_codeIntercept = getArray (_class >> "AWESome_ConfigData" >> "codeIntercept");
+	};
 };
 
 private _aerodynamicsArray = [_dragArray, _liftArray, _angleOfIncidence, _flapsFCoef, _gearsUpFCoef, _airBrakeFCoef, _torqueXCoef];
 private _speedPerformance = [_thrustCoef, _vtolMode, _altFullForce, _altNoForce, _speedStall, _speedMax];
 private _physicalProperty = [_massError, _massStandard, _fuelCapacity];
-private _configData = [_configEnabled, _engineData, _weightData, _miscData];
+private _configData = [_configEnabled, _engineData, _weightData, _miscData, _codeIntercept];
 private _return = [_isAdvanced, _aerodynamicsArray, _speedPerformance, _physicalProperty, _configData];
 
 // report if needed (dev script)

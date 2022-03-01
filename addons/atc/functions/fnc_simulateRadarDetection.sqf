@@ -5,7 +5,7 @@ params ["_monitor", "_target", ["_radarTargetSize", -1]];
 private _radarParams = _monitor getVariable [QGVAR(radarParams), []];
 _radarParams params [["_radar", _monitor], ["_isMaster", false]];
 
-if (_isMaster) then {[GVAR(minRadarDetection), 0] select (isTouchingGround _target)};
+if (_isMaster) exitWith {[GVAR(minRadarDetection), 0] select (isTouchingGround _target)};
 
 private _performanceParams = _radar getVariable [QGVAR(performanceParams), []];
 private _radarDetailParams = _radar getVariable [QGVAR(radarDetailParams), []];

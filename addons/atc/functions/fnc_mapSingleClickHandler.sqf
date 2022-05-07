@@ -20,7 +20,7 @@ private _markerVehicleList = _radarMarkers apply {_x select 2};
 
 private _distanceList = _markerPosList apply {_x distance2D _pos};
 private _minDistance = selectMin _distanceList;
-private _scaleNow = ctrlMapScale ((findDisplay 12) displayCtrl 51);
+private _scaleNow = ctrlMapScale ((findDisplay 12) displayCtrl 51) / GVAR(scaleStd);
 
 if (_minDistance > _scaleNow * GVAR(mapClickRange)) exitWith {};
 

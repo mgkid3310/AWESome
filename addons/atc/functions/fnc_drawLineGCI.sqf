@@ -4,7 +4,7 @@ params ["_blue", "_red"];
 _blue params ["_circleBlue", "_posBlue", "_vehicleBlue"];
 _red params ["_circleRed", "_posRed", "_vehicleRed"];
 
-private _scaleNow = ctrlMapScale ((findDisplay 12) displayCtrl 51);
+private _scaleNow = ctrlMapScale ((findDisplay 12) displayCtrl 51) / GVAR(scaleStd);
 private _position = (_posRed vectorAdd _posBlue) vectorMultiply 0.5;
 private _vector = _posRed vectorDiff _posBlue;
 private _distance = _posRed distance2D _posBlue;

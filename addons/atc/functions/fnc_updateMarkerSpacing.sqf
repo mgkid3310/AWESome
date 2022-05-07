@@ -2,10 +2,10 @@
 
 params [["_array", []]];
 
-private _scaleNow = ctrlMapScale ((findDisplay 12) displayCtrl 51);
-private _xOffset = GVAR(xOffset) * (_scaleNow / GVAR(scaleStd));
-private _yOffset = GVAR(yOffset) * (_scaleNow / GVAR(scaleStd));
-private _ySpace = (linearConversion [GVAR(scaleMin), GVAR(scaleMax), _scaleNow, GVAR(spaceMax), GVAR(spaceMin), true]) * (_scaleNow / GVAR(scaleStd));
+private _scaleNow = ctrlMapScale ((findDisplay 12) displayCtrl 51) / GVAR(scaleStd);
+private _xOffset = GVAR(xOffset) * _scaleNow;
+private _yOffset = GVAR(yOffset) * _scaleNow;
+private _ySpace = (linearConversion [GVAR(scaleMin), GVAR(scaleMax), _scaleNow, GVAR(spaceMax), GVAR(spaceMin), true]) * _scaleNow;
 
 {
 	_x params ["_markers", "_pos"];

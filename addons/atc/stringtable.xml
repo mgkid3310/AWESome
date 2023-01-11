@@ -104,11 +104,11 @@
 			<Korean>Vehicle trail length on ATC radar screen</Korean>
 		</Key>
 
-		<Key ID="STR_orbis_atc_displayProjectileTrailsname">
+		<Key ID="STR_orbis_atc_displayProjectileTrails_name">
 			<English>Display missile trails</English>
 			<Korean>Display missile trails</Korean>
 		</Key>
-		<Key ID="STR_orbis_atc_displayProjectileTrailstooltip">
+		<Key ID="STR_orbis_atc_displayProjectileTrails_tooltip">
 			<English>Determines if missile trails will be drawn, displaying missile trails may lower FPS</English>
 			<Korean>Determines if missile trails will be drawn, displaying missile trails may lower FPS</Korean>
 		</Key>

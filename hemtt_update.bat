@@ -1,3 +1,0 @@
-hemtt update
-
-pause

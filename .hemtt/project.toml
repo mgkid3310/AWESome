@@ -1,0 +1,11 @@
+name = "AWESome"
+prefix = "orbis"
+mainprefix = "z"
+
+[files]
+include = [
+    "documents/**",
+	"icon.jpg",
+	"LICENSE",
+	"README.md"
+]

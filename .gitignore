@@ -6,3 +6,5 @@ releases/
 *.bisign
 *.exe
 *.pbo
+
+hemtt_publish.bat

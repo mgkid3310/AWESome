@@ -98,7 +98,7 @@ if (_configData param [0, 0] > 0) then {
 	_weightData params ["_gWeight", "_zfWeight", "_fWeight"];
 
 	if (_throttleInput > _abThrottle) then {
-		_fuelFlowMultiplier = _fuelFlowMultiplier * _abFuelMultiplier;
+		_fuelFlowMultiplier = _fuelFlowMultiplier * _abFuelMultiplier; // includes thrust & TSFC increase
 		_thrustMultiplier = _thrustMultiplier * _abThrust / _refThrust;
 	} else {
 		_thrustMultiplier = _thrustMultiplier * _milThrust / _refThrust;

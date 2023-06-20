@@ -70,6 +70,7 @@ private _massFuelRatio = GVAR(massFuelRatio);
 
 // read vehicle status
 private _throttleInput = airplaneThrottle _vehicle;
+private _throttleEffective = [_throttleOld, _throttleInput, _timeStep] call FUNC(getEffectiveThrottle);
 private _fuelCurrent = fuel _vehicle;
 private _modelVelocityNew = velocityModelSpace _vehicle;
 private _modelVelocity = (_modelVelocityNew vectorAdd _modelVelocityOld) vectorMultiply 0.5;
@@ -111,45 +112,6 @@ if (_configData param [0, 0] > 0) then {
 private _useExternalFuel = (_configData select 3) param [0, 0];
 private _getExternalFuel = (_configData select 3) param [1, ""];
 private _setExternalFuel = (_configData select 3) param [2, ""];
-
-// get correct fuel consumption
-private _throttleEffective = [_throttleOld, _throttleInput, _timeStep] call FUNC(getEffectiveThrottle);
-private _fuelFlowDefault = [0, 0.3 * _throttleEffective ^ 2 + 0.03] select isEngineOn _vehicle;
-private _fuelFlowEnhanced = [_throttleEffective, isEngineOn _vehicle, _fuelFlowMultiplier] call FUNC(getFuelFlowEnhanced);
-
-// F/A-18 external fuel tank compatibility
-private ["_auxtankSwitch", "_abSwitch"];
-if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
-	_auxtankSwitch = _vehicle animationPhase "auxtank_switch";
-	_abSwitch = [1, 2] select (_vehicle animationPhase "ab_switch" > 0.1);
-
-	if (_auxtankSwitch > 0.05) then {
-		_auxtankSwitch = _auxtankSwitch + ([0, 0.0005 * _abSwitch * _timeStep] select isEngineOn _vehicle);
-		_auxtankSwitch = _auxtankSwitch - _fuelFlowEnhanced * _abSwitch * (_timeStep / _fuelCapacity) / 1.1845;
-		_vehicle animate ["auxtank_switch", _auxtankSwitch max 0, true];
-		_vehicle setFuel (_fuelCurrent + (_auxtankSwitch min 0));
-
-		_fuelFlowEnhanced = 0;
-	} else {
-		_fuelFlowEnhanced = _fuelFlowEnhanced * _abSwitch;
-	};
-};
-
-// apply fuel update
-private _fuelCorrection = (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity);
-_vehicle setFuel ((_fuelCurrent - _fuelCorrection) min 1);
-
-private ["_fuelExternal", "_fuelDraw"];
-if (_useExternalFuel > 0) then {
-	_fuelExternal = [_vehicle] call compile _getExternalFuel;
-	_fuelDraw = (1 - fuel _vehicle) min _fuelExternal;
-	_vehicle setFuel (fuel _vehicle + _fuelDraw);
-	[_vehicle, _fuelExternal - _fuelDraw] call compile _setExternalFuel;
-};
-
-// 3rd party support
-_vehicle setVariable [QGVAR(effectiveThrottle), _throttleEffective];
-_vehicle setVariable [QGVAR(fuelFlowEnhanced), _fuelFlowEnhanced];
 
 // check for ammo on pylons
 private ["_magazineClass", "_ammoClass", "_massFull", "_countFull", "_massMagazine", "_airFriction", "_sideAirFriction"];
@@ -217,6 +179,10 @@ private _paramPylonDrag = [_pylonDragArray, _dragMultiplier, 0, 0, 0, 1, 0, 0];
 private _paramAltitude = [_altFullForce, _altNoForce, _altitudeASL];
 private _paramAtmosphere = [_temperatureRatio, _pressureRatio];
 
+// get correct fuel consumption
+private _fuelFlowDefault = [0, 0.3 * _throttleEffective ^ 2 + 0.03] select isEngineOn _vehicle;
+private _fuelFlowEnhanced = [_throttleEffective, isEngineOn _vehicle, _fuelFlowMultiplier, _paramAtmosphere] call FUNC(getFuelFlowEnhanced);
+
 // thrust correction
 private _thrustDefault = [_paramDefault, _paramThrust, _speedMax, _paramAltitude] call FUNC(getThrustDefault);
 private _thrustEnhanced = [_paramEnhanced, _paramThrust, _speedMax, _paramAtmosphere] call FUNC(getThrustEnhanced);
@@ -237,6 +203,36 @@ private _dragCorrection = (_dragEnhanced vectorAdd _dragPylon) vectorDiff _dragD
 // private _torqueDefault = [_paramDefault, _torqueXCoef, _massError] call FUNC(getTorque);
 // private _torqueEnhanced = [_paramEnhanced, _torqueXCoef, _massError] call FUNC(getTorque);
 // private _torqueCorrection = (_torqueEnhanced vectorMultiply (_massStandard / _massCurrent)) vectorDiff _torqueDefault;
+
+// F/A-18 external fuel tank compatibility
+private ["_auxtankSwitch", "_abSwitch"];
+if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
+	_auxtankSwitch = _vehicle animationPhase "auxtank_switch";
+	_abSwitch = [1, 2] select (_vehicle animationPhase "ab_switch" > 0.1);
+
+	if (_auxtankSwitch > 0.05) then {
+		_auxtankSwitch = _auxtankSwitch + ([0, 0.0005 * _abSwitch * _timeStep] select isEngineOn _vehicle);
+		_auxtankSwitch = _auxtankSwitch - _fuelFlowEnhanced * _abSwitch * (_timeStep / _fuelCapacity) / 1.1845;
+		_vehicle animate ["auxtank_switch", _auxtankSwitch max 0, true];
+		_vehicle setFuel (_fuelCurrent + (_auxtankSwitch min 0));
+
+		_fuelFlowEnhanced = 0;
+	} else {
+		_fuelFlowEnhanced = _fuelFlowEnhanced * _abSwitch;
+	};
+};
+
+// apply fuel update
+private _fuelCorrection = (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity);
+_vehicle setFuel ((_fuelCurrent - _fuelCorrection) min 1);
+
+private ["_fuelExternal", "_fuelDraw"];
+if (_useExternalFuel > 0) then {
+	_fuelExternal = [_vehicle] call compile _getExternalFuel;
+	_fuelDraw = (1 - fuel _vehicle) min _fuelExternal;
+	_vehicle setFuel (fuel _vehicle + _fuelDraw);
+	[_vehicle, _fuelExternal - _fuelDraw] call compile _setExternalFuel;
+};
 
 // sum up corrections and bring wheel friction into calculation if needed (todo)
 private _forceSum = _thrustCorrection vectorAdd _liftCorrection vectorAdd _dragCorrection;
@@ -267,4 +263,9 @@ if (GVAR(applyForce)) then {
 // diag_log format ["orbis_aerodynamics _thrustDefault: %1, _thrustEnhanced: %2, _liftDefault: %3, _liftEnhanced: %4", _thrustDefault, _thrustEnhanced, _liftDefault, _liftEnhanced];
 // diag_log format ["orbis_aerodynamics _massCurrent: %1, _dragDefault: %2, _dragEnhanced: %3, _dragPylon: %4", _massCurrent, _dragDefault, _dragEnhanced, _dragPylon];
 
+// 3rd party support
+_vehicle setVariable [QGVAR(effectiveThrottle), _throttleEffective];
+_vehicle setVariable [QGVAR(fuelFlowEnhanced), _fuelFlowEnhanced];
+
+// save data for next frame
 _vehicle setVariable [QGVAR(fWingData), [_throttleEffective, _modelVelocityNew, _modelWindNew/* , _controlInputs */]];

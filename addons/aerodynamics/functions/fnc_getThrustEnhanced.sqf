@@ -7,7 +7,7 @@ _paramAtmosphere params ["_temperatureRatio", "_pressureRatio"];
 
 // if (_massError) exitWith {[0, 0, 0]};
 
-private _speedKPH = (_modelvelocity select 1) * 3.6;
+private _speedKPH = (_trueAirVelocity select 1) * 3.6;
 private _thrustValue = [_thrustCoef, _speedMax, 1.5 / (count _thrustCoef - 1), _speedKPH] call FUNC(extractCoefArray);
 _thrustValue = _thrustValue * _throttle * _pressureRatio;
 _thrustValue = _thrustValue * (1 - _engineDamage) * GVAR(thrustFactor) * (sqrt _speedMax) * _massStandard * _thrustMultiplier;

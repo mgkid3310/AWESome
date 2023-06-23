@@ -70,11 +70,15 @@ private _codeIntercept = [];
 if (isClass (_class >> "AWESome_ConfigData")) then {
 	_configEnabled = getNumber (_class >> "AWESome_ConfigData" >> "enabled");
 
-	_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "abThrottle");
-	_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "refThrust");
-	_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "milThrust");
-	_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "abThrust");
-	_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "abFuelMultiplier");
+	if (isNumber (_class >> "AWESome_ConfigData" >> "abThrottle")) then {
+		_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "abThrottle");
+		_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "refThrust");
+		_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "milThrust");
+		_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "abThrust");
+		_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "abFuelMultiplier");
+	} else {
+		_engineData = [1, 1, 1, 1, 1];
+	};
 
 	_weightData pushBack getNumber (_class >> "AWESome_ConfigData" >> "grossWeight");
 	_weightData pushBack getNumber (_class >> "AWESome_ConfigData" >> "zfWeight");

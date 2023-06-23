@@ -63,30 +63,28 @@ if !(_massStandard > 0) then {
 _fuelCapacity = getNumber (_class >> "fuelCapacity");
 
 private _configEnabled = 0;
-private _engineData = [];
-private _weightData = [];
-private _miscData = [];
+private _engineData = [1, 1, 1, 1, 1];
+private _weightData = [1, 1, 1];
+private _miscData = [0, "", ""];
 private _codeIntercept = [];
 if (isClass (_class >> "AWESome_ConfigData")) then {
 	_configEnabled = getNumber (_class >> "AWESome_ConfigData" >> "enabled");
 
 	if (isNumber (_class >> "AWESome_ConfigData" >> "abThrottle")) then {
-		_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "abThrottle");
-		_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "refThrust");
-		_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "milThrust");
-		_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "abThrust");
-		_engineData pushBack getNumber (_class >> "AWESome_ConfigData" >> "abFuelMultiplier");
-	} else {
-		_engineData = [1, 1, 1, 1, 1];
+		_engineData set [0, getNumber (_class >> "AWESome_ConfigData" >> "abThrottle")];
+		_engineData set [1, getNumber (_class >> "AWESome_ConfigData" >> "refThrust")];
+		_engineData set [2, getNumber (_class >> "AWESome_ConfigData" >> "milThrust")];
+		_engineData set [3, getNumber (_class >> "AWESome_ConfigData" >> "abThrust")];
+		_engineData set [4, getNumber (_class >> "AWESome_ConfigData" >> "abFuelMultiplier")];
 	};
 
-	_weightData pushBack getNumber (_class >> "AWESome_ConfigData" >> "grossWeight");
-	_weightData pushBack getNumber (_class >> "AWESome_ConfigData" >> "zfWeight");
-	_weightData pushBack getNumber (_class >> "AWESome_ConfigData" >> "fuelWeight");
+	_weightData set [0, getNumber (_class >> "AWESome_ConfigData" >> "grossWeight")];
+	_weightData set [1, getNumber (_class >> "AWESome_ConfigData" >> "zfWeight")];
+	_weightData set [2, getNumber (_class >> "AWESome_ConfigData" >> "fuelWeight")];
 
-	_miscData pushBack getNumber (_class >> "AWESome_ConfigData" >> "useExternalFuel");
-	_miscData pushBack getText (_class >> "AWESome_ConfigData" >> "getExternalFuel");
-	_miscData pushBack getText (_class >> "AWESome_ConfigData" >> "setExternalFuel");
+	_miscData set [0, getNumber (_class >> "AWESome_ConfigData" >> "useExternalFuel")];
+	_miscData set [1, getText (_class >> "AWESome_ConfigData" >> "getExternalFuel")];
+	_miscData set [2, getText (_class >> "AWESome_ConfigData" >> "setExternalFuel")];
 
 	if (isArray (_class >> "AWESome_ConfigData" >> "codeIntercept")) then {
 		_codeIntercept = getArray (_class >> "AWESome_ConfigData" >> "codeIntercept");

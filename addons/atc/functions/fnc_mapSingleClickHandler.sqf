@@ -18,6 +18,8 @@ private _radarMarkers = _markersKnown + _markersBogie + _markersBandit;
 private _markerPosList = _radarMarkers apply {_x select 1};
 private _markerVehicleList = _radarMarkers apply {_x select 2};
 
+if !(count _markerPosList > 0) exitWith {};
+
 private _distanceList = _markerPosList apply {_x distance2D _pos};
 private _minDistance = selectMin _distanceList;
 private _scaleNow = ctrlMapScale ((findDisplay 12) displayCtrl 51) / GVAR(scaleStd);

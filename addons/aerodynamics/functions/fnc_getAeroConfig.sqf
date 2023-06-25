@@ -82,9 +82,11 @@ if (isClass (_class >> "AWESome_ConfigData")) then {
 	_weightData set [1, getNumber (_class >> "AWESome_ConfigData" >> "zfWeight")];
 	_weightData set [2, getNumber (_class >> "AWESome_ConfigData" >> "fuelWeight")];
 
-	_miscData set [0, getNumber (_class >> "AWESome_ConfigData" >> "useExternalFuel")];
-	_miscData set [1, getText (_class >> "AWESome_ConfigData" >> "getExternalFuel")];
-	_miscData set [2, getText (_class >> "AWESome_ConfigData" >> "setExternalFuel")];
+	if (isNumber (_class >> "AWESome_ConfigData" >> "useExternalFuel")) then {
+		_miscData set [0, getNumber (_class >> "AWESome_ConfigData" >> "useExternalFuel")];
+		_miscData set [1, getText (_class >> "AWESome_ConfigData" >> "getExternalFuel")];
+		_miscData set [2, getText (_class >> "AWESome_ConfigData" >> "setExternalFuel")];
+	};
 
 	if (isArray (_class >> "AWESome_ConfigData" >> "codeIntercept")) then {
 		_codeIntercept = getArray (_class >> "AWESome_ConfigData" >> "codeIntercept");

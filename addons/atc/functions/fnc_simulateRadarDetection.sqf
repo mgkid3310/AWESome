@@ -37,7 +37,7 @@ if ((_radarTargetSize < 0) && (_target isEqualType "")) then {
 private _radarCrossSection = 5 * _radarTargetSize ^ 4; // m^2
 private _rangeRatio = 1000 * _radarRange / _distance;
 
-private _detectingPower = _radarCrossSection * _rangeRatio ^ 4; // 5 for 5m^2 RCS aircraft at maximum radar range, high altitude
+private _detectingPower = _radarCrossSection * _rangeRatio ^ 4; // 1 per 1m^2 of RCS at maximum radar range
 
 private _azimuthRadius = _distance * tan (_azimuthBeamwidth / 2);
 private _elevationRadius = _distance * tan (_elevationBeamwidth / 2);

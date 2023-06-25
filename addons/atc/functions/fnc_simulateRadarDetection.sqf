@@ -37,7 +37,7 @@ if ((_radarTargetSize < 0) && (_target isEqualType "")) then {
 private _radarCrossSection = 5 * _radarTargetSize ^ 4; // m^2
 private _rangeRatio = 1000 * _radarRange / _distance;
 
-private _detectingPower = _radarCrossSection * _rangeRatio ^ 4; // 1 for 5m^2 RCS aircraft at maximum radar range, high altitude
+private _detectingPower = _radarCrossSection * _rangeRatio ^ 4; // 5 for 5m^2 RCS aircraft at maximum radar range, high altitude
 
 private _azimuthRadius = _distance * tan (_azimuthBeamwidth / 2);
 private _elevationRadius = _distance * tan (_elevationBeamwidth / 2);
@@ -65,7 +65,7 @@ private _volumeClutter = ((_volumeReflectivity * _volumeClutterCell) / (_volumeC
 private _groundClutter = ((_terrainReflectivity * _groundClutterArea) / (_groundCR * 10 ^ 0.16)) * _rangeRatio ^ 4;
 private _radarClutter = 5 + GVAR(volumeClutterFactor) * _volumeClutter + GVAR(groundClutterFactor) * _groundClutter; // 5 for background noise
 
-private _radarDetection = _detectingPower / _radarClutter;
+private _radarDetection = _detectingPower / _radarClutter; // 1 for 5m^2 RCS aircraft at maximum radar range, no volume nor ground clutter
 
 // systemChat str [_volumeClutter, _groundClutter, _radarClutter, _radarDetection];
 

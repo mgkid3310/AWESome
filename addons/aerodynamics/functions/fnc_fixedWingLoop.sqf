@@ -71,6 +71,7 @@ private _massFuelRatio = GVAR(massFuelRatio);
 // read vehicle status
 private _throttleInput = airplaneThrottle _vehicle;
 private _throttleEffective = [_throttleOld, _throttleInput, _timeStep] call FUNC(getEffectiveThrottle);
+private _throttleApply = _throttleEffective;
 private _fuelCurrent = fuel _vehicle;
 private _modelVelocityNew = velocityModelSpace _vehicle;
 private _modelVelocity = (_modelVelocityNew vectorAdd _modelVelocityOld) vectorMultiply 0.5;
@@ -92,16 +93,20 @@ private _gearPhase = _vehicle animationSourcePhase "gear";
 private _speedBrakePhase = _vehicle animationSourcePhase "speedBrake";
 
 // config data compatibility
+private ["_abRatio"];
 if (_configData param [0, 0] > 0) then {
 	_configData params ["_configEnabled", "_engineData", "_weightData", "_miscData", "_codeIntercept"];
 	_engineData params ["_abThrottle", "_refThrust", "_milThrust", "_abThrust", "_abFuelMultiplier"];
 	_weightData params ["_gWeight", "_zfWeight", "_fWeight"];
 
-	if (_throttleInput > _abThrottle) then {
-		_fuelFlowMultiplier = _fuelFlowMultiplier * _abFuelMultiplier; // includes thrust & TSFC increase
-		_thrustMultiplier = _thrustMultiplier * _abThrust / _refThrust;
+	if (_throttleEffective > _abThrottle) then {
+		_abRatio = linearConversion [_abThrottle, 1, _throttleEffective, GVAR(abMinRatio), 1, true];
+		_fuelFlowMultiplier = _fuelFlowMultiplier * linearConversion [0, 1, _abRatio, 1, _abFuelMultiplier]; // includes thrust & TSFC increase
+		_thrustMultiplier = _thrustMultiplier * linearConversion [0, 1, _abRatio, _milThrust / _refThrust, _abThrust / _refThrust];
+		_throttleApply = 1;
 	} else {
 		_thrustMultiplier = _thrustMultiplier * _milThrust / _refThrust;
+		_throttleApply = linearConversion [0, _abThrottle, _throttleEffective, 0, 1, true];
 	};
 
 	_massStandardRatio = _zfWeight / _gWeight;
@@ -172,7 +177,7 @@ if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 private _paramDefault = [_modelVelocity, _massCurrent, _massError];
 private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityRatio, _altitudeAGLS];
 private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio, _altitudeAGLS];
-private _paramThrust = [_thrustCoef, _vtolMode, _thrustMultiplier, _throttleEffective, _engineDamage, _thrustVector];
+private _paramThrust = [_thrustCoef, _vtolMode, _thrustMultiplier, _engineDamage, _thrustVector];
 private _paramLift = [_liftArray, _liftMultiplier, _flapsFCoef, _flapPhase];
 private _paramDrag = [_dragArray, _dragMultiplier, _flapsFCoef, _flapPhase, _gearsUpFCoef, _gearPhase, _airBrakeFCoef, _speedBrakePhase];
 private _paramPylonDrag = [_pylonDragArray, _dragMultiplier, 0, 0, 0, 1, 0, 0];
@@ -181,11 +186,11 @@ private _paramAtmosphere = [_temperatureRatio, _pressureRatio];
 
 // get correct fuel consumption
 private _fuelFlowDefault = [0, 0.3 * _throttleEffective ^ 2 + 0.03] select isEngineOn _vehicle;
-private _fuelFlowEnhanced = [_throttleEffective, isEngineOn _vehicle, _fuelFlowMultiplier, _paramAtmosphere] call FUNC(getFuelFlowEnhanced);
+private _fuelFlowEnhanced = [_throttleApply, isEngineOn _vehicle, _fuelFlowMultiplier, _paramAtmosphere] call FUNC(getFuelFlowEnhanced);
 
 // thrust correction
-private _thrustDefault = [_paramDefault, _paramThrust, _speedMax, _paramAltitude] call FUNC(getThrustDefault);
-private _thrustEnhanced = [_paramEnhanced, _paramThrust, _speedMax, _paramAtmosphere] call FUNC(getThrustEnhanced);
+private _thrustDefault = [_throttleEffective, _paramDefault, _paramThrust, _speedMax, _paramAltitude] call FUNC(getThrustDefault);
+private _thrustEnhanced = [_throttleApply, _paramEnhanced, _paramThrust, _speedMax, _paramAtmosphere] call FUNC(getThrustEnhanced);
 private _thrustCorrection = _thrustEnhanced vectorDiff _thrustDefault;
 
 // get lift force correction

@@ -22,6 +22,7 @@ GVAR(thrustMultiplierGlobal) = 1;
 GVAR(liftMultiplierGlobal) = 1;
 GVAR(dragMultiplierGlobal) = 1;
 GVAR(controlSensitivityGlobal) = 1;
+GVAR(abMinRatio) = 0.25;
 GVAR(dragSourceMultiplier) = [0.8, 0.1, 0.8];
 GVAR(thrustFactor) = 0.152;
 GVAR(vtolThrustFactor) = [0.21, 0.5, 1.8, 1.0];

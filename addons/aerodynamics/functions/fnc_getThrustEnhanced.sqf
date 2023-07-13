@@ -1,8 +1,8 @@
 #include "script_component.hpp"
 
-params ["_paramEnhanced", "_paramThrust", "_speedMax", "_paramAtmosphere"];
+params ["_throttle", "_paramEnhanced", "_paramThrust", "_speedMax", "_paramAtmosphere"];
 _paramEnhanced params ["_trueAirVelocity", "_massStandard", "_massError", "_densityRatio", "_height"];
-_paramThrust params ["_thrustCoef", "_vtolMode", "_thrustMultiplier", "_throttle", "_engineDamage", "_thrustVector"];
+_paramThrust params ["_thrustCoef", "_vtolMode", "_thrustMultiplier", "_engineDamage", "_thrustVector"];
 _paramAtmosphere params ["_temperatureRatio", "_pressureRatio"];
 
 // if (_massError) exitWith {[0, 0, 0]};

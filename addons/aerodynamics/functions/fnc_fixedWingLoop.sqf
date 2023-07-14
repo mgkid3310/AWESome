@@ -99,14 +99,16 @@ if (_configData param [0, 0] > 0) then {
 	_engineData params ["_abThrottle", "_refThrust", "_milThrust", "_abThrust", "_abFuelMultiplier"];
 	_weightData params ["_gWeight", "_zfWeight", "_fWeight"];
 
-	if (_throttleEffective > _abThrottle) then {
-		_abRatio = linearConversion [_abThrottle, 1, _throttleEffective, GVAR(abMinRatio), 1, true];
-		_fuelFlowMultiplier = _fuelFlowMultiplier * linearConversion [0, 1, _abRatio, 1, _abFuelMultiplier]; // includes thrust & TSFC increase
-		_thrustMultiplier = _thrustMultiplier * linearConversion [0, 1, _abRatio, _milThrust / _refThrust, _abThrust / _refThrust];
-		_throttleApply = 1;
-	} else {
-		_thrustMultiplier = _thrustMultiplier * _milThrust / _refThrust;
-		_throttleApply = linearConversion [0, _abThrottle, _throttleEffective, 0, 1, true];
+	if (_abThrottle > 0) then {
+		if (_throttleEffective > _abThrottle) then {
+			_abRatio = linearConversion [_abThrottle, 1, _throttleEffective, GVAR(abMinRatio), 1, true];
+			_fuelFlowMultiplier = _fuelFlowMultiplier * linearConversion [0, 1, _abRatio, 1, _abFuelMultiplier, true]; // includes thrust & TSFC increase
+			_thrustMultiplier = _thrustMultiplier * linearConversion [0, 1, _abRatio, _milThrust, _abThrust, true] / _refThrust;
+			_throttleApply = 1;
+		} else {
+			_thrustMultiplier = _thrustMultiplier * _milThrust / _refThrust;
+			_throttleApply = linearConversion [0, _abThrottle, _throttleEffective, 0, 1, true];
+		};
 	};
 
 	_massStandardRatio = _zfWeight / _gWeight;

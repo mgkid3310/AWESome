@@ -63,7 +63,7 @@ if !(_massStandard > 0) then {
 _fuelCapacity = getNumber (_class >> "fuelCapacity");
 
 private _configEnabled = 0;
-private _engineData = [1, 1, 1, 1, 1];
+private _engineData = [0, 1, 1, 1, 1];
 private _weightData = [1, 1, 1];
 private _miscData = [0, "", ""];
 private _codeIntercept = [];

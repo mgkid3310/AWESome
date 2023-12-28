@@ -138,6 +138,15 @@
 			<Korean>Manual Update (by ATC)</Korean>
 		</Key>
 
+		<Key ID="STR_orbis_atc_displayTextATIS_name">
+			<English>ATIS text display</English>
+			<Korean>ATIS text display</Korean>
+		</Key>
+		<Key ID="STR_orbis_atc_displayTextATIS_tooltip">
+			<English>Display ATIS in text format</English>
+			<Korean>Display ATIS in text format</Korean>
+		</Key>
+
 		<Key ID="STR_orbis_atc_actionATIS">
 			<English>ATIS</English>
 			<Korean>ATIS</Korean>

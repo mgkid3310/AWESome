@@ -70,6 +70,14 @@ ADDON = true;
 ] call CBA_Settings_fnc_init;
 
 [
+	QGVAR(displayTextATIS),
+	"LIST",
+	[localize LSTRING(displayTextATIS_name), localize LSTRING(displayTextATIS_tooltip)],
+	[localize LSTRING(category), localize LSTRING(atis)],
+	[[0, 1, 2], ["None", "hint", "systemChat"], 1]
+] call CBA_Settings_fnc_init;
+
+[
 	QGVAR(unitSettingLatGCI),
 	"LIST",
 	[localize LSTRING(unitSettingLatGCI_name), localize LSTRING(unitSettingLatGCI_tooltip)],

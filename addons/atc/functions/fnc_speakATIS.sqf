@@ -177,4 +177,4 @@ if (_identifier != "") then {
 _vehicle setVariable [QGVAR(isATISready), true];
 _vehicle setVariable [QGVAR(stopATIS), true];
 
-hintSilent _textATIS;
+_textATIS;

@@ -42,6 +42,6 @@ GVAR(lineWidth) = 0.15;
 GVAR(circleRadius) = 1.125;
 
 // add EventHandlers
-[QGVAR(speakATIS), {_this spawn FUNC(speakATIS)}] call CBA_fnc_addEventHandler;
+[QGVAR(spawnATIS), {_this spawn FUNC(spawnATIS)}] call CBA_fnc_addEventHandler;
 addMissionEventHandler ["EachFrame", {[] call FUNC(eachFrameHandler)}];
 addMissionEventHandler ["MapSingleClick", {_this call FUNC(mapSingleClickHandler)}];

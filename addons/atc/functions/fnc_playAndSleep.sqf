@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-params [["_vehicle", vehicle player], ["_sound", ""], ["_mode", 0], ["_noSound", False], ["_text", 0], ["_addSpace", True]];
+params [["_vehicle", vehicle player], ["_sound", ""], ["_mode", 0], ["_noSound", false], ["_text", 0], ["_addSpace", true]];
 
 private _length = getNumber (configFile >> "CfgSounds" >> _sound >> "length");
 

@@ -4,10 +4,10 @@ params ["_vehicle", "_ATISdata", ["_mode", 0]];
 
 switch (GVAR(displayTextATIS)) do {
 	case 1: {
-		hintSilent ([_vehicle, _ATISdata, _mode, True] call FUNC(speakATIS));
+		hintSilent ([_vehicle, _ATISdata, _mode, true] call FUNC(speakATIS));
 	};
 	case 2: {
-		systemChat ([_vehicle, _ATISdata, _mode, True] call FUNC(speakATIS));
+		systemChat ([_vehicle, _ATISdata, _mode, true] call FUNC(speakATIS));
 	};
 };
 

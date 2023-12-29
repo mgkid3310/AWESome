@@ -11,11 +11,14 @@ for line in script_version_lines:
 		version_list.append(int(version_words[2]))
 
 version_list[-1] += 1
+version_list = [str(version) for version in version_list]
 
 script_version_file = open('addons/main/script_version.hpp', 'w')
-for line in script_version_lines:
+for idx, line in enumerate(script_version_lines):
 	if line.startswith('#define'):
-		version_words = line.split(' ')[:2] + [str(version_list.pop(0))]
+		version_words = line.split(' ')[:2] + [version_list[idx]]
 		line = ' '.join(version_words) + '\n'
 		script_version_file.write(line)
 script_version_file.close()
+
+print('Updated script_version to: ' + '.'.join(version_list))

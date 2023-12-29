@@ -1,4 +1,4 @@
-python update_build_version.py
 hemtt release
+python update_build_version.py
 
 pause

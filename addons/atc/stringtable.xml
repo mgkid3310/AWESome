@@ -193,5 +193,14 @@
 			<English>ft, fpm</English>
 			<Korean>ft, fpm</Korean>
 		</Key>
+
+		<Key ID="STR_orbis_atc_classifyAsHostile_name">
+			<English>Classify as hostile</English>
+			<Korean>Classify as hostile</Korean>
+		</Key>
+		<Key ID="STR_orbis_atc_classifyAsHostile_tooltip">
+			<English>Classify as hostile when clicking on marker with key pressed</English>
+			<Korean>Classify as hostile when clicking on marker with key pressed</Korean>
+		</Key>
 	</Package>
 </Project>

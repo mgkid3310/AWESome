@@ -44,10 +44,15 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		_heliesKnown = _allHelies select {(side driver _x) in [_radarSide, civilian]};
 	};
 
-	private ["_planesUnknown", "_heliesUnknown", "_planesBogie", "_heliesBogie", "_planesBandit", "_heliesBandit"];
+	private ["_planesUnknown", "_heliesUnknown", "_planesRogue", "_heliesRogue", "_planesBogie", "_heliesBogie", "_planesBandit", "_heliesBandit"];
 	if (!_isObserver && (_radarMode > 0)) then {
 		_planesUnknown = (_allPlanes - _planesKnown) apply {[_x, [_monitor, _x] call FUNC(simulateRadarDetection)]};
 		_heliesUnknown = (_allHelies - _heliesKnown) apply {[_x, [_monitor, _x] call FUNC(simulateRadarDetection)]};
+
+		_planesRogue = _planesKnown select {_radarSide in (_x getVariable [QGVAR(isHostileTo), []])};
+		_heliesRogue = _heliesKnown select {_radarSide in (_x getVariable [QGVAR(isHostileTo), []])};
+		_planesKnown = _planesKnown - _planesRogue;
+		_heliesKnown = _heliesKnown - _heliesRogue;
 
 		_planesBogie = _planesUnknown select {((_x select 1) > 1) && !(_radarSide in ((_x select 0) getVariable [QGVAR(isHostileTo), []]))};
 		_heliesBogie = _heliesUnknown select {((_x select 1) > 1) && !(_radarSide in ((_x select 0) getVariable [QGVAR(isHostileTo), []]))};
@@ -56,6 +61,9 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	} else {
 		_planesUnknown = [];
 		_heliesUnknown = [];
+
+		_planesRogue = [];
+		_heliesRogue = [];
 
 		_planesBogie = [];
 		_heliesBogie = [];
@@ -129,7 +137,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		_trailLog pushBack [_x, getPos _x, time];
 
 		_trailLogOld = _trailLogOld - _vehicleTrail;
-	} forEach (_planesModeC + _heliesModeC + ((_planesBogie + _heliesBogie + _planesBandit + _heliesBandit + _trailWeapons) apply {_x select 0}));
+	} forEach (_planesModeC + _heliesModeC + _planesRogue + _heliesRogue + ((_planesBogie + _heliesBogie + _planesBandit + _heliesBandit + _trailWeapons) apply {_x select 0}));
 
 	{
 		deleteMarkerLocal _x;
@@ -142,6 +150,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	} forEach _allMarkers;
 
 	private _trailsModeC = [_trailLog, _planesModeC + _heliesModeC, _radarSide, _targetType] call FUNC(createVehicleTrails);
+	private _trailsRogue = [_trailLog, _planesRogue + _heliesRogue, _radarSide, 2] call FUNC(createVehicleTrails);
 	private _trailsBogie = [_trailLog, _planesBogie + _heliesBogie, _radarSide, 1] call FUNC(createVehicleTrails);
 	private _trailsBandit = [_trailLog, _planesBandit + _heliesBandit, _radarSide, 2] call FUNC(createVehicleTrails);
 	private _weaponTrails = [_trailLog, _trailWeapons, _radarSide, _targetType] call FUNC(createWeaponTrails);
@@ -152,11 +161,13 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	private _heliMarkersStandBy = [_heliesStandBy, "b_air", false, _radarSide, _targetType] call FUNC(createVehicleMarker);
 	private _markersKnown = _planeMarkersModeC + _heliMarkersModeC + _planeMarkersStandBy + _heliMarkersStandBy;
 
+	private _planeMarkersRogue = [_planesRogue, "b_plane", true, _radarSide, 2, 0] call FUNC(createVehicleMarker);
+	private _heliMarkersRogue = [_heliesRogue, "b_air", true, _radarSide, 2, 0] call FUNC(createVehicleMarker);
 	private _planeMarkersBogie = [_planesBogie, "b_plane", true, _radarSide, 1] call FUNC(createVehicleMarker);
 	private _heliMarkersBogie = [_heliesBogie, "b_air", true, _radarSide, 1] call FUNC(createVehicleMarker);
 	private _planeMarkersBandit = [_planesBandit, "b_plane", true, _radarSide, 2] call FUNC(createVehicleMarker);
 	private _heliMarkersBandit = [_heliesBandit, "b_air", true, _radarSide, 2] call FUNC(createVehicleMarker);
-	private _markersUnknown = _planeMarkersBogie + _heliMarkersBogie + _planeMarkersBandit + _heliMarkersBandit;
+	private _markersUnknown = _planeMarkersRogue + _heliMarkersRogue + _planeMarkersBogie + _heliMarkersBogie + _planeMarkersBandit + _heliMarkersBandit;
 
 	private _knownWeaponMarkers = [_knownWeapons, "b_plane", true, _radarSide, _targetType] call FUNC(createWeaponMarker);
 	private _bogieWeaponMarkers = [_bogieWeapons, "b_plane", true, _radarSide, 1] call FUNC(createWeaponMarker);
@@ -165,15 +176,28 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 
 	_antiAirMarkers = [_antiAirVehicles, "b_antiair", false, _radarSide, _targetType] call FUNC(createAntiAirMarker);
 
-	private ["_bogies", "_bandits", "_bogieGCI", "_banditGCI"];
+	private ["_blueVehicles", "_rogueVehicles", "_bogieVehicles", "_banditVehicles"];
+	private ["_blueTargets", "_rogueTargets", "_bogieTargets", "_banditTargets"];
+	private ["_allGCI", "_rogueGCI", "_bogieGCI", "_banditGCI"];
 	if (_radarMode isEqualTo 1) then {
-		_bogies = (_planesBogie + _heliesBogie) apply {_x select 0};
-		_bandits = (_planesBandit + _heliesBandit) apply {_x select 0};
+		_blueVehicles = _planesModeC + _heliesModeC + _planesStandBy + _heliesStandBy;
+		_rogueVehicles = _planesRogue + _heliesRogue;
+		_bogieVehicles = (_planesBogie + _heliesBogie) apply {_x select 0};
+		_banditVehicles = (_planesBandit + _heliesBandit) apply {_x select 0};
 
-		_blueGCI = [_blueGCI apply {_x select 2}, _radarSide, _targetType] call FUNC(createMarkerGCI);
-		_bogieGCI = [_redGCI apply {_x select 2} select {_x in _bogies}, _radarSide, 1] call FUNC(createMarkerGCI);
-		_banditGCI = [_redGCI apply {_x select 2} select {_x in _bandits}, _radarSide, 2] call FUNC(createMarkerGCI);
-		_redGCI = _bogieGCI + _banditGCI;
+		_allGCI = (_blueGCI + _redGCI) apply {_x select 2};
+
+		_blueTargets = _allGCI select {_x in _blueVehicles};
+		_rogueTargets = _allGCI select {_x in _rogueVehicles};
+		_bogieTargets = _allGCI select {_x in _bogieVehicles};
+		_banditTargets = _allGCI select {_x in _banditVehicles};
+
+		_blueGCI = [_blueTargets, _radarSide, 0] call FUNC(createMarkerGCI);
+		_rogueGCI = [_rogueTargets, _radarSide, 2] call FUNC(createMarkerGCI);
+		_bogieGCI = [_bogieTargets, _radarSide, 1] call FUNC(createMarkerGCI);
+		_banditGCI = [_banditTargets, _radarSide, 2] call FUNC(createMarkerGCI);
+
+		_redGCI = _rogueGCI + _bogieGCI + _banditGCI;
 		_lineGCI = [_blueGCI, _redGCI] call FUNC(createLineGCI);
 	} else {
 		_blueGCI = [];
@@ -181,10 +205,10 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		_lineGCI = [];
 	};
 
-	_monitor setVariable [QGVAR(vehiclesGCI), [_markersKnown, _planeMarkersBogie + _heliMarkersBogie, _planeMarkersBandit + _heliMarkersBandit]];
+	_monitor setVariable [QGVAR(vehiclesGCI), [_markersKnown, _planeMarkersBogie + _heliMarkersBogie, _planeMarkersRogue + _heliMarkersRogue + _planeMarkersBandit + _heliMarkersBandit]];
 	_monitor setVariable [QGVAR(dataGCI), [_blueGCI, _redGCI, _lineGCI]];
 
-	_trailMarkers = _trailsModeC + _trailsBogie + _trailsBandit + _weaponTrails;
+	_trailMarkers = _trailsModeC + _trailsRogue + _trailsBogie + _trailsBandit + _weaponTrails;
 	_vehicleMarkers = _markersKnown + _markersUnknown;
 
 	_radarTime = time;

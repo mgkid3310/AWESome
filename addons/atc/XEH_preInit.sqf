@@ -93,6 +93,19 @@ ADDON = true;
 	[[false, true], [localize LSTRING(unitSettingGCI_m), localize LSTRING(unitSettingGCI_ft)], 0]
 ] call CBA_Settings_fnc_init;
 
+// CBA based keybind init
+[
+	localize LSTRING(category),
+	localize LSTRING(gci),
+	[localize LSTRING(classifyAsHostile_name), localize LSTRING(classifyAsHostile_tooltip)],
+	{
+	    missionNameSpace setVariable [QGVAR(classifyAsHostile), true];
+	}, {
+	    missionNameSpace setVariable [QGVAR(classifyAsHostile), false];
+	},
+	[0, [false, false, false]]
+] call CBA_fnc_addKeybind;
+
 // add actions (ACE / vanilla)
 if (EGVAR(main,hasACEInteractMenu)) then {
 	[] call FUNC(addACEInteractMenu);

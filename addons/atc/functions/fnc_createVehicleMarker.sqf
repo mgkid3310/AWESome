@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-params ["_array", "_type", ["_displayDetails", true], ["_radarSide", civilian], ["_targetType", 0]];
+params ["_array", "_type", ["_displayDetails", true], ["_radarSide", civilian], ["_targetType", 0], ["_textType", -1]];
 
 private ["_vehicle", "_radarDetection", "_callsign", "_side", "_markerColor", "_markerArray"];
 private _return = [];
@@ -13,7 +13,10 @@ private _return = [];
 		_radarDetection = 0;
 	};
 
-	switch (_targetType) do {
+	if (_textType < 0) then {
+		_textType = _targetType;
+	};
+	switch (_textType) do {
 		case (1): {
 			if (_radarDetection < GVAR(minRadarDetection)) then {
 				_callsign = "Bogie";

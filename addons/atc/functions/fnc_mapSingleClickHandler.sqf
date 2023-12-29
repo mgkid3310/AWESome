@@ -30,6 +30,10 @@ private _minIndex = _distanceList find _minDistance;
 private _position = _markerPosList select _minIndex;
 private _vehicle = _markerVehicleList select _minIndex;
 
+if (missionNameSpace getVariable [QGVAR(classifyAsHostile), false]) exitWith {
+	[_vehicle, side _controller] call FUNC(classifyAsHostile);
+};
+
 if (_vehicle getVariable [QGVAR(selectedGCI), false]) exitWith {
 	_vehicle setVariable [QGVAR(selectedGCI), false];
 };

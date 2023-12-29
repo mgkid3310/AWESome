@@ -163,6 +163,10 @@ To let the controller manually update the data, disable
 'Real-time ATIS data update' option in addon setting, and  
 add the following code to the target object's init field:  
 `[this] call orbis_atc_fnc_addATCConsole;`  
+
+By default, ATIS will also be displayed as text in hint  
+window. This can be disabled or moved to chat window by  
+changing addon settings.  
 &nbsp;
 
 5. Cockpit Utility  

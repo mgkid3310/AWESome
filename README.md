@@ -138,6 +138,16 @@ to bogie/bandit aircraft. Bearing, distance, radial speed,
 altitude difference and relative vertical speed will be shown  
 for ATC controller to provide target information to pilots or  
 coordinate intercepts.  
+
+GCI automatically classifies unknown aircraft as bogie, and  
+once the bogie launches a missile at friendly aircraft the  
+contact is classified as bandit. To manually perform this  
+task, use keybind "AWESome ATC -> Classify as hostile" when  
+clicking on a radar marker. This will classify the contact  
+as bandit, and when clicked again its classification will  
+be reverted to its original state. Using this feature, it  
+is possible to classify any contact as bandit when required  
+and revert a blue-on-blue contact back to its original state.  
 &nbsp;
 
 4. ATIS (Automatic Terminal Information Service)  

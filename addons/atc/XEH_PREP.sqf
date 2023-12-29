@@ -3,6 +3,7 @@ PREP(addATCConsole);
 PREP(addRadarScreen);
 PREP(atcRadarExit);
 PREP(atcRadarLoop);
+PREP(classifyAsHostile);
 PREP(createAntiAirMarker);
 PREP(createLineGCI);
 PREP(createMarkerGCI);

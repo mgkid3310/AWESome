@@ -193,18 +193,15 @@ private _fuelFlowEnhanced = [_throttleApply, isEngineOn _vehicle, _fuelFlowMulti
 // thrust correction
 private _thrustDefault = [_throttleEffective, _paramDefault, _paramThrust, _speedMax, _paramAltitude] call FUNC(getThrustDefault);
 private _thrustEnhanced = [_throttleApply, _paramEnhanced, _paramThrust, _speedMax, _paramAtmosphere] call FUNC(getThrustEnhanced);
-private _thrustCorrection = _thrustEnhanced vectorDiff _thrustDefault;
 
 // get lift force correction
 private _liftDefault = [_paramDefault, _paramLift, _speedMax, _angleOfIncidence] call FUNC(getLiftDefault);
 private _liftEnhanced = [_paramEnhanced, _paramLift, _speedMax, _angleOfIncidence] call FUNC(getLiftEnhanced);
-private _liftCorrection = _liftEnhanced vectorDiff _liftDefault;
 
 // get drag force correction
 private _dragDefault = [_paramDefault, _paramDrag, _paramAltitude, _isAdvanced] call FUNC(getDragDefault);
 private _dragEnhanced = [_paramEnhanced, _paramDrag, _liftEnhanced, _speedStall] call FUNC(getDragEnhanced);
 private _dragPylon = [_paramPylon, _paramPylonDrag] call FUNC(getDragEnhanced);
-private _dragCorrection = (_dragEnhanced vectorAdd _dragPylon) vectorDiff _dragDefault;
 
 // get torque correction
 // private _torqueDefault = [_paramDefault, _torqueXCoef, _massError] call FUNC(getTorque);
@@ -241,21 +238,24 @@ if (_useExternalFuel > 0) then {
 	[_vehicle, _fuelExternal - _fuelDraw] call compile _setExternalFuel;
 };
 
-// sum up corrections and bring wheel friction into calculation if needed (todo)
-private _forceSum = _thrustCorrection vectorAdd _liftCorrection vectorAdd _dragCorrection;
-private _forceApply = _forceSum vectorMultiply (_massEffective / _massCurrent);
+// sum up forces and bring wheel friction into calculation if needed (todo)
+private _defaultSum = _thrustDefault vectorAdd _liftDefault vectorAdd _dragDefault;
+private _defaultApply = _defaultSum vectorMultiply (-1 * _massEffective / _massCurrent);
+private _enhancedSum = _thrustEnhanced vectorAdd _liftEnhanced vectorAdd _dragEnhanced vectorAdd _dragPylon;
+private _enhancedApply = _enhancedSum vectorMultiply (_massEffective / _massCurrent);
 if ((isTouchingGround _vehicle) && GVAR(noForceOnGround)) then {
-	_forceApply set [0, 0];
-	_forceApply set [1, 0];
-	_forceApply set [2, 0];
-	// _torqueCorrection set [0, 0];
-	// _torqueCorrection set [1, 0];
-	// _torqueCorrection set [2, 0];
+	_defaultApply set [0, 0];
+	_defaultApply set [1, 0];
+	_defaultApply set [2, 0];
+	_enhancedApply set [0, 0];
+	_enhancedApply set [1, 0];
+	_enhancedApply set [2, 0];
 };
 
 // calculate and apply required impulse (force times timestep)
 if (GVAR(applyForce)) then {
-	_vehicle addForce [_vehicle vectorModelToWorld (_forceApply vectorMultiply _timeStep), getCenterOfMass _vehicle];
+	_vehicle addForce [_vehicle vectorModelToWorld (_defaultApply vectorMultiply _timeStep), getCenterOfMass _vehicle];
+	_vehicle addForce [_vehicle vectorModelToWorld (_enhancedApply vectorMultiply _timeStep), getCenterOfMass _vehicle];
 };
 
 // calculate and apply required angular impulse (torque times timestep)

@@ -10,7 +10,9 @@ private _airVel = _trueAirVelocity vectorMultiply -1;
 private _speedKPH = (_trueAirVelocity vectorDotProduct [0, cos deg _angleOfIncidence, sin deg _angleOfIncidence]) * 3.6;
 private _liftValue = [_liftArray, _speedMax, 1.25 / (count _liftArray - 1), _speedKPH] call FUNC(extractCoefArray);
 
-private _hOverD = ((_height max 0) + GVAR(wingHeight)) / GVAR(wingSpan);
+0 boundingBoxReal vehicle player params ["_posMin", "_posMax", "_bbRadius"];
+private _wingSpan = (_posMax select 0) - (_posMin select 0);
+private _hOverD = ((_height max 0) + GVAR(wingHeight)) / _wingSpan;
 private _geMultiplier = GVAR(geFactor) / (_hOverD + GVAR(geFactor));
 _liftValue = _liftValue * (1 + (_geMultiplier * GVAR(geLiftMultiplier)));
 

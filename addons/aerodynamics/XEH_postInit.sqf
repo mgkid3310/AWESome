@@ -3,8 +3,6 @@
 // init global variables
 GVAR(frameInterval) = 1;
 GVAR(gridResolution) = 0; // 2
-GVAR(gridSizeX) = 12;
-GVAR(gridSizeY) = 16;
 GVAR(showSamplingGrid) = false;
 GVAR(maxWindVariability) = 0.4;
 GVAR(windWavelength) = 60;
@@ -31,7 +29,6 @@ GVAR(liftFlapFactor) = [0.27, 0.5, 3.0, 0.5];
 GVAR(waveCdArray) = [0.7, 0.98, 1.0, 1.03, 2.4, 0.2, 0.1, -3.5];
 GVAR(minStallSpeed) = 10;
 GVAR(wingHeight) = 1.5;
-GVAR(wingSpan) = 12;
 GVAR(geFactor) = 0.1;
 GVAR(geLiftMultiplier) = 0.6;
 GVAR(geInducedDragMultiplier) = 0.6;

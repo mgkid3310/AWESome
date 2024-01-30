@@ -6,10 +6,14 @@ if !(_dynamicWindMode > 0) exitWith {wind};
 
 if !((_dynamicWindMode > 1) && (GVAR(gridResolution) > 0)) exitWith {[getPosASL _vehicle, _dynamicWindMode] call FUNC(getWindPosASL)};
 
+0 boundingBoxReal vehicle player params ["_posMin", "_posMax", "_bbRadius"];
+private _gridSizeX = (_posMax select 0) - (_posMin select 0);
+private _gridSizeY = (_posMax select 1) - (_posMin select 1);
+
 private _samplePoints = [];
 private _resolution = 0 max GVAR(gridResolution);
-private _gridSizeX = 0 max GVAR(gridSizeX) / 2;
-private _gridSizeY = 0 max GVAR(gridSizeY) / 2;
+private _gridSizeX = 0 max _gridSizeX / 2;
+private _gridSizeY = 0 max _gridSizeY / 2;
 for "_resX" from -_resolution to _resolution do {
 	for "_resY" from -_resolution to _resolution do {
 		_samplePoints pushBack AGLToASL (_vehicle modelToWorld [_resX * _gridSizeX / _resolution, _resY * _gridSizeY / _resolution, 0]);

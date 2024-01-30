@@ -28,7 +28,9 @@ if (_liftVector isEqualType []) then {
 	private _inducedValue = ((vectorMagnitude _liftVector) / (_airSpeed max (_speedStall / 3.6) max GVAR(minStallSpeed))) ^ 2;
 	_dragInduced = (vectorNormalized _airVel) vectorMultiply (_inducedConst * _inducedValue * (GVAR(dragSourceMultiplier) select 1));
 
-	private _hOverD = (((_height max 0) + GVAR(wingHeight)) / GVAR(wingSpan));
+	0 boundingBoxReal vehicle player params ["_posMin", "_posMax", "_bbRadius"];
+	private _wingSpan = (_posMax select 0) - (_posMin select 0);
+	private _hOverD = (((_height max 0) + GVAR(wingHeight)) / _wingSpan);
 	private _geMultiplier = GVAR(geFactor) / (_hOverD + GVAR(geFactor));
 	_dragInduced = _dragInduced vectorMultiply (1 - (_geMultiplier * GVAR(geInducedDragMultiplier)));
 };

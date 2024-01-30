@@ -253,9 +253,26 @@ if ((isTouchingGround _vehicle) && GVAR(noForceOnGround)) then {
 };
 
 // calculate and apply required impulse (force times timestep)
+private ["_posCG", "_posCP", "_posTail"];
+private ["_xTail", "_yTail", "_zTail"];
+private ["_enhancedX", "_enhancedY", "_enhancedZ"];
 if (GVAR(applyForce)) then {
-	_vehicle addForce [_vehicle vectorModelToWorld (_defaultApply vectorMultiply _timeStep), getCenterOfMass _vehicle];
-	_vehicle addForce [_vehicle vectorModelToWorld (_enhancedApply vectorMultiply _timeStep), getCenterOfMass _vehicle];
+	0 boundingBoxReal vehicle player params ["_posMin", "_posMax", "_bbRadius"];
+	_posCG = getCenterOfMass vehicle player;
+	_xTail = ((_posMin select 0) + (_posMax select 0)) / 2;
+	_yTail = _posMin select 1;
+	_zTail = ((_posMin select 2) + (_posMax select 2)) / 2;
+	_posTail = [_xTail, _yTail, _zTail];
+	_posCP = _posCG vectorAdd ((_posTail vectorDiff _posCG) vectorMultiply GVAR(cpPosRatio));
+
+	_enhancedX = [_enhancedApply select 0, 0, 0];
+	_enhancedY = [0, _enhancedApply select 1, 0];
+	_enhancedZ = [0, 0, _enhancedApply select 2];
+
+	_vehicle addForce [_vehicle vectorModelToWorld (_defaultApply vectorMultiply _timeStep), _posCG];
+	_vehicle addForce [_vehicle vectorModelToWorld (_enhancedX vectorMultiply _timeStep), _posCP];
+	_vehicle addForce [_vehicle vectorModelToWorld (_enhancedY vectorMultiply _timeStep), _posCG];
+	_vehicle addForce [_vehicle vectorModelToWorld (_enhancedZ vectorMultiply _timeStep), _posCG];
 };
 
 // calculate and apply required angular impulse (torque times timestep)

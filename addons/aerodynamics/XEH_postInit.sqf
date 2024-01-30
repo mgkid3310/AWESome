@@ -32,6 +32,7 @@ GVAR(wingHeight) = 1.5;
 GVAR(geFactor) = 0.1;
 GVAR(geLiftMultiplier) = 0.6;
 GVAR(geInducedDragMultiplier) = 0.6;
+GVAR(cpPosRatio) = 0.4;
 GVAR(noForceOnGround) = false;
 GVAR(applyForce) = true;
 GVAR(compensateCrabLanding) = true;

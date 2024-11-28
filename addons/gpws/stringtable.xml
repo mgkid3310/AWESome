@@ -61,6 +61,22 @@
             <English>Default GPWS volume (high/low)</English>
             <Korean>Default GPWS volume (high/low)</Korean>
         </Key>
+        <Key ID="STR_orbis_gpws_enabled_false">
+            <English>Disabled</English>
+            <Korean>Disabled</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_enabled_name">
+            <English>GPWS Features</English>
+            <Korean>GPWS Features</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_enabled_tooltip">
+            <English>Can enable or disable GPWS Features</English>
+            <Korean>Can enable or disable GPWS Features</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_enabled_true">
+            <English>Enabled</English>
+            <Korean>Enabled</Korean>
+        </Key>
         <Key ID="STR_orbis_gpws_modeSTBY">
             <English>Stand by</English>
             <Korean>Stand by</Korean>

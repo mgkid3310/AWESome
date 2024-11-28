@@ -1,94 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="AWESome">
-	<Package name="Cockpit">
-		<Key ID="STR_orbis_cockpit_category">
-			<English>AWESome Cockpit</English>
-			<Korean>AWESome Cockpit</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_cockpit_shakeEnabled_name">
-			<English>Camera Shake</English>
-			<Korean>Camera Shake</Korean>
-		</Key>
-		<Key ID="STR_orbis_cockpit_shakeEnabled_tooltip">
-			<English>Enable/disable camera shake feature</English>
-			<Korean>Enable/disable camera shake feature</Korean>
-		</Key>
-		<Key ID="STR_orbis_cockpit_shakeEnabled_true">
-			<English>Enabled</English>
-			<Korean>Enabled</Korean>
-		</Key>
-		<Key ID="STR_orbis_cockpit_shakeEnabled_false">
-			<English>Disabled</English>
-			<Korean>Disabled</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_cockpit_groundMultiplier_name">
-			<English>Shake Multiplier (ground)</English>
-			<Korean>Shake Multiplier (ground)</Korean>
-		</Key>
-		<Key ID="STR_orbis_cockpit_groundMultiplier_tooltip">
-			<English>Multiplier for camera shake on ground (incl. touchdown)</English>
-			<Korean>Multiplier for camera shake on ground (incl. touchdown)</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_cockpit_speedMultiplier_name">
-			<English>Shake Multiplier (in-flight)</English>
-			<Korean>Shake Multiplier (in-flight)</Korean>
-		</Key>
-		<Key ID="STR_orbis_cockpit_speedMultiplier_tooltip">
-			<English>Multiplier for in-flight camera shake</English>
-			<Korean>Multiplier for in-flight camera shake</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_cockpit_checklistUnits_name">
-			<English>Checklist Units</English>
-			<Korean>Checklist Units</Korean>
-		</Key>
-		<Key ID="STR_orbis_cockpit_checklistUnits_tooltip">
-			<English>Speed unit used on checklists</English>
-			<Korean>Speed unit used on checklists</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_cockpit_checklistMain">
-			<English>Checklist</English>
-			<Korean>Checklist</Korean>
-		</Key>
-		<Key ID="STR_orbis_cockpit_openChecklist01">
-			<English>Pre-Start</English>
-			<Korean>Pre-Start</Korean>
-		</Key>
-		<Key ID="STR_orbis_cockpit_openChecklist02">
-			<English>Startup + Before Taxi</English>
-			<Korean>Startup + Before Taxi</Korean>
-		</Key>
-		<Key ID="STR_orbis_cockpit_openChecklist03">
-			<English>Before Takeoff</English>
-			<Korean>Before Takeoff</Korean>
-		</Key>
-		<Key ID="STR_orbis_cockpit_openChecklist04">
-			<English>Takeoff</English>
-			<Korean>Takeoff</Korean>
-		</Key>
-		<Key ID="STR_orbis_cockpit_openChecklist05">
-			<English>Descent + Approach</English>
-			<Korean>Descent + Approach</Korean>
-		</Key>
-		<Key ID="STR_orbis_cockpit_openChecklist06">
-			<English>Landing + Taxi To Ramp</English>
-			<Korean>Landing + Taxi To Ramp</Korean>
-		</Key>
-		<Key ID="STR_orbis_cockpit_nextChecklist">
-			<English>Next Checklist</English>
-			<Korean>Next Checklist</Korean>
-		</Key>
-		<Key ID="STR_orbis_cockpit_prevChecklist">
-			<English>Previouse Checklist</English>
-			<Korean>Previouse Checklist</Korean>
-		</Key>
-		<Key ID="STR_orbis_cockpit_closeChecklist">
-			<English>Close Checklist</English>
-			<Korean>Close Checklist</Korean>
-		</Key>
-	</Package>
+    <Package name="Cockpit">
+        <Key ID="STR_orbis_cockpit_category">
+            <English>AWESome Cockpit</English>
+            <Korean>AWESome Cockpit</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_checklistMain">
+            <English>Checklist</English>
+            <Korean>Checklist</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_checklistUnits_name">
+            <English>Checklist Units</English>
+            <Korean>Checklist Units</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_checklistUnits_tooltip">
+            <English>Speed unit used on checklists</English>
+            <Korean>Speed unit used on checklists</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_closeChecklist">
+            <English>Close Checklist</English>
+            <Korean>Close Checklist</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_groundMultiplier_name">
+            <English>Shake Multiplier (ground)</English>
+            <Korean>Shake Multiplier (ground)</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_groundMultiplier_tooltip">
+            <English>Multiplier for camera shake on ground (incl. touchdown)</English>
+            <Korean>Multiplier for camera shake on ground (incl. touchdown)</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_nextChecklist">
+            <English>Next Checklist</English>
+            <Korean>Next Checklist</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_openChecklist01">
+            <English>Pre-Start</English>
+            <Korean>Pre-Start</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_openChecklist02">
+            <English>Startup + Before Taxi</English>
+            <Korean>Startup + Before Taxi</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_openChecklist03">
+            <English>Before Takeoff</English>
+            <Korean>Before Takeoff</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_openChecklist04">
+            <English>Takeoff</English>
+            <Korean>Takeoff</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_openChecklist05">
+            <English>Descent + Approach</English>
+            <Korean>Descent + Approach</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_openChecklist06">
+            <English>Landing + Taxi To Ramp</English>
+            <Korean>Landing + Taxi To Ramp</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_prevChecklist">
+            <English>Previouse Checklist</English>
+            <Korean>Previouse Checklist</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_shakeEnabled_false">
+            <English>Disabled</English>
+            <Korean>Disabled</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_shakeEnabled_name">
+            <English>Camera Shake</English>
+            <Korean>Camera Shake</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_shakeEnabled_tooltip">
+            <English>Enable/disable camera shake feature</English>
+            <Korean>Enable/disable camera shake feature</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_shakeEnabled_true">
+            <English>Enabled</English>
+            <Korean>Enabled</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_speedMultiplier_name">
+            <English>Shake Multiplier (in-flight)</English>
+            <Korean>Shake Multiplier (in-flight)</Korean>
+        </Key>
+        <Key ID="STR_orbis_cockpit_speedMultiplier_tooltip">
+            <English>Multiplier for in-flight camera shake</English>
+            <Korean>Multiplier for in-flight camera shake</Korean>
+        </Key>
+    </Package>
 </Project>

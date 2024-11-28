@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="AWESome">
-	<Package name="Main">
-		<Key ID="STR_orbis_main_AWESome">
-			<English>AWESome</English>
-			<Korean>AWESome</Korean>
-		</Key>
-	</Package>
+    <Package name="Main">
+        <Key ID="STR_orbis_main_AWESome">
+            <English>AWESome</English>
+            <Korean>AWESome</Korean>
+        </Key>
+    </Package>
 </Project>

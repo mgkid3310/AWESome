@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 ADDON = false;
-#include "XEH_PREP.sqf"
+#include "XEH_PREP.hpp"
 ADDON = true;
 
 // CBA based addon setting init
@@ -99,9 +99,9 @@ ADDON = true;
 	localize LSTRING(gci),
 	[localize LSTRING(classifyAsHostile_name), localize LSTRING(classifyAsHostile_tooltip)],
 	{
-	    missionNameSpace setVariable [QGVAR(classifyAsHostile), true];
+	    missionNamespace setVariable [QGVAR(classifyAsHostile), true];
 	}, {
-	    missionNameSpace setVariable [QGVAR(classifyAsHostile), false];
+	    missionNamespace setVariable [QGVAR(classifyAsHostile), false];
 	},
 	[0, [false, false, false]]
 ] call CBA_fnc_addKeybind;

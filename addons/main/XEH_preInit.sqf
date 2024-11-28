@@ -1,10 +1,10 @@
 #include "script_component.hpp"
 ADDON = false;
-#include "XEH_PREP.sqf"
+#include "XEH_PREP.hpp"
 ADDON = true;
 
 // set devmode
-AWESOME_DEVMODE_LOG = false;
+awesome_devmode_log = false;
 
 // init global variables
 GVAR(ft2m) = 0.3048;

@@ -1,138 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="AWESome">
-	<Package name="GPWS">
-		<Key ID="STR_orbis_gpws_category">
-			<English>AWESome GPWS</English>
-			<Korean>AWESome GPWS</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_gpws_personalDefault_name">
-			<English>Default GPWS Mode</English>
-			<Korean>Default GPWS Mode</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_personalDefault_tooltip">
-			<English>Default GPWS is activated when boarding initialized planes</English>
-			<Korean>Default GPWS is activated when boarding initialized planes</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_personalDefault_none">
-			<English>No default setting</English>
-			<Korean>No default setting</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_gpws_defaultVolume_name">
-			<English>Default GPWS Volume</English>
-			<Korean>Default GPWS Volume</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_defaultVolume_tooltip">
-			<English>Default GPWS volume (high/low)</English>
-			<Korean>Default GPWS volume (high/low)</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_defaultVolume_high">
-			<English>High</English>
-			<Korean>High</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_defaultVolume_low">
-			<English>Low</English>
-			<Korean>Low</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_gpws_automaticTransponder_name">
-			<English>Use Automatic Transponder</English>
-			<Korean>Use Automatic Transponder</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_automaticTransponder_tooltip">
-			<English>Transponder mode will be automatically changed to appropriate mode</English>
-			<Korean>Transponder mode will be automatically changed to appropriate mode</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_automaticTransponder_automatic">
-			<English>Automatic</English>
-			<Korean>Automatic</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_automaticTransponder_manual">
-			<English>Manual</English>
-			<Korean>Manual</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_gpws_actionGPWS">
-			<English>GPWS</English>
-			<Korean>GPWS</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_gpws_turnOff">
-			<English>Turn off GPWS</English>
-			<Korean>Turn off GPWS</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_actionB747">
-			<English>Set to B747 GPWS</English>
-			<Korean>Set to B747 GPWS</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_actionF16">
-			<English>Set to Betty (F-16)</English>
-			<Korean>Set to Betty (F-16)</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_actionRita">
-			<English>Set to Rita</English>
-			<Korean>Set to Rita</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_gpws_testB747">
-			<English>Test GPWS (B747)</English>
-			<Korean>Test GPWS (B747)</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_testF16">
-			<English>Test GPWS (Betty)</English>
-			<Korean>Test GPWS (Betty)</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_testRita">
-			<English>Test GPWS (Rita)</English>
-			<Korean>Test GPWS (Rita)</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_testStop">
-			<English>Stop GPWS Test</English>
-			<Korean>Stop GPWS Test</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_gpws_volumeLow">
-			<English>Lower Volume</English>
-			<Korean>Lower Volume</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_volumeHigh">
-			<English>Increase Volume</English>
-			<Korean>Increase Volume</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_gpws_actionTCAS">
-			<English>TCAS</English>
-			<Korean>TCAS</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_modeTARA">
-			<English>TA/RA</English>
-			<Korean>TA/RA</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_modeTA">
-			<English>TA</English>
-			<Korean>TA</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_modeSTBY">
-			<English>Stand by</English>
-			<Korean>Stand by</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_gpws_actionTransponderModes">
-			<English>Transponder</English>
-			<Korean>Transponder</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_transponderModeC">
-			<English>Mode C</English>
-			<Korean>Mode C</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_transponderSTBY">
-			<English>Stand By</English>
-			<Korean>Stand By</Korean>
-		</Key>
-		<Key ID="STR_orbis_gpws_transponderOff">
-			<English>Off</English>
-			<Korean>Off</Korean>
-		</Key>
-	</Package>
+    <Package name="GPWS">
+        <Key ID="STR_orbis_gpws_actionB747">
+            <English>Set to B747 GPWS</English>
+            <Korean>Set to B747 GPWS</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_actionF16">
+            <English>Set to Betty (F-16)</English>
+            <Korean>Set to Betty (F-16)</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_actionGPWS">
+            <English>GPWS</English>
+            <Korean>GPWS</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_actionRita">
+            <English>Set to Rita</English>
+            <Korean>Set to Rita</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_actionTCAS">
+            <English>TCAS</English>
+            <Korean>TCAS</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_actionTransponderModes">
+            <English>Transponder</English>
+            <Korean>Transponder</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_automaticTransponder_automatic">
+            <English>Automatic</English>
+            <Korean>Automatic</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_automaticTransponder_manual">
+            <English>Manual</English>
+            <Korean>Manual</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_automaticTransponder_name">
+            <English>Use Automatic Transponder</English>
+            <Korean>Use Automatic Transponder</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_automaticTransponder_tooltip">
+            <English>Transponder mode will be automatically changed to appropriate mode</English>
+            <Korean>Transponder mode will be automatically changed to appropriate mode</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_category">
+            <English>AWESome GPWS</English>
+            <Korean>AWESome GPWS</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_defaultVolume_high">
+            <English>High</English>
+            <Korean>High</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_defaultVolume_low">
+            <English>Low</English>
+            <Korean>Low</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_defaultVolume_name">
+            <English>Default GPWS Volume</English>
+            <Korean>Default GPWS Volume</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_defaultVolume_tooltip">
+            <English>Default GPWS volume (high/low)</English>
+            <Korean>Default GPWS volume (high/low)</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_modeSTBY">
+            <English>Stand by</English>
+            <Korean>Stand by</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_modeTA">
+            <English>TA</English>
+            <Korean>TA</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_modeTARA">
+            <English>TA/RA</English>
+            <Korean>TA/RA</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_personalDefault_name">
+            <English>Default GPWS Mode</English>
+            <Korean>Default GPWS Mode</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_personalDefault_none">
+            <English>No default setting</English>
+            <Korean>No default setting</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_personalDefault_tooltip">
+            <English>Default GPWS is activated when boarding initialized planes</English>
+            <Korean>Default GPWS is activated when boarding initialized planes</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_testB747">
+            <English>Test GPWS (B747)</English>
+            <Korean>Test GPWS (B747)</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_testF16">
+            <English>Test GPWS (Betty)</English>
+            <Korean>Test GPWS (Betty)</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_testRita">
+            <English>Test GPWS (Rita)</English>
+            <Korean>Test GPWS (Rita)</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_testStop">
+            <English>Stop GPWS Test</English>
+            <Korean>Stop GPWS Test</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_transponderModeC">
+            <English>Mode C</English>
+            <Korean>Mode C</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_transponderOff">
+            <English>Off</English>
+            <Korean>Off</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_transponderSTBY">
+            <English>Stand By</English>
+            <Korean>Stand By</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_turnOff">
+            <English>Turn off GPWS</English>
+            <Korean>Turn off GPWS</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_volumeHigh">
+            <English>Increase Volume</English>
+            <Korean>Increase Volume</Korean>
+        </Key>
+        <Key ID="STR_orbis_gpws_volumeLow">
+            <English>Lower Volume</English>
+            <Korean>Lower Volume</Korean>
+        </Key>
+    </Package>
 </Project>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="AWESome">
-	<Package name="Ground">
-		<Key ID="STR_orbis_ground_deployTowBar">
-			<English>Deploy Towbar</English>
-			<Korean>Deploy Towbar</Korean>
-		</Key>
-		<Key ID="STR_orbis_ground_removeTowBar">
-			<English>Remove Towbar</English>
-			<Korean>Remove Towbar</Korean>
-		</Key>
-	</Package>
+    <Package name="Ground">
+        <Key ID="STR_orbis_ground_deployTowBar">
+            <English>Deploy Towbar</English>
+            <Korean>Deploy Towbar</Korean>
+        </Key>
+        <Key ID="STR_orbis_ground_removeTowBar">
+            <English>Remove Towbar</English>
+            <Korean>Remove Towbar</Korean>
+        </Key>
+    </Package>
 </Project>

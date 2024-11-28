@@ -33,7 +33,7 @@ private _allHelies = (entities "Helicopter") select {(alive _x) && (0 < getNumbe
 
 // update planes info
 if (time > _radarTime + GVAR(radarUpdateInterval)) then {
-	missionNameSpace setVariable [QGVAR(markerIndex), 0];
+	missionNamespace setVariable [QGVAR(markerIndex), 0];
 
 	private ["_planesKnown", "_heliesKnown"];
 	if (_isObserver) then {
@@ -71,8 +71,8 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		_heliesBandit = [];
 	};
 
-	private _additionalPlanes = missionNameSpace getVariable [QGVAR(additionalPlanes), []];
-	private _additionalHelies = missionNameSpace getVariable [QGVAR(additionalHelies), []];
+	private _additionalPlanes = missionNamespace getVariable [QGVAR(additionalPlanes), []];
+	private _additionalHelies = missionNamespace getVariable [QGVAR(additionalHelies), []];
 	{
 		_planesKnown pushBackUnique _x;
 	} forEach _additionalPlanes;
@@ -100,7 +100,7 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		_antiAirVehicles = _antiAirVehicles select {(side _x) isEqualTo _radarSide};
 	};
 
-	private _additionalSAMs = missionNameSpace getVariable [QGVAR(additionalSAMs), []];
+	private _additionalSAMs = missionNamespace getVariable [QGVAR(additionalSAMs), []];
 	{
 		_antiAirVehicles pushBackUnique _x;
 	} forEach _additionalSAMs;

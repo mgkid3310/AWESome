@@ -20,6 +20,6 @@ private _doAttach = (abs (_posRel select 0) < 2.5) && (_posRel select 1 < 16) &&
 if (!_arrayNil && _doAttach) then {
 	_player setVelocity (velocity _player vectorAdd _velNow vectorDiff _velOld);
 	private _newPos = getPosASL _player vectorAdd _posNow vectorDiff _posOld;
-	_newPos = _newPos vectorAdd ASLtoAGL (_carrier modelToWorld _posRel) vectorDiff ASLtoAGL (_carrier modelToWorld _relOld);
+	_newPos = _newPos vectorAdd ASLToAGL (_carrier modelToWorld _posRel) vectorDiff ASLToAGL (_carrier modelToWorld _relOld);
 	_player setPosASL _newPos;
 };

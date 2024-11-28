@@ -43,8 +43,8 @@ if (_displayDetails) then {
 	};
 };
 
-private _markerIndex = missionNameSpace getVariable [QGVAR(markerIndex), 0];
-missionNameSpace setVariable [QGVAR(markerIndex), _markerIndex + 1];
+private _markerIndex = missionNamespace getVariable [QGVAR(markerIndex), 0];
+missionNamespace setVariable [QGVAR(markerIndex), _markerIndex + 1];
 
 private _marker0 = createMarkerLocal [format ["orbis_atc_%1_0", _markerIndex], getPos _vehicle];
 _marker0 setMarkerTypeLocal _type;

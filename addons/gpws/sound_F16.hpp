@@ -136,9 +136,9 @@
 	class f16_warning {
 		name = "F16 Warning";
 		length = 2.20;
-		sound[] = {QPATHTOF(sounds\F16\WARNING.ogg), F16_VOL, 1};
+		sound[] = {QPATHTOF(sounds\F16\WARN.ogg), F16_VOL, 1};
 		titles[] = {};
 	};
 	class f16_warning_low: f16_warning {
-		sound[] = {QPATHTOF(sounds\F16\WARNING.ogg), F16_VOL_LOW, 1};
+		sound[] = {QPATHTOF(sounds\F16\WARN.ogg), F16_VOL_LOW, 1};
 	};

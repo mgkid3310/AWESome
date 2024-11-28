@@ -79,7 +79,7 @@ _dragForceEnhanced = (_dragForceEnhanced vectorAdd _dragInduced) vectorMultiply 
 
 // report if needed (dev script)
 // diag_log format ["orbis_aerodynamics _dragParasite: %1, _dragInduced: %2, _dragForceEnhanced: %3", _dragParasite, _dragInduced, _dragForceEnhanced];
-if (AWESOME_DEVMODE_LOG) then {
+if (awesome_devmode_log) then {
 	diag_log format ["orbis_aerodynamics Mach: %1, Base: %2, Parasite: %3, Induced: %4, Wave: %5, Total: %6", _machNumber, vectorMagnitude _dragParasite / (GVAR(dragSourceMultiplier) select 0), vectorMagnitude _dragParasite, vectorMagnitude _dragInduced, vectorMagnitude _dragWave, vectorMagnitude _dragForceEnhanced];
 };
 

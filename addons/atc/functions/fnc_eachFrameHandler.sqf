@@ -19,13 +19,13 @@ private _helies = (entities "Helicopter") select {alive _x};
 private _SAMlaunchers = [];
 {
 	_planes pushBackUnique _x;
-} forEach (missionNameSpace getVariable [QGVAR(additionalPlanes), []]);
+} forEach (missionNamespace getVariable [QGVAR(additionalPlanes), []]);
 {
 	_helies pushBackUnique _x;
-} forEach (missionNameSpace getVariable [QGVAR(additionalHelies), []]);
+} forEach (missionNamespace getVariable [QGVAR(additionalHelies), []]);
 {
 	_SAMlaunchers pushBackUnique _x;
-} forEach (missionNameSpace getVariable [QGVAR(additionalSAMs), []]);
+} forEach (missionNamespace getVariable [QGVAR(additionalSAMs), []]);
 
 // add Eventhandlers
 {

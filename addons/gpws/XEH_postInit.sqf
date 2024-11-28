@@ -19,7 +19,7 @@ GVAR(minAlt) = 250;
 GVAR(b747Delay) = 2.0;
 
 // f16
-GVAR(ChaffFlareList) = ["CMFlareLauncher", "FIR_CMLauncher", "js_w_fa18_CMFlareLauncher", "js_w_fa18_CMChaffLauncher"];
+GVAR(ChaffFlareList) = ["CMFlareLauncher", "CMFlareLauncher_Singles", "CMFlareLauncher_Triples", "FIR_CMLauncher", "js_w_fa18_CMFlareLauncher", "js_w_fa18_CMChaffLauncher"];
 GVAR(f16PullupTime) = 4;
 GVAR(f16LowAltitude) = 50;
 GVAR(f16MaxAOA) = 20; // deg

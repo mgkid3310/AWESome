@@ -15,4 +15,4 @@ for "_i" from 1 to _count do {
 	playSound _sound;
 }; */
 
-playSound _sound;
+playSound [_sound, 2];

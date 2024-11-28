@@ -1,83 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="AWESome">
-	<Package name="Aerodynamics">
-		<Key ID="STR_orbis_aerodynamics_category">
-			<English>AWESome Aerodynamics</English>
-			<Korean>AWESome Aerodynamics</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_aerodynamics_enabled_name">
-			<English>Advanced Aerodynamics</English>
-			<Korean>Advanced Aerodynamics</Korean>
-		</Key>
-		<Key ID="STR_orbis_aerodynamics_enabled_tooltip">
-			<English>Can enable or disable Advanced Aerodynamics</English>
-			<Korean>Can enable or disable Advanced Aerodynamics</Korean>
-		</Key>
-		<Key ID="STR_orbis_aerodynamics_enabled_true">
-			<English>Enabled</English>
-			<Korean>Enabled</Korean>
-		</Key>
-		<Key ID="STR_orbis_aerodynamics_enabled_false">
-			<English>Disabled</English>
-			<Korean>Disabled</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_aerodynamics_dynamicWindMode_name">
-			<English>Dynamic Winds</English>
-			<Korean>Dynamic Winds</Korean>
-		</Key>
-		<Key ID="STR_orbis_aerodynamics_dynamicWindMode_tooltip">
-			<English>Set level of wind dynamics</English>
-			<Korean>Set level of wind dynamics</Korean>
-		</Key>
-		<Key ID="STR_orbis_aerodynamics_dynamic">
-			<English>Dynamic</English>
-			<Korean>Dynamic</Korean>
-		</Key>
-		<Key ID="STR_orbis_aerodynamics_simple">
-			<English>Simple</English>
-			<Korean>Simple</Korean>
-		</Key>
-		<Key ID="STR_orbis_aerodynamics_static">
-			<English>Static</English>
-			<Korean>Static</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_aerodynamics_windMultiplier_name">
-			<English>Wind Multiplier</English>
-			<Korean>Wind Multiplier</Korean>
-		</Key>
-		<Key ID="STR_orbis_aerodynamics_windMultiplier_tooltip">
-			<English>Set how strong the wind effect will be</English>
-			<Korean>Set how strong the wind effect will be</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_aerodynamics_fuelMassMultiplierGlobal_name">
-			<English>Fuel Mass Multiplier</English>
-			<Korean>Fuel Mass Multiplier</Korean>
-		</Key>
-		<Key ID="STR_orbis_aerodynamics_fuelMassMultiplierGlobal_tooltip">
-			<English>Multiplier for fuel mass</English>
-			<Korean>Multiplier for fuel mass</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_aerodynamics_pylonMassMultiplierGlobal_name">
-			<English>Pylon Mass Multiplier</English>
-			<Korean>Pylon Mass Multiplier</Korean>
-		</Key>
-		<Key ID="STR_orbis_aerodynamics_pylonMassMultiplierGlobal_tooltip">
-			<English>Multiplier for pylon weapon's mass</English>
-			<Korean>Multiplier for pylon weapon's mass</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_aerodynamics_pylonDragMultiplierGlobal_name">
-			<English>Pylon Drag Multiplier</English>
-			<Korean>Pylon Drag Multiplier</Korean>
-		</Key>
-		<Key ID="STR_orbis_aerodynamics_pylonDragMultiplierGlobal_tooltip">
-			<English>Multiplier for pylon weapon's drag</English>
-			<Korean>Multiplier for pylon weapon's drag</Korean>
-		</Key>
-	</Package>
+    <Package name="Aerodynamics">
+        <Key ID="STR_orbis_aerodynamics_category">
+            <English>AWESome Aerodynamics</English>
+            <Korean>AWESome Aerodynamics</Korean>
+        </Key>
+        <Key ID="STR_orbis_aerodynamics_dynamic">
+            <English>Dynamic</English>
+            <Korean>Dynamic</Korean>
+        </Key>
+        <Key ID="STR_orbis_aerodynamics_dynamicWindMode_name">
+            <English>Dynamic Winds</English>
+            <Korean>Dynamic Winds</Korean>
+        </Key>
+        <Key ID="STR_orbis_aerodynamics_dynamicWindMode_tooltip">
+            <English>Set level of wind dynamics</English>
+            <Korean>Set level of wind dynamics</Korean>
+        </Key>
+        <Key ID="STR_orbis_aerodynamics_enabled_false">
+            <English>Disabled</English>
+            <Korean>Disabled</Korean>
+        </Key>
+        <Key ID="STR_orbis_aerodynamics_enabled_name">
+            <English>Advanced Aerodynamics</English>
+            <Korean>Advanced Aerodynamics</Korean>
+        </Key>
+        <Key ID="STR_orbis_aerodynamics_enabled_tooltip">
+            <English>Can enable or disable Advanced Aerodynamics</English>
+            <Korean>Can enable or disable Advanced Aerodynamics</Korean>
+        </Key>
+        <Key ID="STR_orbis_aerodynamics_enabled_true">
+            <English>Enabled</English>
+            <Korean>Enabled</Korean>
+        </Key>
+        <Key ID="STR_orbis_aerodynamics_fuelMassMultiplierGlobal_name">
+            <English>Fuel Mass Multiplier</English>
+            <Korean>Fuel Mass Multiplier</Korean>
+        </Key>
+        <Key ID="STR_orbis_aerodynamics_fuelMassMultiplierGlobal_tooltip">
+            <English>Multiplier for fuel mass</English>
+            <Korean>Multiplier for fuel mass</Korean>
+        </Key>
+        <Key ID="STR_orbis_aerodynamics_pylonDragMultiplierGlobal_name">
+            <English>Pylon Drag Multiplier</English>
+            <Korean>Pylon Drag Multiplier</Korean>
+        </Key>
+        <Key ID="STR_orbis_aerodynamics_pylonDragMultiplierGlobal_tooltip">
+            <English>Multiplier for pylon weapon's drag</English>
+            <Korean>Multiplier for pylon weapon's drag</Korean>
+        </Key>
+        <Key ID="STR_orbis_aerodynamics_pylonMassMultiplierGlobal_name">
+            <English>Pylon Mass Multiplier</English>
+            <Korean>Pylon Mass Multiplier</Korean>
+        </Key>
+        <Key ID="STR_orbis_aerodynamics_pylonMassMultiplierGlobal_tooltip">
+            <English>Multiplier for pylon weapon's mass</English>
+            <Korean>Multiplier for pylon weapon's mass</Korean>
+        </Key>
+        <Key ID="STR_orbis_aerodynamics_simple">
+            <English>Simple</English>
+            <Korean>Simple</Korean>
+        </Key>
+        <Key ID="STR_orbis_aerodynamics_static">
+            <English>Static</English>
+            <Korean>Static</Korean>
+        </Key>
+        <Key ID="STR_orbis_aerodynamics_windMultiplier_name">
+            <English>Wind Multiplier</English>
+            <Korean>Wind Multiplier</Korean>
+        </Key>
+        <Key ID="STR_orbis_aerodynamics_windMultiplier_tooltip">
+            <English>Set how strong the wind effect will be</English>
+            <Korean>Set how strong the wind effect will be</Korean>
+        </Key>
+    </Package>
 </Project>

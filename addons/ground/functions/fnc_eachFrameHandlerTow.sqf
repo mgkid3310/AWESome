@@ -44,14 +44,14 @@ private _frameOld = _car getVariable [QGVAR(towingFrameOld), diag_frameNo];
 if (!(time > _timeOld) || (diag_frameNo < (_frameOld + GVAR(perFrame)))) exitWith {};
 
 private _timeStep = time - _timeOld;
-private _offsetVector = (AGLtoASL (_car modelToWorld _posRelCar)) vectorDiff (AGLtoASL (_plane modelToWorld _posRelPlane));
+private _offsetVector = (AGLToASL (_car modelToWorld _posRelCar)) vectorDiff (AGLToASL (_plane modelToWorld _posRelPlane));
 
 if (vectorMagnitude _offsetVector > 3) exitWith {[_car] call FUNC(detachTowingVehicle)};
 
 // base velocity
 private _velVector = [0, 0, 0];
 if (count _posBarOld > 0) then {
-	_velVector = (AGLtoASL (_car modelToWorld _posRelCar)) vectorDiff _posBarOld;
+	_velVector = (AGLToASL (_car modelToWorld _posRelCar)) vectorDiff _posBarOld;
 };
 private _velBase = _velVector vectorMultiply (1 / _timeStep);
 
@@ -70,7 +70,7 @@ if (count _offsetOldArray > 0) then {
 private _velTotal = (_velBase vectorMultiply GVAR(velBase)) vectorAdd (_offsetVector vectorMultiply GVAR(Pconst)) vectorAdd (_offsetIntegral vectorMultiply GVAR(Iconst)) vectorAdd (_offsetDerivative vectorMultiply GVAR(Dconst));
 
 // process to foward speed & heading
-private _vectorDir = AGLtoASL (_car modelToWorld _posRelCar) vectorDiff AGLtoASL (_plane modelToWorld _rotateCenter);
+private _vectorDir = AGLToASL (_car modelToWorld _posRelCar) vectorDiff AGLToASL (_plane modelToWorld _rotateCenter);
 private _dirTotal = _vectorDir vectorAdd (_velTotal vectorMultiply _timeStep);
 
 private _targetVelFwd = [0, vectorMagnitude _velTotal, 0];
@@ -111,6 +111,6 @@ if (_isInit || (count _offsetOldArray >= GVAR(maxIntegralItem))) then {
 };
 _offsetOldArray pushBack _offsetVector;
 _car setVariable [QGVAR(offsetOldArray), _offsetOldArray];
-_car setVariable [QGVAR(posBarOld), AGLtoASL (_car modelToWorld _posRelCar)];
+_car setVariable [QGVAR(posBarOld), AGLToASL (_car modelToWorld _posRelCar)];
 _car setVariable [QGVAR(towingTimeOld), time];
 _car setVariable [QGVAR(towingFrameOld), diag_frameNo];

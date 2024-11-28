@@ -1,206 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="AWESome">
-	<Package name="ATC">
-		<Key ID="STR_orbis_atc_category">
-			<English>AWESome ATC</English>
-			<Korean>AWESome ATC</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_radar">
-			<English>ATC Radar Screen</English>
-			<Korean>ATC Radar Screen</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_atis">
-			<English>ATIS</English>
-			<Korean>ATIS</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_gci">
-			<English>GCI</English>
-			<Korean>GCI</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_atc_displayCallsign_name">
-			<English>Toggle ATC Radar display name</English>
-			<Korean>Toggle ATC Radar display name</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_displayCallsign_tooltip">
-			<English>Select what to be displayed as callsign on the ATC radar screen</English>
-			<Korean>Select what to be displayed as callsign on the ATC radar screen</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_personal">
-			<English>Personal Callsign</English>
-			<Korean>Personal Callsign</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_squad">
-			<English>Squad Callsign</English>
-			<Korean>Squad Callsign</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_aircraft">
-			<English>Vehicle Callsign</English>
-			<Korean>Vehicle Callsign</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_pilot">
-			<English>Pilot Name</English>
-			<Korean>Pilot Name</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_atc_personalCallsign_name">
-			<English>Personal Callsign</English>
-			<Korean>Personal Callsign</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_personalCallsign_tooltip">
-			<English>Unique personal callsign to be displayed on ATC screen</English>
-			<Korean>Unique personal callsign to be displayed on ATC screen</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_atc_unitSettingAlt_name">
-			<English>ATC Altitude unit</English>
-			<Korean>ATC Altitude unit</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_unitSettingAlt_tooltip">
-			<English>Unit for altitude on the ATC radar screen</English>
-			<Korean>Unit for altitude on the ATC radar screen</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_unitSettingAlt_meter">
-			<English>meter (x10m)</English>
-			<Korean>meter (x10m)</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_unitSettingAlt_feet">
-			<English>feet (x100ft)</English>
-			<Korean>feet (x100ft)</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_atc_unitSettingSpd_name">
-			<English>ATC Speed unit</English>
-			<Korean>ATC Speed unit</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_unitSettingSpd_tooltip">
-			<English>Unit for speed on the ATC radar screen</English>
-			<Korean>Unit for speed on the ATC radar screen</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_unitSettingSpd_kph">
-			<English>kph (km/h)</English>
-			<Korean>kph (km/h)</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_unitSettingSpd_knot">
-			<English>knot (kn)</English>
-			<Korean>knot (kn)</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_atc_radarUpdateInterval_name">
-			<English>ATC display Update Interval</English>
-			<Korean>ATC display Update Interval</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_radarUpdateInterval_tooltip">
-			<English>Values below 0.50(s) may lower FPS</English>
-			<Korean>Values below 0.50(s) may lower FPS</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_atc_radarTrailLength_name">
-			<English>ATC display trail length</English>
-			<Korean>ATC display trail length</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_radarTrailLength_tooltip">
-			<English>Vehicle trail length on ATC radar screen</English>
-			<Korean>Vehicle trail length on ATC radar screen</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_atc_displayProjectileTrails_name">
-			<English>Display missile trails</English>
-			<Korean>Display missile trails</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_displayProjectileTrails_tooltip">
-			<English>Determines if missile trails will be drawn, displaying missile trails may lower FPS</English>
-			<Korean>Determines if missile trails will be drawn, displaying missile trails may lower FPS</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_display">
-			<English>Display</English>
-			<Korean>Display</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_hide">
-			<English>Hide</English>
-			<Korean>Hide</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_atc_updateIntervalATIS_name">
-			<English>ATIS update interval</English>
-			<Korean>ATIS update interval</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_updateIntervalATIS_tooltip">
-			<English>Update interval for automatically updated ATIS</English>
-			<Korean>Update interval for automatically updated ATIS</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_realTime">
-			<English>Real-time data</English>
-			<Korean>Real-time data</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_manual">
-			<English>Manual Update (by ATC)</English>
-			<Korean>Manual Update (by ATC)</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_atc_displayTextATIS_name">
-			<English>ATIS text display</English>
-			<Korean>ATIS text display</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_displayTextATIS_tooltip">
-			<English>Display ATIS in text format</English>
-			<Korean>Display ATIS in text format</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_atc_actionATIS">
-			<English>ATIS</English>
-			<Korean>ATIS</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_startATIS">
-			<English>Listen to ATIS</English>
-			<Korean>Listen to ATIS</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_stopATIS">
-			<English>Stop Listening ATIS</English>
-			<Korean>Stop Listening ATIS</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_atc_unitSettingLatGCI_name">
-			<English>GCI distance/radial speed unit</English>
-			<Korean>GCI distance/radial speed unit</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_unitSettingLatGCI_tooltip">
-			<English>Units to show distance and radial speed between two planes</English>
-			<Korean>Units to show distance and radial speed between two planes</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_unitSettingGCI_km">
-			<English>km, km/h</English>
-			<Korean>km, km/h</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_unitSettingGCI_NM">
-			<English>NM, kn</English>
-			<Korean>NM, kn</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_atc_unitSettingHozGCI_name">
-			<English>GCI altitude/vertical speed unit</English>
-			<Korean>GCI altitude/vertical speed unit</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_unitSettingHozGCI_tooltip">
-			<English>Units to show altitude difference and vertical speed between two planes</English>
-			<Korean>Units to show altitude difference and vertical speed between two planes</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_unitSettingGCI_m">
-			<English>m, m/s</English>
-			<Korean>m, m/s</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_unitSettingGCI_ft">
-			<English>ft, fpm</English>
-			<Korean>ft, fpm</Korean>
-		</Key>
-
-		<Key ID="STR_orbis_atc_classifyAsHostile_name">
-			<English>Classify as hostile</English>
-			<Korean>Classify as hostile</Korean>
-		</Key>
-		<Key ID="STR_orbis_atc_classifyAsHostile_tooltip">
-			<English>Classify as hostile when clicking on marker with key pressed</English>
-			<Korean>Classify as hostile when clicking on marker with key pressed</Korean>
-		</Key>
-	</Package>
+    <Package name="ATC">
+        <Key ID="STR_orbis_atc_actionATIS">
+            <English>ATIS</English>
+            <Korean>ATIS</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_aircraft">
+            <English>Vehicle Callsign</English>
+            <Korean>Vehicle Callsign</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_atis">
+            <English>ATIS</English>
+            <Korean>ATIS</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_category">
+            <English>AWESome ATC</English>
+            <Korean>AWESome ATC</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_classifyAsHostile_name">
+            <English>Classify as hostile</English>
+            <Korean>Classify as hostile</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_classifyAsHostile_tooltip">
+            <English>Classify as hostile when clicking on marker with key pressed</English>
+            <Korean>Classify as hostile when clicking on marker with key pressed</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_display">
+            <English>Display</English>
+            <Korean>Display</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_displayCallsign_name">
+            <English>Toggle ATC Radar display name</English>
+            <Korean>Toggle ATC Radar display name</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_displayCallsign_tooltip">
+            <English>Select what to be displayed as callsign on the ATC radar screen</English>
+            <Korean>Select what to be displayed as callsign on the ATC radar screen</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_displayProjectileTrails_name">
+            <English>Display missile trails</English>
+            <Korean>Display missile trails</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_displayProjectileTrails_tooltip">
+            <English>Determines if missile trails will be drawn, displaying missile trails may lower FPS</English>
+            <Korean>Determines if missile trails will be drawn, displaying missile trails may lower FPS</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_displayTextATIS_name">
+            <English>ATIS text display</English>
+            <Korean>ATIS text display</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_displayTextATIS_tooltip">
+            <English>Display ATIS in text format</English>
+            <Korean>Display ATIS in text format</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_gci">
+            <English>GCI</English>
+            <Korean>GCI</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_hide">
+            <English>Hide</English>
+            <Korean>Hide</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_manual">
+            <English>Manual Update (by ATC)</English>
+            <Korean>Manual Update (by ATC)</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_personal">
+            <English>Personal Callsign</English>
+            <Korean>Personal Callsign</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_personalCallsign_name">
+            <English>Personal Callsign</English>
+            <Korean>Personal Callsign</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_personalCallsign_tooltip">
+            <English>Unique personal callsign to be displayed on ATC screen</English>
+            <Korean>Unique personal callsign to be displayed on ATC screen</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_pilot">
+            <English>Pilot Name</English>
+            <Korean>Pilot Name</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_radar">
+            <English>ATC Radar Screen</English>
+            <Korean>ATC Radar Screen</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_radarTrailLength_name">
+            <English>ATC display trail length</English>
+            <Korean>ATC display trail length</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_radarTrailLength_tooltip">
+            <English>Vehicle trail length on ATC radar screen</English>
+            <Korean>Vehicle trail length on ATC radar screen</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_radarUpdateInterval_name">
+            <English>ATC display Update Interval</English>
+            <Korean>ATC display Update Interval</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_radarUpdateInterval_tooltip">
+            <English>Values below 0.50(s) may lower FPS</English>
+            <Korean>Values below 0.50(s) may lower FPS</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_realTime">
+            <English>Real-time data</English>
+            <Korean>Real-time data</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_squad">
+            <English>Squad Callsign</English>
+            <Korean>Squad Callsign</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_startATIS">
+            <English>Listen to ATIS</English>
+            <Korean>Listen to ATIS</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_stopATIS">
+            <English>Stop Listening ATIS</English>
+            <Korean>Stop Listening ATIS</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_unitSettingAlt_feet">
+            <English>feet (x100ft)</English>
+            <Korean>feet (x100ft)</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_unitSettingAlt_meter">
+            <English>meter (x10m)</English>
+            <Korean>meter (x10m)</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_unitSettingAlt_name">
+            <English>ATC Altitude unit</English>
+            <Korean>ATC Altitude unit</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_unitSettingAlt_tooltip">
+            <English>Unit for altitude on the ATC radar screen</English>
+            <Korean>Unit for altitude on the ATC radar screen</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_unitSettingGCI_NM">
+            <English>NM, kn</English>
+            <Korean>NM, kn</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_unitSettingGCI_ft">
+            <English>ft, fpm</English>
+            <Korean>ft, fpm</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_unitSettingGCI_km">
+            <English>km, km/h</English>
+            <Korean>km, km/h</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_unitSettingGCI_m">
+            <English>m, m/s</English>
+            <Korean>m, m/s</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_unitSettingHozGCI_name">
+            <English>GCI altitude/vertical speed unit</English>
+            <Korean>GCI altitude/vertical speed unit</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_unitSettingHozGCI_tooltip">
+            <English>Units to show altitude difference and vertical speed between two planes</English>
+            <Korean>Units to show altitude difference and vertical speed between two planes</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_unitSettingLatGCI_name">
+            <English>GCI distance/radial speed unit</English>
+            <Korean>GCI distance/radial speed unit</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_unitSettingLatGCI_tooltip">
+            <English>Units to show distance and radial speed between two planes</English>
+            <Korean>Units to show distance and radial speed between two planes</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_unitSettingSpd_knot">
+            <English>knot (kn)</English>
+            <Korean>knot (kn)</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_unitSettingSpd_kph">
+            <English>kph (km/h)</English>
+            <Korean>kph (km/h)</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_unitSettingSpd_name">
+            <English>ATC Speed unit</English>
+            <Korean>ATC Speed unit</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_unitSettingSpd_tooltip">
+            <English>Unit for speed on the ATC radar screen</English>
+            <Korean>Unit for speed on the ATC radar screen</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_updateIntervalATIS_name">
+            <English>ATIS update interval</English>
+            <Korean>ATIS update interval</Korean>
+        </Key>
+        <Key ID="STR_orbis_atc_updateIntervalATIS_tooltip">
+            <English>Update interval for automatically updated ATIS</English>
+            <Korean>Update interval for automatically updated ATIS</Korean>
+        </Key>
+    </Package>
 </Project>

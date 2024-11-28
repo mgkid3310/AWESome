@@ -5,6 +5,7 @@ private _vehicle = param [1, vehicle _player];
 private _mode = param [2, 0]; // -1: pass, 0: plane/heli, 1: plane, 2: heli
 
 if !(_player in crew _vehicle) exitWith {false};
+if !(isPlayer _player) exitWith {false};
 
 private _typeMatch = false;
 switch (_mode) do {

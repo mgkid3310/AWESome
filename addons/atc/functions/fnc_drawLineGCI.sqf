@@ -42,8 +42,8 @@ private _line1 = format ["BRG %1%2", _bearingPadding, _bearing];
 private _line2 = format ["%1 %2", _distanceInfo, _radialSpdInfo];
 private _line3 = format ["%1 %2", _altDiffInfo, _relVerticalSpdInfo];
 
-private _markerIndexGCI = missionNameSpace getVariable [QGVAR(markerIndexGCI), 0];
-missionNameSpace setVariable [QGVAR(markerIndexGCI), _markerIndexGCI + 1];
+private _markerIndexGCI = missionNamespace getVariable [QGVAR(markerIndexGCI), 0];
+missionNamespace setVariable [QGVAR(markerIndexGCI), _markerIndexGCI + 1];
 
 private _line = createMarkerLocal [format ["orbis_gci_%1_0", _markerIndexGCI], _position];
 _line setMarkerShapeLocal "RECTANGLE";

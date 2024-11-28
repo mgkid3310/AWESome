@@ -5,6 +5,14 @@ ADDON = true;
 
 // add addon settings
 [
+	QGVAR(enabled),
+	"LIST",
+	[localize LSTRING(enabled_name), localize LSTRING(enabled_tooltip)],
+	localize LSTRING(category),
+	[[true, false], [localize LSTRING(enabled_true), localize LSTRING(enabled_false)], 0]
+] call CBA_Settings_fnc_init;
+
+[
 	QGVAR(personalDefault),
 	"LIST",
 	[localize LSTRING(personalDefault_name), localize LSTRING(personalDefault_tooltip)],

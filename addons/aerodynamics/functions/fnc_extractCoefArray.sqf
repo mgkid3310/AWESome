@@ -18,7 +18,7 @@ if (_input < (_stepSize * (count _array - 1))) then {
 
 	_return = linearConversion [_lowerStep, _upperStep, _input, _lowerValue, _upperValue, true];
 } else {
-	_return = _array select (count _array - 1);
+	_return = _array select -1;
 };
 
 _return

@@ -27,7 +27,7 @@ private _rotateCenter = [0, 0, 0];
 	if (count _wheelPos > 0) then {
 		_wheelPosSorted = [_wheelPos, [], {_x select 1}, "DESCEND"] call BIS_fnc_sortBy;
 		_frontWheelPos = _wheelPosSorted select 0;
-		_rearWheelPos = _wheelPosSorted select (count _wheelPosSorted - 1);
+		_rearWheelPos = _wheelPosSorted select -1;
 		_distanceFront = (AGLToASL (_vehicle modelToWorld _frontWheelPos)) distance2D (AGLToASL (_car modelToWorld _checkCenter));
 		_distanceRear = (AGLToASL (_vehicle modelToWorld _rearWheelPos)) distance2D (AGLToASL (_car modelToWorld _checkCenter));
 

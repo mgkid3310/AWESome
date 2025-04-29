@@ -65,7 +65,7 @@ if (count _offsetOldArray >= GVAR(minIntegralItem)) then {
 };
 private _offsetDerivative = [0, 0, 0];
 if (count _offsetOldArray > 0) then {
-	_offsetDerivative = (_offsetVector vectorDiff (_offsetOldArray select (count _offsetOldArray - 1))) vectorMultiply (1 / _timeStep);
+	_offsetDerivative = (_offsetVector vectorDiff (_offsetOldArray select -1)) vectorMultiply (1 / _timeStep);
 };
 private _velTotal = (_velBase vectorMultiply GVAR(velBase)) vectorAdd (_offsetVector vectorMultiply GVAR(Pconst)) vectorAdd (_offsetIntegral vectorMultiply GVAR(Iconst)) vectorAdd (_offsetDerivative vectorMultiply GVAR(Dconst));
 

@@ -25,10 +25,6 @@ Seperate Licenses
 1. Following files are licensed under GNU General Public License v2.0 by CBATeam:
 /include/x/cba/addons/main/script_macros_common.hpp
 
-2. Following files are licensed under GNU General Public License v2.0 by acemod:
-/tools/build.py
-/tools/make.py
-
-3. I do not have nor know exact license of the files included in listed folders:
+2. I do not have nor know exact license of the files included in listed folders:
 /addons/orbis_gpws/sounds/
 Please let me know if there is a certain license to it.

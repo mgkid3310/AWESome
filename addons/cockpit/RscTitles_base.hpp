@@ -36,7 +36,7 @@ class mainTexture_base: control_base {
 	idc = 1800;
 	moving = 1;
 	type = 0;
-	style = "48 + 2048";
+	style = 2096;		// "48 + 2048"
 	x = "0.1 * safezoneW + safezoneX";
 	y = "0.2 * safezoneH + safezoneY";
 	w = "0.0004 * 900 * safezoneW";

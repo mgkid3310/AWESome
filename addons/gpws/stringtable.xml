@@ -17,10 +17,10 @@
             <English>Set to Rita</English>
             <Korean>Set to Rita</Korean>
         </Key>
-        <Key ID="STR_orbis_gpws_actionTCAS">
+        <!-- <Key ID="STR_orbis_gpws_actionTCAS">
             <English>TCAS</English>
             <Korean>TCAS</Korean>
-        </Key>
+        </Key> -->
         <Key ID="STR_orbis_gpws_actionTransponderModes">
             <English>Transponder</English>
             <Korean>Transponder</Korean>

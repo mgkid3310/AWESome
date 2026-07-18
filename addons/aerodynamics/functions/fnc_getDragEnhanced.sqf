@@ -73,7 +73,7 @@ private _dragWave = [0, 0, 0];
 } forEach [[0, 0], [1, 2], [2, 1]];
 
 // sum up drags (induced drag is not affected by flap/gear status)
-private _vehicleEffect = ((_flapsFCoef min GVAR(flapCoefMax)) * _flapPhase) + (_gearsUpFCoef * (1 - _gearPhase)) + (_airBrakeFCoef * _speedBrakePhase);
+private _vehicleEffect = (_flapsFCoef * _flapPhase) + (_gearsUpFCoef * (1 - _gearPhase)) + (_airBrakeFCoef * _speedBrakePhase);
 private _dragForceEnhanced = (_dragParasite vectorAdd _dragWave) vectorMultiply (1 + _vehicleEffect);
 _dragForceEnhanced = (_dragForceEnhanced vectorAdd _dragInduced) vectorMultiply _dragMultiplier;
 

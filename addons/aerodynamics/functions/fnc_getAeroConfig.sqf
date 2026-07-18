@@ -22,7 +22,7 @@ if (_isAdvanced) then {
 _liftArray = getArray (_class >> "envelope");
 _angleOfIncidence = getNumber (_class >> "angleOfIndicence"); // config name itself is a typo
 if (getNumber (_class >> "flaps") > 0) then {
-	_flapsFCoef = getNumber (_class >> "flapsFrictionCoef");
+	_flapsFCoef = (getNumber (_class >> "flapsFrictionCoef")) min GVAR(flapCoefMax);
 } else {
 	_flapsFCoef = 0;
 };

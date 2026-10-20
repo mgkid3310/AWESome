@@ -9,7 +9,7 @@ private _return = [];
 
 	_callsign = getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName");
 
-	_side = side driver _vehicle;
+	_side = side _vehicle;
 	_markerColor = [_side, _radarSide, _targetType] call FUNC(getRadarMarkerColor);
 
 	_markerArray = [_vehicle, _callsign, _displayDetails, _markerColor] call FUNC(drawRadarMarker);

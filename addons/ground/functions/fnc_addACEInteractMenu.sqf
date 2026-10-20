@@ -17,7 +17,7 @@ private _removeTowBar = [
 	localize LSTRING(removeTowBar),
 	"",
 	{[_target] call FUNC(removeTowBar)},
-	{(_target getVariable [QGVAR(hasTowBarDeployed), false]) && (abs (speed _target) < 1)},
+	{(_target getVariable [QGVAR(hasTowBarDeployed), false]) && !(_target getVariable [QGVAR(isTowingPlane), false]) && (abs (speed _target) < 1)},
 	{},
 	[],
 	[0, 0, 0],

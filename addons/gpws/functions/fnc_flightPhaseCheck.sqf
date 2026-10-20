@@ -185,4 +185,4 @@ switch (_flightphase) do {
 	default {};
 };
 
-[_flightphase, _distanceReturn, _altDiff, _altDiffDesired];
+[_flightphase, _distanceReturn, _altDiffReturn, _altDiffDesired];

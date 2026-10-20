@@ -34,7 +34,7 @@ private _altDiffDesired = _flightphaseOutput select 3;
 private _tooLow = !(_flightphase in ["taxing", "takeOff", "touchDown"]) && (_altRadar < GVAR(tooLowAlt));
 private _terrainWarn = (_altRadar > 5) && (_flightphase in ["takeOff", "inFlight", "landing"]) && ((_expectTerrainAlt + GVAR(terrainWarningHeight)) > (getPosASL _vehicle select 2));
 private _dontSink = (_flightphase isEqualTo "takeOff") && (_altRadar > 5) && (_altRadar < 100) && (_climeASL < 0);
-private _sinkRate = _climeASL < GVAR(maxSinkRate);
+private _sinkRate = (_altRadar < 2450 * EGVAR(main,ft2m)) && !(_flightphase in ["taxing", "touchDown"]) && (_climeASL < GVAR(maxSinkRate));
 private _isCritical = _terrainWarn || _dontSink || _sinkRate;
 
 if !(_tooLow) then {

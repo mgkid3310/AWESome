@@ -37,7 +37,7 @@ if (isClass (configFile >> "CfgPatches" >> "orbis_aerodynamics")) then {
 
 fogParams params ["_fogValue", "_fogDecay", "_fogBase"];
 private _fogAltDiff = ((_pos select 2) + 2.5 - _fogBase) max 0;
-private _fogApply = _fogValue * (0.5 ^ (_fogAltDiff * _fogDecay / (ln 0.5)));
+private _fogApply = 1 min (_fogValue * exp (-_fogDecay * _fogAltDiff));
 private _visibility = 10 * exp (-6 * _fogApply);
 
 private _cloudBaseKm = getNumber (configFile >> "CfgWorlds" >> worldName >> "SimulWeather" >> "DefaultKeyframe" >> "cloudBaseKm");

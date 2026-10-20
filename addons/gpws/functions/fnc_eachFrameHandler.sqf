@@ -50,7 +50,6 @@ private _modeLocal = _vehicle getVariable [QGVAR(GPWSmodeLocal), "off"];
 
 private _isGPWSenabled = _vehicle getVariable [QGVAR(isGPWSenabled), false];
 if (!GVAR(enabled) || !_isGPWSenabled) then {
-	_vehicle setVariable [QGVAR(GPWSmode), "off", true];
 	_modePublic = "off";
 };
 

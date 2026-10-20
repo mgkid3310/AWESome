@@ -102,7 +102,7 @@ if (_configData param [0, 0] > 0) then {
 	_engineData params ["_abThrottle", "_refThrust", "_milThrust", "_abThrust", "_abFuelMultiplier"];
 	_weightData params ["_gWeight", "_zfWeight", "_fWeight"];
 
-	if (_abThrottle > 0) then {
+	if ((_abThrottle > 0) && (_refThrust > 0)) then {
 		if (_throttleEffective > _abThrottle) then {
 			_abRatio = linearConversion [_abThrottle, 1, _throttleEffective, GVAR(abMinRatio), 1, true];
 			_fuelFlowMultiplier = _fuelFlowMultiplier * linearConversion [0, 1, _abRatio, 1, _abFuelMultiplier, true]; // includes thrust & TSFC increase
@@ -114,8 +114,10 @@ if (_configData param [0, 0] > 0) then {
 		};
 	};
 
-	_massStandardRatio = _zfWeight / _gWeight;
-	_massFuelRatio = _fWeight / _gWeight;
+	if (_gWeight > 0) then {
+		_massStandardRatio = _zfWeight / _gWeight;
+		_massFuelRatio = _fWeight / _gWeight;
+	};
 
 	{call compile _x} forEach _codeIntercept;
 };
@@ -219,7 +221,7 @@ if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 
 	if (_auxtankSwitch > 0.05) then {
 		_auxtankSwitch = _auxtankSwitch + ([0, 0.0005 * _abSwitch * _timeStep] select isEngineOn _vehicle);
-		_auxtankSwitch = _auxtankSwitch - _fuelFlowEnhanced * _abSwitch * (_timeStep / _fuelCapacity) / 1.1845;
+		_auxtankSwitch = _auxtankSwitch - _fuelFlowEnhanced * _abSwitch * (_timeStep / (_fuelCapacity max 1)) / 1.1845;
 		_vehicle animate ["auxtank_switch", _auxtankSwitch max 0, true];
 		_vehicle setFuel (_fuelCurrent + (_auxtankSwitch min 0));
 
@@ -230,7 +232,7 @@ if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 };
 
 // apply fuel update
-private _fuelCorrection = (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / _fuelCapacity);
+private _fuelCorrection = (_fuelFlowEnhanced - _fuelFlowDefault) * (_timeStep / (_fuelCapacity max 1));
 _vehicle setFuel ((_fuelCurrent - _fuelCorrection) min 1);
 
 private ["_fuelExternal", "_fuelDraw"];

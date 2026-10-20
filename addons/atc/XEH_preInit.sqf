@@ -66,7 +66,8 @@ ADDON = true;
 	"LIST",
 	[localize LSTRING(updateIntervalATIS_name), localize LSTRING(updateIntervalATIS_tooltip)],
 	[localize LSTRING(category), localize LSTRING(atis)],
-	[[5, 15, 30, 0, -1], ["5min", "15min", "30min", localize LSTRING(realTime), localize LSTRING(manual)], 1]
+	[[5, 15, 30, 0, -1], ["5min", "15min", "30min", localize LSTRING(realTime), localize LSTRING(manual)], 1],
+	true
 ] call CBA_Settings_fnc_init;
 
 [

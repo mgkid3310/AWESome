@@ -107,18 +107,20 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 
 	private ["_knownWeapons", "_detectedWeapons", "_bogieWeapons", "_banditWeapons"];
 	private _trackedWeapons = missionNamespace getVariable [QGVAR(trackedWeapons), []];
-	if !(_isObserver) then {
+	if (!_isObserver && (_radarMode > 0)) then {
 		_knownWeapons = _trackedWeapons select {(_x select 2) isEqualTo _radarSide};
 		_detectedWeapons = (_trackedWeapons - _knownWeapons) apply {_x + [[_monitor, _x select 0, 0.7] call FUNC(simulateRadarDetection)]};
 
 		_bogieWeapons = _detectedWeapons select {((_x select 4) > 1) && !(_radarSide in (_x select 3))};
 		_banditWeapons = _detectedWeapons select {((_x select 4) > 1) && (_radarSide in (_x select 3))};
 
-		_trackedWeapons = _knownWeapons + _detectedWeapons;
+		_trackedWeapons = _knownWeapons + _bogieWeapons + _banditWeapons;
 	} else {
-		_knownWeapons = _trackedWeapons;
+		_knownWeapons = if (_isObserver) then {_trackedWeapons} else {_trackedWeapons select {(_x select 2) isEqualTo _radarSide}};
 		_bogieWeapons = [];
 		_banditWeapons = [];
+
+		_trackedWeapons = _knownWeapons;
 	};
 	private _trailWeapons = [[], _trackedWeapons] select GVAR(displayProjectileTrails);
 

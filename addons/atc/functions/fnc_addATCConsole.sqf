@@ -41,7 +41,7 @@ if (EGVAR(main,hasACEInteractMenu)) then {
 		"Stop Listening to ATIS",
 		"",
 		{(_this select 1) setVariable [QGVAR(stopATIS), true, true]},
-		{!(_player getVariable [QGVAR(orbis_atc_stopATIS), true])},
+		{!(_player getVariable [QGVAR(stopATIS), true])},
 		{},
 		[],
 		[0, 0, 0],

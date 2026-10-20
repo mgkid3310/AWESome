@@ -25,6 +25,10 @@ if (_vtolMode > 0) then {
 	_speedStall = linearConversion [0, 60, _thrustVector * 90, _speedStall, 0, true];
 };
 
+if (fuel _vehicle > GVAR(f16BingoFuel) + 0.05) then {
+	_vehicle setVariable [QGVAR(f16BingoAlerted), false];
+};
+
 // flight phase check
 private _flightphaseOutput = _vehicle getVariable [QGVAR(flightPhaseParam), ["taxing", 0, 0, 0]];
 private _flightphase = _flightphaseOutput select 0;
@@ -129,10 +133,10 @@ if ((_vehicle getVariable [QGVAR(nextGPWStime), -1]) < time) then {
 		};
 
 		// f16_bingo
-		case ((fuel _vehicle < GVAR(f16BingoFuel)) && !(_vehicle getVariable ["bingoAlerted", false])): {
+		case ((fuel _vehicle < GVAR(f16BingoFuel)) && !(_vehicle getVariable [QGVAR(f16BingoAlerted), false])): {
 			DEV_CHAT("orbis_gpws: f16_bingo");
 			[_vehicle, "f16_bingo"] call FUNC(speakGPWS);
-			_vehicle setVariable ["bingoAlerted", true];
+			_vehicle setVariable [QGVAR(f16BingoAlerted), true];
 		};
 
 		default {};

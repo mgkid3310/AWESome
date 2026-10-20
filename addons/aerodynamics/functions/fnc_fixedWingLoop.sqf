@@ -148,6 +148,7 @@ private _pylonDragCoef2 = [0, 0, 0];
 	// diag_log format ["orbis_aerodynamics pylonNum: %1, magazine: %2, _massMagazine: %3, _coefMagazine: %4", _forEachIndex + 1, _x, _massMagazine, _coefMagazine];
 } forEach (getPylonMagazines _vehicle);
 private _pylonDragArray = [_pylonDragCoef2 vectorMultiply (_pylonDragMultiplier / (1 max _massPylon)), [0, 0, 0], [0, 0, 0]];
+private _massPylonDrag = _massPylon;
 _massPylon = _massPylon * linearConversion [0.5, 1, _massStandard / GVAR(massStandardValue), 0.5, 1, true];
 
 // get current vehicle mass
@@ -183,7 +184,7 @@ if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 // build parameter array
 private _paramDefault = [_modelVelocity, _massCurrent, _massError];
 private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityRatio, _altitudeAGLS, _temperatureRatio, _wingSpan];
-private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio, _altitudeAGLS, _temperatureRatio, _wingSpan];
+private _paramPylon = [_trueAirVelocity, _massPylonDrag, _massError, _densityRatio, _altitudeAGLS, _temperatureRatio, _wingSpan];
 private _paramThrust = [_thrustCoef, _vtolMode, _thrustMultiplier, _engineDamage, _thrustVector];
 private _paramLift = [_liftArray, _liftMultiplier, _flapsFCoef, _flapPhase];
 private _paramDrag = [_dragArray, _dragMultiplier, _flapsFCoef, _flapPhase, _gearsUpFCoef, _gearPhase, _airBrakeFCoef, _speedBrakePhase];

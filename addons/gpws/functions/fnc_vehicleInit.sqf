@@ -4,7 +4,9 @@ params ["_vehicle"];
 
 private _firedEventHandlerID = _vehicle getVariable [QGVAR(firedEventHandlerID), false];
 if !(_firedEventHandlerID isEqualType 0) then {
-	_firedEventHandlerID = _vehicle addEventHandler ["Fired", {_this spawn FUNC(f16ChaffFlare)}];
+	_firedEventHandlerID = _vehicle addEventHandler ["Fired", {
+		if ((_this select 1) in GVAR(ChaffFlareList)) then {_this spawn FUNC(f16ChaffFlare)};
+	}];
 	_vehicle setVariable [QGVAR(firedEventHandlerID), _firedEventHandlerID];
 };
 

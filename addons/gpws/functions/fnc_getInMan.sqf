@@ -33,8 +33,9 @@ if (_modeCurrent isEqualTo "init") then {
 		_vehicle setVariable [QGVAR(GPWSmode), GVAR(personalDefault), true];
 	};
 
-	if (getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> QGVAR(defaultGPWS)) isEqualTo "f16") exitWith {
-		_vehicle setVariable [QGVAR(GPWSmode), "f16", true];
+	private _configDefault = getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> QGVAR(defaultGPWS));
+	if (_configDefault in ["b747", "f16", "rita"]) exitWith {
+		_vehicle setVariable [QGVAR(GPWSmode), _configDefault, true];
 	};
 
 	_vehicle setVariable [QGVAR(GPWSmode), "off", true];

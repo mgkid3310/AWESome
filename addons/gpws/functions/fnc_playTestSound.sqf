@@ -14,7 +14,7 @@ if (!_isStop && (_modeGiven isEqualTo _modeLocal)) then {
 	};
 
 	private _crew = allPlayers select {[_x, vehicle player, 1] call EFUNC(main,isCrew)};
-	private _targets = _crew select {missionNamespace getVariable [QGVAR(hasAWESomeGPWS_) + getPlayerUID player, false]};
+	private _targets = _crew select {missionNamespace getVariable [QGVAR(hasAWESomeGPWS_) + getPlayerUID _x, false]};
 
 	[QEGVAR(main,playSoundVehicle), [_soundName], _targets] call CBA_fnc_targetEvent;
 

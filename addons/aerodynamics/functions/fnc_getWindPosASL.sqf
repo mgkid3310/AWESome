@@ -4,7 +4,7 @@ params ["_posASL", ["_dynamicWindMode", GVAR(dynamicWindMode)], ["_time", CBA_mi
 
 if !(_dynamicWindMode > 0) exitWith {wind};
 
-private _altRadar = ((_posASL select 2) - (getTerrainHeightASL _posASL)) max 1;
+private _altRadar = ((_posASL select 2) - (0 max getTerrainHeightASL _posASL)) max 1;
 
 // calculate global wind
 private _altitudeProfile = 1.219 * (exp (-0.15 * _altRadar / 80) - exp (-3.2175 * _altRadar / 80));
@@ -15,10 +15,11 @@ private _globalWind = wind vectorMultiply (1 + _altitudeProfile * _windVariabili
 // wind gust
 private ["_timePassed", "_gustStrength"];
 private _timeGrid = GVAR(maxGustDuration) * floor (_time / GVAR(maxGustDuration));
-private _durationRatio = [1, _timeGrid, [nil, nil, nil, 4]] call EFUNC(main,randomLCG);
+private _gustSeed = _timeGrid + 1;
+private _durationRatio = [1, _gustSeed, [nil, nil, nil, 4]] call EFUNC(main,randomLCG);
 private _timeDuration = linearConversion [0, 1, _durationRatio, GVAR(maxGustDuration) / 2, GVAR(maxGustDuration), true];
 private _timeEnd = _timeGrid + _timeDuration;
-if (!(_dynamicWindMode < 2) && (([1, _timeGrid, [nil, nil, nil, 5]] call EFUNC(main,randomLCG)) < GVAR(gustChance)) && (_time < _timeEnd)) then {
+if (!(_dynamicWindMode < 2) && (([1, _gustSeed, [nil, nil, nil, 5]] call EFUNC(main,randomLCG)) < GVAR(gustChance)) && (_time < _timeEnd)) then {
 	_timePassed = _time - _timeGrid;
 	_gustStrength = _altitudeProfile * gusts * GVAR(gustMultiplier);
 	_globalWind = _globalWind vectorMultiply (1 + _gustStrength * sin (180 * _timePassed / _timeDuration));

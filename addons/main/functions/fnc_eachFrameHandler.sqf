@@ -1,3 +1,6 @@
 #include "script_component.hpp"
 
-player setVariable [QGVAR(crewStatus), [vehicle player, assignedVehicleRole player], true];
+private _crewStatus = [vehicle player, assignedVehicleRole player];
+if !(_crewStatus isEqualTo (player getVariable [QGVAR(crewStatus), []])) then {
+	player setVariable [QGVAR(crewStatus), _crewStatus, true];
+};

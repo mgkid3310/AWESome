@@ -107,13 +107,7 @@ ADDON = true;
 	[0, [false, false, false]]
 ] call CBA_fnc_addKeybind;
 
-// add actions (ACE / vanilla)
+// add actions (ACE)
 if (EGVAR(main,hasACEInteractMenu)) then {
 	[] call FUNC(addACEInteractMenu);
-} else {
-	player addEventHandler ["GetInMan", {_this call FUNC(getInAddAction)}];
-
-	if !(vehicle player isEqualTo player) then {
-		[player, "", vehicle player, []] call FUNC(getInAddAction);
-	};
 };

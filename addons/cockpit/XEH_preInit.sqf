@@ -38,13 +38,7 @@ if !(EGVAR(main,hasACEUnits)) then {
 	] call CBA_Settings_fnc_init;
 };
 
-// add actions (ACE / vanilla)
+// add actions (ACE)
 if (EGVAR(main,hasACEInteractMenu)) then {
 	[] call FUNC(addACEInteractMenu);
-} else {
-	player addEventHandler ["GetInMan", {_this call FUNC(getInAddAction)}];
-
-	if !(vehicle player isEqualTo player) then {
-		[player, "", vehicle player, []] call FUNC(getInAddAction);
-	};
 };

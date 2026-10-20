@@ -66,10 +66,35 @@ for "_i" from 0 to (count (configFile >> "CfgWorlds" >> worldName >> "SecondaryA
 } forEach (allAirports select 1);
 
 // add EventHandlers
-if !(vehicle player isEqualTo player) then {
-	[player, getPos player, vehicle player, nil] spawn FUNC(getInMan);
+if (hasInterface) then {
+	["CAManBase", "GetInMan", {
+		if ((_this select 0) isEqualTo player) then {_this call FUNC(getInMan)};
+	}] call CBA_fnc_addClassEventHandler;
+
+	["CAManBase", "SeatSwitchedMan", {
+		params ["_unit1", "_unit2", "_vehicle"];
+		if (player in [_unit1, _unit2]) then {[player, "", _vehicle, []] call FUNC(getInMan)};
+	}] call CBA_fnc_addClassEventHandler;
+
+	[{!isNull player}, {
+		if !(vehicle player isEqualTo player) then {
+			[player, "", vehicle player, []] call FUNC(getInMan);
+		};
+	}] call CBA_fnc_waitUntilAndExecute;
 };
-player addEventHandler ["GetInMan", {_this spawn FUNC(getInMan)}];
 addMissionEventHandler ["EachFrame", {[] call FUNC(eachFrameHandler)}];
 
 ["Plane", "Init", {_this call FUNC(vehicleInit)}, true, [], true] call CBA_fnc_addClassEventHandler;
+
+// add actions (vanilla)
+if (hasInterface && !EGVAR(main,hasACEInteractMenu)) then {
+	["CAManBase", "GetInMan", {
+		if ((_this select 0) isEqualTo player) then {_this call FUNC(getInAddAction)};
+	}] call CBA_fnc_addClassEventHandler;
+
+	[{!isNull player}, {
+		if !(vehicle player isEqualTo player) then {
+			[player, "", vehicle player, []] call FUNC(getInAddAction);
+		};
+	}] call CBA_fnc_waitUntilAndExecute;
+};

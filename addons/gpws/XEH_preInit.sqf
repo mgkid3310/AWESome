@@ -36,13 +36,7 @@ ADDON = true;
 	[[true, false], [localize LSTRING(automaticTransponder_automatic), localize LSTRING(automaticTransponder_manual)], 0]
 ] call CBA_Settings_fnc_init;
 
-// add actions (ACE / vanilla) & events
+// add actions (ACE)
 if (EGVAR(main,hasACEInteractMenu)) then {
 	[] call FUNC(addACEInteractMenu);
-} else {
-	player addEventHandler ["GetInMan", {_this call FUNC(getInAddAction)}];
-
-	if !(vehicle player isEqualTo player) then {
-		[player, "", vehicle player, []] call FUNC(getInAddAction);
-	};
 };

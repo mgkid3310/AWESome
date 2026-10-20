@@ -46,3 +46,16 @@ GVAR(circleRadius) = 1.125;
 [QGVAR(spawnATIS), {_this spawn FUNC(spawnATIS)}] call CBA_fnc_addEventHandler;
 addMissionEventHandler ["EachFrame", {[] call FUNC(eachFrameHandler)}];
 addMissionEventHandler ["MapSingleClick", {_this call FUNC(mapSingleClickHandler)}];
+
+// add actions (vanilla)
+if (hasInterface && !EGVAR(main,hasACEInteractMenu)) then {
+	["CAManBase", "GetInMan", {
+		if ((_this select 0) isEqualTo player) then {_this call FUNC(getInAddAction)};
+	}] call CBA_fnc_addClassEventHandler;
+
+	[{!isNull player}, {
+		if !(vehicle player isEqualTo player) then {
+			[player, "", vehicle player, []] call FUNC(getInAddAction);
+		};
+	}] call CBA_fnc_waitUntilAndExecute;
+};

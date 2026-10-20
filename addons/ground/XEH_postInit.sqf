@@ -17,3 +17,16 @@ GVAR(towingEventID) = -1;
 
 // add EventHandlers
 [QGVAR(detachTowingVehicle), {_this call FUNC(detachTowingVehicle)}] call CBA_fnc_addEventHandler;
+
+// add actions (vanilla)
+if (hasInterface && !EGVAR(main,hasACEInteractMenu)) then {
+	["CAManBase", "GetInMan", {
+		if ((_this select 0) isEqualTo player) then {_this call FUNC(getInAddAction)};
+	}] call CBA_fnc_addClassEventHandler;
+
+	[{!isNull player}, {
+		if !(vehicle player isEqualTo player) then {
+			[player, "", vehicle player, []] call FUNC(getInAddAction);
+		};
+	}] call CBA_fnc_waitUntilAndExecute;
+};

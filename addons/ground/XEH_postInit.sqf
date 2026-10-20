@@ -12,3 +12,8 @@ GVAR(Dconst) = 0.2;
 
 GVAR(minIntegralItem) = 25;
 GVAR(maxIntegralItem) = 30;
+
+GVAR(towingEventID) = -1;
+
+// add EventHandlers
+[QGVAR(detachTowingVehicle), {_this call FUNC(detachTowingVehicle)}] call CBA_fnc_addEventHandler;

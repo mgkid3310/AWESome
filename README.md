@@ -112,7 +112,7 @@ radarPos: Position of the radar, can be object or position ASL (default: radar)
 radarRange: Standard detecting range for RCS 5m^2 vehicle in km (default: 30)  
 counterStealth: No effect for now (default: 0)  
 volumeCR: Volume clutter reduction ratio (default: 1000)  
-groundCR: Ground clutter reduction ratio (default: 1000)  
+groundCR: Ground clutter reduction ratio (default: 10)  
 
 `radar setVariable ["orbis_atc_radarDetailParams", radarDetailParams]`  
 radar: Radar object  
@@ -120,16 +120,16 @@ radarDetailParams: Radar detail parameters (default: [])
 
 `radarDetailParams` can be used in two modes: preset/custom.  
 The list of available presets is as follows:  
-`"APS-11"`: used in airports as surveillance radar  
+`"ASR-11"`: used in airports as surveillance radar  
 `"AN/APG76"`: used in A-6, weak against rain  
 `"AN/APS145"`: used in E-2C, weak against ground clutter  
 
 When using custom values, the parameters are as follows:  
 `radarDetailParams = [radarFrequency, pulseWidth, azimuthBeamwidth, elevationBeamwidth]`  
-radarFrequency: Frequency of radar beam in GHz (default: 16.5)  
-pulseWidth: Pulse width of radar beam in micro seconds (default: 1.25)  
-azimuthBeamwidth: Azimuth beam width in degrees (default: 2.2)  
-elevationBeamwidth: Elevation beam width in degrees (default: 3.8)  
+radarFrequency: Frequency of radar beam in GHz (default: 2.8)  
+pulseWidth: Pulse width of radar beam in micro seconds (default: 1)  
+azimuthBeamwidth: Azimuth beam width in degrees (default: 1.4)  
+elevationBeamwidth: Elevation beam width in degrees (default: 5)  
 
 Military ATC radar includes tools for GCI. When clicking on  
 radar markers on map, a circle will appear around the marker  

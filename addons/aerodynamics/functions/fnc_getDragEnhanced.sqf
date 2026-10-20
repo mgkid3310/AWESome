@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 
 params ["_paramEnhanced", "_paramDrag", ["_liftVector", false], ["_speedStall", 0]];
-_paramEnhanced params ["_trueAirVelocity", "_massStandard", "_massError", "_densityRatio", "_height"];
+_paramEnhanced params ["_trueAirVelocity", "_massStandard", "_massError", "_densityRatio", "_height", "_temperatureRatio", "_wingSpan"];
 _paramDrag params ["_dragArray", "_dragMultiplier", "_flapsFCoef", "_flapPhase", "_gearsUpFCoef", "_gearPhase", "_airBrakeFCoef", "_speedBrakePhase"];
 _dragArray params ["_coef2", "_coef1", "_coef0"];
 
@@ -24,12 +24,10 @@ private _dragParasite = [0, 0, 0];
 // induced drag (including lift-dependent parasite & wave drag)
 private _dragInduced = [0, 0, 0];
 if (_liftVector isEqualType []) then {
-	private _inducedConst = (2 * 1.225) / (_densityRatio * pi * 0.5 * 400);
+	private _inducedConst = 2 / (1.225 * _densityRatio * pi * GVAR(oswaldEfficiency) * _wingSpan ^ 2);
 	private _inducedValue = ((vectorMagnitude _liftVector) / (_airSpeed max (_speedStall / 3.6) max GVAR(minStallSpeed))) ^ 2;
 	_dragInduced = (vectorNormalized _airVel) vectorMultiply (_inducedConst * _inducedValue * (GVAR(dragSourceMultiplier) select 1));
 
-	0 boundingBoxReal vehicle player params ["_posMin", "_posMax", "_bbRadius"];
-	private _wingSpan = (_posMax select 0) - (_posMin select 0);
 	private _hOverD = (((_height max 0) + GVAR(wingHeight)) / _wingSpan);
 	private _geMultiplier = GVAR(geFactor) / (_hOverD + GVAR(geFactor));
 	_dragInduced = _dragInduced vectorMultiply (1 - (_geMultiplier * GVAR(geInducedDragMultiplier)));
@@ -37,7 +35,7 @@ if (_liftVector isEqualType []) then {
 
 // wave drag (zero lift drag)
 GVAR(waveCdArray) params ["_machCritical", "_transStart", "_machMaxCd", "_transEnd", "_multiplierMax", "_roundFwd", "_roundAft", "_machPower"];
-private _machNumber = _airSpeed / sqrt (103497 / _densityRatio);
+private _machNumber = _airSpeed / (340.294 * sqrt _temperatureRatio);
 private _waveCdMultiplier = 0;
 switch (true) do {
 	case (_machNumber < _machCritical): {

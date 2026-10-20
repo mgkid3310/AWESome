@@ -14,7 +14,13 @@ if (isNull _plane) exitWith {};
 
 private _towBar = _car getVariable [QGVAR(towBarObject), objNull];
 
+private _carOld = player getVariable [QGVAR(towVehicle), objNull];
+if !(isNull _carOld) then {
+	[_carOld] call FUNC(detachTowingVehicle);
+};
+
 player setVariable [QGVAR(towVehicle), _car, true];
+_car setVariable [QGVAR(towingPlayer), player, true];
 _car setVariable [QGVAR(isTowingPlane), true, true];
 _car setVariable [QGVAR(towingTarget), _plane, true];
 _car setVariable [QGVAR(towingOwner), owner _plane, true];
@@ -36,5 +42,4 @@ if !(local _plane) then {
 	[_towBar, _plane] remoteExec ["disableCollisionWith", _plane];
 };
 
-private _eventID = addMissionEventHandler ["EachFrame", {[] call FUNC(eachFrameHandlerTow)}];
-_car setVariable [QGVAR(towingEvent), _eventID, true];
+GVAR(towingEventID) = addMissionEventHandler ["EachFrame", {[] call FUNC(eachFrameHandlerTow)}];

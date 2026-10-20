@@ -92,6 +92,9 @@ private _flapPhase = _vehicle animationSourcePhase "flap";
 private _gearPhase = _vehicle animationSourcePhase "gear";
 private _speedBrakePhase = _vehicle animationSourcePhase "speedBrake";
 
+0 boundingBoxReal _vehicle params ["_posMin", "_posMax", "_bbRadius"];
+private _wingSpan = 1 max ((_posMax select 0) - (_posMin select 0));
+
 // config data compatibility
 private ["_abRatio"];
 if (_configData param [0, 0] > 0) then {
@@ -177,8 +180,8 @@ if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 
 // build parameter array
 private _paramDefault = [_modelVelocity, _massCurrent, _massError];
-private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityRatio, _altitudeAGLS];
-private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio, _altitudeAGLS];
+private _paramEnhanced = [_trueAirVelocity, _massStandard, _massError, _densityRatio, _altitudeAGLS, _temperatureRatio, _wingSpan];
+private _paramPylon = [_trueAirVelocity, _massPylon, _massError, _densityRatio, _altitudeAGLS, _temperatureRatio, _wingSpan];
 private _paramThrust = [_thrustCoef, _vtolMode, _thrustMultiplier, _engineDamage, _thrustVector];
 private _paramLift = [_liftArray, _liftMultiplier, _flapsFCoef, _flapPhase];
 private _paramDrag = [_dragArray, _dragMultiplier, _flapsFCoef, _flapPhase, _gearsUpFCoef, _gearPhase, _airBrakeFCoef, _speedBrakePhase];
@@ -257,8 +260,7 @@ private ["_posCG", "_posCP", "_posTail"];
 private ["_xTail", "_yTail", "_zTail"];
 private ["_enhancedX", "_enhancedY", "_enhancedZ"];
 if (GVAR(applyForce)) then {
-	0 boundingBoxReal vehicle player params ["_posMin", "_posMax", "_bbRadius"];
-	_posCG = getCenterOfMass vehicle player;
+	_posCG = getCenterOfMass _vehicle;
 	_xTail = ((_posMin select 0) + (_posMax select 0)) / 2;
 	_yTail = _posMin select 1;
 	_zTail = ((_posMin select 2) + (_posMax select 2)) / 2;

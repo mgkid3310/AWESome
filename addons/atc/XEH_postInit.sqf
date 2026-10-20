@@ -13,6 +13,7 @@ GVAR(radarParameterOptions) = [
 GVAR(speedOfLight) = 299792458; // m/s
 GVAR(volumeClutterFactor) = 1;
 GVAR(groundClutterFactor) = 1;
+GVAR(terrainGamma) = 0.1; // -10dB, ground clutter reflectivity of constant gamma model
 GVAR(minRadarDetection) = 16; // maximum radar range x0.5
 
 GVAR(minVerticalSpd) = 3.048; // 600ft/min

@@ -106,7 +106,7 @@ if (local _plane) then {
 };
 
 // save data for next run
-if (_isInit || (count _offsetOldArray >= GVAR(maxIntegralItem))) then {
+if (count _offsetOldArray >= GVAR(maxIntegralItem)) then {
 	_offsetOldArray deleteAt 0;
 };
 _offsetOldArray pushBack _offsetVector;

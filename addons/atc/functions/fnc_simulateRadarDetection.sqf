@@ -31,9 +31,11 @@ private _distance = _deadzoneRange max (_posRadarASL vectorDistance _posTargetAS
 
 if !(_distance > _deadzoneRange) exitWith {0};
 
-if ((_radarTargetSize < 0) && (_target isEqualType "")) then {
-	_radarTargetSize = getNumber (configFile >> "CfgVehicles" >> (typeOf _target) >> "radarTargetSize");
+if ((_radarTargetSize < 0) && (_target isEqualType objNull)) then {
+	private _configTargetSize = configFile >> "CfgVehicles" >> (typeOf _target) >> "radarTargetSize";
+	if (isNumber _configTargetSize) then {_radarTargetSize = getNumber _configTargetSize};
 };
+if (_radarTargetSize < 0) then {_radarTargetSize = 1};
 private _radarCrossSection = 5 * _radarTargetSize ^ 4; // m^2
 private _rangeRatio = 1000 * _radarRange / _distance;
 
@@ -52,7 +54,7 @@ private _psi = acos ((_distance2D / _distance) min 1);
 
 private _rainfallRate = [0, 16 * rain] select (overcast > 0.5); // mm/hr
 private _volumeReflectivity = ((6 * 10 ^ -14) * _rainfallRate ^ 1.6) / ((GVAR(speedOfLight) / (_radarFrequencyGHz * 10 ^ 9)) ^ 4); // m^-1
-private _terrainReflectivity = 10 ^ linearConversion [90, 0, _psi, -3, -2, true];
+private _terrainReflectivity = GVAR(terrainGamma) * sin (_psi max 1); // constant gamma model, sigma0 = gamma * sin(grazing angle)
 
 // systemChat str [_rainfallRate, _volumeReflectivity, _terrainReflectivity];
 

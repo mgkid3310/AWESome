@@ -6,7 +6,7 @@ if !(_dynamicWindMode > 0) exitWith {wind};
 
 if !((_dynamicWindMode > 1) && (GVAR(gridResolution) > 0)) exitWith {[getPosASL _vehicle, _dynamicWindMode] call FUNC(getWindPosASL)};
 
-0 boundingBoxReal vehicle player params ["_posMin", "_posMax", "_bbRadius"];
+0 boundingBoxReal _vehicle params ["_posMin", "_posMax", "_bbRadius"];
 private _gridSizeX = (_posMax select 0) - (_posMin select 0);
 private _gridSizeY = (_posMax select 1) - (_posMin select 1);
 

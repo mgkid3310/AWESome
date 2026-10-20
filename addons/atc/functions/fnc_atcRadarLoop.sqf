@@ -96,14 +96,14 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 	_heliesStandBy = _heliesStandBy + (_heliesAuto select {(isEngineOn _x) && (isTouchingGround _x)});
 
 	private _antiAirVehicles = [];
-	if !(_isObserver) then {
-		_antiAirVehicles = _antiAirVehicles select {(side _x) isEqualTo _radarSide};
-	};
-
 	private _additionalSAMs = missionNamespace getVariable [QGVAR(additionalSAMs), []];
 	{
 		_antiAirVehicles pushBackUnique _x;
 	} forEach _additionalSAMs;
+
+	if !(_isObserver) then {
+		_antiAirVehicles = _antiAirVehicles select {(side _x) in [_radarSide, civilian]};
+	};
 
 	private ["_knownWeapons", "_detectedWeapons", "_bogieWeapons", "_banditWeapons"];
 	private _trackedWeapons = missionNamespace getVariable [QGVAR(trackedWeapons), []];

@@ -47,6 +47,18 @@ GVAR(circleRadius) = 1.125;
 addMissionEventHandler ["EachFrame", {[] call FUNC(eachFrameHandler)}];
 addMissionEventHandler ["MapSingleClick", {_this call FUNC(mapSingleClickHandler)}];
 
+// ATIS data update (server)
+if (isServer) then {
+	missionNamespace setVariable [QGVAR(serverUpdatesATIS), true, true];
+	[{
+		if !(GVAR(updateIntervalATIS) > 0) exitWith {};
+		private _ATISdata = missionNamespace getVariable [QGVAR(ATISdata), false];
+		if (!(_ATISdata isEqualType []) || {CBA_missionTime > (_ATISdata select 0 select 1) + GVAR(updateIntervalATIS) * 60}) then {
+			[true, true] call FUNC(updateATISdata);
+		};
+	}, 1] call CBA_fnc_addPerFrameHandler;
+};
+
 // add actions (vanilla)
 if (hasInterface && !EGVAR(main,hasACEInteractMenu)) then {
 	["CAManBase", "GetInMan", {

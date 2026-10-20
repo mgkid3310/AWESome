@@ -29,7 +29,7 @@ if !(local _plane) then {
 _car setVariable [QGVAR(towingPlayer), nil, true];
 _car setVariable [QGVAR(isTowingPlane), false, true];
 _car setVariable [QGVAR(towingTarget), nil, true];
-_car setVariable [QGVAR(towingOwner), nil, true];
+_car setVariable [QGVAR(towingCollisionTime), nil];
 
 _car setVariable [QGVAR(offsetOldArray), nil, true];
 _car setVariable [QGVAR(posBarOld), nil, true];

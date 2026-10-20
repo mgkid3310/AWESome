@@ -25,3 +25,4 @@ if ((alive _controller) && (_distance > 0) && ((_controller distance _monitor) >
 _monitor setVariable [QGVAR(radarData), nil];
 _controller setVariable [QGVAR(isUsingRadar), false];
 _controller setVariable [QGVAR(exitRadar), false];
+GVAR(activeRadar) = nil;

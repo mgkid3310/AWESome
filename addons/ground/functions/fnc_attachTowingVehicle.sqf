@@ -23,7 +23,6 @@ player setVariable [QGVAR(towVehicle), _car, true];
 _car setVariable [QGVAR(towingPlayer), player, true];
 _car setVariable [QGVAR(isTowingPlane), true, true];
 _car setVariable [QGVAR(towingTarget), _plane, true];
-_car setVariable [QGVAR(towingOwner), owner _plane, true];
 
 _car setVariable [QGVAR(offsetOldArray), [], true];
 _car setVariable [QGVAR(posBarOld), AGLToASL (_car modelToWorld _towBarCenterPos), true];

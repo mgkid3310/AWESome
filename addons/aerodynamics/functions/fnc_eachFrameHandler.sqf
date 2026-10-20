@@ -11,19 +11,31 @@ if ((_timeOld < 0) || (_frameOld < 0)) exitWith {
 
 if (diag_frameNo < (_frameOld + GVAR(frameInterval))) exitWith {};
 
+// restore mass of the plane no longer flown by player
+private _isFlying = GVAR(enabled) && {driver _vehicle isEqualTo player} && {(toLower getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "simulation")) in ["airplanex", "planex"]};
+private _vehicleFlown = [objNull, _vehicle] select _isFlying;
+private _vehicleOld = missionNamespace getVariable [QGVAR(lastVehicle), objNull];
+if !(_vehicleOld isEqualTo _vehicleFlown) then {
+	if !(isNull _vehicleOld) then {
+		private _aeroConfigs = _vehicleOld getVariable [QGVAR(aeroConfig), false];
+		if (_aeroConfigs isEqualType []) then {
+			if (local _vehicleOld) then {
+				_vehicleOld setMass (_aeroConfigs select 3 select 1);
+			} else {
+				[_vehicleOld, _aeroConfigs select 3 select 1] remoteExec ["setMass", _vehicleOld];
+			};
+		};
+		_vehicleOld setVariable [QGVAR(fWingData), nil];
+	};
+	missionNamespace setVariable [QGVAR(lastVehicle), _vehicleFlown];
+};
+
 if (_vehicle isEqualTo player) exitWith {
 	missionNamespace setVariable [QGVAR(timeOld), time];
 	missionNamespace setVariable [QGVAR(frameOld), diag_frameNo];
 };
 
 if !(GVAR(enabled)) exitWith {
-	private _aeroConfigs = _vehicle getVariable [QGVAR(aeroConfig), false];
-	if !(_aeroConfigs isEqualType []) then {
-		_aeroConfigs = [_vehicle] call FUNC(getAeroConfig);
-		_vehicle setVariable [QGVAR(aeroConfig), _aeroConfigs];
-	};
-	_vehicle setMass (_aeroConfigs select 3 select 1);
-
 	missionNamespace setVariable [QGVAR(timeOld), time];
 	missionNamespace setVariable [QGVAR(frameOld), diag_frameNo];
 };

@@ -1,8 +1,9 @@
 #include "script_component.hpp"
 #include "header_macros.hpp"
 
-params ["_vehicle", ["_flightphase", "taxing"]];
+params ["_vehicle", ["_flightphase", "taxing"], ["_currentILSindex", -1]];
 private ["_headingDiff", "_approachAngle", "_ILSarray"];
+private _fnc_angleDiff = {abs ((((_this select 0) - (_this select 1)) + 540) % 360 - 180)};
 private _altAGLS = getPos _vehicle select 2;
 private _altASLW = getPosASLW _vehicle select 2;
 private _altRadar = _altAGLS min _altASLW;
@@ -10,7 +11,6 @@ private _altASL = getPosASL _vehicle select 2;
 private _climeASL = velocity _vehicle select 2; // m/s
 private _flapStatus = _vehicle animationSourcePhase "flap";
 private _gearStatus = _vehicle animationSourcePhase "gear";
-private _currentILSindex = -1;
 private _distance = 10000;
 private _distanceReturn = 10000;
 private _altDiff = _altRadar;
@@ -46,8 +46,8 @@ switch (_flightphase) do {
 		{
 			_altDiff = _altASL - (_x select 0 select 2);
 			_distance = (_x select 0) distance2D (getPos _vehicle);
-			_headingDiff = abs ((getDir _vehicle) - (_x select 1));
-			_approachAngle = abs (((getPos _vehicle) getDir (_x select 0)) - (_x select 1));
+			_headingDiff = [getDir _vehicle, _x select 1] call _fnc_angleDiff;
+			_approachAngle = [(getPos _vehicle) getDir (_x select 0), _x select 1] call _fnc_angleDiff;
 			if ((speed _vehicle < 600) && (_altDiff < 400) && (_distance < 6000) && (_headingDiff < 30) && (_approachAngle < 30) && (_climeASL < 0)) exitWith {
 				_flightphase = "landing";
 				_currentILSindex = _forEachIndex;
@@ -71,8 +71,8 @@ switch (_flightphase) do {
 			_distanceReturn = _distance;
 			_altDiffReturn = _altDiff;
 			_altDiffDesired = _distance * tan (_ILSarray select 2);
-			_headingDiff = abs ((getDir _vehicle) - (_ILSarray select 1));
-			_approachAngle = abs (((getPos _vehicle) getDir (_ILSarray select 0)) - (_ILSarray select 1));
+			_headingDiff = [getDir _vehicle, _ILSarray select 1] call _fnc_angleDiff;
+			_approachAngle = [(getPos _vehicle) getDir (_ILSarray select 0), _ILSarray select 1] call _fnc_angleDiff;
 			switch (true) do {
 				case ((speed _vehicle > 600) || (_altDiff > 400) || (_distance > 6000) || (_headingDiff > 30) || (_approachAngle > 30) || (_climeASL > 5)): {
 					_flightphase = "inFlight";
@@ -107,8 +107,8 @@ switch (_flightphase) do {
 					{
 						_altDiff = _altASL - (_x select 0 select 2);
 						_distance = (_x select 0) distance2D (getPos _vehicle);
-						_headingDiff = abs ((getDir _vehicle) - (_x select 1));
-						_approachAngle = abs (((getPos _vehicle) getDir (_x select 0)) - (_x select 1));
+						_headingDiff = [getDir _vehicle, _x select 1] call _fnc_angleDiff;
+						_approachAngle = [(getPos _vehicle) getDir (_x select 0), _x select 1] call _fnc_angleDiff;
 						if ((_altDiff < 200) && (_distance < 3000) && (_headingDiff < 30) && (_approachAngle < 30)) exitWith {
 							_currentILSindex = _forEachIndex;
 							_distanceReturn = _distance;
@@ -129,7 +129,7 @@ switch (_flightphase) do {
 			_distanceReturn = _distance;
 			_altDiffReturn = _altDiff;
 			_altDiffDesired = _distance * tan (_ILSarray select 2);
-			_headingDiff = abs ((getDir _vehicle) - (_ILSarray select 1));
+			_headingDiff = [getDir _vehicle, _ILSarray select 1] call _fnc_angleDiff;
 			switch (true) do {
 				case ((_altDiff > 100) || (_distance > 1000) || (_headingDiff > 30) || (_climeASL > 5)): {
 					_flightphase = "inFlight";
@@ -155,8 +155,8 @@ switch (_flightphase) do {
 					{
 						_altDiff = _altASL - (_x select 0 select 2);
 						_distance = (_x select 0) distance2D (getPos _vehicle);
-						_headingDiff = abs ((getDir _vehicle) - (_x select 1));
-						_approachAngle = abs (((getPos _vehicle) getDir (_x select 0)) - (_x select 1));
+						_headingDiff = [getDir _vehicle, _x select 1] call _fnc_angleDiff;
+						_approachAngle = [(getPos _vehicle) getDir (_x select 0), _x select 1] call _fnc_angleDiff;
 						if ((_altDiff < 100) && (_distance < 1000) && (_headingDiff < 30)) exitWith {
 							_currentILSindex = _forEachIndex;
 							_distanceReturn = _distance;
@@ -185,4 +185,8 @@ switch (_flightphase) do {
 	default {};
 };
 
-[_flightphase, _distanceReturn, _altDiffReturn, _altDiffDesired];
+if (_flightphase in ["taxing", "takeOff", "inFlight", "touchDown"]) then {
+	_currentILSindex = -1;
+};
+
+[_flightphase, _distanceReturn, _altDiffReturn, _altDiffDesired, _currentILSindex];

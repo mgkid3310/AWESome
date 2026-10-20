@@ -3,6 +3,11 @@
 private _timeOld = missionNamespace getVariable [QGVAR(timeOld), -1];
 private _frameOld = missionNamespace getVariable [QGVAR(frameOld), -1];
 
+// call radar functions
+if !(isNil QGVAR(activeRadar)) then {
+	GVAR(activeRadar) call FUNC(atcRadarLoop);
+};
+
 if (!(alive player) || (_timeOld < 0) || (_frameOld < 0)) exitWith {
 	missionNamespace setVariable [QGVAR(timeOld), time];
 	missionNamespace setVariable [QGVAR(frameOld), diag_frameNo];
@@ -32,14 +37,6 @@ private _SAMlaunchers = [];
 	_x setVariable [QGVAR(eventWeaponFire), _x addEventHandler ["Fired", {_this spawn FUNC(eventWeaponFire)}]];
 } forEach ((_planes + _helies + _SAMlaunchers) select {_x getVariable [QGVAR(eventWeaponFire), -1] < 0});
 
-// call radar functions
-private _isUsingRadar = player getVariable [QGVAR(isUsingRadar), false];
-private _radarParam = player getVariable [QGVAR(radarParam), []];
-
-if (_isUsingRadar) then {
-	_radarParam call FUNC(atcRadarLoop);
-};
-
 [] call FUNC(periodicCheck);
 
 // ATIS status check
@@ -49,8 +46,8 @@ if (!_isATISready && (CBA_missionTime > (_lastTime + 60))) then {
 	(vehicle player) setVariable [QGVAR(isATISready), true, true];
 };
 
-// ATIS data update check
-if (GVAR(updateIntervalATIS) > 0) then {
+// ATIS data update check (only when server does not run AWESome)
+if ((GVAR(updateIntervalATIS) > 0) && !(missionNamespace getVariable [QGVAR(serverUpdatesATIS), false])) then {
 	private _ATISdata = missionNamespace getVariable [QGVAR(ATISdata), false];
 	if !(_ATISdata isEqualType []) then {
 		[true, true] call FUNC(updateATISdata);

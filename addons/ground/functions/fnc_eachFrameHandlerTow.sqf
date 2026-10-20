@@ -9,19 +9,21 @@ if (isNull _plane) exitWith {};
 
 if !((alive _car) && (alive _plane)) exitWith {[_car] call FUNC(detachTowingVehicle)};
 
-if (speed _car > GVAR(maxSpeedFoward)) then {
-	_car setVelocity (velocity _car vectorMultiply (GVAR(maxSpeedFoward) / (abs speed _car)));
-};
-if (speed _car < (-1 * GVAR(maxSpeedReverse))) then {
-	_car setVelocity (velocity _car vectorMultiply (GVAR(maxSpeedReverse) / (abs speed _car)));
+private _speedLimit = [GVAR(maxSpeedFoward), GVAR(maxSpeedReverse)] select (speed _car < 0);
+if (abs speed _car > _speedLimit) then {
+	private _velocityLimited = velocity _car vectorMultiply (_speedLimit / (abs speed _car));
+	if (local _car) then {
+		_car setVelocity _velocityLimited;
+	} else {
+		[_car, _velocityLimited] remoteExec ["setVelocity", _car];
+	};
 };
 
 private _posCarNow = getPosASL _car;
 private _posPlaneNow = getPosASL _plane;
 
 private _towBar = _car getVariable [QGVAR(towBarObject), objNull];
-private _ownerOld = _car getVariable [QGVAR(towingOwner), owner _plane];
-if !(_ownerOld isEqualTo owner _plane) then {
+if (time > (_car getVariable [QGVAR(towingCollisionTime), -1]) + 2) then {
 	_plane allowDamage false;
 	_car disableCollisionWith _plane;
 	_towBar disableCollisionWith _plane;
@@ -30,7 +32,7 @@ if !(_ownerOld isEqualTo owner _plane) then {
 		[_car, _plane] remoteExec ["disableCollisionWith", _plane];
 		[_towBar, _plane] remoteExec ["disableCollisionWith", _plane];
 	};
-	_car setVariable [QGVAR(towingOwner), owner _plane];
+	_car setVariable [QGVAR(towingCollisionTime), time];
 };
 
 private _offsetOldArray = _car getVariable [QGVAR(offsetOldArray), []];

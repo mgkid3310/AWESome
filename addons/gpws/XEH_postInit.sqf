@@ -37,31 +37,43 @@ GVAR(ritaMaxAOA) = 15;
 GVAR(ritaMaxDive) = -45;
 
 // get runways list
-GVAR(runwayList) = [[[0, 0, 0], 0, 8]]; // [[position(ASL), heading, approachAngle], ...]
-private _runwayPos = getArray (configFile >> "CfgWorlds" >> worldName >> "ilsPosition");
-_runwayPos set [2, getTerrainHeightASL _runwayPos];
-private _ilsDirection = getArray (configFile >> "CfgWorlds" >> worldName >> "ilsDirection");
-private _dirOpposite = ((asin abs (_ilsDirection select 0)) + 180) % 360;
-GVAR(runwayList) pushBack [_runwayPos, asin abs (_ilsDirection select 0), asin (_ilsDirection select 1)];
-GVAR(runwayList) pushBack [_runwayPos getPos [-1000, _dirOpposite], _dirOpposite, 0];
+GVAR(runwayList) = []; // [[position(ASL), heading, approachAngle], ...]
+private _fnc_addRunway = {
+	params ["_runwayPos", "_ilsDirection", ["_dirOffset", 0], ["_hasOpposite", true]];
+	_ilsDirection params ["_dirX", "_dirZ", "_dirY"];
 
-for "_i" from 0 to (count (configFile >> "CfgWorlds" >> worldName >> "SecondaryAirports") - 1) do {
-	private _config = (configFile >> "CfgWorlds" >> worldName >> "SecondaryAirports") select _i;
-	_runwayPos = getArray (_config >> "ilsPosition");
-	_runwayPos set [2, getTerrainHeightASL _runwayPos];
-	if (isClass _config) then {
-		_ilsDirection = getArray (_config >> "ilsDirection");
-		_dirOpposite = ((asin abs (_ilsDirection select 0)) + 180) % 360;
-		GVAR(runwayList) pushBack [_runwayPos, asin abs (_ilsDirection select 0), asin (_ilsDirection select 1)];
-		GVAR(runwayList) pushBack [_runwayPos getPos [-1000, _dirOpposite], _dirOpposite, 0];
+	private _heading = ((_dirX atan2 _dirY) + 180 + _dirOffset) % 360;
+	GVAR(runwayList) pushBack [_runwayPos, _heading, asin _dirZ];
+
+	if (_hasOpposite) then {
+		private _dirOpposite = (_heading + 180) % 360;
+		private _posOpposite = _runwayPos getPos [-1000, _dirOpposite];
+		_posOpposite set [2, getTerrainHeightASL _posOpposite];
+		GVAR(runwayList) pushBack [_posOpposite, _dirOpposite, 0];
 	};
 };
+
+private _worldConfig = configFile >> "CfgWorlds" >> worldName;
+if ((isArray (_worldConfig >> "ilsPosition")) && (isArray (_worldConfig >> "ilsDirection"))) then {
+	private _runwayPos = getArray (_worldConfig >> "ilsPosition");
+	_runwayPos set [2, getTerrainHeightASL _runwayPos];
+	[_runwayPos, getArray (_worldConfig >> "ilsDirection")] call _fnc_addRunway;
+};
+
+private _secondaryAirports = _worldConfig >> "SecondaryAirports";
+for "_i" from 0 to (count _secondaryAirports - 1) do {
+	private _config = _secondaryAirports select _i;
+	if ((isClass _config) && {isArray (_config >> "ilsPosition")} && {isArray (_config >> "ilsDirection")}) then {
+		private _runwayPos = getArray (_config >> "ilsPosition");
+		_runwayPos set [2, getTerrainHeightASL _runwayPos];
+		[_runwayPos, getArray (_config >> "ilsDirection")] call _fnc_addRunway;
+	};
+};
+
 {
-	_ilsDirection = getArray (configFile >> "CfgVehicles" >> (typeOf _x) >> "ilsDirection");
-	GVAR(runwayList) pushBack [getPosASL _x, asin abs (_ilsDirection select 0), asin (_ilsDirection select 1)];
-	if !(getNumber (configFile >> "CfgVehicles" >> (typeOf _x) >> "isCarrier") > 0) then {
-		_dirOpposite = ((asin abs (_ilsDirection select 0)) + 180) % 360;
-		GVAR(runwayList) pushBack [(getPosASL _x) getPos [-1000, _dirOpposite], _dirOpposite, 0];
+	private _config = configFile >> "CfgVehicles" >> (typeOf _x);
+	if (isArray (_config >> "ilsDirection")) then {
+		[getPosASL _x, getArray (_config >> "ilsDirection"), getDir _x, !(getNumber (_config >> "isCarrier") > 0)] call _fnc_addRunway;
 	};
 } forEach (allAirports select 1);
 

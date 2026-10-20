@@ -55,7 +55,7 @@ private _return = [];
 	_side = side driver _vehicle;
 	_markerColor = [_side, _radarSide, _targetType] call FUNC(getRadarMarkerColor);
 
-	_markerArray = [_vehicle, _callsign, _displayDetails, _markerColor] call FUNC(drawRadarMarker);
+	_markerArray = [_vehicle, _callsign, _displayDetails, _markerColor, _type] call FUNC(drawRadarMarker);
 	_return pushBack _markerArray;
 } forEach _array;
 

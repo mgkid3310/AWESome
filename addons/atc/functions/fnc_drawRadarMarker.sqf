@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-params ["_vehicle", "_callsign", "_displayDetails", "_markerColor"];
+params ["_vehicle", "_callsign", "_displayDetails", "_markerColor", ["_type", "b_plane"]];
 
 private _speed = 3.6 * vectorMagnitude velocity _vehicle;
 private _altitude = getPosASL _vehicle select 2;

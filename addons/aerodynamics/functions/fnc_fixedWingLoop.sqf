@@ -224,7 +224,7 @@ if ((typeOf _vehicle) in ["JS_JC_FA18E", "JS_JC_FA18F"]) then {
 		_auxtankSwitch = _auxtankSwitch + ([0, 0.0005 * _abSwitch * _timeStep] select isEngineOn _vehicle);
 		_auxtankSwitch = _auxtankSwitch - _fuelFlowEnhanced * _abSwitch * (_timeStep / (_fuelCapacity max 1)) / 1.1845;
 		_vehicle animate ["auxtank_switch", _auxtankSwitch max 0, true];
-		_vehicle setFuel (_fuelCurrent + (_auxtankSwitch min 0));
+		_fuelCurrent = _fuelCurrent + 1.1845 * (_auxtankSwitch min 0);
 
 		_fuelFlowEnhanced = 0;
 	} else {

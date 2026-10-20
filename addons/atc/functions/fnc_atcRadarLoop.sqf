@@ -194,6 +194,10 @@ if (time > _radarTime + GVAR(radarUpdateInterval)) then {
 		_bogieTargets = _allGCI select {_x in _bogieVehicles};
 		_banditTargets = _allGCI select {_x in _banditVehicles};
 
+		{
+			_x setVariable [QGVAR(selectedGCI), false];
+		} forEach (_allGCI - (_blueTargets + _rogueTargets + _bogieTargets + _banditTargets));
+
 		_blueGCI = [_blueTargets, _radarSide, 0] call FUNC(createMarkerGCI);
 		_rogueGCI = [_rogueTargets, _radarSide, 2] call FUNC(createMarkerGCI);
 		_bogieGCI = [_bogieTargets, _radarSide, 1] call FUNC(createMarkerGCI);

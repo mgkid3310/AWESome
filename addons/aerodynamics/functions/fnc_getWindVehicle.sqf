@@ -32,7 +32,7 @@ if (GVAR(showSamplingGrid)) then {
 	private ["_start", "_end", "_vector"];
 	{
 		_start = ASLToAGL _x;
-		_vector = [_start, _dynamicWindMode] call FUNC(getWindPosASL);
+		_vector = [_x, _dynamicWindMode] call FUNC(getWindPosASL);
 		drawLine3D [_start, _start vectorAdd _vector, [1, 0, 0, 1]];
 		/* {
 			_end = ASLToAGL _x;

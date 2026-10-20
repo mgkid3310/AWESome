@@ -28,8 +28,8 @@ polynomial function and create many effects such as the
 so-called 'Sound barrier'.  
 Vehicle's fuel status and weapon loadout will now affect  
 mass and aerodynamic characteristics of the vehicle,  
-resulting in high aerodynamic drag and lowered stability  
-when armed heavily.  
+resulting in higher mass and aerodynamic drag when armed  
+heavily.  
 This also brings air density and wind into consideration.  
 Air density is calculated based on altitude, temperature  
 and humidity which gets more accurate if ACE3 weather is  
@@ -37,7 +37,12 @@ used together.
 
 Can enable/disable at addon settings (enabled as default),  
 and effects of wind can be adjusted with "Wind Multiplier"  
-setting.  
+setting. "Dynamic Winds" setting selects the wind model:  
+Dynamic (wind variation by altitude and gusts), Simple  
+(wind variation by altitude only) or Static (ARMA 3 wind).  
+Effects of fuel and weapon loadout can be adjusted with  
+"Fuel Mass Multiplier", "Pylon Mass Multiplier" and  
+"Pylon Drag Multiplier" settings.  
 &nbsp;
 
 2. Voice Informer & GPWS  
@@ -155,13 +160,14 @@ and revert a blue-on-blue contact back to its original state.
 Plays ATIS radio broadcast using real in-game atmospheric  
 data. Provides wind, visibility, etc. Temperature, dew point,  
 QNH will be provided when ACE Weather is enabled.  
-With basic settings, ATIS provides real-time data, but with  
-addon setting changed, ATIS data should be updated on  
-ground  
+By default, ATIS data is updated every 15 minutes. This can  
+be changed with "ATIS update interval" addon setting, which  
+also has "Real-time data" option. When the server also runs  
+this addon, the server updates ATIS data for all players.  
 
-To let the controller manually update the data, disable  
-'Real-time ATIS data update' option in addon setting, and  
-add the following code to the target object's init field:  
+To let the controller manually update the data, set "ATIS  
+update interval" addon setting to "Manual Update (by ATC)",  
+and add the following code to the target object's init field:  
 `[this] call orbis_atc_fnc_addATCConsole;`  
 
 By default, ATIS will also be displayed as text in hint  
@@ -185,8 +191,9 @@ Provides towing vehicle & system for all planes. Works in
 MP and does not require other players to use this addon for  
 towing their planes.  
 Offroad vehicles are used as towing cars, and can tow  
-planes by deploying towbar via Interaction / Action outside  
-the vehicle. Once the towbar is deployed, place target  
+planes by deploying towbar via ACE Interaction outside the  
+vehicle, or via Action as the vehicle's driver without ACE.  
+Once the towbar is deployed, place target  
 plane's front gear at the end of the towbar, then use Action  
 to connect target plane to the towbar. After towing around,  
 stop the vehicle and disconnect target plane using Action.  

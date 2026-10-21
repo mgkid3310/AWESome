@@ -9,7 +9,7 @@ if (isNull _plane) exitWith {};
 
 if !((alive _car) && (alive _plane)) exitWith {[_car] call FUNC(detachTowingVehicle)};
 
-private _speedLimit = [GVAR(maxSpeedFoward), GVAR(maxSpeedReverse)] select (speed _car < 0);
+private _speedLimit = [GVAR(maxSpeedForward), GVAR(maxSpeedReverse)] select (speed _car < 0);
 if (abs speed _car > _speedLimit) then {
 	private _velocityLimited = velocity _car vectorMultiply (_speedLimit / (abs speed _car));
 	if (local _car) then {
@@ -71,7 +71,7 @@ if (count _offsetOldArray > 0) then {
 };
 private _velTotal = (_velBase vectorMultiply GVAR(velBase)) vectorAdd (_offsetVector vectorMultiply GVAR(Pconst)) vectorAdd (_offsetIntegral vectorMultiply GVAR(Iconst)) vectorAdd (_offsetDerivative vectorMultiply GVAR(Dconst));
 
-// process to foward speed & heading
+// process to forward speed & heading
 private _vectorDir = AGLToASL (_car modelToWorld _posRelCar) vectorDiff AGLToASL (_plane modelToWorld _rotateCenter);
 private _dirTotal = _vectorDir vectorAdd (_velTotal vectorMultiply _timeStep);
 

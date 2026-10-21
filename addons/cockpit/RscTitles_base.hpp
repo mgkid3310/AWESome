@@ -28,7 +28,7 @@ class control_base {
 	tooltipColorShade[] = {0, 0, 0, 0};
 	tooltipColorText[] = {};
 	tooltipColorBox[] = {};
-	autocompete = "";
+	autocomplete = "";
 	url = "";
 };
 

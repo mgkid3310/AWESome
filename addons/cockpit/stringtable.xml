@@ -58,8 +58,8 @@
             <Korean>Landing + Taxi To Ramp</Korean>
         </Key>
         <Key ID="STR_orbis_cockpit_prevChecklist">
-            <English>Previouse Checklist</English>
-            <Korean>Previouse Checklist</Korean>
+            <English>Previous Checklist</English>
+            <Korean>Previous Checklist</Korean>
         </Key>
         <Key ID="STR_orbis_cockpit_shakeEnabled_false">
             <English>Disabled</English>

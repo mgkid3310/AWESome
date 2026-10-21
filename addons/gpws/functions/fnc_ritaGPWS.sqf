@@ -24,7 +24,7 @@ private _pitchAngle = _pitchAndBank select 0;
 private _bankAngle = _pitchAndBank select 1;
 
 // flight phase check
-private _flightphaseOutput = _vehicle getVariable [QGVAR(flightPhaseParam), ["taxing", 0, 0, 0]];
+private _flightphaseOutput = _vehicle getVariable [QGVAR(flightPhaseParam), ["taxiing", 0, 0, 0]];
 private _flightphase = _flightphaseOutput select 0;
 
 private _damageNow = damage _vehicle;
@@ -49,7 +49,7 @@ switch (_damageWarnLevel) do {
 	default {};
 };
 
-// GPWS general speach
+// GPWS general speech
 if ((_vehicle getVariable [QGVAR(nextGPWStime), -1]) < time) then {
 	switch (true) do {
 		// rita_pullUp (inFlight)

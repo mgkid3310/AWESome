@@ -10,7 +10,7 @@ if (!([player, _vehicle, 1] call EFUNC(main,isCrew)) || !(alive _vehicle) || (_t
 };
 
 // check flight phase
-private _flightphaseOld = _vehicle getVariable [QGVAR(flightPhaseParam), ["taxing", 0, 0, 0, -1]];
+private _flightphaseOld = _vehicle getVariable [QGVAR(flightPhaseParam), ["taxiing", 0, 0, 0, -1]];
 private _flightphaseOutput = [_vehicle, _flightphaseOld select 0, _flightphaseOld param [4, -1]] call FUNC(flightPhaseCheck);
 _vehicle setVariable [QGVAR(flightPhaseParam), _flightphaseOutput];
 

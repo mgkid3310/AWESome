@@ -30,10 +30,10 @@ if (fuel _vehicle > GVAR(f16BingoFuel) + 0.05) then {
 };
 
 // flight phase check
-private _flightphaseOutput = _vehicle getVariable [QGVAR(flightPhaseParam), ["taxing", 0, 0, 0]];
+private _flightphaseOutput = _vehicle getVariable [QGVAR(flightPhaseParam), ["taxiing", 0, 0, 0]];
 private _flightphase = _flightphaseOutput select 0;
 
-// incoming mssile check (RWR)
+// incoming missile check (RWR)
 private _incomingMSLlist = _vehicle getVariable [QGVAR(incomingMSLlist), []];
 private _incomingMSLs = _incomingMSLlist apply {_x select 0};
 private _ctrWarnMSLs =_incomingMSLs select {[_vehicle, _x] call FUNC(isMSLCritical)};
@@ -81,7 +81,7 @@ if ((side player isEqualTo side _target) && !(_target isEqualTo _targetOld)) the
 	_IFFgo = true;
 }; */
 
-// GPWS general speach
+// GPWS general speech
 if ((_vehicle getVariable [QGVAR(nextGPWStime), -1]) < time) then {
 	switch (true) do {
 		// f16_counter

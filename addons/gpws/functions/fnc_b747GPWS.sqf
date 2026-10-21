@@ -18,23 +18,23 @@ private _posExpect = (getPosASL _vehicle) vectorAdd (velocity _vehicle vectorMul
 private _expectTerrainAlt = 0 max getTerrainHeightASL _posExpect;
 private _flapStatus = _vehicle animationSourcePhase "flap";
 private _gearStatus = _vehicle animationSourcePhase "gear";
-private _climeASL = velocity _vehicle select 2; // m/s
+private _climbASL = velocity _vehicle select 2; // m/s
 
 private _pitchAndBank = _vehicle call BIS_fnc_getPitchBank;
 private _pitchAngle = _pitchAndBank select 0;
 private _bankAngle = _pitchAndBank select 1;
 
 // flight phase check
-private _flightphaseOutput = _vehicle getVariable [QGVAR(flightPhaseParam), ["taxing", 0, 0, 0]];
+private _flightphaseOutput = _vehicle getVariable [QGVAR(flightPhaseParam), ["taxiing", 0, 0, 0]];
 private _flightphase = _flightphaseOutput select 0;
 private _distance = _flightphaseOutput select 1;
 private _altDiff = _flightphaseOutput select 2;
 private _altDiffDesired = _flightphaseOutput select 3;
 
-private _tooLow = !(_flightphase in ["taxing", "takeOff", "touchDown"]) && (_altRadar < GVAR(tooLowAlt));
+private _tooLow = !(_flightphase in ["taxiing", "takeOff", "touchDown"]) && (_altRadar < GVAR(tooLowAlt));
 private _terrainWarn = (_altRadar > 5) && (_flightphase in ["takeOff", "inFlight", "landing"]) && ((_expectTerrainAlt + GVAR(terrainWarningHeight)) > (getPosASL _vehicle select 2));
-private _dontSink = (_flightphase isEqualTo "takeOff") && (_altRadar > 5) && (_altRadar < 100) && (_climeASL < 0);
-private _sinkRate = (_altRadar < 2450 * EGVAR(main,ft2m)) && !(_flightphase in ["taxing", "touchDown"]) && (_climeASL < GVAR(maxSinkRate));
+private _dontSink = (_flightphase isEqualTo "takeOff") && (_altRadar > 5) && (_altRadar < 100) && (_climbASL < 0);
+private _sinkRate = (_altRadar < 2450 * EGVAR(main,ft2m)) && !(_flightphase in ["taxiing", "touchDown"]) && (_climbASL < GVAR(maxSinkRate));
 private _isCritical = _terrainWarn || _dontSink || _sinkRate;
 
 if !(_tooLow) then {
@@ -173,91 +173,91 @@ if ((_vehicle getVariable [QGVAR(nextGPWStime), -1]) < time) then {
 		};
 
 		// b747_MIN (landing / final)
-		case ((_flightphase in ["landing", "final"]) && (_altRadar < (GVAR(minAlt) * EGVAR(main,ft2m))) && (_minWarnLevel < 2) && (_climeASL < 0)): {
+		case ((_flightphase in ["landing", "final"]) && (_altRadar < (GVAR(minAlt) * EGVAR(main,ft2m))) && (_minWarnLevel < 2) && (_climbASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_MIN");
 			[_vehicle, "b747_MIN"] call FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(minWarnLevel), 2];
 		};
 
 		// b747_APPRMIN (landing / final)
-		case ((_flightphase in ["landing", "final"]) && (_altRadar < (GVAR(appMinAlt) * EGVAR(main,ft2m))) && (_minWarnLevel < 1) && (_climeASL < 0)): {
+		case ((_flightphase in ["landing", "final"]) && (_altRadar < (GVAR(appMinAlt) * EGVAR(main,ft2m))) && (_minWarnLevel < 1) && (_climbASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_APPRMIN");
 			[_vehicle, "b747_APPRMIN"] call FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(minWarnLevel), 1];
 		};
 
 		// b747_10 (landing / final)
-		case ((_flightphase in ["landing", "final"]) && (_altRadar < (10 * EGVAR(main,ft2m))) && (_altInfo > 10) && (_climeASL < 0)): {
+		case ((_flightphase in ["landing", "final"]) && (_altRadar < (10 * EGVAR(main,ft2m))) && (_altInfo > 10) && (_climbASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_10");
 			[_vehicle, "b747_10"] call FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 10];
 		};
 
 		// b747_20 (landing / final)
-		case ((_flightphase in ["landing", "final"]) && (_altRadar < (20 * EGVAR(main,ft2m))) && (_altInfo > 20) && (_climeASL < 0)): {
+		case ((_flightphase in ["landing", "final"]) && (_altRadar < (20 * EGVAR(main,ft2m))) && (_altInfo > 20) && (_climbASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_20");
 			[_vehicle, "b747_20"] call FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 20];
 		};
 
 		// b747_30 (landing / final)
-		case ((_flightphase in ["landing", "final"]) && (_altRadar < (30 * EGVAR(main,ft2m))) && (_altInfo > 30) && (_climeASL < 0)): {
+		case ((_flightphase in ["landing", "final"]) && (_altRadar < (30 * EGVAR(main,ft2m))) && (_altInfo > 30) && (_climbASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_30");
 			[_vehicle, "b747_30"] call FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 30];
 		};
 
 		// b747_40 (landing / final)
-		case ((_flightphase in ["landing", "final"]) && (_altRadar < (40 * EGVAR(main,ft2m))) && (_altInfo > 40) && (_climeASL < 0)): {
+		case ((_flightphase in ["landing", "final"]) && (_altRadar < (40 * EGVAR(main,ft2m))) && (_altInfo > 40) && (_climbASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_40");
 			[_vehicle, "b747_40"] call FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 40];
 		};
 
 		// b747_50 (landing / final)
-		case ((_flightphase in ["landing", "final"]) && (_altRadar < (50 * EGVAR(main,ft2m))) && (_altInfo > 50) && (_climeASL < 0)): {
+		case ((_flightphase in ["landing", "final"]) && (_altRadar < (50 * EGVAR(main,ft2m))) && (_altInfo > 50) && (_climbASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_50");
 			[_vehicle, "b747_50"] call FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 50];
 		};
 
 		// b747_100 (landing / final)
-		case ((_flightphase in ["landing", "final"]) && (_altRadar < (100 * EGVAR(main,ft2m))) && (_altInfo > 100) && (_climeASL < 0)): {
+		case ((_flightphase in ["landing", "final"]) && (_altRadar < (100 * EGVAR(main,ft2m))) && (_altInfo > 100) && (_climbASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_100");
 			[_vehicle, "b747_100"] call FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 100];
 		};
 
 		// b747_200 (landing / final)
-		case ((_flightphase in ["landing", "final"]) && (_altRadar < (200 * EGVAR(main,ft2m))) && (_altInfo > 200) && (_climeASL < 0)): {
+		case ((_flightphase in ["landing", "final"]) && (_altRadar < (200 * EGVAR(main,ft2m))) && (_altInfo > 200) && (_climbASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_200");
 			[_vehicle, "b747_200", GVAR(b747Delay)] call FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 200];
 		};
 
 		// b747_300 (landing / final)
-		case ((_flightphase in ["landing", "final"]) && (_altRadar < (300 * EGVAR(main,ft2m))) && (_altInfo > 300) && (_climeASL < 0)): {
+		case ((_flightphase in ["landing", "final"]) && (_altRadar < (300 * EGVAR(main,ft2m))) && (_altInfo > 300) && (_climbASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_300");
 			[_vehicle, "b747_300", GVAR(b747Delay)] call FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 300];
 		};
 
 		// b747_400 (landing / final)
-		case ((_flightphase in ["landing", "final"]) && (_altRadar < (400 * EGVAR(main,ft2m))) && (_altInfo > 400) && (_climeASL < 0)): {
+		case ((_flightphase in ["landing", "final"]) && (_altRadar < (400 * EGVAR(main,ft2m))) && (_altInfo > 400) && (_climbASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_400");
 			[_vehicle, "b747_400", GVAR(b747Delay)] call FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 400];
 		};
 
 		// b747_500 (landing / final)
-		case ((_flightphase in ["landing", "final"]) && (_altRadar < (500 * EGVAR(main,ft2m))) && (_altInfo > 500) && (_climeASL < 0)): {
+		case ((_flightphase in ["landing", "final"]) && (_altRadar < (500 * EGVAR(main,ft2m))) && (_altInfo > 500) && (_climbASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_500");
 			[_vehicle, "b747_500", GVAR(b747Delay)] call FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 500];
 		};
 
 		// b747_1000 (landing / final)
-		case ((_flightphase in ["landing", "final"]) && (_altRadar < (1000 * EGVAR(main,ft2m))) && (_altRadar > (800 * EGVAR(main,ft2m))) && (_altInfo > 1000) && (_climeASL < 0)): {
+		case ((_flightphase in ["landing", "final"]) && (_altRadar < (1000 * EGVAR(main,ft2m))) && (_altRadar > (800 * EGVAR(main,ft2m))) && (_altInfo > 1000) && (_climbASL < 0)): {
 			DEV_CHAT("orbis_gpws: b747_1000");
 			[_vehicle, "b747_1000", GVAR(b747Delay)] call FUNC(speakGPWS);
 			_vehicle setVariable [QGVAR(altInformLevel), 1000];

@@ -43,8 +43,8 @@ if ((getTerrainHeightASL _posASL > 0) && (_windMagnitude > 0.01)) then {
 	_deflectedWind = _globalWind;
 };
 
-// sea brease
-private _seaBrease = [0, 0, 0];
+// sea breeze
+private _seaBreeze = [0, 0, 0];
 
 // wake turbulence
 private ["_wakeTurbulence"];
@@ -55,6 +55,6 @@ if !(_dynamicWindMode < 2) then {
 };
 
 // sum wind components
-private _returnWind = _deflectedWind vectorAdd _seaBrease vectorAdd _wakeTurbulence;
+private _returnWind = _deflectedWind vectorAdd _seaBreeze vectorAdd _wakeTurbulence;
 
 _returnWind

@@ -1,5 +1,5 @@
 	class rita_altitude { // toolow altitude
-		name = "Rita Aaltitude";
+		name = "Rita Altitude";
 		length = 2.413;
 		sound[] = {QPATHTOF(sounds\Rita\altitude.ogg), RITA_VOL, 1};
 		titles[] = {};

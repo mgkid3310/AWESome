@@ -14,7 +14,7 @@ class CfgVehicles {
 				position = "temp";
 				showWindow = 1;
 				hideOnUse = 1;
-				onlyForplayer = 0;
+				onlyForPlayer = 0;
 				condition = QUOTE([this] call FUNC(canAttachTowingVehicle));
 				statement = QUOTE([this] call FUNC(attachTowingVehicle));
 			};

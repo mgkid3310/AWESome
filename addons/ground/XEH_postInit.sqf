@@ -2,7 +2,7 @@
 
 // init global variables
 GVAR(perFrame) = 1;
-GVAR(maxSpeedFoward) = 5; // km/h
+GVAR(maxSpeedForward) = 5; // km/h
 GVAR(maxSpeedReverse) = 20; // km/h
 
 GVAR(velBase) = 0.9;
